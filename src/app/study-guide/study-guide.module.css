@@ -1,0 +1,391 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #f8f9ff 0%, #e8e3ff 100%);
+  border-radius: 24px;
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+.levelSelector {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.levelButton {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #7c4dff;
+  background: white;
+  color: #7c4dff;
+  border-radius: 100px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.levelButton:hover {
+  background: #e8e3ff;
+}
+
+.levelButtonActive {
+  background: #7c4dff;
+  color: white;
+}
+
+.levelButtonActive:hover {
+  background: #5e35b1;
+}
+
+/* Overview Section */
+.overview {
+  background: white;
+  border-radius: 24px;
+  padding: 3rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.levelIntro {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e8e3ff;
+}
+
+.levelIntro h2 {
+  font-size: 2.5rem;
+  color: #7c4dff;
+  margin-bottom: 1rem;
+}
+
+.levelIntro p {
+  font-size: 1.25rem;
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+}
+
+.estimatedTime {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #f8f9ff;
+  border-radius: 100px;
+  font-weight: 500;
+  color: #5e35b1;
+}
+
+/* Exam Sections */
+.examSections {
+  margin-bottom: 4rem;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.sectionsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.examSection {
+  background: #f8f9ff;
+  border-radius: 16px;
+  padding: 2rem;
+  height: 100%;
+}
+
+.sectionHeader {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e8e3ff;
+}
+
+.sectionHeader h4 {
+  font-size: 1.5rem;
+  color: #7c4dff;
+  margin-bottom: 0.5rem;
+}
+
+.sectionMeta {
+  display: flex;
+  gap: 1rem;
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.sectionMeta span {
+  background: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+}
+
+.contentCategory h5 {
+  font-size: 1.125rem;
+  color: #333;
+  margin: 1.5rem 0 0.75rem;
+}
+
+.contentList {
+  list-style: none;
+  padding: 0;
+}
+
+.contentList li {
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+  color: #666;
+  line-height: 1.5;
+}
+
+.contentList li::before {
+  content: "•";
+  color: #7c4dff;
+  position: absolute;
+  left: 0;
+}
+
+/* Study Plan */
+.studyPlan {
+  margin-bottom: 4rem;
+}
+
+.weeklyGoals {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.goalCard {
+  background: white;
+  border: 1px solid #e8e3ff;
+  border-radius: 16px;
+  padding: 2rem;
+  height: 100%;
+}
+
+.goalCard h4 {
+  font-size: 1.25rem;
+  color: #7c4dff;
+  margin-bottom: 1rem;
+}
+
+.taskList {
+  list-style: none;
+  padding: 0;
+}
+
+.taskList li {
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+  color: #666;
+}
+
+.taskList li::before {
+  content: "✓";
+  color: #7c4dff;
+  position: absolute;
+  left: 0;
+}
+
+/* Resources */
+.resources {
+  margin-bottom: 4rem;
+}
+
+.resourcesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.resourceCategory {
+  background: #f8f9ff;
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.resourceCategory h4 {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.resourceCategory ul {
+  list-style: none;
+  padding: 0;
+}
+
+.resourceCategory li {
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+  color: #666;
+}
+
+.resourceCategory li::before {
+  content: "→";
+  color: #7c4dff;
+  position: absolute;
+  left: 0;
+}
+
+/* Tips */
+.tips {
+  margin-bottom: 4rem;
+}
+
+.tipsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.tipCard {
+  background: white;
+  border: 1px solid #e8e3ff;
+  border-radius: 16px;
+  padding: 2rem;
+  position: relative;
+}
+
+.tipNumber {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #7c4dff;
+  color: white;
+  padding: 0.25rem 1rem;
+  border-radius: 100px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.tipCard p {
+  color: #666;
+  line-height: 1.6;
+  margin-top: 1rem;
+}
+
+/* Practice Area */
+.practiceArea {
+  margin-top: 4rem;
+}
+
+.practiceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.practiceCard {
+  background: white;
+  border: 1px solid #e8e3ff;
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.practiceCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(124, 77, 255, 0.1);
+  border-color: #7c4dff;
+}
+
+.practiceIcon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.practiceCard h4 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.practiceCard p {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .hero {
+    padding: 3rem 1rem;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .overview {
+    padding: 2rem;
+  }
+
+  .sectionsGrid,
+  .weeklyGoals,
+  .resourcesGrid,
+  .tipsGrid,
+  .practiceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .levelButton {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+
+  .examSection,
+  .goalCard,
+  .resourceCategory,
+  .tipCard,
+  .practiceCard {
+    padding: 1.5rem;
+  }
+}

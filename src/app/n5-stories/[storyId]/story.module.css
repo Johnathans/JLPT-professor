@@ -1,0 +1,207 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  color: #7c4dff;
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  transition: color 0.2s ease;
+}
+
+.backLink:hover {
+  color: #5e35b1;
+}
+
+.storyArticle {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(124, 77, 255, 0.1);
+  overflow: hidden;
+}
+
+.storyHeader {
+  padding: 2rem;
+  background: #f8f7ff;
+  border-bottom: 1px solid #e8e3ff;
+}
+
+.statsBar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.statValue {
+  color: #7c4dff;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.statLabel {
+  color: #666;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.storyContent {
+  padding: 2rem;
+  line-height: 2;
+  font-size: 1.2rem;
+}
+
+.storyTitle {
+  color: #7c4dff;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.subtitle {
+  color: #5e35b1;
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem;
+  line-height: 1.4;
+}
+
+.paragraph {
+  margin-bottom: 1.5rem;
+}
+
+.dialogue {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  border-left: 4px solid #e8e3ff;
+}
+
+.kanji {
+  position: relative;
+  color: #7c4dff;
+  cursor: help;
+}
+
+.reading {
+  position: absolute;
+  top: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #7c4dff;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.reading::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #7c4dff;
+}
+
+.storyFooter {
+  padding: 2rem;
+  background: #f8f7ff;
+  border-top: 1px solid #e8e3ff;
+}
+
+.vocabularySection,
+.kanjiSection {
+  margin-bottom: 3rem;
+}
+
+.sectionTitle {
+  color: #5e35b1;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+.vocabularyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.vocabularyItem,
+.kanjiItem {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(124, 77, 255, 0.05);
+  border: 1px solid #e8e3ff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vocabularyItem:hover,
+.kanjiItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(124, 77, 255, 0.1);
+}
+
+.word,
+.kanjiCharacter {
+  color: #7c4dff;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.reading,
+.kanjiReading {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  background: #f8f7ff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.meaning {
+  color: #333;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.occurrences {
+  color: #666;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  background: #e8e3ff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.kanjiGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.kanjiItem {
+  text-align: center;
+}

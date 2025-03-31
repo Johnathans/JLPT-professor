@@ -1,0 +1,1815 @@
+.page {
+  --gray-rgb: 0, 0, 0;
+  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
+  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
+
+  --button-primary-hover: #383838;
+  --button-secondary-hover: #f2f2f2;
+
+  /* JLPT Professor Branding Colors */
+  --primary-color: #7c4dff;
+  --primary-light: #e8e3ff;
+  --primary-dark: #5e35b1;
+  --secondary-color: #ff9100;
+  --secondary-light: #ffd180;
+  --accent-color: #00bfa5;
+
+  display: grid;
+  grid-template-rows: 20px 1fr 20px;
+  align-items: center;
+  justify-items: center;
+  min-height: 100svh;
+  padding: 80px;
+  gap: 64px;
+  font-family: var(--font-geist-sans);
+}
+
+@media (prefers-color-scheme: dark) {
+  .page {
+    --gray-rgb: 255, 255, 255;
+    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
+    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
+
+    --button-primary-hover: #ccc;
+    --button-secondary-hover: #1a1a1a;
+  }
+}
+
+.main {
+  min-height: 100vh;
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 2rem 1rem;
+}
+
+.main ol {
+  font-family: var(--font-geist-mono);
+  padding-left: 0;
+  margin: 0;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  list-style-position: inside;
+}
+
+.main li:not(:last-of-type) {
+  margin-bottom: 8px;
+}
+
+.main code {
+  font-family: inherit;
+  background: var(--gray-alpha-100);
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.ctas {
+  display: flex;
+  gap: 16px;
+}
+
+.ctas a {
+  appearance: none;
+  border-radius: 128px;
+  height: 48px;
+  padding: 0 20px;
+  border: none;
+  border: 1px solid transparent;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 500;
+}
+
+a.primary {
+  background: var(--foreground);
+  color: var(--background);
+  gap: 8px;
+}
+
+a.secondary {
+  border-color: var(--gray-alpha-200);
+  min-width: 158px;
+}
+
+.footer {
+  grid-row-start: 3;
+  display: flex;
+  gap: 24px;
+}
+
+.footer a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer img {
+  flex-shrink: 0;
+}
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  a.primary:hover {
+    background: var(--button-primary-hover);
+    border-color: transparent;
+  }
+
+  a.secondary:hover {
+    background: var(--button-secondary-hover);
+    border-color: transparent;
+  }
+
+  .footer a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 32px;
+    padding-bottom: 80px;
+  }
+
+  .main {
+    align-items: center;
+  }
+
+  .main ol {
+    text-align: center;
+  }
+
+  .ctas {
+    flex-direction: column;
+  }
+
+  .ctas a {
+    font-size: 14px;
+    height: 40px;
+    padding: 0 16px;
+  }
+
+  a.secondary {
+    min-width: auto;
+  }
+
+  .footer {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .logo {
+    filter: invert();
+  }
+}
+
+/* Logo */
+.logoWrapper {
+  width: 80px;
+  height: 80px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: white;
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.logoWrapper::after {
+  content: '';
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border: 2px solid var(--primary-color);
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+.logoIcon {
+  width: 50px;
+  height: 50px;
+}
+
+/* Navigation Logo */
+.navLogoWrapper {
+  width: 32px;
+  height: 32px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  overflow: hidden;
+  padding: 0;
+}
+
+.navLogoIcon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hero Section */
+.hero {
+  padding: 4rem 0;
+  text-align: center;
+  background: var(--primary-light);
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroContent {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero::before {
+  content: 'JLPT';
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12rem;
+  font-weight: 900;
+  color: rgba(124, 77, 255, 0.07);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  opacity: 0.8;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.levelButtons {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.levelButton {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.levelButton:hover {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.ctaButton {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.875rem 1.75rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  display: inline-block;
+}
+
+.ctaButton:hover {
+  background-color: #6a3dd9;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.secondaryButton {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.secondaryButton:hover {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* Stat Cards */
+.statCards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.statCard {
+  background: var(--background-color);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-sm);
+  min-width: 160px;
+  transition: transform 0.2s ease;
+  border: 1px solid var(--border-color);
+}
+
+.statCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.statValue {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.statLabel {
+  color: var(--text-color);
+  font-size: 0.875rem;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* JLPT Levels Section */
+.levels {
+  margin-bottom: 2rem;
+}
+
+.levelGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.levelCard {
+  background: var(--background-color);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: var(--text-color);
+  position: relative;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+  height: 100%;
+}
+
+.levelCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-color);
+}
+
+.levelTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--primary-color);
+}
+
+.levelCard p {
+  color: var(--text-color);
+  opacity: 0.8;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.levelDifficulty {
+  height: 6px;
+  background-color: var(--border-color);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.levelDifficultyFill {
+  display: block;
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 3px;
+}
+
+.levelArrow {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* Features Section */
+.features {
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--text-color);
+  font-weight: 700;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.featureCard {
+  background: var(--background-color);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+  height: 100%;
+}
+
+.featureCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.featureIconWrapper {
+  width: 60px;
+  height: 60px;
+  background-color: var(--primary-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: var(--primary-color);
+}
+
+.featureIcon {
+  width: 28px;
+  height: 28px;
+}
+
+.featureCard h3 {
+  margin-bottom: 1rem;
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.featureCard p {
+  color: var(--text-color);
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+/* Categories Section */
+.categories {
+  margin-bottom: 2rem;
+}
+
+.tabsContainer {
+  margin-bottom: 1.5rem;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.tabButton {
+  background: transparent;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  opacity: 0.7;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.tabButton:hover {
+  opacity: 1;
+  color: var(--primary-color);
+}
+
+.activeTab {
+  color: var(--primary-color);
+  opacity: 1;
+}
+
+.activeTab::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 3px 3px 0 0;
+}
+
+.tabContent {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.categoryCard {
+  background: var(--background-color);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: var(--text-color);
+  position: relative;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+  height: 100%;
+}
+
+.categoryCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-color);
+}
+
+.categoryCard h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.categoryCard p {
+  color: var(--text-color);
+  opacity: 0.8;
+  margin: 0;
+}
+
+.categoryArrow {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* Get Started Section */
+.getStarted {
+  text-align: center;
+  padding: 4rem 0;
+  background: var(--primary-light);
+  border-radius: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.getStartedContent {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.getStarted::before {
+  content: '学習';
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 8rem;
+  font-weight: 900;
+  color: rgba(124, 77, 255, 0.07);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.getStartedContent h2 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: var(--text-color);
+  font-weight: 700;
+}
+
+.getStartedContent p {
+  color: var(--text-color);
+  opacity: 0.8;
+  margin-bottom: 2rem;
+}
+
+.getStartedButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero {
+    padding: 3rem 0;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .statCards {
+    gap: 1rem;
+  }
+
+  .statCard {
+    min-width: 140px;
+  }
+
+  .featureGrid,
+  .categoryGrid,
+  .levelGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero::before,
+  .getStarted::before {
+    font-size: 6rem;
+    opacity: 0.05;
+  }
+  
+  .levelButtons {
+    gap: 0.5rem;
+  }
+  
+  .levelButton {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+  
+  .tabs {
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    justify-content: flex-start;
+  }
+  
+  .tabButton {
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+  }
+  
+  .logoWrapper {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .logoIcon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .logoWrapper::after {
+    width: 78px;
+    height: 78px;
+  }
+}
+
+@media (max-width: 576px) {
+  .tabs {
+    gap: 0;
+  }
+  
+  .featureIconWrapper {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .featureIcon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .logoWrapper {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .logoIcon {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .logoWrapper::after {
+    width: 68px;
+    height: 68px;
+  }
+}
+
+/* Kanji List Page Styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.heroWrapper {
+  background-color: var(--primary-light);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.heroContent {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--primary-dark);
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.flashcardButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(124, 77, 255, 0.3);
+}
+
+.flashcardButton:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124, 77, 255, 0.4);
+}
+
+.flashcardIcon {
+  margin-right: 0.25rem;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statValue {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.statLabel {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.searchContainer {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.8rem 1rem 0.8rem 2.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.searchInput:focus {
+  border-color: var(--primary-color);
+}
+
+.tableContainer {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.tableHeader th {
+  background-color: #f8f9fa;
+  color: #6b7280;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tableRow {
+  transition: background-color 0.2s;
+}
+
+.tableRow:hover {
+  background-color: #f9fafb;
+}
+
+.tableCell {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: middle;
+}
+
+.romajiCell {
+  font-size: 0.875rem;
+  color: #374151;
+  width: 20%;
+}
+
+.kanaCell {
+  font-size: 1.125rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #111827;
+  width: 20%;
+}
+
+.meaningCell {
+  font-size: 0.875rem;
+  color: #374151;
+  width: 30%;
+}
+
+.typeCell {
+  width: 15%;
+}
+
+.actionCell {
+  width: 15%;
+  text-align: right;
+}
+
+.levelBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.detailsLink {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--primary-color);
+  background-color: var(--primary-light);
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.detailsLink:hover {
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+}
+
+/* Kanji Table */
+.kanjiTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.kanjiTableHeader {
+  background-color: var(--primary-light);
+}
+
+.kanjiTableHeader th {
+  padding: 1rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+.kanjiTableRow {
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s;
+}
+
+.kanjiTableRow:hover {
+  background-color: #f9f9f9;
+}
+
+.kanjiTableCell {
+  padding: 1rem;
+}
+
+.kanjiKanjiCell {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.kanjiKanaCell {
+  padding: 1rem;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.kanjiMeaningCell {
+  padding: 1rem;
+  color: #555;
+}
+
+.kanjiKanjiLink {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.kanjiKanjiLink:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* Kanji Detail Page Styles */
+.wordDetailHeader {
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary-color);
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: color 0.2s;
+}
+
+.backLink:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+.wordDetailTitle {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.kanjiHeading {
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  display: block;
+  line-height: 1.2;
+}
+
+.kanaHeading {
+  font-size: 2rem;
+  color: var(--text-secondary);
+  font-family: 'Noto Sans JP', sans-serif;
+  display: block;
+}
+
+.wordDetailMeaning {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+}
+
+.wordDetailCard {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.wordDetailSection {
+  margin-bottom: 2.5rem;
+}
+
+.wordDetailSection:last-child {
+  margin-bottom: 0;
+}
+
+.wordDetailSection h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary-light);
+}
+
+.wordDetailGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.wordDetailItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.wordDetailLabel {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.wordDetailValue {
+  font-size: 1.2rem;
+  color: var(--text-color);
+}
+
+.exampleList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.exampleItem {
+  background-color: var(--primary-light);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-color);
+}
+
+.exampleJapanese {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.exampleEnglish {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.errorMessage {
+  text-align: center;
+  padding: 3rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+}
+
+.errorMessage h2 {
+  color: #e53935;
+  margin-bottom: 1rem;
+}
+
+/* Kanji Stroke Order Section */
+.strokeOrderSection {
+  margin: 1.5rem 0;
+}
+
+.strokeOrderTitle {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--primary-dark);
+}
+
+.singleKanjiStrokeOrder {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: var(--primary-light);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.singleKanjiHeading {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--primary-dark);
+}
+
+.strokeOrderContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.strokeStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+  width: 100px;
+  height: 130px;
+}
+
+.strokeNumber {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.strokeImage {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* Related Words Section */
+.relatedWordsSection {
+  margin-top: 2rem;
+}
+
+.relatedWordsTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--primary-dark);
+}
+
+.relatedWordsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.relatedWordCard {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  padding: 0.5rem;
+}
+
+.relatedWordCard:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.relatedWordKanji {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.relatedWordKana {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0.3rem 0;
+  line-height: 1.4;
+}
+
+.relatedWordMeaning {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Practice Section */
+.practiceSection {
+  margin-top: 2rem;
+  background-color: var(--primary-light);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.practiceTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--primary-dark);
+}
+
+.practiceDescription {
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+}
+
+.practiceButtonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.practiceButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(124, 77, 255, 0.3);
+}
+
+.practiceButton:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124, 77, 255, 0.4);
+}
+
+.secondaryPracticeButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: white;
+  color: var(--primary-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: 1px solid var(--primary-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.secondaryPracticeButton:hover {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(124, 77, 255, 0.2);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .wordDetailHeader {
+    padding-top: 3rem;
+  }
+  
+  .kanjiHeading {
+    font-size: 4rem;
+  }
+  
+  .kanaHeading {
+    font-size: 1.5rem;
+  }
+  
+  .wordDetailMeaning {
+    font-size: 1.2rem;
+  }
+  
+  .wordDetailGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .practiceButtonContainer {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .wordDetailCard {
+    padding: 1.5rem;
+  }
+  
+  .kanjiHeading {
+    font-size: 3.5rem;
+  }
+  
+  .strokeStep {
+    width: 80px;
+    height: 110px;
+  }
+}
+
+/* Loading Spinner */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.loadingSpinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--primary-light);
+  border-top: 5px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Kanji Detail Card Styles */
+.kanjiDetailCard {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.kanjiHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.kanjiMain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.kanjiCharacter {
+  font-size: 5rem;
+  line-height: 1;
+  margin: 0;
+  color: #5e35b1;
+}
+
+.kanjiReading {
+  font-size: 1.5rem;
+  color: #7c4dff;
+  margin-top: 0.5rem;
+}
+
+.kanjiMeaning {
+  font-size: 1.25rem;
+  color: #333;
+  margin-top: 1rem;
+}
+
+.levelBadgeWrapper {
+  margin-top: 1rem;
+}
+
+.strokeOrderSection,
+.exampleSentencesSection,
+.relatedWordsSection,
+.studyTipsSection,
+.practiceSection {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e8e3ff;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  color: #5e35b1;
+  margin-bottom: 1rem;
+}
+
+.exampleSentencesList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.exampleSentence {
+  background-color: #f9f7ff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border-left: 4px solid #7c4dff;
+}
+
+.japaneseSentence {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+}
+
+.englishSentence {
+  color: #666;
+}
+
+.showMoreButton {
+  background-color: transparent;
+  border: none;
+  color: #7c4dff;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-top: 1rem;
+}
+
+.showMoreButton:hover {
+  text-decoration: underline;
+}
+
+.relatedWordsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.relatedWordCard {
+  background-color: #f9f7ff;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.relatedWordCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.relatedWordKanji {
+  font-size: 1.5rem;
+  color: #5e35b1;
+  margin-bottom: 0.5rem;
+}
+
+.relatedWordReading {
+  color: #7c4dff;
+  margin-bottom: 0.25rem;
+}
+
+.relatedWordMeaning {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.studyTipsContent {
+  background-color: #f9f7ff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  line-height: 1.6;
+}
+
+.practiceButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.practiceButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #7c4dff;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.2s;
+}
+
+.practiceButton:hover {
+  background-color: #5e35b1;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  color: #7c4dff;
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.backButton:hover {
+  text-decoration: underline;
+}
+
+.detailHeader {
+  margin-bottom: 1.5rem;
+}
+
+.strokeOrderPlaceholder {
+  background-color: #f9f7ff;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  color: #666;
+}
+
+.wordDetailCard {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.wordHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.wordKanji {
+  font-size: 3rem;
+  line-height: 1;
+  margin: 0;
+  color: #5e35b1;
+}
+
+.wordReading {
+  font-size: 1.25rem;
+  color: #7c4dff;
+  margin-top: 0.5rem;
+}
+
+.wordType {
+  display: inline-block;
+  background-color: #e8e3ff;
+  color: #5e35b1;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+}
+
+.wordMeaning {
+  text-align: center;
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.loadingSpinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 1.25rem;
+  color: #7c4dff;
+}
+
+.errorMessage {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  text-align: center;
+}
+
+.errorMessage h2 {
+  color: #5e35b1;
+  margin-bottom: 1rem;
+}
+
+.errorMessage p {
+  margin-bottom: 1.5rem;
+  color: #666;
+}
+
+/* Ensure consistent styling for details links across all pages */
+.tableCell .detailsLink {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tableCell .detailsLink:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.actionCell .detailsLink {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.actionCell .detailsLink:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.actionCell {
+  width: 120px;
+  text-align: center;
+}
+
+/* Pagination Styles */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--primary-light);
+}
+
+.pageInfo {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.pageControls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pageButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pageButton:hover:not(:disabled) {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.pageButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Reading Styles */
+.kanaCell :global(.onyomi) {
+  display: inline-block;
+  margin-right: 0.5rem;
+  padding: 0.1rem 0.3rem;
+  background-color: var(--primary-light);
+  border-radius: 3px;
+  font-size: 0.9rem;
+}
+
+.kanaCell :global(.kunyomi) {
+  display: inline-block;
+  padding: 0.1rem 0.3rem;
+  background-color: rgba(255, 145, 0, 0.1);
+  border-radius: 3px;
+  font-size: 0.9rem;
+}
+
+/* Reading Styles for Kanji Detail Page */
+.kanaHeading :global(.onyomi),
+.wordDetailValue :global(.onyomi),
+.relatedWordKana :global(.onyomi) {
+  display: inline-block;
+  margin-right: 0.5rem;
+  padding: 0.1rem 0.3rem;
+  background-color: var(--primary-light);
+  border-radius: 3px;
+  font-size: 0.9rem;
+}
+
+.kanaHeading :global(.kunyomi),
+.wordDetailValue :global(.kunyomi),
+.relatedWordKana :global(.kunyomi) {
+  display: inline-block;
+  padding: 0.1rem 0.3rem;
+  background-color: rgba(255, 145, 0, 0.1);
+  border-radius: 3px;
+  font-size: 0.9rem;
+}

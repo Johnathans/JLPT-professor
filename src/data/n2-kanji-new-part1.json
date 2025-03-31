@@ -1,0 +1,1404 @@
+{
+  "kanji_data": [
+    {
+      "id": 1,
+      "kanji": "党",
+      "onyomi": "tou (トウ)",
+      "kunyomi": "nakama, mura (なかま、 むら)",
+      "meaning": "party, faction, clique"
+    },
+    {
+      "id": 2,
+      "kanji": "協",
+      "onyomi": "kyou (キョウ)",
+      "kunyomi": "",
+      "meaning": "co-, cooperation"
+    },
+    {
+      "id": 3,
+      "kanji": "総",
+      "onyomi": "sou (ソウ)",
+      "kunyomi": "sube(te), fusa (すべ(て)、 ふさ)",
+      "meaning": "general, whole, all"
+    },
+    {
+      "id": 4,
+      "kanji": "区",
+      "onyomi": "ku (ク)",
+      "kunyomi": "",
+      "meaning": "ward, district"
+    },
+    {
+      "id": 5,
+      "kanji": "領",
+      "onyomi": "ryou (リョウ)",
+      "kunyomi": "eri (えり)",
+      "meaning": "jurisdiction, dominion"
+    },
+    {
+      "id": 6,
+      "kanji": "県",
+      "onyomi": "ken (ケン)",
+      "kunyomi": "ka(keru) (か(ける))",
+      "meaning": "prefecture"
+    },
+    {
+      "id": 7,
+      "kanji": "設",
+      "onyomi": "setsu (セツ)",
+      "kunyomi": "mou(keru) (もう(ける))",
+      "meaning": "establishment, provision"
+    },
+    {
+      "id": 8,
+      "kanji": "保",
+      "onyomi": "ho, hou (ホ、ホウ)",
+      "kunyomi": "tamo(tsu) (たも(つ))",
+      "meaning": "protect, guarantee, keep"
+    },
+    {
+      "id": 9,
+      "kanji": "改",
+      "onyomi": "kai (カイ)",
+      "kunyomi": "arata(meru) (あらた(める))",
+      "meaning": "reformation, change, modify"
+    },
+    {
+      "id": 10,
+      "kanji": "第",
+      "onyomi": "dai (ダイ)",
+      "kunyomi": "",
+      "meaning": "No., number"
+    },
+    {
+      "id": 11,
+      "kanji": "結",
+      "onyomi": "ketsu (ケツ)",
+      "kunyomi": "musu(bu), yu(u) (むす(ぶ)、ゆ(う))",
+      "meaning": "tie, bind, contract"
+    },
+    {
+      "id": 12,
+      "kanji": "派",
+      "onyomi": "ha (ハ)",
+      "kunyomi": "",
+      "meaning": "faction, group, party"
+    },
+    {
+      "id": 13,
+      "kanji": "府",
+      "onyomi": "fu (フ)",
+      "kunyomi": "",
+      "meaning": "borough, urban prefecture, govt office"
+    },
+    {
+      "id": 14,
+      "kanji": "査",
+      "onyomi": "sa (サ)",
+      "kunyomi": "",
+      "meaning": "investigate"
+    },
+    {
+      "id": 15,
+      "kanji": "委",
+      "onyomi": "i (イ)",
+      "kunyomi": "yuda(neru) (ゆだ(ねる))",
+      "meaning": "committee, entrust to"
+    },
+    {
+      "id": 16,
+      "kanji": "軍",
+      "onyomi": "gun (グン)",
+      "kunyomi": "ikusa (いくさ)",
+      "meaning": "army, force, troops"
+    },
+    {
+      "id": 17,
+      "kanji": "案",
+      "onyomi": "an (アン)",
+      "kunyomi": "tsukue (つくえ)",
+      "meaning": "plan, suggestion, draft"
+    },
+    {
+      "id": 18,
+      "kanji": "策",
+      "onyomi": "saku (サク)",
+      "kunyomi": "",
+      "meaning": "scheme, plan, policy"
+    },
+    {
+      "id": 19,
+      "kanji": "団",
+      "onyomi": "dan, ton (ダン、トン)",
+      "kunyomi": "katamari, maru(i) (かたまり、 まる(い))",
+      "meaning": "group, association"
+    },
+    {
+      "id": 20,
+      "kanji": "各",
+      "onyomi": "kaku (カク)",
+      "kunyomi": "onoono (おのおの)",
+      "meaning": "each; every; either"
+    },
+    {
+      "id": 21,
+      "kanji": "島",
+      "onyomi": "tou (トウ)",
+      "kunyomi": "shima (しま)",
+      "meaning": "island"
+    },
+    {
+      "id": 22,
+      "kanji": "革",
+      "onyomi": "kaku (カク)",
+      "kunyomi": "kawa (かわ)",
+      "meaning": "leather; skin; reform; become serious"
+    },
+    {
+      "id": 23,
+      "kanji": "村",
+      "onyomi": "son (ソン)",
+      "kunyomi": "mura (むら)",
+      "meaning": "village; town"
+    },
+    {
+      "id": 24,
+      "kanji": "勢",
+      "onyomi": "sei (セイ)",
+      "kunyomi": "ikio(i) (いきお(い))",
+      "meaning": "forces; energy; military strength"
+    },
+    {
+      "id": 25,
+      "kanji": "減",
+      "onyomi": "gen (ゲン)",
+      "kunyomi": "he(ru) (へ(る))",
+      "meaning": "dwindle; decrease; reduce"
+    },
+    {
+      "id": 26,
+      "kanji": "再",
+      "onyomi": "sai, sa (サイ、 サ)",
+      "kunyomi": "futata(bi) (ふたた(び))",
+      "meaning": "again, twice, second time"
+    },
+    {
+      "id": 27,
+      "kanji": "税",
+      "onyomi": "zei (ゼイ)",
+      "kunyomi": "",
+      "meaning": "tax; duty"
+    },
+    {
+      "id": 28,
+      "kanji": "営",
+      "onyomi": "ei (エイ)",
+      "kunyomi": "itona(mu) (いとな(む))",
+      "meaning": "occupation; camp; perform; build; conduct (business)"
+    },
+    {
+      "id": 29,
+      "kanji": "比",
+      "onyomi": "hi (ヒ)",
+      "kunyomi": "kura(beru) (くら(べる))",
+      "meaning": "compare; race; ratio"
+    },
+    {
+      "id": 30,
+      "kanji": "防",
+      "onyomi": "bou (ボウ)",
+      "kunyomi": "fuse(gu) (ふせ(ぐ))",
+      "meaning": "ward off; defend; protect; resist"
+    },
+    {
+      "id": 31,
+      "kanji": "補",
+      "onyomi": "ho (ホ)",
+      "kunyomi": "ogina(u) (おぎな(う))",
+      "meaning": "supplement; supply; offset; compensate"
+    },
+    {
+      "id": 32,
+      "kanji": "境",
+      "onyomi": "kyou (キョウ)",
+      "kunyomi": "sakai (さかい)",
+      "meaning": "boundary, border, region"
+    },
+    {
+      "id": 33,
+      "kanji": "導",
+      "onyomi": "dou (ドウ)",
+      "kunyomi": "michibi(ku) (みちび(く))",
+      "meaning": "guidance; leading; conduct; usher"
+    },
+    {
+      "id": 34,
+      "kanji": "副",
+      "onyomi": "fuku (フク)",
+      "kunyomi": "",
+      "meaning": "vice-; assistant; aide; duplicate; copy"
+    },
+    {
+      "id": 35,
+      "kanji": "算",
+      "onyomi": "san (サン)",
+      "kunyomi": "soro (そろ)",
+      "meaning": "calculate; divining; number; probability"
+    },
+    {
+      "id": 36,
+      "kanji": "輸",
+      "onyomi": "yu, shu (ユ、 シュ)",
+      "kunyomi": "",
+      "meaning": "transport, send, be inferior"
+    },
+    {
+      "id": 37,
+      "kanji": "述",
+      "onyomi": "jutsu (ジュツ)",
+      "kunyomi": "no(beru) (の(べる))",
+      "meaning": "mention; state; speak"
+    },
+    {
+      "id": 38,
+      "kanji": "線",
+      "onyomi": "sen (セン)",
+      "kunyomi": "suji (すじ)",
+      "meaning": "line; track"
+    },
+    {
+      "id": 39,
+      "kanji": "農",
+      "onyomi": "nou (ノウ)",
+      "kunyomi": "",
+      "meaning": "agriculture; farmers"
+    },
+    {
+      "id": 40,
+      "kanji": "州",
+      "onyomi": "shuu (シュウ)",
+      "kunyomi": "su (す)",
+      "meaning": "state; province"
+    },
+    {
+      "id": 41,
+      "kanji": "武",
+      "onyomi": "bu, mu (ブ、 ム)",
+      "kunyomi": "take(shi) (たけ(し))",
+      "meaning": "warrior; military; chivalry; arms"
+    },
+    {
+      "id": 42,
+      "kanji": "象",
+      "onyomi": "shou, zou (ショウ、 ゾウ)",
+      "kunyomi": "katado(ru) (かたど(る))",
+      "meaning": "elephant; pattern after; image; shape"
+    },
+    {
+      "id": 43,
+      "kanji": "域",
+      "onyomi": "iki (イキ)",
+      "kunyomi": "",
+      "meaning": "range; region; limits; stage; level"
+    },
+    {
+      "id": 44,
+      "kanji": "額",
+      "onyomi": "gaku (ガク)",
+      "kunyomi": "hitai (ひたい)",
+      "meaning": "forehead; tablet; framed picture; sum; amount; volume"
+    },
+    {
+      "id": 45,
+      "kanji": "欧",
+      "onyomi": "ou (オウ)",
+      "kunyomi": "uta(u), ha(ku) (うた(う)、 は(く))",
+      "meaning": "Europe"
+    },
+    {
+      "id": 46,
+      "kanji": "担",
+      "onyomi": "tan (タン)",
+      "kunyomi": "katsu(gu), nina(u) (かつ(ぐ)、 にな(う))",
+      "meaning": "shouldering; carry; raise; bear"
+    },
+    {
+      "id": 47,
+      "kanji": "準",
+      "onyomi": "jun (ジュン)",
+      "kunyomi": "jun(jiru), nazora(eru) (じゅん(じる)、 なぞら(える))",
+      "meaning": "semi-; correspond to; imitate"
+    },
+    {
+      "id": 48,
+      "kanji": "賞",
+      "onyomi": "shou (ショウ)",
+      "kunyomi": "ho(meru) (ほ(める))",
+      "meaning": "prize; reward; praise"
+    },
+    {
+      "id": 49,
+      "kanji": "辺",
+      "onyomi": "hen (ヘン)",
+      "kunyomi": "ata(ri), hoto(ri) (あた(り)、 ほと(り))",
+      "meaning": "environs; boundary; border; vicinity"
+    },
+    {
+      "id": 50,
+      "kanji": "造",
+      "onyomi": "zou (ゾウ)",
+      "kunyomi": "tsuku(ru) (つく(る))",
+      "meaning": "create; make; structure; physique"
+    },
+    {
+      "id": 51,
+      "kanji": "被",
+      "onyomi": "hi (ヒ)",
+      "kunyomi": "koumu(ru), kabu(ru) (こうむ(る)、 かぶ(る))",
+      "meaning": "incur; cover; shelter; wear; put on"
+    },
+    {
+      "id": 52,
+      "kanji": "技",
+      "onyomi": "gi (ギ)",
+      "kunyomi": "waza (わざ)",
+      "meaning": "skill; art; craft; ability; vocation; arts"
+    },
+    {
+      "id": 53,
+      "kanji": "低",
+      "onyomi": "tei (テイ)",
+      "kunyomi": "hiku(i) (ひく(い))",
+      "meaning": "lower; short; humble"
+    },
+    {
+      "id": 54,
+      "kanji": "復",
+      "onyomi": "fuku (フク)",
+      "kunyomi": "mata (また)",
+      "meaning": "restore, return to, revert"
+    },
+    {
+      "id": 55,
+      "kanji": "移",
+      "onyomi": "i (イ)",
+      "kunyomi": "utsu(ru) (うつ(る))",
+      "meaning": "shift, move, change"
+    },
+    {
+      "id": 56,
+      "kanji": "個",
+      "onyomi": "ko (コ)",
+      "kunyomi": "",
+      "meaning": "individual; counter for articles"
+    },
+    {
+      "id": 57,
+      "kanji": "門",
+      "onyomi": "mon (モン)",
+      "kunyomi": "kado, to (かど、 と)",
+      "meaning": "gate"
+    },
+    {
+      "id": 58,
+      "kanji": "課",
+      "onyomi": "ka (カ)",
+      "kunyomi": "",
+      "meaning": "chapter, lesson, section, department"
+    },
+    {
+      "id": 59,
+      "kanji": "脳",
+      "onyomi": "nou (ノウ)",
+      "kunyomi": "nouzuru (のうずる)",
+      "meaning": "brain; memory"
+    },
+    {
+      "id": 60,
+      "kanji": "極",
+      "onyomi": "kyoku, goku (キョク、 ゴク)",
+      "kunyomi": "kiwa(meru) (きわ(める))",
+      "meaning": "poles; settlement; conclusion; end"
+    },
+    {
+      "id": 61,
+      "kanji": "含",
+      "onyomi": "gan (ガン)",
+      "kunyomi": "fuku(mu) (ふく(む))",
+      "meaning": "contain; include"
+    },
+    {
+      "id": 62,
+      "kanji": "蔵",
+      "onyomi": "zou (ゾウ)",
+      "kunyomi": "kura (くら)",
+      "meaning": "storehouse; hide; own; have; possess"
+    },
+    {
+      "id": 63,
+      "kanji": "量",
+      "onyomi": "ryou (リョウ)",
+      "kunyomi": "haka(ru) (はか(る))",
+      "meaning": "quantity; measure; weight; amount"
+    },
+    {
+      "id": 64,
+      "kanji": "型",
+      "onyomi": "kei (ケイ)",
+      "kunyomi": "kata (かた)",
+      "meaning": "type; model"
+    },
+    {
+      "id": 65,
+      "kanji": "況",
+      "onyomi": "kyou (キョウ)",
+      "kunyomi": "mashi(te) (まし(て))",
+      "meaning": "condition; situation"
+    },
+    {
+      "id": 66,
+      "kanji": "針",
+      "onyomi": "shin (シン)",
+      "kunyomi": "hari (はり)",
+      "meaning": "needle; pin; staple; stinger"
+    },
+    {
+      "id": 67,
+      "kanji": "専",
+      "onyomi": "sen (セン)",
+      "kunyomi": "moppa(ra) (もっぱ(ら))",
+      "meaning": "specialty; exclusive; mainly; solely"
+    },
+    {
+      "id": 68,
+      "kanji": "谷",
+      "onyomi": "koku (コク)",
+      "kunyomi": "tani, kiwa(maru) (たに、 きわ(まる))",
+      "meaning": "valley"
+    },
+    {
+      "id": 69,
+      "kanji": "史",
+      "onyomi": "shi (シ)",
+      "kunyomi": "",
+      "meaning": "history; chronicle"
+    },
+    {
+      "id": 70,
+      "kanji": "階",
+      "onyomi": "kai (カイ)",
+      "kunyomi": "kizahashi (きざはし)",
+      "meaning": "stair; counter for building story"
+    },
+    {
+      "id": 71,
+      "kanji": "管",
+      "onyomi": "kan (カン)",
+      "kunyomi": "kuda (くだ)",
+      "meaning": "pipe; tube; wind instrument; control; jurisdiction"
+    },
+    {
+      "id": 72,
+      "kanji": "兵",
+      "onyomi": "hei, hyou (ヘイ、 ヒョウ)",
+      "kunyomi": "tsuwamono (つわもの)",
+      "meaning": "soldier; private; troops; army"
+    },
+    {
+      "id": 73,
+      "kanji": "接",
+      "onyomi": "setsu (セツ)",
+      "kunyomi": "tsu(gu) (つ(ぐ))",
+      "meaning": "touch; contact; adjoin; piece together"
+    },
+    {
+      "id": 74,
+      "kanji": "細",
+      "onyomi": "sai (サイ)",
+      "kunyomi": "hoso(i), koma(kai) (ほそ(い)、 こま(かい))",
+      "meaning": "slender; narrow; detailed; precise"
+    },
+    {
+      "id": 75,
+      "kanji": "効",
+      "onyomi": "kou (コウ)",
+      "kunyomi": "ki(ku) (き(く))",
+      "meaning": "merit; efficacy; efficiency; benefit"
+    },
+    {
+      "id": 76,
+      "kanji": "丸",
+      "onyomi": "gan (ガン)",
+      "kunyomi": "maru, maru(i) (まる、まる(い))",
+      "meaning": "round; full (month); perfection"
+    },
+    {
+      "id": 77,
+      "kanji": "湾",
+      "onyomi": "wan (ワン)",
+      "kunyomi": "irie (いりえ)",
+      "meaning": "gulf; bay; inlet"
+    },
+    {
+      "id": 78,
+      "kanji": "録",
+      "onyomi": "roku (ロク)",
+      "kunyomi": "to(ru) (と(る))",
+      "meaning": "record"
+    },
+    {
+      "id": 79,
+      "kanji": "省",
+      "onyomi": "sei, shou (セイ、 ショウ)",
+      "kunyomi": "kaeri(miru), habu(ku) (かえり(みる)、 はぶ(く))",
+      "meaning": "focus; government ministry; conserve"
+    },
+    {
+      "id": 80,
+      "kanji": "旧",
+      "onyomi": "kyuu (キュウ)",
+      "kunyomi": "furu(i), moto (ふる(い)、 もと)",
+      "meaning": "old times; old things; former; ex-"
+    },
+    {
+      "id": 81,
+      "kanji": "橋",
+      "onyomi": "kyou (キョウ)",
+      "kunyomi": "hashi (はし)",
+      "meaning": "bridge"
+    },
+    {
+      "id": 82,
+      "kanji": "岸",
+      "onyomi": "gan (ガン)",
+      "kunyomi": "kishi (きし)",
+      "meaning": "beach"
+    },
+    {
+      "id": 83,
+      "kanji": "周",
+      "onyomi": "shuu (シュウ)",
+      "kunyomi": "mawa(ri) (まわ(り))",
+      "meaning": "circumference; circuit; lap"
+    },
+    {
+      "id": 84,
+      "kanji": "材",
+      "onyomi": "zai (ザイ)",
+      "kunyomi": "",
+      "meaning": "lumber, log, timber, wood"
+    },
+    {
+      "id": 85,
+      "kanji": "戸",
+      "onyomi": "ko (コ)",
+      "kunyomi": "to (と)",
+      "meaning": "door; counter for houses"
+    },
+    {
+      "id": 86,
+      "kanji": "央",
+      "onyomi": "ou (オウ)",
+      "kunyomi": "",
+      "meaning": "center; middle"
+    },
+    {
+      "id": 87,
+      "kanji": "券",
+      "onyomi": "ken (ケン)",
+      "kunyomi": "",
+      "meaning": "ticket"
+    },
+    {
+      "id": 88,
+      "kanji": "編",
+      "onyomi": "hen (ヘン)",
+      "kunyomi": "a(mu) (あ(む))",
+      "meaning": "compilation; knit; braid; twist; editing"
+    },
+    {
+      "id": 89,
+      "kanji": "捜",
+      "onyomi": "sou (ソウ)",
+      "kunyomi": "saga(su) (さが(す))",
+      "meaning": "search; look for; locate"
+    },
+    {
+      "id": 90,
+      "kanji": "竹",
+      "onyomi": "chiku (チク)",
+      "kunyomi": "take (たけ)",
+      "meaning": "bamboo"
+    },
+    {
+      "id": 91,
+      "kanji": "超",
+      "onyomi": "chou (チョウ)",
+      "kunyomi": "ko(eru) (こ(える))",
+      "meaning": "transcend; super-; ultra-"
+    },
+    {
+      "id": 92,
+      "kanji": "並",
+      "onyomi": "hei (ヘイ)",
+      "kunyomi": "na(mi), nami, nara(beru) (な(み)、なみ、なら(べる))",
+      "meaning": "row, and, besides"
+    },
+    {
+      "id": 93,
+      "kanji": "療",
+      "onyomi": "ryou (リョウ)",
+      "kunyomi": "",
+      "meaning": "heal; cure"
+    },
+    {
+      "id": 94,
+      "kanji": "採",
+      "onyomi": "sai (サイ)",
+      "kunyomi": "to(ru) (と(る))",
+      "meaning": "pick; take; fetch; take up"
+    },
+    {
+      "id": 95,
+      "kanji": "森",
+      "onyomi": "shin (シン)",
+      "kunyomi": "mori (もり)",
+      "meaning": "forest, woods"
+    },
+    {
+      "id": 96,
+      "kanji": "競",
+      "onyomi": "kyou, kei (キョウ、 ケイ)",
+      "kunyomi": "kiso(u), se(ru) (きそ(う)、 せ(る))",
+      "meaning": "compete with; bid; contest; race"
+    },
+    {
+      "id": 97,
+      "kanji": "介",
+      "onyomi": "kai (カイ)",
+      "kunyomi": "",
+      "meaning": "jammed in; shellfish; mediate"
+    },
+    {
+      "id": 98,
+      "kanji": "根",
+      "onyomi": "kon (コン)",
+      "kunyomi": "ne (ね)",
+      "meaning": "root; radical"
+    },
+    {
+      "id": 99,
+      "kanji": "販",
+      "onyomi": "han (ハン)",
+      "kunyomi": "",
+      "meaning": "marketing, sell, trade"
+    },
+    {
+      "id": 100,
+      "kanji": "歴",
+      "onyomi": "reki (レキ)",
+      "kunyomi": "",
+      "meaning": "curriculum; continuation; passage of time"
+    },
+    {
+      "id": 101,
+      "kanji": "将",
+      "onyomi": "shou (ショウ)",
+      "kunyomi": "masa(ni), hata (まさ(に)、 はた)",
+      "meaning": "leader; commander; general; admiral"
+    },
+    {
+      "id": 102,
+      "kanji": "幅",
+      "onyomi": "fuku (フク)",
+      "kunyomi": "haba (はば)",
+      "meaning": "hanging scroll; width"
+    },
+    {
+      "id": 103,
+      "kanji": "般",
+      "onyomi": "han (ハン)",
+      "kunyomi": "",
+      "meaning": "carrier; carry; all; general; sort; kind"
+    },
+    {
+      "id": 104,
+      "kanji": "貿",
+      "onyomi": "bou (ボウ)",
+      "kunyomi": "",
+      "meaning": "trade; exchange"
+    },
+    {
+      "id": 105,
+      "kanji": "講",
+      "onyomi": "kou (コウ)",
+      "kunyomi": "",
+      "meaning": "lecture; club; association"
+    },
+    {
+      "id": 106,
+      "kanji": "林",
+      "onyomi": "rin (リン)",
+      "kunyomi": "hayashi (はやし)",
+      "meaning": "grove; forest"
+    },
+    {
+      "id": 107,
+      "kanji": "装",
+      "onyomi": "sou, shou (ソウ、 ショウ)",
+      "kunyomi": "yosoo(u) (よそお(う))",
+      "meaning": "attire; dress; pretend; disguise"
+    },
+    {
+      "id": 108,
+      "kanji": "諸",
+      "onyomi": "sho (ショ)",
+      "kunyomi": "moro (もろ)",
+      "meaning": "various; many; several; together"
+    },
+    {
+      "id": 109,
+      "kanji": "劇",
+      "onyomi": "geki (ゲキ)",
+      "kunyomi": "",
+      "meaning": "drama; play"
+    },
+    {
+      "id": 110,
+      "kanji": "河",
+      "onyomi": "ka (カ)",
+      "kunyomi": "kawa (かわ)",
+      "meaning": "river"
+    },
+    {
+      "id": 111,
+      "kanji": "航",
+      "onyomi": "kou (コウ)",
+      "kunyomi": "",
+      "meaning": "navigate; sail; cruise; fly"
+    },
+    {
+      "id": 112,
+      "kanji": "鉄",
+      "onyomi": "tetsu (テツ)",
+      "kunyomi": "kurogane (くろがね)",
+      "meaning": "iron"
+    },
+    {
+      "id": 113,
+      "kanji": "児",
+      "onyomi": "ji (ジ)",
+      "kunyomi": "ko (こ)",
+      "meaning": "newborn babe; child"
+    },
+    {
+      "id": 114,
+      "kanji": "禁",
+      "onyomi": "kin (キン)",
+      "kunyomi": "",
+      "meaning": "prohibition; ban; forbid"
+    },
+    {
+      "id": 115,
+      "kanji": "印",
+      "onyomi": "in (イン)",
+      "kunyomi": "shirushi (しるし)",
+      "meaning": "stamp; seal; mark; symbol; trademark"
+    },
+    {
+      "id": 116,
+      "kanji": "逆",
+      "onyomi": "gyaku (ギャク)",
+      "kunyomi": "saka(rau) (さか(らう))",
+      "meaning": "inverted; reverse; opposite"
+    },
+    {
+      "id": 117,
+      "kanji": "換",
+      "onyomi": "kan (カン)",
+      "kunyomi": "",
+      "meaning": "exchange; interchange"
+    },
+    {
+      "id": 118,
+      "kanji": "久",
+      "onyomi": "kyuu, ku (キュウ、 ク)",
+      "kunyomi": "hisa(shii) (ひさ(しい))",
+      "meaning": "long time; old story"
+    },
+    {
+      "id": 119,
+      "kanji": "短",
+      "onyomi": "tan (タン)",
+      "kunyomi": "mijika(i) (みじか(い))",
+      "meaning": "short; fault; defect; weak point"
+    },
+    {
+      "id": 120,
+      "kanji": "油",
+      "onyomi": "yu (ユ)",
+      "kunyomi": "abura (あぶら)",
+      "meaning": "oil; fat"
+    },
+    {
+      "id": 121,
+      "kanji": "暴",
+      "onyomi": "bou, baku (ボウ、 バク)",
+      "kunyomi": "aba(ku) (あば(く))",
+      "meaning": "outburst; force; violence"
+    },
+    {
+      "id": 122,
+      "kanji": "輪",
+      "onyomi": "rin (リン)",
+      "kunyomi": "wa (わ)",
+      "meaning": "wheel; ring; circle; link; loop; counter for wheels and flowers"
+    },
+    {
+      "id": 123,
+      "kanji": "占",
+      "onyomi": "sen (セン)",
+      "kunyomi": "shi(meru), urana(u) (し(める)、 うらな(う))",
+      "meaning": "fortune-telling; divining; forecasting"
+    },
+    {
+      "id": 124,
+      "kanji": "植",
+      "onyomi": "shoku (ショク)",
+      "kunyomi": "u(eru) (う(える))",
+      "meaning": "plant"
+    },
+    {
+      "id": 125,
+      "kanji": "清",
+      "onyomi": "sei (セイ)",
+      "kunyomi": "kiyo(i) (きよ(い))",
+      "meaning": "pure; purify; cleanse"
+    },
+    {
+      "id": 126,
+      "kanji": "倍",
+      "onyomi": "bai (バイ)",
+      "kunyomi": "",
+      "meaning": "double; twice; times; fold"
+    },
+    {
+      "id": 127,
+      "kanji": "均",
+      "onyomi": "kin (キン)",
+      "kunyomi": "nara(su) (なら(す))",
+      "meaning": "level; average"
+    },
+    {
+      "id": 128,
+      "kanji": "億",
+      "onyomi": "oku (オク)",
+      "kunyomi": "",
+      "meaning": "hundred million; 10**8"
+    },
+    {
+      "id": 129,
+      "kanji": "圧",
+      "onyomi": "atsu (アツ)",
+      "kunyomi": "o(su) (お(す))",
+      "meaning": "pressure; push; overwhelm; oppress"
+    },
+    {
+      "id": 130,
+      "kanji": "芸",
+      "onyomi": "gei (ゲイ)",
+      "kunyomi": "u(eru), nori, waza (う(える)、 のり、 わざ)",
+      "meaning": "technique; art; craft; performance; acting"
+    },
+    {
+      "id": 131,
+      "kanji": "署",
+      "onyomi": "sho (ショ)",
+      "kunyomi": "",
+      "meaning": "signature; govt office; police station"
+    },
+    {
+      "id": 132,
+      "kanji": "伸",
+      "onyomi": "shin (シン)",
+      "kunyomi": "no(biru) (の(びる))",
+      "meaning": "expand; stretch; extend"
+    },
+    {
+      "id": 133,
+      "kanji": "停",
+      "onyomi": "tei (テイ)",
+      "kunyomi": "to(meru) (と(める))",
+      "meaning": "halt; stopping"
+    },
+    {
+      "id": 134,
+      "kanji": "爆",
+      "onyomi": "baku (バク)",
+      "kunyomi": "ha(zeru) (は(ぜる))",
+      "meaning": "bomb; burst open"
+    },
+    {
+      "id": 135,
+      "kanji": "陸",
+      "onyomi": "riku, roku (リク、 ロク)",
+      "kunyomi": "oka (おか)",
+      "meaning": "land; six"
+    },
+    {
+      "id": 136,
+      "kanji": "玉",
+      "onyomi": "gyoku (ギョク)",
+      "kunyomi": "tama (たま)",
+      "meaning": "jewel; ball"
+    },
+    {
+      "id": 137,
+      "kanji": "波",
+      "onyomi": "ha (ハ)",
+      "kunyomi": "nami (なみ)",
+      "meaning": "waves; billows"
+    },
+    {
+      "id": 138,
+      "kanji": "帯",
+      "onyomi": "tai (タイ)",
+      "kunyomi": "o(biru) (お(びる))",
+      "meaning": "sash; belt; obi; zone; region"
+    },
+    {
+      "id": 139,
+      "kanji": "延",
+      "onyomi": "en (エン)",
+      "kunyomi": "no(biru) (の(びる))",
+      "meaning": "prolong; stretching"
+    },
+    {
+      "id": 140,
+      "kanji": "羽",
+      "onyomi": "u (ウ)",
+      "kunyomi": "ha, wa, hane (は、 わ、 はね)",
+      "meaning": "feathers; counter for birds, rabbits"
+    },
+    {
+      "id": 141,
+      "kanji": "固",
+      "onyomi": "ko (コ)",
+      "kunyomi": "kata(meru) (かた(める))",
+      "meaning": "harden; set; clot; curdle"
+    },
+    {
+      "id": 142,
+      "kanji": "則",
+      "onyomi": "soku (ソク)",
+      "kunyomi": "notto(ru) (のっと(る))",
+      "meaning": "rule; follow; based on"
+    },
+    {
+      "id": 143,
+      "kanji": "乱",
+      "onyomi": "ran (ラン)",
+      "kunyomi": "mida(reru) (みだ(れる))",
+      "meaning": "riot; war; disorder; disturb"
+    },
+    {
+      "id": 144,
+      "kanji": "普",
+      "onyomi": "fu (フ)",
+      "kunyomi": "amane(ku) (あまね(く))",
+      "meaning": "universal; generally"
+    },
+    {
+      "id": 145,
+      "kanji": "測",
+      "onyomi": "soku (ソク)",
+      "kunyomi": "haka(ru) (はか(る))",
+      "meaning": "fathom; plan; scheme; measure"
+    },
+    {
+      "id": 146,
+      "kanji": "豊",
+      "onyomi": "hou, bu (ホウ、 ブ)",
+      "kunyomi": "yuta(ka), toyo (ゆた(か)、 とよ)",
+      "meaning": "bountiful; excellent; rich"
+    },
+    {
+      "id": 147,
+      "kanji": "厚",
+      "onyomi": "kou (コウ)",
+      "kunyomi": "atsu(i) (あつ(い))",
+      "meaning": "thick; heavy; rich"
+    },
+    {
+      "id": 148,
+      "kanji": "齢",
+      "onyomi": "rei (レイ)",
+      "kunyomi": "yowai, toshi (よわい、 とし)",
+      "meaning": "age"
+    },
+    {
+      "id": 149,
+      "kanji": "囲",
+      "onyomi": "i (イ)",
+      "kunyomi": "kako(mu) (かこ(む))",
+      "meaning": "surround; enclosure; preserve; keep"
+    },
+    {
+      "id": 150,
+      "kanji": "卒",
+      "onyomi": "sotsu (ソツ)",
+      "kunyomi": "so(ssuru) (そっ(する))",
+      "meaning": "graduate; soldier; private; die"
+    },
+    {
+      "id": 151,
+      "kanji": "略",
+      "onyomi": "ryaku (リャク)",
+      "kunyomi": "hobo (ほぼ)",
+      "meaning": "abbreviation; omission; outline; shorten"
+    },
+    {
+      "id": 152,
+      "kanji": "承",
+      "onyomi": "shou (ショウ)",
+      "kunyomi": "uketamawa(ru) (うけたまわ(る))",
+      "meaning": "hear; listen to; be informed; receive"
+    },
+    {
+      "id": 153,
+      "kanji": "順",
+      "onyomi": "jun (ジュン)",
+      "kunyomi": "",
+      "meaning": "obey; order; turn; occasion"
+    },
+    {
+      "id": 154,
+      "kanji": "岩",
+      "onyomi": "gan (ガン)",
+      "kunyomi": "iwa (いわ)",
+      "meaning": "boulder; rock; cliff"
+    },
+    {
+      "id": 155,
+      "kanji": "練",
+      "onyomi": "ren (レン)",
+      "kunyomi": "ne(ru) (ね(る))",
+      "meaning": "practice, gloss, train, drill, polish, refine"
+    },
+    {
+      "id": 156,
+      "kanji": "軽",
+      "onyomi": "kei (ケイ)",
+      "kunyomi": "karu(i) (かる(い))",
+      "meaning": "lightly; trifling; unimportant"
+    },
+    {
+      "id": 157,
+      "kanji": "了",
+      "onyomi": "ryou (リョウ)",
+      "kunyomi": "",
+      "meaning": "complete; finish"
+    },
+    {
+      "id": 158,
+      "kanji": "庁",
+      "onyomi": "chou (チョウ)",
+      "kunyomi": "yakusho (やくしょ)",
+      "meaning": "government office"
+    },
+    {
+      "id": 159,
+      "kanji": "城",
+      "onyomi": "jou, sei (ジョウ、 セイ)",
+      "kunyomi": "shiro (しろ)",
+      "meaning": "castle"
+    },
+    {
+      "id": 160,
+      "kanji": "患",
+      "onyomi": "kan (カン)",
+      "kunyomi": "wazura(u) (わずら(う))",
+      "meaning": "afflicted; disease; suffer from; be ill"
+    },
+    {
+      "id": 161,
+      "kanji": "層",
+      "onyomi": "sou (ソウ)",
+      "kunyomi": "",
+      "meaning": "stratum; social class; layer; story; floor"
+    },
+    {
+      "id": 162,
+      "kanji": "版",
+      "onyomi": "han (ハン)",
+      "kunyomi": "",
+      "meaning": "printing block; edition; impression; label"
+    },
+    {
+      "id": 163,
+      "kanji": "令",
+      "onyomi": "rei (レイ)",
+      "kunyomi": "",
+      "meaning": "orders; command; decree"
+    },
+    {
+      "id": 164,
+      "kanji": "角",
+      "onyomi": "kaku (カク)",
+      "kunyomi": "kado, tsuno (かど、 つの)",
+      "meaning": "angle; corner; square"
+    },
+    {
+      "id": 165,
+      "kanji": "絡",
+      "onyomi": "raku (ラク)",
+      "kunyomi": "kara(mu) (から(む))",
+      "meaning": "entwine; coil around; get caught in"
+    },
+    {
+      "id": 166,
+      "kanji": "損",
+      "onyomi": "son (ソン)",
+      "kunyomi": "soko(nau) (そこ(なう))",
+      "meaning": "damage; loss; disadvantage; hurt; injure"
+    },
+    {
+      "id": 167,
+      "kanji": "募",
+      "onyomi": "bo (ボ)",
+      "kunyomi": "tsuno(ru) (つの(る))",
+      "meaning": "recruit; campaign"
+    },
+    {
+      "id": 168,
+      "kanji": "裏",
+      "onyomi": "ri (リ)",
+      "kunyomi": "ura (うら)",
+      "meaning": "back; reverse; inside; rear"
+    },
+    {
+      "id": 169,
+      "kanji": "仏",
+      "onyomi": "butsu (ブツ)",
+      "kunyomi": "hotoke (ほとけ)",
+      "meaning": "Buddha, the dead, France"
+    },
+    {
+      "id": 170,
+      "kanji": "績",
+      "onyomi": "seki (セキ)",
+      "kunyomi": "",
+      "meaning": "exploits; achievements"
+    },
+    {
+      "id": 171,
+      "kanji": "築",
+      "onyomi": "chiku (チク)",
+      "kunyomi": "kizu(ku) (きず(く))",
+      "meaning": "fabricate; build; construct"
+    },
+    {
+      "id": 172,
+      "kanji": "貨",
+      "onyomi": "ka (カ)",
+      "kunyomi": "takara (たから)",
+      "meaning": "freight; goods; property"
+    },
+    {
+      "id": 173,
+      "kanji": "混",
+      "onyomi": "kon (コン)",
+      "kunyomi": "ma(jiru) (ま(じる))",
+      "meaning": "mix; blend; confuse"
+    },
+    {
+      "id": 174,
+      "kanji": "昇",
+      "onyomi": "shou (ショウ)",
+      "kunyomi": "nobo(ru) (のぼ(る))",
+      "meaning": "rise up"
+    },
+    {
+      "id": 175,
+      "kanji": "池",
+      "onyomi": "chi (チ)",
+      "kunyomi": "ike (いけ)",
+      "meaning": "pond; pool; reservoir"
+    },
+    {
+      "id": 176,
+      "kanji": "血",
+      "onyomi": "ketsu (ケツ)",
+      "kunyomi": "chi (ち)",
+      "meaning": "blood"
+    },
+    {
+      "id": 177,
+      "kanji": "温",
+      "onyomi": "on (オン)",
+      "kunyomi": "atata(kai), nuku (あたた(かい)、ぬく)",
+      "meaning": "warm"
+    },
+    {
+      "id": 178,
+      "kanji": "季",
+      "onyomi": "ki (キ)",
+      "kunyomi": "",
+      "meaning": "seasons"
+    },
+    {
+      "id": 179,
+      "kanji": "星",
+      "onyomi": "sei (セイ)",
+      "kunyomi": "hoshi (ほし)",
+      "meaning": "star"
+    },
+    {
+      "id": 180,
+      "kanji": "永",
+      "onyomi": "ei (エイ)",
+      "kunyomi": "naga(i) (なが(い))",
+      "meaning": "eternity; long; lengthy"
+    },
+    {
+      "id": 181,
+      "kanji": "著",
+      "onyomi": "cho, chaku (チョ、 チャク)",
+      "kunyomi": "arawa(su), ichijiru(shii) (あらわ(す)、 いちじる(しい))",
+      "meaning": "renowned; publish; write"
+    },
+    {
+      "id": 182,
+      "kanji": "誌",
+      "onyomi": "shi (シ)",
+      "kunyomi": "",
+      "meaning": "document; records"
+    },
+    {
+      "id": 183,
+      "kanji": "庫",
+      "onyomi": "ko, ku (コ、 ク)",
+      "kunyomi": "kura (くら)",
+      "meaning": "warehouse; storehouse"
+    },
+    {
+      "id": 184,
+      "kanji": "刊",
+      "onyomi": "kan (カン)",
+      "kunyomi": "",
+      "meaning": "publish; carve; engrave"
+    },
+    {
+      "id": 185,
+      "kanji": "像",
+      "onyomi": "zou (ゾウ)",
+      "kunyomi": "",
+      "meaning": "statue; picture; image; figure"
+    },
+    {
+      "id": 186,
+      "kanji": "香",
+      "onyomi": "kou, kyou (コウ、 キョウ)",
+      "kunyomi": "kao(ri) (かお(り))",
+      "meaning": "incense; smell; perfume"
+    },
+    {
+      "id": 187,
+      "kanji": "坂",
+      "onyomi": "han (ハン)",
+      "kunyomi": "saka (さか)",
+      "meaning": "slope; incline; hill"
+    },
+    {
+      "id": 188,
+      "kanji": "底",
+      "onyomi": "tei (テイ)",
+      "kunyomi": "soko (そこ)",
+      "meaning": "bottom; sole; depth; bottom price"
+    },
+    {
+      "id": 189,
+      "kanji": "布",
+      "onyomi": "fu (フ)",
+      "kunyomi": "nuno, shi(ku) (ぬの、 し(く))",
+      "meaning": "linen; cloth; spread; distribute"
+    },
+    {
+      "id": 190,
+      "kanji": "寺",
+      "onyomi": "ji (ジ)",
+      "kunyomi": "tera (てら)",
+      "meaning": "Buddhist temple"
+    },
+    {
+      "id": 191,
+      "kanji": "宇",
+      "onyomi": "u (ウ)",
+      "kunyomi": "",
+      "meaning": "eaves; roof; house; heaven"
+    },
+    {
+      "id": 192,
+      "kanji": "巨",
+      "onyomi": "kyo (キョ)",
+      "kunyomi": "",
+      "meaning": "gigantic; big; large; great"
+    },
+    {
+      "id": 193,
+      "kanji": "震",
+      "onyomi": "shin (シン)",
+      "kunyomi": "furu(u) (ふる(う))",
+      "meaning": "quake; shake; tremble; quiver"
+    },
+    {
+      "id": 194,
+      "kanji": "希",
+      "onyomi": "ki (キ)",
+      "kunyomi": "mare, koinega(u) (まれ、 こいねが(う))",
+      "meaning": "hope; beg; request; pray"
+    },
+    {
+      "id": 195,
+      "kanji": "触",
+      "onyomi": "shoku (ショク)",
+      "kunyomi": "fu(reru), sawa(ru) (ふ(れる)、 さわ(る))",
+      "meaning": "contact; touch; feel; hit; proclaim; announce"
+    },
+    {
+      "id": 196,
+      "kanji": "依",
+      "onyomi": "i, e (イ、 エ)",
+      "kunyomi": "yo(ru) (よ(る))",
+      "meaning": "reliant; depend on; consequently; therefore; due to"
+    },
+    {
+      "id": 197,
+      "kanji": "籍",
+      "onyomi": "seki (セキ)",
+      "kunyomi": "",
+      "meaning": "enroll; register; membership"
+    },
+    {
+      "id": 198,
+      "kanji": "汚",
+      "onyomi": "o (オ)",
+      "kunyomi": "yogo(su), kitana(i), kega(su) (よご(す)、 きたな(い)、 けが(す))",
+      "meaning": "dirty; pollute; disgrace; defile"
+    },
+    {
+      "id": 199,
+      "kanji": "枚",
+      "onyomi": "mai, bai (マイ、 バイ)",
+      "kunyomi": "",
+      "meaning": "sheet of...; counter for flat thin objects"
+    },
+    {
+      "id": 200,
+      "kanji": "複",
+      "onyomi": "fuku (フク)",
+      "kunyomi": "",
+      "meaning": "duplicate; double; compound; multiple"
+    }
+  ]
+}

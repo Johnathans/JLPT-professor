@@ -1,0 +1,1599 @@
+{
+  "title": "N5 Vocabulary",
+  "part": 1,
+  "count": 200,
+  "vocabulary": [
+    {
+      "id": 1,
+      "japanese": "浴びる",
+      "romaji": "abiru",
+      "hiragana": "あびる",
+      "type": "Verb, Ichidan verb, Transitive verb",
+      "meaning": "to bathe, to shower"
+    },
+    {
+      "id": 2,
+      "japanese": "危ない",
+      "romaji": "abunai",
+      "hiragana": "あぶない",
+      "type": "Adjective, い-adjective",
+      "meaning": "dangerous"
+    },
+    {
+      "id": 3,
+      "japanese": "あっち",
+      "romaji": "acchi",
+      "hiragana": "",
+      "type": "Pronoun",
+      "meaning": "over there"
+    },
+    {
+      "id": 4,
+      "japanese": "あちら",
+      "romaji": "achira",
+      "hiragana": "",
+      "type": "Pronoun",
+      "meaning": "there"
+    },
+    {
+      "id": 5,
+      "japanese": "上げる",
+      "romaji": "ageru",
+      "hiragana": "あげる",
+      "type": "Verb, Ichidan verb, Transitive verb",
+      "meaning": "to raise; to elevate; to give"
+    },
+    {
+      "id": 6,
+      "japanese": "赤",
+      "romaji": "aka",
+      "hiragana": "あか",
+      "type": "Noun",
+      "meaning": "red; crimson; scarlet​"
+    },
+    {
+      "id": 7,
+      "japanese": "赤い",
+      "romaji": "akai",
+      "hiragana": "あかい",
+      "type": "Adjective, い-adjective",
+      "meaning": "red; crimson; scarlet​"
+    },
+    {
+      "id": 8,
+      "japanese": "明るい",
+      "romaji": "akarui",
+      "hiragana": "あかるい",
+      "type": "Adjective, い-adjective",
+      "meaning": "bright; light"
+    },
+    {
+      "id": 9,
+      "japanese": "開ける",
+      "romaji": "akeru",
+      "hiragana": "あける",
+      "type": "Verb, Ichidan verb, Transitive verb",
+      "meaning": "to open (a door, etc.); to unwrap (e.g. parcel, package); to unlock"
+    },
+    {
+      "id": 10,
+      "japanese": "秋",
+      "romaji": "aki",
+      "hiragana": "あき",
+      "type": "Noun",
+      "meaning": "autumn; fall"
+    },
+    {
+      "id": 11,
+      "japanese": "開く",
+      "romaji": "aku",
+      "hiragana": "あく",
+      "type": "Verb, Godan verb, Intransitive verb",
+      "meaning": "to open (e.g. doors, business, etc)"
+    },
+    {
+      "id": 12,
+      "japanese": "甘い",
+      "romaji": "amai",
+      "hiragana": "あまい",
+      "type": "Adjective, い-adjective",
+      "meaning": "sweet; sweet-tasting; sugary; naive; indulgent"
+    },
+    {
+      "id": 13,
+      "japanese": "雨",
+      "romaji": "ame",
+      "hiragana": "あめ",
+      "type": "Noun",
+      "meaning": "rain"
+    },
+    {
+      "id": 14,
+      "japanese": "飴",
+      "romaji": "ame",
+      "hiragana": "あめ",
+      "type": "Noun",
+      "meaning": "candy"
+    },
+    {
+      "id": 15,
+      "japanese": "あなた",
+      "romaji": "anata",
+      "hiragana": "",
+      "type": "Pronoun",
+      "meaning": "you"
+    },
+    {
+      "id": 16,
+      "japanese": "姉",
+      "romaji": "ane",
+      "hiragana": "あね",
+      "type": "Noun",
+      "meaning": "older sister; elder sister​"
+    },
+    {
+      "id": 17,
+      "japanese": "兄",
+      "romaji": "ani",
+      "hiragana": "あに",
+      "type": "Noun",
+      "meaning": "elder brother; older brother​"
+    },
+    {
+      "id": 18,
+      "japanese": "あの",
+      "romaji": "ano",
+      "hiragana": "",
+      "type": "Pre-noun adjectival",
+      "meaning": "that"
+    },
+    {
+      "id": 19,
+      "japanese": "青",
+      "romaji": "ao",
+      "hiragana": "あお",
+      "type": "Noun",
+      "meaning": "blue; azure"
+    },
+    {
+      "id": 20,
+      "japanese": "青い",
+      "romaji": "aoi",
+      "hiragana": "あおい",
+      "type": "Adjective, い-adjective",
+      "meaning": "blue; azure"
+    },
+    {
+      "id": 21,
+      "japanese": "アパート",
+      "romaji": "apaato",
+      "hiragana": "",
+      "type": "Noun, Katakana",
+      "meaning": "apartment"
+    },
+    {
+      "id": 22,
+      "japanese": "洗う",
+      "romaji": "arau",
+      "hiragana": "あらう",
+      "type": "Verb, Godan verb, Transitive verb",
+      "meaning": "to wash"
+    },
+    {
+      "id": 23,
+      "japanese": "あれ",
+      "romaji": "are",
+      "hiragana": "",
+      "type": "Pronoun",
+      "meaning": "that"
+    },
+    {
+      "id": 24,
+      "japanese": "ある",
+      "romaji": "aru",
+      "hiragana": "",
+      "type": "Verb, Godan verb, Intransitive verb",
+      "meaning": "to be, to have"
+    },
+    {
+      "id": 25,
+      "japanese": "歩く",
+      "romaji": "aruku",
+      "hiragana": "あるく",
+      "type": "Verb, Godan verb, Intransitive verb",
+      "meaning": "to walk"
+    },
+    {
+      "id": 26,
+      "japanese": "朝",
+      "romaji": "asa",
+      "hiragana": "あさ",
+      "type": "Noun",
+      "meaning": "morning"
+    },
+    {
+      "id": 27,
+      "japanese": "朝ご飯",
+      "romaji": "asagohan",
+      "hiragana": "あさごはん",
+      "type": "Noun",
+      "meaning": "breakfast"
+    },
+    {
+      "id": 28,
+      "japanese": "明後日",
+      "romaji": "asatte",
+      "hiragana": "あさって",
+      "type": "Noun",
+      "meaning": "day after tomorrow"
+    },
+    {
+      "id": 29,
+      "japanese": "足",
+      "romaji": "ashi",
+      "hiragana": "あし",
+      "type": "Noun",
+      "meaning": "foot; leg; paw; arm"
+    },
+    {
+      "id": 30,
+      "japanese": "明日",
+      "romaji": "ashita",
+      "hiragana": "あした",
+      "type": "Noun, Temporal noun",
+      "meaning": "tomorrow"
+    },
+    {
+      "id": 31,
+      "japanese": "遊ぶ",
+      "romaji": "asobu",
+      "hiragana": "あそぶ",
+      "type": "Verb, Godan verb, Intransitive verb",
+      "meaning": "to play; to enjoy oneself"
+    },
+    {
+      "id": 32,
+      "japanese": "あそこ",
+      "romaji": "asoko",
+      "hiragana": "",
+      "type": "Pronoun",
+      "meaning": "over there"
+    },
+    {
+      "id": 33,
+      "japanese": "頭",
+      "romaji": "atama",
+      "hiragana": "あたま",
+      "type": "Noun",
+      "meaning": "head"
+    },
+    {
+      "id": 34,
+      "japanese": "新しい",
+      "romaji": "atarashii",
+      "hiragana": "あたらしい",
+      "type": "Adjective, い-adjective",
+      "meaning": "new; novel; fresh; recent; latest"
+    },
+    {
+      "id": 35,
+      "japanese": "暖かい",
+      "romaji": "atatakai",
+      "hiragana": "あたたかい",
+      "type": "Adjective, い-adjective",
+      "meaning": "warm"
+    },
+    {
+      "id": 36,
+      "japanese": "後",
+      "romaji": "ato",
+      "hiragana": "あと",
+      "type": "Noun",
+      "meaning": "behind; after; remainder; left; also"
+    },
+    {
+      "id": 37,
+      "japanese": "暑い",
+      "romaji": "atsui",
+      "hiragana": "あつい",
+      "type": "Adjective, い-adjective",
+      "meaning": "hot; sultry"
+    },
+    {
+      "id": 38,
+      "japanese": "厚い",
+      "romaji": "atsui",
+      "hiragana": "あつい",
+      "type": "Adjective, い-adjective",
+      "meaning": "thick"
+    },
+    {
+      "id": 39,
+      "japanese": "熱い",
+      "romaji": "atsui",
+      "hiragana": "あつい",
+      "type": "Adjective, い-adjective",
+      "meaning": "hot"
+    },
+    {
+      "id": 40,
+      "japanese": "会う",
+      "romaji": "au",
+      "hiragana": "あう",
+      "type": "Verb, Godan verb, Intransitive verb",
+      "meaning": "to meet; to encounter; to see"
+    },
+    {
+      "id": 41,
+      "japanese": "晩ご飯",
+      "romaji": "bangohan",
+      "hiragana": "ばんごはん",
+      "type": "Noun",
+      "meaning": "dinner; evening meal"
+    },
+    {
+      "id": 42,
+      "japanese": "番号",
+      "romaji": "bangou",
+      "hiragana": "ばんごう",
+      "type": "Noun",
+      "meaning": "number"
+    },
+    {
+      "id": 43,
+      "japanese": "バス",
+      "romaji": "basu",
+      "hiragana": "",
+      "type": "Noun, Katakana",
+      "meaning": "bus"
+    },
+    {
+      "id": 44,
+      "japanese": "バター",
+      "romaji": "bataa",
+      "hiragana": "",
+      "type": "Noun, Katakana",
+      "meaning": "butter​"
+    },
+    {
+      "id": 45,
+      "japanese": "ベッド",
+      "romaji": "beddo",
+      "hiragana": "",
+      "type": "Noun, Katakana",
+      "meaning": "bed"
+    },
+    {
+      "id": 46,
+      "japanese": "勉強",
+      "romaji": "benkyou",
+      "hiragana": "べんきょう",
+      "type": "Noun, Suru verb",
+      "meaning": "to study"
+    },
+    {
+      "id": 47,
+      "japanese": "便利",
+      "romaji": "benri",
+      "hiragana": "べんり",
+      "type": "な-adjective",
+      "meaning": "convenient; handy; useful"
+    },
+    {
+      "id": 48,
+      "japanese": "ボールペン",
+      "romaji": "boorupen",
+      "hiragana": "",
+      "type": "Noun, Katakana",
+      "meaning": "ball-point pen"
+    },
+    {
+      "id": 49,
+      "japanese": "ボタン",
+      "romaji": "botan",
+      "hiragana": "",
+      "type": "Noun, Katakana",
+      "meaning": "button"
+    },
+    {
+      "id": 50,
+      "japanese": "帽子",
+      "romaji": "boushi",
+      "hiragana": "ぼうし",
+      "type": "Noun",
+      "meaning": "hat; cap"
+    },
+    {
+      "id": 51,
+      "japanese": "文章",
+      "romaji": "bunshou",
+      "hiragana": "ぶんしょう",
+      "type": "Noun",
+      "meaning": "sentence"
+    },
+    {
+      "id": 52,
+      "japanese": "豚肉",
+      "romaji": "butaniku",
+      "hiragana": "ぶたにく",
+      "type": "Noun",
+      "meaning": "pork"
+    },
+    {
+      "id": 53,
+      "japanese": "病院",
+      "romaji": "byouin",
+      "hiragana": "びょういん",
+      "type": "Noun",
+      "meaning": "hospital"
+    },
+    {
+      "id": 54,
+      "japanese": "病気",
+      "romaji": "byouki",
+      "hiragana": "びょうき",
+      "type": "Noun",
+      "meaning": "illness; disease; sickness"
+    },
+    {
+      "id": 55,
+      "japanese": "茶色",
+      "romaji": "chairo",
+      "hiragana": "ちゃいろ",
+      "type": "Noun",
+      "meaning": "brown"
+    },
+    {
+      "id": 56,
+      "japanese": "茶碗",
+      "romaji": "chawan",
+      "hiragana": "ちゃわん",
+      "type": "Noun",
+      "meaning": "rice bowl; tea cup; teacup"
+    },
+    {
+      "id": 57,
+      "japanese": "父",
+      "romaji": "chichi",
+      "hiragana": "ちち",
+      "type": "Noun",
+      "meaning": "father"
+    },
+    {
+      "id": 58,
+      "japanese": "違う",
+      "romaji": "chigau",
+      "hiragana": "ちがう",
+      "type": "Verb, Godan verb, Intransitive verb",
+      "meaning": "to differ"
+    },
+    {
+      "id": 59,
+      "japanese": "小さい",
+      "romaji": "chiisai",
+      "hiragana": "ちいさい",
+      "type": "Adjective, い-adjective",
+      "meaning": "small; little; tiny"
+    },
+    {
+      "id": 60,
+      "japanese": "小さな",
+      "romaji": "chiisana",
+      "hiragana": "ちいさな",
+      "type": "Pre-noun adjectival",
+      "meaning": "small; little; tiny​"
+    },
+    {
+      "id": 61,
+      "japanese": "近い",
+      "romaji": "chikai",
+      "hiragana": "ちかい",
+      "type": "い-adjective",
+      "meaning": "near; close"
+    },
+    {
+      "id": 62,
+      "japanese": "地下鉄",
+      "romaji": "chikatetsu",
+      "hiragana": "ちかてつ",
+      "type": "Noun",
+      "meaning": "subway; underground train"
+    },
+    {
+      "id": 63,
+      "japanese": "地図",
+      "romaji": "chizu",
+      "hiragana": "ちず",
+      "type": "Noun",
+      "meaning": "map"
+    },
+    {
+      "id": 64,
+      "japanese": "ちょっと",
+      "romaji": "chotto",
+      "hiragana": "",
+      "type": "Adverb",
+      "meaning": "a little"
+    },
+    {
+      "id": 65,
+      "japanese": "丁度",
+      "romaji": "choudo",
+      "hiragana": "ちょうど",
+      "type": "Adverb",
+      "meaning": "exactly"
+    },
+    {
+      "id": 66,
+      "japanese": "台所",
+      "romaji": "daidokoro",
+      "hiragana": "だいどころ",
+      "type": "Noun",
+      "meaning": "kitchen"
+    },
+    {
+      "id": 67,
+      "japanese": "大学",
+      "romaji": "daigaku",
+      "hiragana": "だいがく",
+      "type": "Noun",
+      "meaning": "university; college"
+    },
+    {
+      "id": 68,
+      "japanese": "大丈夫",
+      "romaji": "daijoubu",
+      "hiragana": "だいじょうぶ",
+      "type": "Adjective, な-adjective, Adverb",
+      "meaning": "OK; okay; alright; problem free"
+    },
+    {
+      "id": 69,
+      "japanese": "大好き",
+      "romaji": "daisuki",
+      "hiragana": "だいすき",
+      "type": "Adjective, な-adjective",
+      "meaning": "love; like; like very much"
+    },
+    {
+      "id": 70,
+      "japanese": "だんだん",
+      "romaji": "dandan",
+      "hiragana": "",
+      "type": "Adverb",
+      "meaning": "gradually"
+    },
+    {
+      "id": 71,
+      "japanese": "誰",
+      "romaji": "dare",
+      "hiragana": "だれ",
+      "type": "Pronoun",
+      "meaning": "who"
+    },
+    {
+      "id": 72,
+      "japanese": "誰か",
+      "romaji": "dareka",
+      "hiragana": "だれか",
+      "type": "Pronoun",
+      "meaning": "someone; somebody"
+    },
+    {
+      "id": 73,
+      "japanese": "出す",
+      "romaji": "dasu",
+      "hiragana": "だす",
+      "type": "Verb, Godan verb, Transitive verb",
+      "meaning": "to take out; to get out; to put out; to reveal"
+    },
+    {
+      "id": 74,
+      "japanese": "出口",
+      "romaji": "deguchi",
+      "hiragana": "でぐち",
+      "type": "Noun",
+      "meaning": "exit; gateway; way out"
+    },
+    {
+      "id": 75,
+      "japanese": "出かける",
+      "romaji": "dekakeru",
+      "hiragana": "でかける",
+      "type": "Verb, Ichidan verb, Intransitive verb",
+      "meaning": "to go out; to leave; to depart"
+    },
+    {
+      "id": 76,
+      "japanese": "電気",
+      "romaji": "denki",
+      "hiragana": "でんき",
+      "type": "Noun",
+      "meaning": "electricity"
+    },
+    {
+      "id": 77,
+      "japanese": "電車",
+      "romaji": "densha",
+      "hiragana": "でんしゃ",
+      "type": "Noun",
+      "meaning": "train; electric train"
+    },
+    {
+      "id": 78,
+      "japanese": "電話",
+      "romaji": "denwa",
+      "hiragana": "でんわ",
+      "type": "Noun, Verb, Suru verb",
+      "meaning": "telephone (call / device)l; phone call"
+    },
+    {
+      "id": 79,
+      "japanese": "デパート",
+      "romaji": "depaato",
+      "hiragana": "",
+      "type": "Noun, Katakana",
+      "meaning": "department store"
+    },
+    {
+      "id": 80,
+      "japanese": "出る",
+      "romaji": "deru",
+      "hiragana": "でる",
+      "type": "Verb, Ichidan verb, Intransitive verb",
+      "meaning": "to leave; to exit; to appear; to go out"
+    },
+    {
+      "id": 81,
+      "japanese": "ドア",
+      "romaji": "doa",
+      "hiragana": "",
+      "type": "Noun, Katakana",
+      "meaning": "door"
+    },
+    {
+      "id": 82,
+      "japanese": "どっち",
+      "romaji": "docchi",
+      "hiragana": "",
+      "type": "Pronoun",
+      "meaning": "which; which one"
+    },
+    {
+      "id": 83,
+      "japanese": "どちら",
+      "romaji": "dochira",
+      "hiragana": "",
+      "type": "Pronoun",
+      "meaning": "which of two"
+    },
+    {
+      "id": 84,
+      "japanese": "どこ",
+      "romaji": "doko",
+      "hiragana": "",
+      "type": "Pronoun",
+      "meaning": "where; what place​"
+    },
+    {
+      "id": 85,
+      "japanese": "どなた",
+      "romaji": "donata",
+      "hiragana": "",
+      "type": "Noun",
+      "meaning": "who"
+    },
+    {
+      "id": 86,
+      "japanese": "どの",
+      "romaji": "dono",
+      "hiragana": "",
+      "type": "Pre-noun adjectival",
+      "meaning": "which"
+    },
+    {
+      "id": 87,
+      "japanese": "どれ",
+      "romaji": "dore",
+      "hiragana": "",
+      "type": "Pronoun",
+      "meaning": "which (of three or more)​"
+    },
+    {
+      "id": 88,
+      "japanese": "どう",
+      "romaji": "dou",
+      "hiragana": "",
+      "type": "Adverb",
+      "meaning": "how; in what way; how about​"
+    },
+    {
+      "id": 89,
+      "japanese": "動物",
+      "romaji": "doubutsu",
+      "hiragana": "どうぶつ",
+      "type": "Noun",
+      "meaning": "animal"
+    },
+    {
+      "id": 90,
+      "japanese": "どうも",
+      "romaji": "doumo",
+      "hiragana": "",
+      "type": "Adverb",
+      "meaning": "thank you; thanks"
+    },
+    {
+      "id": 91,
+      "japanese": "どうぞ",
+      "romaji": "douzo",
+      "hiragana": "",
+      "type": "Adverb",
+      "meaning": "please"
+    },
+    {
+      "id": 92,
+      "japanese": "土曜日",
+      "romaji": "doyoubi",
+      "hiragana": "どようび",
+      "type": "Noun",
+      "meaning": "Saturday"
+    },
+    {
+      "id": 93,
+      "japanese": "絵",
+      "romaji": "e",
+      "hiragana": "え",
+      "type": "Noun",
+      "meaning": "picture"
+    },
+    {
+      "id": 94,
+      "japanese": "ええ",
+      "romaji": "ee",
+      "hiragana": "",
+      "type": "Noun",
+      "meaning": "yes; that is correct; right"
+    },
+    {
+      "id": 95,
+      "japanese": "映画",
+      "romaji": "eiga",
+      "hiragana": "えいが",
+      "type": "Noun",
+      "meaning": "movie; film"
+    },
+    {
+      "id": 96,
+      "japanese": "映画館",
+      "romaji": "eigakan",
+      "hiragana": "えいがかん",
+      "type": "Noun",
+      "meaning": "movie theater; cinema"
+    },
+    {
+      "id": 97,
+      "japanese": "英語",
+      "romaji": "eigo",
+      "hiragana": "えいご",
+      "type": "Noun",
+      "meaning": "English language"
+    },
+    {
+      "id": 98,
+      "japanese": "駅",
+      "romaji": "eki",
+      "hiragana": "えき",
+      "type": "Noun",
+      "meaning": "station"
+    },
+    {
+      "id": 99,
+      "japanese": "鉛筆",
+      "romaji": "enpitsu",
+      "hiragana": "えんぴつ",
+      "type": "Noun",
+      "meaning": "pencil"
+    },
+    {
+      "id": 100,
+      "japanese": "エレベーター",
+      "romaji": "erebeetaa",
+      "hiragana": "",
+      "type": "Noun, Katakana",
+      "meaning": "elevator"
+    },
+    {
+      "id": 101,
+      "japanese": "フィルム",
+      "romaji": "firumu",
+      "hiragana": "",
+      "type": "Noun, Katakana",
+      "meaning": "film"
+    },
+    {
+      "id": 102,
+      "japanese": "フォーク",
+      "romaji": "fooku",
+      "hiragana": "",
+      "type": "Noun, Katakana",
+      "meaning": "fork"
+    },
+    {
+      "id": 103,
+      "japanese": "服",
+      "romaji": "fuku",
+      "hiragana": "ふく",
+      "type": "Noun",
+      "meaning": "clothes"
+    },
+    {
+      "id": 104,
+      "japanese": "吹く",
+      "romaji": "fuku",
+      "hiragana": "ふく",
+      "type": "Verb, Godan verb, Intransitive verb",
+      "meaning": "to blow (of the wind)"
+    },
+    {
+      "id": 105,
+      "japanese": "降る",
+      "romaji": "furu",
+      "hiragana": "ふる",
+      "type": "Verb, Godan verb, Intransitive verb",
+      "meaning": "to fall"
+    },
+    {
+      "id": 106,
+      "japanese": "古い",
+      "romaji": "furui",
+      "hiragana": "ふるい",
+      "type": "い-adjective",
+      "meaning": "old (not used for people)"
+    },
+    {
+      "id": 107,
+      "japanese": "二人",
+      "romaji": "futari",
+      "hiragana": "ふたり",
+      "type": "Noun",
+      "meaning": "two people; pair; couple"
+    },
+    {
+      "id": 108,
+      "japanese": "二つ",
+      "romaji": "futatsu",
+      "hiragana": "ふたつ",
+      "type": "Noun, Numeric",
+      "meaning": "two; 2"
+    },
+    {
+      "id": 109,
+      "japanese": "太い",
+      "romaji": "futoi",
+      "hiragana": "ふとい",
+      "type": "Adjective, い-adjective",
+      "meaning": "fat; thick"
+    },
+    {
+      "id": 110,
+      "japanese": "二日",
+      "romaji": "futsuka",
+      "hiragana": "ふつか",
+      "type": "Noun",
+      "meaning": "the second day of the month / 2 days"
+    },
+    {
+      "id": 111,
+      "japanese": "封筒",
+      "romaji": "fuutou",
+      "hiragana": "ふうとう",
+      "type": "Noun",
+      "meaning": "envelope"
+    },
+    {
+      "id": 112,
+      "japanese": "冬",
+      "romaji": "fuyu",
+      "hiragana": "ふゆ",
+      "type": "Noun",
+      "meaning": "winter"
+    },
+    {
+      "id": 113,
+      "japanese": "外国",
+      "romaji": "gaikoku",
+      "hiragana": "がいこく",
+      "type": "Noun",
+      "meaning": "foreign country"
+    },
+    {
+      "id": 114,
+      "japanese": "外国人",
+      "romaji": "gaikokujin",
+      "hiragana": "がいこくじん",
+      "type": "Noun",
+      "meaning": "foreigner; foreign citizen; foreign national; alien; non-Japanese"
+    },
+    {
+      "id": 115,
+      "japanese": "学校",
+      "romaji": "gakkou",
+      "hiragana": "がっこう",
+      "type": "Noun",
+      "meaning": "school"
+    },
+    {
+      "id": 116,
+      "japanese": "学生",
+      "romaji": "gakusei",
+      "hiragana": "がくせい",
+      "type": "Noun",
+      "meaning": "student"
+    },
+    {
+      "id": 117,
+      "japanese": "玄関",
+      "romaji": "genkan",
+      "hiragana": "げんかん",
+      "type": "Noun",
+      "meaning": "entrance"
+    },
+    {
+      "id": 118,
+      "japanese": "元気",
+      "romaji": "genki",
+      "hiragana": "げんき",
+      "type": "Noun, Adjective, な-adjective",
+      "meaning": "lively; full of spirit; energetic; healthy"
+    },
+    {
+      "id": 119,
+      "japanese": "月曜日",
+      "romaji": "getsuyoubi",
+      "hiragana": "げつようび",
+      "type": "Noun",
+      "meaning": "Monday"
+    },
+    {
+      "id": 120,
+      "japanese": "銀行",
+      "romaji": "ginkou",
+      "hiragana": "ぎんこう",
+      "type": "Noun",
+      "meaning": "bank"
+    },
+    {
+      "id": 121,
+      "japanese": "ギター",
+      "romaji": "gitaa",
+      "hiragana": "",
+      "type": "Noun, Katakana",
+      "meaning": "guitar"
+    },
+    {
+      "id": 122,
+      "japanese": "五",
+      "romaji": "go",
+      "hiragana": "ご",
+      "type": "Noun, Numeric",
+      "meaning": "five; 5"
+    },
+    {
+      "id": 123,
+      "japanese": "午後",
+      "romaji": "gogo",
+      "hiragana": "ごご",
+      "type": "Noun",
+      "meaning": "afternoon; p.m."
+    },
+    {
+      "id": 124,
+      "japanese": "ご飯",
+      "romaji": "gohan",
+      "hiragana": "ごはん",
+      "type": "Noun",
+      "meaning": "cooked rice, meal"
+    },
+    {
+      "id": 125,
+      "japanese": "午前",
+      "romaji": "gozen",
+      "hiragana": "ごぜん",
+      "type": "Noun",
+      "meaning": "morning; a.m."
+    },
+    {
+      "id": 126,
+      "japanese": "グラム",
+      "romaji": "guramu",
+      "hiragana": "",
+      "type": "Noun, Katakana",
+      "meaning": "gram"
+    },
+    {
+      "id": 127,
+      "japanese": "牛肉",
+      "romaji": "gyuuniku",
+      "hiragana": "ぎゅうにく",
+      "type": "Noun",
+      "meaning": "beef"
+    },
+    {
+      "id": 128,
+      "japanese": "牛乳",
+      "romaji": "gyuunyuu",
+      "hiragana": "ぎゅうにゅう",
+      "type": "Noun",
+      "meaning": "(cow's) milk"
+    },
+    {
+      "id": 129,
+      "japanese": "歯",
+      "romaji": "ha",
+      "hiragana": "は",
+      "type": "Noun",
+      "meaning": "tooth"
+    },
+    {
+      "id": 130,
+      "japanese": "八",
+      "romaji": "hachi",
+      "hiragana": "はち",
+      "type": "Noun, Numeric",
+      "meaning": "eight: 8"
+    },
+    {
+      "id": 131,
+      "japanese": "葉書",
+      "romaji": "hagaki",
+      "hiragana": "はがき",
+      "type": "Noun",
+      "meaning": "postcard"
+    },
+    {
+      "id": 132,
+      "japanese": "母",
+      "romaji": "haha",
+      "hiragana": "はは",
+      "type": "Noun",
+      "meaning": "mother"
+    },
+    {
+      "id": 133,
+      "japanese": "はい",
+      "romaji": "hai",
+      "hiragana": "",
+      "type": "Noun",
+      "meaning": "yes; that is correct​"
+    },
+    {
+      "id": 134,
+      "japanese": "入る",
+      "romaji": "hairu",
+      "hiragana": "はいる",
+      "type": "Verb, Godan verb, Intransitive verb",
+      "meaning": "to enter; to go into"
+    },
+    {
+      "id": 135,
+      "japanese": "灰皿",
+      "romaji": "haizara",
+      "hiragana": "はいざら",
+      "type": "Noun",
+      "meaning": "ashtray"
+    },
+    {
+      "id": 136,
+      "japanese": "始まる",
+      "romaji": "hajimaru",
+      "hiragana": "はじまる",
+      "type": "Verb, Godan verb, Intransitive verb",
+      "meaning": "to begin"
+    },
+    {
+      "id": 137,
+      "japanese": "初めて",
+      "romaji": "hajimete",
+      "hiragana": "はじめて",
+      "type": "Adverb",
+      "meaning": "for the first time"
+    },
+    {
+      "id": 138,
+      "japanese": "箱",
+      "romaji": "hako",
+      "hiragana": "はこ",
+      "type": "Noun",
+      "meaning": "box; crate"
+    },
+    {
+      "id": 139,
+      "japanese": "履く",
+      "romaji": "haku",
+      "hiragana": "はく",
+      "type": "Verb, Godan verb, Transitive verb",
+      "meaning": "to wear, to put on trousers"
+    },
+    {
+      "id": 140,
+      "japanese": "半",
+      "romaji": "han",
+      "hiragana": "はん",
+      "type": "Noun",
+      "meaning": "half; semi-; half-past"
+    },
+    {
+      "id": 141,
+      "japanese": "花",
+      "romaji": "hana",
+      "hiragana": "はな",
+      "type": "Noun",
+      "meaning": "flower"
+    },
+    {
+      "id": 142,
+      "japanese": "鼻",
+      "romaji": "hana",
+      "hiragana": "はな",
+      "type": "Noun",
+      "meaning": "nose"
+    },
+    {
+      "id": 143,
+      "japanese": "話",
+      "romaji": "hanashi",
+      "hiragana": "はなし",
+      "type": "Noun",
+      "meaning": "talk; speech; chat; conversation​"
+    },
+    {
+      "id": 144,
+      "japanese": "話す",
+      "romaji": "hanasu",
+      "hiragana": "はなす",
+      "type": "Verb, Godan verb, Transitive verb",
+      "meaning": "to speak; to talk; to converse"
+    },
+    {
+      "id": 145,
+      "japanese": "半分",
+      "romaji": "hanbun",
+      "hiragana": "はんぶん",
+      "type": "Noun",
+      "meaning": "half"
+    },
+    {
+      "id": 146,
+      "japanese": "ハンカチ",
+      "romaji": "hankachi",
+      "hiragana": "",
+      "type": "Noun, Katakana",
+      "meaning": "handkerchief​"
+    },
+    {
+      "id": 147,
+      "japanese": "晴れ",
+      "romaji": "hare",
+      "hiragana": "はれ",
+      "type": "Noun",
+      "meaning": "clear weather"
+    },
+    {
+      "id": 148,
+      "japanese": "晴れる",
+      "romaji": "hareru",
+      "hiragana": "はれる",
+      "type": "Verb, Ichidan verb, Intransitive verb",
+      "meaning": "to be sunny"
+    },
+    {
+      "id": 149,
+      "japanese": "春",
+      "romaji": "haru",
+      "hiragana": "はる",
+      "type": "Noun",
+      "meaning": "spring; springtime"
+    },
+    {
+      "id": 150,
+      "japanese": "貼る",
+      "romaji": "haru",
+      "hiragana": "はる",
+      "type": "Verb, Godan verb, Transitive verb",
+      "meaning": "to stick; to paste"
+    },
+    {
+      "id": 151,
+      "japanese": "箸",
+      "romaji": "hashi",
+      "hiragana": "はし",
+      "type": "Noun",
+      "meaning": "chopsticks"
+    },
+    {
+      "id": 152,
+      "japanese": "橋",
+      "romaji": "hashi",
+      "hiragana": "はし",
+      "type": "Noun",
+      "meaning": "bridge"
+    },
+    {
+      "id": 153,
+      "japanese": "走る",
+      "romaji": "hashiru",
+      "hiragana": "はしる",
+      "type": "Verb, Godan verb, Intransitive verb",
+      "meaning": "to run"
+    },
+    {
+      "id": 154,
+      "japanese": "二十歳",
+      "romaji": "hatachi",
+      "hiragana": "はたち",
+      "type": "Noun",
+      "meaning": "20 years old; twenty years old"
+    },
+    {
+      "id": 155,
+      "japanese": "働く",
+      "romaji": "hataraku",
+      "hiragana": "はたらく",
+      "type": "Verb, Godan verb, Intransitive verb",
+      "meaning": "to work"
+    },
+    {
+      "id": 156,
+      "japanese": "二十日",
+      "romaji": "hatsuka",
+      "hiragana": "はつか",
+      "type": "Noun",
+      "meaning": "twentieth day of the month / 20 days"
+    },
+    {
+      "id": 157,
+      "japanese": "速い",
+      "romaji": "hayai",
+      "hiragana": "はやい",
+      "type": "Adjective, い-adjective",
+      "meaning": "fast; quick; hasty; brisk"
+    },
+    {
+      "id": 158,
+      "japanese": "早い",
+      "romaji": "hayai",
+      "hiragana": "はやい",
+      "type": "Adjective, い-adjective",
+      "meaning": "fast; early"
+    },
+    {
+      "id": 159,
+      "japanese": "辺",
+      "romaji": "hen",
+      "hiragana": "へん",
+      "type": "Noun",
+      "meaning": "area"
+    },
+    {
+      "id": 160,
+      "japanese": "下手",
+      "romaji": "heta",
+      "hiragana": "へた",
+      "type": "Noun, Adjective, な-adjective",
+      "meaning": "unskillful; poor; awkward​"
+    },
+    {
+      "id": 161,
+      "japanese": "部屋",
+      "romaji": "heya",
+      "hiragana": "へや",
+      "type": "Noun",
+      "meaning": "room"
+    },
+    {
+      "id": 162,
+      "japanese": "左",
+      "romaji": "hidari",
+      "hiragana": "ひだり",
+      "type": "Noun",
+      "meaning": "left; left hand side"
+    },
+    {
+      "id": 163,
+      "japanese": "東",
+      "romaji": "higashi",
+      "hiragana": "ひがし",
+      "type": "Noun",
+      "meaning": "east"
+    },
+    {
+      "id": 164,
+      "japanese": "飛行機",
+      "romaji": "hikouki",
+      "hiragana": "ひこうき",
+      "type": "Noun",
+      "meaning": "airplane; aircraft"
+    },
+    {
+      "id": 166,
+      "japanese": "弾く",
+      "romaji": "hiku",
+      "hiragana": "ひく",
+      "type": "Verb, Godan verb, Transitive verb",
+      "meaning": "to play"
+    },
+    {
+      "id": 167,
+      "japanese": "低い",
+      "romaji": "hikui",
+      "hiragana": "ひくい",
+      "type": "い-adjective",
+      "meaning": "short,low"
+    },
+    {
+      "id": 168,
+      "japanese": "暇",
+      "romaji": "hima",
+      "hiragana": "ひま",
+      "type": "Noun, な-adjective",
+      "meaning": "free time"
+    },
+    {
+      "id": 169,
+      "japanese": "広い",
+      "romaji": "hiroi",
+      "hiragana": "ひろい",
+      "type": "い-adjective",
+      "meaning": "spacious; vast; wide"
+    },
+    {
+      "id": 170,
+      "japanese": "昼",
+      "romaji": "hiru",
+      "hiragana": "ひる",
+      "type": "Noun",
+      "meaning": "noon; midday; daytime; lunch"
+    },
+    {
+      "id": 171,
+      "japanese": "昼ご飯",
+      "romaji": "hirugohan",
+      "hiragana": "ひるごはん",
+      "type": "Noun",
+      "meaning": "lunch"
+    },
+    {
+      "id": 172,
+      "japanese": "人",
+      "romaji": "hito",
+      "hiragana": "ひと",
+      "type": "Noun",
+      "meaning": "person; human"
+    },
+    {
+      "id": 173,
+      "japanese": "一人",
+      "romaji": "hitori",
+      "hiragana": "ひとり",
+      "type": "Noun, Adverb",
+      "meaning": "one person​; alone; single"
+    },
+    {
+      "id": 174,
+      "japanese": "一つ",
+      "romaji": "hitotsu",
+      "hiragana": "ひとつ",
+      "type": "Noun, Numeric",
+      "meaning": "one thing; only"
+    },
+    {
+      "id": 175,
+      "japanese": "ほか",
+      "romaji": "hoka",
+      "hiragana": "",
+      "type": "Noun",
+      "meaning": "other (place, thing, person); the rest"
+    },
+    {
+      "id": 176,
+      "japanese": "本",
+      "romaji": "hon",
+      "hiragana": "ほん",
+      "type": "Noun",
+      "meaning": "book; volume; script"
+    },
+    {
+      "id": 177,
+      "japanese": "本棚",
+      "romaji": "hondana",
+      "hiragana": "ほんだな",
+      "type": "Noun",
+      "meaning": "bookshelf; bookcase"
+    },
+    {
+      "id": 178,
+      "japanese": "本当",
+      "romaji": "hontou",
+      "hiragana": "ほんとう",
+      "type": "Noun, Adjective, な-adjective",
+      "meaning": "truth; reality; actuality; fact"
+    },
+    {
+      "id": 179,
+      "japanese": "欲しい",
+      "romaji": "hoshii",
+      "hiragana": "ほしい",
+      "type": "Adjective, い-adjective",
+      "meaning": "want"
+    },
+    {
+      "id": 180,
+      "japanese": "細い",
+      "romaji": "hosoi",
+      "hiragana": "ほそい",
+      "type": "Adjective, い-adjective",
+      "meaning": "thin; slender"
+    },
+    {
+      "id": 181,
+      "japanese": "ホテル",
+      "romaji": "hoteru",
+      "hiragana": "",
+      "type": "Noun, Katakana",
+      "meaning": "hotel"
+    },
+    {
+      "id": 182,
+      "japanese": "百",
+      "romaji": "hyaku",
+      "hiragana": "ひゃく",
+      "type": "Noun, Numeric",
+      "meaning": "100; hundred"
+    },
+    {
+      "id": 183,
+      "japanese": "一",
+      "romaji": "ichi",
+      "hiragana": "いち",
+      "type": "Noun, Prefix, Suffix, Numeric",
+      "meaning": "one; best; first; foremost; start"
+    },
+    {
+      "id": 184,
+      "japanese": "一番",
+      "romaji": "ichiban",
+      "hiragana": "いちばん",
+      "type": "Noun, Adverb",
+      "meaning": "number one; first; 1st, first place​; best; most​"
+    },
+    {
+      "id": 185,
+      "japanese": "一日",
+      "romaji": "ichinichi",
+      "hiragana": "いちにち",
+      "type": "Noun, Adverbial Noun",
+      "meaning": "one day, all day"
+    },
+    {
+      "id": 186,
+      "japanese": "家",
+      "romaji": "ie",
+      "hiragana": "いえ",
+      "type": "Noun",
+      "meaning": "house, residence, family"
+    },
+    {
+      "id": 187,
+      "japanese": "いかが",
+      "romaji": "ikaga",
+      "hiragana": "",
+      "type": "Adverb",
+      "meaning": "how; in what way; how about​"
+    },
+    {
+      "id": 188,
+      "japanese": "池",
+      "romaji": "ike",
+      "hiragana": "いけ",
+      "type": "Noun",
+      "meaning": "pond"
+    },
+    {
+      "id": 189,
+      "japanese": "行く",
+      "romaji": "iku",
+      "hiragana": "いく",
+      "type": "Verb, Godan verb, Intransitive verb",
+      "meaning": "to go; to move"
+    },
+    {
+      "id": 190,
+      "japanese": "いくら",
+      "romaji": "ikura",
+      "hiragana": "",
+      "type": "Noun, Adverb",
+      "meaning": "how much?; how many?​"
+    },
+    {
+      "id": 191,
+      "japanese": "いくつ",
+      "romaji": "ikutsu",
+      "hiragana": "",
+      "type": "Adverb",
+      "meaning": "how many?,how old?"
+    },
+    {
+      "id": 192,
+      "japanese": "今",
+      "romaji": "ima",
+      "hiragana": "いま",
+      "type": "Noun, Adverbial Noun",
+      "meaning": "now; the present time; soon"
+    },
+    {
+      "id": 193,
+      "japanese": "意味",
+      "romaji": "imi",
+      "hiragana": "いみ",
+      "type": "Noun",
+      "meaning": "meaning; significance; sense"
+    },
+    {
+      "id": 194,
+      "japanese": "妹",
+      "romaji": "imouto",
+      "hiragana": "いもうと",
+      "type": "Noun",
+      "meaning": "younger sister"
+    },
+    {
+      "id": 195,
+      "japanese": "犬",
+      "romaji": "inu",
+      "hiragana": "いぬ",
+      "type": "Noun",
+      "meaning": "dog"
+    },
+    {
+      "id": 196,
+      "japanese": "入れる",
+      "romaji": "ireru",
+      "hiragana": "いれる",
+      "type": "Verb, Ichidan verb, Transitive verb",
+      "meaning": "to put in; to let in; to take in; to bring in; to insert; to install"
+    },
+    {
+      "id": 197,
+      "japanese": "入口",
+      "romaji": "iriguchi",
+      "hiragana": "いりぐち",
+      "type": "Noun",
+      "meaning": "entrance; entry; gate"
+    },
+    {
+      "id": 198,
+      "japanese": "色",
+      "romaji": "iro",
+      "hiragana": "いろ",
+      "type": "Noun",
+      "meaning": "colour; color"
+    },
+    {
+      "id": 199,
+      "japanese": "色々",
+      "romaji": "iroiro",
+      "hiragana": "いろいろ",
+      "type": "Noun, Adjective, な-adjective, Adverb",
+      "meaning": "various"
+    },
+    {
+      "id": 200,
+      "japanese": "要る",
+      "romaji": "iru",
+      "hiragana": "いる",
+      "type": "Verb, Godan verb, Intransitive verb",
+      "meaning": "to be needed"
+    }
+  ]
+}

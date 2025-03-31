@@ -1,0 +1,2163 @@
+{
+  "stories": [
+    {
+      "id": "hana-taro-adventure",
+      "title": "はな と たろう の ぼうけん",
+      "titleTranslation": "Hana and Taro's Adventure",
+      "description": "Follow Hana and Taro's two-day adventure as they explore a mountain and visit a library. Perfect for N5 learners!",
+      "stats": {
+        "n5_words": 85,
+        "n5_kanji": 31,
+        "estimated_time": 7
+      },
+      "content": [
+        {
+          "type": "title",
+          "text": "はな と たろう の ぼうけん"
+        },
+        {
+          "type": "subtitle",
+          "segments": [
+            {
+              "text": "一",
+              "isKanji": true,
+              "id": "day-1",
+              "reading": "いち"
+            },
+            {
+              "text": "日目",
+              "isKanji": true,
+              "id": "day-suffix",
+              "reading": "にちめ"
+            },
+            {
+              "text": " (Day One)"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "はなさん は " },
+            {
+              "text": "十八",
+              "isKanji": true,
+              "id": "age-18",
+              "reading": "じゅうはち"
+            },
+            { "text": "さい の " },
+            {
+              "text": "女",
+              "isKanji": true,
+              "id": "woman",
+              "reading": "おんな"
+            },
+            { "text": "の子 です。たろうさん は " },
+            {
+              "text": "十九",
+              "isKanji": true,
+              "id": "age-19",
+              "reading": "じゅうきゅう"
+            },
+            { "text": "さい の " },
+            {
+              "text": "男",
+              "isKanji": true,
+              "id": "man",
+              "reading": "おとこ"
+            },
+            { "text": "の子 です。" },
+            {
+              "text": "二人",
+              "isKanji": true,
+              "id": "two-people",
+              "reading": "ふたり"
+            },
+            { "text": " は " },
+            {
+              "text": "友",
+              "isKanji": true,
+              "id": "friend",
+              "reading": "とも"
+            },
+            { "text": "だち です。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "朝",
+              "isKanji": true,
+              "reading": "あさ",
+              "id": "morning-1"
+            },
+            {
+              "text": "六",
+              "isKanji": true,
+              "reading": "ろく",
+              "id": "six"
+            },
+            {
+              "text": "時",
+              "isKanji": true,
+              "reading": "じ",
+              "id": "time"
+            },
+            {
+              "text": "半に",
+              "isKanji": false
+            },
+            {
+              "text": "起",
+              "isKanji": true,
+              "reading": "お",
+              "id": "wake"
+            },
+            {
+              "text": "きました。",
+              "isKanji": false
+            },
+            {
+              "text": "外",
+              "isKanji": true,
+              "reading": "そと",
+              "id": "outside"
+            },
+            {
+              "text": "を",
+              "isKanji": false
+            },
+            {
+              "text": "見",
+              "isKanji": true,
+              "reading": "み",
+              "id": "see"
+            },
+            {
+              "text": "ると、",
+              "isKanji": false
+            },
+            {
+              "text": "雨",
+              "isKanji": true,
+              "reading": "あめ",
+              "id": "rain"
+            },
+            {
+              "text": "が",
+              "isKanji": false
+            },
+            {
+              "text": "降",
+              "isKanji": true,
+              "reading": "ふ",
+              "id": "fall"
+            },
+            {
+              "text": "っていました。「",
+              "isKanji": false
+            },
+            {
+              "text": "今日",
+              "isKanji": true,
+              "reading": "きょう",
+              "id": "today"
+            },
+            {
+              "text": "は",
+              "isKanji": false
+            },
+            {
+              "text": "雨",
+              "isKanji": true,
+              "reading": "あめ",
+              "id": "rain-2"
+            },
+            {
+              "text": "か...」と",
+              "isKanji": false
+            },
+            {
+              "text": "思",
+              "isKanji": true,
+              "reading": "おも",
+              "id": "think"
+            },
+            {
+              "text": "いました。",
+              "isKanji": false
+            },
+            {
+              "text": "天気",
+              "isKanji": true,
+              "reading": "てんき",
+              "id": "weather"
+            },
+            {
+              "text": "予報では、",
+              "isKanji": false
+            },
+            {
+              "text": "午後",
+              "isKanji": true,
+              "reading": "ごご",
+              "id": "afternoon"
+            },
+            {
+              "text": "には",
+              "isKanji": false
+            },
+            {
+              "text": "晴",
+              "isKanji": true,
+              "reading": "は",
+              "id": "sunny"
+            },
+            {
+              "text": "れると",
+              "isKanji": false
+            },
+            {
+              "text": "言",
+              "isKanji": true,
+              "reading": "い",
+              "id": "say"
+            },
+            {
+              "text": "っていました。",
+              "isKanji": false
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "朝",
+              "isKanji": true,
+              "reading": "あさ",
+              "id": "morning-2"
+            },
+            {
+              "text": "ご",
+              "isKanji": false
+            },
+            {
+              "text": "飯",
+              "isKanji": true,
+              "reading": "はん",
+              "id": "meal-1"
+            },
+            {
+              "text": "を",
+              "isKanji": false
+            },
+            {
+              "text": "作",
+              "isKanji": true,
+              "reading": "つく",
+              "id": "make"
+            },
+            {
+              "text": "りました。",
+              "isKanji": false
+            },
+            {
+              "text": "米",
+              "isKanji": true,
+              "reading": "こめ",
+              "id": "rice"
+            },
+            {
+              "text": "を",
+              "isKanji": false
+            },
+            {
+              "text": "炊",
+              "isKanji": true,
+              "reading": "た",
+              "id": "cook"
+            },
+            {
+              "text": "いて、",
+              "isKanji": false
+            },
+            {
+              "text": "卵",
+              "isKanji": true,
+              "reading": "たまご",
+              "id": "egg"
+            },
+            {
+              "text": "を",
+              "isKanji": false
+            },
+            {
+              "text": "焼",
+              "isKanji": true,
+              "reading": "や",
+              "id": "grill"
+            },
+            {
+              "text": "きました。",
+              "isKanji": false
+            },
+            {
+              "text": "魚",
+              "isKanji": true,
+              "reading": "さかな",
+              "id": "fish"
+            },
+            {
+              "text": "も",
+              "isKanji": false
+            },
+            {
+              "text": "焼",
+              "isKanji": true,
+              "reading": "や",
+              "id": "grill-2"
+            },
+            {
+              "text": "きました。",
+              "isKanji": false
+            },
+            {
+              "text": "家族",
+              "isKanji": true,
+              "reading": "かぞく",
+              "id": "family-3"
+            },
+            {
+              "text": "が",
+              "isKanji": false
+            },
+            {
+              "text": "起",
+              "isKanji": true,
+              "reading": "お",
+              "id": "wake-2"
+            },
+            {
+              "text": "きる",
+              "isKanji": false
+            },
+            {
+              "text": "前",
+              "isKanji": true,
+              "reading": "まえ",
+              "id": "before"
+            },
+            {
+              "text": "に、",
+              "isKanji": false
+            },
+            {
+              "text": "朝",
+              "isKanji": true,
+              "reading": "あさ",
+              "id": "morning-3"
+            },
+            {
+              "text": "ご",
+              "isKanji": false
+            },
+            {
+              "text": "飯",
+              "isKanji": true,
+              "reading": "はん",
+              "id": "meal-2"
+            },
+            {
+              "text": "の",
+              "isKanji": false
+            },
+            {
+              "text": "準備",
+              "isKanji": true,
+              "reading": "じゅんび",
+              "id": "preparation"
+            },
+            {
+              "text": "をしました。",
+              "isKanji": false
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「おはよう、はなさん！」と たろうさん が " },
+            {
+              "text": "言",
+              "isKanji": true,
+              "id": "say-1",
+              "reading": "い"
+            },
+            { "text": "いました。" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「おはよう、たろうさん。" },
+            {
+              "text": "今日",
+              "isKanji": true,
+              "id": "today-2",
+              "reading": "きょう"
+            },
+            { "text": " は いい " },
+            {
+              "text": "天気",
+              "isKanji": true,
+              "id": "weather",
+              "reading": "てんき"
+            },
+            { "text": " ですね。」と はなさん が " },
+            {
+              "text": "言",
+              "isKanji": true,
+              "id": "say-2",
+              "reading": "い"
+            },
+            { "text": "いました。" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「そう ですね。" },
+            {
+              "text": "今日",
+              "isKanji": true,
+              "id": "today-3",
+              "reading": "きょう"
+            },
+            { "text": " は " },
+            {
+              "text": "山",
+              "isKanji": true,
+              "id": "mountain-1",
+              "reading": "やま"
+            },
+            { "text": " に 行きましょう か？」と たろうさん が " },
+            {
+              "text": "聞",
+              "isKanji": true,
+              "id": "ask-1",
+              "reading": "き"
+            },
+            { "text": "きました。" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「いい ですね！" },
+            {
+              "text": "山",
+              "isKanji": true,
+              "id": "mountain-2",
+              "reading": "やま"
+            },
+            { "text": " に 行きましょう！」と はなさん が " },
+            {
+              "text": "答",
+              "isKanji": true,
+              "id": "answer-1",
+              "reading": "こた"
+            },
+            { "text": "えました。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "二人",
+              "isKanji": true,
+              "id": "two-people-2",
+              "reading": "ふたり"
+            },
+            { "text": " は リュックサック を " },
+            {
+              "text": "持",
+              "isKanji": true,
+              "id": "hold-1",
+              "reading": "も"
+            },
+            { "text": "って、" },
+            {
+              "text": "家",
+              "isKanji": true,
+              "id": "house",
+              "reading": "いえ"
+            },
+            { "text": " を " },
+            {
+              "text": "出",
+              "isKanji": true,
+              "id": "leave",
+              "reading": "で"
+            },
+            { "text": "ました。はなさん は あか い リュックサック を " },
+            {
+              "text": "持",
+              "isKanji": true,
+              "id": "hold-2",
+              "reading": "も"
+            },
+            { "text": "って います。たろうさん は あお い リュックサック を " },
+            {
+              "text": "持",
+              "isKanji": true,
+              "id": "hold-3",
+              "reading": "も"
+            },
+            { "text": "って います。" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「" },
+            {
+              "text": "電車",
+              "isKanji": true,
+              "id": "train-1",
+              "reading": "でんしゃ"
+            },
+            { "text": " で 行きましょう。」と たろうさん が " },
+            {
+              "text": "言",
+              "isKanji": true,
+              "id": "say-3",
+              "reading": "い"
+            },
+            { "text": "いました。" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「はい、そう しましょう。」と はなさん が " },
+            {
+              "text": "言",
+              "isKanji": true,
+              "id": "say-4",
+              "reading": "い"
+            },
+            { "text": "いました。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "二人",
+              "isKanji": true,
+              "id": "two-people-3",
+              "reading": "ふたり"
+            },
+            { "text": " は " },
+            {
+              "text": "駅",
+              "isKanji": true,
+              "id": "station",
+              "reading": "えき"
+            },
+            { "text": " に 行きました。" },
+            {
+              "text": "電車",
+              "isKanji": true,
+              "id": "train-2",
+              "reading": "でんしゃ"
+            },
+            { "text": " は " },
+            {
+              "text": "九",
+              "isKanji": true,
+              "id": "nine",
+              "reading": "く"
+            },
+            {
+              "text": "時",
+              "isKanji": true,
+              "id": "time",
+              "reading": "じ"
+            },
+            { "text": " に 来ました。" },
+            {
+              "text": "二人",
+              "isKanji": true,
+              "id": "two-people-4",
+              "reading": "ふたり"
+            },
+            { "text": " は " },
+            {
+              "text": "電車",
+              "isKanji": true,
+              "id": "train-3",
+              "reading": "でんしゃ"
+            },
+            { "text": " に " },
+            {
+              "text": "乗",
+              "isKanji": true,
+              "id": "ride",
+              "reading": "の"
+            },
+            { "text": "りました。" },
+            {
+              "text": "電車",
+              "isKanji": true,
+              "id": "train-4",
+              "reading": "でんしゃ"
+            },
+            { "text": " の " },
+            {
+              "text": "中",
+              "isKanji": true,
+              "id": "inside",
+              "reading": "なか"
+            },
+            { "text": " は とても こんで いました。" }
+          ]
+        },
+        {
+          "type": "subtitle",
+          "segments": [
+            {
+              "text": "二",
+              "isKanji": true,
+              "id": "day-2",
+              "reading": "に"
+            },
+            {
+              "text": "日目",
+              "isKanji": true,
+              "id": "day-suffix-2",
+              "reading": "にちめ"
+            },
+            {
+              "text": " (Day Two)"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "次",
+              "isKanji": true,
+              "id": "next",
+              "reading": "つぎ"
+            },
+            { "text": "の日、" },
+            {
+              "text": "空",
+              "isKanji": true,
+              "id": "sky-2",
+              "reading": "そら"
+            },
+            { "text": " は くも って いました。" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「おはよう、たろうさん。" },
+            {
+              "text": "今日",
+              "isKanji": true,
+              "id": "today-4",
+              "reading": "きょう"
+            },
+            { "text": " は くも って います ね。」と はなさん が " },
+            {
+              "text": "電話",
+              "isKanji": true,
+              "id": "phone",
+              "reading": "でんわ"
+            },
+            { "text": " で " },
+            {
+              "text": "言",
+              "isKanji": true,
+              "id": "say-5",
+              "reading": "い"
+            },
+            { "text": "いました。" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「そう ですね。でも、" },
+            {
+              "text": "大丈夫",
+              "isKanji": true,
+              "id": "okay",
+              "reading": "だいじょうぶ"
+            },
+            { "text": " です。" },
+            {
+              "text": "今日",
+              "isKanji": true,
+              "id": "today-5",
+              "reading": "きょう"
+            },
+            { "text": " は " },
+            {
+              "text": "図書館",
+              "isKanji": true,
+              "id": "library-1",
+              "reading": "としょかん"
+            },
+            { "text": " に 行きましょう か？」と たろうさん が " },
+            {
+              "text": "聞",
+              "isKanji": true,
+              "id": "ask-2",
+              "reading": "き"
+            },
+            { "text": "きました。" }
+          ]
+        }
+      ],
+      "vocabulary": {
+        "n5_words": [
+          { "word": "今日", "reading": "きょう", "meaning": "today" },
+          { "word": "友だち", "reading": "ともだち", "meaning": "friend" },
+          { "word": "空", "reading": "そら", "meaning": "sky" },
+          { "word": "山", "reading": "やま", "meaning": "mountain" },
+          { "word": "図書館", "reading": "としょかん", "meaning": "library" },
+          { "word": "電車", "reading": "でんしゃ", "meaning": "train" },
+          { "word": "駅", "reading": "えき", "meaning": "station" },
+          { "word": "天気", "reading": "てんき", "meaning": "weather" },
+          { "word": "電話", "reading": "でんわ", "meaning": "telephone" },
+          { "word": "大丈夫", "reading": "だいじょうぶ", "meaning": "okay, alright" }
+        ]
+      }
+    },
+    {
+      "id": "first-time-in-tokyo",
+      "title": "はじめての 東京",
+      "titleTranslation": "First Time in Tokyo",
+      "description": "Follow Mike's exciting first day in Tokyo as he practices Japanese, tries delicious food, and makes new friends. A perfect story for N5 learners!",
+      "stats": {
+        "n5_words": 72,
+        "n5_kanji": 28,
+        "estimated_time": 8
+      },
+      "content": [
+        {
+          "type": "title",
+          "segments": [
+            { "text": "はじめての " },
+            {
+              "text": "東京",
+              "isKanji": true,
+              "reading": "とうきょう"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "わたしの なまえは マイクです。わたしは " },
+            {
+              "text": "二十",
+              "isKanji": true,
+              "reading": "にじゅう"
+            },
+            { "text": "才です。わたしは がくせいです。にほんごを べんきょうして、" },
+            {
+              "text": "三",
+              "isKanji": true,
+              "reading": "さん"
+            },
+            { "text": "年に なります。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "きょう、はじめて " },
+            {
+              "text": "東京",
+              "isKanji": true,
+              "reading": "とうきょう"
+            },
+            { "text": "に 行きます。とても たのしみです。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "あさ " },
+            {
+              "text": "六",
+              "isKanji": true,
+              "reading": "ろく"
+            },
+            { "text": "時に おきました。" },
+            { "text": "かおを あらって、はを みがきました。" },
+            { "text": "それから あさごはんを たべました。" },
+            { "text": "たまごと さかなと ごはんを たべました。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "七",
+              "isKanji": true,
+              "reading": "しち"
+            },
+            { "text": "時に いえを でました。" },
+            { "text": "えきまで あるきました。" },
+            { "text": "えきで きっぷを かいました。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "でんしゃは " },
+            {
+              "text": "七",
+              "isKanji": true,
+              "reading": "しち"
+            },
+            { "text": "時" },
+            {
+              "text": "半",
+              "isKanji": true,
+              "reading": "はん"
+            },
+            { "text": "に きました。" },
+            { "text": "わたしは でんしゃに のりました。" },
+            { "text": "せきに すわって、ほんを よみました。" },
+            { "text": "まどから そとを みました。" },
+            { "text": "けしきは きれいでした。" },
+            { "text": "やまや かわを みました。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "でんしゃの なかで おんなの ひとが はなしかけてきました。" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「はじめまして。なまえは たなかです。あなたは がいこくじんですか？」" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「はい、そうです。わたしは マイクです。はじめまして。」" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「" },
+            {
+              "text": "東京",
+              "isKanji": true,
+              "id": "tokyo",
+              "reading": "とうきょう"
+            },
+            { "text": "に 行きますか？」" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「はい、はじめて " },
+            {
+              "text": "東京",
+              "isKanji": true,
+              "id": "tokyo",
+              "reading": "とうきょう"
+            },
+            { "text": "に 行きます。にほんごを べんきょうしていて、れんしゅうしたいです。」" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「そうですか。" },
+            {
+              "text": "東京",
+              "isKanji": true,
+              "id": "tokyo",
+              "reading": "とうきょう"
+            },
+            { "text": "は おおきい まちですよ。なにを みたいですか？」" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「" },
+            {
+              "text": "東京",
+              "isKanji": true,
+              "id": "tokyo",
+              "reading": "とうきょう"
+            },
+            { "text": "えきと しんじゅくと あきはばらを みたいです。それから、おいしい りょうりを たべたいです。とくに すしが すきです。」" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「いいですね。わたしは " },
+            {
+              "text": "東京",
+              "isKanji": true,
+              "id": "tokyo",
+              "reading": "とうきょう"
+            },
+            { "text": "に すんでいます。よい みせを しっています。すしが すきですか？」" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「はい、すしが だいすきです！くにでも よく たべます。でも にほんの すしを たべたいです。」" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「では、これを どうぞ。」たなかさんは かみを くれました。「この みせの すしは ほんとうに おいしいですよ。」" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「ありがとう ございます！かならず 行きます。」" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "たなかさんと にほんごで はなすのは たのしかったです。" },
+            { "text": "ときどき わからない ことばが ありましたが、" },
+            { "text": "たなかさんは ゆっくり はなして くれました。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "十時" },
+            {
+              "text": "に",
+              "isKanji": true,
+              "reading": "に"
+            },
+            { "text": "に " },
+            {
+              "text": "東京",
+              "isKanji": true,
+              "id": "tokyo",
+              "reading": "とうきょう"
+            },
+            { "text": "えきに つきました。" },
+            { "text": "えきは おおきくて、" },
+            { "text": "ひとが たくさん いました。" },
+            { "text": "はじめて みる " },
+            {
+              "text": "東京",
+              "isKanji": true,
+              "id": "tokyo",
+              "reading": "とうきょう"
+            },
+            { "text": "えきは ほんとうに すばらしかったです。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "まず、えきの なかを みました。" },
+            { "text": "きれいな たてものでした。" },
+            { "text": "てんじょうが たかくて、" },
+            { "text": "ひかりが たくさん はいって いました。" },
+            { "text": "えきの なかには みせも たくさん ありました。" }
+          ]
+        }
+      ],
+      "vocabulary": {
+        "n5_words": [
+          { "word": "東京", "reading": "とうきょう", "meaning": "Tokyo" },
+          { "word": "行く", "reading": "いく", "meaning": "to go" },
+          { "word": "食べる", "reading": "たべる", "meaning": "to eat" },
+          { "word": "見る", "reading": "みる", "meaning": "to see" },
+          { "word": "電車", "reading": "でんしゃ", "meaning": "train" },
+          { "word": "駅", "reading": "えき", "meaning": "station" },
+          { "word": "切符", "reading": "きっぷ", "meaning": "ticket" },
+          { "word": "外国人", "reading": "がいこくじん", "meaning": "foreigner" },
+          { "word": "勉強", "reading": "べんきょう", "meaning": "study" },
+          { "word": "学生", "reading": "がくせい", "meaning": "student" },
+          { "word": "時", "reading": "じ", "meaning": "time, hour" },
+          { "word": "朝", "reading": "あさ", "meaning": "morning" },
+          { "word": "窓", "reading": "まど", "meaning": "window" },
+          { "word": "天気", "reading": "てんき", "meaning": "weather" },
+          { "word": "空", "reading": "そら", "meaning": "sky" },
+          { "word": "明るい", "reading": "あかるい", "meaning": "bright" },
+          { "word": "朝ご飯", "reading": "あさごはん", "meaning": "breakfast" },
+          { "word": "卵", "reading": "たまご", "meaning": "egg" },
+          { "word": "牛乳", "reading": "ぎゅうにゅう", "meaning": "milk" },
+          { "word": "顔", "reading": "かお", "meaning": "face" },
+          { "text": "歯" },
+          { "word": "服", "reading": "ふく", "meaning": "clothes" },
+          { "word": "黒い", "reading": "くろい", "meaning": "black" },
+          { "word": "銀行", "reading": "ぎんこう", "meaning": "bank" },
+          { "word": "近く", "reading": "ちかく", "meaning": "nearby" },
+          { "word": "町", "reading": "まち", "meaning": "town" },
+          { "word": "店", "reading": "みせ", "meaning": "store, shop" },
+          { "word": "時間", "reading": "じかん", "meaning": "time" },
+          { "word": "短い", "reading": "みじかい", "meaning": "short" },
+          { "word": "階", "reading": "かい", "meaning": "floor (of building)" },
+          { "word": "売り場", "reading": "うりば", "meaning": "sales floor" },
+          { "word": "男", "reading": "おとこ", "meaning": "man" },
+          { "word": "女", "reading": "おんな", "meaning": "woman" },
+          { "word": "子ども", "reading": "こども", "meaning": "child" },
+          { "word": "本", "reading": "ほん", "meaning": "book" },
+          { "word": "食事", "reading": "しょくじ", "meaning": "meal" },
+          { "word": "所", "reading": "ところ", "meaning": "place" },
+          { "word": "日本語", "reading": "にほんご", "meaning": "Japanese language" },
+          { "word": "外", "reading": "そと", "meaning": "outside" },
+          { "word": "国", "reading": "くに", "meaning": "country" },
+          { "word": "人", "reading": "ひと", "meaning": "person" },
+          { "word": "千", "reading": "せん", "meaning": "thousand" },
+          { "word": "円", "reading": "えん", "meaning": "yen" },
+          { "word": "白い", "reading": "しろい", "meaning": "white" },
+          { "word": "赤い", "reading": "あかい", "meaning": "red" },
+          { "word": "選ぶ", "reading": "えらぶ", "meaning": "to choose" },
+          { "word": "試着室", "reading": "しちゃくしつ", "meaning": "fitting room" },
+          { "word": "大きすぎる", "reading": "おおきすぎる", "meaning": "too big" },
+          { "word": "小さすぎる", "reading": "ちいさすぎる", "meaning": "too small" },
+          { "word": "良い", "reading": "よい", "meaning": "good" }
+        ]
+      }
+    },
+    {
+      "id": "shopping-day",
+      "title": "買い物の日",
+      "titleTranslation": "Shopping Day",
+      "description": "Follow Ken Yamashita's Saturday shopping adventure as he visits different stores, buys clothes, books, and groceries. A perfect story for N5 learners to practice everyday shopping and activity vocabulary!",
+      "stats": {
+        "n5_words": 65,
+        "n5_kanji": 25,
+        "estimated_time": 15
+      },
+      "content": [
+        {
+          "type": "title",
+          "segments": [
+            { "text": "買い物の日" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "今日は土曜日です。" },
+            { "text": "私の名前は山下ケンです。" },
+            { "text": "私は二十三才の会社の人です。" },
+            { "text": "今日は休みの日なので、買い物に行きます。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "朝は少し遅く、八時に起きました。" },
+            { "text": "窓を開けると、外は良い天気でした。" },
+            { "text": "空は青くて、とても明るいです。" },
+            { "text": "「今日は買い物に行くのに良い日だ」と思いました。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "朝ご飯を食べました。" },
+            { "text": "パンと卵と牛乳でした。" },
+            { "text": "食べた後、顔を洗って、歯を磨きました。" },
+            { "text": "それから服を着ました。" },
+            { "text": "青いシャツと黒いズボンです。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "三階では、女の友だちのためにプレゼントを買いました。" },
+            { "text": "彼女の誕生日が来週です。" },
+            { "text": "きれいな青い耳に付けるものを見つけました。" },
+            { "text": "「これは彼女に似合うだろう」と思いました。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "一階に下りて、食べ物売り場に行きました。" },
+            { "text": "お腹がすいていたので、何か食べたいと思いました。" },
+            { "text": "お弁当を買って、近くの椅子に座って食べました。" },
+            { "text": "お弁当は魚と野菜とご飯でした。" },
+            { "text": "とても美味しかったです。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "昼ご飯を食べた後、他の店にも行くことにしました。" },
+            { "text": "本と服と友だちへのプレゼントの入った袋を持って、店を出ました。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "次に、電気店に行きました。" },
+            { "text": "新しい電話が欲しかったです。" },
+            { "text": "古い電話は壊れていました。" },
+            { "text": "店の人は色々な電話を見せてくれました。" },
+            { "text": "黒い電話が一番良いと思いました。" },
+            { "text": "でも、とても高かったです。" },
+            { "text": "今日は買わないことにしました。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "それから、薬を買うために薬屋に行きました。" },
+            { "text": "頭が時々痛くなるので、頭痛の薬が必要でした。" },
+            { "text": "薬屋で頭痛の薬を買いました。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "薬屋の横に小さい食べ物屋がありました。" },
+            { "text": "そこで果物を買いました。" },
+            { "text": "りんごとみかんを買いました。" },
+            { "text": "家で食べようと思いました。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "買い物が終わったので、家に帰ることにしました。" },
+            { "text": "バス停に行って、バスを待ちました。" },
+            { "text": "十分後にバスが来ました。" },
+            { "text": "バスに乗って、家に帰りました。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "家に着いたのは四時でした。" },
+            { "text": "「ただいま」と言いました。" },
+            { "text": "家には誰もいませんでした。" },
+            { "text": "父と母は出かけていました。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "買った物を部屋に置きました。" },
+            { "text": "新しい本を少し読みました。" },
+            { "text": "とても面白い本でした。" },
+            { "text": "日本語が少し難しかったですが、がんばって読みました。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "それから、買ってきた果物を食べました。" },
+            { "text": "りんごは甘くて、みかんは少し酸っぱかったです。" },
+            { "text": "でも、どちらも美味しかったです。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "夕方、父と母が帰ってきました。" },
+            { "text": "「お帰りなさい」と言いました。" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「何を買ったの？」" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "と母が聞きました。" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「本とシャツと友だちへのプレゼントです」" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "と答えました。" }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            { "text": "「そうですか。晩ご飯の前に手を洗ってください」" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "と母が言いました。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "私は手を洗って、家族と一緒に晩ご飯を食べました。" },
+            { "text": "晩ご飯は肉と野菜とご飯でした。" },
+            { "text": "食べながら、今日の買い物について話しました。" },
+            { "text": "父は「お金を使いすぎないように」と言いました。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "晩ご飯の後、お風呂に入りました。" },
+            { "text": "それから、新しい本をもっと読みました。" },
+            { "text": "本当に良い本でした。" }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            { "text": "十一時に寝ました。" },
+            { "text": "今日は楽しい一日でした。" },
+            { "text": "買い物はとても疲れましたが、必要な物を全部買うことができて良かったです。" },
+            { "text": "明日は家で休みます。" }
+          ]
+        }
+      ],
+      "vocabulary": {
+        "n5_words": [
+          { "word": "買い物", "reading": "かいもの", "meaning": "shopping" },
+          { "word": "土曜日", "reading": "どようび", "meaning": "Saturday" },
+          { "word": "名前", "reading": "なまえ", "meaning": "name" },
+          { "word": "会社", "reading": "かいしゃ", "meaning": "company" },
+          { "word": "休み", "reading": "やすみ", "meaning": "holiday, day off" },
+          { "word": "朝", "reading": "あさ", "meaning": "morning" },
+          { "word": "窓", "reading": "まど", "meaning": "window" },
+          { "word": "天気", "reading": "てんき", "meaning": "weather" },
+          { "word": "空", "reading": "そら", "meaning": "sky" },
+          { "word": "明るい", "reading": "あかるい", "meaning": "bright" },
+          { "word": "朝ご飯", "reading": "あさごはん", "meaning": "breakfast" },
+          { "word": "卵", "reading": "たまご", "meaning": "egg" },
+          { "word": "牛乳", "reading": "ぎゅうにゅう", "meaning": "milk" },
+          { "word": "顔", "reading": "かお", "meaning": "face" },
+          { "word": "歯", "reading": "は", "meaning": "tooth, teeth" },
+          { "word": "服", "reading": "ふく", "meaning": "clothes" },
+          { "word": "黒い", "reading": "くろい", "meaning": "black" },
+          { "word": "銀行", "reading": "ぎんこう", "meaning": "bank" },
+          { "word": "近く", "reading": "ちかく", "meaning": "nearby" },
+          { "word": "町", "reading": "まち", "meaning": "town" },
+          { "word": "店", "reading": "みせ", "meaning": "store, shop" },
+          { "word": "時間", "reading": "じかん", "meaning": "time" },
+          { "word": "短い", "reading": "みじかい", "meaning": "short" },
+          { "word": "階", "reading": "かい", "meaning": "floor (of building)" },
+          { "word": "売り場", "reading": "うりば", "meaning": "sales floor" },
+          { "word": "男", "reading": "おとこ", "meaning": "man" },
+          { "word": "女", "reading": "おんな", "meaning": "woman" },
+          { "word": "子ども", "reading": "こども", "meaning": "child" },
+          { "word": "本", "reading": "ほん", "meaning": "book" },
+          { "word": "食事", "reading": "しょくじ", "meaning": "meal" },
+          { "word": "所", "reading": "ところ", "meaning": "place" },
+          { "word": "日本語", "reading": "にほんご", "meaning": "Japanese language" },
+          { "word": "外", "reading": "そと", "meaning": "outside" },
+          { "word": "国", "reading": "くに", "meaning": "country" },
+          { "word": "人", "reading": "ひと", "meaning": "person" },
+          { "word": "千", "reading": "せん", "meaning": "thousand" },
+          { "word": "円", "reading": "えん", "meaning": "yen" },
+          { "word": "白い", "reading": "しろい", "meaning": "white" },
+          { "word": "赤い", "reading": "あかい", "meaning": "red" },
+          { "word": "選ぶ", "reading": "えらぶ", "meaning": "to choose" },
+          { "word": "試着室", "reading": "しちゃくしつ", "meaning": "fitting room" },
+          { "word": "大きすぎる", "reading": "おおきすぎる", "meaning": "too big" },
+          { "word": "小さすぎる", "reading": "ちいさすぎる", "meaning": "too small" },
+          { "word": "良い", "reading": "よい", "meaning": "good" }
+        ]
+      }
+    },
+    {
+      "id": "family-weekend",
+      "title": "家族の週末",
+      "titleTranslation": "Family Weekend",
+      "description": "Follow the Nakamura family's typical Sunday routine through the eyes of Yoshiko, a mother who shares her family's weekend activities, from a rainy morning to a fun afternoon at the park.",
+      "stats": {
+        "n5_words": 82,
+        "n5_kanji": 35,
+        "estimated_time": 25
+      },
+      "content": [
+        {
+          "type": "title",
+          "segments": [
+            {
+              "text": "家族",
+              "isKanji": true,
+              "reading": "かぞく",
+              "id": "family-1"
+            },
+            {
+              "text": "の",
+              "isKanji": false
+            },
+            {
+              "text": "週末",
+              "isKanji": true,
+              "reading": "しゅうまつ",
+              "id": "weekend-1"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "私の",
+              "isKanji": false
+            },
+            {
+              "text": "名前",
+              "isKanji": true,
+              "reading": "なまえ",
+              "id": "name-1"
+            },
+            {
+              "text": "は",
+              "isKanji": false
+            },
+            {
+              "text": "中村",
+              "isKanji": true,
+              "reading": "なかむら",
+              "id": "surname-1"
+            },
+            {
+              "text": "よしこです。私は",
+              "isKanji": false
+            },
+            {
+              "text": "四十",
+              "isKanji": true,
+              "reading": "よんじゅう",
+              "id": "forty"
+            },
+            {
+              "text": "才です。私には",
+              "isKanji": false
+            },
+            {
+              "text": "家族",
+              "isKanji": true,
+              "reading": "かぞく",
+              "id": "family-2"
+            },
+            {
+              "text": "がいます。",
+              "isKanji": false
+            },
+            {
+              "text": "夫",
+              "isKanji": true,
+              "reading": "おっと",
+              "id": "husband-1"
+            },
+            {
+              "text": "と",
+              "isKanji": false
+            },
+            {
+              "text": "二人",
+              "isKanji": true,
+              "reading": "ふたり",
+              "id": "two-people"
+            },
+            {
+              "text": "の",
+              "isKanji": false
+            },
+            {
+              "text": "子",
+              "isKanji": true,
+              "reading": "こ",
+              "id": "child"
+            },
+            {
+              "text": "どもがいます。",
+              "isKanji": false
+            },
+            {
+              "text": "夫",
+              "isKanji": true,
+              "reading": "おっと",
+              "id": "husband-2"
+            },
+            {
+              "text": "の",
+              "isKanji": false
+            },
+            {
+              "text": "名前",
+              "isKanji": true,
+              "reading": "なまえ",
+              "id": "name-2"
+            },
+            {
+              "text": "は",
+              "isKanji": false
+            },
+            {
+              "text": "中村",
+              "isKanji": true,
+              "reading": "なかむら",
+              "id": "surname-2"
+            },
+            {
+              "text": "たかしで、",
+              "isKanji": false
+            },
+            {
+              "text": "四十二",
+              "isKanji": true,
+              "reading": "よんじゅうに",
+              "id": "forty-two"
+            },
+            {
+              "text": "才です。",
+              "isKanji": false
+            },
+            {
+              "text": "長男",
+              "isKanji": true,
+              "reading": "ちょうなん",
+              "id": "eldest-son"
+            },
+            {
+              "text": "は",
+              "isKanji": false
+            },
+            {
+              "text": "中村",
+              "isKanji": true,
+              "reading": "なかむら",
+              "id": "surname-3"
+            },
+            {
+              "text": "けんで、",
+              "isKanji": false
+            },
+            {
+              "text": "十",
+              "isKanji": true,
+              "reading": "じゅう",
+              "id": "ten"
+            },
+            {
+              "text": "才です。",
+              "isKanji": false
+            },
+            {
+              "text": "長女",
+              "isKanji": true,
+              "reading": "ちょうじょ",
+              "id": "eldest-daughter"
+            },
+            {
+              "text": "は",
+              "isKanji": false
+            },
+            {
+              "text": "中村",
+              "isKanji": true,
+              "reading": "なかむら",
+              "id": "surname-4"
+            },
+            {
+              "text": "まりで、",
+              "isKanji": false
+            },
+            {
+              "text": "七",
+              "isKanji": true,
+              "reading": "なな",
+              "id": "seven"
+            },
+            {
+              "text": "才です。",
+              "isKanji": false
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "今日は日曜日です。日曜日は家族の日です。毎週日曜日に、私たちは何か一緒にします。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "朝",
+              "isKanji": true,
+              "reading": "あさ",
+              "id": "morning-1"
+            },
+            {
+              "text": "六",
+              "isKanji": true,
+              "reading": "ろく",
+              "id": "six"
+            },
+            {
+              "text": "時",
+              "isKanji": true,
+              "reading": "じ",
+              "id": "time"
+            },
+            {
+              "text": "半に",
+              "isKanji": false
+            },
+            {
+              "text": "起",
+              "isKanji": true,
+              "reading": "お",
+              "id": "wake"
+            },
+            {
+              "text": "きました。",
+              "isKanji": false
+            },
+            {
+              "text": "外",
+              "isKanji": true,
+              "reading": "そと",
+              "id": "outside"
+            },
+            {
+              "text": "を",
+              "isKanji": false
+            },
+            {
+              "text": "見",
+              "isKanji": true,
+              "reading": "み",
+              "id": "see"
+            },
+            {
+              "text": "ると、",
+              "isKanji": false
+            },
+            {
+              "text": "雨",
+              "isKanji": true,
+              "reading": "あめ",
+              "id": "rain"
+            },
+            {
+              "text": "が",
+              "isKanji": false
+            },
+            {
+              "text": "降",
+              "isKanji": true,
+              "reading": "ふ",
+              "id": "fall"
+            },
+            {
+              "text": "っていました。「",
+              "isKanji": false
+            },
+            {
+              "text": "今日",
+              "isKanji": true,
+              "reading": "きょう",
+              "id": "today"
+            },
+            {
+              "text": "は",
+              "isKanji": false
+            },
+            {
+              "text": "雨",
+              "isKanji": true,
+              "reading": "あめ",
+              "id": "rain-2"
+            },
+            {
+              "text": "か...」と",
+              "isKanji": false
+            },
+            {
+              "text": "思",
+              "isKanji": true,
+              "reading": "おも",
+              "id": "think"
+            },
+            {
+              "text": "いました。",
+              "isKanji": false
+            },
+            {
+              "text": "天気",
+              "isKanji": true,
+              "reading": "てんき",
+              "id": "weather"
+            },
+            {
+              "text": "予報では、",
+              "isKanji": false
+            },
+            {
+              "text": "午後",
+              "isKanji": true,
+              "reading": "ごご",
+              "id": "afternoon"
+            },
+            {
+              "text": "には",
+              "isKanji": false
+            },
+            {
+              "text": "晴",
+              "isKanji": true,
+              "reading": "は",
+              "id": "sunny"
+            },
+            {
+              "text": "れると",
+              "isKanji": false
+            },
+            {
+              "text": "言",
+              "isKanji": true,
+              "reading": "い",
+              "id": "say"
+            },
+            {
+              "text": "っていました。",
+              "isKanji": false
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "七時に夫が起きました。「おはよう。今日は雨だね。」と夫が言いました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「おはよう。でも午後には晴れるよ。」と私は答えました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「そうですか。今日は何をする予定？」と夫が聞きました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「午後に公園に行こうと思っていたけど、雨が止んだら行きましょう。」"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "七時半に子どもたちが起きてきました。「おはよう、お母さん、お父さん。」と二人が言いました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「おはよう。手を洗って、朝ご飯を食べましょう。」と私は言いました。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "家族四人で朝ご飯を食べました。「今日は何をするの？」と長女のまりが聞きました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「午後に公園に行くよ。でも、今は雨だから、家で何かしよう。」と私は答えました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「わあ、公園楽しみ！」とまりが言いました。「雨が早く止むといいな。」"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "朝ご飯の後、夫は新聞を読みました。子どもたちはテレビを見ました。私は家の掃除をしました。部屋を掃除して、洗濯をしました。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "十時に雨が止みました。でも、外はまだ濡れていました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「雨が止んだね。でも、まだ公園には行けないよ。」と夫が言いました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「そうですね。お昼ご飯の後に行きましょう。」と私は言いました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「その間に何をする？」と長男のけんが聞きました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「カードゲームをしよう！」と夫が提案しました。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "家族でカードゲームをしました。とても楽しかったです。けんが一番強くて、三回勝ちました。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "十二時に、私はお昼ご飯を作りました。サンドイッチとスープを作りました。皆でお昼ご飯を食べました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「美味しいね、お母さん。」と長女のまりが言いました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「ありがとう。」と私は答えました。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "お昼ご飯の後、外を見ました。空が青くなり始めていました。「そろそろ公園に行けるかもしれないね。」と夫が言いました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「そうですね。準備をしましょう。」と私は言いました。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "子どもたちは喜んで準備をしました。靴を履いて、上着を着ました。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "外に出ると、空は青くて、太陽が出ていました。でも、まだ少し寒かったです。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「公園まで歩きましょう。」と夫が言いました。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "公園は家から十分くらいの所にあります。道を歩いている時、色々なものを見ました。赤い花、小さい犬、高い木などです。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "公園に着くと、他の家族もたくさんいました。子どもたちは遊具で遊びました。滑り台を滑ったり、ブランコに乗ったりしました。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "夫と私はベンチに座って、子どもたちを見ていました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「子どもたちは本当に元気ですね。」と夫が言いました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「そうですね。見ているだけで疲れます。」と私は笑いました。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "一時間くらい公園にいました。その後、アイスクリーム屋に行きました。子どもたちはアイスクリームを食べました。けんはチョコレート、まりはイチゴのアイスクリームを選びました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「美味しい！」と二人は言いました。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "家に帰る時、スーパーに寄りました。晩ご飯の材料を買いました。野菜と肉を買いました。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "家に帰ったのは四時でした。子どもたちは少し疲れていました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「宿題をしなさい。」と私は子どもたちに言いました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「はい。」と二人は答えました。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "夫はテレビでサッカーの試合を見ました。私は晩ご飯を作り始めました。今日の晩ご飯はカレーライスです。子どもたちが大好きな食べ物です。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "六時に晩ご飯の準備ができました。「晩ご飯ですよ！」と私は家族を呼びました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「わあ、カレーだ！」と子どもたちは喜びました。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "家族でカレーライスを食べました。「美味しいね。」と夫が言いました。「今日の公園は楽しかった？」と子どもたちに聞きました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「うん、とても楽しかった！明日もまた行きたい！」とまりが言いました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「明日は学校でしょう。週末にまた行こうね。」と私は言いました。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "晩ご飯の後、子どもたちはお風呂に入りました。その後、寝る準備をしました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「おやすみなさい、お母さん、お父さん。」と子どもたちは言いました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「おやすみ。明日も元気に学校に行ってね。」と私たちは答えました。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "子どもたちが寝た後、夫と私はお茶を飲みながら話しました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「今日は良い一日だったね。」と夫が言いました。"
+            }
+          ]
+        },
+        {
+          "type": "dialogue",
+          "segments": [
+            {
+              "text": "「そうですね。家族と過ごす時間は大切ですね。」と私は答えました。"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "segments": [
+            {
+              "text": "十時に私たちも寝ました。明日はまた新しい一週間の始まりです。"
+            }
+          ]
+        }
+      ],
+      "vocabulary": {
+        "n5_words": [
+          {
+            "word": "家族",
+            "reading": "かぞく",
+            "meaning": "family"
+          },
+          {
+            "word": "週末",
+            "reading": "しゅうまつ",
+            "meaning": "weekend"
+          },
+          {
+            "word": "名前",
+            "reading": "なまえ",
+            "meaning": "name"
+          },
+          {
+            "word": "夫",
+            "reading": "おっと",
+            "meaning": "husband"
+          },
+          {
+            "word": "子ども",
+            "reading": "こども",
+            "meaning": "children"
+          },
+          {
+            "word": "長男",
+            "reading": "ちょうなん",
+            "meaning": "eldest son"
+          },
+          {
+            "word": "長女",
+            "reading": "ちょうじょ",
+            "meaning": "eldest daughter"
+          },
+          {
+            "word": "朝ご飯",
+            "reading": "あさごはん",
+            "meaning": "breakfast"
+          },
+          {
+            "word": "公園",
+            "reading": "こうえん",
+            "meaning": "park"
+          },
+          {
+            "word": "雨",
+            "reading": "あめ",
+            "meaning": "rain"
+          },
+          {
+            "word": "掃除",
+            "reading": "そうじ",
+            "meaning": "cleaning"
+          },
+          {
+            "word": "洗濯",
+            "reading": "せんたく",
+            "meaning": "laundry"
+          },
+          {
+            "word": "新聞",
+            "reading": "しんぶん",
+            "meaning": "newspaper"
+          },
+          {
+            "word": "天気",
+            "reading": "てんき",
+            "meaning": "weather"
+          },
+          {
+            "word": "晩ご飯",
+            "reading": "ばんごはん",
+            "meaning": "dinner"
+          },
+          {
+            "word": "宿題",
+            "reading": "しゅくだい",
+            "meaning": "homework"
+          },
+          {
+            "word": "買い物",
+            "reading": "かいもの",
+            "meaning": "shopping"
+          },
+          {
+            "word": "材料",
+            "reading": "ざいりょう",
+            "meaning": "ingredients"
+          },
+          {
+            "word": "野菜",
+            "reading": "やさい",
+            "meaning": "vegetables"
+          },
+          {
+            "word": "肉",
+            "reading": "にく",
+            "meaning": "meat"
+          }
+        ]
+      }
+    }
+  ]
+}
