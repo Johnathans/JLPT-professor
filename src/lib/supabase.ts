@@ -2,6 +2,13 @@ import { createClient } from '@supabase/supabase-js'
 import type { Database } from './database.types'
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config'
 
+if (!SUPABASE_URL) {
+  throw new Error('Missing env.NEXT_PUBLIC_SUPABASE_URL')
+}
+if (!SUPABASE_ANON_KEY) {
+  throw new Error('Missing env.NEXT_PUBLIC_SUPABASE_ANON_KEY')
+}
+
 const supabaseUrl = SUPABASE_URL
 const supabaseKey = SUPABASE_ANON_KEY
 
