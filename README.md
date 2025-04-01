@@ -20,6 +20,34 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Environment Setup
+
+This project uses environment variables for configuration. To set up your local environment:
+
+1. Create a `.env.local` file in the root directory with the following variables:
+```bash
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+2. Get the required values:
+   - Create a Supabase project at [supabase.com](https://supabase.com)
+   - Copy the URL and anon key from your project settings
+   - Never commit these values to version control
+
+## API Endpoints
+
+The application uses the following API endpoints:
+
+- `/api/dictionary`: Dictionary lookup endpoint
+  - Query params: `keyword` (word to look up), `type` (word/kanji)
+- `/api/jisho`: Jisho.org integration endpoint
+  - Query params: `keyword` (word to look up)
+- `/api/flashcards`: Flashcard management endpoint
+- `/api/review-history`: User review history endpoint
+
+All API endpoints are protected and require proper authentication.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
