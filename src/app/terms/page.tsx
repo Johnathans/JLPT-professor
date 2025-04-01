@@ -10,8 +10,7 @@ export default function TermsPage() {
         <section className={styles.section}>
           <h2>1. Acceptance of Terms</h2>
           <p>
-            By accessing and using JLPT Professor, you agree to be bound by these Terms of Service.
-            If you do not agree to these terms, please do not use our service.
+            By using JLPT Professor, you agree to these terms and conditions. If you don't agree to these terms, please don't use our website.
           </p>
         </section>
 
@@ -43,6 +42,13 @@ export default function TermsPage() {
           <p>
             JLPT Professor shall not be held liable for any damages arising out of the use
             or inability to use the materials on our website.
+          </p>
+        </section>
+
+        <section className={styles.section}>
+          <h2>5. Data Sharing</h2>
+          <p>
+            We don't collect any personal information from our users. Your privacy is important to us.
           </p>
         </section>
       </div>

@@ -14,7 +14,9 @@ export default function N5AdjectivesPage() {
           <p className={styles.subtitle}>
             Master the essential Japanese adjectives required for the JLPT N5 level. 
             These adjectives will help you describe objects, people, and situations in basic Japanese.
+            You&apos;ll learn essential descriptive words that are frequently used in everyday conversations.
           </p>
+          <p className={styles.intro}>Let&apos;s master N5 adjectives!</p>
           <div className={styles.actionButtons}>
             <Link href="/n5-adjectives/flashcards" className={styles.flashcardButton}>
               <svg className={styles.flashcardIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +53,7 @@ export default function N5AdjectivesPage() {
 
         <div className={styles.comingSoon}>
           <h2>More Adjectives Coming Soon</h2>
-          <p>We're currently expanding our N5 adjective list. Check back soon for more content!</p>
+          <p>We&apos;re currently expanding our N5 adjectives list. Check back soon for more content!</p>
           <Link href="/" className={styles.backLink}>
             ← Back to Home
           </Link>

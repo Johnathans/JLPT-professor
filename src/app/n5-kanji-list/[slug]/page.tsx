@@ -131,14 +131,20 @@ export default function WordDetailPage({ params }: Props) {
 
         <div className={styles.wordDetailSection}>
           <h2>Example Sentences</h2>
-          <ul className={styles.exampleList}>
-            {word.examples.map((example, index) => (
-              <li key={index} className={styles.exampleItem}>
-                <div className={styles.exampleJapanese}>{example.japanese}</div>
-                <div className={styles.exampleEnglish}>{example.english}</div>
-              </li>
-            ))}
-          </ul>
+          {word.examples.length > 0 ? (
+            <ul className={styles.exampleList}>
+              {word.examples.map((example, index) => (
+                <li key={index} className={styles.exampleItem}>
+                  <div className={styles.exampleJapanese}>{example.japanese}</div>
+                  <div className={styles.exampleEnglish}>{example.english}</div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="alert alert-info" role="alert">
+              No examples found for "{word.kanji}"
+            </div>
+          )}
         </div>
 
         <div className={styles.wordDetailSection}>

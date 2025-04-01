@@ -14,6 +14,7 @@ export default function JishoTest({ level = 'n5', word = '日本' }: JishoTestPr
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [words, setWords] = useState<any[]>([]);
+  const [userAnswer, setUserAnswer] = useState('');
 
   useEffect(() => {
     async function fetchData() {
@@ -78,6 +79,7 @@ export default function JishoTest({ level = 'n5', word = '日本' }: JishoTestPr
           ))}
         </ul>
       </div>
+      <p>You answered "{userAnswer}"</p>
     </div>
   );
 }

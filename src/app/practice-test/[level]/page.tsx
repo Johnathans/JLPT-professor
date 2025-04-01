@@ -212,7 +212,7 @@ export default function TestPage({ params }: Props) {
               <li>You can navigate between questions using the previous/next buttons</li>
               <li>Mark questions for review if you want to come back to them</li>
               <li>Submit your test before the time runs out</li>
-              <li>You'll receive detailed feedback after submission</li>
+              <li>You&apos;re doing great! Keep going!</li>
             </ul>
           </div>
 

@@ -11,6 +11,7 @@ export default function N5VerbsPage() {
       <div className={styles.heroWrapper}>
         <div className={styles.heroContent}>
           <h1 className={styles.title}>JLPT N5 Verbs</h1>
+          <p className={styles.intro}>Let's master N5 verbs!</p>
           <p className={styles.subtitle}>
             Master the essential Japanese verbs required for the JLPT N5 level. 
             These are the basic verbs you'll need for everyday communication.

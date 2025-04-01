@@ -134,14 +134,20 @@ export default function KanjiDetailPage({ params }: { params: { slug: string } }
 
         <div className={styles.wordDetailSection}>
           <h2>Example Sentences</h2>
-          <ul className={styles.exampleList}>
-            {examples.map((example, index) => (
-              <li key={index} className={styles.exampleItem}>
-                <div className={styles.exampleJapanese}>{example.japanese}</div>
-                <div className={styles.exampleEnglish}>{example.english}</div>
-              </li>
-            ))}
-          </ul>
+          {examples.length > 0 ? (
+            <ul className={styles.exampleList}>
+              {examples.map((example, index) => (
+                <li key={index} className={styles.exampleItem}>
+                  <div className={styles.exampleJapanese}>{example.japanese}</div>
+                  <div className={styles.exampleEnglish}>{example.english}</div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="alert alert-info" role="alert">
+              No examples found for "{kanji.kanji}"
+            </div>
+          )}
         </div>
 
         <div className={styles.wordDetailSection}>
@@ -171,19 +177,25 @@ export default function KanjiDetailPage({ params }: { params: { slug: string } }
         {relatedKanji.length > 0 && (
           <div className={styles.wordDetailSection}>
             <h2>Other N4 Kanji</h2>
-            <div className={styles.relatedWordsList}>
-              {relatedKanji.map((relatedKanji, index) => (
-                <Link 
-                  key={index}
-                  href={`/n4-kanji-list/${relatedKanji.kanji}`}
-                  className={styles.relatedWordCard}
-                >
-                  <div className={styles.relatedWordKanji}>{relatedKanji.kanji}</div>
-                  <div className={styles.relatedWordKana} dangerouslySetInnerHTML={{ __html: relatedKanji.reading }}></div>
-                  <div className={styles.relatedWordMeaning}>{relatedKanji.meaning}</div>
-                </Link>
-              ))}
-            </div>
+            {relatedKanji.length > 0 ? (
+              <div className={styles.relatedWordsList}>
+                {relatedKanji.map((relatedKanji, index) => (
+                  <Link 
+                    key={index}
+                    href={`/n4-kanji-list/${relatedKanji.kanji}`}
+                    className={styles.relatedWordCard}
+                  >
+                    <div className={styles.relatedWordKanji}>{relatedKanji.kanji}</div>
+                    <div className={styles.relatedWordKana} dangerouslySetInnerHTML={{ __html: relatedKanji.reading }}></div>
+                    <div className={styles.relatedWordMeaning}>{relatedKanji.meaning}</div>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <div className="alert alert-info" role="alert">
+                No compounds found for "{kanji.kanji}" in the N{kanji.level} vocabulary list
+              </div>
+            )}
           </div>
         )}
 

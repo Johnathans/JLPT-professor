@@ -9,8 +9,7 @@ export default function ContactPage() {
       <div className={styles.content}>
         <section className={styles.section}>
           <p className={styles.intro}>
-            Have questions or feedback? We'd love to hear from you. Choose the most convenient
-            way to reach us below.
+            Have questions or feedback? We&apos;d love to hear from you! Please fill out the form below and we&apos;ll get back to you as soon as possible.
           </p>
         </section>
 

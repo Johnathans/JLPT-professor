@@ -21,6 +21,7 @@ export default function FlashcardsPage() {
             <br />
             Check back soon for an immersive learning experience!
           </p>
+          <p className={styles.intro}>Let&apos;s master N1 kanji!</p>
         </div>
         <div className={styles.reviewActions}>
           <Link href="/n1-kanji-list" className={styles.secondaryButton}>

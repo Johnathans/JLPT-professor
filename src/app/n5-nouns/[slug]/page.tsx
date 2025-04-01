@@ -107,7 +107,7 @@ export default function NounDetailPage({ params }: Props) {
           </div>
         </div>
 
-        {word.examples && word.examples.length > 0 && (
+        {word.examples && word.examples.length > 0 ? (
           <div className={styles.wordDetailSection}>
             <h2>Example Sentences</h2>
             <ul className={styles.exampleList}>
@@ -118,6 +118,10 @@ export default function NounDetailPage({ params }: Props) {
                 </li>
               ))}
             </ul>
+          </div>
+        ) : (
+          <div className="alert alert-info" role="alert">
+            No examples found for &quot;{word.kanji}&quot;
           </div>
         )}
 

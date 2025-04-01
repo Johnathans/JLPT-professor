@@ -156,6 +156,11 @@ export default function AdjectiveDetailPage({ params }: Props) {
                 </li>
               ))}
             </ul>
+            {word.examples.length === 0 && (
+              <div className={'alert alert-info'} role="alert">
+                No examples found for &quot;{word.kanji}&quot;
+              </div>
+            )}
           </div>
         )}
 

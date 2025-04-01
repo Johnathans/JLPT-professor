@@ -11,6 +11,7 @@ export default function N5NounsPage() {
       <div className={styles.heroWrapper}>
         <div className={styles.heroContent}>
           <h1 className={styles.title}>JLPT N5 Nouns</h1>
+          <p className={styles.intro}>Let&apos;s master N5 nouns!</p>
           <p className={styles.subtitle}>
             Master the essential Japanese nouns required for the JLPT N5 level. 
             These are the fundamental building blocks for basic Japanese communication.
@@ -51,7 +52,7 @@ export default function N5NounsPage() {
 
         <div className={styles.comingSoon}>
           <h2>More Nouns Coming Soon</h2>
-          <p>We're currently expanding our N5 noun list. Check back soon for more content!</p>
+          <p>We&apos;re currently expanding our N5 noun list. Check back soon for more content!</p>
           <Link href="/" className={styles.backLink}>
             ← Back to Home
           </Link>

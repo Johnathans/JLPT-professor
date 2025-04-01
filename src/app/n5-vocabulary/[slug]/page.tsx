@@ -260,6 +260,10 @@ export default function VocabularyDetailPage({ params }: Props) {
               ))}
             </ul>
           </div>
+        ) || (
+          <div className="alert alert-info" role="alert">
+            No examples found for "{word.kanji}"
+          </div>
         )}
 
         <div className={styles.wordDetailSection}>
@@ -301,6 +305,10 @@ export default function VocabularyDetailPage({ params }: Props) {
                 </Link>
               ))}
             </div>
+          </div>
+        ) || (
+          <div className="alert alert-info" role="alert">
+            No compounds found for "{word.kanji}" in the N5 vocabulary list
           </div>
         )}
 

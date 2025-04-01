@@ -127,14 +127,20 @@ export default function WordDetailPage({ params }: { params: { slug: string } })
 
         <div className={styles.wordDetailSection}>
           <h2>Example Sentences</h2>
-          <ul className={styles.exampleList}>
-            {examples.map((example, index) => (
-              <li key={index} className={styles.exampleItem}>
-                <div className={styles.exampleJapanese}>{example.japanese}</div>
-                <div className={styles.exampleEnglish}>{example.english}</div>
-              </li>
-            ))}
-          </ul>
+          {examples.length > 0 ? (
+            <ul className={styles.exampleList}>
+              {examples.map((example, index) => (
+                <li key={index} className={styles.exampleItem}>
+                  <div className={styles.exampleJapanese}>{example.japanese}</div>
+                  <div className={styles.exampleEnglish}>{example.english}</div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="alert alert-info" role="alert">
+              No examples found for "{word.kanji}"
+            </div>
+          )}
         </div>
 
         {word.kanji && (
@@ -188,6 +194,11 @@ export default function WordDetailPage({ params }: { params: { slug: string } })
                 </Link>
               ))}
             </div>
+            {relatedWords.length === 0 ? (
+              <div className="alert alert-info" role="alert">
+                No compounds found for "{word.kanji}" in the N1 vocabulary list
+              </div>
+            ) : null}
           </div>
         </div>
       )}
