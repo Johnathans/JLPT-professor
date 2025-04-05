@@ -1,207 +1,289 @@
-.container {
-  max-width: 1200px;
+.pageWrapper {
+  min-height: 100vh;
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav {
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+}
+
+.contentWrapper {
+  width: 100%;
+  max-width: var(--max-width);
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 var(--page-padding);
+}
+
+/* Main content layout */
+.mainContent {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem var(--page-padding);
+  display: flex;
+  gap: 2rem;
+  background: var(--background-color);
+}
+
+/* Nav specific styles */
+.nav .contentWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  width: 100%;
 }
 
 .backLink {
   display: inline-flex;
   align-items: center;
-  color: #7c4dff;
-  text-decoration: none;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
   font-weight: 500;
-  margin-bottom: 2rem;
-  transition: color 0.2s ease;
 }
 
 .backLink:hover {
-  color: #5e35b1;
+  color: var(--primary-color);
 }
 
-.storyArticle {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(124, 77, 255, 0.1);
-  overflow: hidden;
-}
-
-.storyHeader {
-  padding: 2rem;
-  background: #f8f7ff;
-  border-bottom: 1px solid #e8e3ff;
-}
-
-.statsBar {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.stat {
-  display: flex;
-  flex-direction: column;
+.levelBadge {
+  display: inline-flex;
   align-items: center;
-  text-align: center;
   gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 600;
 }
 
-.statValue {
-  color: #7c4dff;
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.statLabel {
-  color: #666;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-.storyContent {
-  padding: 2rem;
-  line-height: 2;
-  font-size: 1.2rem;
+/* Story content styles */
+.storyHeader {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  align-self: flex-start;
 }
 
 .storyTitle {
-  color: #7c4dff;
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  line-height: 1.4;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 .subtitle {
-  color: #5e35b1;
-  font-size: 1.5rem;
-  margin: 2rem 0 1rem;
-  line-height: 1.4;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.stats {
+  display: flex;
+  gap: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.stat {
+  text-align: center;
+}
+
+.statValue {
+  display: block;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* Main content area */
+.mainArea {
+  flex: 1;
+  min-width: 0;
 }
 
 .paragraph {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
 }
 
-.dialogue {
+.japaneseText {
+  font-size: 1.5rem;
+  line-height: 2.5;
   margin-bottom: 1.5rem;
-  padding-left: 1.5rem;
-  border-left: 4px solid #e8e3ff;
 }
 
 .kanji {
-  position: relative;
-  color: #7c4dff;
-  cursor: help;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.toolsSection {
+  background: var(--primary-light);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.toolsGroup {
+  margin-bottom: 1.5rem;
+}
+
+.toolsGroup:last-child {
+  margin-bottom: 0;
+}
+
+.toolsTitle {
+  text-transform: uppercase;
+  color: var(--primary-dark);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.controls {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.controlButton {
+  background: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.controlButton:hover,
+.controlButton.active {
+  background: var(--primary-color);
+  color: white;
+}
+
+.playButton {
+  background: var(--accent-color);
+  color: white;
+}
+
+.playButton:hover,
+.playButton.active {
+  background: var(--accent-color);
+  filter: brightness(0.9);
+  color: white;
+}
+
+.furiganaText,
+.romajiText,
+.englishText {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  padding: 1rem;
+  margin-top: 1rem;
+  background: white;
+  border-radius: 8px;
+}
+
+/* Modal styles */
+.modalContent {
+  padding: 2rem;
+}
+
+.modalTitle {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.vocabularyList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.vocabularyItem {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  align-items: center;
+}
+
+.vocabularyItem:last-child {
+  border-bottom: none;
+}
+
+.word {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--primary-color);
 }
 
 .reading {
-  position: absolute;
-  top: -2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #7c4dff;
-  color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.875rem;
-  white-space: nowrap;
-  z-index: 10;
-}
-
-.reading::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 4px solid #7c4dff;
-}
-
-.storyFooter {
-  padding: 2rem;
-  background: #f8f7ff;
-  border-top: 1px solid #e8e3ff;
-}
-
-.vocabularySection,
-.kanjiSection {
-  margin-bottom: 3rem;
-}
-
-.sectionTitle {
-  color: #5e35b1;
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  font-weight: bold;
-}
-
-.vocabularyGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
-}
-
-.vocabularyItem,
-.kanjiItem {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(124, 77, 255, 0.05);
-  border: 1px solid #e8e3ff;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.vocabularyItem:hover,
-.kanjiItem:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(124, 77, 255, 0.1);
-}
-
-.word,
-.kanjiCharacter {
-  color: #7c4dff;
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-}
-
-.reading,
-.kanjiReading {
-  color: #666;
+  color: var(--text-color);
   font-size: 1rem;
-  margin-bottom: 0.5rem;
-  background: #f8f7ff;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  display: inline-block;
 }
 
 .meaning {
-  color: #333;
-  font-size: 0.875rem;
-  margin-bottom: 0.5rem;
+  color: var(--text-color);
+  font-size: 1rem;
 }
 
-.occurrences {
-  color: #666;
-  font-size: 0.75rem;
-  margin-top: 0.5rem;
-  background: #e8e3ff;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  display: inline-block;
-}
+/* Responsive styles */
+@media (max-width: 768px) {
+  .mainContent {
+    flex-direction: column;
+  }
 
-.kanjiGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 1rem;
-}
+  .storyHeader {
+    width: 100%;
+    position: static;
+  }
 
-.kanjiItem {
-  text-align: center;
+  .stats {
+    flex-direction: column;
+  }
+  
+  .controls {
+    flex-direction: column;
+  }
+  
+  .controlButton {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .japaneseText {
+    font-size: 1.25rem;
+    line-height: 2.2;
+  }
 }

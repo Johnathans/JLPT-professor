@@ -9,18 +9,25 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google-cloud/text-to-speech": "^6.0.1",
     "@popperjs/core": "^2.11.8",
     "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@supabase/auth-ui-react": "^0.4.7",
     "@supabase/auth-ui-shared": "^0.1.8",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.49.4",
+    "@types/uuid": "^10.0.0",
+    "@types/wanakana": "^4.0.6",
     "bootstrap": "^5.3.3",
     "csv-parse": "^5.6.0",
+    "dotenv": "^16.4.7",
     "lucide-react": "^0.479.0",
     "next": "15.2.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0",
+    "uuid": "^11.1.0",
+    "wanakana": "^5.3.1"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -3,151 +3,286 @@
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import { ChevronLeft, Volume2, BookOpen, GraduationCap, Play, Pause } from 'lucide-react';
+import { Modal } from '@/components/Modal';
 import storiesData from '@/data/n5-stories.json';
 import styles from './story.module.css';
 
-interface Segment {
-  text: string;
-  isKanji?: boolean;
-  reading?: string;
-  id?: string;
-}
-
-interface ContentItem {
-  type: string;
-  text?: string;
-  segments?: Segment[];
-}
-
-interface Story {
-  id: string;
-  title: string;
-  titleTranslation: string;
-  description: string;
-  stats: {
-    n5_words: number;
-    n5_kanji: number;
-    estimated_time: number;
-  };
-  content: ContentItem[];
-  vocabulary: {
-    n5_words: Array<{
-      word: string;
-      reading: string;
-      meaning: string;
-    }>;
-  };
+interface ParagraphAudioState {
+  isPlaying: boolean;
+  audioUrl?: string;
+  audio?: HTMLAudioElement;
 }
 
 export default function StoryPage() {
   const params = useParams();
-  const story = storiesData.stories.find(s => s.id === params.storyId) as Story;
-  const [hoveredKanji, setHoveredKanji] = useState<string | null>(null);
+  const story = storiesData.stories.find(s => s.id === params.storyId);
+  const [showFurigana, setShowFurigana] = useState<Record<number, boolean>>({});
+  const [showRomaji, setShowRomaji] = useState<Record<number, boolean>>({});
+  const [showEnglish, setShowEnglish] = useState<Record<number, boolean>>({});
+  const [isVocabModalOpen, setIsVocabModalOpen] = useState(false);
+  const [currentParagraphIndex, setCurrentParagraphIndex] = useState(0);
+  const [paragraphAudioStates, setParagraphAudioStates] = useState<{ [key: number]: ParagraphAudioState }>({});
 
   if (!story) {
     return (
-      <div className={styles.container}>
-        <h1>Story not found</h1>
-        <Link href="/n5-stories" className={styles.backLink}>
-          ← Back to Stories
-        </Link>
+      <div className={styles.pageWrapper}>
+        <nav className={styles.nav}>
+          <div className={styles.contentWrapper}>
+            <Link href="/n5-stories" className={styles.backLink}>
+              <ChevronLeft size={20} />
+              Back to Stories
+            </Link>
+          </div>
+        </nav>
+        <div className={styles.contentWrapper}>
+          <h1>Story not found</h1>
+        </div>
       </div>
     );
   }
 
-  const renderSegments = (segments: Segment[] = []) => {
-    return segments.map((segment, index) => {
-      if (segment.isKanji) {
-        return (
-          <span
-            key={index}
-            className={styles.kanji}
-            onMouseEnter={() => setHoveredKanji(segment.id)}
-            onMouseLeave={() => setHoveredKanji(null)}
-          >
-            {segment.text}
-            {hoveredKanji === segment.id && (
-              <span className={styles.reading}>{segment.reading}</span>
-            )}
-          </span>
-        );
-      }
-      return <span key={index}>{segment.text}</span>;
-    });
+  const toggleFurigana = (index: number) => {
+    setShowFurigana(prev => ({ ...prev, [index]: !prev[index] }));
   };
 
-  const renderContent = (content: ContentItem[]) => {
-    return content.map((item, index) => {
-      switch (item.type) {
-        case 'title':
-          return <h1 key={index} className={styles.storyTitle}>{item.text}</h1>;
-        case 'subtitle':
-          return (
-            <h2 key={index} className={styles.subtitle}>
-              {renderSegments(item.segments)}
-            </h2>
-          );
-        case 'paragraph':
-          return (
-            <p key={index} className={styles.paragraph}>
-              {renderSegments(item.segments)}
-            </p>
-          );
-        case 'dialogue':
-          return (
-            <p key={index} className={styles.dialogue}>
-              {renderSegments(item.segments)}
-            </p>
-          );
-        default:
-          return null;
+  const toggleRomaji = (index: number) => {
+    setShowRomaji(prev => ({ ...prev, [index]: !prev[index] }));
+  };
+
+  const toggleEnglish = (index: number) => {
+    setShowEnglish(prev => ({ ...prev, [index]: !prev[index] }));
+  };
+
+  const showVocabulary = (index: number) => {
+    setCurrentParagraphIndex(index);
+    setIsVocabModalOpen(true);
+  };
+
+  const playAudio = async (paragraphIndex: number, text: string) => {
+    let audioState = paragraphAudioStates[paragraphIndex];
+
+    // If we don't have audio yet, generate it
+    if (!audioState?.audioUrl) {
+      try {
+        const response = await fetch('/api/story-audio', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            text,
+            storyId: params.storyId,
+            paragraphId: paragraphIndex,
+          }),
+        });
+
+        const data = await response.json();
+        if (data.error) throw new Error(data.error);
+
+        const audio = new Audio(data.url);
+        audioState = {
+          isPlaying: false,
+          audioUrl: data.url,
+          audio,
+        };
+        setParagraphAudioStates(prev => ({
+          ...prev,
+          [paragraphIndex]: audioState,
+        }));
+      } catch (error) {
+        console.error('Error generating audio:', error);
+        return;
       }
-    });
+    }
+
+    // Play or pause the audio
+    if (audioState.isPlaying) {
+      audioState.audio?.pause();
+      setParagraphAudioStates(prev => ({
+        ...prev,
+        [paragraphIndex]: { ...audioState, isPlaying: false },
+      }));
+    } else {
+      // Pause all other playing audio
+      Object.entries(paragraphAudioStates).forEach(([idx, state]) => {
+        if (state.isPlaying && state.audio) {
+          state.audio.pause();
+          setParagraphAudioStates(prev => ({
+            ...prev,
+            [idx]: { ...state, isPlaying: false },
+          }));
+        }
+      });
+
+      // Play the selected audio
+      audioState.audio?.play();
+      setParagraphAudioStates(prev => ({
+        ...prev,
+        [paragraphIndex]: { ...audioState, isPlaying: true },
+      }));
+
+      // Add ended event listener
+      audioState.audio?.addEventListener('ended', () => {
+        setParagraphAudioStates(prev => ({
+          ...prev,
+          [paragraphIndex]: { ...audioState, isPlaying: false },
+        }));
+      });
+    }
+  };
+
+  const getParagraphText = (paragraph: any) => {
+    return paragraph.segments.map((segment: any) => segment.text).join('');
+  };
+
+  const getParagraphFurigana = (paragraph: any) => {
+    return paragraph.segments.map((segment: any) => {
+      if (segment.isKanji) {
+        return segment.reading;
+      }
+      return segment.text;
+    }).join('');
+  };
+
+  const renderParagraph = (paragraph: any, index: number) => {
+    const audioState = paragraphAudioStates[index] || { isPlaying: false };
+
+    return (
+      <div key={index} className={styles.paragraph}>
+        <div className={styles.japaneseText}>
+          {paragraph.segments.map((segment: any, segIndex: number) => (
+            <span key={segIndex} className={segment.isKanji ? styles.kanji : ''}>
+              {segment.text}
+            </span>
+          ))}
+        </div>
+
+        <div className={styles.toolsSection}>
+          <div className={styles.toolsGroup}>
+            <h3 className={styles.toolsTitle}>Reading Aids</h3>
+            <div className={styles.controls}>
+              <button 
+                className={`${styles.controlButton} ${showFurigana[index] ? styles.active : ''}`}
+                onClick={() => toggleFurigana(index)}
+              >
+                Furigana
+              </button>
+              <button 
+                className={`${styles.controlButton} ${showRomaji[index] ? styles.active : ''}`}
+                onClick={() => toggleRomaji(index)}
+              >
+                Romaji
+              </button>
+              <button 
+                className={`${styles.controlButton} ${showEnglish[index] ? styles.active : ''}`}
+                onClick={() => toggleEnglish(index)}
+              >
+                English
+              </button>
+            </div>
+          </div>
+
+          <div className={styles.toolsGroup}>
+            <h3 className={styles.toolsTitle}>Study Tools</h3>
+            <div className={styles.controls}>
+              <button 
+                className={`${styles.controlButton} ${styles.playButton} ${audioState.isPlaying ? styles.active : ''}`}
+                onClick={() => playAudio(index, getParagraphText(paragraph))}
+              >
+                {audioState.isPlaying ? <Pause size={16} /> : <Play size={16} />}
+                {audioState.isPlaying ? 'Pause' : 'Play'}
+              </button>
+              <button 
+                className={styles.controlButton}
+                onClick={() => showVocabulary(index)}
+              >
+                <GraduationCap size={16} />
+                Vocabulary
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {showFurigana[index] && (
+          <div className={styles.furiganaText}>
+            {getParagraphFurigana(paragraph)}
+          </div>
+        )}
+
+        {showRomaji[index] && (
+          <div className={styles.romajiText}>
+            {/* Add romaji conversion logic here */}
+          </div>
+        )}
+
+        {showEnglish[index] && (
+          <div className={styles.englishText}>
+            {paragraph.translation}
+          </div>
+        )}
+      </div>
+    );
   };
 
   return (
-    <div className={styles.container}>
-      <Link href="/n5-stories" className={styles.backLink}>
-        ← Back to Stories
-      </Link>
-      
-      <article className={styles.storyArticle}>
-        <header className={styles.storyHeader}>
-          <div className={styles.statsBar}>
-            <div className={styles.stat}>
-              <span className={styles.statValue}>{story.stats.n5_words}</span>
-              <span className={styles.statLabel}>N5 Words</span>
-            </div>
-            <div className={styles.stat}>
-              <span className={styles.statValue}>{story.stats.n5_kanji}</span>
-              <span className={styles.statLabel}>N5 Kanji</span>
-            </div>
-            <div className={styles.stat}>
-              <span className={styles.statValue}>{story.stats.estimated_time}</span>
-              <span className={styles.statLabel}>Minutes</span>
-            </div>
+    <div className={styles.pageWrapper}>
+      <nav className={styles.nav}>
+        <div className={styles.contentWrapper}>
+          <Link href="/n5-stories" className={styles.backLink}>
+            <ChevronLeft size={20} />
+            Back to Stories
+          </Link>
+          <div className={styles.levelBadge}>
+            <GraduationCap size={16} />
+            JLPT N5
           </div>
-        </header>
-
-        <div className={styles.storyContent}>
-          {renderContent(story.content)}
         </div>
+      </nav>
 
-        <footer className={styles.storyFooter}>
-          <div className={styles.vocabularySection}>
-            <h3 className={styles.sectionTitle}>N5 Vocabulary in this Story</h3>
-            <div className={styles.vocabularyGrid}>
-              {story.vocabulary.n5_words.map((word, index) => (
-                <div key={index} className={styles.vocabularyItem}>
-                  <div className={styles.word}>{word.word}</div>
-                  <div className={styles.reading}>{word.reading}</div>
-                  <div className={styles.meaning}>{word.meaning}</div>
-                </div>
-              ))}
+      <div className={styles.mainContent}>
+        <aside>
+          <header className={styles.storyHeader}>
+            <h1 className={styles.storyTitle}>{story.title}</h1>
+            <p className={styles.subtitle}>{story.titleTranslation}</p>
+            <div className={styles.stats}>
+              <div className={styles.stat}>
+                <span className={styles.statValue}>{story.stats.n5_words}</span>
+                <span className={styles.statLabel}>N5 Words</span>
+              </div>
+              <div className={styles.stat}>
+                <span className={styles.statValue}>{story.stats.n5_kanji}</span>
+                <span className={styles.statLabel}>N5 Kanji</span>
+              </div>
+              <div className={styles.stat}>
+                <span className={styles.statValue}>{story.stats.estimated_time}</span>
+                <span className={styles.statLabel}>Minutes</span>
+              </div>
             </div>
-          </div>
-        </footer>
-      </article>
+          </header>
+        </aside>
+
+        <div className={styles.mainArea}>
+          {story.content
+            .filter(p => p.type === 'paragraph')
+            .map((paragraph, index) => renderParagraph(paragraph, index))}
+        </div>
+      </div>
+
+      <Modal isOpen={isVocabModalOpen} onClose={() => setIsVocabModalOpen(false)}>
+        <div className={styles.modalContent}>
+          <h2 className={styles.modalTitle}>Vocabulary</h2>
+          <ul className={styles.vocabularyList}>
+            {story.vocabulary.n5_words.map((word: any, index: number) => (
+              <li key={index} className={styles.vocabularyItem}>
+                <span className={styles.word}>{word.word}</span>
+                <span className={styles.reading}>{word.reading}</span>
+                <span className={styles.meaning}>{word.meaning}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Modal>
     </div>
   );
 }
