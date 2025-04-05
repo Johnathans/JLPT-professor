@@ -1,6 +1,7 @@
 import React from 'react';
 import { Metadata, ResolvingMetadata } from 'next';
 import { N2_KANJI } from '@/data/jlpt-kanji-updated';
+import styles from '@/styles/kanji-list.module.css';
 
 type Props = {
   params: { slug: string };
@@ -51,5 +52,11 @@ export async function generateMetadata(
 }
 
 export default function KanjiDetailLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <div className={styles.page}>
+      <main className={styles.main}>
+        {children}
+      </main>
+    </div>
+  );
 }

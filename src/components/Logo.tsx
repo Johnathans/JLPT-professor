@@ -14,18 +14,18 @@ interface LogoProps {
  */
 export const Logo: React.FC<LogoProps> = ({ 
   size = 24, 
-  className, 
+  className = '', 
   color = 'white'
 }) => {
   return (
     <div 
       className={className} 
       style={{ 
+        width: size,
+        height: size,
         display: 'flex', 
         alignItems: 'center', 
-        justifyContent: 'center',
-        width: '100%',
-        height: '100%'
+        justifyContent: 'center'
       }}
     >
       <Image 

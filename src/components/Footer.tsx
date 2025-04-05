@@ -16,7 +16,7 @@ export default function Footer() {
           <div className="col-md-6">
             <div className="d-flex align-items-center mb-2">
               <div className={styles.footerLogoWrapper}>
-                <Logo size={24} className={styles.footerLogoIcon} />
+                <Logo size={24} className={styles.footerLogoIcon} color="white" />
               </div>
               <span className="ms-2" style={{ fontSize: '24px' }}><span style={{ fontWeight: 800 }}>JLPT</span> <span style={{ fontWeight: 300 }}>Professor</span></span>
             </div>

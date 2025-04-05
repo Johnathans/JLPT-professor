@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { N2_KANJI } from '@/data/jlpt-kanji-updated';
+import n2KanjiData from '@/data/n2-kanji-standardized.json';
 import styles from '@/styles/kanji-list.module.css';
 import Link from 'next/link';
 import JlptLevelBadge from '@/components/JlptLevelBadge';
+import { formatKanjiForDisplay } from '@/utils/kanji-formatter';
 
 const ITEMS_PER_PAGE = 20;
 
@@ -12,7 +13,10 @@ export default function N2KanjiListPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const filteredKanji = N2_KANJI.filter(kanji => 
+  // Format all kanji for display
+  const formattedKanji = n2KanjiData.n2_kanji.map(k => formatKanjiForDisplay(k, 'N2'));
+
+  const filteredKanji = formattedKanji.filter(kanji => 
     kanji.kanji.includes(searchQuery) ||
     kanji.reading.toLowerCase().includes(searchQuery.toLowerCase()) ||
     kanji.meaning.toLowerCase().includes(searchQuery.toLowerCase())
@@ -22,7 +26,7 @@ export default function N2KanjiListPage() {
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const displayedKanji = filteredKanji.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
-  const totalKanji = N2_KANJI.length;
+  const totalKanji = formattedKanji.length;
 
   return (
     <div className={styles.container}>

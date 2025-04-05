@@ -2,58 +2,68 @@
 
 import { useEffect, useState, use } from 'react';
 import { n3KanjiComplete } from '@/data/n3-kanji-complete';
+import { Word } from '@/types/word';
 import Link from 'next/link';
 import styles from '@/styles/kanji-list.module.css';
 import StrokeOrderDisplay from '@/components/StrokeOrderDisplay';
+import KanjiAudioPlayer from '@/components/KanjiAudioPlayer';
+import n3KanjiRaw from '@/data/n3-kanji-standardized.json';
 
-// Define a KanjiDetail interface that matches the structure we need for the page
-interface KanjiDetail {
-  kanji: string;
-  reading: string;
-  meaning: string;
-  level: string;
-  examples?: {
-    japanese: string;
-    english: string;
-  }[];
+type Props = {
+  params: { slug: string }
 }
 
-export default function KanjiDetailPage({ params }: { params: { slug: string } }) {
+export default function WordDetailPage({ params }: Props) {
   // Unwrap the params promise at the component level
   const resolvedParams = use(params);
   
-  const [kanji, setKanji] = useState<KanjiDetail | null>(null);
+  const [word, setWord] = useState<Word | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [relatedKanji, setRelatedKanji] = useState<KanjiDetail[]>([]);
+  const [relatedWords, setRelatedWords] = useState<Word[]>([]);
+  const [rawKanjiData, setRawKanjiData] = useState<any>(null);
 
   useEffect(() => {
-    // Decode the slug
     const decodedSlug = decodeURIComponent(resolvedParams.slug);
     
-    // Find the kanji that matches this slug
     const foundKanji = n3KanjiComplete.find(k => k.kanji === decodedSlug);
+    const rawKanji = n3KanjiRaw.n3_kanji.find(k => k.kanji === decodedSlug);
 
-    if (foundKanji) {
-      // Convert to KanjiDetail format
-      const kanjiDetail: KanjiDetail = {
+    if (foundKanji && rawKanji) {
+      setRawKanjiData(rawKanji);
+      
+      const wordDetail: Word = {
         kanji: foundKanji.kanji,
-        reading: foundKanji.reading,
+        kana: foundKanji.reading,
         meaning: foundKanji.meaning,
-        level: foundKanji.level
+        type: 'kanji',
+        examples: [
+          {
+            japanese: `これは${foundKanji.kanji}です。`,
+            english: `This is ${foundKanji.meaning.split(',')[0]}.`
+          },
+          {
+            japanese: `私は${foundKanji.kanji}が好きです。`,
+            english: `I like ${foundKanji.meaning.split(',')[0]}.`
+          }
+        ]
       };
       
-      setKanji(kanjiDetail);
+      setWord(wordDetail);
       
-      // Find related kanji (other N3 kanji)
       const related = n3KanjiComplete
         .filter(k => k.kanji !== foundKanji.kanji)
-        .sort(() => 0.5 - Math.random()) // Shuffle
-        .slice(0, 4); // Limit to 4 related kanji
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 4);
       
-      setRelatedKanji(related);
+      setRelatedWords(related.map(k => ({
+        kanji: k.kanji,
+        kana: k.reading,
+        meaning: k.meaning,
+        type: 'kanji'
+      })));
     } else {
-      setError('Kanji not found');
+      setError('Word not found');
     }
     
     setLoading(false);
@@ -64,18 +74,18 @@ export default function KanjiDetailPage({ params }: { params: { slug: string } }
       <div className={styles.container}>
         <div className={styles.loadingContainer}>
           <div className={styles.loadingSpinner}></div>
-          <p>Loading kanji details...</p>
+          <p>Loading word details...</p>
         </div>
       </div>
     );
   }
 
-  if (error || !kanji) {
+  if (error || !word) {
     return (
       <div className={styles.container}>
         <div className={styles.errorMessage}>
           <h2>Error</h2>
-          <p>{error || 'Kanji not found'}</p>
+          <p>{error || 'Word not found'}</p>
           <Link href="/n3-kanji-list" className={styles.backLink}>
             ← Back to N3 Kanji List
           </Link>
@@ -84,18 +94,6 @@ export default function KanjiDetailPage({ params }: { params: { slug: string } }
     );
   }
 
-  // Mock example sentences
-  const examples = kanji.examples || [
-    {
-      japanese: `これは${kanji.kanji}です。`,
-      english: `This is ${kanji.meaning.split(',')[0]}.`
-    },
-    {
-      japanese: `私は${kanji.kanji}が好きです。`,
-      english: `I like ${kanji.meaning.split(',')[0]}.`
-    }
-  ];
-
   return (
     <div className={styles.container}>
       <div className={styles.wordDetailHeader}>
@@ -103,10 +101,10 @@ export default function KanjiDetailPage({ params }: { params: { slug: string } }
           ← Back to N3 Kanji List
         </Link>
         <h1 className={styles.wordDetailTitle}>
-          <span className={styles.kanjiHeading}>{kanji.kanji}</span>
-          <span className={styles.kanaHeading} dangerouslySetInnerHTML={{ __html: kanji.reading }}></span>
+          <span className={styles.kanjiHeading}>{word.kanji}</span>
+          <span className={styles.kanaHeading} dangerouslySetInnerHTML={{ __html: word.kana }}></span>
         </h1>
-        <p className={styles.wordDetailMeaning}>{kanji.meaning}</p>
+        <p className={styles.wordDetailMeaning}>{word.meaning}</p>
       </div>
 
       <div className={styles.wordDetailCard}>
@@ -115,43 +113,59 @@ export default function KanjiDetailPage({ params }: { params: { slug: string } }
           <div className={styles.wordDetailGrid}>
             <div className={styles.wordDetailItem}>
               <span className={styles.wordDetailLabel}>Type:</span>
-              <span className={styles.wordDetailValue}>Kanji</span>
+              <span className={styles.wordDetailValue}>{word.type}</span>
             </div>
             <div className={styles.wordDetailItem}>
               <span className={styles.wordDetailLabel}>JLPT Level:</span>
-              <span className={styles.wordDetailValue}>{kanji.level}</span>
+              <span className={styles.wordDetailValue}>N3</span>
             </div>
             <div className={styles.wordDetailItem}>
               <span className={styles.wordDetailLabel}>Kanji:</span>
-              <span className={styles.wordDetailValue}>{kanji.kanji}</span>
+              <span className={styles.wordDetailValue}>{word.kanji}</span>
             </div>
             <div className={styles.wordDetailItem}>
               <span className={styles.wordDetailLabel}>Reading:</span>
-              <span className={styles.wordDetailValue} dangerouslySetInnerHTML={{ __html: kanji.reading }}></span>
+              <span className={styles.wordDetailValue} dangerouslySetInnerHTML={{ __html: word.kana }}></span>
             </div>
           </div>
         </div>
 
+        {rawKanjiData && (
+          <div className={styles.wordDetailSection}>
+            <KanjiAudioPlayer
+              kanji={word.kanji}
+              onyomi={rawKanjiData.onyomi}
+              kunyomi={rawKanjiData.kunyomi.map((k: string) => k.replace(/\(.*?\)/g, ''))}
+            />
+          </div>
+        )}
+
         <div className={styles.wordDetailSection}>
           <h2>Example Sentences</h2>
-          <ul className={styles.exampleList}>
-            {examples.map((example, index) => (
-              <li key={index} className={styles.exampleItem}>
-                <div className={styles.exampleJapanese}>{example.japanese}</div>
-                <div className={styles.exampleEnglish}>{example.english}</div>
-              </li>
-            ))}
-          </ul>
+          {word.examples.length > 0 ? (
+            <ul className={styles.exampleList}>
+              {word.examples.map((example, index) => (
+                <li key={index} className={styles.exampleItem}>
+                  <div className={styles.exampleJapanese}>{example.japanese}</div>
+                  <div className={styles.exampleEnglish}>{example.english}</div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="alert alert-info" role="alert">
+              No examples found for "{word.kanji}"
+            </div>
+          )}
         </div>
 
         <div className={styles.wordDetailSection}>
           <h2>Kanji Breakdown</h2>
           <p>
-            The kanji "{kanji.kanji}" is commonly used in JLPT N3 vocabulary. 
+            The kanji "{word.kanji}" is commonly used in JLPT N3 vocabulary. 
             Understanding its components and stroke order will help you master it.
           </p>
           <div className={styles.strokeOrderSection}>
-            <StrokeOrderDisplay kanji={kanji.kanji} />
+            <StrokeOrderDisplay kanji={word.kanji} />
           </div>
         </div>
 
@@ -168,43 +182,24 @@ export default function KanjiDetailPage({ params }: { params: { slug: string } }
           </ul>
         </div>
 
-        {relatedKanji.length > 0 && (
+        {relatedWords.length > 0 && (
           <div className={styles.wordDetailSection}>
             <h2>Other N3 Kanji</h2>
             <div className={styles.relatedWordsList}>
-              {relatedKanji.map((relatedKanji, index) => (
+              {relatedWords.map((relatedWord, index) => (
                 <Link 
                   key={index}
-                  href={`/n3-kanji-list/${relatedKanji.kanji}`}
+                  href={`/n3-kanji-list/${relatedWord.kanji}`}
                   className={styles.relatedWordCard}
                 >
-                  <div className={styles.relatedWordKanji}>{relatedKanji.kanji}</div>
-                  <div className={styles.relatedWordKana} dangerouslySetInnerHTML={{ __html: relatedKanji.reading }}></div>
-                  <div className={styles.relatedWordMeaning}>{relatedKanji.meaning}</div>
+                  <div className={styles.relatedWordKanji}>{relatedWord.kanji}</div>
+                  <div className={styles.relatedWordKana} dangerouslySetInnerHTML={{ __html: relatedWord.kana }}></div>
+                  <div className={styles.relatedWordMeaning}>{relatedWord.meaning}</div>
                 </Link>
               ))}
             </div>
           </div>
         )}
-
-        <div className={styles.practiceSection}>
-          <h2 className={styles.practiceTitle}>Practice This Kanji</h2>
-          <p className={styles.practiceDescription}>
-            Reinforce your knowledge of this kanji through interactive exercises.
-          </p>
-          <div className={styles.practiceButtonContainer}>
-            <Link href="/n3-kanji-list/flashcards" className={styles.practiceButton}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="2" />
-                <path d="M3 10H21" stroke="currentColor" strokeWidth="2" />
-              </svg>
-              Practice with Flashcards
-            </Link>
-            <Link href="/n3-kanji-list" className={styles.secondaryPracticeButton}>
-              Explore More N3 Kanji
-            </Link>
-          </div>
-        </div>
       </div>
     </div>
   );

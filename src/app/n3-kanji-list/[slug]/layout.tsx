@@ -1,6 +1,7 @@
 import React from 'react';
 import { Metadata, ResolvingMetadata } from 'next';
-import { n3KanjiComplete } from '@/data/n3-kanji-complete';
+import { N3_KANJI } from '@/data/jlpt-kanji-updated';
+import styles from '@/styles/kanji-list.module.css';
 
 type Props = {
   params: { slug: string };
@@ -15,7 +16,7 @@ export async function generateMetadata(
   const decodedSlug = decodeURIComponent(await params.slug);
   
   // Find the kanji that matches this slug
-  const kanji = n3KanjiComplete.find(k => k.kanji === decodedSlug);
+  const kanji = N3_KANJI.find(k => k.kanji === decodedSlug);
   
   // If kanji not found, return default metadata
   if (!kanji) {
@@ -51,5 +52,11 @@ export async function generateMetadata(
 }
 
 export default function KanjiDetailLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <div className={styles.page}>
+      <main className={styles.main}>
+        {children}
+      </main>
+    </div>
+  );
 }

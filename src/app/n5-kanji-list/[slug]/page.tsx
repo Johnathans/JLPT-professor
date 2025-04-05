@@ -1,12 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, use } from 'react';
 import { n5KanjiComplete } from '@/data/n5-kanji-complete';
 import { Word } from '@/types/word';
 import Link from 'next/link';
 import styles from '@/styles/kanji-list.module.css';
-import { generateWordSlug } from '@/utils/url';
 import StrokeOrderDisplay from '@/components/StrokeOrderDisplay';
+import KanjiAudioPlayer from '@/components/KanjiAudioPlayer';
+import n5KanjiRaw from '@/data/n5-kanji-new.json';
 
 type Props = {
   params: { slug: string }
@@ -14,12 +15,13 @@ type Props = {
 
 export default function WordDetailPage({ params }: Props) {
   // Unwrap the params promise at the component level
-  const resolvedParams = params;
+  const resolvedParams = use(params);
   
   const [word, setWord] = useState<Word | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [relatedWords, setRelatedWords] = useState<Word[]>([]);
+  const [rawKanjiData, setRawKanjiData] = useState<any>(null);
 
   useEffect(() => {
     // Decode the slug
@@ -27,8 +29,11 @@ export default function WordDetailPage({ params }: Props) {
     
     // Find the word that matches this slug
     const foundKanji = n5KanjiComplete.find(k => k.kanji === decodedSlug);
+    const rawKanji = n5KanjiRaw.n5_kanji.find(k => k.kanji === decodedSlug);
 
-    if (foundKanji) {
+    if (foundKanji && rawKanji) {
+      setRawKanjiData(rawKanji);
+      
       // Convert to Word format
       const wordDetail: Word = {
         kanji: foundKanji.kanji,
@@ -129,6 +134,16 @@ export default function WordDetailPage({ params }: Props) {
           </div>
         </div>
 
+        {rawKanjiData && (
+          <div className={styles.wordDetailSection}>
+            <KanjiAudioPlayer
+              kanji={word.kanji}
+              onyomi={rawKanjiData.onyomi}
+              kunyomi={rawKanjiData.kunyomi.map((k: string) => k.replace(/\(.*?\)/g, ''))}
+            />
+          </div>
+        )}
+
         <div className={styles.wordDetailSection}>
           <h2>Example Sentences</h2>
           {word.examples.length > 0 ? (
@@ -199,12 +214,16 @@ export default function WordDetailPage({ params }: Props) {
             <Link href="/n5-kanji-list/flashcards" className={styles.practiceButton}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="2" />
-                <path d="M3 10H21" stroke="currentColor" strokeWidth="2" />
+                <path d="M8 10L16 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                <path d="M8 14L12 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
               </svg>
-              Practice with Flashcards
+              Practice Flashcards
             </Link>
-            <Link href="/n5-kanji-list" className={styles.secondaryPracticeButton}>
-              Explore More N5 Kanji
+            <Link href="/n5-kanji-exercises" className={styles.practiceButton}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Writing Practice
             </Link>
           </div>
         </div>

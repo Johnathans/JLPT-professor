@@ -2,38 +2,38 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 2rem;
   min-height: 80vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .flashcardHeader {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
   margin-bottom: 2rem;
 }
 
 .title {
   font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: var(--primary-dark);
+  font-weight: bold;
+  color: var(--primary-color);
+  margin: 0;
 }
 
 .progressContainer {
-  max-width: 500px;
-  margin: 0 auto;
+  width: 100%;
+  height: 8px;
+  background-color: var(--primary-light);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 1rem 0 2rem;
 }
 
 .progressBar {
-  height: 8px;
-  background-color: #eee;
-  border-radius: 4px;
-  overflow: hidden;
-  margin-bottom: 0.5rem;
-}
-
-.progressFill {
   height: 100%;
   background-color: var(--primary-color);
   transition: width 0.3s ease;
@@ -144,26 +144,68 @@
   width: 100%;
 }
 
-.onyomi {
+.onyomi, .kunyomi {
   padding: 0.5rem 1rem;
-  background-color: #f3f0ff;
   border-radius: 8px;
-  color: #7c4dff;
   font-size: 1.25rem;
   flex: 1;
   max-width: 200px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.onyomi {
+  background-color: #f3f0ff;
+  color: var(--primary-color);
+}
+
+.onyomi:hover {
+  background-color: #e8e3ff;
+  transform: translateY(-1px);
 }
 
 .kunyomi {
-  padding: 0.5rem 1rem;
+  background-color: #fff3e0;
+  color: var(--secondary-color);
+}
+
+.kunyomi:hover {
   background-color: #ffe4c4;
-  border-radius: 8px;
-  color: #ff9100;
-  font-size: 1.25rem;
-  flex: 1;
-  max-width: 200px;
-  text-align: center;
+  transform: translateY(-1px);
+}
+
+.soundIcon {
+  color: currentColor;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.onyomi:hover .soundIcon,
+.kunyomi:hover .soundIcon {
+  opacity: 1;
+}
+
+.onyomi:disabled .soundIcon,
+.kunyomi:disabled .soundIcon {
+  opacity: 0.4;
+}
+
+.onyomi:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.kunyomi:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .meaning {
@@ -186,9 +228,52 @@
 /* Controls */
 .controls {
   display: flex;
+  align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 1rem;
-  margin-bottom: 2rem;
+}
+
+.readingControls {
+  display: flex;
+  align-items: center;
+}
+
+.readingSelect {
+  composes: form-select from global;
+  margin-right: 1rem !important;
+  padding: 0.5rem 2.5rem 0.5rem 1rem !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--primary-color) !important;
+  background-color: white !important;
+  color: var(--primary-color) !important;
+  font-size: 1rem !important;
+  cursor: pointer !important;
+  width: auto !important;
+  max-width: 180px !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%237c4dff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0.7rem center !important;
+  background-size: 1em !important;
+}
+
+.readingSelect option {
+  background-color: white !important;
+  color: var(--text-color) !important;
+  padding: 1rem !important;
+}
+
+.readingSelect option:checked {
+  background-color: var(--primary-light) !important;
+  color: var(--primary-color) !important;
+}
+
+.readingSelect option:hover {
+  background-color: var(--primary-light) !important;
+  color: var(--primary-color) !important;
 }
 
 .controlButton {
@@ -296,74 +381,71 @@
 /* Autoplay Controls */
 .autoplayControls {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
-  margin: 1.5rem 0;
+  margin: 1rem 0;
 }
 
 .speedSelector {
   display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.autoplayButton {
+  padding: 0.5rem 2rem;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.autoplayButton:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.autoplayButton.playing {
+  background-color: var(--secondary-color);
+}
+
+.speedOptions {
+  display: flex;
   gap: 0.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
 .speedButton {
   padding: 0.5rem 1rem;
-  border: 1px solid #e8e3ff;
-  background: white;
-  color: #7c4dff;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.speedButton:hover:not(:disabled) {
-  background: #e8e3ff;
-}
-
-.speedButton:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.speedButtonActive {
-  background: #7c4dff;
-  color: white;
-  border-color: #7c4dff;
-}
-
-.speedButtonActive:hover {
-  background: #5e35b1;
-}
-
-.autoplayButton {
-  padding: 0.75rem 1.5rem;
-  background: #7c4dff;
-  color: white;
+  border-radius: 8px;
   border: none;
-  border-radius: 25px;
+  background-color: var(--primary-light);
+  color: var(--primary-color);
   font-size: 1rem;
-  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(124, 77, 255, 0.2);
+  opacity: 0.7;
 }
 
-.autoplayButton:hover {
-  background: #5e35b1;
+.speedButton:hover {
+  background-color: #e0d6ff;
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(124, 77, 255, 0.3);
 }
 
-.autoplayActive {
-  background: #ff9100;
+.speedButton.selected {
+  background-color: var(--primary-light);
+  opacity: 1;
 }
 
-.autoplayActive:hover {
-  background: #ff6d00;
+.speedValue {
+  font-size: 0.85rem;
+  color: var(--primary-dark);
+  opacity: 0.8;
 }
 
 /* Update existing controls for autoplay state */
@@ -375,6 +457,28 @@
   color: #666;
   transform: none;
   box-shadow: none;
+}
+
+/* Audio Controls */
+.audioControls {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: var(--primary-light);
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.audioControls :global(.audioPlayerContainer) {
+  margin: 0;
+}
+
+.audioControls :global(.readingSection) {
+  gap: 0.75rem;
+}
+
+.audioControls :global(.audioButton) {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
 }
 
 /* Review Screen */
@@ -475,6 +579,27 @@
   justify-content: center;
   align-items: center;
   height: 300px;
+}
+
+/* Bottom Controls */
+.bottomControls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.navigationControls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.deckControls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
 }
 
 /* Media Queries */
