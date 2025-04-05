@@ -45,7 +45,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--text-secondary);
+  color: var(--primary-dark);
   font-size: 0.875rem;
   font-weight: 500;
 }
@@ -60,7 +60,7 @@
   gap: 0.5rem;
   padding: 0.5rem 1rem;
   background-color: var(--primary-light);
-  color: var(--primary-color);
+  color: var(--primary-dark);
   border-radius: 999px;
   font-size: 0.875rem;
   font-weight: 600;
@@ -68,7 +68,7 @@
 
 /* Story content styles */
 .storyHeader {
-  background: white;
+  background: var(--primary-light);
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 1.5rem;
@@ -79,30 +79,34 @@
 }
 
 .storyTitle {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
+  color: var(--primary-dark);
 }
 
 .subtitle {
   color: var(--text-secondary);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .stats {
-  display: flex;
-  gap: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .stat {
   text-align: center;
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
 }
 
 .statValue {
   display: block;
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 600;
   color: var(--primary-color);
   line-height: 1;
@@ -110,8 +114,48 @@
 }
 
 .statLabel {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.storyActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.storyAction {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.playFullStory {
+  background: var(--accent-color);
+  color: white;
+}
+
+.playFullStory:hover {
+  filter: brightness(0.9);
+}
+
+.viewFlashcards {
+  background: white;
+  color: var(--primary-color);
+}
+
+.viewFlashcards:hover {
+  background: var(--primary-color);
+  color: white;
 }
 
 /* Main content area */
@@ -270,7 +314,7 @@
   }
 
   .stats {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
   
   .controls {

@@ -31,7 +31,7 @@ export default function StoryPage() {
           <div className={styles.contentWrapper}>
             <Link href="/n5-stories" className={styles.backLink}>
               <ChevronLeft size={20} />
-              Back to Stories
+              Stories
             </Link>
           </div>
         </nav>
@@ -245,6 +245,7 @@ export default function StoryPage() {
           <header className={styles.storyHeader}>
             <h1 className={styles.storyTitle}>{story.title}</h1>
             <p className={styles.subtitle}>{story.titleTranslation}</p>
+            
             <div className={styles.stats}>
               <div className={styles.stat}>
                 <span className={styles.statValue}>{story.stats.n5_words}</span>
@@ -255,9 +256,24 @@ export default function StoryPage() {
                 <span className={styles.statLabel}>N5 Kanji</span>
               </div>
               <div className={styles.stat}>
-                <span className={styles.statValue}>{story.stats.estimated_time}</span>
-                <span className={styles.statLabel}>Minutes</span>
+                <span className={styles.statValue}>{story.stats.sentences}</span>
+                <span className={styles.statLabel}>Sentences</span>
               </div>
+              <div className={styles.stat}>
+                <span className={styles.statValue}>{story.stats.estimated_time}m</span>
+                <span className={styles.statLabel}>Est. Time</span>
+              </div>
+            </div>
+
+            <div className={styles.storyActions}>
+              <button className={`${styles.storyAction} ${styles.playFullStory}`}>
+                <Play size={16} />
+                Play Full Story
+              </button>
+              <button className={`${styles.storyAction} ${styles.viewFlashcards}`}>
+                <GraduationCap size={16} />
+                View Flashcards
+              </button>
             </div>
           </header>
         </aside>

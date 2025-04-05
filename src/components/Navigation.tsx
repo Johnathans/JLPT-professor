@@ -2,17 +2,34 @@
 
 import Link from 'next/link';
 import Logo from '@/components/Logo';
-import styles from '@/app/page.module.css';
 
 export default function Navigation() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container">
-        <Link href="/" className={styles.logo}>
-          <div className={styles.navLogoWrapper}>
-            <Logo size={24} className={styles.navLogoIcon} />
+        <Link href="/" className="d-flex align-items-center text-decoration-none text-dark">
+          <div className="rounded-circle bg-primary d-flex align-items-center justify-content-center" style={{ width: '32px', height: '32px' }}>
+            <Logo size={24} color="white" />
           </div>
-          <span className="ms-2" style={{ fontSize: '24px' }}><span style={{ fontWeight: 800 }}>JLPT</span> <span style={{ fontWeight: 300 }}>Professor</span></span>
+          <span className="ms-2" style={{ fontSize: '24px' }}>
+            <span style={{ fontWeight: 800 }}>JLPT</span>{' '}
+            <span style={{ fontWeight: 300 }}>Professor</span>
+            <span 
+              style={{ 
+                fontSize: '11px',
+                fontWeight: 500,
+                background: '#00bfa5',
+                color: 'white',
+                padding: '2px 6px',
+                borderRadius: '4px',
+                marginLeft: '8px',
+                position: 'relative',
+                top: '-8px'
+              }}
+            >
+              BETA
+            </span>
+          </span>
         </Link>
         <button 
           className="navbar-toggler" 
@@ -32,6 +49,8 @@ export default function Navigation() {
                 N5
               </Link>
               <ul className="dropdown-menu" aria-labelledby="n5Dropdown">
+                <li><Link className="dropdown-item" href="/n5-stories">Stories</Link></li>
+                <li><Link className="dropdown-item" href="/n5-listening">Listening</Link></li>
                 <li><Link className="dropdown-item" href="/n5-kanji-list">Kanji</Link></li>
                 <li><Link className="dropdown-item" href="/n5-verbs">Verbs</Link></li>
                 <li><Link className="dropdown-item" href="/n5-adjectives">Adjectives</Link></li>
