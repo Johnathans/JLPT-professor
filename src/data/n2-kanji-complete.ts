@@ -6,52 +6,36 @@
 
 import n2KanjiPart1Raw from './n2-kanji-new-part1.json';
 import n2KanjiPart2Raw from './n2-kanji-new-part2.json';
-
-export interface KanjiData {
-  kanji: string;
-  reading: string;
-  meaning: string;
-  level: string;
-}
+import { KanjiData } from '@/types/word';
 
 // Process the raw kanji data from both files
 const processKanjiData = (kanjiItem: any): KanjiData => {
   // Extract onyomi and kunyomi from the string format
   const extractReading = (reading: string) => {
     if (!reading) return [];
-    // Handle empty readings
-    if (reading === "") return [];
     
     // Extract kana readings from format like "ryou (リョウ)" or "take (たけ)"
     const match = reading.match(/([^(]+)\s*\(([^)]+)\)/);
     if (match) {
-      return [match[1].trim()];
+      return [match[2].trim()];
     }
-    return [reading.trim()];
+    return [];
   };
 
-  // Process onyomi
-  const onyomiRaw = kanjiItem.onyomi || "";
-  const onyomiList = extractReading(onyomiRaw);
-  
-  // Process kunyomi
-  const kunyomiRaw = kanjiItem.kunyomi || "";
-  const kunyomiList = extractReading(kunyomiRaw);
-  
-  // Format readings with HTML spans
-  const onyomi = onyomiList.length > 0 ? `<span class="onyomi">On: ${onyomiList.join(', ')}</span>` : '';
-  const kunyomi = kunyomiList.length > 0 ? `<span class="kunyomi">Kun: ${kunyomiList.join(', ')}</span>` : '';
-  const reading = [onyomi, kunyomi].filter(Boolean).join(' ');
-  
   // Process meaning
   const meaningRaw = kanjiItem.meaning || "";
-  const meanings = typeof meaningRaw === 'string' ? meaningRaw.split(', ') : [meaningRaw];
+  const meanings = typeof meaningRaw === 'string' ? meaningRaw.split(',').map(m => m.trim()) : [meaningRaw];
   
   return {
     kanji: kanjiItem.kanji,
-    reading: reading || '(No reading available)',
-    meaning: meanings.join(', '),
-    level: 'N2'
+    onyomi: extractReading(kanjiItem.onyomi),
+    kunyomi: extractReading(kanjiItem.kunyomi),
+    meaning: meanings,
+    level: 'N2',
+    type: 'general',
+    usefulness: 4,
+    usefulnessDescription: 'Common in upper-intermediate Japanese texts',
+    examples: []
   };
 };
 

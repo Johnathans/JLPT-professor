@@ -1,95 +1,42 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { ArrowLeft, Check, X } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import styles from './kanji-match.module.css';
 
-// Sample data - In production, this would come from an API
-const kanjiData = [
-  { kanji: '人', meaning: 'person', level: 'N5', wrong: ['入', '八', '大', '本', '木', '休'] },
-  { kanji: '日', meaning: 'day, sun', level: 'N5', wrong: ['月', '目', '田', '白', '百', '早'] },
-  { kanji: '山', meaning: 'mountain', level: 'N5', wrong: ['出', '川', '石', '岩', '止', '足'] },
-  { kanji: '水', meaning: 'water', level: 'N5', wrong: ['永', '氷', '泳', '海', '池', '江'] },
-  { kanji: '火', meaning: 'fire', level: 'N5', wrong: ['灯', '炎', '点', '熱', '災', '焼'] },
-];
-
-export default function KanjiMatch() {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [score, setScore] = useState(0);
-  const [showResult, setShowResult] = useState(false);
-  const [options, setOptions] = useState<string[]>([]);
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    if (currentQuestion < kanjiData.length) {
-      const current = kanjiData[currentQuestion];
-      // Get 5 random wrong answers
-      const wrongOptions = current.wrong
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 5);
-      // Add correct answer and shuffle
-      const allOptions = [...wrongOptions, current.kanji]
-        .sort(() => Math.random() - 0.5);
-      setOptions(allOptions);
-    }
-  }, [currentQuestion]);
-
-  const handleAnswer = (answer: string) => {
-    if (selectedAnswer !== null) return; // Prevent multiple selections
-
-    const correct = answer === kanjiData[currentQuestion].kanji;
-    setSelectedAnswer(answer);
-    setIsCorrect(correct);
-
-    if (correct) {
-      setScore(score + 1);
-    }
-
-    // Move to next question after delay
-    setTimeout(() => {
-      if (currentQuestion === kanjiData.length - 1) {
-        setShowResult(true);
-      } else {
-        setCurrentQuestion(currentQuestion + 1);
-        setSelectedAnswer(null);
-        setIsCorrect(null);
-      }
-    }, 1500);
-  };
-
-  const restartGame = () => {
-    setCurrentQuestion(0);
-    setScore(0);
-    setShowResult(false);
-    setSelectedAnswer(null);
-    setIsCorrect(null);
-  };
-
-  if (showResult) {
-    return (
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <Link href="/resources" className={styles.backLink}>
-            <ArrowLeft size={20} />
-            Back to Resources
-          </Link>
-        </div>
-
-        <div className={styles.resultCard}>
-          <h2 className={styles.resultTitle}>Game Complete!</h2>
-          <div className={styles.scoreDisplay}>
-            <span className={styles.scoreLabel}>Your Score</span>
-            <span className={styles.scoreValue}>{score}/{kanjiData.length}</span>
-          </div>
-          <button onClick={restartGame} className={styles.restartButton}>
-            Play Again
-          </button>
+// Loading component while the game loads
+function LoadingGame() {
+  return (
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <Link href="/resources" className={styles.backLink}>
+          <ArrowLeft size={20} />
+          Back to Resources
+        </Link>
+      </div>
+      <div className={styles.gameContent}>
+        <div className={styles.question}>
+          <h2 className={styles.meaning}>Loading game...</h2>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
+
+const JLPT_LEVELS = ['N5', 'N4', 'N3', 'N2'];
+const KANJI_COUNTS = [5, 10, 15, 20, 25];
+
+function KanjiMatchLanding() {
+  const [selectedLevel, setSelectedLevel] = useState('N5');
+  const [kanjiCount, setKanjiCount] = useState(10);
+  const router = useRouter();
+
+  const handlePlay = () => {
+    router.push(`/resources/kanji-match/play?level=${selectedLevel}&count=${kanjiCount}`);
+  };
 
   return (
     <div className={styles.container}>
@@ -98,60 +45,76 @@ export default function KanjiMatch() {
           <ArrowLeft size={20} />
           Back to Resources
         </Link>
-        <div className={styles.progress}>
-          <div className={styles.progressText}>
-            Question {currentQuestion + 1} of {kanjiData.length}
-          </div>
-          <div className={styles.progressBar}>
-            <div 
-              className={styles.progressFill}
-              style={{ width: `${((currentQuestion + 1) / kanjiData.length) * 100}%` }}
-            />
-          </div>
-        </div>
-        <div className={styles.score}>
-          Score: {score}
-        </div>
       </div>
 
-      <div className={styles.gameContent}>
-        <div className={styles.question}>
-          <h2 className={styles.meaning}>
-            Which kanji means &quot;{kanjiData[currentQuestion].meaning}&quot;?
-          </h2>
-          <div className={styles.level}>
-            Level: {kanjiData[currentQuestion].level}
+      <div className={styles.landingContent}>
+        <div className={styles.landingLeft}>
+          <h1 className={styles.landingTitle}>Kanji Match Game</h1>
+          
+          <div className={styles.gameDescription}>
+            <p>Test your kanji knowledge with our interactive matching game! Match kanji characters with their meanings in this fast-paced challenge.</p>
+            <ul>
+              <li>Practice recognizing kanji quickly</li>
+              <li>Learn common meanings and readings</li>
+              <li>Track your progress with scores</li>
+              <li>Choose your JLPT level (N5-N2)</li>
+            </ul>
+          </div>
+
+          <div className={styles.gameSettings}>
+            <div className={styles.settingGroup}>
+              <label className={styles.settingLabel}>Select JLPT Level:</label>
+              <div className={styles.levelSelector}>
+                {JLPT_LEVELS.map((level) => (
+                  <button
+                    key={level}
+                    onClick={() => setSelectedLevel(level)}
+                    className={`${styles.levelButton} ${
+                      selectedLevel === level ? styles.levelButtonActive : ''
+                    }`}
+                  >
+                    {level}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.settingGroup}>
+              <label className={styles.settingLabel}>Number of Kanji:</label>
+              <div className={styles.levelSelector}>
+                {KANJI_COUNTS.map((count) => (
+                  <button
+                    key={count}
+                    onClick={() => setKanjiCount(count)}
+                    className={`${styles.levelButton} ${
+                      kanjiCount === count ? styles.levelButtonActive : ''
+                    }`}
+                  >
+                    {count}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <button onClick={handlePlay} className={styles.playButton}>
+              Play Now
+            </button>
           </div>
         </div>
 
-        <div className={styles.optionsGrid}>
-          {options.map((option, index) => (
-            <button
-              key={index}
-              onClick={() => handleAnswer(option)}
-              className={`${styles.optionCard} ${
-                selectedAnswer === option
-                  ? isCorrect
-                    ? styles.correct
-                    : styles.incorrect
-                  : ''
-              }`}
-              disabled={selectedAnswer !== null}
-            >
-              {option}
-              {selectedAnswer === option && (
-                <div className={styles.resultIcon}>
-                  {isCorrect ? (
-                    <Check className={styles.checkIcon} />
-                  ) : (
-                    <X className={styles.xIcon} />
-                  )}
-                </div>
-              )}
-            </button>
-          ))}
+        <div className={styles.gamePreview}>
+          <Image 
+            src="/kanji-match-game.png"
+            alt="Kanji Match Game Screenshot"
+            width={800}
+            height={600}
+            className={styles.screenshot}
+            priority
+          />
         </div>
       </div>
     </div>
   );
 }
+
+export default KanjiMatchLanding;

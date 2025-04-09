@@ -1,88 +1,103 @@
 import { ImageResponse } from 'next/og';
-import { N2_KANJI } from '@/data/jlpt-kanji-updated';
+import { n2KanjiComplete } from '@/data/n2-kanji-complete';
+import { KanjiData } from '@/types/word';
 
-// Define image size and content type
 export const runtime = 'edge';
+export const alt = 'JLPT N2 Kanji';
 export const size = {
   width: 1200,
   height: 630,
 };
 export const contentType = 'image/png';
 
-// Define interfaces
-interface KanjiDetails {
-  kanji: string;
-  meaning: string | string[];
-  reading?: string;
-  level?: string;
-}
-
 export default async function Image({ params }: { params: { slug: string } }) {
-  // Decode the slug
-  const decodedSlug = decodeURIComponent(params.slug);
-
-  // Find the kanji that matches this slug
-  const kanji = N2_KANJI.find((k: KanjiDetails) => k.kanji === decodedSlug);
-
-  // If kanji not found, return a default image
+  const kanji = n2KanjiComplete.find(k => k.kanji === params.slug) as KanjiData | undefined;
+  
   if (!kanji) {
     return new ImageResponse(
       (
         <div
           style={{
-            fontSize: 128,
-            background: '#7c4dff',
-            width: '100%',
-            height: '100%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: 'white',
+            width: '100%',
+            height: '100%',
+            background: '#e8e3ff',
           }}
         >
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div>Kanji Not Found</div>
-            <div style={{ fontSize: 48, marginTop: 24 }}>JLPT Professor</div>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '1rem',
+            }}
+          >
+            <div style={{ fontSize: 48, fontWeight: 'bold', color: '#7c4dff' }}>
+              Kanji Not Found
+            </div>
           </div>
         </div>
       ),
-      size
+      {
+        ...size,
+      }
     );
   }
 
-  // Get the first meaning for display
-  const primaryMeaning = Array.isArray(kanji.meaning) 
+  // Get the first meaning
+  const meaning = Array.isArray(kanji.meaning)
     ? kanji.meaning[0] 
     : typeof kanji.meaning === 'string' 
       ? kanji.meaning.split(',')[0].trim()
       : '';
 
   // Get the reading text
-  const readingText = kanji.reading || '';
-  
+  const readings = [
+    ...(kanji.onyomi || []),
+    ...(kanji.kunyomi || []),
+  ].join('・');
+
   return new ImageResponse(
     (
       <div
         style={{
-          fontSize: 128,
-          background: '#7c4dff',
-          width: '100%',
-          height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: 'white',
-          padding: '48px',
+          width: '100%',
+          height: '100%',
+          background: '#e8e3ff',
         }}
       >
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-          <div style={{ fontSize: 200, marginBottom: 32 }}>{kanji.kanji}</div>
-          <div style={{ fontSize: 48, marginBottom: 24 }}>{primaryMeaning}</div>
-          <div style={{ fontSize: 32 }}>{readingText}</div>
-          <div style={{ fontSize: 36, marginTop: 48 }}>JLPT Professor</div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '1rem',
+          }}
+        >
+          <div style={{ fontSize: 144, fontWeight: 'bold' }}>
+            {kanji.kanji}
+          </div>
+          <div style={{ fontSize: 48, fontWeight: 'bold', color: '#7c4dff' }}>
+            {meaning}
+          </div>
+          <div style={{ fontSize: 36, color: '#5e35b1' }}>
+            {readings}
+          </div>
+          <div style={{ fontSize: 24, color: '#666', marginTop: '1rem' }}>
+            JLPT N2 Kanji
+          </div>
         </div>
       </div>
     ),
-    size
+    {
+      ...size,
+    }
   );
 }

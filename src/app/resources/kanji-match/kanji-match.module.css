@@ -26,6 +26,149 @@
   color: var(--text-color);
 }
 
+/* Landing Page Styles */
+.landingContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.landingLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.landingTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.gamePreview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background: var(--primary-light);
+  transition: transform 0.3s ease;
+}
+
+.gamePreview:hover {
+  transform: translateY(-4px);
+}
+
+.screenshot {
+  object-fit: cover;
+  object-position: center;
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+}
+
+.gameDescription {
+  color: var(--text-color);
+}
+
+.gameDescription p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.gameDescription ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.gameDescription li {
+  background: var(--primary-light);
+  color: var(--primary-color);
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.gameSettings {
+  margin-top: 2rem;
+}
+
+.settingGroup {
+  margin-bottom: 2rem;
+}
+
+.settingLabel {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.levelSelector {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.levelButton {
+  padding: 0.75rem 1.25rem;
+  border: 2px solid var(--border-color);
+  background: white;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1.125rem;
+}
+
+.levelButton:hover {
+  border-color: var(--primary-color);
+  background: var(--primary-light);
+}
+
+.levelButtonActive {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.levelButtonActive:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  color: white;
+}
+
+.playButton {
+  width: 100%;
+  padding: 1.25rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.playButton:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Game Styles */
 .progress {
   flex: 1;
   max-width: 400px;
@@ -200,30 +343,44 @@
   background: var(--primary-dark);
 }
 
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .landingContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .landingLeft {
+    order: -1;
+  }
+
+  .landingTitle {
+    font-size: 2.5rem;
+  }
+
+  .gamePreview {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
 @media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .progress {
-    margin: 1rem 0;
-    width: 100%;
-  }
-
   .optionsGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-
-  .meaning {
-    font-size: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
+  .levelSelector {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   .optionsGrid {
     grid-template-columns: 1fr;
+  }
+
+  .landingTitle {
+    font-size: 2rem;
   }
 }

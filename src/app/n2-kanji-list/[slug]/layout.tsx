@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata, ResolvingMetadata } from 'next';
-import { N2_KANJI } from '@/data/jlpt-kanji-updated';
+import { n2KanjiComplete } from '@/data/n2-kanji-complete';
 import styles from '@/styles/kanji-list.module.css';
 
 type Props = {
@@ -17,7 +17,7 @@ export async function generateMetadata(
   const decodedSlug = decodeURIComponent(slug);
   
   // Find the kanji that matches this slug
-  const kanji = N2_KANJI.find(k => k.kanji === decodedSlug);
+  const kanji = n2KanjiComplete.find(k => k.kanji === decodedSlug);
   
   // If kanji not found, return default metadata
   if (!kanji) {
@@ -27,26 +27,22 @@ export async function generateMetadata(
     };
   }
 
-  // Create a clean meaning without HTML tags
-  let cleanMeaning = '';
-  if (kanji) {
-    // Force the type to be any to handle the meaning property
-    const kanjiAny = kanji as any;
-    if (kanjiAny.meaning) {
-      if (Array.isArray(kanjiAny.meaning) && kanjiAny.meaning.length > 0) {
-        cleanMeaning = kanjiAny.meaning[0] ? kanjiAny.meaning[0].replace(/<[^>]*>/g, '') : '';
-      } else if (typeof kanjiAny.meaning === 'string') {
-        cleanMeaning = kanjiAny.meaning.replace(/<[^>]*>/g, '');
-      }
-    }
-  }
+  // Get the first meaning for display
+  const cleanMeaning = Array.isArray(kanji.meaning)
+    ? kanji.meaning[0]
+    : typeof kanji.meaning === 'string'
+      ? kanji.meaning.split(',')[0].trim()
+      : '';
   
-  // Create a clean reading text (without HTML tags) for meta description
-  const readingText = kanji.reading.replace(/<[^>]*>/g, '');
+  // Create a clean reading text for meta description
+  const readingText = [
+    kanji.onyomi.length > 0 ? `On: ${kanji.onyomi.join(', ')}` : '',
+    kanji.kunyomi.length > 0 ? `Kun: ${kanji.kunyomi.join(', ')}` : ''
+  ].filter(Boolean).join(' ');
   
   return {
     title: `${kanji.kanji} (${cleanMeaning}) | JLPT N2 Kanji | JLPT Professor`,
-    description: `Learn the JLPT N2 kanji ${kanji.kanji} (${readingText}): meaning, readings, example sentences, stroke order, and study tips.`,
+    description: `Learn the meaning (${cleanMeaning}) and readings (${readingText}) of the JLPT N2 kanji ${kanji.kanji}.`,
     openGraph: {
       title: `${kanji.kanji} - ${cleanMeaning} | JLPT N2 Kanji`,
       description: `Master the JLPT N2 kanji ${kanji.kanji}: ${readingText} - ${cleanMeaning}`,

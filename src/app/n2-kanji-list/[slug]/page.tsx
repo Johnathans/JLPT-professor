@@ -30,23 +30,29 @@ export default function WordDetailPage({ params }: Props) {
     if (foundKanji && rawKanji) {
       setRawKanjiData(rawKanji);
       
+      const meaning = Array.isArray(foundKanji.meaning)
+        ? foundKanji.meaning[0]
+        : typeof foundKanji.meaning === 'string'
+          ? foundKanji.meaning.split(',')[0].trim()
+          : '';
+
       const wordDetail: Partial<Word> = {
         id: resolvedParams.slug,
         kanji: foundKanji.kanji,
-        kana: foundKanji.reading,
-        romaji: foundKanji.reading, // Use reading as romaji for now
-        meaning: foundKanji.meaning,
+        kana: foundKanji.onyomi.join('、'),
+        romaji: foundKanji.kunyomi.join('、'),
+        meaning,
         type: 'kanji',
         examples: [
           {
             japanese: `これは${foundKanji.kanji}です。`,
             romaji: `Kore wa ${foundKanji.kanji} desu.`,
-            english: `This is ${foundKanji.meaning.split(',')[0]}.`
+            english: meaning
           },
           {
             japanese: `私は${foundKanji.kanji}が好きです。`,
             romaji: `Watashi wa ${foundKanji.kanji} ga suki desu.`,
-            english: `I like ${foundKanji.meaning.split(',')[0]}.`
+            english: meaning
           }
         ],
       };
@@ -66,9 +72,13 @@ export default function WordDetailPage({ params }: Props) {
         setRelatedWords(related.map(k => ({
           id: k.kanji,
           kanji: k.kanji,
-          kana: k.reading,
-          romaji: k.reading,
-          meaning: k.meaning,
+          kana: k.onyomi.join('、'),
+          romaji: k.kunyomi.join('、'),
+          meaning: Array.isArray(k.meaning)
+            ? k.meaning[0]
+            : typeof k.meaning === 'string'
+              ? k.meaning.split(',')[0].trim()
+              : '',
           type: 'kanji'
         })) as Word[]);
       }

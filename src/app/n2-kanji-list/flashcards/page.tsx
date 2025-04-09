@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import styles from '@/styles/flashcards.module.css';
 import Link from 'next/link';
-import { N2_KANJI } from '@/data/jlpt-kanji-updated';
+import { n2KanjiComplete } from '@/data/n2-kanji-complete';
 
 interface Flashcard {
   id: number;
@@ -24,11 +24,16 @@ export default function FlashcardsPage() {
 
   useEffect(() => {
     // Initialize flashcards from the N2 kanji data
-    const initialCards = N2_KANJI.map((kanji, index) => ({
+    const initialCards = n2KanjiComplete.map((kanji, index) => ({
       id: index,
       kanji: kanji.kanji,
-      reading: kanji.reading,
-      meaning: kanji.meaning,
+      reading: [
+        kanji.onyomi.length > 0 ? `On: ${kanji.onyomi.join(', ')}` : '',
+        kanji.kunyomi.length > 0 ? `Kun: ${kanji.kunyomi.join(', ')}` : ''
+      ].filter(Boolean).join(' '),
+      meaning: Array.isArray(kanji.meaning) 
+        ? kanji.meaning.join(', ')
+        : kanji.meaning,
       isKnown: false,
     }));
 
@@ -50,21 +55,11 @@ export default function FlashcardsPage() {
       setCurrentCardIndex(currentCardIndex + 1);
       setProgress(Math.round(((currentCardIndex + 1) / cards.length) * 100));
     } else {
-      // Show review screen when all cards are done
       setShowReview(true);
     }
   };
 
-  // Move to the previous card
-  const previousCard = () => {
-    if (currentCardIndex > 0) {
-      setIsFlipped(false);
-      setCurrentCardIndex(currentCardIndex - 1);
-      setProgress(Math.round(((currentCardIndex - 1) / cards.length) * 100));
-    }
-  };
-
-  // Mark the current card as known
+  // Mark current card as known
   const markAsKnown = () => {
     const updatedCards = [...cards];
     updatedCards[currentCardIndex].isKnown = true;
@@ -73,10 +68,19 @@ export default function FlashcardsPage() {
     nextCard();
   };
 
-  // Reset the deck and shuffle cards
-  const resetDeck = () => {
-    const shuffledCards = [...cards].sort(() => Math.random() - 0.5);
-    shuffledCards.forEach(card => card.isKnown = false);
+  // Mark current card as unknown
+  const markAsUnknown = () => {
+    const updatedCards = [...cards];
+    updatedCards[currentCardIndex].isKnown = false;
+    setCards(updatedCards);
+    nextCard();
+  };
+
+  // Reset the flashcards
+  const resetCards = () => {
+    const shuffledCards = [...cards]
+      .map(card => ({ ...card, isKnown: false }))
+      .sort(() => Math.random() - 0.5);
     setCards(shuffledCards);
     setCurrentCardIndex(0);
     setIsFlipped(false);
@@ -85,144 +89,90 @@ export default function FlashcardsPage() {
     setKnownCount(0);
   };
 
-  // Show loading state
   if (isLoading) {
-    return (
-      <div className={styles.container}>
-        <div className={styles.loadingContainer}>
-          <p>Loading flashcards...</p>
-        </div>
-      </div>
-    );
+    return <div className={styles.loading}>Loading flashcards...</div>;
   }
 
-  // Show review screen when all cards are done
   if (showReview) {
     return (
       <div className={styles.container}>
         <div className={styles.reviewContainer}>
-          <h1 className={styles.title}>Review Complete!</h1>
+          <h2>Review Complete!</h2>
+          <p>You knew {knownCount} out of {cards.length} kanji.</p>
           <div className={styles.reviewStats}>
-            <div className={styles.statItem}>
-              <span className={styles.statValue}>{cards.length}</span>
-              <span className={styles.statLabel}>Total Cards</span>
+            <h3>Known Kanji:</h3>
+            <div className={styles.knownKanji}>
+              {cards
+                .filter(card => card.isKnown)
+                .map(card => (
+                  <Link 
+                    key={card.id} 
+                    href={`/n2-kanji-list/${encodeURIComponent(card.kanji)}`}
+                    className={styles.kanjiLink}
+                  >
+                    {card.kanji}
+                  </Link>
+                ))}
             </div>
-            <div className={styles.statItem}>
-              <span className={styles.statValue}>{knownCount}</span>
-              <span className={styles.statLabel}>Known Cards</span>
-            </div>
-            <div className={styles.statItem}>
-              <span className={styles.statValue}>{Math.round((knownCount / cards.length) * 100)}%</span>
-              <span className={styles.statLabel}>Mastery</span>
+            <h3>Need More Practice:</h3>
+            <div className={styles.unknownKanji}>
+              {cards
+                .filter(card => !card.isKnown)
+                .map(card => (
+                  <Link 
+                    key={card.id} 
+                    href={`/n2-kanji-list/${encodeURIComponent(card.kanji)}`}
+                    className={styles.kanjiLink}
+                  >
+                    {card.kanji}
+                  </Link>
+                ))}
             </div>
           </div>
-          <div className={styles.reviewActions}>
-            <button onClick={resetDeck} className={styles.primaryButton}>
-              Restart Deck
-            </button>
-            <Link href="/n2-kanji-list" className={styles.secondaryButton}>
-              Back to N2 Kanji List
-            </Link>
-          </div>
+          <button onClick={resetCards} className={styles.resetButton}>
+            Start Over
+          </button>
+          <Link href="/n2-kanji-list" className={styles.backLink}>
+            Back to N2 Kanji List
+          </Link>
         </div>
       </div>
     );
   }
 
-  // Main flashcard interface
+  const currentCard = cards[currentCardIndex];
+
   return (
     <div className={styles.container}>
-      <div className={styles.flashcardHeader}>
-        <h1 className={styles.title}>N2 Kanji Flashcards</h1>
-        <div className={styles.progressContainer}>
-          <div className={styles.progressBar}>
-            <div 
-              className={styles.progressFill} 
-              style={{ width: `${progress}%` }}
-            ></div>
-          </div>
-          <div className={styles.progressText}>
-            {currentCardIndex + 1} of {cards.length} cards
-          </div>
+      <div className={styles.header}>
+        <Link href="/n2-kanji-list" className={styles.backLink}>
+          Back to N2 Kanji List
+        </Link>
+        <div className={styles.progress}>
+          Card {currentCardIndex + 1} of {cards.length} ({progress}%)
         </div>
       </div>
 
       <div 
-        className={`${styles.flashcard} ${isFlipped ? styles.flipped : ''}`} 
+        className={`${styles.flashcard} ${isFlipped ? styles.flipped : ''}`}
         onClick={flipCard}
       >
-        <div className={styles.flashcardInner}>
-          <div className={styles.flashcardFront}>
-            <div className={styles.cardContent}>
-              <div className={styles.kanji}>{cards[currentCardIndex].kanji}</div>
-              <div className={styles.cardHint}>Click to reveal reading and meaning</div>
-            </div>
-          </div>
-          <div className={styles.flashcardBack}>
-            <div className={styles.cardContent}>
-              <div className={styles.reading}>
-                <div className={styles.readingRow}>
-                  <div className={styles.readingLabel}>READINGS</div>
-                  <div className={styles.readingBoxes}>
-                    {cards[currentCardIndex].reading.includes('On:') && (
-                      <div 
-                        className={styles.onyomi}
-                        dangerouslySetInnerHTML={{ 
-                          __html: cards[currentCardIndex].reading
-                            .split('On:')[1]
-                            .split('Kun:')[0]
-                            .trim() 
-                        }}
-                      />
-                    )}
-                    {cards[currentCardIndex].reading.includes('Kun:') && (
-                      <div 
-                        className={styles.kunyomi}
-                        dangerouslySetInnerHTML={{ 
-                          __html: cards[currentCardIndex].reading
-                            .split('Kun:')[1]
-                            .trim() 
-                        }}
-                      />
-                    )}
-                  </div>
-                </div>
-              </div>
-              <div className={styles.meaning}>{cards[currentCardIndex].meaning}</div>
-            </div>
-          </div>
+        <div className={styles.front}>
+          <div className={styles.kanji}>{currentCard.kanji}</div>
+        </div>
+        <div className={styles.back}>
+          <div className={styles.reading}>{currentCard.reading}</div>
+          <div className={styles.meaning}>{currentCard.meaning}</div>
         </div>
       </div>
 
       <div className={styles.controls}>
-        <button 
-          onClick={previousCard} 
-          className={`${styles.controlButton} ${currentCardIndex === 0 ? styles.disabled : ''}`}
-          disabled={currentCardIndex === 0}
-        >
-          Previous
+        <button onClick={markAsUnknown} className={styles.unknownButton}>
+          Don&apos;t Know
         </button>
-        <button 
-          onClick={markAsKnown} 
-          className={styles.knownButton}
-        >
-          I Know This
+        <button onClick={markAsKnown} className={styles.knownButton}>
+          Know It
         </button>
-        <button 
-          onClick={nextCard} 
-          className={styles.controlButton}
-        >
-          Next
-        </button>
-      </div>
-
-      <div className={styles.deckControls}>
-        <button onClick={resetDeck} className={styles.resetButton}>
-          Reset Deck
-        </button>
-        <Link href="/n2-kanji-list" className={styles.backButton}>
-          Back to List
-        </Link>
       </div>
     </div>
   );
