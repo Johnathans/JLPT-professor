@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { N3_KANJI } from '@/data/jlpt-kanji-updated';
 import styles from '@/styles/kanji-list.module.css';
+import heroColors from '@/styles/hero-colors.module.css';
 import Link from 'next/link';
 import JlptLevelBadge from '@/components/JlptLevelBadge';
 
@@ -32,29 +33,57 @@ export default function N3KanjiListPage() {
   return (
     <div className={styles.container}>
       <div className={styles.heroWrapper}>
-        <div className={styles.heroContent}>
-          <h1 className={styles.title}>JLPT N3 Kanji</h1>
-          <p className={styles.subtitle}>
-            Master the intermediate Japanese kanji required for the JLPT N3 level. 
-            This level introduces more complex characters used in everyday situations.
-          </p>
-          <div className={styles.actionButtons}>
-            <Link href="/n3-kanji-list/flashcards" className={styles.flashcardButton}>
-              <svg className={styles.flashcardIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="2" />
-                <path d="M3 10H21" stroke="currentColor" strokeWidth="2" />
-              </svg>
-              Start Flashcard Learning
-            </Link>
-          </div>
-          <div className={styles.stats}>
-            <div className={styles.statItem}>
-              <span className={styles.statValue}>{totalKanji}</span>
-              <span className={styles.statLabel}>Total Kanji</span>
+        <div className={`${styles.heroContent} container`}>
+          <div className={styles.heroLeft}>
+            <div className={styles.heroLeftContent}>
+              <h1 className={`${styles.title} ${heroColors.title}`}>JLPT N3 Kanji</h1>
+              <p className={styles.subtitle}>
+                Master the intermediate Japanese kanji required for the JLPT N3 level. 
+                This level introduces more complex characters used in everyday situations.
+              </p>
+              
+              <div className={styles.stats}>
+                <div className={styles.statItem}>
+                  <span className={`${styles.statValue} ${heroColors.statValue}`}>{totalKanji}</span>
+                  <span className={styles.statLabel}>Total Kanji</span>
+                </div>
+                <div className={styles.statItem}>
+                  <span className={`${styles.statValue} ${heroColors.statValue}`}>N3</span>
+                  <span className={styles.statLabel}>JLPT Level</span>
+                </div>
+              </div>
+
+              <div className={styles.actionButtons}>
+                <Link href="/n3-kanji-list/flashcards" className={styles.flashcardButton}>
+                  <svg className={styles.flashcardIcon} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="2" />
+                    <path d="M3 10H21" stroke="currentColor" strokeWidth="2" />
+                  </svg>
+                  Start Flashcard Learning
+                </Link>
+              </div>
             </div>
-            <div className={styles.statItem}>
-              <span className={styles.statValue}>N3</span>
-              <span className={styles.statLabel}>JLPT Level</span>
+          </div>
+
+          <div className={styles.heroRight}>
+            <div className={styles.kanjiGrid}>
+              {N3_KANJI.slice(0, 9).map((kanji) => (
+                <Link 
+                  href={`/n3-kanji-list/${encodeURIComponent(kanji.kanji)}`} 
+                  key={kanji.kanji}
+                  className={styles.kanjiGridItem}
+                >
+                  <span className={`${styles.kanjiCharacter} ${heroColors.kanjiGridCharacter}`}>{kanji.kanji}</span>
+                  <span className={styles.meaning}>
+                    {typeof kanji.meaning === 'string' ? 
+                      kanji.meaning.split(',')[0].trim() :
+                      Array.isArray(kanji.meaning) && kanji.meaning.length > 0 ?
+                        kanji.meaning[0].trim() :
+                        ''
+                    }
+                  </span>
+                </Link>
+              ))}
             </div>
           </div>
         </div>
@@ -102,21 +131,27 @@ export default function N3KanjiListPage() {
           </thead>
           <tbody>
             {displayedKanji.map((kanji, index) => {
-              const onyomiText = kanji.onyomi?.length > 0 ? `On: ${kanji.onyomi.join(', ')}` : '';
-              const kunyomiText = kanji.kunyomi?.length > 0 ? `Kun: ${kanji.kunyomi.join(', ')}` : '';
-              const readingText = [onyomiText, kunyomiText].filter(Boolean).join(' ');
-              const meaningText = Array.isArray(kanji.meaning) ? kanji.meaning.join(', ') : kanji.meaning;
-
               return (
                 <tr key={index} className={styles.tableRow}>
                   <td className={`${styles.tableCell} ${styles.kanjiCell}`}>
                     {kanji.kanji}
                   </td>
-                  <td className={`${styles.tableCell} ${styles.kanaCell}`}
-                    dangerouslySetInnerHTML={{ __html: readingText }}
-                  />
+                  <td className={`${styles.tableCell} ${styles.kanaCell}`}>
+                    {kanji.onyomi?.length > 0 && (
+                      <span className="onyomi">On: {kanji.onyomi.join(', ')}</span>
+                    )}
+                    {kanji.onyomi?.length > 0 && kanji.kunyomi?.length > 0 && ' '}
+                    {kanji.kunyomi?.length > 0 && (
+                      <span className="kunyomi">Kun: {kanji.kunyomi.join(', ')}</span>
+                    )}
+                  </td>
                   <td className={`${styles.tableCell} ${styles.meaningCell}`}>
-                    {meaningText}
+                    {typeof kanji.meaning === 'string' ? 
+                      kanji.meaning :
+                      Array.isArray(kanji.meaning) ? 
+                        kanji.meaning.join(', ') :
+                        ''
+                    }
                   </td>
                   <td className={`${styles.tableCell} ${styles.typeCell}`}>
                     <JlptLevelBadge word={kanji} />

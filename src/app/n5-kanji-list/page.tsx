@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { N5_KANJI } from '@/data/jlpt-kanji-updated';
 import styles from '@/styles/kanji-list.module.css';
+import heroColors from '@/styles/hero-colors.module.css';
 import Link from 'next/link';
 import JlptLevelBadge from '@/components/JlptLevelBadge';
 
@@ -34,7 +35,7 @@ export default function N5KanjiListPage() {
         <div className={`${styles.heroContent} container`}>
           <div className={styles.heroLeft}>
             <div className={styles.heroLeftContent}>
-              <h1 className={styles.title}>JLPT N5 Kanji</h1>
+              <h1 className={`${styles.title} ${heroColors.title}`}>JLPT N5 Kanji</h1>
               <p className={styles.subtitle}>
                 Master the foundational Japanese kanji required for the JLPT N5 level. 
                 This comprehensive list covers essential characters for basic daily reading and writing.
@@ -42,11 +43,11 @@ export default function N5KanjiListPage() {
               
               <div className={styles.stats}>
                 <div className={styles.statItem}>
-                  <span className={styles.statValue}>{totalKanji}</span>
+                  <span className={`${styles.statValue} ${heroColors.statValue}`}>{totalKanji}</span>
                   <span className={styles.statLabel}>Total Kanji</span>
                 </div>
                 <div className={styles.statItem}>
-                  <span className={styles.statValue}>N5</span>
+                  <span className={`${styles.statValue} ${heroColors.statValue}`}>N5</span>
                   <span className={styles.statLabel}>JLPT Level</span>
                 </div>
               </div>
@@ -71,7 +72,7 @@ export default function N5KanjiListPage() {
                   key={kanji.kanji}
                   className={styles.kanjiGridItem}
                 >
-                  <span className={styles.kanji}>{kanji.kanji}</span>
+                  <span className={`${styles.kanjiCharacter} ${heroColors.kanjiGridCharacter}`}>{kanji.kanji}</span>
                   <span className={styles.meaning}>
                     {typeof kanji.meaning === 'string' ? 
                       (kanji.meaning as string).split(',')[0].trim() :
