@@ -6,6 +6,7 @@ import { n5VocabularyCombined } from '@/data/n5-vocabulary-combined';
 import { generateWordSlug } from '@/utils/url';
 import styles from '@/styles/kanji-list.module.css';
 import JlptLevelBadge from '@/components/JlptLevelBadge';
+import { Word } from '@/types/word';
 
 const ITEMS_PER_PAGE = 20;
 
@@ -106,7 +107,7 @@ export default function N5VocabularyPage() {
                   {word.meaning}
                 </td>
                 <td className={`${styles.tableCell} ${styles.typeCell}`}>
-                  <JlptLevelBadge word={{ ...word, level: 'N5' }} />
+                  <JlptLevelBadge word={word.kanji || word.kana} />
                 </td>
                 <td className={`${styles.tableCell} ${styles.actionCell}`}>
                   <Link

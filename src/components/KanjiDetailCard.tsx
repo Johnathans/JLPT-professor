@@ -71,7 +71,12 @@ export default function KanjiDetailCard({ kanjiDetail }: KanjiDetailCardProps) {
             {kanjiDetail.relatedWords.map((word, index) => (
               <Link 
                 key={index} 
-                href={`/n4-kanji-list/${generateWordSlug(word.word, word.reading, word.meaning)}`}
+                href={`/n4-kanji-list/${generateWordSlug({
+                  kana: word.reading,
+                  kanji: word.word,
+                  meaning: word.meaning,
+                  type: 'kanji'
+                })}`}
                 className={styles.relatedWordCard}
               >
                 <div className={styles.relatedWordKanji}>{word.word}</div>

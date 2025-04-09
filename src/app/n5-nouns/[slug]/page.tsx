@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, use } from 'react';
 import { n5Nouns } from '@/data/n5-nouns';
 import { Word } from '@/types/word';
 import Link from 'next/link';
@@ -8,11 +8,12 @@ import styles from '@/styles/word-detail.module.css';
 import { generateWordSlug } from '@/utils/url';
 
 type Props = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>;
 }
 
 export default function NounDetailPage({ params }: Props) {
-  const resolvedParams = params;
+  // Unwrap the params promise at the component level
+  const resolvedParams = use(params);
   
   const [word, setWord] = useState<Word | null>(null);
   const [loading, setLoading] = useState(true);

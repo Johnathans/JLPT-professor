@@ -10,16 +10,16 @@ interface StrokeOrderDisplayProps {
 }
 
 export default function StrokeOrderDisplay({ kanji }: StrokeOrderDisplayProps) {
-  const [svgContent, setSvgContent] = useState<string | null>(null);
+  const [svgContent, setSvgContent] = useState<string>('');
+  const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const svgContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function fetchSvg() {
       try {
         setLoading(true);
-        setError(null);
+        setError('');
         
         // Only proceed if we have a kanji character
         if (!kanji || kanji.length === 0) {
@@ -29,10 +29,10 @@ export default function StrokeOrderDisplay({ kanji }: StrokeOrderDisplayProps) {
         }
         
         // Get the SVG URL
-        const url = getKanjiVgUrl(kanji);
+        const url = await getKanjiVgUrl(kanji);
         
         if (!url) {
-          setError('Stroke order not available');
+          setError('No stroke order data available for this kanji');
           setLoading(false);
           return;
         }
@@ -42,15 +42,11 @@ export default function StrokeOrderDisplay({ kanji }: StrokeOrderDisplayProps) {
         
         if (!response.ok) {
           // If we get a 404, the kanji might not be in the KanjiVG database
-          if (response.status === 404) {
-            setError(`Stroke order not available for ${kanji}`);
-          } else {
-            setError(`Failed to fetch stroke order: ${response.status}`);
-          }
+          setError('No stroke order data available for this kanji');
           setLoading(false);
           return;
         }
-        
+
         const svgText = await response.text();
         setSvgContent(svgText);
         setLoading(false);
@@ -63,7 +59,7 @@ export default function StrokeOrderDisplay({ kanji }: StrokeOrderDisplayProps) {
         }, 100);
       } catch (err) {
         console.error('Error fetching stroke order:', err);
-        setError('Failed to load stroke order');
+        setError('Error loading stroke order data');
         setLoading(false);
       }
     }
@@ -134,16 +130,20 @@ export default function StrokeOrderDisplay({ kanji }: StrokeOrderDisplayProps) {
     );
   }
 
-  if (error || !svgContent) {
+  if (error) {
     return (
       <div className={styles.strokeOrderError}>
-        <p>{error || 'Stroke order not available'}</p>
+        <p>{error}</p>
         {/* Fallback display - just show the kanji character */}
         <div className={styles.fallbackKanji}>
           {kanji}
         </div>
       </div>
     );
+  }
+
+  if (!svgContent) {
+    return <div>Loading stroke order...</div>;
   }
 
   return (

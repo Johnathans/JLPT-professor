@@ -14,8 +14,11 @@ export default function N4KanjiListPage() {
 
   const filteredKanji = n4KanjiComplete.filter(kanji => 
     kanji.kanji.includes(searchQuery) ||
-    kanji.reading.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    kanji.meaning.toLowerCase().includes(searchQuery.toLowerCase())
+    kanji.onyomi.some(r => r.toLowerCase().includes(searchQuery.toLowerCase())) ||
+    kanji.kunyomi.some(r => r.toLowerCase().includes(searchQuery.toLowerCase())) ||
+    (Array.isArray(kanji.meaning) ? 
+      kanji.meaning.some(m => m.toLowerCase().includes(searchQuery.toLowerCase())) :
+      kanji.meaning.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   const totalPages = Math.ceil(filteredKanji.length / ITEMS_PER_PAGE);
@@ -102,7 +105,7 @@ export default function N4KanjiListPage() {
                   {kanji.kanji}
                 </td>
                 <td className={`${styles.tableCell} ${styles.kanaCell}`}
-                  dangerouslySetInnerHTML={{ __html: kanji.reading }}
+                  dangerouslySetInnerHTML={{ __html: kanji.onyomi.join(', ') + ' / ' + kanji.kunyomi.join(', ') }}
                 />
                 <td className={`${styles.tableCell} ${styles.meaningCell}`}>
                   {kanji.meaning}

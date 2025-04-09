@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState, use } from 'react';
-import { n3KanjiComplete } from '@/data/n3-kanji-complete';
-import { Word } from '@/types/word';
+import { N3_KANJI } from '@/data/jlpt-kanji-updated';
+import { Word, ExampleSentence } from '@/types/word';
 import Link from 'next/link';
 import styles from '@/styles/kanji-list.module.css';
 import StrokeOrderDisplay from '@/components/StrokeOrderDisplay';
@@ -10,7 +10,7 @@ import KanjiAudioPlayer from '@/components/KanjiAudioPlayer';
 import n3KanjiRaw from '@/data/n3-kanji-standardized.json';
 
 type Props = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>;
 }
 
 export default function WordDetailPage({ params }: Props) {
@@ -26,175 +26,172 @@ export default function WordDetailPage({ params }: Props) {
   useEffect(() => {
     const decodedSlug = decodeURIComponent(resolvedParams.slug);
     
-    const foundKanji = n3KanjiComplete.find(k => k.kanji === decodedSlug);
+    const foundKanji = N3_KANJI.find(k => k.kanji === decodedSlug);
     const rawKanji = n3KanjiRaw.n3_kanji.find(k => k.kanji === decodedSlug);
 
     if (foundKanji && rawKanji) {
       setRawKanjiData(rawKanji);
       
+      // Create reading text from onyomi and kunyomi
+      const onyomiText = foundKanji.onyomi?.length > 0 ? `On: ${foundKanji.onyomi.join(', ')}` : '';
+      const kunyomiText = foundKanji.kunyomi?.length > 0 ? `Kun: ${foundKanji.kunyomi.join(', ')}` : '';
+      const readingText = [onyomiText, kunyomiText].filter(Boolean).join(' ');
+
+      // Get primary meaning
+      const primaryMeaning = Array.isArray(foundKanji.meaning) 
+        ? foundKanji.meaning[0] 
+        : typeof foundKanji.meaning === 'string' 
+          ? foundKanji.meaning.split(',')[0].trim()
+          : '';
+      
+      // Convert examples to ExampleSentence format
+      const formattedExamples: ExampleSentence[] = foundKanji.examples 
+        ? foundKanji.examples.map(example => ({
+            japanese: typeof example === 'string' ? example : example.japanese,
+            romaji: '',
+            english: typeof example === 'string' ? '' : example.english
+          }))
+        : [];
+      
       const wordDetail: Word = {
+        id: resolvedParams.slug,
         kanji: foundKanji.kanji,
-        kana: foundKanji.reading,
-        meaning: foundKanji.meaning,
+        kana: readingText,
+        romaji: readingText,
+        meaning: Array.isArray(foundKanji.meaning) ? foundKanji.meaning.join(', ') : foundKanji.meaning,
         type: 'kanji',
-        examples: [
-          {
-            japanese: `これは${foundKanji.kanji}です。`,
-            english: `This is ${foundKanji.meaning.split(',')[0]}.`
-          },
-          {
-            japanese: `私は${foundKanji.kanji}が好きです。`,
-            english: `I like ${foundKanji.meaning.split(',')[0]}.`
-          }
-        ]
+        examples: formattedExamples
       };
-      
+
       setWord(wordDetail);
-      
-      const related = n3KanjiComplete
+      setLoading(false);
+      setError(null);
+
+      // Find related kanji based on similar meanings or readings
+      const relatedKanji = N3_KANJI
         .filter(k => k.kanji !== foundKanji.kanji)
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 4);
-      
-      setRelatedWords(related.map(k => ({
-        kanji: k.kanji,
-        kana: k.reading,
-        meaning: k.meaning,
-        type: 'kanji'
-      })));
+        .filter(k => {
+          const kMeaning = Array.isArray(k.meaning) ? k.meaning.join(' ') : k.meaning;
+          const fMeaning = Array.isArray(foundKanji.meaning) ? foundKanji.meaning.join(' ') : foundKanji.meaning;
+          
+          // Check for shared readings
+          const sharedOnyomi = k.onyomi?.some(reading => foundKanji.onyomi?.includes(reading));
+          const sharedKunyomi = k.kunyomi?.some(reading => foundKanji.kunyomi?.includes(reading));
+          
+          // Check for similar meanings
+          const similarMeaning = kMeaning.toLowerCase().includes(primaryMeaning.toLowerCase()) ||
+                               fMeaning.toLowerCase().includes(Array.isArray(k.meaning) ? k.meaning[0].toLowerCase() : k.meaning.toLowerCase());
+          
+          return sharedOnyomi || sharedKunyomi || similarMeaning;
+        })
+        .slice(0, 5)
+        .map(k => {
+          const kMeaning = Array.isArray(k.meaning) ? k.meaning[0] : k.meaning.split(',')[0].trim();
+          const kOnyomi = k.onyomi?.length > 0 ? `On: ${k.onyomi.join(', ')}` : '';
+          const kKunyomi = k.kunyomi?.length > 0 ? `Kun: ${k.kunyomi.join(', ')}` : '';
+          const kReadingText = [kOnyomi, kKunyomi].filter(Boolean).join(' ');
+          
+          return {
+            id: k.kanji,
+            kanji: k.kanji,
+            kana: kReadingText,
+            romaji: kReadingText,
+            meaning: kMeaning,
+            type: 'kanji'
+          } as Word;
+        });
+
+      setRelatedWords(relatedKanji);
     } else {
-      setError('Word not found');
+      setWord(null);
+      setLoading(false);
+      setError('Kanji not found');
     }
-    
-    setLoading(false);
   }, [resolvedParams.slug]);
 
   if (loading) {
     return (
-      <div className={styles.container}>
-        <div className={styles.loadingContainer}>
-          <div className={styles.loadingSpinner}></div>
-          <p>Loading word details...</p>
-        </div>
+      <div className={styles.loadingContainer}>
+        <div className={styles.loadingSpinner}></div>
+        <p>Loading kanji details...</p>
       </div>
     );
   }
 
   if (error || !word) {
     return (
-      <div className={styles.container}>
-        <div className={styles.errorMessage}>
-          <h2>Error</h2>
-          <p>{error || 'Word not found'}</p>
-          <Link href="/n3-kanji-list" className={styles.backLink}>
-            ← Back to N3 Kanji List
-          </Link>
-        </div>
+      <div className={styles.errorContainer}>
+        <h1>Error</h1>
+        <p>{error || 'Failed to load kanji details'}</p>
+        <Link href="/n3-kanji-list" className={styles.backLink}>
+          Back to Kanji List
+        </Link>
       </div>
     );
   }
 
+  const foundKanji = N3_KANJI.find(k => k.kanji === word.kanji);
+
   return (
-    <div className={styles.container}>
-      <div className={styles.wordDetailHeader}>
+    <div className={styles.kanjiDetailContainer}>
+      <div className={styles.kanjiHeader}>
         <Link href="/n3-kanji-list" className={styles.backLink}>
-          ← Back to N3 Kanji List
+          ← Back to Kanji List
         </Link>
-        <h1 className={styles.wordDetailTitle}>
-          <span className={styles.kanjiHeading}>{word.kanji}</span>
-          <span className={styles.kanaHeading} dangerouslySetInnerHTML={{ __html: word.kana }}></span>
-        </h1>
-        <p className={styles.wordDetailMeaning}>{word.meaning}</p>
+        <h1 className={styles.kanjiTitle}>{word.kanji}</h1>
+        <div className={styles.kanjiMeaning}>{word.meaning}</div>
+        <div className={styles.kanjiReadings}>{word.kana}</div>
       </div>
 
-      <div className={styles.wordDetailCard}>
-        <div className={styles.wordDetailSection}>
-          <h2>Details</h2>
-          <div className={styles.wordDetailGrid}>
-            <div className={styles.wordDetailItem}>
-              <span className={styles.wordDetailLabel}>Type:</span>
-              <span className={styles.wordDetailValue}>{word.type}</span>
-            </div>
-            <div className={styles.wordDetailItem}>
-              <span className={styles.wordDetailLabel}>JLPT Level:</span>
-              <span className={styles.wordDetailValue}>N3</span>
-            </div>
-            <div className={styles.wordDetailItem}>
-              <span className={styles.wordDetailLabel}>Kanji:</span>
-              <span className={styles.wordDetailValue}>{word.kanji}</span>
-            </div>
-            <div className={styles.wordDetailItem}>
-              <span className={styles.wordDetailLabel}>Reading:</span>
-              <span className={styles.wordDetailValue} dangerouslySetInnerHTML={{ __html: word.kana }}></span>
-            </div>
+      <div className={styles.kanjiContent}>
+        {word.kanji && (
+          <div className={styles.strokeOrder}>
+            <h2>Stroke Order</h2>
+            <StrokeOrderDisplay kanji={word.kanji} />
           </div>
-        </div>
+        )}
 
-        {rawKanjiData && (
-          <div className={styles.wordDetailSection}>
-            <KanjiAudioPlayer
+        {word.kanji && foundKanji && (
+          <div className={styles.audioSection}>
+            <h2>Audio</h2>
+            <KanjiAudioPlayer 
               kanji={word.kanji}
-              onyomi={rawKanjiData.onyomi}
-              kunyomi={rawKanjiData.kunyomi.map((k: string) => k.replace(/\(.*?\)/g, ''))}
+              onyomi={foundKanji.onyomi || []}
+              kunyomi={foundKanji.kunyomi || []}
             />
           </div>
         )}
 
-        <div className={styles.wordDetailSection}>
-          <h2>Example Sentences</h2>
-          {word.examples.length > 0 ? (
-            <ul className={styles.exampleList}>
+        {word.examples && word.examples.length > 0 && (
+          <div className={styles.exampleSection}>
+            <h2>Example Usage</h2>
+            <div className={styles.examples}>
               {word.examples.map((example, index) => (
-                <li key={index} className={styles.exampleItem}>
-                  <div className={styles.exampleJapanese}>{example.japanese}</div>
-                  <div className={styles.exampleEnglish}>{example.english}</div>
-                </li>
+                <div key={index} className={styles.example}>
+                  <div className={styles.japanese}>{example.japanese}</div>
+                  <div className={styles.romaji}>{example.romaji}</div>
+                  <div className={styles.english}>{example.english}</div>
+                </div>
               ))}
-            </ul>
-          ) : (
-            <div className="alert alert-info" role="alert">
-              No examples found for "{word.kanji}"
             </div>
-          )}
-        </div>
-
-        <div className={styles.wordDetailSection}>
-          <h2>Kanji Breakdown</h2>
-          <p>
-            The kanji "{word.kanji}" is commonly used in JLPT N3 vocabulary. 
-            Understanding its components and stroke order will help you master it.
-          </p>
-          <div className={styles.strokeOrderSection}>
-            <StrokeOrderDisplay kanji={word.kanji} />
           </div>
-        </div>
-
-        <div className={styles.wordDetailSection}>
-          <h2>Study Tips</h2>
-          <p>
-            To memorize this kanji effectively:
-          </p>
-          <ul className={styles.studyTipsList}>
-            <li>Practice writing it multiple times, paying attention to stroke order</li>
-            <li>Create flashcards with the kanji on one side and its readings and meanings on the other</li>
-            <li>Look for this kanji in real Japanese text to reinforce your memory</li>
-            <li>Create mnemonics that connect the kanji's shape to its meaning</li>
-          </ul>
-        </div>
+        )}
 
         {relatedWords.length > 0 && (
-          <div className={styles.wordDetailSection}>
-            <h2>Other N3 Kanji</h2>
-            <div className={styles.relatedWordsList}>
-              {relatedWords.map((relatedWord, index) => (
-                <Link 
-                  key={index}
-                  href={`/n3-kanji-list/${relatedWord.kanji}`}
-                  className={styles.relatedWordCard}
+          <div className={styles.relatedSection}>
+            <h2>Related Kanji</h2>
+            <div className={styles.relatedGrid}>
+              {relatedWords.map((related) => (
+                <Link
+                  key={related.id}
+                  href={`/n3-kanji-list/${related.kanji}`}
+                  className={styles.relatedCard}
                 >
-                  <div className={styles.relatedWordKanji}>{relatedWord.kanji}</div>
-                  <div className={styles.relatedWordKana} dangerouslySetInnerHTML={{ __html: relatedWord.kana }}></div>
-                  <div className={styles.relatedWordMeaning}>{relatedWord.meaning}</div>
+                  <div className={styles.relatedKanji}>{related.kanji}</div>
+                  <div className={styles.relatedInfo}>
+                    <div className={styles.relatedMeaning}>{related.meaning}</div>
+                    <div className={styles.relatedReading}>{related.kana}</div>
+                  </div>
                 </Link>
               ))}
             </div>

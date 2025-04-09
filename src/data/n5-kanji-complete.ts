@@ -5,28 +5,32 @@
  */
 
 import { N4_KANJI, N3_KANJI, N2_KANJI, N1_KANJI } from '@/data/jlpt-kanji';
-import n5KanjiRaw from './n5-kanji-new.json';
-
-export interface KanjiData {
-  kanji: string;
-  reading: string;
-  meaning: string;
-  level: string;
-}
+import { ExampleSentence, KanjiData } from '@/types/word';
+import n5KanjiRaw from './n5-kanji.json';
 
 // Convert the raw JSON data to our KanjiData format
-export const n5KanjiComplete: KanjiData[] = n5KanjiRaw.n5_kanji.map(k => {
-  const onyomi = k.onyomi.length > 0 ? `<span class="onyomi">On: ${k.onyomi.join(', ')}</span>` : '';
-  const kunyomi = k.kunyomi.length > 0 ? `<span class="kunyomi">Kun: ${k.kunyomi.join(', ')}</span>` : '';
-  const reading = [onyomi, kunyomi].filter(Boolean).join(' ');
-  
-  return {
-    kanji: k.kanji,
-    reading: reading || '(No reading available)',
-    meaning: k.meaning.join(', '),
-    level: 'N5'
-  };
-});
+export const n5KanjiComplete: KanjiData[] = n5KanjiRaw.map(k => ({
+  kanji: k.kanji,
+  onyomi: k.readings_on || [],
+  kunyomi: k.readings_kun || [],
+  meaning: k.meanings,
+  level: 'N5',
+  type: 'general',
+  usefulness: (() => {
+    // Basic kanji used in daily life get higher scores
+    if (['日', '一', '人', '大', '本', '中', '上', '下', '生', '時'].includes(k.kanji)) {
+      return 10;
+    }
+    // Common kanji get medium scores
+    if (['山', '川', '田', '木', '火', '水', '金', '土'].includes(k.kanji)) {
+      return 8;
+    }
+    // Default score for other N5 kanji
+    return 6;
+  })(),
+  usefulnessDescription: 'Common in basic Japanese texts',
+  examples: []
+}));
 
 /**
  * Helper function to get JLPT level for a kanji

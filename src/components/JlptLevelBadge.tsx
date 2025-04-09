@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { getJlptLevel } from '@/services/jisho-service';
-import { getJlptLevelForKanji } from '@/data/jlpt-kanji';
+import { getJlptLevelForKanji } from '@/utils/jlpt-utils';
 import { n5WordsComplete as N5_WORDS } from '@/data/n5-words-complete';
 import { n4WordsComplete as N4_WORDS } from '@/data/n4-words-complete';
 import styles from '@/styles/word-detail.module.css';
-import { KanjiData } from '@/data/jlpt-kanji-complete';
+import { KanjiData } from '@/types/word';
 
 interface JlptLevelBadgeProps {
   word: string | KanjiData;

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { n5KanjiComplete as N5_KANJI } from '@/data/n5-kanji-complete';
+import { N5_KANJI } from '@/data/jlpt-kanji-updated';
 import styles from '@/styles/kanji-list.module.css';
 import Link from 'next/link';
 import JlptLevelBadge from '@/components/JlptLevelBadge';
@@ -12,11 +12,15 @@ export default function N5KanjiListPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const filteredKanji = N5_KANJI.filter(kanji => 
-    kanji.kanji.includes(searchQuery) ||
-    kanji.reading.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    kanji.meaning.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredKanji = N5_KANJI.filter(kanji => {
+    const onyomiStr = kanji.onyomi?.join(' ').toLowerCase() || '';
+    const kunyomiStr = kanji.kunyomi?.join(' ').toLowerCase() || '';
+    const readings = `${onyomiStr} ${kunyomiStr}`;
+    const meanings = Array.isArray(kanji.meaning) ? kanji.meaning.join(' ') : kanji.meaning;
+    return kanji.kanji.includes(searchQuery) ||
+           readings.includes(searchQuery.toLowerCase()) ||
+           meanings.toLowerCase().includes(searchQuery.toLowerCase())
+  });
 
   const totalPages = Math.ceil(filteredKanji.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -27,29 +31,57 @@ export default function N5KanjiListPage() {
   return (
     <div className={styles.container}>
       <div className={styles.heroWrapper}>
-        <div className={styles.heroContent}>
-          <h1 className={styles.title}>JLPT N5 Kanji</h1>
-          <p className={styles.subtitle}>
-            Master the foundational Japanese kanji required for the JLPT N5 level. 
-            This comprehensive list covers essential characters for basic daily reading and writing.
-          </p>
-          <div className={styles.actionButtons}>
-            <Link href="/n5-kanji-list/flashcards" className={styles.flashcardButton}>
-              <svg className={styles.flashcardIcon} width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="2" />
-                <path d="M3 10H21" stroke="currentColor" strokeWidth="2" />
-              </svg>
-              Start Flashcard Learning
-            </Link>
-          </div>
-          <div className={styles.stats}>
-            <div className={styles.statItem}>
-              <span className={styles.statValue}>{totalKanji}</span>
-              <span className={styles.statLabel}>Total Kanji</span>
+        <div className={`${styles.heroContent} container`}>
+          <div className={styles.heroLeft}>
+            <div className={styles.heroLeftContent}>
+              <h1 className={styles.title}>JLPT N5 Kanji</h1>
+              <p className={styles.subtitle}>
+                Master the foundational Japanese kanji required for the JLPT N5 level. 
+                This comprehensive list covers essential characters for basic daily reading and writing.
+              </p>
+              
+              <div className={styles.stats}>
+                <div className={styles.statItem}>
+                  <span className={styles.statValue}>{totalKanji}</span>
+                  <span className={styles.statLabel}>Total Kanji</span>
+                </div>
+                <div className={styles.statItem}>
+                  <span className={styles.statValue}>N5</span>
+                  <span className={styles.statLabel}>JLPT Level</span>
+                </div>
+              </div>
+
+              <div className={styles.actionButtons}>
+                <Link href="/n5-kanji-list/flashcards" className={styles.flashcardButton}>
+                  <svg className={styles.flashcardIcon} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="2" />
+                    <path d="M3 10H21" stroke="currentColor" strokeWidth="2" />
+                  </svg>
+                  Start Flashcard Learning
+                </Link>
+              </div>
             </div>
-            <div className={styles.statItem}>
-              <span className={styles.statValue}>N5</span>
-              <span className={styles.statLabel}>JLPT Level</span>
+          </div>
+
+          <div className={styles.heroRight}>
+            <div className={styles.kanjiGrid}>
+              {N5_KANJI.slice(0, 9).map((kanji) => (
+                <Link 
+                  href={`/n5-kanji-list/${encodeURIComponent(kanji.kanji)}`} 
+                  key={kanji.kanji}
+                  className={styles.kanjiGridItem}
+                >
+                  <span className={styles.kanji}>{kanji.kanji}</span>
+                  <span className={styles.meaning}>
+                    {typeof kanji.meaning === 'string' ? 
+                      (kanji.meaning as string).split(',')[0].trim() :
+                      Array.isArray(kanji.meaning) && kanji.meaning.length > 0 ?
+                        (kanji.meaning[0] as string).trim() :
+                        ''
+                    }
+                  </span>
+                </Link>
+              ))}
             </div>
           </div>
         </div>
@@ -98,14 +130,28 @@ export default function N5KanjiListPage() {
                 <td className={`${styles.tableCell} ${styles.kanjiCell}`}>
                   {kanji.kanji}
                 </td>
-                <td className={`${styles.tableCell} ${styles.kanaCell}`}
-                  dangerouslySetInnerHTML={{ __html: kanji.reading }}
-                />
+                <td className={`${styles.tableCell} ${styles.kanaCell}`}>
+                  {kanji.onyomi?.length > 0 && (
+                    <span className="onyomi">On: {kanji.onyomi.join(', ')}</span>
+                  )}
+                  {kanji.onyomi?.length > 0 && kanji.kunyomi?.length > 0 && ' '}
+                  {kanji.kunyomi?.length > 0 && (
+                    <span className="kunyomi">Kun: {kanji.kunyomi.join(', ')}</span>
+                  )}
+                </td>
                 <td className={`${styles.tableCell} ${styles.meaningCell}`}>
-                  {kanji.meaning}
+                  {typeof kanji.meaning === 'string' ? 
+                    kanji.meaning :
+                    Array.isArray(kanji.meaning) ? 
+                      kanji.meaning.join(', ') :
+                      ''
+                  }
                 </td>
                 <td className={`${styles.tableCell} ${styles.typeCell}`}>
-                  <JlptLevelBadge word={kanji} />
+                  <JlptLevelBadge word={{
+                    ...kanji,
+                    level: 'N5'
+                  }} />
                 </td>
                 <td className={`${styles.tableCell} ${styles.actionCell}`}>
                   <Link

@@ -1,18 +1,19 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, use } from 'react';
 import { n5Adjectives } from '@/data/n5-adjectives';
 import { Word } from '@/types/word';
 import Link from 'next/link';
-import styles from '@/styles/word-detail.module.css';
+import styles from '@/styles/kanji-list.module.css';
 import { generateWordSlug } from '@/utils/url';
 
 type Props = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>;
 }
 
 export default function AdjectiveDetailPage({ params }: Props) {
-  const resolvedParams = params;
+  // Unwrap the params promise at the component level
+  const resolvedParams = use(params);
   
   const [word, setWord] = useState<Word | null>(null);
   const [loading, setLoading] = useState(true);

@@ -1,58 +1,74 @@
+'use client';
+
+import { use } from 'react';
 import Link from 'next/link';
 import styles from './session.module.css';
 import { ChevronLeft, Play, GraduationCap } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 interface Question {
   id: number;
-  type: 'true-false' | 'multiple-choice';
-  question: string;
-  options?: { id: string; text: string }[];
   audioUrl: string;
+  questionText: string;
+  options: string[];
+  correctAnswer: number;
 }
 
-// This would come from your database/API
-const mockQuestion: Question = {
-  id: 1,
-  type: 'multiple-choice',
-  question: 'What is the woman talking about?',
-  options: [
-    { id: 'A', text: 'Her hometown' },
-    { id: 'B', text: 'Where she currently lives' },
-    { id: 'C', text: 'A place she visited' },
-    { id: 'D', text: 'Where she wants to go' }
-  ],
-  audioUrl: '/audio/listening/sample.mp3'
-};
+function getMockQuestion(): Question {
+  return {
+    id: 1,
+    audioUrl: '/audio/n5-listening-1.mp3',
+    questionText: 'What is the woman asking about?',
+    options: [
+      'The time of the meeting',
+      'The location of the office',
+      'When the man will arrive',
+      'If the man has finished his work'
+    ],
+    correctAnswer: 2
+  };
+}
 
-export default function ListeningSession({ params }: { params: { sessionId: string } }) {
+type Props = {
+  params: Promise<{ sessionId: string }>;
+}
+
+export default function ListeningSession({ params }: Props) {
+  const resolvedParams = use(params);
+  const mockQuestion = getMockQuestion();
+
   return (
     <div className={styles.pageWrapper}>
       <div className={styles.contentWrapper}>
-        <div className={styles.mainContent}>
-          <aside>
-            <header className={styles.sessionHeader}>
-              <Link href="/n5-listening" className={styles.backLink}>
-                <ChevronLeft size={20} />
-                Back to Listening Practice
-              </Link>
-              
-              <div className={styles.stats}>
-                <div className={styles.stat}>
-                  <span className={styles.statValue}>1/3</span>
-                  <span className={styles.statLabel}>Plays</span>
-                </div>
-                <div className={styles.stat}>
-                  <span className={styles.statValue}>0.75×</span>
-                  <span className={styles.statLabel}>Speed</span>
-                </div>
-              </div>
+        <header className={styles.header}>
+          <div className={styles.headerLeft}>
+            <Link href="/n5-listening" className={styles.backButton}>
+              <ChevronLeft size={24} />
+              <span>Back to Lessons</span>
+            </Link>
+          </div>
+          
+          <div className={styles.headerCenter}>
+            <h1 className={styles.title}>Listening Practice</h1>
+            <div className={styles.sessionInfo}>
+              <span className={styles.sessionId}>Session {resolvedParams.sessionId}</span>
+              <span className={styles.divider}>•</span>
+              <span className={styles.questionCount}>Question 1 of 5</span>
+            </div>
+          </div>
+          
+          <div className={styles.headerRight}>
+            <Link href="/n5-learning-path" className={styles.pathButton}>
+              <GraduationCap size={20} />
+              <span>Learning Path</span>
+            </Link>
+          </div>
+        </header>
 
-              <div className={styles.levelBadge}>
-                <GraduationCap size={16} />
-                JLPT N5
-              </div>
-            </header>
-          </aside>
+        <div className={styles.mainContent}>
+          <div className={styles.progressBar}>
+            <div className={styles.progressFill} style={{ width: '20%' }}></div>
+          </div>
 
           <main className={styles.questionArea}>
             <div className={styles.audioPlayer}>
@@ -62,33 +78,15 @@ export default function ListeningSession({ params }: { params: { sessionId: stri
             </div>
 
             <div className={styles.questionCard}>
-              <h2 className={styles.question}>{mockQuestion.question}</h2>
+              <h2 className={styles.question}>{mockQuestion.questionText}</h2>
 
               <div className={styles.options}>
-                {mockQuestion.options?.map((option) => (
-                  <button key={option.id} className={styles.optionButton}>
-                    <span className={styles.optionLabel}>{option.id}</span>
-                    {option.text}
+                {mockQuestion.options.map((option, index) => (
+                  <button key={index} className={styles.optionButton}>
+                    <span className={styles.optionLabel}>{String.fromCharCode(65 + index)}</span>
+                    {option}
                   </button>
                 ))}
-              </div>
-
-              <div className={styles.controls}>
-                <button className={styles.controlButton}>
-                  Replay Audio
-                </button>
-                <button className={styles.controlButton}>
-                  Show Text
-                </button>
-              </div>
-
-              <div className={styles.actionButtons}>
-                <button className={styles.skipButton}>
-                  Skip
-                </button>
-                <button className={styles.submitButton}>
-                  Submit
-                </button>
               </div>
             </div>
           </main>

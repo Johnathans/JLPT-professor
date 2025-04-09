@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 import { metadata } from './metadata'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import Head from 'next/head'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -31,6 +32,9 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <Head>
+        <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
+      </Head>
       <body className={inter.className}>
         <nav className="navbar navbar-expand-lg navbar-light">
           <div className="container">
@@ -153,10 +157,10 @@ export default function RootLayout({
             </div>
           </div>
         </nav>
-        <main>
+        <main className="flex-grow-1 d-flex flex-column">
           {children}
         </main>
-        <footer className={`py-4 border-top${!isAuthPage ? ' mt-5' : ''}`}>
+        <footer className="footer py-4 border-top">
           <div className="container">
             <div className="row">
               <div className="col-md-6">
@@ -171,19 +175,19 @@ export default function RootLayout({
               <div className="col-md-3">
                 <h5>JLPT Levels</h5>
                 <ul className="list-unstyled">
-                  <li><Link href="/n5-kanji-list" className={styles.footerLink}>N5 (Beginner)</Link></li>
-                  <li><Link href="/n4-kanji-list" className={styles.footerLink}>N4 (Basic)</Link></li>
-                  <li><Link href="/n3-kanji-list" className={styles.footerLink}>N3 (Intermediate)</Link></li>
-                  <li><Link href="/n2-kanji-list" className={styles.footerLink}>N2 (Advanced)</Link></li>
-                  <li><Link href="/n1-kanji-list" className={styles.footerLink}>N1 (Expert)</Link></li>
+                  <li><Link href="/n5-kanji-list">N5 (Beginner)</Link></li>
+                  <li><Link href="/n4-kanji-list">N4 (Basic)</Link></li>
+                  <li><Link href="/n3-kanji-list">N3 (Intermediate)</Link></li>
+                  <li><Link href="/n2-kanji-list">N2 (Advanced)</Link></li>
+                  <li><Link href="/n1-kanji-list">N1 (Expert)</Link></li>
                 </ul>
               </div>
               <div className="col-md-3">
                 <h5>Resources</h5>
                 <ul className="list-unstyled">
-                  <li><Link href="/contact" className="text-decoration-none">Contact</Link></li>
-                  <li><Link href="/privacy" className="text-decoration-none">Privacy Policy</Link></li>
-                  <li><Link href="/terms" className="text-decoration-none">Terms of Service</Link></li>
+                  <li><Link href="/contact">Contact</Link></li>
+                  <li><Link href="/privacy">Privacy Policy</Link></li>
+                  <li><Link href="/terms">Terms of Service</Link></li>
                 </ul>
               </div>
             </div>

@@ -122,4 +122,17 @@ function toRomajiInternal(text: string): string {
   return romaji;
 }
 
-module.exports = { toRomaji: toRomajiInternal };
+export function toRomaji(text: string): string {
+  // TODO: Implement proper romaji conversion
+  return toRomajiInternal(text);
+}
+
+export function toHiragana(text: string): string {
+  // TODO: Implement proper hiragana conversion
+  return text;
+}
+
+export function toKatakana(text: string): string {
+  // TODO: Implement proper katakana conversion
+  return text;
+}

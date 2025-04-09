@@ -1,215 +1,102 @@
-import n5VocabPart1 from '@/data/n5-vocabulary-part1.json';
-import n5VocabPart2 from '@/data/n5-vocabulary-part2.json';
-import n5VocabPart3 from '@/data/n5-vocabulary-part3.json';
-import n5VocabPart4 from '@/data/n5-vocabulary-part4.json';
+import { Word } from '@/types/word';
+import { n5WordsComplete } from '@/data/n5-words-complete';
+import { n4WordsComplete } from '@/data/n4-words-complete';
+import { getJlptLevel } from '@/services/jisho-service';
 
-// Combine all N5 vocabulary
-const n5Vocabulary = [
-  ...n5VocabPart1.vocabulary,
-  ...n5VocabPart2.vocabulary,
-  ...n5VocabPart3.vocabulary,
-  ...n5VocabPart4.vocabulary
-].filter(Boolean);
-
-console.log('Combined vocabulary length:', n5Vocabulary.length);
-
-interface StorySegment {
-  text: string;
-  isKanji?: boolean;
-  reading?: string;
-  id?: string;
-}
-
-interface StoryContent {
-  type: string;
-  text?: string;
-  segments?: StorySegment[];
-}
-
-interface VocabItem {
-  japanese: string;
-  hiragana: string;
-  english: string;
-  occurrences: number;
-}
-
-interface KanjiItem {
+interface VocabMatch {
   kanji: string;
-  reading: string;
-  occurrences: number;
+  kana: string;
+  meaning: string;
 }
 
-interface StoryStats {
-  n5_words: number;
-  n5_kanji: number;
-  unique_kanji: Set<string>;
-  word_occurrences: Map<string, number>;
-  vocabulary: VocabItem[];
-  kanji: KanjiItem[];
+interface StoryAnalysis {
+  totalCharacters: number;
+  uniqueCharacters: number;
+  kanjiCount: number;
+  uniqueKanji: string[];
+  kanjiByLevel: {
+    [key: string]: string[];
+  };
+  vocabulary: VocabMatch[];
+  unknownWords: string[];
 }
 
-export function analyzeStory(content: StoryContent[]): StoryStats {
-  if (!content || !Array.isArray(content)) {
-    console.error('Invalid content:', content);
-    return {
-      n5_words: 0,
-      n5_kanji: 0,
-      unique_kanji: new Set(),
-      word_occurrences: new Map(),
-      vocabulary: [],
-      kanji: []
-    };
-  }
-
-  const stats: StoryStats = {
-    n5_words: 0,
-    n5_kanji: 0,
-    unique_kanji: new Set(),
-    word_occurrences: new Map(),
+/**
+ * Analyze Japanese text for kanji usage and vocabulary
+ */
+export async function analyzeStory(text: string): Promise<StoryAnalysis> {
+  // Initialize analysis object
+  const analysis: StoryAnalysis = {
+    totalCharacters: 0,
+    uniqueCharacters: 0,
+    kanjiCount: 0,
+    uniqueKanji: [],
+    kanjiByLevel: {},
     vocabulary: [],
-    kanji: []
+    unknownWords: []
   };
 
-  // Track kanji with readings
-  const kanjiMap = new Map<string, { reading: string; occurrences: number }>();
+  // Early return for empty text
+  if (!text) {
+    return analysis;
+  }
+
+  // Count total characters
+  analysis.totalCharacters = text.length;
+
+  // Get unique characters
+  const uniqueChars = Array.from(new Set(text));
+  analysis.uniqueCharacters = uniqueChars.length;
+
+  // Extract kanji characters
+  const kanjiChars = uniqueChars.filter(char => /[\u4e00-\u9faf]/.test(char));
+  analysis.kanjiCount = kanjiChars.length;
+  analysis.uniqueKanji = kanjiChars;
+
+  // Categorize kanji by JLPT level
+  for (const kanji of kanjiChars) {
+    const level = await getJlptLevel(kanji);
+    if (level) {
+      if (!analysis.kanjiByLevel[level]) {
+        analysis.kanjiByLevel[level] = [];
+      }
+      analysis.kanjiByLevel[level].push(kanji);
+    }
+  }
+
+  // Find vocabulary matches
+  const words = [...n5WordsComplete, ...n4WordsComplete];
+  const foundWords = new Set<string>();
+
+  // First pass: Look for exact matches
+  for (const vocabItem of words) {
+    if (vocabItem.kanji && text.includes(vocabItem.kanji)) {
+      foundWords.add(vocabItem.kanji);
+      analysis.vocabulary.push({
+        kanji: vocabItem.kanji,
+        kana: vocabItem.kana || '',
+        meaning: vocabItem.meaning || ''
+      });
+    }
+    if (vocabItem.kana && text.includes(vocabItem.kana)) {
+      foundWords.add(vocabItem.kana);
+      analysis.vocabulary.push({
+        kanji: vocabItem.kana,
+        kana: vocabItem.kana,
+        meaning: vocabItem.meaning || ''
+      });
+    }
+  }
+
+  // Find unknown words (sequences of kanji not in our vocabulary)
+  const kanjiRegex = /[\u4e00-\u9faf]+/g;
+  const kanjiSequences = text.match(kanjiRegex) || [];
   
-  // Process kanji segments
-  content.forEach(item => {
-    if (item?.segments) {
-      item.segments.forEach(segment => {
-        if (segment?.isKanji && segment.text) {
-          stats.unique_kanji.add(segment.text);
-          
-          // Track kanji with readings
-          const existingKanji = kanjiMap.get(segment.text);
-          if (existingKanji) {
-            existingKanji.occurrences++;
-          } else {
-            kanjiMap.set(segment.text, {
-              reading: segment.reading || '',
-              occurrences: 1
-            });
-          }
-        }
-      });
-    }
-  });
-
-  // Convert kanji map to array
-  stats.kanji = Array.from(kanjiMap.entries()).map(([kanji, info]) => ({
-    kanji,
-    reading: info.reading,
-    occurrences: info.occurrences
-  }));
-
-  stats.n5_kanji = stats.unique_kanji.size;
-  console.log('Found kanji:', Array.from(stats.unique_kanji));
-
-  // Get all text content from the story
-  const textSegments: string[] = [];
-  content.forEach(item => {
-    if (item?.segments) {
-      item.segments.forEach(segment => {
-        if (segment?.text) {
-          textSegments.push(segment.text);
-        }
-      });
-    } else if (item?.text) {
-      textSegments.push(item.text);
-    }
-  });
-
-  const fullText = textSegments.join('');
-  console.log('Full text:', fullText);
-
-  // Create a map for faster word lookup
-  const wordMap = new Map<string, { kanji: string; hiragana: string; english: string }>();
-  n5Vocabulary.forEach(vocabItem => {
-    if (vocabItem?.japanese) {
-      wordMap.set(vocabItem.japanese, {
-        kanji: vocabItem.japanese,
-        hiragana: vocabItem.hiragana || '',
-        english: vocabItem.english || ''
-      });
-    }
-    if (vocabItem?.hiragana) {
-      wordMap.set(vocabItem.hiragana, {
-        kanji: vocabItem.japanese,
-        hiragana: vocabItem.hiragana,
-        english: vocabItem.english || ''
-      });
-    }
-  });
-
-  // Track found vocabulary
-  const vocabMap = new Map<string, { hiragana: string; english: string; occurrences: number }>();
-
-  // Search for words in the text
-  let totalWords = 0;
-  for (const [searchWord, forms] of wordMap) {
-    try {
-      // Escape special regex characters
-      const escapedForm = searchWord.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const regex = new RegExp(escapedForm, 'g');
-      const matches = fullText.match(regex);
-      
-      if (matches) {
-        const count = matches.length;
-        const word = forms.kanji || forms.hiragana;
-        stats.word_occurrences.set(word, (stats.word_occurrences.get(word) || 0) + count);
-        totalWords += count;
-        
-        // Track vocabulary
-        vocabMap.set(word, {
-          hiragana: forms.hiragana,
-          english: forms.english,
-          occurrences: count
-        });
-        
-        console.log(`Found word "${searchWord}" (${word}) ${count} times`);
-      }
-    } catch (e) {
-      console.error(`Error matching word "${searchWord}":`, e);
+  for (const sequence of kanjiSequences) {
+    if (!foundWords.has(sequence)) {
+      analysis.unknownWords.push(sequence);
     }
   }
 
-  // Convert vocab map to array
-  stats.vocabulary = Array.from(vocabMap.entries()).map(([word, info]) => ({
-    japanese: word,
-    hiragana: info.hiragana,
-    english: info.english,
-    occurrences: info.occurrences
-  }));
-
-  stats.n5_words = totalWords;
-  console.log('Total N5 words:', totalWords);
-  console.log('Word occurrences:', Object.fromEntries(stats.word_occurrences));
-
-  return stats;
-}
-
-export function getStoryReadingTime(content: StoryContent[]): number {
-  if (!content || !Array.isArray(content)) {
-    return 0;
-  }
-
-  // Average reading speed for N5 level Japanese (characters per minute)
-  const N5_READING_SPEED = 100;
-
-  // Count total characters in the story
-  const totalChars = content
-    .map(item => {
-      if (!item) return 0;
-      if (item.segments) {
-        return item.segments
-          .filter(Boolean)
-          .map(seg => (seg.text || '').length)
-          .reduce((a, b) => a + b, 0);
-      }
-      return (item.text || '').length;
-    })
-    .reduce((a, b) => a + b, 0);
-
-  console.log('Total characters:', totalChars);
-  return Math.ceil(totalChars / N5_READING_SPEED);
+  return analysis;
 }

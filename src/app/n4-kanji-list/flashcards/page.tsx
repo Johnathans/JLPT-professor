@@ -8,7 +8,7 @@ import Link from 'next/link';
 // Convert the kanji data to flashcard format
 const kanjiFlashcards = n4KanjiComplete.map(kanji => ({
   kanji: kanji.kanji,
-  kana: kanji.reading,
+  kana: kanji.onyomi[0] || kanji.kunyomi[0],
   meaning: kanji.meaning,
   type: 'Kanji (N4)'
 }));

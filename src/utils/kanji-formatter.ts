@@ -14,6 +14,7 @@ interface FormattedKanji {
   reading: string;
   meaning: string;
   level: string;
+  type: string;
   onyomi: string[];
   onyomi_katakana: string[];
   kunyomi: string[];
@@ -42,6 +43,7 @@ export function formatKanjiForDisplay(kanji: StandardizedKanji, level: string): 
     reading,
     meaning: kanji.meaning.join(', '),
     level,
+    type: 'general',
     onyomi: kanji.onyomi,
     onyomi_katakana: kanji.onyomi_katakana,
     kunyomi: kanji.kunyomi,

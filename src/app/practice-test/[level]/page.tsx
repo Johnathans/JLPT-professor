@@ -7,9 +7,9 @@ import { Question, TestSection, TestProgress, TestResult } from '@/types/test';
 import styles from './test.module.css';
 
 interface Props {
-  params: {
+  params: Promise<{
     level: string;
-  };
+  }>;
 }
 
 export default function TestPage({ params }: Props) {

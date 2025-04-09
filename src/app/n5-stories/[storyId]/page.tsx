@@ -8,6 +8,13 @@ import { Modal } from '@/components/Modal';
 import storiesData from '@/data/n5-stories.json';
 import styles from './story.module.css';
 
+interface StoryStats {
+  n5_words: number;
+  n5_kanji: number;
+  estimated_time: number;
+  sentences?: number;
+}
+
 interface ParagraphAudioState {
   isPlaying: boolean;
   audioUrl?: string;
@@ -256,7 +263,9 @@ export default function StoryPage() {
                 <span className={styles.statLabel}>N5 Kanji</span>
               </div>
               <div className={styles.stat}>
-                <span className={styles.statValue}>{story.stats.sentences}</span>
+                <span className={styles.statValue}>
+                  {(story.stats as StoryStats).sentences || '-'}
+                </span>
                 <span className={styles.statLabel}>Sentences</span>
               </div>
               <div className={styles.stat}>

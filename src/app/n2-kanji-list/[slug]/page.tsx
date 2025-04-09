@@ -10,13 +10,11 @@ import KanjiAudioPlayer from '@/components/KanjiAudioPlayer';
 import n2KanjiRaw from '@/data/n2-kanji-standardized.json';
 
 type Props = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>;
 }
 
 export default function WordDetailPage({ params }: Props) {
-  // Unwrap the params promise at the component level
   const resolvedParams = use(params);
-  
   const [word, setWord] = useState<Word | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -32,36 +30,48 @@ export default function WordDetailPage({ params }: Props) {
     if (foundKanji && rawKanji) {
       setRawKanjiData(rawKanji);
       
-      const wordDetail: Word = {
+      const wordDetail: Partial<Word> = {
+        id: resolvedParams.slug,
         kanji: foundKanji.kanji,
         kana: foundKanji.reading,
+        romaji: foundKanji.reading, // Use reading as romaji for now
         meaning: foundKanji.meaning,
         type: 'kanji',
         examples: [
           {
             japanese: `これは${foundKanji.kanji}です。`,
+            romaji: `Kore wa ${foundKanji.kanji} desu.`,
             english: `This is ${foundKanji.meaning.split(',')[0]}.`
           },
           {
             japanese: `私は${foundKanji.kanji}が好きです。`,
+            romaji: `Watashi wa ${foundKanji.kanji} ga suki desu.`,
             english: `I like ${foundKanji.meaning.split(',')[0]}.`
           }
-        ]
+        ],
       };
       
-      setWord(wordDetail);
+      setWord(wordDetail as Word);
       
-      const related = n2KanjiComplete
-        .filter(k => k.kanji !== foundKanji.kanji)
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 4);
-      
-      setRelatedWords(related.map(k => ({
-        kanji: k.kanji,
-        kana: k.reading,
-        meaning: k.meaning,
-        type: 'kanji'
-      })));
+      if (foundKanji.kanji) {
+        const related = n2KanjiComplete
+          .filter(k => 
+            k !== foundKanji && 
+            k.kanji && 
+            (k.kanji.includes(foundKanji.kanji || '') || (foundKanji.kanji || '').includes(k.kanji))
+          )
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 4);
+        
+        setRelatedWords(related.map(k => ({
+          id: k.kanji,
+          kanji: k.kanji,
+          kana: k.reading,
+          romaji: k.reading,
+          meaning: k.meaning,
+          type: 'kanji'
+        })) as Word[]);
+      }
     } else {
       setError('Word not found');
     }
@@ -133,7 +143,7 @@ export default function WordDetailPage({ params }: Props) {
         {rawKanjiData && (
           <div className={styles.wordDetailSection}>
             <KanjiAudioPlayer
-              kanji={word.kanji}
+              kanji={word.kanji || ''}
               onyomi={rawKanjiData.onyomi}
               kunyomi={rawKanjiData.kunyomi.map((k: string) => k.replace(/\(.*?\)/g, ''))}
             />
@@ -142,19 +152,18 @@ export default function WordDetailPage({ params }: Props) {
 
         <div className={styles.wordDetailSection}>
           <h2>Example Sentences</h2>
-          {word.examples.length > 0 ? (
+          {word.examples && word.examples.length > 0 ? (
             <ul className={styles.exampleList}>
               {word.examples.map((example, index) => (
                 <li key={index} className={styles.exampleItem}>
                   <div className={styles.exampleJapanese}>{example.japanese}</div>
+                  <div className={styles.exampleRomaji}>{example.romaji}</div>
                   <div className={styles.exampleEnglish}>{example.english}</div>
                 </li>
               ))}
             </ul>
           ) : (
-            <div className="alert alert-info" role="alert">
-              No examples found for "{word.kanji}"
-            </div>
+            <p>No example sentences available.</p>
           )}
         </div>
 
@@ -165,7 +174,7 @@ export default function WordDetailPage({ params }: Props) {
             Understanding its components and stroke order will help you master it.
           </p>
           <div className={styles.strokeOrderSection}>
-            <StrokeOrderDisplay kanji={word.kanji} />
+            <StrokeOrderDisplay kanji={word.kanji || ''} />
           </div>
         </div>
 
@@ -189,11 +198,10 @@ export default function WordDetailPage({ params }: Props) {
               {relatedWords.map((relatedWord, index) => (
                 <Link 
                   key={index}
-                  href={`/n2-kanji-list/${relatedWord.kanji}`}
+                  href={`/n2-kanji-list/${encodeURIComponent(relatedWord.kanji || '')}`}
                   className={styles.relatedWordCard}
                 >
                   <div className={styles.relatedWordKanji}>{relatedWord.kanji}</div>
-                  <div className={styles.relatedWordKana} dangerouslySetInnerHTML={{ __html: relatedWord.kana }}></div>
                   <div className={styles.relatedWordMeaning}>{relatedWord.meaning}</div>
                 </Link>
               ))}

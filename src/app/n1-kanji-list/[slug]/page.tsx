@@ -1,13 +1,20 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, use } from 'react';
 import { n1WordsComplete } from '@/data/n1-words-complete';
 import { Word } from '@/types/word';
 import Link from 'next/link';
+import StrokeOrderDisplay from '@/components/StrokeOrderDisplay';
 import styles from '@/styles/kanji-list.module.css';
 import { generateWordSlug } from '@/utils/url';
 
-export default function WordDetailPage({ params }: { params: { slug: string } }) {
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export default function WordDetailPage({ params }: Props) {
+  const resolvedParams = use(params);
+  
   const [word, setWord] = useState<Word | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -15,7 +22,7 @@ export default function WordDetailPage({ params }: { params: { slug: string } })
 
   useEffect(() => {
     // Decode the slug
-    const decodedSlug = decodeURIComponent(params.slug);
+    const decodedSlug = decodeURIComponent(resolvedParams.slug);
     
     // Find the word that matches this slug
     const foundWord = n1WordsComplete.find(w => {
@@ -30,7 +37,27 @@ export default function WordDetailPage({ params }: { params: { slug: string } })
     });
 
     if (foundWord) {
-      setWord(foundWord);
+      const wordDetail: Partial<Word> = {
+        id: resolvedParams.slug,
+        kanji: foundWord.kanji,
+        kana: foundWord.kana,
+        romaji: foundWord.kana, // Use kana as romaji for now
+        meaning: foundWord.meaning,
+        type: 'kanji',
+        examples: [
+          {
+            japanese: `これは${foundWord.kanji}です。`,
+            romaji: `Kore wa ${foundWord.kanji} desu.`,
+            english: `This is ${foundWord.meaning.split(',')[0]}.`
+          },
+          {
+            japanese: `私は${foundWord.kanji}が好きです。`,
+            romaji: `Watashi wa ${foundWord.kanji} ga suki desu.`,
+            english: `I like ${foundWord.meaning.split(',')[0]}.`
+          }
+        ],
+      };
+      setWord(wordDetail as Word);
       
       // Find related words (words that share the same kanji)
       if (foundWord.kanji) {
@@ -38,17 +65,28 @@ export default function WordDetailPage({ params }: { params: { slug: string } })
           .filter(w => 
             w !== foundWord && 
             w.kanji && 
-            (w.kanji.includes(foundWord.kanji) || foundWord.kanji.includes(w.kanji))
+            (w.kanji.includes(foundWord.kanji || '') || (foundWord.kanji || '').includes(w.kanji))
           )
           .slice(0, 4); // Limit to 4 related words
-        setRelatedWords(related);
+        
+        // Ensure related words have all required fields for Word type
+        const typedRelatedWords = related.map(w => ({
+          id: w.kanji || w.kana,
+          kanji: w.kanji,
+          kana: w.kana,
+          romaji: w.kana, // Use kana as romaji
+          meaning: w.meaning,
+          type: 'kanji'
+        })) as Word[];
+        
+        setRelatedWords(typedRelatedWords);
       }
     } else {
       setError('Word not found');
     }
     
     setLoading(false);
-  }, [params.slug]);
+  }, [resolvedParams.slug]);
 
   if (loading) {
     return (
@@ -74,18 +112,6 @@ export default function WordDetailPage({ params }: { params: { slug: string } })
       </div>
     );
   }
-
-  // Mock example sentences if none exist
-  const examples = word.examples || [
-    {
-      japanese: `これは${word.kanji || word.kana}です。`,
-      english: `This is ${word.meaning}.`
-    },
-    {
-      japanese: `私は${word.kanji || word.kana}が好きです。`,
-      english: `I like ${word.meaning}.`
-    }
-  ];
 
   return (
     <div className={styles.container}>
@@ -127,19 +153,18 @@ export default function WordDetailPage({ params }: { params: { slug: string } })
 
         <div className={styles.wordDetailSection}>
           <h2>Example Sentences</h2>
-          {examples.length > 0 ? (
+          {word.examples && word.examples.length > 0 ? (
             <ul className={styles.exampleList}>
-              {examples.map((example, index) => (
+              {word.examples.map((example, index) => (
                 <li key={index} className={styles.exampleItem}>
                   <div className={styles.exampleJapanese}>{example.japanese}</div>
+                  <div className={styles.exampleRomaji}>{example.romaji}</div>
                   <div className={styles.exampleEnglish}>{example.english}</div>
                 </li>
               ))}
             </ul>
           ) : (
-            <div className="alert alert-info" role="alert">
-              No examples found for "{word.kanji}"
-            </div>
+            <p>No example sentences available.</p>
           )}
         </div>
 
@@ -153,13 +178,8 @@ export default function WordDetailPage({ params }: { params: { slug: string } })
             
             <div className={styles.strokeOrderSection}>
               <h3 className={styles.strokeOrderTitle}>Stroke Order</h3>
-              <div className={styles.strokeOrderContainer}>
-                {Array.from({ length: Math.min(word.kanji.length * 3, 6) }).map((_, index) => (
-                  <div key={index} className={styles.strokeStep}>
-                    <div className={styles.strokeNumber}>Step {index + 1}</div>
-                    <div className={styles.strokeImage}>{word.kanji}</div>
-                  </div>
-                ))}
+              <div className={styles.strokeOrderDisplay}>
+                <StrokeOrderDisplay kanji={word.kanji || ''} />
               </div>
             </div>
           </div>

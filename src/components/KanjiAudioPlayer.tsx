@@ -55,9 +55,9 @@ export default function KanjiAudioPlayer({ kanji, onyomi, kunyomi }: KanjiAudioP
           <div className={styles.readingGroup}>
             <h4>On'yomi (音読み)</h4>
             <div className={styles.readingButtons}>
-              {onyomi.map((reading) => (
+              {onyomi.map((reading, index) => (
                 <button
-                  key={reading}
+                  key={`onyomi-${reading}-${index}`}
                   onClick={() => generateAudio(reading, 'onyomi')}
                   disabled={loading}
                   className={styles.audioButton}
@@ -73,9 +73,9 @@ export default function KanjiAudioPlayer({ kanji, onyomi, kunyomi }: KanjiAudioP
           <div className={styles.readingGroup}>
             <h4>Kun'yomi (訓読み)</h4>
             <div className={styles.readingButtons}>
-              {kunyomi.map((reading) => (
+              {kunyomi.map((reading, index) => (
                 <button
-                  key={reading}
+                  key={`kunyomi-${reading}-${index}`}
                   onClick={() => generateAudio(reading, 'kunyomi')}
                   disabled={loading}
                   className={styles.audioButton}

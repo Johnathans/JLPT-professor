@@ -1,18 +1,19 @@
 import { createClient } from '@supabase/supabase-js'
-import type { Database } from './database.types'
+import type { Database as SupabaseDatabase } from './database.types'
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config'
 
 if (!SUPABASE_URL) {
-  throw new Error('Missing env.NEXT_PUBLIC_SUPABASE_URL')
+  throw new Error('Missing SUPABASE_URL environment variable')
 }
+
 if (!SUPABASE_ANON_KEY) {
-  throw new Error('Missing env.NEXT_PUBLIC_SUPABASE_ANON_KEY')
+  throw new Error('Missing SUPABASE_ANON_KEY environment variable')
 }
 
 const supabaseUrl = SUPABASE_URL
 const supabaseKey = SUPABASE_ANON_KEY
 
-export const supabase = createClient<Database>(supabaseUrl, supabaseKey)
+export const supabase = createClient<SupabaseDatabase>(supabaseUrl, supabaseKey)
 
 // Helper function to check if we have a user session
 export const getUser = async () => {

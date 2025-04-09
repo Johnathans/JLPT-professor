@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { ALL_JLPT_KANJI } from '@/data/n5-kanji-complete';
+import { ALL_JLPT_KANJI } from '@/utils/jlpt-utils';
 import { n5WordsComplete as N5_WORDS } from '@/data/n5-words-complete';
 import { n4WordsComplete as N4_WORDS } from '@/data/n4-words-complete';
 
@@ -142,9 +142,9 @@ function getLocalJlptWords(level: string, limit: number) {
   
   if (levelNumber === '5') {
     const words = N5_WORDS.slice(0, limit).map(word => ({
-      japanese: [{ word: word.word, reading: word.reading }],
+      japanese: [{ word: word.kanji || word.kana, reading: word.kana }],
       senses: [{ english_definitions: [word.meaning], parts_of_speech: ['Noun'] }],
-      jlpt: [`jlpt-${word.level.toLowerCase()}`]
+      jlpt: [`jlpt-n5`]
     }));
     
     return { data: words };
@@ -152,9 +152,9 @@ function getLocalJlptWords(level: string, limit: number) {
   
   if (levelNumber === '4') {
     const words = N4_WORDS.slice(0, limit).map(word => ({
-      japanese: [{ word: word.word, reading: word.reading }],
+      japanese: [{ word: word.kanji || word.kana, reading: word.kana }],
       senses: [{ english_definitions: [word.meaning], parts_of_speech: ['Noun'] }],
-      jlpt: [`jlpt-${word.level.toLowerCase()}`]
+      jlpt: [`jlpt-n4`]
     }));
     
     return { data: words };
@@ -170,11 +170,20 @@ function getLocalKanjiData(kanji: string) {
   const kanjiData = ALL_JLPT_KANJI.find(k => k.kanji === kanji);
   
   if (kanjiData) {
+    // Handle both types of KanjiData interfaces
+    const reading = 'reading' in kanjiData ? kanjiData.reading : 
+                   (kanjiData.onyomi && kanjiData.onyomi.length > 0 ? kanjiData.onyomi[0] : '');
+    
+    const meaning = 'meaning' in kanjiData && typeof kanjiData.meaning === 'string' ? 
+                   kanjiData.meaning : 
+                   (Array.isArray(kanjiData.meaning) && kanjiData.meaning.length > 0 ? 
+                   kanjiData.meaning[0] : '');
+    
     return {
       data: [{
-        japanese: [{ word: kanjiData.kanji, reading: kanjiData.reading }],
-        senses: [{ english_definitions: [kanjiData.meaning], parts_of_speech: ['Kanji'] }],
-        jlpt: [`jlpt-${kanjiData.level.toLowerCase()}`]
+        japanese: [{ word: kanjiData.kanji, reading: reading }],
+        senses: [{ english_definitions: [meaning], parts_of_speech: ['Kanji'] }],
+        jlpt: [`jlpt-n5`]
       }]
     };
   }
@@ -187,41 +196,28 @@ function getLocalKanjiData(kanji: string) {
  */
 function getLocalWordData(word: string) {
   // Check if it's a common word
-  const n5Word = N5_WORDS.find(w => w.word === word);
+  const n5Word = N5_WORDS.find(w => (w.kanji && w.kanji === word) || w.kana === word);
   if (n5Word) {
     return {
       data: [{
-        japanese: [{ word: n5Word.word, reading: n5Word.reading }],
+        japanese: [{ word: n5Word.kanji || n5Word.kana, reading: n5Word.kana }],
         senses: [{ english_definitions: [n5Word.meaning], parts_of_speech: ['Noun'] }],
-        jlpt: [`jlpt-${n5Word.level.toLowerCase()}`]
+        jlpt: [`jlpt-n5`]
       }]
     };
   }
   
-  const n4Word = N4_WORDS.find(w => w.word === word);
+  const n4Word = N4_WORDS.find(w => (w.kanji && w.kanji === word) || w.kana === word);
   if (n4Word) {
     return {
       data: [{
-        japanese: [{ word: n4Word.word, reading: n4Word.reading }],
+        japanese: [{ word: n4Word.kanji || n4Word.kana, reading: n4Word.kana }],
         senses: [{ english_definitions: [n4Word.meaning], parts_of_speech: ['Noun'] }],
-        jlpt: [`jlpt-${n4Word.level.toLowerCase()}`]
+        jlpt: [`jlpt-n4`]
       }]
     };
   }
   
-  // If it's a single kanji, check our kanji data
-  if (word.length === 1) {
-    const kanjiData = ALL_JLPT_KANJI.find(k => k.kanji === word);
-    if (kanjiData) {
-      return {
-        data: [{
-        japanese: [{ word: kanjiData.kanji, reading: kanjiData.reading }],
-        senses: [{ english_definitions: [kanjiData.meaning], parts_of_speech: ['Kanji'] }],
-        jlpt: [`jlpt-${kanjiData.level.toLowerCase()}`]
-      }]
-      };
-    }
-  }
-  
+  // If not found in our database, return null
   return null;
 }

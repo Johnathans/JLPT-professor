@@ -145,7 +145,7 @@ export default function StudyGuidePage() {
         )}
 
         {/* Weekly Study Plan */}
-        {levelData.studyPlan?.weekly_goals?.length > 0 && (
+        {levelData.studyPlan?.weekly_goals && levelData.studyPlan.weekly_goals.length > 0 && (
           <div className={styles.studyPlan}>
             <h3 className={styles.sectionTitle}>Weekly Study Plan</h3>
             <div className={styles.weeklyGoals}>

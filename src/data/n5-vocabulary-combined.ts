@@ -1,8 +1,8 @@
-const part1Data = require('./n5-vocabulary-part1.json');
-const part2Data = require('./n5-vocabulary-part2.json');
-const part3Data = require('./n5-vocabulary-part3.json');
-const part4Data = require('./n5-vocabulary-part4.json');
-const { toRomaji } = require('../utils/japanese');
+import part1Data from './n5-vocabulary-part1.json';
+import part2Data from './n5-vocabulary-part2.json';
+import part3Data from './n5-vocabulary-part3.json';
+import part4Data from './n5-vocabulary-part4.json';
+import { toRomaji } from '../utils/japanese';
 
 interface Word {
   id: string;
@@ -22,6 +22,7 @@ interface VocabularyEntry {
   romaji?: string;
   type?: string;
   meaning?: string;
+  examples?: any[];
 }
 
 // Helper function to convert vocabulary entries
@@ -71,4 +72,4 @@ function getCombinedVocabulary(): Word[] {
 
 const n5VocabularyCombined = getCombinedVocabulary();
 
-module.exports = { n5VocabularyCombined };
+export { n5VocabularyCombined };

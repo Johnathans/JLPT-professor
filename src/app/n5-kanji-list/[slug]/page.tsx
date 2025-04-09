@@ -8,9 +8,10 @@ import styles from '@/styles/kanji-list.module.css';
 import StrokeOrderDisplay from '@/components/StrokeOrderDisplay';
 import KanjiAudioPlayer from '@/components/KanjiAudioPlayer';
 import n5KanjiRaw from '@/data/n5-kanji-new.json';
+import { KanjiData } from '@/types/kanji';
 
 type Props = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export default function WordDetailPage({ params }: Props) {
@@ -36,18 +37,34 @@ export default function WordDetailPage({ params }: Props) {
       
       // Convert to Word format
       const wordDetail: Word = {
+        id: decodedSlug,
         kanji: foundKanji.kanji,
-        kana: foundKanji.reading,
-        meaning: foundKanji.meaning,
+        kana: (foundKanji as any).reading || '',
+        romaji: (foundKanji as any).reading || '',
+        meaning: typeof foundKanji.meaning === 'string' ? 
+          foundKanji.meaning : 
+          Array.isArray(foundKanji.meaning) ? 
+            foundKanji.meaning.join(', ') : 
+            '',
         type: 'kanji',
         examples: [
           {
             japanese: `これは${foundKanji.kanji}です。`,
-            english: `This is ${foundKanji.meaning.split(',')[0]}.`
+            romaji: `Kore wa ${foundKanji.kanji} desu.`,
+            english: `This is ${typeof foundKanji.meaning === 'string' ? 
+              (foundKanji.meaning as string).split(',')[0] : 
+              Array.isArray(foundKanji.meaning) && foundKanji.meaning.length > 0 ? 
+                foundKanji.meaning[0].split(',')[0] : 
+                foundKanji.kanji}.`
           },
           {
             japanese: `私は${foundKanji.kanji}が好きです。`,
-            english: `I like ${foundKanji.meaning.split(',')[0]}.`
+            romaji: `Watashi wa ${foundKanji.kanji} ga suki desu.`,
+            english: `I like ${typeof foundKanji.meaning === 'string' ? 
+              (foundKanji.meaning as string).split(',')[0] : 
+              Array.isArray(foundKanji.meaning) && foundKanji.meaning.length > 0 ? 
+                (foundKanji.meaning[0] as string).split(',')[0] : 
+                foundKanji.kanji}.`
           }
         ]
       };
@@ -61,9 +78,15 @@ export default function WordDetailPage({ params }: Props) {
         .slice(0, 4); // Limit to 4 related kanji
       
       setRelatedWords(related.map(k => ({
+        id: k.kanji,
         kanji: k.kanji,
-        kana: k.reading,
-        meaning: k.meaning,
+        kana: (k as any).reading || '',
+        romaji: (k as any).reading || '',
+        meaning: typeof k.meaning === 'string' ? 
+          k.meaning : 
+          Array.isArray(k.meaning) ? 
+            k.meaning.join(', ') : 
+            '',
         type: 'kanji'
       })));
     } else {
@@ -134,31 +157,30 @@ export default function WordDetailPage({ params }: Props) {
           </div>
         </div>
 
-        {rawKanjiData && (
+        {word && rawKanjiData && (
           <div className={styles.wordDetailSection}>
             <KanjiAudioPlayer
-              kanji={word.kanji}
-              onyomi={rawKanjiData.onyomi}
-              kunyomi={rawKanjiData.kunyomi.map((k: string) => k.replace(/\(.*?\)/g, ''))}
+              kanji={word.kanji || ''}
+              onyomi={rawKanjiData.onyomi || []}
+              kunyomi={(rawKanjiData.kunyomi || []).map((k: string) => k.replace(/\(.*?\)/g, ''))}
             />
           </div>
         )}
 
         <div className={styles.wordDetailSection}>
           <h2>Example Sentences</h2>
-          {word.examples.length > 0 ? (
+          {word?.examples && word.examples.length > 0 ? (
             <ul className={styles.exampleList}>
               {word.examples.map((example, index) => (
                 <li key={index} className={styles.exampleItem}>
                   <div className={styles.exampleJapanese}>{example.japanese}</div>
+                  <div className={styles.exampleRomaji}>{example.romaji}</div>
                   <div className={styles.exampleEnglish}>{example.english}</div>
                 </li>
               ))}
             </ul>
           ) : (
-            <div className="alert alert-info" role="alert">
-              No examples found for "{word.kanji}"
-            </div>
+            <p>No examples available.</p>
           )}
         </div>
 
@@ -168,8 +190,11 @@ export default function WordDetailPage({ params }: Props) {
             The kanji "{word.kanji}" is commonly used in JLPT N5 vocabulary. 
             Understanding its components and stroke order will help you master it.
           </p>
+          <p className={styles.strokeOrderText}>
+            Stroke Order
+          </p>
           <div className={styles.strokeOrderSection}>
-            <StrokeOrderDisplay kanji={word.kanji} />
+            {word?.kanji && <StrokeOrderDisplay kanji={word.kanji} />}
           </div>
         </div>
 

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import JlptLevelBadge from '@/components/JlptLevelBadge';
 import StrokeOrderDisplay from '@/components/StrokeOrderDisplay';
 import { getJlptLevel } from '@/services/jisho-service';
-import { ALL_JLPT_KANJI } from '@/data/n5-kanji-complete';
+import { ALL_JLPT_KANJI } from '@/utils/jlpt-utils';
 import { n5WordsComplete as N5_WORDS } from '@/data/n5-words-complete';
 import { n4WordsComplete as N4_WORDS } from '@/data/n4-words-complete';
 import styles from '@/styles/word-detail.module.css';
@@ -15,11 +15,14 @@ export default function JlptTestPage() {
   const [apiJlptLevel, setApiJlptLevel] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   
+  // Get KanjiData with level property
+  const kanjiWithLevel = ALL_JLPT_KANJI.filter(k => 'level' in k) as any[];
+  
   // Sample N5 kanji
-  const n5Samples = ALL_JLPT_KANJI.filter(k => k.level === 'N5').slice(0, 10);
+  const n5Samples = kanjiWithLevel.filter(k => k.level === 'N5' || k.level === '5').slice(0, 10);
   
   // Sample N4 kanji
-  const n4Samples = ALL_JLPT_KANJI.filter(k => k.level === 'N4').slice(0, 10);
+  const n4Samples = kanjiWithLevel.filter(k => k.level === 'N4' || k.level === '4').slice(0, 10);
   
   // Sample words
   const wordSamples = [...N5_WORDS.slice(0, 5), ...N4_WORDS.slice(0, 5)];
@@ -42,9 +45,17 @@ export default function JlptTestPage() {
     }
   };
   
-  const handleSampleClick = (word: string) => {
-    setInputWord(word);
-    setTestWord(word);
+  const handleSampleClick = (sample: string) => {
+    setInputWord(sample);
+    setTestWord(sample);
+    
+    // Auto-submit
+    getJlptLevel(sample)
+      .then(level => setApiJlptLevel(level))
+      .catch(error => {
+        console.error('Error fetching JLPT level:', error);
+        setApiJlptLevel(null);
+      });
   };
   
   return (
@@ -136,11 +147,11 @@ export default function JlptTestPage() {
           <div className="flex flex-wrap gap-2">
             {wordSamples.map((word) => (
               <button
-                key={word.word}
-                onClick={() => handleSampleClick(word.word)}
+                key={word.kanji || word.kana}
+                onClick={() => handleSampleClick(word.kanji || word.kana)}
                 className="bg-orange-100 hover:bg-orange-200 text-orange-800 px-3 py-2 rounded"
               >
-                {word.word}
+                {word.kanji || word.kana}
               </button>
             ))}
           </div>

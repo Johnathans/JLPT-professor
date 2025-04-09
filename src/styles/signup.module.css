@@ -1,0 +1,153 @@
+.containerFluid {
+  padding: 0;
+}
+
+.row {
+  margin: 0;
+}
+
+.colLg6 {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .colLg6 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 3rem;
+    width: 50%;
+  }
+}
+
+.col12 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+}
+
+@media (min-width: 992px) {
+  .col12 {
+    padding: 0 3rem;
+  }
+}
+
+.col12ColLg6 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .col12ColLg6 {
+    padding: 0 3rem;
+    width: 50%;
+  }
+}
+
+.mxAuto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mxAutoW100 {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.roundedCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+}
+
+.textWhite {
+  color: white;
+}
+
+.display5 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.fs5 {
+  font-size: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.dFlexFlexColumnGap3 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dFlexAlignItemsCenter {
+  display: flex;
+  align-items: center;
+}
+
+.me3 {
+  margin-right: 1rem;
+}
+
+.dLgNoneTextCenterMb4 {
+  display: block;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 992px) {
+  .dLgNoneTextCenterMb4 {
+    display: none;
+  }
+}
+
+.mxAutoRoundedCircleDFlexAlignItemsCenterJustifyContentCenterMb3 {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.textCenterTextLgStartMb4 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 992px) {
+  .textCenterTextLgStartMb4 {
+    text-align: left;
+  }
+}
+
+.fs2FwBold {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.signupButton {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  height: auto;
+  cursor: pointer;
+  font-family: var(--font-inter);
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.signupButton:hover {
+  background: var(--primary-dark);
+}

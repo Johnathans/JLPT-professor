@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { n3KanjiComplete } from '@/data/n3-kanji-complete';
+import { N3_KANJI } from '@/data/jlpt-kanji-updated';
 import styles from '@/styles/kanji-list.module.css';
 import Link from 'next/link';
 import JlptLevelBadge from '@/components/JlptLevelBadge';
@@ -12,17 +12,22 @@ export default function N3KanjiListPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const filteredKanji = n3KanjiComplete.filter(kanji => 
-    kanji.kanji.includes(searchQuery) ||
-    kanji.reading.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    kanji.meaning.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredKanji = N3_KANJI.filter(kanji => {
+    const onyomiText = kanji.onyomi?.join(', ') || '';
+    const kunyomiText = kanji.kunyomi?.join(', ') || '';
+    const readingText = [onyomiText, kunyomiText].filter(Boolean).join(' ');
+    const meaningText = Array.isArray(kanji.meaning) ? kanji.meaning.join(', ') : kanji.meaning;
+
+    return kanji.kanji.includes(searchQuery) ||
+           readingText.toLowerCase().includes(searchQuery.toLowerCase()) ||
+           meaningText.toLowerCase().includes(searchQuery.toLowerCase());
+  });
 
   const totalPages = Math.ceil(filteredKanji.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const displayedKanji = filteredKanji.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
-  const totalKanji = n3KanjiComplete.length;
+  const totalKanji = N3_KANJI.length;
 
   return (
     <div className={styles.container}>
@@ -96,30 +101,37 @@ export default function N3KanjiListPage() {
             </tr>
           </thead>
           <tbody>
-            {displayedKanji.map((kanji, index) => (
-              <tr key={index} className={styles.tableRow}>
-                <td className={`${styles.tableCell} ${styles.kanjiCell}`}>
-                  {kanji.kanji}
-                </td>
-                <td className={`${styles.tableCell} ${styles.kanaCell}`}
-                  dangerouslySetInnerHTML={{ __html: kanji.reading }}
-                />
-                <td className={`${styles.tableCell} ${styles.meaningCell}`}>
-                  {kanji.meaning}
-                </td>
-                <td className={`${styles.tableCell} ${styles.typeCell}`}>
-                  <JlptLevelBadge word={kanji} />
-                </td>
-                <td className={`${styles.tableCell} ${styles.actionCell}`}>
-                  <Link
-                    href={`/n3-kanji-list/${kanji.kanji}`}
-                    className={styles.detailsLink}
-                  >
-                    View →
-                  </Link>
-                </td>
-              </tr>
-            ))}
+            {displayedKanji.map((kanji, index) => {
+              const onyomiText = kanji.onyomi?.length > 0 ? `On: ${kanji.onyomi.join(', ')}` : '';
+              const kunyomiText = kanji.kunyomi?.length > 0 ? `Kun: ${kanji.kunyomi.join(', ')}` : '';
+              const readingText = [onyomiText, kunyomiText].filter(Boolean).join(' ');
+              const meaningText = Array.isArray(kanji.meaning) ? kanji.meaning.join(', ') : kanji.meaning;
+
+              return (
+                <tr key={index} className={styles.tableRow}>
+                  <td className={`${styles.tableCell} ${styles.kanjiCell}`}>
+                    {kanji.kanji}
+                  </td>
+                  <td className={`${styles.tableCell} ${styles.kanaCell}`}
+                    dangerouslySetInnerHTML={{ __html: readingText }}
+                  />
+                  <td className={`${styles.tableCell} ${styles.meaningCell}`}>
+                    {meaningText}
+                  </td>
+                  <td className={`${styles.tableCell} ${styles.typeCell}`}>
+                    <JlptLevelBadge word={kanji} />
+                  </td>
+                  <td className={`${styles.tableCell} ${styles.actionCell}`}>
+                    <Link
+                      href={`/n3-kanji-list/${kanji.kanji}`}
+                      className={styles.detailsLink}
+                    >
+                      View →
+                    </Link>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

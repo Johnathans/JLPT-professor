@@ -1,6 +1,6 @@
 export interface ExampleSentence {
   japanese: string;
-  romaji: string;
+  romaji?: string;
   english: string;
 }
 
@@ -12,9 +12,24 @@ export interface KanjiInfo {
   strokeCount: number;
 }
 
+export interface KanjiData {
+  kanji: string;
+  onyomi: string[];
+  kunyomi: string[];
+  meaning: string | string[];
+  level: string;
+  type: string;
+  usefulness?: number;
+  usefulnessDescription?: string;
+  examples?: ExampleSentence[];
+  id?: number;
+  onyomi_katakana?: string[];
+  kunyomi_hiragana?: string[];
+}
+
 export interface Word {
-  id: string;
-  romaji: string;
+  id?: string;
+  romaji?: string;
   kana: string;
   kanji?: string;
   meaning: string;

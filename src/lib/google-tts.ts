@@ -1,4 +1,4 @@
-import { TextToSpeechClient } from '@google-cloud/text-to-speech';
+import { TextToSpeechClient, protos } from '@google-cloud/text-to-speech';
 import fs from 'fs';
 import path from 'path';
 
@@ -41,18 +41,18 @@ export async function generateSpeech(text: string) {
       name: 'ja-JP-Neural2-B' // Male voice
     },
     audioConfig: { 
-      audioEncoding: 'MP3',
-      speakingRate: 0.9, // Slightly slower for clearer pronunciation
-      pitch: 0 // Natural pitch
+      audioEncoding: protos.google.cloud.texttospeech.v1.AudioEncoding.MP3,
+      speakingRate: 1.0, 
+      pitch: 0.0 // Natural pitch
     },
   };
 
   try {
-    const [response] = await ttsClient.synthesizeSpeech(request);
-    if (!response.audioContent) {
+    const response = await ttsClient.synthesizeSpeech(request);
+    if (!response[0].audioContent) {
       throw new Error('No audio content received');
     }
-    return Buffer.from(response.audioContent as Uint8Array);
+    return Buffer.from(response[0].audioContent as Uint8Array);
   } catch (error) {
     console.error('Error generating speech:', error);
     throw error;

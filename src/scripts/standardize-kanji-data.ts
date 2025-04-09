@@ -1,6 +1,6 @@
-const fs = require('fs/promises');
-const path = require('path');
-const wanakana = require('wanakana');
+import * as fs from 'fs/promises';
+import * as path from 'path';
+import * as wanakana from 'wanakana';
 
 interface KanjiDataN5 {
   id: number;

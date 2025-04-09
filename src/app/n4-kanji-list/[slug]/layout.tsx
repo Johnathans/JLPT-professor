@@ -1,24 +1,17 @@
 import React from 'react';
-import { Metadata, ResolvingMetadata } from 'next';
-import { N4_KANJI } from '@/data/jlpt-kanji-updated';
+import { Metadata } from 'next';
+import { n4KanjiComplete } from '@/data/n4-kanji-complete';
 import styles from '@/styles/kanji-list.module.css';
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
   children: React.ReactNode;
 };
 
-export async function generateMetadata(
-  { params }: { params: { slug: string } },
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  // Decode the slug
-  const decodedSlug = decodeURIComponent(await params.slug);
+export async function generateMetadata({ params }: { params: Props['params'] }): Promise<Metadata> {
+  const { slug } = await params;
+  const kanjiData = n4KanjiComplete.find(k => k.kanji === decodeURIComponent(slug));
   
-  // Find the kanji that matches this slug
-  const kanjiData = N4_KANJI.find(k => k.kanji === decodedSlug);
-  
-  // If kanji not found, return default metadata
   if (!kanjiData) {
     return {
       title: 'Kanji Not Found | JLPT Professor',
@@ -26,30 +19,22 @@ export async function generateMetadata(
     };
   }
 
-  // Get the first meaning for meta description
-  const primaryMeaning = kanjiData.meaning.split(',')[0].trim();
-  
-  // Create a clean reading text (without HTML tags) for meta description
-  const readingText = kanjiData.reading.replace(/<[^>]*>/g, '');
-  
-  // Create a clean meaning without HTML tags
-  const cleanMeaning = kanjiData.meaning.replace(/<[^>]*>/g, '');
-  
+  // Format readings for display
+  const onyomiText = kanjiData.onyomi.length > 0 ? `On: ${kanjiData.onyomi.join(', ')}` : '';
+  const kunyomiText = kanjiData.kunyomi.length > 0 ? `Kun: ${kanjiData.kunyomi.join(', ')}` : '';
+  const readingText = [onyomiText, kunyomiText].filter(Boolean).join(' ');
+
+  // Create a clean meaning
+  const meaningText = Array.isArray(kanjiData.meaning) 
+    ? kanjiData.meaning.join(', ')
+    : kanjiData.meaning;
+
   return {
-    title: `${kanjiData.kanji} (${primaryMeaning}) | JLPT N4 Kanji | JLPT Professor`,
-    description: `Learn the JLPT N4 kanji ${kanjiData.kanji} (${readingText}): meaning, readings, example sentences, stroke order, and study tips.`,
+    title: `${kanjiData.kanji} - N4 Kanji | JLPT Professor`,
+    description: `Learn the N4 kanji ${kanjiData.kanji}. Readings: ${readingText}. Meaning: ${meaningText}.`,
     openGraph: {
-      title: `${kanjiData.kanji} - ${primaryMeaning} | JLPT N4 Kanji`,
-      description: `Master the JLPT N4 kanji ${kanjiData.kanji}: ${readingText} - ${kanjiData.meaning}`,
-      url: `https://jlptprofessor.com/n4-kanji-list/${encodeURIComponent(kanjiData.kanji)}`,
-      siteName: 'JLPT Professor',
-      locale: 'en_US',
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${kanjiData.kanji} - ${primaryMeaning} | JLPT N4 Kanji`,
-      description: `Master the JLPT N4 kanji ${kanjiData.kanji}: ${readingText} - ${kanjiData.meaning}`,
+      title: `${kanjiData.kanji} - N4 Kanji | JLPT Professor`,
+      description: `Learn the N4 kanji ${kanjiData.kanji}. Readings: ${readingText}. Meaning: ${meaningText}.`,
     },
   };
 }

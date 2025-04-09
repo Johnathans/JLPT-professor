@@ -7,7 +7,21 @@
       "onyomi_katakana": ["ニチ", "ジツ"],
       "kunyomi": ["hi", "-bi", "-ka"],
       "kunyomi_hiragana": ["ひ", "-び", "-か"],
-      "meaning": ["day", "sun", "Japan", "counter for days"]
+      "meaning": ["day", "sun", "Japan", "counter for days"],
+      "examples": [
+        {
+          "japanese": "今日は晴れです。",
+          "hiragana": "きょうははれです。",
+          "english": "Today is sunny.",
+          "focus_word": "今日"
+        },
+        {
+          "japanese": "日本語を勉強しています。",
+          "hiragana": "にほんごをべんきょうしています。",
+          "english": "I am studying Japanese.",
+          "focus_word": "日本"
+        }
+      ]
     },
     {
       "id": 2,

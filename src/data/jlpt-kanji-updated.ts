@@ -9,13 +9,22 @@ import { n5KanjiComplete } from './n5-kanji-complete';
 import { n4KanjiComplete } from './n4-kanji-complete';
 import { n3KanjiComplete } from './n3-kanji-complete';
 import { n2KanjiComplete } from './n2-kanji-complete';
+import { ExampleSentence } from '@/types/word';
 
 // Define KanjiData interface
 export interface KanjiData {
   kanji: string;
-  reading: string;
-  meaning: string;
+  onyomi: string[];
+  kunyomi: string[];
+  meaning: string | string[];
   level: string;
+  type: string;
+  usefulness?: number;
+  usefulnessDescription?: string;
+  examples?: ExampleSentence[];
+  id?: number;
+  onyomi_katakana?: string[];
+  kunyomi_hiragana?: string[];
 }
 
 // Export the updated kanji data

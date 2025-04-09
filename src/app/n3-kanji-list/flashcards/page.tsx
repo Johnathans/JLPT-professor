@@ -1,17 +1,23 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { n3KanjiComplete } from '@/data/n3-kanji-complete';
+import { N3_KANJI } from '@/data/jlpt-kanji-updated';
 import styles from '@/styles/flashcards.module.css';
 import Link from 'next/link';
 
 // Convert the kanji data to flashcard format
-const kanjiFlashcards = n3KanjiComplete.map(kanji => ({
-  kanji: kanji.kanji,
-  kana: kanji.reading,
-  meaning: kanji.meaning,
-  type: 'Kanji (N3)'
-}));
+const kanjiFlashcards = N3_KANJI.map(kanji => {
+  const onyomiText = kanji.onyomi?.length > 0 ? `On: ${kanji.onyomi.join(', ')}` : '';
+  const kunyomiText = kanji.kunyomi?.length > 0 ? `Kun: ${kanji.kunyomi.join(', ')}` : '';
+  const readingText = [onyomiText, kunyomiText].filter(Boolean).join(' ');
+  
+  return {
+    kanji: kanji.kanji,
+    kana: readingText,
+    meaning: Array.isArray(kanji.meaning) ? kanji.meaning.join(', ') : kanji.meaning,
+    type: 'Kanji (N3)'
+  };
+});
 
 export default function FlashcardsPage() {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);

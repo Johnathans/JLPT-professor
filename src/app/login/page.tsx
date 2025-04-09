@@ -112,9 +112,6 @@ export default function LoginPage() {
                       width: '100%',
                       padding: '0.75rem 1rem',
                       height: 'auto',
-                      '&:hover': {
-                        background: '#5e35b1',
-                      },
                     },
                     input: {
                       borderRadius: '0.5rem',
@@ -137,10 +134,6 @@ export default function LoginPage() {
                       color: '#7c4dff',
                       fontSize: '0.875rem',
                       textDecoration: 'none',
-                      '&:hover': {
-                        color: '#5e35b1',
-                        textDecoration: 'underline',
-                      },
                     },
                     divider: {
                       background: '#dee2e6',

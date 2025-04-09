@@ -1,14 +1,19 @@
 import type { Metadata } from 'next';
 import { n5KanjiComplete } from '@/data/n5-kanji-complete';
 
+type LayoutProps = {
+  params: Promise<{ slug: string }>;
+  children: React.ReactNode;
+}
+
 // Define the generateMetadata function for dynamic metadata
 export async function generateMetadata({ 
   params 
 }: { 
-  params: { slug: string } 
+  params: Promise<{ slug: string }> 
 }): Promise<Metadata> {
   // Decode the slug
-  const decodedSlug = decodeURIComponent(params.slug);
+  const decodedSlug = decodeURIComponent((await params).slug);
   
   // Find the kanji that matches this slug
   const kanjiData = n5KanjiComplete.find(k => k.kanji === decodedSlug);
@@ -22,7 +27,12 @@ export async function generateMetadata({
   }
   
   // Create a clean meaning without HTML tags
-  const cleanMeaning = kanjiData.meaning.replace(/<[^>]*>/g, '');
+  const meaning = kanjiData.meaning as string | string[];
+  const cleanMeaning = typeof meaning === 'string' 
+    ? meaning.replace(/<[^>]*>/g, '')
+    : Array.isArray(meaning) 
+      ? meaning[0].replace(/<[^>]*>/g, '')
+      : '';
   
   // Return metadata with dynamic values
   return {
@@ -46,8 +56,7 @@ export async function generateMetadata({
 
 export default function KanjiDetailLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+  params,
+}: LayoutProps) {
   return <>{children}</>;
 }

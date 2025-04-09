@@ -1,3 +1,11 @@
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[]
+
 export type Database = {
   public: {
     Tables: {
@@ -112,6 +120,50 @@ export type Database = {
           item_type?: 'kanji' | 'vocabulary' | 'grammar' | 'mixed'
         }
       }
+      user_progress: {
+        Row: {
+          id: string
+          user_id: string
+          kanji_id: string
+          level: string
+          status: string
+          last_reviewed: string
+          next_review: string
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          kanji_id: string
+          level: string
+          status: string
+          last_reviewed?: string
+          next_review?: string
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          kanji_id?: string
+          level?: string
+          status?: string
+          last_reviewed?: string
+          next_review?: string
+          created_at?: string
+          updated_at?: string
+        }
+      }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      [_ in never]: never
+    }
+    Enums: {
+      [_ in never]: never
     }
   }
 }
