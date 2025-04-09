@@ -13,35 +13,22 @@ export default function LoginPage() {
     return (
       <div className="container-fluid p-0">
         <div className="row g-0" style={{ 
-          minHeight: 'calc(100vh - 72px)', 
-          marginBottom: '-1px' // Just enough to overlap the footer border
+          minHeight: 'calc(100vh - 72px)' 
         }}>
           {/* Left column - Branding */}
-          <div className="col-lg-6 d-none d-lg-flex flex-column justify-content-center px-5" style={{ backgroundColor: '#e8e3ff' }}>
-            <div className="mx-auto" style={{ maxWidth: '32rem' }}>
-              <div className="rounded-4 d-flex align-items-center justify-content-center mb-4" 
-                   style={{ width: '4rem', height: '4rem', backgroundColor: '#7c4dff' }}>
-                <svg 
-                  className="text-white" 
-                  style={{ width: '2.5rem', height: '2.5rem' }}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2}
-                    d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-                  />
-                </svg>
+          <div className="col-lg-6 d-none d-lg-flex flex-column px-4 px-lg-5 pt-5" style={{ backgroundColor: '#e8e3ff' }}>
+            <div className="mx-auto w-100" style={{ maxWidth: '24rem' }}>
+              <div className="d-none mb-4">
+                {/* Spacer div to match right column structure */}
               </div>
-              <h1 className="display-5 fw-bold mb-4" style={{ color: '#1a1a1a' }}>
-                Welcome Back to JLPT Professor
-              </h1>
-              <p className="fs-5 mb-5" style={{ color: '#4a4a4a' }}>
-                Continue your journey to JLPT success. Your personalized study plan is waiting for you.
-              </p>
+              <div className="text-lg-start mb-4">
+                <h1 className="display-5 fw-bold" style={{ color: '#1a1a1a' }}>
+                  Welcome Back to JLPT Professor
+                </h1>
+                <p className="fs-5" style={{ color: '#4a4a4a' }}>
+                  Continue your journey to JLPT success. Your personalized study plan is waiting for you.
+                </p>
+              </div>
               <div className="d-flex flex-column gap-3">
                 <div className="d-flex align-items-center" style={{ color: '#4a4a4a' }}>
                   <svg className="me-3" style={{ width: '1.5rem', height: '1.5rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,7 +53,7 @@ export default function LoginPage() {
           </div>
 
           {/* Right column - Form */}
-          <div className="col-12 col-lg-6 d-flex flex-column justify-content-center px-4 px-lg-5">
+          <div className="col-12 col-lg-6 d-flex flex-column px-4 px-lg-5 pt-5">
             <div className="mx-auto w-100" style={{ maxWidth: '24rem' }}>
               <div className="d-lg-none text-center mb-4">
                 <div 
@@ -179,10 +166,9 @@ export default function LoginPage() {
     return (
       <div className="container-fluid p-0">
         <div className="row g-0" style={{ 
-          minHeight: 'calc(100vh - 72px)', 
-          marginBottom: '-1px' // Just enough to overlap the footer border
+          minHeight: 'calc(100vh - 72px)' 
         }}>
-          <div className="col-12 d-flex flex-column justify-content-center px-4 px-lg-5">
+          <div className="col-12 d-flex flex-column px-4 px-lg-5 pt-5">
             <div className="mx-auto w-100" style={{ maxWidth: '24rem' }}>
               <div className="text-center text-lg-start mb-4">
                 <h1 className="fs-2 fw-bold" style={{ color: '#1a1a1a' }}>

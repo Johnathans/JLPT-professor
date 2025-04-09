@@ -4,7 +4,6 @@ import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { createClient } from '@/utils/supabase/client'
 import { getSiteUrl } from '@/utils/auth'
-import styles from '@/styles/signup.module.css';
 
 export default function SignUpPage() {
   try {
@@ -12,51 +11,36 @@ export default function SignUpPage() {
     const siteUrl = getSiteUrl()
 
     return (
-      <div className={styles.containerFluid}>
-        <div className={styles.row} style={{ 
-          minHeight: 'calc(100vh - 72px)', 
-          marginBottom: '-1px' // Just enough to overlap the footer border
+      <div className="container-fluid p-0">
+        <div className="row g-0" style={{ 
+          minHeight: 'calc(100vh - 72px)'
         }}>
           {/* Left column - Branding */}
-          <div className={styles.colLg6} style={{ backgroundColor: '#e8e3ff' }}>
-            <div className={styles.mxAuto} style={{ maxWidth: '32rem' }}>
-              <div className={styles.roundedCircle} style={{ width: '4rem', height: '4rem', backgroundColor: '#7c4dff' }}>
-                <svg 
-                  className={styles.textWhite} 
-                  style={{ width: '2.5rem', height: '2.5rem' }}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2}
-                    d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-                  />
-                </svg>
+          <div className="col-lg-6 d-none d-lg-flex flex-column px-4 px-lg-5 pt-5" style={{ backgroundColor: '#e8e3ff' }}>
+            <div className="mx-auto w-100" style={{ maxWidth: '24rem' }}>
+              <div className="text-lg-start mb-4">
+                <h1 className="display-5 fw-bold" style={{ color: '#1a1a1a' }}>
+                  Start Your JLPT Journey Today
+                </h1>
+                <p className="fs-5" style={{ color: '#4a4a4a' }}>
+                  Join thousands of students preparing for JLPT success. Track your progress, practice with flashcards, and learn at your own pace.
+                </p>
               </div>
-              <h1 className={styles.display5} style={{ color: '#1a1a1a' }}>
-                Start Your JLPT Journey Today
-              </h1>
-              <p className={styles.fs5} style={{ color: '#4a4a4a' }}>
-                Join thousands of students preparing for JLPT success. Track your progress, practice with flashcards, and learn at your own pace.
-              </p>
-              <div className={styles.dFlexFlexColumnGap3}>
-                <div className={styles.dFlexAlignItemsCenter} style={{ color: '#4a4a4a' }}>
-                  <svg className={styles.me3} style={{ width: '1.5rem', height: '1.5rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="d-flex flex-column gap-3">
+                <div className="d-flex align-items-center" style={{ color: '#4a4a4a' }}>
+                  <svg className="me-3" style={{ width: '1.5rem', height: '1.5rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   Personalized study plans
                 </div>
-                <div className={styles.dFlexAlignItemsCenter} style={{ color: '#4a4a4a' }}>
-                  <svg className={styles.me3} style={{ width: '1.5rem', height: '1.5rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="d-flex align-items-center" style={{ color: '#4a4a4a' }}>
+                  <svg className="me-3" style={{ width: '1.5rem', height: '1.5rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   Smart flashcard system
                 </div>
-                <div className={styles.dFlexAlignItemsCenter} style={{ color: '#4a4a4a' }}>
-                  <svg className={styles.me3} style={{ width: '1.5rem', height: '1.5rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="d-flex align-items-center" style={{ color: '#4a4a4a' }}>
+                  <svg className="me-3" style={{ width: '1.5rem', height: '1.5rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   Progress tracking
@@ -66,11 +50,11 @@ export default function SignUpPage() {
           </div>
 
           {/* Right column - Form */}
-          <div className={styles.col12ColLg6} style={{ backgroundColor: '#ffffff' }}>
-            <div className={styles.mxAutoW100} style={{ maxWidth: '24rem' }}>
-              <div className={styles.dLgNoneTextCenterMb4}>
+          <div className="col-12 col-lg-6 d-flex flex-column px-4 px-lg-5 pt-5">
+            <div className="mx-auto w-100" style={{ maxWidth: '24rem' }}>
+              <div className="d-lg-none text-center mb-4">
                 <div 
-                  className={styles.mxAutoRoundedCircleDFlexAlignItemsCenterJustifyContentCenterMb3}
+                  className="mx-auto rounded-circle d-flex align-items-center justify-content-center mb-3"
                   style={{ width: '4rem', height: '4rem', backgroundColor: '#e8e3ff' }}
                 >
                   <svg 
@@ -88,8 +72,8 @@ export default function SignUpPage() {
                   </svg>
                 </div>
               </div>
-              <div className={styles.textCenterTextLgStartMb4}>
-                <h2 className={styles.fs2FwBold} style={{ color: '#1a1a1a' }}>
+              <div className="text-center text-lg-start mb-4">
+                <h2 className="fs-2 fw-bold" style={{ color: '#1a1a1a' }}>
                   Create your account
                 </h2>
                 <p style={{ color: '#4a4a4a' }}>
@@ -101,18 +85,71 @@ export default function SignUpPage() {
                 view="sign_up"
                 appearance={{
                   theme: ThemeSupa,
+                  style: {
+                    container: {
+                      width: '100%',
+                    },
+                    button: {
+                      background: '#7c4dff',
+                      color: 'white',
+                      borderRadius: '0.5rem',
+                      width: '100%',
+                      padding: '0.75rem 1rem',
+                      height: 'auto',
+                    },
+                    input: {
+                      borderRadius: '0.5rem',
+                      border: '1px solid #dee2e6',
+                      padding: '0.75rem 1rem',
+                      width: '100%',
+                      marginBottom: '1rem',
+                    },
+                    label: {
+                      color: '#4a4a4a',
+                      marginBottom: '0.5rem',
+                      fontSize: '0.875rem',
+                    },
+                    message: {
+                      color: '#dc3545',
+                      marginTop: '0.5rem',
+                      fontSize: '0.875rem',
+                    },
+                    anchor: {
+                      color: '#7c4dff',
+                      fontSize: '0.875rem',
+                      textDecoration: 'none',
+                    },
+                    divider: {
+                      background: '#dee2e6',
+                      margin: '1.5rem 0',
+                    },
+                  },
                   variables: {
                     default: {
                       colors: {
                         brand: '#7c4dff',
                         brandAccent: '#5e35b1',
+                        inputBackground: 'white',
+                        inputText: '#1a1a1a',
+                        inputBorder: '#dee2e6',
+                        inputBorderHover: '#7c4dff',
+                        inputBorderFocus: '#7c4dff',
                       },
                     },
                   },
-                  className: {
-                    button: styles.signupButton
-                  }
                 }}
+                localization={{
+                  variables: {
+                    sign_up: {
+                      email_label: 'Email address',
+                      password_label: 'Password',
+                      button_label: 'Sign up',
+                      social_provider_text: 'Sign up with {{provider}}',
+                      link_text: 'Already have an account? Sign in',
+                    },
+                  },
+                }}
+                theme="light"
                 providers={['google']}
                 redirectTo={`${siteUrl}/auth/callback`}
               />
@@ -124,15 +161,14 @@ export default function SignUpPage() {
   } catch (error) {
     // If environment variables are missing, show a maintenance page
     return (
-      <div className={styles.containerFluid}>
-        <div className={styles.row} style={{ 
-          minHeight: 'calc(100vh - 72px)', 
-          marginBottom: '-1px'
+      <div className="container-fluid p-0">
+        <div className="row g-0" style={{ 
+          minHeight: 'calc(100vh - 72px)'
         }}>
-          <div className={styles.col12} style={{ backgroundColor: '#ffffff' }}>
-            <div className={styles.mxAutoW100} style={{ maxWidth: '24rem' }}>
-              <div className={styles.textCenterTextLgStartMb4}>
-                <h1 className={styles.fs2FwBold} style={{ color: '#1a1a1a' }}>
+          <div className="col-12 d-flex flex-column px-4 px-lg-5 pt-5">
+            <div className="mx-auto w-100" style={{ maxWidth: '24rem' }}>
+              <div className="text-center text-lg-start mb-4">
+                <h1 className="fs-2 fw-bold" style={{ color: '#1a1a1a' }}>
                   Maintenance Mode
                 </h1>
                 <p style={{ color: '#4a4a4a' }}>
