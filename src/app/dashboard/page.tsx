@@ -1,248 +1,273 @@
 'use client';
 
 import { useState } from 'react';
-import styles from './dashboard.module.css';
-import { GraduationCap, Book, Headphones, PenTool, Target, Clock } from 'lucide-react';
+import { 
+  Box, 
+  Typography, 
+  Paper, 
+  LinearProgress, 
+  Grid,
+  Button,
+  IconButton,
+  ToggleButton,
+  ToggleButtonGroup,
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { 
+  BookOpen, 
+  GraduationCap, 
+  PenTool,
+  ChevronRight,
+  Headphones,
+  Target,
+  Trophy
+} from 'lucide-react';
+import StudyCalendar from '@/components/StudyCalendar';
 
-interface StudyProgress {
-  stories: number;
-  vocabulary: number;
-  kanji: number;
-  listening: number;
-  grammar: number;
-}
+const PageContainer = styled(Box)(({ theme }) => ({
+  maxWidth: '1200px',
+  margin: '0 auto',
+  padding: theme.spacing(4),
+}));
 
-const mockProgress: Record<string, StudyProgress> = {
-  n5: {
-    stories: 65,
-    vocabulary: 45,
-    kanji: 30,
-    listening: 55,
-    grammar: 40,
+const WelcomeCard = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(4),
+  background: theme.palette.background.paper,
+  borderRadius: theme.spacing(2),
+  marginBottom: theme.spacing(4),
+  border: `1px solid ${theme.palette.divider}`,
+  boxShadow: 'none',
+}));
+
+const StatsChip = styled(Paper)(({ theme }) => ({
+  padding: '0.5rem 1rem',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.5rem',
+  borderRadius: '999px',
+  background: theme.palette.primary.light,
+  color: theme.palette.primary.main,
+  border: 'none',
+  fontWeight: 500,
+}));
+
+const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
+  background: theme.palette.primary.light,
+  borderRadius: '999px',
+  border: 'none',
+  '& .MuiToggleButton-root': {
+    border: 'none',
+    borderRadius: '999px',
+    padding: '0.5rem 1rem',
+    color: theme.palette.primary.main,
+    fontWeight: 500,
+    '&.Mui-selected': {
+      backgroundColor: theme.palette.primary.main,
+      color: '#fff',
+      '&:hover': {
+        backgroundColor: theme.palette.primary.dark,
+      },
+    },
   },
-  n4: {
-    stories: 25,
-    vocabulary: 15,
-    kanji: 10,
-    listening: 20,
-    grammar: 5,
+}));
+
+const StatsCard = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(3),
+  borderRadius: theme.spacing(2),
+  height: '100%',
+  border: `1px solid ${theme.palette.divider}`,
+  background: theme.palette.background.paper,
+  boxShadow: 'none',
+  transition: 'all 0.2s ease',
+  cursor: 'pointer',
+  '&:hover': {
+    transform: 'translateY(-4px)',
+    borderColor: theme.palette.primary.main,
+    '& .MuiLinearProgress-root': {
+      transform: 'scaleX(1.02)',
+    },
   },
-  n3: {
-    stories: 0,
-    vocabulary: 0,
-    kanji: 0,
-    listening: 0,
-    grammar: 0,
+}));
+
+const ProgressSection = styled(Box)(({ theme }) => ({
+  marginBottom: theme.spacing(4),
+}));
+
+const StyledLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  height: 8,
+  borderRadius: 4,
+  backgroundColor: 'rgba(124, 77, 255, 0.1)',
+  '& .MuiLinearProgress-bar': {
+    backgroundColor: theme.palette.primary.main,
   },
-  n2: {
-    stories: 0,
-    vocabulary: 0,
-    kanji: 0,
-    listening: 0,
-    grammar: 0,
-  },
-  n1: {
-    stories: 0,
-    vocabulary: 0,
-    kanji: 0,
-    listening: 0,
-    grammar: 0,
-  },
-};
+}));
+
+// Sample data - will be fetched from backend
+const mockStudyData = [
+  ...Array.from({ length: 180 }).map((_, i) => ({
+    date: new Date(Date.now() - (179 - i) * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    intensity: Math.floor(Math.random() * 4),
+  })),
+];
 
 export default function Dashboard() {
-  const [activeLevel, setActiveLevel] = useState('n5');
+  const [currentLevel, setCurrentLevel] = useState('N5');
   
+  const handleLevelChange = (event: React.MouseEvent<HTMLElement>, newLevel: string) => {
+    if (newLevel !== null) {
+      setCurrentLevel(newLevel);
+    }
+  };
+
+  const stats = [
+    {
+      title: 'Reading',
+      icon: BookOpen,
+      progress: 65,
+      items: '13/20 stories completed',
+    },
+    {
+      title: 'Kanji',
+      icon: PenTool,
+      progress: 45,
+      items: '45/100 kanji mastered',
+    },
+    {
+      title: 'Vocabulary',
+      icon: GraduationCap,
+      progress: 30,
+      items: '300/1000 words learned',
+    },
+    {
+      title: 'Listening',
+      icon: Headphones,
+      progress: 55,
+      items: '11/20 lessons completed',
+    },
+  ];
+
   return (
-    <div className={styles.pageWrapper}>
-      <div className={styles.contentWrapper}>
-        <header className={styles.header}>
-          <div>
-            <h1 className={styles.title}>Your Progress</h1>
-            <p className={styles.subtitle}>Track your JLPT journey</p>
-          </div>
-          <div className={styles.stats}>
-            <div className={styles.stat}>
-              <Clock size={20} />
-              <span>23h studied</span>
-            </div>
-            <div className={styles.stat}>
-              <Target size={20} />
-              <span>5 day streak</span>
-            </div>
-          </div>
-        </header>
+    <PageContainer>
+      <WelcomeCard>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+          <Box>
+            <Typography variant="h4" sx={{ mb: 1, fontWeight: 700, color: 'text.primary' }}>
+              Welcome back, John!
+            </Typography>
+            <Typography variant="h6" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+              Current Goal: JLPT {currentLevel}
+            </Typography>
+          </Box>
+          <StyledToggleButtonGroup
+            value={currentLevel}
+            exclusive
+            onChange={handleLevelChange}
+            aria-label="JLPT Level"
+          >
+            <ToggleButton value="N5" aria-label="N5">
+              N5
+            </ToggleButton>
+            <ToggleButton value="N4" aria-label="N4">
+              N4
+            </ToggleButton>
+            <ToggleButton value="N3" aria-label="N3">
+              N3
+            </ToggleButton>
+            <ToggleButton value="N2" aria-label="N2">
+              N2
+            </ToggleButton>
+            <ToggleButton value="N1" aria-label="N1">
+              N1
+            </ToggleButton>
+          </StyledToggleButtonGroup>
+        </Box>
+        <StyledLinearProgress variant="determinate" value={45} />
+        <Typography sx={{ mt: 1, color: 'text.secondary' }}>
+          45% towards JLPT {currentLevel}
+        </Typography>
+      </WelcomeCard>
 
-        <nav className={styles.levelNav}>
-          {['n5', 'n4', 'n3', 'n2', 'n1'].map((level) => (
-            <button
-              key={level}
-              className={`${styles.levelButton} ${activeLevel === level ? styles.active : ''}`}
-              onClick={() => setActiveLevel(level)}
-            >
-              <div className={styles.levelIcon}>
-                <GraduationCap size={16} />
-              </div>
-              {level.toUpperCase()}
-            </button>
+      <ProgressSection>
+        <Typography variant="h5" sx={{ mb: 3, fontWeight: 600 }}>
+          Your Progress
+        </Typography>
+        <Grid container spacing={3}>
+          {stats.map((stat) => (
+            <Grid item xs={12} sm={6} md={3} key={stat.title}>
+              <StatsCard>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <stat.icon size={20} color="#7c4dff" />
+                    <Typography variant="h6">{stat.title}</Typography>
+                  </Box>
+                  <IconButton size="small">
+                    <ChevronRight size={20} />
+                  </IconButton>
+                </Box>
+                <StyledLinearProgress variant="determinate" value={stat.progress} />
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
+                  <Typography variant="body2" color="text.secondary">
+                    {stat.items}
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: 'primary.main', fontWeight: 600 }}>
+                    {stat.progress}%
+                  </Typography>
+                </Box>
+              </StatsCard>
+            </Grid>
           ))}
-        </nav>
+        </Grid>
+      </ProgressSection>
 
-        <main className={styles.mainContent}>
-          <div className={styles.progressOverview}>
-            <div className={styles.overviewCard}>
-              <div className={styles.overviewHeader}>
-                <h2 className={styles.overviewTitle}>
-                  {activeLevel.toUpperCase()} Progress Overview
-                </h2>
-                <div className={styles.overviewStats}>
-                  <div className={styles.overviewStat}>
-                    <div className={styles.overviewStatValue}>
-                      {Object.values(mockProgress[activeLevel]).reduce((a, b) => a + b, 0) / 5}%
-                    </div>
-                    <div className={styles.overviewStatLabel}>Overall Progress</div>
-                  </div>
-                  <div className={styles.overviewStat}>
-                    <div className={styles.overviewStatValue}>342</div>
-                    <div className={styles.overviewStatLabel}>Items Mastered</div>
-                  </div>
-                </div>
-              </div>
+      <Box sx={{ mb: 4 }}>
+        <StudyCalendar studyData={mockStudyData} />
+      </Box>
 
-              <div className={styles.skillGrid}>
-                <div className={styles.skillCard}>
-                  <div className={styles.skillHeader}>
-                    <Book size={20} />
-                    <h3>Stories</h3>
-                  </div>
-                  <div className={styles.skillProgress}>
-                    <div className={styles.skillBar}>
-                      <div 
-                        className={styles.skillFill} 
-                        style={{ width: `${mockProgress[activeLevel].stories}%` }}
-                      />
-                    </div>
-                    <span>{mockProgress[activeLevel].stories}%</span>
-                  </div>
-                  <p className={styles.skillDetail}>12 of 20 stories completed</p>
-                </div>
-
-                <div className={styles.skillCard}>
-                  <div className={styles.skillHeader}>
-                    <Book size={20} />
-                    <h3>Vocabulary</h3>
-                  </div>
-                  <div className={styles.skillProgress}>
-                    <div className={styles.skillBar}>
-                      <div 
-                        className={styles.skillFill} 
-                        style={{ width: `${mockProgress[activeLevel].vocabulary}%` }}
-                      />
-                    </div>
-                    <span>{mockProgress[activeLevel].vocabulary}%</span>
-                  </div>
-                  <p className={styles.skillDetail}>450 of 1000 words mastered</p>
-                </div>
-
-                <div className={styles.skillCard}>
-                  <div className={styles.skillHeader}>
-                    <PenTool size={20} />
-                    <h3>Kanji</h3>
-                  </div>
-                  <div className={styles.skillProgress}>
-                    <div className={styles.skillBar}>
-                      <div 
-                        className={styles.skillFill} 
-                        style={{ width: `${mockProgress[activeLevel].kanji}%` }}
-                      />
-                    </div>
-                    <span>{mockProgress[activeLevel].kanji}%</span>
-                  </div>
-                  <p className={styles.skillDetail}>30 of 100 kanji mastered</p>
-                </div>
-
-                <div className={styles.skillCard}>
-                  <div className={styles.skillHeader}>
-                    <Headphones size={20} />
-                    <h3>Listening</h3>
-                  </div>
-                  <div className={styles.skillProgress}>
-                    <div className={styles.skillBar}>
-                      <div 
-                        className={styles.skillFill} 
-                        style={{ width: `${mockProgress[activeLevel].listening}%` }}
-                      />
-                    </div>
-                    <span>{mockProgress[activeLevel].listening}%</span>
-                  </div>
-                  <p className={styles.skillDetail}>11 of 20 sessions completed</p>
-                </div>
-
-                <div className={styles.skillCard}>
-                  <div className={styles.skillHeader}>
-                    <Book size={20} />
-                    <h3>Grammar</h3>
-                  </div>
-                  <div className={styles.skillProgress}>
-                    <div className={styles.skillBar}>
-                      <div 
-                        className={styles.skillFill} 
-                        style={{ width: `${mockProgress[activeLevel].grammar}%` }}
-                      />
-                    </div>
-                    <span>{mockProgress[activeLevel].grammar}%</span>
-                  </div>
-                  <p className={styles.skillDetail}>20 of 50 grammar points mastered</p>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.recentActivity}>
-              <h2 className={styles.activityTitle}>Recent Activity</h2>
-              <div className={styles.activityList}>
-                <div className={styles.activityItem}>
-                  <div className={styles.activityMeta}>
-                    <div className={styles.activityIcon}>
-                      <Headphones size={16} />
-                    </div>
-                    <div>
-                      <h3>Completed Listening Practice</h3>
-                      <time>2 hours ago</time>
-                    </div>
-                  </div>
-                  <p>Scored 8/10 on "Daily Life Conversations"</p>
-                </div>
-
-                <div className={styles.activityItem}>
-                  <div className={styles.activityMeta}>
-                    <div className={styles.activityIcon}>
-                      <Book size={16} />
-                    </div>
-                    <div>
-                      <h3>Read Story</h3>
-                      <time>Yesterday</time>
-                    </div>
-                  </div>
-                  <p>Completed "A Day at the Park" with 90% comprehension</p>
-                </div>
-
-                <div className={styles.activityItem}>
-                  <div className={styles.activityMeta}>
-                    <div className={styles.activityIcon}>
-                      <PenTool size={16} />
-                    </div>
-                    <div>
-                      <h3>Kanji Practice</h3>
-                      <time>2 days ago</time>
-                    </div>
-                  </div>
-                  <p>Mastered 5 new kanji characters</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </main>
-      </div>
-    </div>
+      <Box>
+        <Typography variant="h5" sx={{ mb: 3, fontWeight: 600 }}>
+          Continue Learning
+        </Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <Button
+              variant="contained"
+              fullWidth
+              size="large"
+              sx={{ 
+                p: 3, 
+                borderRadius: 2,
+                textAlign: 'left',
+                justifyContent: 'flex-start',
+                backgroundColor: 'primary.main',
+              }}
+              startIcon={<BookOpen size={24} />}
+            >
+              Continue Reading: "Morning in the Park"
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Button
+              variant="outlined"
+              fullWidth
+              size="large"
+              sx={{ 
+                p: 3, 
+                borderRadius: 2,
+                textAlign: 'left',
+                justifyContent: 'flex-start',
+                borderColor: 'primary.main',
+                '&:hover': {
+                  borderColor: 'primary.dark',
+                  background: 'primary.light',
+                },
+              }}
+              startIcon={<PenTool size={24} />}
+            >
+              Practice Kanji: 10 new characters
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
+    </PageContainer>
   );
 }
