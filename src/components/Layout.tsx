@@ -1,35 +1,52 @@
+'use client';
+
 import { ReactNode } from 'react';
-import { Box, Container } from '@mui/material';
+import { Box } from '@mui/material';
 import Navigation from './Navigation';
-import { styled } from '@mui/material/styles';
-
-const PageWrapper = styled(Box)(({ theme }) => ({
-  minHeight: '100vh',
-  paddingBottom: '56px', // Height of bottom navigation
-  backgroundColor: theme.palette.background.default,
-}));
-
-const ContentContainer = styled(Container)(({ theme }) => ({
-  paddingTop: theme.spacing(2),
-  paddingBottom: theme.spacing(2),
-  [theme.breakpoints.up('sm')]: {
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
-  },
-}));
+import { useTheme, useMediaQuery } from '@mui/material';
 
 interface LayoutProps {
   children: ReactNode;
-  maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
-export default function Layout({ children, maxWidth = 'lg' }: LayoutProps) {
+const DrawerWidth = 240;
+
+export default function Layout({ children }: LayoutProps) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
-    <PageWrapper>
-      <ContentContainer maxWidth={maxWidth}>
-        {children}
-      </ContentContainer>
+    <Box sx={{ 
+      display: 'flex',
+      minHeight: '100vh',
+      bgcolor: 'grey.50'
+    }}>
       <Navigation />
-    </PageWrapper>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          width: '100%',
+          ml: { sm: `${DrawerWidth}px` },
+          height: '100vh',
+          overflow: 'auto',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        <Box sx={{ 
+          flex: 1, 
+          display: 'flex', 
+          flexDirection: 'column',
+          maxWidth: { sm: `calc(1200px - ${DrawerWidth}px)` },
+          width: '100%',
+          mx: 'auto',
+          px: { xs: 2, sm: 3 },
+          py: { xs: 2, sm: 3 }
+        }}>
+          {children}
+        </Box>
+      </Box>
+    </Box>
   );
 }
