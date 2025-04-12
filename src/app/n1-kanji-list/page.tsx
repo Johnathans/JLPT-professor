@@ -52,7 +52,7 @@ export default function N1KanjiListPage() {
         <div className={styles.comingSoon}>
           <h2>More Kanji Coming Soon</h2>
           <p>We&apos;re currently expanding our N1 kanji list. Check back soon for more content!</p>
-          <Link href="/" className={styles.backLink}>
+          <Link href="/dashboard" className={styles.backLink}>
             ← Back to Home
           </Link>
         </div>

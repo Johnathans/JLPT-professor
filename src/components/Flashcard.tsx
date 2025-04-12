@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { Card, Typography, Box, IconButton } from '@mui/material';
 import { VolumeUp } from '@mui/icons-material';

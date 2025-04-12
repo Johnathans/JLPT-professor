@@ -23,6 +23,7 @@ import {
   Trophy
 } from 'lucide-react';
 import StudyCalendar from '@/components/StudyCalendar';
+import { useJlptLevel } from '@/contexts/JlptLevelContext';
 
 const PageContainer = styled(Box)(({ theme }) => ({
   maxWidth: '1200px',
@@ -111,11 +112,11 @@ const mockStudyData = [
 ];
 
 export default function Dashboard() {
-  const [currentLevel, setCurrentLevel] = useState('N5');
+  const { level: currentLevel, setLevel } = useJlptLevel();
   
   const handleLevelChange = (event: React.MouseEvent<HTMLElement>, newLevel: string) => {
     if (newLevel !== null) {
-      setCurrentLevel(newLevel);
+      setLevel(newLevel as 'N5' | 'N4' | 'N3' | 'N2' | 'N1');
     }
   };
 

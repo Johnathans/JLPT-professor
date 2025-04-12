@@ -223,15 +223,15 @@ export default function VocabularyPage() {
             </Box>
             <LinearProgress 
               variant="determinate" 
-              value={(current/total) * 100} 
-              sx={{ 
+              value={(current / total) * 100}
+              sx={{
                 height: 6, 
                 borderRadius: 3,
-                backgroundColor: (theme) => theme.palette.primary.light,
+                backgroundColor: 'rgba(0, 191, 165, 0.1)',
                 '& .MuiLinearProgress-bar': {
-                  backgroundColor: (theme) => theme.palette.primary.main,
-                },
-              }} 
+                  backgroundColor: '#00bfa5'
+                }
+              }}
             />
           </Grid>
           <Grid item xs={12} md={6}>

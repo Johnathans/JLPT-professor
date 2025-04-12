@@ -1,0 +1,124 @@
+/* Button hover effects */
+@media (hover: hover) {
+  .answerButton {
+    transition: all 0.2s ease;
+  }
+  
+  .answerButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.answerButton {
+  border-radius: 8px !important;
+  padding: 12px !important;
+  margin-bottom: 8px !important;
+  text-align: left !important;
+  transition: all 0.2s ease-in-out !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-size: 1.1rem !important;
+  position: relative !important;
+  padding-left: 32px !important;
+}
+
+.answerButton:hover:not(:disabled) {
+  background-color: #e8e3ff !important;
+}
+
+.correctAnswer {
+  background-color: #e8f5e9 !important;
+  color: #2e7d32 !important;
+}
+
+.incorrectAnswer {
+  background-color: #ffebee !important;
+  color: #c62828 !important;
+}
+
+.answerButton:disabled {
+  opacity: 0.7 !important;
+  cursor: not-allowed !important;
+}
+
+.notYetButton, .notBadButton, .easyButton, .hardButton {
+  color: #000000 !important;
+}
+
+.notYetButton::before {
+  content: "•" !important;
+  position: absolute !important;
+  left: 16px !important;
+  color: #e8e3ff !important;
+}
+
+.hardButton::before {
+  content: "•" !important;
+  position: absolute !important;
+  left: 16px !important;
+  color: #ff9100 !important;
+}
+
+.notBadButton::before {
+  content: "•" !important;
+  position: absolute !important;
+  left: 16px !important;
+  color: #7c4dff !important;
+}
+
+.easyButton::before {
+  content: "•" !important;
+  position: absolute !important;
+  left: 16px !important;
+  color: #00bfa5 !important;
+}
+
+.flipContainer {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+  cursor: pointer;
+}
+
+.card[data-flipped="true"] {
+  transform: rotateY(180deg);
+}
+
+.cardFace {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+.cardBack {
+  transform: rotateY(180deg) translate3d(0, 0, 1px);
+  -webkit-transform: rotateY(180deg) translate3d(0, 0, 1px);
+}
+
+/* Fix for Safari flickering */
+@supports (-webkit-touch-callout: none) {
+  .cardFace {
+    transform: translate3d(0, 0, 0.1px);
+    -webkit-transform: translate3d(0, 0, 0.1px);
+  }
+  
+  .cardBack {
+    transform: rotateY(180deg) translate3d(0, 0, 0.2px);
+    -webkit-transform: rotateY(180deg) translate3d(0, 0, 0.2px);
+  }
+}

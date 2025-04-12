@@ -1,65 +1,40 @@
+'use client';
+
 import React from 'react';
-import Image from 'next/image';
+import { styled } from '@mui/material/styles';
+import { School as SchoolIcon } from '@mui/icons-material';
+
+const LogoWrapper = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: 40,
+  height: 40,
+  borderRadius: '12px',
+  backgroundColor: theme.palette.primary.main,
+  '& .MuiSvgIcon-root': {
+    color: 'white',
+    fontSize: '1.5rem'
+  }
+}));
 
 interface LogoProps {
   size?: number;
-  className?: string;
-  color?: string;
 }
 
 /**
  * Logo component for JLPT Professor
  * 
- * Uses a custom SVG logo with configurable color (defaults to white)
+ * Uses the Material UI School icon in white
  */
 export const Logo: React.FC<LogoProps> = ({ 
-  size = 24, 
-  className = '', 
-  color = 'white'
+  size = 40
 }) => {
   return (
-    <div 
-      className={className} 
-      style={{ 
-        width: size,
-        height: size,
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center'
-      }}
-    >
-      <Image 
-        src="/assets/logo.svg"
-        alt="JLPT Professor Logo" 
-        width={size} 
-        height={size}
-        style={{ 
-          filter: color === 'white' ? 'none' : `brightness(0) saturate(100%) ${getColorFilter(color)}`,
-          objectFit: 'contain',
-          objectPosition: 'center'
-        }}
-      />
-    </div>
+    <LogoWrapper style={{ width: size, height: size, backgroundColor: '#7c4dff' }}>
+      <SchoolIcon />
+    </LogoWrapper>
   );
 };
-
-// Helper function to convert color names to CSS filters
-function getColorFilter(color: string): string {
-  switch (color.toLowerCase()) {
-    case 'purple':
-    case '#7c4dff':
-      return 'invert(32%) sepia(93%) saturate(7466%) hue-rotate(254deg) brightness(101%) contrast(108%)';
-    case 'orange':
-    case '#ff9100':
-      return 'invert(56%) sepia(86%) saturate(1096%) hue-rotate(360deg) brightness(103%) contrast(105%)';
-    case 'teal':
-    case '#00bfa5':
-      return 'invert(42%) sepia(93%) saturate(1352%) hue-rotate(155deg) brightness(97%) contrast(101%)';
-    case 'black':
-      return 'invert(0%) sepia(0%) saturate(0%) hue-rotate(324deg) brightness(96%) contrast(104%)';
-    default:
-      return ''; // Default is white (no filter)
-  }
-}
 
 export default Logo;

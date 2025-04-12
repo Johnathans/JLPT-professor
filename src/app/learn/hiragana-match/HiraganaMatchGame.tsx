@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import styles from '../hiragana-match.module.css';
+import styles from './hiragana-match.module.css';
 
 interface Character {
   hiragana: string;

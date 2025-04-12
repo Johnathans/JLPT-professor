@@ -53,7 +53,7 @@ export default function N5NounsPage() {
         <div className={styles.comingSoon}>
           <h2>More Nouns Coming Soon</h2>
           <p>We&apos;re currently expanding our N5 noun list. Check back soon for more content!</p>
-          <Link href="/" className={styles.backLink}>
+          <Link href="/dashboard" className={styles.backLink}>
             ← Back to Home
           </Link>
         </div>

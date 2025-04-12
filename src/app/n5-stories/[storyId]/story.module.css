@@ -162,85 +162,151 @@
 .mainArea {
   flex: 1;
   min-width: 0;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
 }
 
 .paragraph {
-  margin-bottom: 2rem;
-  background: white;
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.sentence {
+  position: relative;
+  padding: 0.75rem 3rem;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sentence:hover {
+  background-color: var(--primary-light);
+}
+
+.playButton {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+.sentence:hover .playButton {
+  opacity: 1;
 }
 
 .japaneseText {
-  font-size: 1.5rem;
-  line-height: 2.5;
-  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  line-height: 2;
+  flex: 1;
 }
 
 .kanji {
   color: var(--primary-color);
   font-weight: 500;
+  position: relative;
 }
 
-.toolsSection {
-  background: var(--primary-light);
-  border-radius: 12px;
-  padding: 1.5rem;
+.furigana {
+  position: absolute;
+  top: -1.2em;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.7em;
+  color: var(--text-secondary);
+  font-weight: normal;
 }
 
-.toolsGroup {
-  margin-bottom: 1.5rem;
-}
-
-.toolsGroup:last-child {
-  margin-bottom: 0;
-}
-
-.toolsTitle {
-  text-transform: uppercase;
-  color: var(--primary-dark);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  margin-bottom: 1rem;
-}
-
-.controls {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.controlButton {
-  background: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  font-weight: 500;
+.toolsButton {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  cursor: pointer;
   color: var(--primary-color);
+}
+
+.sentence:hover .toolsButton {
+  opacity: 0.6;
+}
+
+.toolsButton:hover {
+  opacity: 1 !important;
+}
+
+.toolsPopover {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 0.5rem;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  z-index: 10;
+  min-width: 200px;
+}
+
+.toolButton {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 4px;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
 }
 
-.controlButton:hover,
-.controlButton.active {
-  background: var(--primary-color);
-  color: white;
+.toolButton:hover {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
 }
 
-.playButton {
-  background: var(--accent-color);
-  color: white;
+.flashcardOptions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 
-.playButton:hover,
-.playButton.active {
-  background: var(--accent-color);
+.flashcardOption {
+  flex: 1;
+  padding: 0.25rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.flashcardOption.hard {
+  background-color: #ff91001a;
+  color: #ff9100;
+}
+
+.flashcardOption.good {
+  background-color: #7c4dff1a;
+  color: #7c4dff;
+}
+
+.flashcardOption.easy {
+  background-color: #00bfa51a;
+  color: #00bfa5;
+}
+
+.flashcardOption:hover {
   filter: brightness(0.9);
-  color: white;
 }
 
 .furiganaText,

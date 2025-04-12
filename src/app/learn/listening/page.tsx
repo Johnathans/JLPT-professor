@@ -1,115 +1,137 @@
+'use client';
+
 import { useState } from 'react';
 import { Card, Typography, Box, Button, Grid, RadioGroup, FormControlLabel, Radio } from '@mui/material';
-import Layout from '@/components/Layout';
-import AudioPlayer from '@/components/AudioPlayer';
-import Image from 'next/image';
 import { styled } from '@mui/material/styles';
 
-const ListeningCard = styled(Card)(({ theme }) => ({
-  marginBottom: theme.spacing(3),
-  padding: theme.spacing(2),
-  [theme.breakpoints.up('sm')]: {
-    padding: theme.spacing(3),
-  },
-}));
-
-const ImageContainer = styled(Box)(({ theme }) => ({
-  position: 'relative',
-  width: '100%',
-  height: '200px',
-  marginBottom: theme.spacing(2),
-  borderRadius: theme.shape.borderRadius,
-  overflow: 'hidden',
-}));
-
 const AnswerOption = styled(FormControlLabel)(({ theme }) => ({
-  marginBottom: theme.spacing(1),
-  padding: theme.spacing(1),
   width: '100%',
-  borderRadius: theme.shape.borderRadius,
+  margin: 0,
+  padding: theme.spacing(2),
   border: `1px solid ${theme.palette.divider}`,
+  borderRadius: theme.shape.borderRadius,
   '&:hover': {
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: theme.palette.action.hover,
   },
 }));
+
+const PageContainer = styled(Box)(({ theme }) => ({
+  maxWidth: 600,
+  margin: '0 auto',
+  width: '100%',
+}));
+
+const sampleListening = {
+  id: '1',
+  title: 'Daily Conversation',
+  audio: '/audio/conversation1.mp3',
+  image: '/images/cafe.jpg',
+  question: 'What did the woman order?',
+  options: [
+    { id: 'a', text: 'Coffee' },
+    { id: 'b', text: 'Tea' },
+    { id: 'c', text: 'Orange juice' },
+    { id: 'd', text: 'Water' },
+  ],
+  correctAnswer: 'b',
+};
 
 export default function ListeningPage() {
-  const [showTranscript, setShowTranscript] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState('');
+  const [isAnswered, setIsAnswered] = useState(false);
 
-  // Sample listening content (will be fetched from Supabase in production)
-  const sampleListening = {
-    audioUrl: '/sample-audio.mp3',
-    imageUrl: '/sample-image.jpg',
-    transcript: '公園で子供たちが遊んでいます。',
-    translation: 'Children are playing in the park.',
-    options: [
-      { id: 'a', text: '公園で子供たちが遊んでいます。' },
-      { id: 'b', text: '公園で大人たちが話しています。' },
-      { id: 'c', text: '公園で犬が走っています。' },
-      { id: 'd', text: '公園は空いています。' },
-    ],
-    correctAnswer: 'a',
+  const handleAnswer = () => {
+    setIsAnswered(true);
   };
 
+  const isCorrect = selectedAnswer === sampleListening.correctAnswer;
+
   return (
-    <Layout maxWidth="md">
-      <Typography variant="h1" gutterBottom>
+    <PageContainer>
+      <Typography variant="h4" gutterBottom>
         Listening Practice
       </Typography>
-      
-      <ListeningCard>
-        <ImageContainer>
-          <Image
-            src={sampleListening.imageUrl}
-            alt="Listening exercise"
-            fill
-            style={{ objectFit: 'cover' }}
-          />
-        </ImageContainer>
-        
-        <Box mb={3}>
-          <AudioPlayer src={sampleListening.audioUrl} />
-        </Box>
-        
+
+      <Card sx={{ mb: 4, p: 3 }}>
+        <Box
+          component="img"
+          src={sampleListening.image}
+          alt="Listening context"
+          sx={{
+            width: '100%',
+            height: 200,
+            objectFit: 'cover',
+            borderRadius: 1,
+            mb: 3,
+          }}
+        />
+
+        <Typography variant="h6" gutterBottom>
+          {sampleListening.question}
+        </Typography>
+
         <RadioGroup
           value={selectedAnswer}
           onChange={(e) => setSelectedAnswer(e.target.value)}
         >
-          <Grid container spacing={2}>
+          <Box sx={{ display: 'grid', gap: 2 }}>
             {sampleListening.options.map((option) => (
-              <Grid item xs={12} key={option.id}>
-                <AnswerOption
-                  value={option.id}
-                  control={<Radio />}
-                  label={option.text}
-                />
-              </Grid>
+              <AnswerOption
+                key={option.id}
+                value={option.id}
+                control={<Radio />}
+                label={option.text}
+                disabled={isAnswered}
+              />
             ))}
-          </Grid>
+          </Box>
         </RadioGroup>
-        
-        <Box mt={3}>
+
+        {!isAnswered && (
           <Button
-            variant="outlined"
-            onClick={() => setShowTranscript(!showTranscript)}
+            variant="contained"
+            color="primary"
             fullWidth
+            onClick={handleAnswer}
+            disabled={!selectedAnswer}
+            sx={{ mt: 3 }}
           >
-            {showTranscript ? 'Hide' : 'Show'} Transcript
+            Check Answer
           </Button>
-          
-          {showTranscript && (
-            <Box mt={2}>
-              <Typography variant="body1">
-                {sampleListening.transcript}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" mt={1}>
-                {sampleListening.translation}
-              </Typography>
-            </Box>
-          )}
-        </Box>
-      </ListeningCard>
-    </Layout>
+        )}
+
+        {isAnswered && (
+          <Box sx={{ mt: 3, textAlign: 'center' }}>
+            <Typography
+              variant="h6"
+              color={isCorrect ? 'success.main' : 'error.main'}
+              gutterBottom
+            >
+              {isCorrect ? 'Correct!' : 'Incorrect'}
+            </Typography>
+            <Typography variant="body1" color="text.secondary">
+              {isCorrect
+                ? 'Great job! Let\'s try another one.'
+                : `The correct answer was: ${
+                    sampleListening.options.find(
+                      (opt) => opt.id === sampleListening.correctAnswer
+                    )?.text
+                  }`}
+            </Typography>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                setSelectedAnswer('');
+                setIsAnswered(false);
+              }}
+              sx={{ mt: 2 }}
+            >
+              Next Question
+            </Button>
+          </Box>
+        )}
+      </Card>
+    </PageContainer>
   );
 }

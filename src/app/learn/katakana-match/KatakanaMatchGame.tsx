@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import styles from '../katakana-match.module.css';
+import styles from './katakana-match.module.css';
 
 interface Character {
   katakana: string;
