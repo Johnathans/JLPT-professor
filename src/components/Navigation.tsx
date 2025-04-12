@@ -1,11 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemIcon, ListItemText, Collapse, Typography, Box, BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
+import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemIcon, ListItemText, Collapse, Typography, Box, BottomNavigation, BottomNavigationAction, Paper, Select, MenuItem } from '@mui/material';
 import { useTheme, useMediaQuery } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Logo from '@/components/Logo';
 import { useRouter, usePathname } from 'next/navigation';
+import { useJlptLevel } from '@/contexts/JlptLevelContext';
 import {
   Menu as MenuIcon,
   Home,
@@ -15,11 +16,11 @@ import {
   Person,
   ExpandLess,
   ExpandMore,
-  Search as SearchIcon
+  Circle as CircleIcon
 } from '@mui/icons-material';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper,
+  backgroundColor: '#ffffff !important',
   color: theme.palette.text.primary,
   boxShadow: 'none',
   borderBottom: `1px solid ${theme.palette.divider}`,
@@ -28,13 +29,16 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
   }
 }));
 
-const DrawerWidth = 240;
+const drawerWidth = 280;
 
 const LogoContainer = styled('div')(({ theme }) => ({
   padding: theme.spacing(2.5),
   display: 'flex',
   alignItems: 'center',
-  gap: theme.spacing(1.5)
+  gap: theme.spacing(1.5),
+  '& .MuiTypography-root': {
+    fontFamily: 'var(--font-poppins)',
+  }
 }));
 
 const StyledListItem = styled(ListItem)(({ theme }) => ({
@@ -48,22 +52,24 @@ const StyledListItem = styled(ListItem)(({ theme }) => ({
   },
   '& .MuiListItemText-primary': {
     fontSize: '0.875rem',
-    fontWeight: 500,
+    fontWeight: 700,
+    fontFamily: 'var(--font-poppins)',
+    color: '#1a1a1a',
   },
   '&.Mui-selected': {
     backgroundColor: theme.palette.primary.light,
     '& .MuiListItemIcon-root': {
-      color: theme.palette.primary.main,
+      color: '#5e35b1',
     },
     '& .MuiListItemText-primary': {
-      color: theme.palette.primary.main,
-      fontWeight: 600,
+      color: '#5e35b1',
+      fontWeight: 700,
     },
   },
   '&:hover': {
     backgroundColor: theme.palette.primary.light,
     '& .MuiListItemIcon-root': {
-      color: theme.palette.primary.main,
+      color: '#5e35b1',
     },
   }
 }));
@@ -75,19 +81,27 @@ const CategoryLabel = styled(Typography)(({ theme }) => ({
   textTransform: 'uppercase',
   letterSpacing: '0.1em',
   padding: theme.spacing(2, 3, 1),
+  fontFamily: 'var(--font-poppins)',
 }));
 
-const SearchBox = styled('div')(({ theme }) => ({
+const LevelIndicator = styled('div')(({ theme }) => ({
   margin: theme.spacing(0, 2, 2),
   padding: theme.spacing(1, 1.5),
-  backgroundColor: theme.palette.grey[100],
+  backgroundColor: '#fff',
+  border: `1px solid ${theme.palette.primary.main}20`,
   borderRadius: theme.shape.borderRadius,
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(1),
-  '& .MuiSvgIcon-root': {
-    fontSize: '1.2rem',
-    color: theme.palette.text.secondary,
+  '& .MuiSelect-select': {
+    padding: theme.spacing(0.5, 1),
+    fontFamily: 'var(--font-poppins)',
+    fontWeight: 600,
+    fontSize: '0.875rem',
+    color: theme.palette.primary.main,
+    '&:focus': {
+      backgroundColor: 'transparent'
+    }
+  },
+  '& .MuiOutlinedInput-notchedOutline': {
+    border: 'none'
   }
 }));
 
@@ -98,6 +112,7 @@ export default function Navigation() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const router = useRouter();
   const pathname = usePathname();
+  const { level, setLevel } = useJlptLevel();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -109,7 +124,28 @@ export default function Navigation() {
 
   const menuItems = [
     { text: 'Home', icon: <Home />, path: '/dashboard' },
-    { text: 'Study', icon: <School />, path: '/study' },
+    { 
+      text: 'Kanji', 
+      icon: <CircleIcon sx={{ fontSize: 10, color: pathname === '/learn/kanji' ? '#5e35b1' : '#e8e3ff' }} />, 
+      path: '/learn/kanji' 
+    },
+    { 
+      text: 'Vocabulary', 
+      icon: <CircleIcon sx={{ fontSize: 10, color: pathname === '/learn/vocabulary' ? '#5e35b1' : '#e8e3ff' }} />, 
+      path: '/learn/vocabulary' 
+    },
+    { 
+      text: 'Reading', 
+      icon: <CircleIcon sx={{ fontSize: 10, color: pathname === '/learn/reading' ? '#5e35b1' : '#e8e3ff' }} />, 
+      path: '/learn/reading' 
+    },
+    { 
+      text: 'Listening', 
+      icon: <CircleIcon sx={{ fontSize: 10, color: pathname === '/learn/listening' ? '#5e35b1' : '#e8e3ff' }} />, 
+      path: '/learn/listening' 
+    },
+    { text: 'Hiragana', icon: <CircleIcon sx={{ fontSize: 10, color: pathname === '/learn/hiragana-match/play' ? '#5e35b1' : '#e8e3ff' }} />, path: '/learn/hiragana-match/play' },
+    { text: 'Katakana', icon: <CircleIcon sx={{ fontSize: 10, color: pathname === '/learn/katakana-match/play' ? '#5e35b1' : '#e8e3ff' }} />, path: '/learn/katakana-match/play' },
     { text: 'Resources', icon: <MenuBook />, path: '/resources', hasSubmenu: true },
     { text: 'Tests', icon: <Assessment />, path: '/tests' },
     { text: 'Profile', icon: <Person />, path: '/profile' },
@@ -130,12 +166,20 @@ export default function Navigation() {
         </Typography>
       </LogoContainer>
       
-      <SearchBox>
-        <SearchIcon />
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          Search...
-        </Typography>
-      </SearchBox>
+      <LevelIndicator>
+        <Select
+          value={level}
+          onChange={(e) => setLevel(e.target.value as 'N1' | 'N2' | 'N3' | 'N4' | 'N5')}
+          fullWidth
+          variant="outlined"
+        >
+          <MenuItem value="N5">Studying N5</MenuItem>
+          <MenuItem value="N4">Studying N4</MenuItem>
+          <MenuItem value="N3">Studying N3</MenuItem>
+          <MenuItem value="N2">Studying N2</MenuItem>
+          <MenuItem value="N1">Studying N1</MenuItem>
+        </Select>
+      </LevelIndicator>
 
       <Box sx={{ flex: 1, overflowY: 'auto' }}>
         <CategoryLabel>Main Menu</CategoryLabel>
@@ -205,7 +249,7 @@ export default function Navigation() {
       <Box
         component="nav"
         sx={{
-          width: { sm: DrawerWidth },
+          width: { sm: drawerWidth },
           flexShrink: { sm: 0 },
           position: 'fixed',
           top: 0,
@@ -225,7 +269,7 @@ export default function Navigation() {
             display: { xs: 'block', sm: 'none' },
             '& .MuiDrawer-paper': { 
               boxSizing: 'border-box', 
-              width: DrawerWidth,
+              width: drawerWidth,
               borderRight: 'none',
               bgcolor: 'background.paper'
             },
@@ -239,7 +283,7 @@ export default function Navigation() {
             display: { xs: 'none', sm: 'block' },
             '& .MuiDrawer-paper': { 
               boxSizing: 'border-box', 
-              width: DrawerWidth,
+              width: drawerWidth,
               borderRight: 'none',
               bgcolor: 'background.paper'
             },

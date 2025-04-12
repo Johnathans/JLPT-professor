@@ -9,7 +9,7 @@ interface LayoutProps {
   children: ReactNode;
 }
 
-const DrawerWidth = 240;
+const DrawerWidth = 280;
 
 export default function Layout({ children }: LayoutProps) {
   const theme = useTheme();
@@ -19,7 +19,7 @@ export default function Layout({ children }: LayoutProps) {
     <Box sx={{ 
       display: 'flex',
       minHeight: '100vh',
-      bgcolor: 'grey.50'
+      bgcolor: '#fafcfe'
     }}>
       <Navigation />
       <Box
