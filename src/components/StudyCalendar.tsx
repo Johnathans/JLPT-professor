@@ -1,99 +1,100 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
-import { Box, Typography, Paper } from '@mui/material';
-import { format, eachDayOfInterval, subMonths, startOfMonth, endOfMonth } from 'date-fns';
+import { Box, Typography } from '@mui/material';
 
-const CalendarWrapper = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(3),
-  borderRadius: theme.spacing(2),
-  border: `1px solid ${theme.palette.divider}`,
-  boxShadow: 'none',
+const CalendarWrapper = styled(Box)(({ theme }) => ({
+  width: '100%',
+  maxWidth: '800px',
 }));
 
 const CalendarGrid = styled(Box)(({ theme }) => ({
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fill, minmax(15px, 1fr))',
-  gap: '4px',
-  marginTop: theme.spacing(2),
+  gridTemplateColumns: 'repeat(20, 1fr)',
+  gap: 2,
+  [theme.breakpoints.down('sm')]: {
+    gridTemplateColumns: 'repeat(15, 1fr)',
+  },
 }));
 
-const CalendarCell = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'intensity',
-})<{ intensity?: number }>(({ theme, intensity = 0 }) => {
-  const getBackgroundColor = () => {
-    switch (intensity) {
-      case 0:
-        return theme.palette.grey[100];
-      case 1:
-        return theme.palette.primary.light;
-      case 2:
-        return theme.palette.primary.main;
-      case 3:
-        return theme.palette.primary.dark;
-      default:
-        return theme.palette.grey[100];
+const DayCell = styled(Box)<{ intensity: number }>(({ theme, intensity }) => {
+  const getColor = (level: number) => {
+    switch (level) {
+      case 1: return '#e8e3ff';
+      case 2: return '#b4a0ff';
+      case 3: return '#7c4dff';
+      default: return '#f5f5f5';
     }
   };
 
   return {
-    width: '15px',
-    height: '15px',
+    aspectRatio: '1',
+    backgroundColor: getColor(intensity),
     borderRadius: '2px',
-    backgroundColor: getBackgroundColor(),
-    transition: 'transform 0.2s ease',
-    '&:hover': {
-      transform: 'scale(1.2)',
-    },
+    width: '100%',
+    minWidth: '12px',
+    maxWidth: '16px',
   };
 });
 
-interface StudyDay {
-  date: string;
-  intensity: number;
-}
+const Legend = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  gap: theme.spacing(2),
+  marginTop: theme.spacing(2),
+}));
+
+const LegendItem = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: theme.spacing(1),
+}));
 
 interface StudyCalendarProps {
-  studyData: StudyDay[];
+  data: Array<{
+    date: string;
+    intensity: number;
+  }>;
 }
 
-export default function StudyCalendar({ studyData }: StudyCalendarProps) {
-  const [calendarData, setCalendarData] = useState<StudyDay[]>([]);
-
-  useEffect(() => {
-    const endDate = new Date();
-    const startDate = subMonths(startOfMonth(endDate), 5);
-    
-    const allDays = eachDayOfInterval({ start: startDate, end: endDate }).map(
-      date => {
-        const dateStr = format(date, 'yyyy-MM-dd');
-        const studyDay = studyData.find(d => d.date === dateStr);
-        return {
-          date: dateStr,
-          intensity: studyDay?.intensity || 0,
-        };
-      }
-    );
-
-    setCalendarData(allDays);
-  }, [studyData]);
-
+export default function StudyCalendar({ data }: StudyCalendarProps) {
   return (
     <CalendarWrapper>
-      <Typography variant="h6" sx={{ fontWeight: 600 }}>Study Activity</Typography>
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-        Last 6 months of activity
-      </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+        <Typography variant="subtitle1" sx={{ fontWeight: 500 }}>
+          Study Activity
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Last 6 Months
+        </Typography>
+      </Box>
       <CalendarGrid>
-        {calendarData.map((day) => (
-          <CalendarCell
+        {data.map((day) => (
+          <DayCell
             key={day.date}
             intensity={day.intensity}
-            title={`${day.date}: ${day.intensity} studies`}
+            title={`${day.date}: ${day.intensity} study sessions`}
           />
         ))}
       </CalendarGrid>
+      <Legend>
+        <LegendItem>
+          <DayCell intensity={0} />
+          <Typography variant="caption" color="text.secondary">None</Typography>
+        </LegendItem>
+        <LegendItem>
+          <DayCell intensity={1} />
+          <Typography variant="caption" color="text.secondary">Light</Typography>
+        </LegendItem>
+        <LegendItem>
+          <DayCell intensity={2} />
+          <Typography variant="caption" color="text.secondary">Medium</Typography>
+        </LegendItem>
+        <LegendItem>
+          <DayCell intensity={3} />
+          <Typography variant="caption" color="text.secondary">Heavy</Typography>
+        </LegendItem>
+      </Legend>
     </CalendarWrapper>
   );
 }
