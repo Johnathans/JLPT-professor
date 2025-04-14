@@ -1,6 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
+import Image, { StaticImageData } from 'next/image';
+import japaneseFoodImage from '../../../assets/japanese-food.jpg';
 import { 
   Card, 
   Typography, 
@@ -17,7 +21,9 @@ import {
   DialogTitle,
   ToggleButtonGroup,
   ToggleButton,
-  Tooltip
+  Tooltip,
+  alpha,
+  Link
 } from '@mui/material';
 import { 
   VolumeUp, 
@@ -29,16 +35,17 @@ import {
   Book,
   ViewHeadline,
   ViewStream,
-  School
+  School,
+  ArrowBack,
+  MenuBook,
+  Translate
 } from '@mui/icons-material';
-import { styled } from '@mui/material/styles';
-import AudioPlayer from '@/components/AudioPlayer';
 
 const PageContainer = styled(Box)(({ theme }) => ({
-  maxWidth: 1200,
+  maxWidth: 'calc(1400px - 240px)', // updated width
   margin: '0 auto',
   width: '100%',
-  padding: theme.spacing(3),
+  padding: theme.spacing(2, 3),
 }));
 
 const StoryCard = styled(Paper)(({ theme }) => ({
@@ -54,26 +61,48 @@ const StoryCard = styled(Paper)(({ theme }) => ({
   }
 }));
 
-const StoryContainer = styled(Paper)(({ theme }) => ({
-  maxWidth: 800,
-  margin: '0 auto',
-  backgroundColor: '#fff',
-  border: `1px solid ${theme.palette.divider}`,
-  borderRadius: theme.shape.borderRadius,
-  overflow: 'hidden',
-}));
-
-const StoryHeader = styled(Box)(({ theme }) => ({
-  position: 'relative',
-  padding: theme.spacing(4),
-  borderBottom: `1px solid ${theme.palette.divider}`,
+const StoryContainer = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.primary.light,
+  borderRadius: theme.shape.borderRadius,
+  padding: theme.spacing(4),
+  marginBottom: theme.spacing(4),
 }));
 
-const StoryHeaderContent = styled(Box)(({ theme }) => ({
+const StoryStats = styled('div')(({ theme }) => ({
   display: 'flex',
-  alignItems: 'flex-start',
-  gap: theme.spacing(3),
+  gap: theme.spacing(2),
+  marginTop: theme.spacing(3),
+  '& .MuiChip-root': {
+    backgroundColor: '#fff',
+    '& .MuiChip-icon': {
+      color: theme.palette.primary.main,
+    },
+  },
+}));
+
+const StoryContent = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(4),
+  backgroundColor: '#fff',
+  '& > div': {
+    padding: theme.spacing(3),
+    borderBottom: `1px solid ${theme.palette.divider}`,
+    '&:last-child': {
+      borderBottom: 'none',
+    },
+    '&:hover': {
+      backgroundColor: alpha(theme.palette.primary.main, 0.05),
+    },
+    '&.active': {
+      backgroundColor: alpha(theme.palette.primary.main, 0.1),
+    },
+  },
+}));
+
+const StoryImage = styled('img')(({ theme }) => ({
+  width: '100%',
+  height: '200px',
+  objectFit: 'cover',
+  borderRadius: theme.shape.borderRadius,
 }));
 
 const StoryInfo = styled(Box)({
@@ -91,10 +120,6 @@ const ViewOptions = styled(Box)(({ theme }) => ({
   display: 'flex',
   gap: theme.spacing(1),
   marginLeft: 'auto',
-}));
-
-const StoryContent = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(4, 6),
 }));
 
 const StoryText = styled(Box)(({ theme }) => ({
@@ -199,17 +224,15 @@ const ToolButton = styled(Button)(({ theme }) => ({
   }
 }));
 
-const FlashcardOptions = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  gap: theme.spacing(1),
-  marginTop: theme.spacing(1),
-}));
+interface DifficultyButtonProps {
+  difficulty: 'hard' | 'good' | 'easy';
+}
 
-const FlashcardOption = styled(Button)(({ theme, difficulty }) => {
+const DifficultyButton = styled(Button)<DifficultyButtonProps>(({ theme, difficulty }) => {
   const colors = {
-    hard: '#ff9100',
-    good: '#7c4dff',
-    easy: '#00bfa5',
+    hard: theme.palette.error.main,
+    good: theme.palette.warning.main,
+    easy: theme.palette.success.main
   };
   return {
     flex: 1,
@@ -222,6 +245,12 @@ const FlashcardOption = styled(Button)(({ theme, difficulty }) => {
     }
   };
 });
+
+const FlashcardOptions = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  gap: theme.spacing(1),
+  marginTop: theme.spacing(1),
+}));
 
 const ToolsPopover = styled(Paper)(({ theme }) => ({
   position: 'absolute',
@@ -237,21 +266,166 @@ const ToolsPopover = styled(Paper)(({ theme }) => ({
   minWidth: 200,
 }));
 
+const ReadingLayout = styled('div')(({ theme }) => ({
+  display: 'grid',
+  gridTemplateColumns: '1fr 400px',
+  gap: theme.spacing(4),
+  width: '100%',
+  paddingTop: theme.spacing(5),
+  [theme.breakpoints.down('md')]: {
+    gridTemplateColumns: '1fr',
+  }
+}));
+
+const MainContent = styled('div')(({ theme }) => ({
+  flex: 1,
+  position: 'relative',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: theme.spacing(3),
+}));
+
+const AudioSidebar = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(3),
+  backgroundColor: '#fff',
+  borderRadius: theme.shape.borderRadius,
+  position: 'sticky',
+  top: theme.spacing(2),
+  height: 'fit-content',
+  maxHeight: 'calc(100vh - 100px)',
+  overflowY: 'auto',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: theme.spacing(3),
+  [theme.breakpoints.down('md')]: {
+    position: 'static',
+    maxHeight: '400px'
+  }
+}));
+
+const BackButton = styled(Link)(({ theme }) => ({
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: theme.spacing(1),
+  color: theme.palette.primary.main,
+  backgroundColor: alpha(theme.palette.primary.main, 0.05),
+  textDecoration: 'none',
+  position: 'absolute',
+  top: -48,
+  left: 0,
+  fontSize: '0.875rem',
+  padding: theme.spacing(0.5, 1),
+  borderRadius: theme.shape.borderRadius,
+  transition: 'all 0.2s ease',
+  '& svg': {
+    fontSize: '1.2rem',
+  },
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.primary.main, 0.1),
+  },
+}));
+
+const StoryHeader = styled('div')(({ theme }) => ({
+  marginBottom: theme.spacing(4),
+}));
+
+const StatsGrid = styled('div')(({ theme }) => ({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2, 1fr)',
+  gap: theme.spacing(1.5),
+  marginTop: theme.spacing(2),
+  marginBottom: theme.spacing(3),
+}));
+
+const StatCard = styled('div')(({ theme }) => ({
+  backgroundColor: '#fff',
+  padding: theme.spacing(1.5),
+  borderRadius: theme.shape.borderRadius,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: theme.spacing(0.25),
+  boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+  '& .label': {
+    color: theme.palette.text.secondary,
+    fontSize: '0.75rem',
+  },
+  '& .value': {
+    color: theme.palette.primary.main,
+    fontSize: '1rem',
+    fontWeight: 600,
+  },
+}));
+
+const AudioSidebarHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  marginBottom: theme.spacing(3),
+}));
+
+const StoryBadge = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: theme.spacing(1),
+  padding: theme.spacing(0.5, 1.5),
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: '#fff',
+  '& svg': {
+    color: theme.palette.primary.main,
+    fontSize: '1.2rem',
+  },
+}));
+
+const StoryBadges = styled('div')(({ theme }) => ({
+  display: 'flex',
+  gap: theme.spacing(1),
+  marginBottom: theme.spacing(3),
+}));
+
+const StoryTextContainer = styled('div')(({ theme }) => ({
+  backgroundColor: '#fff',
+  borderRadius: theme.shape.borderRadius,
+  overflow: 'hidden',
+  '& > div': {
+    padding: theme.spacing(3),
+    borderBottom: `1px solid ${theme.palette.divider}`,
+    cursor: 'pointer',
+    '&:last-child': {
+      borderBottom: 'none',
+    },
+    '&:hover': {
+      backgroundColor: alpha(theme.palette.primary.main, 0.05),
+    },
+    '&.active': {
+      backgroundColor: alpha(theme.palette.primary.main, 0.1),
+    },
+  },
+}));
+
+const AudioSectionHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  marginBottom: theme.spacing(2),
+}));
+
 interface Story {
   id: string;
   title: string;
   description: string;
-  imageUrl?: string;
+  imageUrl: string | StaticImageData;
   n5KanjiCount: number;
   n5VocabCount: number;
-  sections: {
-    japanese: string;
-    translation: string;
-    flashcards: Array<{
-      word: string;
-      reading: string;
-      meaning: string;
-    }>;
+  sections: StorySection[];
+}
+
+interface StorySection {
+  japanese: string;
+  translation: string;
+  flashcards: {
+    word: string;
+    reading: string;
+    meaning: string;
   }[];
 }
 
@@ -259,152 +433,87 @@ interface Story {
 const sampleStories: Story[] = [
   {
     id: '1',
-    title: 'Morning in the Park',
-    description: 'A peaceful story about morning routines and nature.',
-    n5KanjiCount: 12,
-    n5VocabCount: 25,
+    title: 'My First Day at Work',
+    description: 'Experience the excitement and nervousness of starting a new job.',
+    imageUrl: '',
+    n5KanjiCount: 15,
+    n5VocabCount: 30,
     sections: [
       {
-        japanese: '私は毎朝公園を散歩します。桜の木の下でコーヒーを飲むのが好きです。',
-        translation: 'I take a walk in the park every morning. I like to drink coffee under the cherry blossom trees.',
+        japanese: '今日は新しい会社の初日です。朝早く起きて、スーツを着ました。電車は込んでいましたが、時間通りに着きました。オフィスは大きくて綺麗でした。',
+        translation: 'Today is my first day at the new company. I woke up early and put on a suit. The train was crowded, but I arrived on time. The office was big and clean.',
         flashcards: [
-          { word: '公園', reading: 'こうえん', meaning: 'park' },
-          { word: '散歩', reading: 'さんぽ', meaning: 'walk' },
-          { word: '桜', reading: 'さくら', meaning: 'cherry blossom' }
-        ]
-      },
-      {
-        japanese: '小鳥のさえずりを聞きながら、本を読みます。とても静かで平和な時間です。',
-        translation: 'I read a book while listening to the birds chirping. It is a very quiet and peaceful time.',
-        flashcards: [
-          { word: '小鳥', reading: 'ことり', meaning: 'small bird' },
-          { word: '静か', reading: 'しずか', meaning: 'quiet' },
-          { word: '平和', reading: 'へいわ', meaning: 'peace' }
-        ]
-      },
-      {
-        japanese: '時々、友達も一緒に来ます。私たちは楽しく話をしながら、朝ごはんを食べます。',
-        translation: 'Sometimes, my friends come along too. We enjoy breakfast while having pleasant conversations.',
-        flashcards: [
-          { word: '友達', reading: 'ともだち', meaning: 'friend' },
-          { word: '一緒', reading: 'いっしょ', meaning: 'together' },
-          { word: '朝ごはん', reading: 'あさごはん', meaning: 'breakfast' }
+          { word: '会社', reading: 'かいしゃ', meaning: 'company' },
+          { word: '初日', reading: 'しょにち', meaning: 'first day' },
+          { word: 'スーツ', reading: 'すーつ', meaning: 'suit' }
         ]
       }
     ]
   },
   {
     id: '2',
-    title: 'My First Day at Work',
-    description: 'Experience the excitement and nervousness of starting a new job.',
-    n5KanjiCount: 15,
-    n5VocabCount: 30,
-    sections: [
-      {
-        japanese: '今日は新しい会社の初日です。朝早く起きて、スーツを着ました。',
-        translation: 'Today is my first day at the new company. I woke up early and put on my suit.',
-        flashcards: [
-          { word: '会社', reading: 'かいしゃ', meaning: 'company' },
-          { word: '初日', reading: 'しょにち', meaning: 'first day' },
-          { word: 'スーツ', reading: 'すーつ', meaning: 'suit' }
-        ]
-      },
-      {
-        japanese: '電車は込んでいましたが、時間通りに着きました。オフィスは大きくて綺麗でした。',
-        translation: 'The train was crowded, but I arrived on time. The office was big and beautiful.',
-        flashcards: [
-          { word: '電車', reading: 'でんしゃ', meaning: 'train' },
-          { word: '時間', reading: 'じかん', meaning: 'time' },
-          { word: '綺麗', reading: 'きれい', meaning: 'beautiful' }
-        ]
-      }
-    ]
-  },
-  {
-    id: '3',
-    title: 'Weekend Shopping',
-    description: 'A fun story about shopping and meeting friends in the city.',
-    n5KanjiCount: 18,
-    n5VocabCount: 35,
-    sections: [
-      {
-        japanese: '土曜日に友達と買い物に行きました。新しい服を買いたかったです。',
-        translation: 'I went shopping with my friend on Saturday. I wanted to buy new clothes.',
-        flashcards: [
-          { word: '土曜日', reading: 'どようび', meaning: 'Saturday' },
-          { word: '買い物', reading: 'かいもの', meaning: 'shopping' },
-          { word: '服', reading: 'ふく', meaning: 'clothes' }
-        ]
-      },
-      {
-        japanese: '駅の近くの大きいデパートに入りました。たくさんの人がいました。',
-        translation: 'We entered a large department store near the station. There were many people.',
-        flashcards: [
-          { word: '駅', reading: 'えき', meaning: 'station' },
-          { word: '近く', reading: 'ちかく', meaning: 'near' },
-          { word: 'デパート', reading: 'でぱーと', meaning: 'department store' }
-        ]
-      },
-      {
-        japanese: '昼ごはんは食堂で食べました。おいしいラーメンを注文しました。',
-        translation: 'We had lunch at the cafeteria. We ordered delicious ramen.',
-        flashcards: [
-          { word: '昼ごはん', reading: 'ひるごはん', meaning: 'lunch' },
-          { word: '食堂', reading: 'しょくどう', meaning: 'cafeteria' },
-          { word: '注文', reading: 'ちゅうもん', meaning: 'order' }
-        ]
-      }
-    ]
-  },
-  {
-    id: '4',
     title: 'Making Japanese Food',
     description: 'Learn about cooking traditional Japanese dishes at home.',
+    imageUrl: japaneseFoodImage,
     n5KanjiCount: 20,
     n5VocabCount: 40,
     sections: [
       {
-        japanese: '週末に日本料理を作ることにしました。まず、スーパーに買い物に行きました。',
-        translation: 'I decided to make Japanese food on the weekend. First, I went shopping at the supermarket.',
+        japanese: '週末に日本料理を作ることにしました。まず、スーパーに買い物に行きました。野菜、お米、そして魚を買いました。家に帰って、料理を始めました。最初に、お米を研ぎました。次に、魚を焼いて、野菜を切りました。',
+        translation: 'I decided to make Japanese food on the weekend. First, I went shopping at the supermarket. I bought vegetables, rice, and fish. I returned home and started cooking. First, I washed the rice. Next, I grilled the fish and cut the vegetables.',
         flashcards: [
           { word: '料理', reading: 'りょうり', meaning: 'cooking' },
           { word: '週末', reading: 'しゅうまつ', meaning: 'weekend' },
-          { word: 'スーパー', reading: 'すーぱー', meaning: 'supermarket' }
-        ]
-      },
-      {
-        japanese: '野菜、お米、そして魚を買いました。家に帰って、料理を始めました。',
-        translation: 'I bought vegetables, rice, and fish. I went home and started cooking.',
-        flashcards: [
-          { word: '野菜', reading: 'やさい', meaning: 'vegetables' },
-          { word: 'お米', reading: 'おこめ', meaning: 'rice' },
-          { word: '魚', reading: 'さかな', meaning: 'fish' }
-        ]
-      },
-      {
-        japanese: '最初に、お米を研ぎました。次に、魚を焼いて、野菜を切りました。',
-        translation: 'First, I washed the rice. Then, I grilled the fish and cut the vegetables.',
-        flashcards: [
-          { word: '最初', reading: 'さいしょ', meaning: 'first' },
-          { word: '次', reading: 'つぎ', meaning: 'next' },
-          { word: '切る', reading: 'きる', meaning: 'to cut' }
+          { word: '買い物', reading: 'かいもの', meaning: 'shopping' }
         ]
       }
     ]
   }
 ];
 
+const getAllSentences = (sections: StorySection[]) => {
+  return sections.flatMap((section, sectionIndex) => 
+    section.japanese.split('。').map((sentence, sentenceIndex) => ({
+      text: sentence.trim() + (sentence.trim() ? '。' : ''),
+      translation: section.translation,
+      flashcards: section.flashcards,
+      index: `${sectionIndex}-${sentenceIndex}`
+    })).filter(s => s.text.trim())
+  );
+};
+
+const AudioLine = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'flex-start',
+  gap: theme.spacing(2),
+  padding: theme.spacing(2),
+  borderRadius: theme.shape.borderRadius,
+  cursor: 'pointer',
+  transition: 'all 0.2s ease',
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.primary.main, 0.05),
+  },
+  '&.active': {
+    backgroundColor: alpha(theme.palette.primary.main, 0.1),
+    borderLeft: `4px solid ${theme.palette.primary.main}`,
+  },
+}));
+
 export default function ReadingPage() {
+  const theme = useTheme();
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
+  const [selectedStoryIndex, setSelectedStoryIndex] = useState<number | undefined>(undefined);
   const [showFurigana, setShowFurigana] = useState<Record<string, boolean>>({});
   const [showTools, setShowTools] = useState<Record<string, boolean>>({});
   const [audioStates, setAudioStates] = useState<Record<string, boolean>>({});
   const [flashcardDialogOpen, setFlashcardDialogOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'paragraph' | 'lines'>('paragraph');
   const [showTranslation, setShowTranslation] = useState(false);
+  const [activeLine, setActiveLine] = useState<number | null>(null);
 
-  const handleStorySelect = (story: Story) => {
+  const handleStorySelect = (story: Story, index: number) => {
     setSelectedStory(story);
+    setSelectedStoryIndex(index);
     setShowFurigana({});
     setShowTools({});
   };
@@ -422,16 +531,6 @@ export default function ReadingPage() {
       newState[sentenceId] = !prev[sentenceId];
       return newState;
     });
-  };
-
-  const getAllSentences = (sections: Story['sections']) => {
-    return sections.flatMap((section, sectionIndex) => 
-      section.japanese.split('。').map((sentence, sentenceIndex) => ({
-        text: sentence.trim() + (sentence.trim() ? '。' : ''),
-        flashcards: section.flashcards,
-        index: `${sectionIndex}-${sentenceIndex}`
-      })).filter(s => s.text.trim())
-    );
   };
 
   const renderSentence = (text: string, index: number, flashcards: any[]) => {
@@ -463,9 +562,9 @@ export default function ReadingPage() {
               Add to Flashcards
             </ToolButton>
             <FlashcardOptions>
-              <FlashcardOption difficulty="hard">Hard</FlashcardOption>
-              <FlashcardOption difficulty="good">Good</FlashcardOption>
-              <FlashcardOption difficulty="easy">Easy</FlashcardOption>
+              <DifficultyButton difficulty="hard">Hard</DifficultyButton>
+              <DifficultyButton difficulty="good">Good</DifficultyButton>
+              <DifficultyButton difficulty="easy">Easy</DifficultyButton>
             </FlashcardOptions>
           </ToolsPopover>
         )}
@@ -473,191 +572,178 @@ export default function ReadingPage() {
     );
   };
 
+  const toggleAudio = (index: number) => {
+    setAudioStates(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
+
   return (
     <PageContainer>
-      <Grid container spacing={3}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
         {!selectedStory ? (
-          <Grid item xs={12}>
+          <Box>
             <Typography variant="h4" sx={{ mb: 3, fontWeight: 700 }}>
               Reading Practice
             </Typography>
-            <Grid container spacing={3}>
-              {sampleStories.map((story) => (
-                <Grid item xs={12} md={6} key={story.id}>
-                  <StoryCard onClick={() => handleStorySelect(story)}>
-                    <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
-                      {story.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                      {story.description}
-                    </Typography>
-                    <Stack direction="row" spacing={1}>
-                      <Chip
-                        icon={<School />}
-                        label={`${story.n5KanjiCount} N5 Kanji`}
-                        size="small"
-                      />
-                      <Chip
-                        icon={<School />}
-                        label={`${story.n5VocabCount} N5 Vocab`}
-                        size="small"
-                      />
-                    </Stack>
-                  </StoryCard>
-                </Grid>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
+              {sampleStories.map((story, index) => (
+                <StoryCard key={story.id} onClick={() => handleStorySelect(story, index)}>
+                  <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
+                    {story.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                    {story.description}
+                  </Typography>
+                  <Stack direction="row" spacing={1}>
+                    <Chip
+                      icon={<School />}
+                      label={`${story.n5KanjiCount} N5 Kanji`}
+                      size="small"
+                    />
+                    <Chip
+                      icon={<School />}
+                      label={`${story.n5VocabCount} N5 Vocab`}
+                      size="small"
+                    />
+                  </Stack>
+                </StoryCard>
               ))}
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         ) : (
-          <Grid item xs={12}>
-            <Button
-              startIcon={<ChevronRight sx={(theme) => ({ transform: 'rotate(180deg)' })} />}
-              onClick={() => setSelectedStory(null)}
-              sx={(theme) => ({
-                mb: 3,
-                color: theme.palette.primary.dark,
-                '&:hover': {
-                  backgroundColor: `${theme.palette.primary.light}40`,
-                }
-              })}
-            >
-              Back to Stories
-            </Button>
+          <ReadingLayout>
+            <MainContent>
+              <BackButton href="/learn/reading">
+                <ArrowBack fontSize="small" />
+                Back to Stories
+              </BackButton>
 
-            <StoryContainer>
-              <StoryHeader>
-                <StoryHeaderContent>
-                  <StoryInfo>
-                    <Typography 
-                      variant="h4" 
-                      sx={(theme) => ({ 
-                        color: theme.palette.primary.dark,
-                        fontWeight: 700,
-                        mb: 1
-                      })}
-                    >
-                      {selectedStory.title}
+              <StoryHeader sx={{ mt: -1 }}>
+                <Typography variant="h4" gutterBottom fontWeight="bold" sx={{ fontSize: '2rem', color: 'text.primary' }}>
+                  {selectedStory.title}
+                </Typography>
+
+                <Typography variant="body1" color="text.secondary" gutterBottom>
+                  {selectedStory.description}
+                </Typography>
+
+                <StatsGrid>
+                  <StatCard>
+                    <Typography className="label">Time</Typography>
+                    <Typography className="value">5 min</Typography>
+                  </StatCard>
+                  <StatCard>
+                    <Typography className="label">Sentences</Typography>
+                    <Typography className="value">
+                      {getAllSentences(selectedStory.sections).length}
                     </Typography>
-
-                    <Typography 
-                      variant="body1" 
-                      sx={(theme) => ({ 
-                        color: theme.palette.text.secondary,
-                        mb: 2
-                      })}
-                    >
-                      {selectedStory.description}
+                  </StatCard>
+                  <StatCard>
+                    <Typography className="label">N5 Kanji</Typography>
+                    <Typography className="value">
+                      {selectedStory.n5KanjiCount}
                     </Typography>
+                  </StatCard>
+                  <StatCard>
+                    <Typography className="label">N5 Vocab</Typography>
+                    <Typography className="value">
+                      {selectedStory.n5VocabCount}
+                    </Typography>
+                  </StatCard>
+                </StatsGrid>
 
-                    <Stack direction="row" spacing={1}>
-                      <Chip
-                        icon={<School />}
-                        label={`${selectedStory.n5KanjiCount} N5 Kanji`}
-                        size="small"
-                        sx={(theme) => ({ backgroundColor: theme.palette.background.paper })}
-                      />
-                      <Chip
-                        icon={<School />}
-                        label={`${selectedStory.n5VocabCount} N5 Vocab`}
-                        size="small"
-                        sx={(theme) => ({ backgroundColor: theme.palette.background.paper })}
-                      />
-                    </Stack>
-                  </StoryInfo>
-
-                  {selectedStory.imageUrl && (
-                    <Box
-                      component="img"
+                {selectedStory.imageUrl && (
+                  <Box sx={{ mt: 3, position: 'relative', width: '100%', height: '300px' }}>
+                    <Image 
                       src={selectedStory.imageUrl}
                       alt={selectedStory.title}
-                      sx={(theme) => ({
-                        width: 200,
-                        height: 140,
+                      fill
+                      style={{ 
                         objectFit: 'cover',
-                        borderRadius: theme.shape.borderRadius,
-                      })}
+                        borderRadius: '8px',
+                      }} 
                     />
-                  )}
-                </StoryHeaderContent>
-
-                <StoryControls>
-                  <Button
-                    variant="contained"
-                    startIcon={<VolumeUp />}
-                    sx={{
-                      backgroundColor: '#00bfa5',
-                      '&:hover': {
-                        backgroundColor: '#008e76'
-                      }
-                    }}
-                  >
-                    Play Story
-                  </Button>
-                  <ViewOptions>
-                    <ToggleButtonGroup
-                      value={viewMode}
-                      exclusive
-                      onChange={(e, value) => value && setViewMode(value)}
-                      size="small"
-                      sx={{
-                        '& .MuiToggleButton-root': {
-                          border: `1px solid #7c4dff30`,
-                          '&.Mui-selected': {
-                            backgroundColor: '#e8e3ff',
-                            color: '#7c4dff',
-                            '&:hover': {
-                              backgroundColor: '#e8e3ff'
-                            }
-                          }
-                        }
-                      }}
-                    >
-                      <ToggleButton value="paragraph">
-                        <Tooltip title="Paragraph View">
-                          <ViewHeadline />
-                        </Tooltip>
-                      </ToggleButton>
-                      <ToggleButton value="lines">
-                        <Tooltip title="Line by Line">
-                          <ViewStream />
-                        </Tooltip>
-                      </ToggleButton>
-                    </ToggleButtonGroup>
-                    <Button
-                      variant="outlined"
-                      onClick={() => setShowTranslation(!showTranslation)}
-                      size="small"
-                      sx={{
-                        borderColor: '#7c4dff',
-                        color: '#7c4dff',
-                        '&:hover': {
-                          borderColor: '#5e35b1',
-                          backgroundColor: 'rgba(124, 77, 255, 0.04)'
-                        }
-                      }}
-                    >
-                      {showTranslation ? 'Hide' : 'Show'} Translation
-                    </Button>
-                  </ViewOptions>
-                </StoryControls>
+                  </Box>
+                )}
               </StoryHeader>
 
-              <StoryContent>
-                <StoryText sx={viewMode === 'lines' ? (theme) => ({ 
-                  '& > *': { 
-                    display: 'block', 
-                    mb: theme.spacing(2)
-                  } 
-                }) : undefined}>
-                  {getAllSentences(selectedStory.sections).map(({ text, flashcards, index }) => 
-                    renderSentence(text, index, flashcards)
-                  )}
-                </StoryText>
-              </StoryContent>
-            </StoryContainer>
-          </Grid>
+              <StoryTextContainer>
+                {getAllSentences(selectedStory.sections).map(({ text }, index) => (
+                  <Box
+                    key={index}
+                    onClick={() => setActiveLine(index)}
+                    className={activeLine === index ? 'active' : ''}
+                  >
+                    <Typography variant="body1">{text}</Typography>
+                  </Box>
+                ))}
+              </StoryTextContainer>
+            </MainContent>
+
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+              <Stack direction="row" spacing={1}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setFlashcardDialogOpen(true)}
+                  startIcon={<MenuBook />}
+                  fullWidth
+                  sx={{ py: 1 }}
+                >
+                  Story Vocabulary
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => {/* TODO: Add kanji dialog handler */}}
+                  startIcon={<Translate />}
+                  fullWidth
+                  sx={{ py: 1 }}
+                >
+                  Story Kanji
+                </Button>
+              </Stack>
+
+              <AudioSidebar>
+                <Typography variant="h6" fontWeight="bold" gutterBottom>
+                  Line by Line Audio
+                </Typography>
+
+                <Stack spacing={1}>
+                  {getAllSentences(selectedStory.sections).map(({ text, translation }, index) => (
+                    <AudioLine
+                      key={index}
+                      className={activeLine === index ? 'active' : ''}
+                      onClick={() => setActiveLine(index)}
+                    >
+                      <IconButton
+                        size="small"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleAudio(index);
+                        }}
+                      >
+                        {audioStates[index] ? <Pause /> : <PlayArrow />}
+                      </IconButton>
+
+                      <Box sx={{ flex: 1 }}>
+                        <Typography variant="body1">{text}</Typography>
+                        {showTranslation && translation && (
+                          <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                            {translation}
+                          </Typography>
+                        )}
+                      </Box>
+                    </AudioLine>
+                  ))}
+                </Stack>
+              </AudioSidebar>
+            </Box>
+          </ReadingLayout>
         )}
-      </Grid>
+      </Box>
 
       <Dialog
         open={flashcardDialogOpen}
