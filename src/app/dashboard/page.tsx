@@ -1,332 +1,415 @@
 'use client';
 
-import { useState } from 'react';
-import { 
-  Box, 
-  Typography, 
-  Grid,
-  ToggleButton,
-  ToggleButtonGroup,
-  Button,
-  LinearProgress,
-  Paper,
-} from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { 
-  BookOpen, 
-  GraduationCap, 
-  PenTool,
-  Headphones,
-  Play,
-  Trophy,
-} from 'lucide-react';
-import StudyCalendar from '@/components/StudyCalendar';
-import ProfessorCharacter from '@/components/ProfessorCharacter';
-import ReviewSchedule from '@/components/ReviewSchedule';
+import { Box, Grid, Typography, Card, CircularProgress, Button } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { useJlptLevel } from '@/contexts/JlptLevelContext';
+import ContentContainer from '@/components/shared/ContentContainer';
+import { useEffect, useState } from 'react';
+import { Module, ModuleProgress as ModuleProgressType, DailyStudyPlan as DailyStudyPlanType } from '@/types/module';
+import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabase';
 
-const PageContainer = styled(Box)(({ theme }) => ({
-  width: 'calc(1600px - 280px)', 
-  maxWidth: '100%',
-  margin: '0 auto',
-  padding: theme.spacing(4, 3),
-  [theme.breakpoints.down('sm')]: {
-    padding: theme.spacing(3, 2),
-  },
-}));
-
-const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
-  backgroundColor: '#fff',
-  '& .MuiToggleButton-root': {
-    border: 'none',
-    borderRadius: '8px !important',
-    margin: '0 4px',
-    padding: '6px 18px',
-    color: theme.palette.text.secondary,
-    '&.Mui-selected': {
-      backgroundColor: '#7c4dff',
-      color: '#fff',
-      '&:hover': {
-        backgroundColor: '#6c3fff',
-      },
-    },
-    '&:hover': {
-      backgroundColor: '#f5f5f5',
-    },
-  },
-}));
-
-const StatsCard = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(3),
-  height: '100%',
-  backgroundColor: '#fff',
-  borderRadius: theme.spacing(2),
-}));
-
-const ProgressCard = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(3),
-  backgroundColor: '#fff',
-  borderRadius: theme.spacing(2),
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing(2),
-  transition: 'transform 0.2s ease-in-out',
-  '&:hover': {
-    transform: 'translateY(-2px)',
-  },
-}));
-
-const IconCircle = styled(Box)(({ theme }) => ({
-  width: 48,
-  height: 48,
-  borderRadius: '50%',
-  backgroundColor: '#e8e3ff',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  color: '#7c4dff',
-}));
-
-const ButtonGroup = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  gap: theme.spacing(1),
-  marginTop: 'auto',
-}));
-
-// Use a fixed date for mock data to avoid hydration mismatches
-const FIXED_DATE = '2025-04-12';
-const mockStudyData = Array.from({ length: 180 }).map((_, i) => {
-  const date = new Date(FIXED_DATE);
-  date.setDate(date.getDate() - (179 - i));
-  return {
-    date: date.toISOString().split('T')[0],
-    intensity: i % 4,
-  };
-});
-
-const stats = [
+const initialProgressItems = [
   {
-    id: 'vocabulary',
-    title: 'Vocabulary',
-    icon: <BookOpen size={24} />,
-    total: 2136,
-    completed: 523,
-    reviewsDue: 48,
-  },
-  {
-    id: 'kanji',
     title: 'Kanji',
-    icon: <PenTool size={24} />,
-    total: 1026,
-    completed: 284,
-    reviewsDue: 32,
+    progress: 0,
+    count: '0 learned',
+    reviewsDue: 0,
+    color: '#7C4DFF',
+    bgColor: '#F6F3FF'
   },
   {
-    id: 'grammar',
+    title: 'Vocabulary',
+    progress: 0,
+    count: '0 words',
+    reviewsDue: 0,
+    color: '#00BFA5',
+    bgColor: '#E6F7F5'
+  },
+  {
     title: 'Grammar',
-    icon: <GraduationCap size={24} />,
-    total: 186,
-    completed: 42,
-    reviewsDue: 15,
+    progress: 0,
+    count: '0 points',
+    reviewsDue: 0,
+    color: '#FF9100',
+    bgColor: '#FFF4E5'
   },
   {
-    id: 'listening',
     title: 'Listening',
-    icon: <Headphones size={24} />,
-    total: 524,
-    completed: 128,
-    reviewsDue: 24,
-  },
-];
-
-const upcomingReviews = [
-  { time: '30 minutes', count: 28 },
-  { time: '1 hour', count: 15 },
-  { time: '4 hours', count: 42 },
+    progress: 0,
+    count: '0 exercises',
+    reviewsDue: 0,
+    color: '#1890FF',
+    bgColor: '#E6F4FF'
+  }
 ];
 
 export default function Dashboard() {
-  const { level: currentLevel, setLevel } = useJlptLevel();
-  
-  const handleLevelChange = (event: React.MouseEvent<HTMLElement>, newLevel: string) => {
-    if (newLevel !== null) {
-      setLevel(newLevel as 'N5' | 'N4' | 'N3' | 'N2' | 'N1');
-    }
-  };
+  const router = useRouter();
+  const { level: currentLevel, userId } = useJlptLevel();
+  const [currentModule, setCurrentModule] = useState<Module | null>(null);
+  const [moduleProgress, setModuleProgress] = useState<ModuleProgressType | null>(null);
+  const [studyPlan, setStudyPlan] = useState<DailyStudyPlanType | null>(null);
+  const [progressItems, setProgressItems] = useState(initialProgressItems);
+  const theme = useTheme();
 
-  const totalReviewsDue = stats.reduce((acc, stat) => acc + stat.reviewsDue, 0);
-  const streakDays = 23; 
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!userId) return;
+
+      try {
+        // Get total items for each category
+        const { count: kanjiCount } = await supabase
+          .from('srs_items')
+          .select('*', { count: 'exact', head: true })
+          .eq('user_id', userId)
+          .eq('type', 'kanji');
+
+        const { count: vocabCount } = await supabase
+          .from('srs_items')
+          .select('*', { count: 'exact', head: true })
+          .eq('user_id', userId)
+          .eq('type', 'vocabulary');
+
+        const { count: grammarCount } = await supabase
+          .from('srs_items')
+          .select('*', { count: 'exact', head: true })
+          .eq('user_id', userId)
+          .eq('type', 'grammar');
+
+        // Get items due for review
+        const now = new Date().toISOString();
+        const { count: kanjiReviews } = await supabase
+          .from('srs_items')
+          .select('*', { count: 'exact', head: true })
+          .eq('user_id', userId)
+          .eq('type', 'kanji')
+          .lte('next_review', now);
+
+        const { count: vocabReviews } = await supabase
+          .from('srs_items')
+          .select('*', { count: 'exact', head: true })
+          .eq('user_id', userId)
+          .eq('type', 'vocabulary')
+          .lte('next_review', now);
+
+        // Update progress items with actual data
+        setProgressItems([
+          {
+            title: 'Kanji',
+            progress: Math.round((kanjiCount || 0) / 100 * 100), // Assuming 100 kanji total for N5
+            count: `${kanjiCount || 0} learned`,
+            reviewsDue: kanjiReviews || 0,
+            color: '#7C4DFF',
+            bgColor: '#F6F3FF'
+          },
+          {
+            title: 'Vocabulary',
+            progress: Math.round((vocabCount || 0) / 200 * 100), // Assuming 200 vocab total for N5
+            count: `${vocabCount || 0} words`,
+            reviewsDue: vocabReviews || 0,
+            color: '#00BFA5',
+            bgColor: '#E6F7F5'
+          },
+          {
+            title: 'Grammar',
+            progress: Math.round((grammarCount || 0) / 50 * 100), // Assuming 50 grammar points total for N5
+            count: `${grammarCount || 0} points`,
+            reviewsDue: 0,
+            color: '#FF9100',
+            bgColor: '#FFF4E5'
+          },
+          {
+            title: 'Listening',
+            progress: 0,
+            count: '0 exercises',
+            reviewsDue: 0,
+            color: '#1890FF',
+            bgColor: '#E6F4FF'
+          }
+        ]);
+
+      } catch (error) {
+        console.error('Error fetching progress:', error);
+      }
+    };
+
+    fetchData();
+  }, [userId]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!userId) return;
+
+      const { data: progress, error: progressError } = await supabase
+        .from('module_progress')
+        .select('*')
+        .eq('userId', userId)
+        .eq('status', 'in_progress')
+        .single();
+
+      if (progressError) {
+        console.error('Error fetching progress:', progressError);
+        return;
+      }
+
+      setModuleProgress(progress);
+
+      if (progress?.moduleId) {
+        const { data: module, error: moduleError } = await supabase
+          .from('modules')
+          .select('*')
+          .eq('id', progress.moduleId)
+          .single();
+
+        if (moduleError) {
+          console.error('Error fetching module:', moduleError);
+          return;
+        }
+
+        setCurrentModule(module);
+      }
+
+      // Fetch study plan
+      const { data: plan, error: planError } = await supabase
+        .from('daily_study_plans')
+        .select('*')
+        .eq('userId', userId)
+        .eq('date', new Date().toISOString().split('T')[0])
+        .single();
+
+      if (planError && planError.code !== 'PGRST116') {
+        console.error('Error fetching study plan:', planError);
+      }
+
+      setStudyPlan(plan);
+    };
+
+    fetchData();
+  }, [userId]);
 
   return (
-    <PageContainer>
-      <ProfessorCharacter 
-        message={`Welcome back! You have ${totalReviewsDue} items to review.`}
-        submessage={`Keep up your ${streakDays}-day study streak!`}
-      />
+    <ContentContainer>
+      <Box sx={{ py: 3 }}>
+        <Typography
+          variant="h4"
+          sx={{
+            fontWeight: 800,
+            color: '#1A2027',
+            mb: 4,
+            fontSize: '2rem',
+            letterSpacing: '-0.02em'
+          }}
+        >
+          Course Progress
+        </Typography>
 
-      <Box sx={{ mb: 4 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-          <Box>
-            <Typography variant="body1" sx={{ mb: 1, color: 'text.secondary' }}>
-              Current Level
-            </Typography>
-            <StyledToggleButtonGroup
-              value={currentLevel}
-              exclusive
-              onChange={handleLevelChange}
-              aria-label="JLPT Level"
-            >
-              <ToggleButton value="N5">N5</ToggleButton>
-              <ToggleButton value="N4">N4</ToggleButton>
-              <ToggleButton value="N3">N3</ToggleButton>
-              <ToggleButton value="N2">N2</ToggleButton>
-              <ToggleButton value="N1">N1</ToggleButton>
-            </StyledToggleButtonGroup>
-          </Box>
-          <Box sx={{ display: 'flex', gap: 2 }}>
-            {totalReviewsDue > 0 && (
-              <Button
-                variant="contained"
-                size="large"
-                startIcon={<Play />}
+        <Grid container spacing={3} sx={{ mb: 6 }}>
+          {progressItems.map((item) => (
+            <Grid item xs={12} sm={6} key={item.title}>
+              <Card
                 sx={{
-                  backgroundColor: '#7c4dff',
+                  p: 4,
+                  borderRadius: 2,
+                  bgcolor: '#fff',
+                  boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.08)',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  minHeight: '280px',
+                  transition: 'box-shadow 0.2s ease-in-out',
                   '&:hover': {
-                    backgroundColor: '#6c3fff',
-                  },
-                  borderRadius: '12px',
-                  textTransform: 'none',
-                  px: 4,
+                    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.12)'
+                  }
                 }}
               >
-                Start Reviews ({totalReviewsDue})
-              </Button>
-            )}
-            <Button
-              variant="outlined"
-              size="large"
-              sx={{
-                borderColor: '#7c4dff',
-                color: '#7c4dff',
-                '&:hover': {
-                  borderColor: '#6c3fff',
-                  backgroundColor: '#e8e3ff',
-                },
-                borderRadius: '12px',
-                textTransform: 'none',
-                px: 4,
-              }}
-            >
-              Take {currentLevel} Practice Test
-            </Button>
-          </Box>
-        </Box>
-
-        <Grid container spacing={3}>
-          {stats.map((stat) => (
-            <Grid item xs={12} sm={6} key={stat.id}>
-              <ProgressCard elevation={0}>
-                <Box sx={{ display: 'flex', gap: 2 }}>
-                  <IconCircle>
-                    {stat.icon}
-                  </IconCircle>
-                  <Box sx={{ flexGrow: 1 }}>
-                    <Typography variant="h6" sx={{ fontWeight: 500, mb: 0.5 }}>
-                      {stat.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                      {stat.completed} of {stat.total} items mastered
-                    </Typography>
-                    <LinearProgress
-                      variant="determinate"
-                      value={(stat.completed / stat.total) * 100}
+                <Box sx={{ position: 'relative', zIndex: 1, mb: 3 }}>
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      color: '#1A2027',
+                      fontWeight: 700,
+                      mb: 2,
+                      letterSpacing: '-0.01em',
+                      fontSize: '1.5rem'
+                    }}
+                  >
+                    {item.title}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color: '#637381',
+                      mb: 1,
+                      fontSize: '1rem'
+                    }}
+                  >
+                    {item.count}
+                  </Typography>
+                  {item.reviewsDue > 0 && (
+                    <Typography
+                      variant="body1"
                       sx={{
-                        height: 8,
-                        borderRadius: 4,
-                        backgroundColor: '#e8e3ff',
-                        '& .MuiLinearProgress-bar': {
-                          backgroundColor: '#7c4dff',
-                          borderRadius: 4,
-                        },
+                        color: '#637381',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 1,
+                        fontSize: '1rem'
                       }}
-                    />
-                  </Box>
+                    >
+                      {item.reviewsDue} reviews due today
+                    </Typography>
+                  )}
                 </Box>
 
-                {stat.reviewsDue > 0 && (
-                  <Box sx={{ 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    gap: 1, 
-                    backgroundColor: '#e8e3ff',
-                    p: 1.5,
-                    borderRadius: 2,
-                    color: '#7c4dff',
-                  }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <Play size={18} />
-                      <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                        {stat.reviewsDue} items due for review
+                <Box sx={{ 
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flex: 1,
+                  gap: 4
+                }}>
+                  <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+                    <CircularProgress
+                      variant="determinate"
+                      value={100}
+                      size={120}
+                      thickness={4}
+                      sx={{
+                        color: '#F4F6F8',
+                        position: 'absolute',
+                        '& .MuiCircularProgress-circle': {
+                          strokeLinecap: 'round'
+                        }
+                      }}
+                    />
+                    <CircularProgress
+                      variant="determinate"
+                      value={item.progress}
+                      size={120}
+                      thickness={4}
+                      sx={{
+                        color: item.color,
+                        '& .MuiCircularProgress-circle': {
+                          strokeLinecap: 'round'
+                        }
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        top: 0,
+                        left: 0,
+                        bottom: 0,
+                        right: 0,
+                        position: 'absolute',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      <Typography
+                        variant="h4"
+                        sx={{
+                          color: item.color,
+                          fontWeight: 600
+                        }}
+                      >
+                        {item.progress}%
                       </Typography>
                     </Box>
                   </Box>
-                )}
 
-                <ButtonGroup>
                   <Button
                     variant="outlined"
-                    size="large"
-                    sx={{ 
-                      flexGrow: 1,
-                      borderColor: '#e0e0e0',
-                      color: 'text.primary',
+                    onClick={() => router.push(`/learn/${item.title.toLowerCase()}`)}
+                    sx={{
+                      width: '100%',
+                      color: '#212B36',
+                      borderColor: '#E2E8F0',
+                      bgcolor: '#fff',
                       '&:hover': {
-                        borderColor: '#7c4dff',
-                        backgroundColor: '#e8e3ff',
-                      }
+                        bgcolor: '#F8FAFC',
+                        borderColor: '#CBD5E1'
+                      },
+                      textTransform: 'none',
+                      fontWeight: 600,
+                      fontSize: '1rem',
+                      py: 1.5
                     }}
                   >
-                    Study New
+                    Keep Studying
                   </Button>
-                  <Button
-                    variant="outlined"
-                    size="large"
-                    sx={{ 
-                      flexGrow: 1,
-                      borderColor: '#e0e0e0',
-                      color: 'text.primary',
-                      '&:hover': {
-                        borderColor: '#7c4dff',
-                        backgroundColor: '#e8e3ff',
-                      }
-                    }}
-                  >
-                    Practice
-                  </Button>
-                </ButtonGroup>
-              </ProgressCard>
+                </Box>
+              </Card>
             </Grid>
           ))}
         </Grid>
-      </Box>
 
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={8}>
-          <StatsCard elevation={0}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
-              <Trophy size={20} color="#7c4dff" />
-              <Typography variant="subtitle1" sx={{ fontWeight: 500 }}>
-                Study Activity
-              </Typography>
-            </Box>
-            <StudyCalendar data={mockStudyData} />
-          </StatsCard>
+        <Grid container spacing={3}>
+          <Grid item xs={12} lg={8}>
+            <Typography
+              variant="h5"
+              sx={{
+                fontWeight: 600,
+                color: '#212B36',
+                mb: 3
+              }}
+            >
+              Recent Activity
+            </Typography>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={6}>
+                <Card sx={{ p: 3, borderRadius: 2 }}>
+                  <Typography variant="h6" sx={{ mb: 2 }}>Due for Review</Typography>
+                  {/* List of items due for review */}
+                  {/* Kanji and vocabulary with SRS intervals */}
+                </Card>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Card sx={{ p: 3, borderRadius: 2 }}>
+                  <Typography variant="h6" sx={{ mb: 2 }}>New Content</Typography>
+                  {/* New lessons available */}
+                  {/* Reading passages and listening exercises */}
+                </Card>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={12} lg={4}>
+            <Typography
+              variant="h5"
+              sx={{
+                fontWeight: 600,
+                color: '#212B36',
+                mb: 3
+              }}
+            >
+              Study Streak
+            </Typography>
+            <Card sx={{ p: 3, borderRadius: 2 }}>
+              {/* Calendar heatmap showing study streak */}
+              {/* Daily goals and achievements */}
+            </Card>
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={4}>
-          <ReviewSchedule items={upcomingReviews} />
-        </Grid>
-      </Grid>
-    </PageContainer>
+
+        {studyPlan && (
+          <Box>
+            <Typography
+              variant="h5"
+              sx={{
+                fontWeight: 600,
+                color: '#212B36',
+                mb: 3
+              }}
+            >
+              Today's Study Plan
+            </Typography>
+            {/* Study plan content will be implemented later */}
+          </Box>
+        )}
+      </Box>
+    </ContentContainer>
   );
 }
