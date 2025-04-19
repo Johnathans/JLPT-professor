@@ -1,0 +1,399 @@
+.pageWrapper {
+  min-height: 100vh;
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav {
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+}
+
+.contentWrapper {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--page-padding);
+}
+
+/* Main content layout */
+.mainContent {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem var(--page-padding);
+  display: flex;
+  gap: 2rem;
+  background: var(--background-color);
+}
+
+/* Nav specific styles */
+.nav .contentWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  width: 100%;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary-dark);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.backLink:hover {
+  color: var(--primary-color);
+}
+
+.levelBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Story content styles */
+.storyHeader {
+  background: var(--primary-light);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 300px;
+  position: sticky;
+  top: 2rem;
+  align-self: flex-start;
+}
+
+.storyTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--primary-dark);
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat {
+  text-align: center;
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.statValue {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.storyActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.storyAction {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.playFullStory {
+  background: var(--accent-color);
+  color: white;
+}
+
+.playFullStory:hover {
+  filter: brightness(0.9);
+}
+
+.viewFlashcards {
+  background: white;
+  color: var(--primary-color);
+}
+
+.viewFlashcards:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* Main content area */
+.mainArea {
+  flex: 1;
+  min-width: 0;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.paragraph {
+  margin-bottom: 1.5rem;
+}
+
+.sentence {
+  position: relative;
+  padding: 0.75rem 3rem;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sentence:hover {
+  background-color: var(--primary-light);
+}
+
+.playButton {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+.sentence:hover .playButton {
+  opacity: 1;
+}
+
+.japaneseText {
+  font-size: 1.25rem;
+  line-height: 2;
+  flex: 1;
+}
+
+.kanji {
+  color: var(--primary-color);
+  font-weight: 500;
+  position: relative;
+}
+
+.furigana {
+  position: absolute;
+  top: -1.2em;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.7em;
+  color: var(--text-secondary);
+  font-weight: normal;
+}
+
+.toolsButton {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+.sentence:hover .toolsButton {
+  opacity: 0.6;
+}
+
+.toolsButton:hover {
+  opacity: 1 !important;
+}
+
+.toolsPopover {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 0.5rem;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  z-index: 10;
+  min-width: 200px;
+}
+
+.toolButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 4px;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+}
+
+.toolButton:hover {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.flashcardOptions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.flashcardOption {
+  flex: 1;
+  padding: 0.25rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.flashcardOption.hard {
+  background-color: #ff91001a;
+  color: #ff9100;
+}
+
+.flashcardOption.good {
+  background-color: #7c4dff1a;
+  color: #7c4dff;
+}
+
+.flashcardOption.easy {
+  background-color: #00bfa51a;
+  color: #00bfa5;
+}
+
+.flashcardOption:hover {
+  filter: brightness(0.9);
+}
+
+.furiganaText,
+.romajiText,
+.englishText {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  padding: 1rem;
+  margin-top: 1rem;
+  background: white;
+  border-radius: 8px;
+}
+
+/* Modal styles */
+.modalContent {
+  padding: 2rem;
+}
+
+.modalTitle {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.vocabularyList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.vocabularyItem {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  align-items: center;
+}
+
+.vocabularyItem:last-child {
+  border-bottom: none;
+}
+
+.word {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.reading {
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.meaning {
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .mainContent {
+    flex-direction: column;
+  }
+
+  .storyHeader {
+    width: 100%;
+    position: static;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .controls {
+    flex-direction: column;
+  }
+  
+  .controlButton {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .japaneseText {
+    font-size: 1.25rem;
+    line-height: 2.2;
+  }
+}

@@ -1,0 +1,629 @@
+{
+  "levels": {
+    "N5": {
+      "title": "JLPT N5 Study Guide",
+      "description": "Entry level certification for basic Japanese comprehension",
+      "examSections": {
+        "language": {
+          "title": "Language Knowledge (文字・語彙・文法)",
+          "timeLimit": "25 minutes",
+          "questions": "38 questions",
+          "content": [
+            {
+              "section": "Vocabulary & Kanji",
+              "points": [
+                "800 basic vocabulary words",
+                "100 kanji characters",
+                "Basic verb conjugations (ます, て-form)",
+                "Common adjectives and their conjugations",
+                "Numbers, time, and dates",
+                "Basic nouns for everyday objects"
+              ]
+            },
+            {
+              "section": "Grammar",
+              "points": [
+                "Basic sentence structure (は, が, を, に, で)",
+                "Present and past tense",
+                "Basic questions (か, どこ, なに)",
+                "Basic counters and time expressions",
+                "Simple requests and desires (ください, ほしい)",
+                "Basic て-form usage"
+              ]
+            }
+          ]
+        },
+        "reading": {
+          "title": "Reading (読解)",
+          "timeLimit": "50 minutes",
+          "questions": "12 questions",
+          "content": [
+            {
+              "section": "Reading Comprehension",
+              "points": [
+                "Short text messages and emails",
+                "Simple signs and notices",
+                "Basic advertisements",
+                "Short diary entries",
+                "Simple schedules and timetables"
+              ]
+            }
+          ]
+        },
+        "listening": {
+          "title": "Listening (聴解)",
+          "timeLimit": "30 minutes",
+          "questions": "15 questions",
+          "content": [
+            {
+              "section": "Listening Comprehension",
+              "points": [
+                "Basic greetings and conversations",
+                "Simple questions and answers",
+                "Short announcements",
+                "Basic instructions",
+                "Simple telephone conversations"
+              ]
+            }
+          ]
+        }
+      },
+      "studyPlan": {
+        "estimated_time": "3-6 months (150-300 hours)",
+        "weekly_goals": [
+          {
+            "focus": "Vocabulary & Kanji",
+            "tasks": [
+              "Learn 30-40 new words per week",
+              "Practice writing 5 new kanji",
+              "Review previously learned kanji",
+              "Use flashcards for daily review"
+            ]
+          },
+          {
+            "focus": "Grammar",
+            "tasks": [
+              "Study 2-3 grammar points per week",
+              "Complete practice exercises",
+              "Write simple sentences",
+              "Review previous grammar points"
+            ]
+          },
+          {
+            "focus": "Reading & Listening",
+            "tasks": [
+              "Read short texts daily",
+              "Listen to basic conversations",
+              "Practice with audio materials",
+              "Take practice tests weekly"
+            ]
+          }
+        ]
+      },
+      "resources": {
+        "textbooks": [
+          "Genki I",
+          "Minna no Nihongo I",
+          "JLPT N5 Complete Practice Tests"
+        ],
+        "online": [
+          "JLPT Professor N5 Kanji Course",
+          "JLPT Professor Practice Tests",
+          "JLPT Professor Flashcards"
+        ],
+        "apps": [
+          "Anki (flashcards)",
+          "Japanese (free dictionary)",
+          "Kanji Study"
+        ]
+      },
+      "tips": [
+        "Focus on mastering basic sentence patterns before moving to complex grammar",
+        "Practice writing kanji daily, even if just for 10 minutes",
+        "Listen to Japanese audio while doing other activities",
+        "Use real-life situations to practice basic conversations",
+        "Take regular mock tests to track progress"
+      ]
+    },
+    "N4": {
+      "title": "JLPT N4 Study Guide",
+      "description": "Basic level certification for everyday Japanese comprehension",
+      "examSections": {
+        "language": {
+          "title": "Language Knowledge (文字・語彙・文法)",
+          "timeLimit": "30 minutes",
+          "questions": "42 questions",
+          "content": [
+            {
+              "section": "Vocabulary & Kanji",
+              "points": [
+                "1,500 basic to intermediate vocabulary",
+                "300 kanji characters",
+                "Compound verbs",
+                "Common idiomatic expressions",
+                "Basic honorific vocabulary",
+                "Common compound words"
+              ]
+            },
+            {
+              "section": "Grammar",
+              "points": [
+                "Conditional forms (と, ば, たら, なら)",
+                "Potential form",
+                "Giving and receiving (あげる, くれる, もらう)",
+                "Causative form basics",
+                "More complex particle usage",
+                "Basic honorific expressions"
+              ]
+            }
+          ]
+        },
+        "reading": {
+          "title": "Reading (読解)",
+          "timeLimit": "55 minutes",
+          "questions": "15 questions",
+          "content": [
+            {
+              "section": "Reading Comprehension",
+              "points": [
+                "Short articles and news",
+                "Longer emails and messages",
+                "Basic narrative texts",
+                "Simple blogs and reviews",
+                "Detailed schedules and instructions"
+              ]
+            }
+          ]
+        },
+        "listening": {
+          "title": "Listening (聴解)",
+          "timeLimit": "35 minutes",
+          "questions": "20 questions",
+          "content": [
+            {
+              "section": "Listening Comprehension",
+              "points": [
+                "Natural conversation speed",
+                "Basic news broadcasts",
+                "Detailed instructions",
+                "Phone conversations",
+                "Daily life situations"
+              ]
+            }
+          ]
+        }
+      },
+      "studyPlan": {
+        "estimated_time": "6-12 months (300-400 hours)",
+        "weekly_goals": [
+          {
+            "focus": "Vocabulary & Kanji",
+            "tasks": [
+              "Learn 40-50 new words per week",
+              "Master 10 new kanji",
+              "Practice compound words",
+              "Review N5 vocabulary"
+            ]
+          },
+          {
+            "focus": "Grammar",
+            "tasks": [
+              "Study 3-4 grammar points weekly",
+              "Practice writing compositions",
+              "Use new grammar in conversations",
+              "Review conditional forms"
+            ]
+          },
+          {
+            "focus": "Reading & Listening",
+            "tasks": [
+              "Read news articles for beginners",
+              "Listen to Japanese podcasts",
+              "Watch Japanese shows with subtitles",
+              "Practice speed reading"
+            ]
+          }
+        ]
+      },
+      "resources": {
+        "textbooks": [
+          "Genki II",
+          "Minna no Nihongo II",
+          "New Kanzen Master N4"
+        ],
+        "online": [
+          "JLPT Professor N4 Grammar Course",
+          "JLPT Professor Reading Practice",
+          "NHK Easy News"
+        ],
+        "apps": [
+          "Bunpo (grammar)",
+          "Satori Reader",
+          "Japanese Pod 101"
+        ]
+      },
+      "tips": [
+        "Start reading NHK Easy News articles regularly",
+        "Practice speaking with language exchange partners",
+        "Create example sentences for new grammar points",
+        "Record yourself speaking and analyze pronunciation",
+        "Focus on understanding context in conversations"
+      ]
+    },
+    "N3": {
+      "title": "JLPT N3 Study Guide",
+      "description": "Intermediate level. Understand Japanese used in everyday situations to a certain degree.",
+      "examSections": {
+        "language": {
+          "title": "Language Knowledge (文字・語彙・文法)",
+          "timeLimit": "30 minutes",
+          "questions": "42 questions",
+          "content": [
+            {
+              "section": "Vocabulary & Kanji",
+              "points": [
+                "3,000 basic to intermediate vocabulary",
+                "650 kanji characters",
+                "Intermediate verb conjugations",
+                "Common idiomatic expressions",
+                "Basic honorific vocabulary",
+                "Common compound words"
+              ]
+            },
+            {
+              "section": "Grammar",
+              "points": [
+                "Intermediate sentence structure",
+                "Present and past tense",
+                "Intermediate questions (か, どこ, なに)",
+                "Intermediate counters and time expressions",
+                "Simple requests and desires (ください, ほしい)",
+                "Intermediate て-form usage"
+              ]
+            }
+          ]
+        },
+        "reading": {
+          "title": "Reading (読解)",
+          "timeLimit": "55 minutes",
+          "questions": "15 questions",
+          "content": [
+            {
+              "section": "Reading Comprehension",
+              "points": [
+                "Short articles and news",
+                "Longer emails and messages",
+                "Basic narrative texts",
+                "Simple blogs and reviews",
+                "Detailed schedules and instructions"
+              ]
+            }
+          ]
+        },
+        "listening": {
+          "title": "Listening (聴解)",
+          "timeLimit": "35 minutes",
+          "questions": "20 questions",
+          "content": [
+            {
+              "section": "Listening Comprehension",
+              "points": [
+                "Natural conversation speed",
+                "Basic news broadcasts",
+                "Detailed instructions",
+                "Phone conversations",
+                "Daily life situations"
+              ]
+            }
+          ]
+        }
+      },
+      "studyPlan": {
+        "estimated_time": "6-12 months (300-400 hours)",
+        "weekly_goals": [
+          {
+            "focus": "Vocabulary & Kanji",
+            "tasks": [
+              "Learn 40-50 new words per week",
+              "Master 10 new kanji",
+              "Practice compound words",
+              "Review N5 vocabulary"
+            ]
+          },
+          {
+            "focus": "Grammar",
+            "tasks": [
+              "Study 3-4 grammar points weekly",
+              "Practice writing compositions",
+              "Use new grammar in conversations",
+              "Review conditional forms"
+            ]
+          },
+          {
+            "focus": "Reading & Listening",
+            "tasks": [
+              "Read news articles for beginners",
+              "Listen to Japanese podcasts",
+              "Watch Japanese shows with subtitles",
+              "Practice speed reading"
+            ]
+          }
+        ]
+      },
+      "resources": {
+        "textbooks": [
+          "Genki II",
+          "Minna no Nihongo II",
+          "New Kanzen Master N3"
+        ],
+        "online": [
+          "JLPT Professor N3 Grammar Course",
+          "JLPT Professor Reading Practice",
+          "NHK Easy News"
+        ],
+        "apps": [
+          "Bunpo (grammar)",
+          "Satori Reader",
+          "Japanese Pod 101"
+        ]
+      },
+      "tips": [
+        "Start reading NHK Easy News articles regularly",
+        "Practice speaking with language exchange partners",
+        "Create example sentences for new grammar points",
+        "Record yourself speaking and analyze pronunciation",
+        "Focus on understanding context in conversations"
+      ]
+    },
+    "N2": {
+      "title": "JLPT N2 Study Guide",
+      "description": "Pre-advanced level. Understand Japanese used in everyday situations and in a variety of circumstances.",
+      "examSections": {
+        "language": {
+          "title": "Language Knowledge (文字・語彙・文法)",
+          "timeLimit": "30 minutes",
+          "questions": "42 questions",
+          "content": [
+            {
+              "section": "Vocabulary & Kanji",
+              "points": [
+                "6,000 basic to intermediate vocabulary",
+                "1,000 kanji characters",
+                "Intermediate verb conjugations",
+                "Common idiomatic expressions",
+                "Basic honorific vocabulary",
+                "Common compound words"
+              ]
+            },
+            {
+              "section": "Grammar",
+              "points": [
+                "Intermediate sentence structure",
+                "Present and past tense",
+                "Intermediate questions (か, どこ, なに)",
+                "Intermediate counters and time expressions",
+                "Simple requests and desires (ください, ほしい)",
+                "Intermediate て-form usage"
+              ]
+            }
+          ]
+        },
+        "reading": {
+          "title": "Reading (読解)",
+          "timeLimit": "55 minutes",
+          "questions": "15 questions",
+          "content": [
+            {
+              "section": "Reading Comprehension",
+              "points": [
+                "Short articles and news",
+                "Longer emails and messages",
+                "Basic narrative texts",
+                "Simple blogs and reviews",
+                "Detailed schedules and instructions"
+              ]
+            }
+          ]
+        },
+        "listening": {
+          "title": "Listening (聴解)",
+          "timeLimit": "35 minutes",
+          "questions": "20 questions",
+          "content": [
+            {
+              "section": "Listening Comprehension",
+              "points": [
+                "Natural conversation speed",
+                "Basic news broadcasts",
+                "Detailed instructions",
+                "Phone conversations",
+                "Daily life situations"
+              ]
+            }
+          ]
+        }
+      },
+      "studyPlan": {
+        "estimated_time": "6-12 months (300-400 hours)",
+        "weekly_goals": [
+          {
+            "focus": "Vocabulary & Kanji",
+            "tasks": [
+              "Learn 40-50 new words per week",
+              "Master 10 new kanji",
+              "Practice compound words",
+              "Review N5 vocabulary"
+            ]
+          },
+          {
+            "focus": "Grammar",
+            "tasks": [
+              "Study 3-4 grammar points weekly",
+              "Practice writing compositions",
+              "Use new grammar in conversations",
+              "Review conditional forms"
+            ]
+          },
+          {
+            "focus": "Reading & Listening",
+            "tasks": [
+              "Read news articles for beginners",
+              "Listen to Japanese podcasts",
+              "Watch Japanese shows with subtitles",
+              "Practice speed reading"
+            ]
+          }
+        ]
+      },
+      "resources": {
+        "textbooks": [
+          "Genki II",
+          "Minna no Nihongo II",
+          "New Kanzen Master N2"
+        ],
+        "online": [
+          "JLPT Professor N2 Grammar Course",
+          "JLPT Professor Reading Practice",
+          "NHK Easy News"
+        ],
+        "apps": [
+          "Bunpo (grammar)",
+          "Satori Reader",
+          "Japanese Pod 101"
+        ]
+      },
+      "tips": [
+        "Start reading NHK Easy News articles regularly",
+        "Practice speaking with language exchange partners",
+        "Create example sentences for new grammar points",
+        "Record yourself speaking and analyze pronunciation",
+        "Focus on understanding context in conversations"
+      ]
+    },
+    "N1": {
+      "title": "JLPT N1 Study Guide",
+      "description": "Advanced level. Understand Japanese used in a variety of circumstances.",
+      "examSections": {
+        "language": {
+          "title": "Language Knowledge (文字・語彙・文法)",
+          "timeLimit": "30 minutes",
+          "questions": "42 questions",
+          "content": [
+            {
+              "section": "Vocabulary & Kanji",
+              "points": [
+                "10,000+ basic to intermediate vocabulary",
+                "2,000+ kanji characters",
+                "Intermediate verb conjugations",
+                "Common idiomatic expressions",
+                "Basic honorific vocabulary",
+                "Common compound words"
+              ]
+            },
+            {
+              "section": "Grammar",
+              "points": [
+                "Intermediate sentence structure",
+                "Present and past tense",
+                "Intermediate questions (か, どこ, なに)",
+                "Intermediate counters and time expressions",
+                "Simple requests and desires (ください, ほしい)",
+                "Intermediate て-form usage"
+              ]
+            }
+          ]
+        },
+        "reading": {
+          "title": "Reading (読解)",
+          "timeLimit": "55 minutes",
+          "questions": "15 questions",
+          "content": [
+            {
+              "section": "Reading Comprehension",
+              "points": [
+                "Short articles and news",
+                "Longer emails and messages",
+                "Basic narrative texts",
+                "Simple blogs and reviews",
+                "Detailed schedules and instructions"
+              ]
+            }
+          ]
+        },
+        "listening": {
+          "title": "Listening (聴解)",
+          "timeLimit": "35 minutes",
+          "questions": "20 questions",
+          "content": [
+            {
+              "section": "Listening Comprehension",
+              "points": [
+                "Natural conversation speed",
+                "Basic news broadcasts",
+                "Detailed instructions",
+                "Phone conversations",
+                "Daily life situations"
+              ]
+            }
+          ]
+        }
+      },
+      "studyPlan": {
+        "estimated_time": "6-12 months (300-400 hours)",
+        "weekly_goals": [
+          {
+            "focus": "Vocabulary & Kanji",
+            "tasks": [
+              "Learn 40-50 new words per week",
+              "Master 10 new kanji",
+              "Practice compound words",
+              "Review N5 vocabulary"
+            ]
+          },
+          {
+            "focus": "Grammar",
+            "tasks": [
+              "Study 3-4 grammar points weekly",
+              "Practice writing compositions",
+              "Use new grammar in conversations",
+              "Review conditional forms"
+            ]
+          },
+          {
+            "focus": "Reading & Listening",
+            "tasks": [
+              "Read news articles for beginners",
+              "Listen to Japanese podcasts",
+              "Watch Japanese shows with subtitles",
+              "Practice speed reading"
+            ]
+          }
+        ]
+      },
+      "resources": {
+        "textbooks": [
+          "Genki II",
+          "Minna no Nihongo II",
+          "New Kanzen Master N1"
+        ],
+        "online": [
+          "JLPT Professor N1 Grammar Course",
+          "JLPT Professor Reading Practice",
+          "NHK Easy News"
+        ],
+        "apps": [
+          "Bunpo (grammar)",
+          "Satori Reader",
+          "Japanese Pod 101"
+        ]
+      },
+      "tips": [
+        "Start reading NHK Easy News articles regularly",
+        "Practice speaking with language exchange partners",
+        "Create example sentences for new grammar points",
+        "Record yourself speaking and analyze pronunciation",
+        "Focus on understanding context in conversations"
+      ]
+    }
+  }
+}

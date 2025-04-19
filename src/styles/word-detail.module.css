@@ -1,0 +1,898 @@
+/* JLPT Professor Branding Colors */
+.wordDetailContainer {
+  --primary-color: #7c4dff;
+  --primary-light: #e8e3ff;
+  --primary-dark: #5e35b1;
+  --secondary-color: #ff9100;
+  --secondary-light: #ffd180;
+  --accent-color: #00bfa5;
+  --text-color: #333333;
+  --text-light: #666666;
+  --text-secondary: #999999;
+  --background-color: #ffffff;
+  --card-background: #ffffff;
+  --border-color: #e0e0e0;
+  --error-color: #f44336;
+  --success-color: #4caf50;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: var(--text-color);
+}
+
+/* Loading and Error States */
+.loadingWrapper, .errorWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  text-align: center;
+  padding: 2rem;
+}
+
+.loadingSpinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--primary-light);
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.errorWrapper h2 {
+  color: var(--error-color);
+  margin-bottom: 1rem;
+}
+
+/* Back Link */
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  transition: color 0.2s ease;
+}
+
+.backLink:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* Word Detail Header */
+.wordDetailHeader {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+}
+
+.wordDetailTitle {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.kanjiHeading {
+  font-size: 3.5rem;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.kanaHeading {
+  font-size: 1.5rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.wordMeaning {
+  font-size: 1.25rem;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+/* Header */
+.header {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+}
+
+/* Word Display */
+.wordDisplay {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+
+.word {
+  font-size: 3.5rem;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.reading {
+  font-size: 1.5rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.meaning {
+  font-size: 1.25rem;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Section */
+.section {
+  background-color: var(--card-background);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.studyTips {
+  padding: 1rem;
+  background-color: var(--primary-light);
+  border-radius: 6px;
+  line-height: 1.6;
+}
+
+.studyTips p {
+  margin-bottom: 0.75rem;
+}
+
+.studyTips p:last-child {
+  margin-bottom: 0;
+}
+
+/* Word Detail Content */
+.wordDetailContent {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+/* Sections */
+.wordInfoSection, 
+.conjugationSection, 
+.exampleSection, 
+.kanjiBreakdownSection, 
+.studyTipsSection, 
+.relatedWordsSection, 
+.practiceSection,
+.usageSection {
+  background-color: var(--card-background);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wordInfoSection:hover, 
+.conjugationSection:hover, 
+.exampleSection:hover, 
+.kanjiBreakdownSection:hover, 
+.studyTipsSection:hover, 
+.relatedWordsSection:hover, 
+.practiceSection:hover,
+.usageSection:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary-light);
+}
+
+/* Word Info Grid */
+.wordInfoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.wordInfoItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.wordInfoLabel {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  margin-bottom: 0.25rem;
+}
+
+.wordInfoValue {
+  font-weight: 500;
+}
+
+/* Conjugation Grid */
+.conjugationGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.conjugationItem {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+  background-color: var(--primary-light);
+  border-radius: 6px;
+}
+
+.conjugationLabel {
+  font-size: 0.875rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.25rem;
+}
+
+.conjugationValue {
+  font-weight: 500;
+}
+
+/* Example Sentences */
+.exampleList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.exampleItem {
+  padding: 1rem;
+  border-left: 4px solid var(--primary-color);
+  background-color: var(--primary-light);
+  border-radius: 0 6px 6px 0;
+}
+
+.exampleJapanese {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.exampleRomaji {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.exampleEnglish {
+  font-size: 1rem;
+}
+
+/* Kanji Breakdown */
+.kanjiBreakdownContent {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem;
+}
+
+.kanjiStrokeOrder {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.strokeOrderContainer {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--primary-light);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.strokeOrderHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.strokeOrderTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 12px;
+}
+
+.strokeOrderSvg {
+  width: 100%;
+  height: auto;
+  max-width: 200px;
+  margin: 0 auto;
+  display: block;
+}
+
+.strokeOrderSvg svg {
+  width: 200px;
+  height: 200px;
+  display: block;
+}
+
+.strokeOrderSvg path {
+  transition: stroke-dashoffset 0.5s ease-in-out;
+}
+
+.strokeOrderLoading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: var(--primary-light);
+  border-radius: 8px;
+  color: var(--primary-dark);
+}
+
+.strokeOrderError {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: var(--primary-light);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.fallbackKanji {
+  font-size: 5rem;
+  margin: 1rem 0;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.strokeOrderLoadingSpinner {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(124, 77, 255, 0.2);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 1s ease-in-out infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.strokeOrderInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e8e3ff;
+}
+
+.strokeOrderInfoItem {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.strokeOrderInfoLabel {
+  font-weight: 600;
+  color: #5e35b1;
+  min-width: 60px;
+}
+
+.strokeOrderInfoValue {
+  color: #333;
+}
+
+/* Study Tips */
+.studyTipsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.studyTipItem {
+  padding: 1rem;
+  border-radius: 6px;
+  background-color: var(--primary-light);
+}
+
+.studyTipTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+}
+
+.studyTipContent {
+  line-height: 1.5;
+}
+
+/* Related Words */
+.relatedWordsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.relatedWordItem {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 6px;
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  text-decoration: none;
+  color: var(--text-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.relatedWordItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  border-color: var(--primary-color);
+}
+
+.relatedWordKanji {
+  font-size: 1.5rem;
+  margin-right: 0.75rem;
+  min-width: 40px;
+  text-align: center;
+}
+
+.relatedWordInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.relatedWordKana {
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.relatedWordMeaning {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+/* Practice Section */
+.practiceButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.practiceButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.practiceButton:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Usage Section */
+.usageContent {
+  line-height: 1.6;
+  padding: 1rem;
+  background-color: var(--primary-light);
+  border-radius: 6px;
+}
+
+/* JLPT Level Badge Styles */
+.jlptLevelBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 8px;
+  color: white;
+  min-width: 40px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.jlpt-n5 {
+  background-color: #7c4dff; /* Primary color */
+}
+
+.jlpt-n4 {
+  background-color: #7c4dff; /* Same as N5 */
+}
+
+.jlpt-n3 {
+  background-color: #7c4dff; /* Same as N5 */
+}
+
+.jlpt-n2 {
+  background-color: #7c4dff; /* Same as N5 */
+}
+
+.jlpt-n1 {
+  background-color: #00bfa5; /* Accent color */
+}
+
+.jlptUnknown {
+  background-color: #999; /* Gray for unknown level */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .kanjiHeading {
+    font-size: 2.5rem;
+  }
+  
+  .kanjiBreakdownContent {
+    grid-template-columns: 1fr;
+  }
+  
+  .practiceButtons {
+    flex-direction: column;
+  }
+  
+  .wordInfoGrid,
+  .conjugationGrid,
+  .studyTipsList,
+  .relatedWordsList {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .kanjiHeading {
+    font-size: 2rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.25rem;
+  }
+}
+
+/* New Styles */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e8e3ff;
+  border-top: 4px solid #7c4dff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.errorMessage {
+  text-align: center;
+  padding: 2rem;
+}
+
+.wordDetailHeader {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  color: #7c4dff;
+  text-decoration: none;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.backLink:hover {
+  color: #5e35b1;
+}
+
+.wordDetailTitle {
+  font-size: 3rem;
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.kanjiHeading {
+  font-size: 4rem;
+  color: #7c4dff;
+}
+
+.kanaHeading {
+  font-size: 2rem;
+  color: #666;
+}
+
+.wordDetailMeaning {
+  font-size: 1.5rem;
+  color: #444;
+  margin-bottom: 2rem;
+}
+
+.wordDetailCard {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+.wordDetailSection {
+  margin-bottom: 3rem;
+}
+
+.wordDetailSection h2 {
+  color: #7c4dff;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.wordDetailGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.wordDetailItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.wordDetailLabel {
+  font-weight: 500;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.wordDetailValue {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.exampleList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.exampleItem {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.exampleJapanese {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.exampleEnglish {
+  color: #666;
+}
+
+.studyTipsList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.studyTipsList li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.studyTipsList li::before {
+  content: "•";
+  color: #7c4dff;
+  position: absolute;
+  left: 0;
+  font-size: 1.2rem;
+}
+
+.relatedWordsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.relatedWordCard {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.relatedWordCard:hover {
+  background: #e8e3ff;
+  transform: translateY(-2px);
+}
+
+.relatedWordKanji {
+  font-size: 1.5rem;
+  color: #7c4dff;
+  margin-bottom: 0.5rem;
+}
+
+.relatedWordKana {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.relatedWordMeaning {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.practiceSection {
+  text-align: center;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-top: 3rem;
+}
+
+.practiceTitle {
+  color: #7c4dff;
+  margin-bottom: 1rem;
+}
+
+.practiceDescription {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.practiceButtonContainer {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.practiceButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #7c4dff;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.practiceButton:hover {
+  background: #5e35b1;
+}
+
+.secondaryPracticeButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #e8e3ff;
+  color: #7c4dff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.secondaryPracticeButton:hover {
+  background: #d1c4ff;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .wordDetailTitle {
+    font-size: 2rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .kanjiHeading {
+    font-size: 3rem;
+  }
+
+  .kanaHeading {
+    font-size: 1.5rem;
+  }
+
+  .wordDetailMeaning {
+    font-size: 1.2rem;
+  }
+
+  .practiceButtonContainer {
+    flex-direction: column;
+  }
+}

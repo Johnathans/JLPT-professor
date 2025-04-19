@@ -1,0 +1,411 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Hero Section */
+.heroSection {
+  position: relative;
+  padding: 4rem 0;
+  margin-bottom: 3rem;
+  background: linear-gradient(135deg, #f8f9ff 0%, #e8e3ff 100%);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.heroSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(124, 77, 255, 0.1) 0%, rgba(124, 77, 255, 0) 70%);
+  transform: translate(30%, -30%);
+}
+
+.heroContent {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  align-items: center;
+  padding: 0 4rem;
+}
+
+.heroLeft {
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.titleHighlight {
+  display: block;
+  color: #7c4dff;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+  max-width: 540px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.statNumber {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #7c4dff;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.statLabel {
+  font-size: 1rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.heroRight {
+  position: relative;
+}
+
+.heroGraphic {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroIcon {
+  width: 200px;
+  height: 200px;
+  color: #7c4dff;
+  position: relative;
+  z-index: 2;
+}
+
+.heroDecoration {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(124, 77, 255, 0.1) 0%, rgba(124, 77, 255, 0) 70%);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.heroBadges {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 3rem;
+  padding: 0 4rem;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  background: white;
+  border-radius: 100px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  color: #333;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.badgeIcon {
+  width: 24px;
+  height: 24px;
+  color: #7c4dff;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 2rem;
+}
+
+.testOptions {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.levelSelector {
+  margin-bottom: 2rem;
+}
+
+.levelSelector h2 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.levelButtons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.levelButton {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #e8e3ff;
+  border-radius: 8px;
+  background: white;
+  color: #7c4dff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.levelButton:hover {
+  background: #e8e3ff;
+}
+
+.levelButton.selected {
+  background: #7c4dff;
+  color: white;
+  border-color: #7c4dff;
+}
+
+.sectionSelector {
+  margin-bottom: 2rem;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.customizeButton {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #e8e3ff;
+  color: #7c4dff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.customizeButton:hover {
+  background: #d1c4ff;
+}
+
+.sectionOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.sectionCheckbox {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.sectionCheckbox:hover {
+  background: #e8e3ff;
+}
+
+.sectionCheckbox input {
+  margin-right: 1rem;
+  width: 18px;
+  height: 18px;
+  accent-color: #7c4dff;
+}
+
+.checkboxLabel {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: #333;
+  font-weight: 500;
+}
+
+.sectionTime {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.testSummary {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.summaryDetails {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.summaryItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.summaryItem span {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.summaryItem strong {
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.startButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem;
+  background: #7c4dff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  gap: 0.5rem;
+}
+
+.startButton:hover {
+  background: #6c3fff;
+  transform: translateY(-1px);
+}
+
+.startIcon {
+  transition: transform 0.2s ease;
+}
+
+.startButton:hover .startIcon {
+  transform: translateX(4px);
+}
+
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.infoCard {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.infoCard h3 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.infoCard p {
+  color: #666;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.infoList, .tipsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.infoList li, .tipsList li {
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  color: #666;
+}
+
+.infoList li:before, .tipsList li:before {
+  content: "•";
+  color: #7c4dff;
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
+
+  .summaryDetails {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+}

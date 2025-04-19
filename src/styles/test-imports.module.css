@@ -1,0 +1,76 @@
+.container {
+  padding: 20px;
+  font-family: var(--font-inter), sans-serif;
+}
+
+.title {
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+.subtitle {
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+.kanjiGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.kanjiCard {
+  border: 1px solid var(--primary-light);
+  border-radius: 8px;
+  padding: 1rem;
+  background: var(--white);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kanjiCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.kanjiCharacter {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.reading {
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.onyomi {
+  color: var(--primary-dark);
+}
+
+.kunyomi {
+  color: var(--secondary-color);
+}
+
+.meaning {
+  font-size: 12px;
+  color: #666;
+}
+
+.totalKanji {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--primary-light);
+  border-radius: 8px;
+}
+
+.totalKanjiTitle {
+  color: var(--primary-dark);
+  margin: 0 0 0.75rem 0;
+}
+
+.totalKanjiDescription {
+  margin: 0;
+  color: #333;
+  line-height: 1.5;
+}

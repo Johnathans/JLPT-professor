@@ -1,0 +1,489 @@
+/* Kanji Detail Page Styles */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  min-height: 80vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.backLink, .nextLink {
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: var(--primary-light);
+}
+
+.backLink:hover, .nextLink:hover {
+  color: white;
+  background: var(--primary-color);
+}
+
+.kanjiHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+}
+
+.kanjiDisplay {
+  font-size: 12rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--primary-dark);
+  margin-bottom: 1.5rem;
+}
+
+.kanjiReading {
+  margin-top: 1rem;
+  font-family: 'Noto Sans JP', sans-serif;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.onyomiButton, .kunyomiButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-family: 'Noto Sans JP', sans-serif;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1.1rem;
+}
+
+.onyomiButton {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.kunyomiButton {
+  background-color: #fff3e0;
+  color: inherit;
+}
+
+.onyomiButton:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.kunyomiButton:hover {
+  background-color: #ffe0b2;
+  color: inherit;
+}
+
+.onyomiButton:disabled, .kunyomiButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.playIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.kanjiDetails {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.detailItem {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.detailItem:last-child {
+  margin-bottom: 0;
+}
+
+.detailTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  min-width: 120px;
+}
+
+.detailContent {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #333;
+  flex: 1;
+}
+
+.usefulnessRating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.usefulnessDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  transition: background-color 0.2s;
+}
+
+.usefulnessDot.filled {
+  background: var(--primary-color);
+}
+
+.usefulnessScore {
+  margin-left: 0.5rem;
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+.infoIcon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary-color);
+  cursor: help;
+  position: relative;
+  margin-left: 0.5rem;
+  opacity: 0.7;
+}
+
+.infoIcon:hover {
+  opacity: 1;
+}
+
+.infoIcon:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  color: #333;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--primary-light);
+  margin-bottom: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+
+.tooltip::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 7px;
+  border-style: solid;
+  border-color: var(--primary-light) transparent transparent transparent;
+  margin-left: -1px;
+}
+
+.tooltipRating {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 1.5rem;
+}
+
+.exampleSection {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.exampleList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.exampleItem {
+  border-left: 4px solid var(--primary-color);
+  padding-left: 1rem;
+}
+
+.exampleJapanese {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.exampleKanji {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.exampleMeaning {
+  font-size: 1rem;
+  color: #666;
+}
+
+.examples {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.exampleItem {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.exampleJapanese {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.exampleHiragana {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.exampleEnglish {
+  color: #444;
+  font-style: italic;
+}
+
+.playButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+  transition: all 0.2s ease;
+}
+
+.playButton:hover {
+  color: var(--primary-dark);
+  transform: scale(1.1);
+}
+
+.playButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.strokeOrderSection {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.strokeOrderDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.strokeAnimation {
+  font-size: 6rem;
+  margin-bottom: 1.5rem;
+}
+
+.strokeCount {
+  font-size: 1rem;
+  color: #666;
+}
+
+.relatedSection {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.relatedCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: var(--primary-light);
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.relatedCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.relatedKanji {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+}
+
+.relatedMeaning {
+  font-size: 0.9rem;
+  color: #333;
+  text-align: center;
+}
+
+.practiceSection {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+.practiceButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.practiceButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.practiceButton:hover {
+  background-color: var(--primary-dark);
+}
+
+.errorContainer {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.errorTitle {
+  font-size: 2rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+.errorMessage {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.readingContainer {
+  background-color: var(--primary-light);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #666;
+  margin: 1rem 0;
+}
+
+.readingContainer span {
+  display: inline-block;
+  margin: 0 0.25rem;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .kanjiDisplay {
+    font-size: 6rem;
+  }
+  
+  .relatedGrid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+  
+  .practiceButtons {
+    flex-direction: column;
+  }
+  
+  .practiceButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .kanjiDisplay {
+    font-size: 4rem;
+  }
+  
+  .kanjiReading {
+    font-size: 1.2rem;
+  }
+  
+  .relatedGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

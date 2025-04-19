@@ -1,0 +1,2834 @@
+[
+  {
+    "kanji": "力",
+    "strokes": 2,
+    "meanings": [
+      "Power",
+      "Strength",
+      "Strong",
+      "Strain",
+      "Bear Up",
+      "Exert"
+    ],
+    "readings_on": [
+      "りょく",
+      "りき",
+      "りい"
+    ],
+    "readings_kun": [
+      "ちから"
+    ]
+  },
+  {
+    "kanji": "口",
+    "strokes": 3,
+    "meanings": [
+      "Mouth"
+    ],
+    "readings_on": [
+      "こう",
+      "く"
+    ],
+    "readings_kun": [
+      "くち"
+    ]
+  },
+  {
+    "kanji": "工",
+    "strokes": 3,
+    "meanings": [
+      "Craft",
+      "Construction",
+      "Katakana E Radical (no. 48)"
+    ],
+    "readings_on": [
+      "こう",
+      "く",
+      "ぐ"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "夕",
+    "strokes": 3,
+    "meanings": [
+      "Evening"
+    ],
+    "readings_on": [
+      "せき"
+    ],
+    "readings_kun": [
+      "ゆう"
+    ]
+  },
+  {
+    "kanji": "手",
+    "strokes": 4,
+    "meanings": [
+      "Hand"
+    ],
+    "readings_on": [
+      "しゅ",
+      "ず"
+    ],
+    "readings_kun": [
+      "て",
+      "て-",
+      "-て",
+      "た-"
+    ]
+  },
+  {
+    "kanji": "文",
+    "strokes": 4,
+    "meanings": [
+      "Sentence",
+      "Literature",
+      "Style",
+      "Art",
+      "Decoration",
+      "Figures",
+      "Plan",
+      "Literary Radical (no. 67)"
+    ],
+    "readings_on": [
+      "ぶん",
+      "もん"
+    ],
+    "readings_kun": [
+      "ふみ",
+      "あや"
+    ]
+  },
+  {
+    "kanji": "犬",
+    "strokes": 4,
+    "meanings": [
+      "Dog"
+    ],
+    "readings_on": [
+      "けん"
+    ],
+    "readings_kun": [
+      "いぬ",
+      "いぬ-"
+    ]
+  },
+  {
+    "kanji": "正",
+    "strokes": 5,
+    "meanings": [
+      "Correct",
+      "Justice",
+      "Righteous",
+      "10**40"
+    ],
+    "readings_on": [
+      "せい",
+      "しょう"
+    ],
+    "readings_kun": [
+      "ただ.しい",
+      "ただ.す",
+      "まさ",
+      "まさ.に"
+    ]
+  },
+  {
+    "kanji": "田",
+    "strokes": 5,
+    "meanings": [
+      "Rice Field",
+      "Rice Paddy"
+    ],
+    "readings_on": [
+      "でん"
+    ],
+    "readings_kun": [
+      "た"
+    ]
+  },
+  {
+    "kanji": "目",
+    "strokes": 5,
+    "meanings": [
+      "Eye",
+      "Class",
+      "Look",
+      "Insight",
+      "Experience",
+      "Care",
+      "Favor"
+    ],
+    "readings_on": [
+      "もく",
+      "ぼく"
+    ],
+    "readings_kun": [
+      "め",
+      "-め",
+      "ま-"
+    ]
+  },
+  {
+    "kanji": "立",
+    "strokes": 5,
+    "meanings": [
+      "Stand Up",
+      "Rise",
+      "Set Up",
+      "Erect"
+    ],
+    "readings_on": [
+      "りつ",
+      "りゅう",
+      "りっとる"
+    ],
+    "readings_kun": [
+      "た.つ",
+      "-た.つ",
+      "た.ち-",
+      "た.てる",
+      "-た.てる",
+      "た.て-",
+      "たて-",
+      "-た.て",
+      "-だ.て",
+      "-だ.てる"
+    ]
+  },
+  {
+    "kanji": "元",
+    "strokes": 4,
+    "meanings": [
+      "Beginning",
+      "Former Time",
+      "Origin"
+    ],
+    "readings_on": [
+      "げん",
+      "がん"
+    ],
+    "readings_kun": [
+      "もと"
+    ]
+  },
+  {
+    "kanji": "公",
+    "strokes": 4,
+    "meanings": [
+      "Public",
+      "Prince",
+      "Official",
+      "Governmental"
+    ],
+    "readings_on": [
+      "こう",
+      "く"
+    ],
+    "readings_kun": [
+      "おおやけ"
+    ]
+  },
+  {
+    "kanji": "切",
+    "strokes": 4,
+    "meanings": [
+      "Cut",
+      "Cutoff",
+      "Be Sharp"
+    ],
+    "readings_on": [
+      "せつ",
+      "さい"
+    ],
+    "readings_kun": [
+      "き.る",
+      "-き.る",
+      "き.り",
+      "-き.り",
+      "-ぎ.り",
+      "き.れる",
+      "-き.れる",
+      "き.れ",
+      "-き.れ",
+      "-ぎ.れ"
+    ]
+  },
+  {
+    "kanji": "少",
+    "strokes": 4,
+    "meanings": [
+      "Few",
+      "Little"
+    ],
+    "readings_on": [
+      "しょう"
+    ],
+    "readings_kun": [
+      "すく.ない",
+      "すこ.し"
+    ]
+  },
+  {
+    "kanji": "心",
+    "strokes": 4,
+    "meanings": [
+      "Heart",
+      "Mind",
+      "Spirit",
+      "Heart Radical (no. 61)"
+    ],
+    "readings_on": [
+      "しん"
+    ],
+    "readings_kun": [
+      "こころ",
+      "-ごころ"
+    ]
+  },
+  {
+    "kanji": "方",
+    "strokes": 4,
+    "meanings": [
+      "Direction",
+      "Person",
+      "Alternative"
+    ],
+    "readings_on": [
+      "ほう"
+    ],
+    "readings_kun": [
+      "かた",
+      "-かた",
+      "-がた"
+    ]
+  },
+  {
+    "kanji": "牛",
+    "strokes": 4,
+    "meanings": [
+      "Cow"
+    ],
+    "readings_on": [
+      "ぎゅう"
+    ],
+    "readings_kun": [
+      "うし"
+    ]
+  },
+  {
+    "kanji": "止",
+    "strokes": 4,
+    "meanings": [
+      "Stop",
+      "Halt"
+    ],
+    "readings_on": [
+      "し"
+    ],
+    "readings_kun": [
+      "と.まる",
+      "-ど.まり",
+      "と.める",
+      "-と.める",
+      "-ど.め",
+      "とど.める",
+      "とど.め",
+      "とど.まる",
+      "や.める",
+      "や.む",
+      "-や.む",
+      "よ.す",
+      "-さ.す",
+      "-さ.し"
+    ]
+  },
+  {
+    "kanji": "兄",
+    "strokes": 5,
+    "meanings": [
+      "Elder Brother",
+      "Big Brother"
+    ],
+    "readings_on": [
+      "けい",
+      "きょう"
+    ],
+    "readings_kun": [
+      "あに"
+    ]
+  },
+  {
+    "kanji": "冬",
+    "strokes": 5,
+    "meanings": [
+      "Winter"
+    ],
+    "readings_on": [
+      "とう"
+    ],
+    "readings_kun": [
+      "ふゆ"
+    ]
+  },
+  {
+    "kanji": "古",
+    "strokes": 5,
+    "meanings": [
+      "Old"
+    ],
+    "readings_on": [
+      "こ"
+    ],
+    "readings_kun": [
+      "ふる.い",
+      "ふる-",
+      "-ふる.す"
+    ]
+  },
+  {
+    "kanji": "台",
+    "strokes": 5,
+    "meanings": [
+      "Pedestal",
+      "A Stand",
+      "Counter For Machines And Vehicles"
+    ],
+    "readings_on": [
+      "だい",
+      "たい"
+    ],
+    "readings_kun": [
+      "うてな",
+      "われ",
+      "つかさ"
+    ]
+  },
+  {
+    "kanji": "広",
+    "strokes": 5,
+    "meanings": [
+      "Wide",
+      "Broad",
+      "Spacious"
+    ],
+    "readings_on": [
+      "こう"
+    ],
+    "readings_kun": [
+      "ひろ.い",
+      "ひろ.まる",
+      "ひろ.める",
+      "ひろ.がる",
+      "ひろ.げる"
+    ]
+  },
+  {
+    "kanji": "用",
+    "strokes": 5,
+    "meanings": [
+      "Utilize",
+      "Business",
+      "Service",
+      "Use",
+      "Employ"
+    ],
+    "readings_on": [
+      "よう"
+    ],
+    "readings_kun": [
+      "もち.いる"
+    ]
+  },
+  {
+    "kanji": "世",
+    "strokes": 5,
+    "meanings": [
+      "Generation",
+      "World",
+      "Society",
+      "Public"
+    ],
+    "readings_on": [
+      "せい",
+      "せ",
+      "そう"
+    ],
+    "readings_kun": [
+      "よ"
+    ]
+  },
+  {
+    "kanji": "主",
+    "strokes": 5,
+    "meanings": [
+      "Lord",
+      "Chief",
+      "Master",
+      "Main Thing",
+      "Principal"
+    ],
+    "readings_on": [
+      "しゅ",
+      "す",
+      "しゅう"
+    ],
+    "readings_kun": [
+      "ぬし",
+      "おも",
+      "あるじ"
+    ]
+  },
+  {
+    "kanji": "代",
+    "strokes": 5,
+    "meanings": [
+      "Substitute",
+      "Change",
+      "Convert",
+      "Replace",
+      "Period",
+      "Age",
+      "Counter For Decades Of Ages, Eras, Etc.",
+      "Generation",
+      "Charge",
+      "Rate",
+      "Fee"
+    ],
+    "readings_on": [
+      "だい",
+      "たい"
+    ],
+    "readings_kun": [
+      "か.わる",
+      "かわ.る",
+      "かわ.り",
+      "か.わり",
+      "-がわ.り",
+      "-が.わり",
+      "か.える",
+      "よ",
+      "しろ"
+    ]
+  },
+  {
+    "kanji": "写",
+    "strokes": 5,
+    "meanings": [
+      "Copy",
+      "Be Photographed",
+      "Describe"
+    ],
+    "readings_on": [
+      "しゃ",
+      "じゃ"
+    ],
+    "readings_kun": [
+      "うつ.す",
+      "うつ.る",
+      "うつ-",
+      "うつ.し"
+    ]
+  },
+  {
+    "kanji": "去",
+    "strokes": 5,
+    "meanings": [
+      "Gone",
+      "Past",
+      "Quit",
+      "Leave",
+      "Elapse",
+      "Eliminate",
+      "Divorce"
+    ],
+    "readings_on": [
+      "きょ",
+      "こ"
+    ],
+    "readings_kun": [
+      "さ.る",
+      "-さ.る"
+    ]
+  },
+  {
+    "kanji": "字",
+    "strokes": 6,
+    "meanings": [
+      "Character",
+      "Letter",
+      "Word",
+      "Section Of Village"
+    ],
+    "readings_on": [
+      "じ"
+    ],
+    "readings_kun": [
+      "あざ",
+      "あざな",
+      "-な"
+    ]
+  },
+  {
+    "kanji": "早",
+    "strokes": 6,
+    "meanings": [
+      "Early",
+      "Fast"
+    ],
+    "readings_on": [
+      "そう",
+      "さっ"
+    ],
+    "readings_kun": [
+      "はや.い",
+      "はや",
+      "はや-",
+      "はや.まる",
+      "はや.める",
+      "さ-"
+    ]
+  },
+  {
+    "kanji": "町",
+    "strokes": 7,
+    "meanings": [
+      "Town",
+      "Village",
+      "Block",
+      "Street"
+    ],
+    "readings_on": [
+      "ちょう"
+    ],
+    "readings_kun": [
+      "まち"
+    ]
+  },
+  {
+    "kanji": "花",
+    "strokes": 7,
+    "meanings": [
+      "Flower"
+    ],
+    "readings_on": [
+      "か",
+      "け"
+    ],
+    "readings_kun": [
+      "はな"
+    ]
+  },
+  {
+    "kanji": "赤",
+    "strokes": 7,
+    "meanings": [
+      "Red"
+    ],
+    "readings_on": [
+      "せき",
+      "しゃく"
+    ],
+    "readings_kun": [
+      "あか",
+      "あか-",
+      "あか.い",
+      "あか.らむ",
+      "あか.らめる"
+    ]
+  },
+  {
+    "kanji": "足",
+    "strokes": 7,
+    "meanings": [
+      "Leg",
+      "Foot",
+      "Be Sufficient",
+      "Counter For Pairs Of Footwear"
+    ],
+    "readings_on": [
+      "そく"
+    ],
+    "readings_kun": [
+      "あし",
+      "た.りる",
+      "た.る",
+      "た.す"
+    ]
+  },
+  {
+    "kanji": "不",
+    "strokes": 4,
+    "meanings": [
+      "Negative",
+      "Non-",
+      "Bad",
+      "Ugly",
+      "Clumsy"
+    ],
+    "readings_on": [
+      "ふ",
+      "ぶ"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "仕",
+    "strokes": 5,
+    "meanings": [
+      "Attend",
+      "Doing",
+      "Official",
+      "Serve"
+    ],
+    "readings_on": [
+      "し",
+      "じ"
+    ],
+    "readings_kun": [
+      "つか.える"
+    ]
+  },
+  {
+    "kanji": "会",
+    "strokes": 6,
+    "meanings": [
+      "Meeting",
+      "Meet",
+      "Party",
+      "Association",
+      "Interview",
+      "Join"
+    ],
+    "readings_on": [
+      "かい",
+      "え"
+    ],
+    "readings_kun": [
+      "あ.う",
+      "あ.わせる",
+      "あつ.まる"
+    ]
+  },
+  {
+    "kanji": "同",
+    "strokes": 6,
+    "meanings": [
+      "Same",
+      "Agree",
+      "Equal"
+    ],
+    "readings_on": [
+      "どう"
+    ],
+    "readings_kun": [
+      "おな.じ"
+    ]
+  },
+  {
+    "kanji": "多",
+    "strokes": 6,
+    "meanings": [
+      "Many",
+      "Frequent",
+      "Much"
+    ],
+    "readings_on": [
+      "た"
+    ],
+    "readings_kun": [
+      "おお.い",
+      "まさ.に",
+      "まさ.る"
+    ]
+  },
+  {
+    "kanji": "考",
+    "strokes": 6,
+    "meanings": [
+      "Consider",
+      "Think Over"
+    ],
+    "readings_on": [
+      "こう"
+    ],
+    "readings_kun": [
+      "かんが.える",
+      "かんが.え"
+    ]
+  },
+  {
+    "kanji": "肉",
+    "strokes": 6,
+    "meanings": [
+      "Meat"
+    ],
+    "readings_on": [
+      "にく"
+    ],
+    "readings_kun": [
+      "しし"
+    ]
+  },
+  {
+    "kanji": "自",
+    "strokes": 6,
+    "meanings": [
+      "Oneself"
+    ],
+    "readings_on": [
+      "じ",
+      "し"
+    ],
+    "readings_kun": [
+      "みずか.ら",
+      "おの.ずから",
+      "おの.ずと"
+    ]
+  },
+  {
+    "kanji": "色",
+    "strokes": 6,
+    "meanings": [
+      "Color"
+    ],
+    "readings_on": [
+      "しょく",
+      "しき"
+    ],
+    "readings_kun": [
+      "いろ"
+    ]
+  },
+  {
+    "kanji": "体",
+    "strokes": 7,
+    "meanings": [
+      "Body",
+      "Substance",
+      "Object",
+      "Reality",
+      "Counter For Images"
+    ],
+    "readings_on": [
+      "たい",
+      "てい"
+    ],
+    "readings_kun": [
+      "からだ",
+      "かたち"
+    ]
+  },
+  {
+    "kanji": "作",
+    "strokes": 7,
+    "meanings": [
+      "Make",
+      "Production",
+      "Prepare",
+      "Build"
+    ],
+    "readings_on": [
+      "さく",
+      "さ"
+    ],
+    "readings_kun": [
+      "つく.る",
+      "つく.り",
+      "-づく.り"
+    ]
+  },
+  {
+    "kanji": "図",
+    "strokes": 7,
+    "meanings": [
+      "Map",
+      "Drawing",
+      "Plan",
+      "Extraordinary",
+      "Audacious"
+    ],
+    "readings_on": [
+      "ず",
+      "と"
+    ],
+    "readings_kun": [
+      "え",
+      "はか.る"
+    ]
+  },
+  {
+    "kanji": "売",
+    "strokes": 7,
+    "meanings": [
+      "Sell"
+    ],
+    "readings_on": [
+      "ばい"
+    ],
+    "readings_kun": [
+      "う.る",
+      "う.れる"
+    ]
+  },
+  {
+    "kanji": "弟",
+    "strokes": 7,
+    "meanings": [
+      "Younger Brother",
+      "Faithful Service To Elders"
+    ],
+    "readings_on": [
+      "てい",
+      "だい",
+      "で"
+    ],
+    "readings_kun": [
+      "おとうと"
+    ]
+  },
+  {
+    "kanji": "社",
+    "strokes": 7,
+    "meanings": [
+      "Company",
+      "Firm",
+      "Office",
+      "Association",
+      "Shrine"
+    ],
+    "readings_on": [
+      "しゃ"
+    ],
+    "readings_kun": [
+      "やしろ"
+    ]
+  },
+  {
+    "kanji": "言",
+    "strokes": 7,
+    "meanings": [
+      "Say",
+      "Word"
+    ],
+    "readings_on": [
+      "げん",
+      "ごん"
+    ],
+    "readings_kun": [
+      "い.う",
+      "こと"
+    ]
+  },
+  {
+    "kanji": "走",
+    "strokes": 7,
+    "meanings": [
+      "Run"
+    ],
+    "readings_on": [
+      "そう"
+    ],
+    "readings_kun": [
+      "はし.る"
+    ]
+  },
+  {
+    "kanji": "近",
+    "strokes": 7,
+    "meanings": [
+      "Near",
+      "Early",
+      "Akin",
+      "Tantamount"
+    ],
+    "readings_on": [
+      "きん",
+      "こん"
+    ],
+    "readings_kun": [
+      "ちか.い"
+    ]
+  },
+  {
+    "kanji": "空",
+    "strokes": 8,
+    "meanings": [
+      "Empty",
+      "Sky",
+      "Void",
+      "Vacant",
+      "Vacuum"
+    ],
+    "readings_on": [
+      "くう"
+    ],
+    "readings_kun": [
+      "そら",
+      "あ.く",
+      "あ.き",
+      "あ.ける",
+      "から",
+      "す.く",
+      "す.かす",
+      "むな.しい"
+    ]
+  },
+  {
+    "kanji": "青",
+    "strokes": 8,
+    "meanings": [
+      "Blue",
+      "Green"
+    ],
+    "readings_on": [
+      "せい",
+      "しょう"
+    ],
+    "readings_kun": [
+      "あお",
+      "あお-",
+      "あお.い"
+    ]
+  },
+  {
+    "kanji": "音",
+    "strokes": 9,
+    "meanings": [
+      "Sound",
+      "Noise"
+    ],
+    "readings_on": [
+      "おん",
+      "いん",
+      "-のん"
+    ],
+    "readings_kun": [
+      "おと",
+      "ね"
+    ]
+  },
+  {
+    "kanji": "地",
+    "strokes": 6,
+    "meanings": [
+      "Ground",
+      "Earth"
+    ],
+    "readings_on": [
+      "ち",
+      "じ"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "安",
+    "strokes": 6,
+    "meanings": [
+      "Relax",
+      "Cheap",
+      "Low",
+      "Quiet",
+      "Rested",
+      "Contented",
+      "Peaceful"
+    ],
+    "readings_on": [
+      "あん"
+    ],
+    "readings_kun": [
+      "やす.い",
+      "やす.まる",
+      "やす",
+      "やす.らか"
+    ]
+  },
+  {
+    "kanji": "有",
+    "strokes": 6,
+    "meanings": [
+      "Possess",
+      "Have",
+      "Exist",
+      "Happen",
+      "Occur",
+      "Approx"
+    ],
+    "readings_on": [
+      "ゆう",
+      "う"
+    ],
+    "readings_kun": [
+      "あ.る"
+    ]
+  },
+  {
+    "kanji": "死",
+    "strokes": 6,
+    "meanings": [
+      "Death",
+      "Die"
+    ],
+    "readings_on": [
+      "し"
+    ],
+    "readings_kun": [
+      "し.ぬ",
+      "し.に-"
+    ]
+  },
+  {
+    "kanji": "京",
+    "strokes": 8,
+    "meanings": [
+      "Capital",
+      "10**16"
+    ],
+    "readings_on": [
+      "きょう",
+      "けい",
+      "きん"
+    ],
+    "readings_kun": [
+      "みやこ"
+    ]
+  },
+  {
+    "kanji": "夜",
+    "strokes": 8,
+    "meanings": [
+      "Night",
+      "Evening"
+    ],
+    "readings_on": [
+      "や"
+    ],
+    "readings_kun": [
+      "よ",
+      "よる"
+    ]
+  },
+  {
+    "kanji": "妹",
+    "strokes": 8,
+    "meanings": [
+      "Younger Sister"
+    ],
+    "readings_on": [
+      "まい"
+    ],
+    "readings_kun": [
+      "いもうと"
+    ]
+  },
+  {
+    "kanji": "姉",
+    "strokes": 8,
+    "meanings": [
+      "Elder Sister"
+    ],
+    "readings_on": [
+      "し"
+    ],
+    "readings_kun": [
+      "あね",
+      "はは"
+    ]
+  },
+  {
+    "kanji": "店",
+    "strokes": 8,
+    "meanings": [
+      "Store",
+      "Shop"
+    ],
+    "readings_on": [
+      "てん"
+    ],
+    "readings_kun": [
+      "みせ",
+      "たな"
+    ]
+  },
+  {
+    "kanji": "明",
+    "strokes": 8,
+    "meanings": [
+      "Bright",
+      "Light"
+    ],
+    "readings_on": [
+      "めい",
+      "みょう",
+      "みん"
+    ],
+    "readings_kun": [
+      "あ.かり",
+      "あか.るい",
+      "あか.るむ",
+      "あか.らむ",
+      "あき.らか",
+      "あ.ける",
+      "-あ.け",
+      "あ.く",
+      "あ.くる",
+      "あ.かす"
+    ]
+  },
+  {
+    "kanji": "歩",
+    "strokes": 8,
+    "meanings": [
+      "Walk",
+      "Counter For Steps"
+    ],
+    "readings_on": [
+      "ほ",
+      "ぶ",
+      "ふ"
+    ],
+    "readings_kun": [
+      "ある.く",
+      "あゆ.む"
+    ]
+  },
+  {
+    "kanji": "画",
+    "strokes": 8,
+    "meanings": [
+      "Brush-stroke",
+      "Picture"
+    ],
+    "readings_on": [
+      "が",
+      "かく",
+      "え",
+      "かい"
+    ],
+    "readings_kun": [
+      "えが.く",
+      "かく.する",
+      "かぎ.る",
+      "はかりごと",
+      "はか.る"
+    ]
+  },
+  {
+    "kanji": "知",
+    "strokes": 8,
+    "meanings": [
+      "Know",
+      "Wisdom"
+    ],
+    "readings_on": [
+      "ち"
+    ],
+    "readings_kun": [
+      "し.る",
+      "し.らせる"
+    ]
+  },
+  {
+    "kanji": "室",
+    "strokes": 9,
+    "meanings": [
+      "Room",
+      "Apartment",
+      "Chamber",
+      "Greenhouse",
+      "Cellar"
+    ],
+    "readings_on": [
+      "しつ"
+    ],
+    "readings_kun": [
+      "むろ"
+    ]
+  },
+  {
+    "kanji": "思",
+    "strokes": 9,
+    "meanings": [
+      "Think"
+    ],
+    "readings_on": [
+      "し"
+    ],
+    "readings_kun": [
+      "おも.う",
+      "おもえら.く",
+      "おぼ.す"
+    ]
+  },
+  {
+    "kanji": "海",
+    "strokes": 9,
+    "meanings": [
+      "Sea",
+      "Ocean"
+    ],
+    "readings_on": [
+      "かい"
+    ],
+    "readings_kun": [
+      "うみ"
+    ]
+  },
+  {
+    "kanji": "茶",
+    "strokes": 9,
+    "meanings": [
+      "Tea"
+    ],
+    "readings_on": [
+      "ちゃ",
+      "さ"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "以",
+    "strokes": 5,
+    "meanings": [
+      "By Means Of",
+      "Because",
+      "In View Of",
+      "Compared With"
+    ],
+    "readings_on": [
+      "い"
+    ],
+    "readings_kun": [
+      "もっ.て"
+    ]
+  },
+  {
+    "kanji": "夏",
+    "strokes": 10,
+    "meanings": [
+      "Summer"
+    ],
+    "readings_on": [
+      "か",
+      "が",
+      "げ"
+    ],
+    "readings_kun": [
+      "なつ"
+    ]
+  },
+  {
+    "kanji": "家",
+    "strokes": 10,
+    "meanings": [
+      "House",
+      "Home",
+      "Family",
+      "Professional",
+      "Expert",
+      "Performer"
+    ],
+    "readings_on": [
+      "か",
+      "け"
+    ],
+    "readings_kun": [
+      "いえ",
+      "や",
+      "うち"
+    ]
+  },
+  {
+    "kanji": "紙",
+    "strokes": 10,
+    "meanings": [
+      "Paper"
+    ],
+    "readings_on": [
+      "し"
+    ],
+    "readings_kun": [
+      "かみ"
+    ]
+  },
+  {
+    "kanji": "通",
+    "strokes": 10,
+    "meanings": [
+      "Traffic",
+      "Pass Through",
+      "Avenue",
+      "Commute",
+      "Counter For Letters, Notes, Documents, Etc."
+    ],
+    "readings_on": [
+      "つう",
+      "つ"
+    ],
+    "readings_kun": [
+      "とお.る",
+      "とお.り",
+      "-とお.り",
+      "-どお.り",
+      "とお.す",
+      "とお.し",
+      "-どお.し",
+      "かよ.う"
+    ]
+  },
+  {
+    "kanji": "強",
+    "strokes": 11,
+    "meanings": [
+      "Strong"
+    ],
+    "readings_on": [
+      "きょう",
+      "ごう"
+    ],
+    "readings_kun": [
+      "つよ.い",
+      "つよ.まる",
+      "つよ.める",
+      "し.いる",
+      "こわ.い"
+    ]
+  },
+  {
+    "kanji": "教",
+    "strokes": 11,
+    "meanings": [
+      "Teach",
+      "Faith",
+      "Doctrine"
+    ],
+    "readings_on": [
+      "きょう"
+    ],
+    "readings_kun": [
+      "おし.える",
+      "おそ.わる"
+    ]
+  },
+  {
+    "kanji": "理",
+    "strokes": 11,
+    "meanings": [
+      "Logic",
+      "Arrangement",
+      "Reason",
+      "Justice",
+      "Truth"
+    ],
+    "readings_on": [
+      "り"
+    ],
+    "readings_kun": [
+      "ことわり"
+    ]
+  },
+  {
+    "kanji": "週",
+    "strokes": 11,
+    "meanings": [
+      "Week"
+    ],
+    "readings_on": [
+      "しゅう"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "魚",
+    "strokes": 11,
+    "meanings": [
+      "Fish"
+    ],
+    "readings_on": [
+      "ぎょ"
+    ],
+    "readings_kun": [
+      "うお",
+      "さかな",
+      "-ざかな"
+    ]
+  },
+  {
+    "kanji": "鳥",
+    "strokes": 11,
+    "meanings": [
+      "Bird",
+      "Chicken"
+    ],
+    "readings_on": [
+      "ちょう"
+    ],
+    "readings_kun": [
+      "とり"
+    ]
+  },
+  {
+    "kanji": "黒",
+    "strokes": 11,
+    "meanings": [
+      "Black"
+    ],
+    "readings_on": [
+      "こく"
+    ],
+    "readings_kun": [
+      "くろ",
+      "くろ.ずむ",
+      "くろ.い"
+    ]
+  },
+  {
+    "kanji": "住",
+    "strokes": 7,
+    "meanings": [
+      "Dwell",
+      "Reside",
+      "Live",
+      "Inhabit"
+    ],
+    "readings_on": [
+      "じゅう",
+      "ぢゅう",
+      "ちゅう"
+    ],
+    "readings_kun": [
+      "す.む",
+      "す.まう",
+      "-ず.まい"
+    ]
+  },
+  {
+    "kanji": "医",
+    "strokes": 7,
+    "meanings": [
+      "Doctor",
+      "Medicine"
+    ],
+    "readings_on": [
+      "い"
+    ],
+    "readings_kun": [
+      "い.やす",
+      "い.する",
+      "くすし"
+    ]
+  },
+  {
+    "kanji": "究",
+    "strokes": 7,
+    "meanings": [
+      "Research",
+      "Study"
+    ],
+    "readings_on": [
+      "きゅう",
+      "く"
+    ],
+    "readings_kun": [
+      "きわ.める"
+    ]
+  },
+  {
+    "kanji": "者",
+    "strokes": 8,
+    "meanings": [
+      "Someone",
+      "Person"
+    ],
+    "readings_on": [
+      "しゃ"
+    ],
+    "readings_kun": [
+      "もの"
+    ]
+  },
+  {
+    "kanji": "研",
+    "strokes": 9,
+    "meanings": [
+      "Polish",
+      "Study Of",
+      "Sharpen"
+    ],
+    "readings_on": [
+      "けん"
+    ],
+    "readings_kun": [
+      "と.ぐ"
+    ]
+  },
+  {
+    "kanji": "場",
+    "strokes": 12,
+    "meanings": [
+      "Location",
+      "Place"
+    ],
+    "readings_on": [
+      "じょう",
+      "ちょう"
+    ],
+    "readings_kun": [
+      "ば"
+    ]
+  },
+  {
+    "kanji": "朝",
+    "strokes": 12,
+    "meanings": [
+      "Morning",
+      "Dynasty",
+      "Regime",
+      "Epoch",
+      "Period",
+      "(north) Korea"
+    ],
+    "readings_on": [
+      "ちょう"
+    ],
+    "readings_kun": [
+      "あさ"
+    ]
+  },
+  {
+    "kanji": "答",
+    "strokes": 12,
+    "meanings": [
+      "Solution",
+      "Answer"
+    ],
+    "readings_on": [
+      "とう"
+    ],
+    "readings_kun": [
+      "こた.える",
+      "こた.え"
+    ]
+  },
+  {
+    "kanji": "買",
+    "strokes": 12,
+    "meanings": [
+      "Buy"
+    ],
+    "readings_on": [
+      "ばい"
+    ],
+    "readings_kun": [
+      "か.う"
+    ]
+  },
+  {
+    "kanji": "道",
+    "strokes": 12,
+    "meanings": [
+      "Road-way",
+      "Street",
+      "District",
+      "Journey",
+      "Course",
+      "Moral",
+      "Teachings"
+    ],
+    "readings_on": [
+      "どう",
+      "とう"
+    ],
+    "readings_kun": [
+      "みち",
+      "いう"
+    ]
+  },
+  {
+    "kanji": "楽",
+    "strokes": 13,
+    "meanings": [
+      "Music",
+      "Comfort",
+      "Ease"
+    ],
+    "readings_on": [
+      "がく",
+      "らく",
+      "ごう"
+    ],
+    "readings_kun": [
+      "たの.しい",
+      "たの.しむ",
+      "この.む"
+    ]
+  },
+  {
+    "kanji": "事",
+    "strokes": 8,
+    "meanings": [
+      "Matter",
+      "Thing",
+      "Fact",
+      "Business",
+      "Reason",
+      "Possibly"
+    ],
+    "readings_on": [
+      "じ",
+      "ず"
+    ],
+    "readings_kun": [
+      "こと",
+      "つか.う",
+      "つか.える"
+    ]
+  },
+  {
+    "kanji": "使",
+    "strokes": 8,
+    "meanings": [
+      "Use",
+      "Send On A Mission",
+      "Order",
+      "Messenger",
+      "Envoy",
+      "Ambassador",
+      "Cause"
+    ],
+    "readings_on": [
+      "し"
+    ],
+    "readings_kun": [
+      "つか.う",
+      "つか.い",
+      "-つか.い",
+      "-づか.い"
+    ]
+  },
+  {
+    "kanji": "始",
+    "strokes": 8,
+    "meanings": [
+      "Commence",
+      "Begin"
+    ],
+    "readings_on": [
+      "し"
+    ],
+    "readings_kun": [
+      "はじ.める",
+      "-はじ.める",
+      "はじ.まる"
+    ]
+  },
+  {
+    "kanji": "服",
+    "strokes": 8,
+    "meanings": [
+      "Clothing",
+      "Admit",
+      "Obey",
+      "Discharge"
+    ],
+    "readings_on": [
+      "ふく"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "物",
+    "strokes": 8,
+    "meanings": [
+      "Thing",
+      "Object",
+      "Matter"
+    ],
+    "readings_on": [
+      "ぶつ",
+      "もつ"
+    ],
+    "readings_kun": [
+      "もの",
+      "もの-"
+    ]
+  },
+  {
+    "kanji": "屋",
+    "strokes": 9,
+    "meanings": [
+      "Roof",
+      "House",
+      "Shop",
+      "Dealer",
+      "Seller"
+    ],
+    "readings_on": [
+      "おく"
+    ],
+    "readings_kun": [
+      "や"
+    ]
+  },
+  {
+    "kanji": "度",
+    "strokes": 9,
+    "meanings": [
+      "Degrees",
+      "Occurrence",
+      "Time",
+      "Counter For Occurrences",
+      "Consider",
+      "Attitude"
+    ],
+    "readings_on": [
+      "ど",
+      "と",
+      "たく"
+    ],
+    "readings_kun": [
+      "たび",
+      "-た.い"
+    ]
+  },
+  {
+    "kanji": "待",
+    "strokes": 9,
+    "meanings": [
+      "Wait",
+      "Depend On"
+    ],
+    "readings_on": [
+      "たい"
+    ],
+    "readings_kun": [
+      "ま.つ",
+      "-ま.ち"
+    ]
+  },
+  {
+    "kanji": "持",
+    "strokes": 9,
+    "meanings": [
+      "Hold",
+      "Have"
+    ],
+    "readings_on": [
+      "じ"
+    ],
+    "readings_kun": [
+      "も.つ",
+      "-も.ち",
+      "も.てる"
+    ]
+  },
+  {
+    "kanji": "界",
+    "strokes": 9,
+    "meanings": [
+      "World",
+      "Boundary"
+    ],
+    "readings_on": [
+      "かい"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "発",
+    "strokes": 9,
+    "meanings": [
+      "Departure",
+      "Discharge",
+      "Publish",
+      "Emit",
+      "Start From",
+      "Disclose",
+      "Counter For Gunshots"
+    ],
+    "readings_on": [
+      "はつ",
+      "ほつ"
+    ],
+    "readings_kun": [
+      "た.つ",
+      "あば.く",
+      "おこ.る",
+      "つか.わす",
+      "はな.つ"
+    ]
+  },
+  {
+    "kanji": "送",
+    "strokes": 9,
+    "meanings": [
+      "Escort",
+      "Send"
+    ],
+    "readings_on": [
+      "そう"
+    ],
+    "readings_kun": [
+      "おく.る"
+    ]
+  },
+  {
+    "kanji": "重",
+    "strokes": 9,
+    "meanings": [
+      "Heavy",
+      "Important",
+      "Esteem",
+      "Respect",
+      "Heap Up",
+      "Pile Up",
+      "Nest Of Boxes",
+      "-fold"
+    ],
+    "readings_on": [
+      "じゅう",
+      "ちょう"
+    ],
+    "readings_kun": [
+      "え",
+      "おも.い",
+      "おも.り",
+      "おも.なう",
+      "かさ.ねる",
+      "かさ.なる",
+      "おも"
+    ]
+  },
+  {
+    "kanji": "起",
+    "strokes": 10,
+    "meanings": [
+      "Rouse",
+      "Wake Up",
+      "Get Up"
+    ],
+    "readings_on": [
+      "き"
+    ],
+    "readings_kun": [
+      "お.きる",
+      "お.こる",
+      "お.こす",
+      "おこ.す",
+      "た.つ"
+    ]
+  },
+  {
+    "kanji": "院",
+    "strokes": 10,
+    "meanings": [
+      "Inst.",
+      "Institution",
+      "Temple",
+      "Mansion",
+      "School"
+    ],
+    "readings_on": [
+      "いん"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "終",
+    "strokes": 11,
+    "meanings": [
+      "End",
+      "Finish"
+    ],
+    "readings_on": [
+      "しゅう"
+    ],
+    "readings_kun": [
+      "お.わる",
+      "-お.わる",
+      "おわ.る",
+      "お.える",
+      "つい",
+      "つい.に"
+    ]
+  },
+  {
+    "kanji": "習",
+    "strokes": 11,
+    "meanings": [
+      "Learn"
+    ],
+    "readings_on": [
+      "しゅう",
+      "じゅ"
+    ],
+    "readings_kun": [
+      "なら.う",
+      "なら.い"
+    ]
+  },
+  {
+    "kanji": "転",
+    "strokes": 11,
+    "meanings": [
+      "Revolve",
+      "Turn Around",
+      "Change"
+    ],
+    "readings_on": [
+      "てん"
+    ],
+    "readings_kun": [
+      "ころ.がる",
+      "ころ.げる",
+      "ころ.がす",
+      "ころ.ぶ",
+      "まろ.ぶ",
+      "うたた",
+      "うつ.る",
+      "くる.めく"
+    ]
+  },
+  {
+    "kanji": "運",
+    "strokes": 12,
+    "meanings": [
+      "Carry",
+      "Luck",
+      "Destiny",
+      "Fate",
+      "Lot",
+      "Transport",
+      "Progress",
+      "Advance"
+    ],
+    "readings_on": [
+      "うん"
+    ],
+    "readings_kun": [
+      "はこ.ぶ"
+    ]
+  },
+  {
+    "kanji": "開",
+    "strokes": 12,
+    "meanings": [
+      "Open",
+      "Unfold",
+      "Unseal"
+    ],
+    "readings_on": [
+      "かい"
+    ],
+    "readings_kun": [
+      "ひら.く",
+      "ひら.き",
+      "-びら.き",
+      "ひら.ける",
+      "あ.く",
+      "あ.ける"
+    ]
+  },
+  {
+    "kanji": "集",
+    "strokes": 12,
+    "meanings": [
+      "Gather",
+      "Meet",
+      "Congregate",
+      "Swarm",
+      "Flock"
+    ],
+    "readings_on": [
+      "しゅう"
+    ],
+    "readings_kun": [
+      "あつ.まる",
+      "あつ.める",
+      "つど.う"
+    ]
+  },
+  {
+    "kanji": "飲",
+    "strokes": 12,
+    "meanings": [
+      "Drink",
+      "Smoke",
+      "Take"
+    ],
+    "readings_on": [
+      "いん",
+      "おん"
+    ],
+    "readings_kun": [
+      "の.む",
+      "-の.み"
+    ]
+  },
+  {
+    "kanji": "業",
+    "strokes": 13,
+    "meanings": [
+      "Business",
+      "Vocation",
+      "Arts",
+      "Performance"
+    ],
+    "readings_on": [
+      "ぎょう",
+      "ごう"
+    ],
+    "readings_kun": [
+      "わざ"
+    ]
+  },
+  {
+    "kanji": "漢",
+    "strokes": 13,
+    "meanings": [
+      "Sino-",
+      "China"
+    ],
+    "readings_on": [
+      "かん"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "歌",
+    "strokes": 14,
+    "meanings": [
+      "Song",
+      "Sing"
+    ],
+    "readings_on": [
+      "か"
+    ],
+    "readings_kun": [
+      "うた",
+      "うた.う"
+    ]
+  },
+  {
+    "kanji": "親",
+    "strokes": 16,
+    "meanings": [
+      "Parent",
+      "Intimacy",
+      "Relative",
+      "Familiarity",
+      "Dealer (cards)"
+    ],
+    "readings_on": [
+      "しん"
+    ],
+    "readings_kun": [
+      "おや",
+      "おや-",
+      "した.しい",
+      "した.しむ"
+    ]
+  },
+  {
+    "kanji": "病",
+    "strokes": 10,
+    "meanings": [
+      "Ill",
+      "Sick"
+    ],
+    "readings_on": [
+      "びょう",
+      "へい"
+    ],
+    "readings_kun": [
+      "や.む",
+      "-や.み",
+      "やまい"
+    ]
+  },
+  {
+    "kanji": "別",
+    "strokes": 7,
+    "meanings": [
+      "Separate",
+      "Branch Off",
+      "Diverge",
+      "Fork",
+      "Another",
+      "Extra",
+      "Specially"
+    ],
+    "readings_on": [
+      "べつ"
+    ],
+    "readings_kun": [
+      "わか.れる",
+      "わ.ける"
+    ]
+  },
+  {
+    "kanji": "注",
+    "strokes": 8,
+    "meanings": [
+      "Pour",
+      "Irrigate",
+      "Shed (tears)",
+      "Flow Into",
+      "Concentrate On",
+      "Notes",
+      "Comment",
+      "Annotate"
+    ],
+    "readings_on": [
+      "ちゅう"
+    ],
+    "readings_kun": [
+      "そそ.ぐ",
+      "さ.す",
+      "つ.ぐ"
+    ]
+  },
+  {
+    "kanji": "洋",
+    "strokes": 9,
+    "meanings": [
+      "Ocean",
+      "Sea",
+      "Foreign",
+      "Western Style"
+    ],
+    "readings_on": [
+      "よう"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "特",
+    "strokes": 10,
+    "meanings": [
+      "Special"
+    ],
+    "readings_on": [
+      "とく"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "意",
+    "strokes": 13,
+    "meanings": [
+      "Idea",
+      "Mind",
+      "Heart",
+      "Taste",
+      "Thought",
+      "Desire",
+      "Care",
+      "Liking"
+    ],
+    "readings_on": [
+      "い"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "味",
+    "strokes": 8,
+    "meanings": [
+      "Flavor",
+      "Taste"
+    ],
+    "readings_on": [
+      "み"
+    ],
+    "readings_kun": [
+      "あじ",
+      "あじ.わう"
+    ]
+  },
+  {
+    "kanji": "勉",
+    "strokes": 10,
+    "meanings": [
+      "Exertion",
+      "Endeavour",
+      "Encourage",
+      "Strive",
+      "Make Effort",
+      "Diligent"
+    ],
+    "readings_on": [
+      "べん"
+    ],
+    "readings_kun": [
+      "つと.める"
+    ]
+  },
+  {
+    "kanji": "旅",
+    "strokes": 10,
+    "meanings": [
+      "Trip",
+      "Travel"
+    ],
+    "readings_on": [
+      "りょ"
+    ],
+    "readings_kun": [
+      "たび"
+    ]
+  },
+  {
+    "kanji": "員",
+    "strokes": 10,
+    "meanings": [
+      "Employee",
+      "Member",
+      "Number",
+      "The One In Charge"
+    ],
+    "readings_on": [
+      "いん"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "動",
+    "strokes": 11,
+    "meanings": [
+      "Move",
+      "Motion",
+      "Change",
+      "Confusion",
+      "Shift",
+      "Shake"
+    ],
+    "readings_on": [
+      "どう"
+    ],
+    "readings_kun": [
+      "うご.く",
+      "うご.かす"
+    ]
+  },
+  {
+    "kanji": "悪",
+    "strokes": 11,
+    "meanings": [
+      "Bad",
+      "Vice",
+      "Rascal",
+      "False",
+      "Evil",
+      "Wrong"
+    ],
+    "readings_on": [
+      "あく",
+      "お"
+    ],
+    "readings_kun": [
+      "わる.い",
+      "わる-",
+      "あ.し",
+      "にく.い",
+      "-にく.い",
+      "ああ",
+      "いずくに",
+      "いずくんぞ",
+      "にく.む"
+    ]
+  },
+  {
+    "kanji": "族",
+    "strokes": 11,
+    "meanings": [
+      "Tribe",
+      "Family"
+    ],
+    "readings_on": [
+      "ぞく"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "着",
+    "strokes": 12,
+    "meanings": [
+      "Don",
+      "Arrive",
+      "Wear",
+      "Counter For Suits Of Clothing"
+    ],
+    "readings_on": [
+      "ちゃく",
+      "じゃく"
+    ],
+    "readings_kun": [
+      "き.る",
+      "-ぎ",
+      "き.せる",
+      "-き.せ",
+      "つ.く",
+      "つ.ける"
+    ]
+  },
+  {
+    "kanji": "野",
+    "strokes": 11,
+    "meanings": [
+      "Plains",
+      "Field",
+      "Rustic",
+      "Civilian Life"
+    ],
+    "readings_on": [
+      "や",
+      "しょ"
+    ],
+    "readings_kun": [
+      "の",
+      "の-"
+    ]
+  },
+  {
+    "kanji": "風",
+    "strokes": 9,
+    "meanings": [
+      "Wind",
+      "Air",
+      "Style",
+      "Manner"
+    ],
+    "readings_on": [
+      "ふう",
+      "ふ"
+    ],
+    "readings_kun": [
+      "かぜ",
+      "かざ-",
+      "-かぜ"
+    ]
+  },
+  {
+    "kanji": "新",
+    "strokes": 13,
+    "meanings": [
+      "New"
+    ],
+    "readings_on": [
+      "しん"
+    ],
+    "readings_kun": [
+      "あたら.しい",
+      "あら.た",
+      "あら-",
+      "にい-"
+    ]
+  },
+  {
+    "kanji": "問",
+    "strokes": 11,
+    "meanings": [
+      "Question",
+      "Ask",
+      "Problem"
+    ],
+    "readings_on": [
+      "もん"
+    ],
+    "readings_kun": [
+      "と.う",
+      "と.い",
+      "とん"
+    ]
+  },
+  {
+    "kanji": "銀",
+    "strokes": 14,
+    "meanings": [
+      "Silver"
+    ],
+    "readings_on": [
+      "ぎん"
+    ],
+    "readings_kun": [
+      "しろがね"
+    ]
+  },
+  {
+    "kanji": "題",
+    "strokes": 18,
+    "meanings": [
+      "Topic",
+      "Subject"
+    ],
+    "readings_on": [
+      "だい"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "館",
+    "strokes": 16,
+    "meanings": [
+      "Building",
+      "Mansion",
+      "Large Building",
+      "Palace"
+    ],
+    "readings_on": [
+      "かん"
+    ],
+    "readings_kun": [
+      "やかた",
+      "たて"
+    ]
+  },
+  {
+    "kanji": "駅",
+    "strokes": 14,
+    "meanings": [
+      "Station"
+    ],
+    "readings_on": [
+      "えき"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "料",
+    "strokes": 10,
+    "meanings": [
+      "Fee",
+      "Materials"
+    ],
+    "readings_on": [
+      "りょう"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "映",
+    "strokes": 9,
+    "meanings": [
+      "Reflect",
+      "Reflection",
+      "Projection"
+    ],
+    "readings_on": [
+      "えい"
+    ],
+    "readings_kun": [
+      "うつ.る",
+      "うつ.す",
+      "は.える",
+      "-ば.え"
+    ]
+  },
+  {
+    "kanji": "私",
+    "strokes": 7,
+    "meanings": [
+      "Private",
+      "I",
+      "Me"
+    ],
+    "readings_on": [
+      "し"
+    ],
+    "readings_kun": [
+      "わたくし",
+      "わたし"
+    ]
+  },
+  {
+    "kanji": "帰",
+    "strokes": 10,
+    "meanings": [
+      "Homecoming",
+      "Arrive At",
+      "Lead To",
+      "Result In"
+    ],
+    "readings_on": [
+      "き"
+    ],
+    "readings_kun": [
+      "かえ.る",
+      "かえ.す",
+      "おく.る",
+      "とつ.ぐ"
+    ]
+  },
+  {
+    "kanji": "春",
+    "strokes": 9,
+    "meanings": [
+      "Springtime",
+      "Spring (season)"
+    ],
+    "readings_on": [
+      "しゅん"
+    ],
+    "readings_kun": [
+      "はる"
+    ]
+  },
+  {
+    "kanji": "昼",
+    "strokes": 9,
+    "meanings": [
+      "Daytime",
+      "Noon"
+    ],
+    "readings_on": [
+      "ちゅう"
+    ],
+    "readings_kun": [
+      "ひる"
+    ]
+  },
+  {
+    "kanji": "秋",
+    "strokes": 9,
+    "meanings": [
+      "Autumn"
+    ],
+    "readings_on": [
+      "しゅう"
+    ],
+    "readings_kun": [
+      "あき",
+      "とき"
+    ]
+  },
+  {
+    "kanji": "計",
+    "strokes": 9,
+    "meanings": [
+      "Plot",
+      "Plan",
+      "Scheme",
+      "Measure"
+    ],
+    "readings_on": [
+      "けい"
+    ],
+    "readings_kun": [
+      "はか.る",
+      "はか.らう"
+    ]
+  },
+  {
+    "kanji": "建",
+    "strokes": 9,
+    "meanings": [
+      "Build"
+    ],
+    "readings_on": [
+      "けん",
+      "こん"
+    ],
+    "readings_kun": [
+      "た.てる",
+      "た.て",
+      "-だ.て",
+      "た.つ"
+    ]
+  },
+  {
+    "kanji": "英",
+    "strokes": 8,
+    "meanings": [
+      "England",
+      "English",
+      "Hero",
+      "Outstanding",
+      "Calyx"
+    ],
+    "readings_on": [
+      "えい"
+    ],
+    "readings_kun": [
+      "はなぶさ"
+    ]
+  },
+  {
+    "kanji": "飯",
+    "strokes": 12,
+    "meanings": [
+      "Meal",
+      "Boiled Rice"
+    ],
+    "readings_on": [
+      "はん"
+    ],
+    "readings_kun": [
+      "めし"
+    ]
+  },
+  {
+    "kanji": "曜",
+    "strokes": 18,
+    "meanings": [
+      "Weekday"
+    ],
+    "readings_on": [
+      "よう"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "品",
+    "strokes": 9,
+    "meanings": [
+      "Goods",
+      "Refinement",
+      "Dignity",
+      "Article",
+      "Counter For Meal Courses"
+    ],
+    "readings_on": [
+      "ひん",
+      "ほん"
+    ],
+    "readings_kun": [
+      "しな"
+    ]
+  },
+  {
+    "kanji": "急",
+    "strokes": 9,
+    "meanings": [
+      "Hurry",
+      "Emergency",
+      "Sudden",
+      "Steep"
+    ],
+    "readings_on": [
+      "きゅう"
+    ],
+    "readings_kun": [
+      "いそ.ぐ",
+      "いそ.ぎ",
+      "せ.く"
+    ]
+  },
+  {
+    "kanji": "真",
+    "strokes": 10,
+    "meanings": [
+      "True",
+      "Reality",
+      "Buddhist Sect"
+    ],
+    "readings_on": [
+      "しん"
+    ],
+    "readings_kun": [
+      "ま",
+      "ま-",
+      "まこと"
+    ]
+  },
+  {
+    "kanji": "堂",
+    "strokes": 11,
+    "meanings": [
+      "Public Chamber",
+      "Hall"
+    ],
+    "readings_on": [
+      "どう"
+    ],
+    "readings_kun": []
+  },
+  {
+    "kanji": "試",
+    "strokes": 13,
+    "meanings": [
+      "Test",
+      "Try",
+      "Attempt",
+      "Experiment",
+      "Ordeal"
+    ],
+    "readings_on": [
+      "し"
+    ],
+    "readings_kun": [
+      "こころ.みる",
+      "ため.す"
+    ]
+  },
+  {
+    "kanji": "借",
+    "strokes": 10,
+    "meanings": [
+      "Borrow",
+      "Rent"
+    ],
+    "readings_on": [
+      "しゃく"
+    ],
+    "readings_kun": [
+      "か.りる"
+    ]
+  },
+  {
+    "kanji": "験",
+    "strokes": 18,
+    "meanings": [
+      "Verification",
+      "Effect",
+      "Testing"
+    ],
+    "readings_on": [
+      "けん",
+      "げん"
+    ],
+    "readings_kun": [
+      "あかし",
+      "しるし",
+      "ため.す",
+      "ためし"
+    ]
+  },
+  {
+    "kanji": "質",
+    "strokes": 15,
+    "meanings": [
+      "Substance",
+      "Quality",
+      "Matter",
+      "Temperament"
+    ],
+    "readings_on": [
+      "しつ",
+      "しち",
+      "ち"
+    ],
+    "readings_kun": [
+      "たち",
+      "ただ.す",
+      "もと",
+      "わりふ"
+    ]
+  },
+  {
+    "kanji": "貸",
+    "strokes": 12,
+    "meanings": [
+      "Lend"
+    ],
+    "readings_on": [
+      "たい"
+    ],
+    "readings_kun": [
+      "か.す",
+      "か.し-",
+      "かし-"
+    ]
+  }
+]

@@ -1,0 +1,68 @@
+{
+  "sections": [
+    {
+      "id": "n5-vocab",
+      "title": "Vocabulary",
+      "instructions": "Choose the best answer for each vocabulary question.",
+      "timeLimit": 25,
+      "questions": [
+        {
+          "id": "n5-vocab-1",
+          "type": "multiple-choice",
+          "text": "What does 「いぬ」mean?",
+          "options": ["cat", "dog", "bird", "fish"],
+          "correctAnswer": "dog",
+          "explanation": "「いぬ」(犬) means 'dog' in Japanese."
+        },
+        {
+          "id": "n5-vocab-2",
+          "type": "multiple-choice",
+          "text": "Which is the correct meaning of 「おはよう」?",
+          "options": ["Good morning", "Good afternoon", "Good evening", "Good night"],
+          "correctAnswer": "Good morning",
+          "explanation": "「おはよう」is used to say 'good morning' in Japanese."
+        }
+      ]
+    },
+    {
+      "id": "n5-grammar",
+      "title": "Grammar",
+      "instructions": "Select the correct grammar pattern or particle to complete each sentence.",
+      "timeLimit": 25,
+      "questions": [
+        {
+          "id": "n5-grammar-1",
+          "type": "multiple-choice",
+          "text": "わたし＿＿＿がくせいです。",
+          "options": ["は", "が", "を", "に"],
+          "correctAnswer": "は",
+          "explanation": "The particle は is used to mark the topic of the sentence."
+        },
+        {
+          "id": "n5-grammar-2",
+          "type": "multiple-choice",
+          "text": "きのう＿＿＿えいがをみました。",
+          "options": ["は", "が", "を", "に"],
+          "correctAnswer": "に",
+          "explanation": "The particle に is used to indicate time in this sentence."
+        }
+      ]
+    },
+    {
+      "id": "n5-reading",
+      "title": "Reading",
+      "instructions": "Read the passage and answer the questions that follow.",
+      "timeLimit": 50,
+      "questions": [
+        {
+          "id": "n5-reading-1",
+          "type": "multiple-choice",
+          "text": "わたしはマリーです。にほんごをべんきょうしています。にほんごはたのしいです。\n\nWhat is the person studying?",
+          "options": ["English", "Japanese", "Chinese", "Korean"],
+          "correctAnswer": "Japanese",
+          "explanation": "The text states 'にほんごをべんきょうしています' which means 'I am studying Japanese.'"
+        }
+      ]
+    }
+  ]
+}

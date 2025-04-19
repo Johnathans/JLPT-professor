@@ -1,0 +1,359 @@
+{
+  "title": "N5 Vocabulary",
+  "part": 4,
+  "count": 44,
+  "vocabulary": [
+    {
+      "id": 601,
+      "japanese": "後ろ",
+      "hiragana": "うしろ",
+      "romaji": "ushiro",
+      "type": "Noun",
+      "meaning": "back; behind; rear"
+    },
+    {
+      "id": 602,
+      "japanese": "薄い",
+      "hiragana": "うすい",
+      "romaji": "usui",
+      "type": "Adjective, い-adjective",
+      "meaning": "thin; weak"
+    },
+    {
+      "id": 603,
+      "japanese": "歌",
+      "hiragana": "うた",
+      "romaji": "uta",
+      "type": "Noun",
+      "meaning": "song"
+    },
+    {
+      "id": 604,
+      "japanese": "歌う",
+      "hiragana": "うたう",
+      "romaji": "utau",
+      "type": "Verb, Godan verb, Intransitive verb, Transitive verb",
+      "meaning": "to sing"
+    },
+    {
+      "id": 605,
+      "japanese": "上着",
+      "hiragana": "うわぎ",
+      "romaji": "uwagi",
+      "type": "Noun",
+      "meaning": "coat; tunic; jacket; outer garment"
+    },
+    {
+      "id": 606,
+      "japanese": "ワイシャツ",
+      "hiragana": "",
+      "romaji": "wai shatsu",
+      "type": "Noun, Katakana, Wasei",
+      "meaning": "shirt"
+    },
+    {
+      "id": 607,
+      "japanese": "若い",
+      "hiragana": "わかい",
+      "romaji": "wakai",
+      "type": "Adjective, い-adjective",
+      "meaning": "young"
+    },
+    {
+      "id": 608,
+      "japanese": "分かる",
+      "hiragana": "わかる",
+      "romaji": "wakaru",
+      "type": "Verb, Godan verb, Intransitive verb",
+      "meaning": "to understand; to comprehend; to grasp; to see; to get; to follow"
+    },
+    {
+      "id": 609,
+      "japanese": "悪い",
+      "hiragana": "わるい",
+      "romaji": "warui",
+      "type": "Adjective, い-adjective",
+      "meaning": "bad; poor; undesirable"
+    },
+    {
+      "id": 610,
+      "japanese": "忘れる",
+      "hiragana": "わすれる",
+      "romaji": "wasureru",
+      "type": "Verb, Ichidan verb, Transitive verb",
+      "meaning": "to forget"
+    },
+    {
+      "id": 611,
+      "japanese": "渡る",
+      "hiragana": "わたる",
+      "romaji": "wataru",
+      "type": "Verb, Godan verb, Intransitive verb",
+      "meaning": "to go across"
+    },
+    {
+      "id": 612,
+      "japanese": "私",
+      "hiragana": "わたし",
+      "romaji": "watashi",
+      "type": "Pronoun",
+      "meaning": "I; myself"
+    },
+    {
+      "id": 613,
+      "japanese": "渡す",
+      "hiragana": "わたす",
+      "romaji": "watasu",
+      "type": "Verb, Godan verb, Transitive verb",
+      "meaning": "to hand over"
+    },
+    {
+      "id": 614,
+      "japanese": "山",
+      "hiragana": "やま",
+      "romaji": "yama",
+      "type": "Noun",
+      "meaning": "mountain; hill"
+    },
+    {
+      "id": 615,
+      "japanese": "八百屋",
+      "hiragana": "やおや",
+      "romaji": "yaoya",
+      "type": "Noun",
+      "meaning": "greengrocer; fruit and vegetable shop; versatile"
+    },
+    {
+      "id": 616,
+      "japanese": "やる",
+      "hiragana": "",
+      "romaji": "yaru",
+      "type": "Verb, Godan verb, Transitive verb",
+      "meaning": "to do"
+    },
+    {
+      "id": 617,
+      "japanese": "野菜",
+      "hiragana": "やさい",
+      "romaji": "yasai",
+      "type": "Noun",
+      "meaning": "vegetable"
+    },
+    {
+      "id": 618,
+      "japanese": "易しい",
+      "hiragana": "やさしい",
+      "romaji": "yasashii",
+      "type": "Adjective, い-adjective",
+      "meaning": "easy, simple"
+    },
+    {
+      "id": 619,
+      "japanese": "安い",
+      "hiragana": "やすい",
+      "romaji": "yasui",
+      "type": "Adjective, い-adjective",
+      "meaning": "cheap; inexpensive"
+    },
+    {
+      "id": 620,
+      "japanese": "休み",
+      "hiragana": "やすみ",
+      "romaji": "yasumi",
+      "type": "Noun",
+      "meaning": "rest; vacation; holiday"
+    },
+    {
+      "id": 621,
+      "japanese": "休む",
+      "hiragana": "やすむ",
+      "romaji": "yasumu",
+      "type": "Verb, Godan verb, Intransitive verb",
+      "meaning": "to be absent; to take a day off; to rest"
+    },
+    {
+      "id": 622,
+      "japanese": "八つ",
+      "hiragana": "やっつ",
+      "romaji": "yattsu",
+      "type": "Noun, Numeric",
+      "meaning": "eight: 8"
+    },
+    {
+      "id": 623,
+      "japanese": "呼ぶ",
+      "hiragana": "よぶ",
+      "romaji": "yobu",
+      "type": "Verb, Godan verb, Transitive verb",
+      "meaning": "to call out, to invite"
+    },
+    {
+      "id": 624,
+      "japanese": "良い",
+      "hiragana": "よい/いい",
+      "romaji": "yoi/ii",
+      "type": "Adjective, い-adjective",
+      "meaning": "good"
+    },
+    {
+      "id": 625,
+      "japanese": "四日",
+      "hiragana": "よっか",
+      "romaji": "yokka",
+      "type": "Noun",
+      "meaning": "fourth day of the month / 4 days"
+    },
+    {
+      "id": 626,
+      "japanese": "横",
+      "hiragana": "よこ",
+      "romaji": "yoko",
+      "type": "Noun",
+      "meaning": "beside,side,width"
+    },
+    {
+      "id": 627,
+      "japanese": "よく",
+      "hiragana": "",
+      "romaji": "yoku",
+      "type": "Adverb",
+      "meaning": "often, well"
+    },
+    {
+      "id": 628,
+      "japanese": "読む",
+      "hiragana": "よむ",
+      "romaji": "yomu",
+      "type": "Verb, Godan verb, Transitive verb",
+      "meaning": "to read; to guess; to predict; to read (someone's thoughts)"
+    },
+    {
+      "id": 629,
+      "japanese": "夜",
+      "hiragana": "よる",
+      "romaji": "yoru",
+      "type": "Noun",
+      "meaning": "evening; night"
+    },
+    {
+      "id": 630,
+      "japanese": "四つ",
+      "hiragana": "よつ",
+      "romaji": "yotsu",
+      "type": "Noun, Numeric",
+      "meaning": "four; 4"
+    },
+    {
+      "id": 631,
+      "japanese": "洋服",
+      "hiragana": "ようふく",
+      "romaji": "youfuku",
+      "type": "Noun",
+      "meaning": "western clothes"
+    },
+    {
+      "id": 632,
+      "japanese": "八日",
+      "hiragana": "ようか",
+      "romaji": "youka",
+      "type": "Noun",
+      "meaning": "eighth day of the month / 8 days"
+    },
+    {
+      "id": 633,
+      "japanese": "弱い",
+      "hiragana": "よわい",
+      "romaji": "yowai",
+      "type": "Adjective, い-adjective",
+      "meaning": "weak"
+    },
+    {
+      "id": 634,
+      "japanese": "雪",
+      "hiragana": "ゆき",
+      "romaji": "yuki",
+      "type": "Noun",
+      "meaning": "snow"
+    },
+    {
+      "id": 635,
+      "japanese": "ゆっくり",
+      "hiragana": "",
+      "romaji": "yukkuri",
+      "type": "Adverb",
+      "meaning": "slowly"
+    },
+    {
+      "id": 636,
+      "japanese": "昨夜",
+      "hiragana": "ゆうべ",
+      "romaji": "yuube",
+      "type": "Noun",
+      "meaning": "last night"
+    },
+    {
+      "id": 637,
+      "japanese": "郵便局",
+      "hiragana": "ゆうびんきょく",
+      "romaji": "yuubinkyoku",
+      "type": "Noun",
+      "meaning": "post office"
+    },
+    {
+      "id": 638,
+      "japanese": "夕方",
+      "hiragana": "ゆうがた",
+      "romaji": "yuugata",
+      "type": "Noun",
+      "meaning": "evening; dusk"
+    },
+    {
+      "id": 639,
+      "japanese": "夕飯",
+      "hiragana": "ゆうはん",
+      "romaji": "yuuhan",
+      "type": "Noun",
+      "meaning": "evening meal"
+    },
+    {
+      "id": 640,
+      "japanese": "有名",
+      "hiragana": "ゆうめい",
+      "romaji": "yuumei",
+      "type": "Noun, Adjective, な-adjective",
+      "meaning": "famous"
+    },
+    {
+      "id": 641,
+      "japanese": "雑誌",
+      "hiragana": "ざっし",
+      "romaji": "zasshi",
+      "type": "Noun",
+      "meaning": "magazine"
+    },
+    {
+      "id": 642,
+      "japanese": "全部",
+      "hiragana": "ぜんぶ",
+      "romaji": "zenbu",
+      "type": "Noun, Adverbial Noun",
+      "meaning": "all"
+    },
+    {
+      "id": 643,
+      "japanese": "ゼロ",
+      "hiragana": "",
+      "romaji": "zero",
+      "type": "Noun",
+      "meaning": "zero"
+    },
+    {
+      "id": 644,
+      "japanese": "ズボン",
+      "hiragana": "",
+      "romaji": "zubon",
+      "type": "Noun, Katakana",
+      "meaning": "trousers; pants"
+    }
+  ]
+}

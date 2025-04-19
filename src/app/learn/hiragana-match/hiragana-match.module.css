@@ -1,0 +1,512 @@
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem var(--page-padding);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: white;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.backLink:hover {
+  color: var(--text-color);
+}
+
+.score {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Game Content Styles */
+.gameContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.progress {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background: var(--border-color);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--primary-color);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  text-align: center;
+  margin-top: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.question {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.meaning {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.option {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color);
+  background: white;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.option:hover:not(:disabled) {
+  border-color: var(--primary-color);
+  background: var(--primary-light);
+}
+
+.option:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.option.correct {
+  background: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+  transition: background-color 0.2s ease;
+}
+
+.option.incorrect {
+  background: #f44336;
+  color: white;
+  border-color: #f44336;
+  transition: background-color 0.2s ease;
+}
+
+/* Landing Page Styles */
+.landingContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.landingLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.landingTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.gamePreview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background: var(--primary-light);
+  transition: transform 0.3s ease;
+}
+
+.gamePreview:hover {
+  transform: translateY(-4px);
+}
+
+.screenshot {
+  object-fit: cover;
+  object-position: center;
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+}
+
+.gameDescription {
+  color: var(--text-color);
+}
+
+.gameDescription p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.gameDescription ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.gameDescription li {
+  background: var(--primary-light);
+  color: var(--primary-color);
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.gameSettings {
+  margin-top: 2rem;
+}
+
+.settingGroup {
+  margin-bottom: 2rem;
+}
+
+.settingLabel {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.sectionToggle {
+  width: 100%;
+  text-align: left;
+  padding: 1rem;
+  background: white;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sectionToggle:hover {
+  border-color: var(--primary-color);
+  background: var(--primary-light);
+}
+
+.characterSection {
+  background: white;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.sectionControls {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.controlButton {
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--border-color);
+  background: white;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.controlButton:hover {
+  border-color: var(--primary-color);
+  background: var(--primary-light);
+}
+
+.characterGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 0.5rem;
+}
+
+.characterButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.75rem;
+  border: 2px solid var(--border-color);
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.characterButton:hover {
+  border-color: var(--primary-color);
+  background: var(--primary-light);
+}
+
+.characterButton.selected {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.kana {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.romaji {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+/* Progress Bar Styles */
+.progress {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background: var(--border-color);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--primary-color);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+/* Game Results Styles */
+.resultCard {
+  background: white;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.resultTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+}
+
+.resultStats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.statCard {
+  padding: 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  background: white;
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.statValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.resultButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.playAgainButton {
+  padding: 1rem 2rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.playAgainButton:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.levelSelector {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.levelButton {
+  padding: 0.75rem 1.25rem;
+  border: 2px solid var(--border-color);
+  background: white;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1.125rem;
+}
+
+.levelButton:hover {
+  border-color: var(--primary-color);
+  background: var(--primary-light);
+}
+
+.levelButtonActive {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.levelButtonActive:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  color: white;
+}
+
+.playButton {
+  width: 100%;
+  padding: 1.25rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.playButton:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.playButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.restartButton {
+  width: 100%;
+  padding: 1rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.restartButton:hover {
+  background: var(--primary-dark);
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  font-size: 1.25rem;
+  color: var(--error);
+}
+
+@media (max-width: 768px) {
+  .landingContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
