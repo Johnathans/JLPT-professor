@@ -1,255 +1,720 @@
-"use client";
+'use client';
 
-import { Box, Grid, Typography, Card, CircularProgress, Button, Stack, LinearProgress } from '@mui/material';
+import { Box, Typography, Avatar, IconButton, Tabs, Tab, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useJlptLevel } from '@/contexts/JlptLevelContext';
-import { useEffect, useState } from 'react';
-import { Module, ModuleProgress as ModuleProgressType, DailyStudyPlan as DailyStudyPlanType } from '@/types/module';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
-import { LocalFireDepartment, School, MenuBook, Headphones } from '@mui/icons-material';
+import { useJlptLevel } from '@/contexts/JlptLevelContext';
+import React, { useState } from 'react';
+import Home from '@mui/icons-material/Home';
+import MenuBook from '@mui/icons-material/MenuBook';
+import School from '@mui/icons-material/School';
+import Quiz from '@mui/icons-material/Quiz';
+import Settings from '@mui/icons-material/Settings';
+import Assignment from '@mui/icons-material/Assignment';
+import Insights from '@mui/icons-material/Insights';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import Help from '@mui/icons-material/Help';
+import Star from '@mui/icons-material/Star';
+import Lock from '@mui/icons-material/Lock';
 
-const PageWrapper = styled('div')({
-  minHeight: '100vh',
-  backgroundColor: '#f8fafc',
+// Styled Components
+const AppContainer = styled('div')({
   display: 'flex',
-  flexDirection: 'column',
+  minHeight: '100vh',
+  backgroundColor: '#f8fafc'
 });
 
-const ContentWrapper = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(3),
-  maxWidth: '1200px',
-  margin: '0 auto',
+const MainContent = styled('div')(({ theme }) => ({
+  flexGrow: 1,
   width: '100%',
-  flex: 1,
+  backgroundColor: '#f8fafc',
+  overflow: 'auto',
+  padding: theme.spacing(3),
+  marginLeft: 72,
+  transition: 'margin-left 0.3s ease-in-out',
+  '.sidebar-expanded &': {
+    marginLeft: 240
+  },
   [theme.breakpoints.down('sm')]: {
     padding: theme.spacing(2),
+    paddingBottom: theme.spacing(8),
+    marginLeft: 0
   }
 }));
 
-const WelcomeCard = styled(Card)(({ theme }) => ({
-  padding: theme.spacing(3),
-  marginBottom: theme.spacing(3),
-  borderRadius: theme.spacing(2),
-  background: '#fff',
-  border: '1px solid #e2e8f0',
-  [theme.breakpoints.down('sm')]: {
-    padding: theme.spacing(2),
-  }
-}));
-
-const StatsCard = styled(Card)(({ theme }) => ({
-  padding: theme.spacing(3),
-  borderRadius: theme.spacing(2),
-  height: '100%',
+const Sidebar = styled('div')(({ theme }) => ({
+  position: 'fixed',
+  left: 0,
+  top: 0,
+  bottom: 0,
+  width: 72,
+  backgroundColor: '#fff',
+  borderRight: '1px solid rgba(0,0,0,0.08)',
+  transition: 'all 0.3s ease-in-out',
+  overflow: 'hidden',
+  zIndex: 1000,
   display: 'flex',
   flexDirection: 'column',
-  background: '#fff',
-  border: '1px solid #e2e8f0',
-  transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+  padding: '16px 12px',
+  gap: '8px',
+  '& .nav-text': {
+    opacity: 0,
+    transform: 'translateX(-10px)',
+    transition: 'all 0.3s ease-in-out'
+  },
+  '& .user-name': {
+    opacity: 0,
+    transform: 'translateX(-10px)',
+    transition: 'all 0.3s ease-in-out'
+  },
+  '.MuiSvgIcon-root': {
+    transition: 'margin 0.3s ease-in-out'
+  },
   '&:hover': {
-    transform: 'translateY(-4px)',
-    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
+    width: 240,
+    '& .nav-text, & .user-name': {
+      opacity: 1,
+      transform: 'translateX(0)'
+    },
+    '& + .main-content': {
+      marginLeft: 240
+    }
   },
   [theme.breakpoints.down('sm')]: {
-    padding: theme.spacing(2),
+    display: 'none'
   }
 }));
 
-const ProgressBar = styled(LinearProgress)(({ theme }) => ({
-  height: 8,
-  borderRadius: 4,
-  backgroundColor: '#f1f5f9',
-  '& .MuiLinearProgress-bar': {
-    borderRadius: 4,
-    backgroundColor: '#7c4dff',
-  }
-}));
-
-const StudyButton = styled(Button)(({ theme }) => ({
-  backgroundColor: '#fff',
-  color: '#1a2027',
-  borderRadius: theme.spacing(1),
-  padding: theme.spacing(1.5, 3),
-  textTransform: 'none',
-  fontWeight: 600,
-  border: '1px solid #e2e8f0',
+const UserSection = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '12px',
+  padding: '8px',
+  marginBottom: '16px',
+  borderRadius: '12px',
+  cursor: 'pointer',
+  transition: 'background-color 0.2s ease',
   '&:hover': {
-    backgroundColor: '#f8fafc',
-    borderColor: '#cbd5e1',
+    backgroundColor: 'rgba(124, 77, 255, 0.04)'
   }
-}));
+});
 
-const studyTypes = [
-  {
-    title: 'Kanji',
-    icon: School,
-    description: 'Master Japanese characters',
-    path: '/learn/kanji',
+const NavItem = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '12px',
+  padding: '12px',
+  borderRadius: '12px',
+  cursor: 'pointer',
+  transition: 'all 0.2s ease',
+  color: '#6F767E',
+  position: 'relative',
+  '&:hover': {
+    backgroundColor: 'rgba(124, 77, 255, 0.04)',
     color: '#7c4dff'
   },
-  {
-    title: 'Vocabulary',
-    icon: MenuBook,
-    description: 'Build your word power',
-    path: '/learn/vocabulary',
-    color: '#00bfa5'
+  '.MuiSvgIcon-root': {
+    width: 24,
+    height: 24,
+    flexShrink: 0
   },
-  {
-    title: 'Listening',
-    icon: Headphones,
-    description: 'Improve comprehension',
-    path: '/learn/listening',
-    color: '#ff9100'
+  '.nav-text': {
+    fontSize: '0.9375rem',
+    fontWeight: 500,
+    whiteSpace: 'nowrap',
+    opacity: 0,
+    transform: 'translateX(-10px)',
+    transition: 'all 0.3s ease-in-out',
+    color: 'inherit'
+  },
+  '&.active': {
+    color: '#7c4dff',
+    backgroundColor: 'rgba(124, 77, 255, 0.08)',
+    fontWeight: 600
   }
+}));
+
+const ProgressSection = styled(Box)({
+  background: '#fff',
+  borderRadius: 12,
+  padding: 24,
+  marginBottom: 24
+});
+
+const StudyCard = styled(Box)({
+  background: '#fff',
+  borderRadius: 12,
+  padding: 20,
+  border: '1px solid rgba(0,0,0,0.08)',
+  cursor: 'pointer',
+  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+  '&:hover': {
+    transform: 'translateY(-2px)',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
+  }
+});
+
+const FlipCard = styled('div')({
+  width: '100%',
+  height: '100%',
+  perspective: '1000px',
+  cursor: 'pointer',
+  '.flip-card-inner': {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+    textAlign: 'center',
+    transition: 'transform 0.6s',
+    transformStyle: 'preserve-3d',
+    backgroundColor: '#fff',
+    borderRadius: '12px',
+    border: '1px solid rgba(0,0,0,0.08)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '16px'
+  },
+  '&:hover .flip-card-inner': {
+    transform: 'rotateY(180deg)'
+  },
+  '.flip-card-front, .flip-card-back': {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backfaceVisibility: 'hidden',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  '.flip-card-back': {
+    transform: 'rotateY(180deg)'
+  }
+});
+
+const BottomNav = styled('div')(({ theme }) => ({
+  display: 'none',
+  [theme.breakpoints.down('sm')]: {
+    display: 'flex',
+    position: 'fixed',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 56,
+    backgroundColor: 'white',
+    borderTop: '1px solid',
+    borderColor: theme.palette.divider,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    zIndex: 1000,
+    padding: '0 16px'
+  }
+}));
+
+const navItems = [
+  { icon: <Home />, label: 'Dashboard', path: '/', active: true },
+  { icon: <MenuBook />, label: 'Study Guide', path: '/study-guide' },
+  { icon: <School />, label: 'Practice Tests', path: '/practice-test' },
+  { icon: <Quiz />, label: 'JLPT Test', path: '/jlpt-test' },
+  { icon: <Settings />, label: 'Settings', path: '/settings' },
+  { icon: <Assignment />, label: 'Study Plan', path: '/study-plan' },
+  { icon: <Insights />, label: 'Progress', path: '/progress' },
+  { icon: <AccountCircle />, label: 'Profile', path: '/profile' },
+  { icon: <Help />, label: 'Help', path: '/help' }
+];
+
+const todaysKanji = [
+  { kanji: '力', meaning: 'Power', reading: 'ちから (chikara)' },
+  { kanji: '山', meaning: 'Mountain', reading: 'やま (yama)' },
+  { kanji: '川', meaning: 'River', reading: 'かわ (kawa)' },
+  { kanji: '木', meaning: 'Tree', reading: 'き (ki)' }
+];
+
+const todaysVocab = [
+  { word: '勉強', meaning: 'Study', reading: 'べんきょう (benkyou)' },
+  { word: '学校', meaning: 'School', reading: 'がっこう (gakkou)' },
+  { word: '先生', meaning: 'Teacher', reading: 'せんせい (sensei)' },
+  { word: '学生', meaning: 'Student', reading: 'がくせい (gakusei)' }
+];
+
+const todaysGrammar = [
+  { pattern: 'ています', meaning: 'Present continuous' },
+  { pattern: 'ました', meaning: 'Past tense' },
+  { pattern: 'たい', meaning: 'Want to do' },
+  { pattern: 'ない', meaning: 'Negative' }
 ];
 
 export default function Dashboard() {
   const router = useRouter();
-  const { level: currentLevel, userId } = useJlptLevel();
-  const [studyStreak, setStudyStreak] = useState(0);
-  const [totalReviews, setTotalReviews] = useState(0);
-  const [progress, setProgress] = useState({
-    kanji: 0,
-    vocabulary: 0,
-    grammar: 0
-  });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!userId) return;
-
-      try {
-        // Fetch study streak
-        const { data: streakData } = await supabase
-          .from('user_stats')
-          .select('study_streak')
-          .eq('user_id', userId)
-          .single();
-        
-        setStudyStreak(streakData?.study_streak || 0);
-
-        // Fetch reviews due today
-        const now = new Date().toISOString();
-        const { count: reviewCount } = await supabase
-          .from('srs_items')
-          .select('*', { count: 'exact', head: true })
-          .eq('user_id', userId)
-          .lte('next_review', now);
-
-        setTotalReviews(reviewCount || 0);
-
-        // Fetch progress for each type
-        const { data: progressData } = await supabase
-          .from('user_progress')
-          .select('*')
-          .eq('user_id', userId)
-          .single();
-
-        if (progressData) {
-          setProgress({
-            kanji: progressData.kanji_progress || 0,
-            vocabulary: progressData.vocabulary_progress || 0,
-            grammar: progressData.grammar_progress || 0
-          });
-        }
-      } catch (error) {
-        console.error('Error fetching dashboard data:', error);
-      }
-    };
-
-    fetchData();
-  }, [userId]);
+  const { jlptLevel } = useJlptLevel();
+  const [activeTab, setActiveTab] = useState('kanji');
+  const pathname = '/';
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <PageWrapper>
-      <ContentWrapper>
-        <WelcomeCard>
-          <Stack direction="row" alignItems="center" spacing={2} mb={3}>
-            <LocalFireDepartment sx={{ fontSize: 40, color: '#ff9100' }} />
-            <Box>
-              <Typography variant="h5" fontWeight={700} gutterBottom color="#1a2027">
-                {studyStreak} Day Streak!
+    <AppContainer>
+      <Sidebar 
+        className="sidebar"
+        onMouseEnter={() => setIsExpanded(true)}
+        onMouseLeave={() => setIsExpanded(false)}
+      >
+        <UserSection>
+          <Avatar 
+            sx={{ 
+              width: 36,
+              height: 36,
+              bgcolor: '#7c4dff',
+              fontSize: '1rem',
+              fontWeight: 600,
+              flexShrink: 0
+            }}
+          >
+            J
+          </Avatar>
+          <Typography className="user-name" variant="body1" sx={{ fontWeight: 600 }}>
+            John
+          </Typography>
+        </UserSection>
+        
+        {navItems.map((item, index) => (
+          <NavItem
+            key={index}
+            className={item.path === pathname ? 'active' : ''}
+            onClick={() => router.push(item.path || '/')}
+          >
+            {item.icon}
+            <Typography className="nav-text">
+              {item.label}
+            </Typography>
+          </NavItem>
+        ))}
+      </Sidebar>
+
+      <MainContent className={`main-content ${isExpanded ? 'sidebar-expanded' : ''}`}>
+        <Box sx={{ 
+          p: { xs: 2, sm: 3 },
+          pb: { xs: 8, sm: 3 },
+          display: 'flex',
+          flexDirection: 'column',
+          gap: { xs: 2, sm: 3 }
+        }}>
+          {/* Welcome Message */}
+          <Box sx={{ mb: { xs: 2, sm: 3 } }}>
+            <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 1 }}>
+              <Typography variant="h4" sx={{ 
+                fontWeight: 900,
+                fontSize: { xs: '2rem', sm: '2.65rem' },
+                color: '#1A1D1E',
+              }}>
+                Welcome back,
               </Typography>
-              <Typography color="text.secondary">
-                You have {totalReviews} reviews due today
+              <Typography variant="h4" sx={{ 
+                fontWeight: 400,
+                fontSize: { xs: '2rem', sm: '2.65rem' },
+                color: '#1A1D1E',
+              }}>
+                John
               </Typography>
             </Box>
-          </Stack>
-          <ProgressBar variant="determinate" value={30} />
-          <Typography sx={{ mt: 1, color: 'text.secondary' }}>
-            30% towards your daily goal
-          </Typography>
-        </WelcomeCard>
+            <Typography sx={{ 
+              color: '#6F767E',
+              fontSize: { xs: '0.875rem', sm: '1rem' },
+              mt: 1
+            }}>
+              Ready to continue your JLPT N{jlptLevel} journey?
+            </Typography>
+          </Box>
 
-        <Typography variant="h5" sx={{ mb: 3, fontWeight: 700, color: '#1a2027' }}>
-          Study Decks
-        </Typography>
-
-        <Grid container spacing={3} mb={4}>
-          {studyTypes.map((type) => (
-            <Grid item xs={12} md={4} key={type.title}>
-              <StatsCard>
-                <Box sx={{ mb: 2 }}>
-                  <type.icon sx={{ fontSize: 32, color: type.color, mb: 1 }} />
-                  <Typography variant="h6" fontWeight={600} color="#1a2027">
-                    {type.title}
-                  </Typography>
-                  <Typography color="text.secondary" sx={{ mb: 2 }}>
-                    {type.description}
-                  </Typography>
-                  <ProgressBar 
-                    variant="determinate" 
-                    value={progress[type.title.toLowerCase() as keyof typeof progress] || 0}
-                    sx={{
-                      '& .MuiLinearProgress-bar': {
-                        backgroundColor: type.color,
-                      }
-                    }}
-                  />
+          {/* Main Content */}
+          <Box sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            gap: { xs: 2, sm: 3 },
+            width: '100%'
+          }}>
+            <Box sx={{
+              width: { xs: '100%', md: '520px' },
+              height: { md: '100%' }
+            }}>
+              <Typography variant="h6" sx={{ 
+                mb: 2, 
+                fontWeight: 700,
+                color: '#1A1D1E',
+                fontSize: { xs: '1.25rem', md: '1.35rem' }
+              }}>
+                Progress Overview
+              </Typography>
+              <ProgressSection sx={{ height: { md: 'calc(100% - 42px)' } }}>
+                <Typography sx={{ mb: 2, color: '#6F767E' }}>
+                  JLPT N{jlptLevel} Progress
+                </Typography>
+                <Box sx={{ 
+                  height: 24, 
+                  background: '#F5F5F5',
+                  borderRadius: 2,
+                  mb: 2,
+                  overflow: 'hidden',
+                  display: 'flex'
+                }}>
+                  <Box sx={{ 
+                    width: '40%',
+                    height: '100%',
+                    background: '#7c4dff',
+                    borderRadius: '8px 0 0 8px'
+                  }} />
+                  <Box sx={{ 
+                    width: '25%',
+                    height: '100%',
+                    background: '#7c4dff',
+                    opacity: 0.8,
+                    borderLeft: '2px solid #F5F5F5'
+                  }} />
+                  <Box sx={{ 
+                    width: '25%',
+                    height: '100%',
+                    background: '#7c4dff',
+                    opacity: 0.6,
+                    borderLeft: '2px solid #F5F5F5'
+                  }} />
+                  <Box sx={{ 
+                    width: '10%',
+                    height: '100%',
+                    background: '#7c4dff',
+                    opacity: 0.4,
+                    borderLeft: '2px solid #F5F5F5',
+                    borderRadius: '0 8px 8px 0'
+                  }} />
                 </Box>
-                <Box sx={{ mt: 'auto' }}>
-                  <StudyButton
-                    fullWidth
-                    onClick={() => router.push(type.path)}
-                    sx={{
-                      '&:hover': {
-                        borderColor: type.color,
-                        color: type.color,
-                      }
-                    }}
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                  <Typography sx={{ fontSize: '0.875rem', fontWeight: 600, color: '#1A1D1E' }}>
+                    Overall Progress
+                  </Typography>
+                  <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
+                    1,250/3,000 items
+                  </Typography>
+                </Box>
+                <Box sx={{ mb: 3 }}>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: '#7c4dff', opacity: 0.8 }} />
+                      <Typography sx={{ fontSize: '0.875rem', fontWeight: 600, color: '#1A1D1E' }}>
+                        Vocabulary (40%)
+                      </Typography>
+                    </Box>
+                    <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
+                      800/2,000 words
+                    </Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: '#7c4dff', opacity: 0.6 }} />
+                      <Typography sx={{ fontSize: '0.875rem', fontWeight: 600, color: '#1A1D1E' }}>
+                        Kanji (25%)
+                      </Typography>
+                    </Box>
+                    <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
+                      250/500 characters
+                    </Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: '#7c4dff', opacity: 0.4 }} />
+                      <Typography sx={{ fontSize: '0.875rem', fontWeight: 600, color: '#1A1D1E' }}>
+                        Grammar (25%)
+                      </Typography>
+                    </Box>
+                    <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
+                      100/300 points
+                    </Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: '#7c4dff', opacity: 0.2 }} />
+                      <Typography sx={{ fontSize: '0.875rem', fontWeight: 600, color: '#1A1D1E' }}>
+                        Listening (10%)
+                      </Typography>
+                    </Box>
+                    <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
+                      100/200 exercises
+                    </Typography>
+                  </Box>
+                </Box>
+              </ProgressSection>
+            </Box>
+
+            <Box sx={{
+              flex: 1,
+              height: { md: '100%' }
+            }}>
+              <Typography variant="h6" sx={{ 
+                mb: 2,
+                fontWeight: 700,
+                color: '#1A1D1E',
+                fontSize: { xs: '1.25rem', md: '1.35rem' }
+              }}>
+                Today's Study Goals
+              </Typography>
+              <ProgressSection sx={{ height: { md: 'calc(100% - 42px)' } }}>
+                <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 2 }}>
+                  <Tabs 
+                    value={activeTab} 
+                    onChange={(e, newValue) => setActiveTab(newValue)} 
+                    aria-label="study goals"
+                    variant="scrollable"
+                    scrollButtons="auto"
+                    allowScrollButtonsMobile
                   >
-                    Start Studying
-                  </StudyButton>
+                    <Tab label="Kanji" value="kanji" />
+                    <Tab label="Vocabulary" value="vocabulary" />
+                    <Tab label="Grammar" value="grammar" />
+                    <Tab label="Reading" value="reading" />
+                    <Tab label="Listening" value="listening" />
+                  </Tabs>
                 </Box>
-              </StatsCard>
-            </Grid>
-          ))}
-        </Grid>
+                
+                <Grid container spacing={2} sx={{ p: 2, borderRadius: 2, mb: 3 }}>
+                  {activeTab === 'kanji' && todaysKanji.map((item, index) => (
+                    <Grid item xs={6} sm={3} key={index} sx={{ height: '120px' }}>
+                      <FlipCard>
+                        <Box className="flip-card-inner">
+                          <Box className="flip-card-front">
+                            <Typography sx={{ 
+                              fontSize: { xs: '1.5rem', sm: '1.75rem' },
+                              fontWeight: 900,
+                              color: '#000000',
+                              textAlign: 'center',
+                              mb: 1
+                            }}>
+                              {item.kanji}
+                            </Typography>
+                          </Box>
+                          <Box className="flip-card-back">
+                            <Typography sx={{ 
+                              fontSize: '1rem',
+                              fontWeight: 500,
+                              color: '#7c4dff',
+                              mb: 1
+                            }}>
+                              {item.meaning}
+                            </Typography>
+                            <Typography sx={{ 
+                              fontSize: '0.875rem',
+                              color: '#6F767E'
+                            }}>
+                              {item.reading}
+                            </Typography>
+                          </Box>
+                        </Box>
+                      </FlipCard>
+                    </Grid>
+                  ))}
+                  
+                  {activeTab === 'vocabulary' && todaysVocab.map((item, index) => (
+                    <Grid item xs={6} sm={3} key={index} sx={{ height: '120px' }}>
+                      <FlipCard>
+                        <Box className="flip-card-inner">
+                          <Box className="flip-card-front">
+                            <Typography sx={{ 
+                              fontSize: '1.25rem',
+                              fontWeight: 900,
+                              color: '#000000',
+                              textAlign: 'center',
+                              mb: 1
+                            }}>
+                              {item.word}
+                            </Typography>
+                          </Box>
+                          <Box className="flip-card-back">
+                            <Typography sx={{ 
+                              fontSize: '1rem',
+                              fontWeight: 500,
+                              color: '#7c4dff',
+                              mb: 1
+                            }}>
+                              {item.meaning}
+                            </Typography>
+                            <Typography sx={{ 
+                              fontSize: '0.875rem',
+                              color: '#6F767E'
+                            }}>
+                              {item.reading}
+                            </Typography>
+                          </Box>
+                        </Box>
+                      </FlipCard>
+                    </Grid>
+                  ))}
 
-        <Typography variant="h5" sx={{ mb: 3, fontWeight: 700, color: '#1a2027' }}>
-          Recent Activity
-        </Typography>
+                  {activeTab === 'grammar' && todaysGrammar.map((item, index) => (
+                    <Grid item xs={6} sm={3} key={index} sx={{ height: '120px' }}>
+                      <FlipCard>
+                        <Box className="flip-card-inner">
+                          <Box className="flip-card-front">
+                            <Typography sx={{ 
+                              fontSize: '1rem',
+                              fontWeight: 900,
+                              color: '#000000',
+                              textAlign: 'center',
+                              mb: 1
+                            }}>
+                              {item.pattern}
+                            </Typography>
+                          </Box>
+                          <Box className="flip-card-back">
+                            <Typography sx={{ 
+                              fontSize: '1rem',
+                              fontWeight: 500,
+                              color: '#7c4dff',
+                              mb: 1
+                            }}>
+                              {item.meaning}
+                            </Typography>
+                          </Box>
+                        </Box>
+                      </FlipCard>
+                    </Grid>
+                  ))}
+                </Grid>
+              </ProgressSection>
+            </Box>
+          </Box>
 
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={8}>
-            <StatsCard>
-              <Typography variant="h6" sx={{ mb: 2, fontWeight: 600, color: '#1a2027' }}>
-                Reviews Due Today
-              </Typography>
-              {/* Review schedule component will be added here */}
-            </StatsCard>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <StatsCard>
-              <Typography variant="h6" sx={{ mb: 2, fontWeight: 600, color: '#1a2027' }}>
-                Study Stats
-              </Typography>
-              {/* Study statistics component will be added here */}
-            </StatsCard>
-          </Grid>
-        </Grid>
-      </ContentWrapper>
-    </PageWrapper>
+          <Box sx={{ mb: 4 }}>
+            <Typography variant="h6" sx={{ mb: 2 }}>Study Materials</Typography>
+            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 3 }}>
+              <StudyCard>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+                  <Box sx={{ 
+                    fontSize: '1.5rem',
+                    width: 48,
+                    height: 48,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: 'rgba(124, 77, 255, 0.08)',
+                    borderRadius: 8
+                  }}>
+                    力
+                  </Box>
+                  <Box>
+                    <Typography sx={{ fontWeight: 600, mb: 0.5 }}>
+                      Kanji Study
+                    </Typography>
+                    <Typography sx={{ 
+                      fontSize: '0.875rem',
+                      color: '#6F767E'
+                    }}>
+                      Master {jlptLevel} kanji characters
+                    </Typography>
+                  </Box>
+                </Box>
+              </StudyCard>
+
+              <StudyCard>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+                  <Box sx={{ 
+                    fontSize: '1.5rem',
+                    width: 48,
+                    height: 48,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: 'rgba(124, 77, 255, 0.08)',
+                    borderRadius: 8
+                  }}>
+                    語
+                  </Box>
+                  <Box>
+                    <Typography sx={{ fontWeight: 600, mb: 0.5 }}>
+                      Vocabulary
+                    </Typography>
+                    <Typography sx={{ 
+                      fontSize: '0.875rem',
+                      color: '#6F767E'
+                    }}>
+                      Essential {jlptLevel} vocabulary
+                    </Typography>
+                  </Box>
+                </Box>
+              </StudyCard>
+
+              <StudyCard>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+                  <Box sx={{ 
+                    fontSize: '1.5rem',
+                    width: 48,
+                    height: 48,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: 'rgba(124, 77, 255, 0.08)',
+                    borderRadius: 8
+                  }}>
+                    文
+                  </Box>
+                  <Box>
+                    <Typography sx={{ fontWeight: 600, mb: 0.5 }}>
+                      Grammar
+                    </Typography>
+                    <Typography sx={{ 
+                      fontSize: '0.875rem',
+                      color: '#6F767E'
+                    }}>
+                      {jlptLevel} grammar patterns
+                    </Typography>
+                  </Box>
+                </Box>
+              </StudyCard>
+
+              <StudyCard>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+                  <Box sx={{ 
+                    fontSize: '1.5rem',
+                    width: 48,
+                    height: 48,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: 'rgba(124, 77, 255, 0.08)',
+                    borderRadius: 8
+                  }}>
+                    聴
+                  </Box>
+                  <Box>
+                    <Typography sx={{ fontWeight: 600, mb: 0.5 }}>
+                      Listening
+                    </Typography>
+                    <Typography sx={{ 
+                      fontSize: '0.875rem',
+                      color: '#6F767E'
+                    }}>
+                      {jlptLevel} listening practice
+                    </Typography>
+                  </Box>
+                </Box>
+              </StudyCard>
+            </Box>
+          </Box>
+
+          <BottomNav>
+            {navItems.slice(0, 5).map((item, index) => (
+              <IconButton
+                key={index}
+                size="small"
+                onClick={() => router.push(item.path || '/')}
+                sx={{
+                  color: 'text.secondary',
+                  '&:hover': {
+                    color: '#7c4dff',
+                  },
+                }}
+              >
+                {item.icon}
+              </IconButton>
+            ))}
+          </BottomNav>
+        </Box>
+      </MainContent>
+    </AppContainer>
   );
 }
