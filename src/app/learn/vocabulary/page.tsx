@@ -22,39 +22,37 @@ interface MatchTileData {
   matched: boolean;
 }
 
-const PageWrapper = styled(Box)({
-  height: '100vh',
+const StudyContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  position: 'relative',
-  overflow: 'hidden'
-});
+  alignItems: 'center',
+  width: '100%',
+  minHeight: '100vh',
+  padding: theme.spacing(1),
+  backgroundColor: '#f8fafc',
+  position: 'relative'
+}));
 
 const Header = styled(Box)(({ theme }) => ({
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  right: 0,
-  padding: '12px 24px',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  zIndex: 2,
-  [theme.breakpoints.down('sm')]: {
-    padding: '12px 16px',
-  }
+  width: '100%',
+  maxWidth: '680px',
+  padding: theme.spacing(1),
+  marginBottom: theme.spacing(1),
 }));
 
 const HeaderControls = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  gap: theme.spacing(2),
+  gap: theme.spacing(2)
 }));
 
 const CurrentMode = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.primary,
   fontSize: '1rem',
   fontWeight: 500,
+  color: theme.palette.text.secondary
 }));
 
 const MenuButton = styled(IconButton)(({ theme }) => ({
@@ -79,135 +77,120 @@ const CloseButton = styled(IconButton)(({ theme }) => ({
   }
 }));
 
-const ProgressBar = styled(Box)<{ value: number }>(({ value }) => ({
-  position: 'absolute',
-  top: '64px',
-  left: 0,
-  right: 0,
-  height: '8px',
-  backgroundColor: 'rgba(124, 77, 255, 0.1)',
-  zIndex: 1,
+const ProgressBar = styled(Box)<{ value: number }>(({ theme, value }) => ({
+  width: '100%',
+  maxWidth: '680px',
+  height: '4px',
+  backgroundColor: '#e8e3ff',
+  position: 'relative',
+  borderRadius: '2px',
+  overflow: 'hidden',
   '&::after': {
     content: '""',
     position: 'absolute',
+    top: 0,
+    left: 0,
     height: '100%',
     width: `${value}%`,
     backgroundColor: '#7c4dff',
-    transition: 'width 0.3s ease',
-  },
+    transition: 'width 0.3s ease'
+  }
 }));
 
-const ContentArea = styled(Box)(({ theme }) => ({
-  flex: 1,
+const FlipCard = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  padding: '24px',
-  paddingTop: '96px', 
-  paddingBottom: '140px', 
-  [theme.breakpoints.down('sm')]: {
-    padding: '16px',
-    paddingTop: '88px', 
-    paddingBottom: '120px'
-  }
-}));
-
-const FlipCard = styled(Paper)(({ theme }) => ({
   width: '100%',
-  maxWidth: '600px',
-  height: '500px',
-  cursor: 'pointer',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  padding: '32px',
-  transition: 'transform 0.6s',
-  transformStyle: 'preserve-3d',
-  position: 'relative',
+  maxWidth: '680px',
+  aspectRatio: '16/10',
   backgroundColor: '#fff',
-  borderRadius: '24px',
+  borderRadius: theme.spacing(4),
+  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
+  padding: theme.spacing(4),
+  marginTop: theme.spacing(2),
+  marginBottom: theme.spacing(2),
+  cursor: 'pointer',
+  transition: 'transform 0.2s ease',
+  userSelect: 'none',
+  WebkitUserSelect: 'none',
+  MozUserSelect: 'none',
+  msUserSelect: 'none',
+  '&:hover': {
+    transform: 'translateY(-4px)'
+  },
   [theme.breakpoints.down('sm')]: {
-    height: '400px',
-    padding: '24px',
-    borderRadius: '16px',
+    aspectRatio: '4/3.2',
+    padding: theme.spacing(3)
   }
 }));
 
-const FooterArea = styled(Box)(({ theme }) => ({
-  backgroundColor: 'rgba(124, 77, 255, 0.08)',
-  position: 'fixed',
-  bottom: 0,
-  left: 0,
-  right: 0,
-  padding: '20px 24px', 
-  [theme.breakpoints.down('sm')]: {
-    padding: '16px'
+const WordText = styled(Typography)(({ theme }) => ({
+  fontSize: '12rem',
+  fontFamily: '"Noto Sans JP", sans-serif',
+  fontWeight: 400,
+  color: '#1a1a1a',
+  lineHeight: 1.2,
+  marginBottom: theme.spacing(5),
+  userSelect: 'none',
+  WebkitUserSelect: 'none',
+  MozUserSelect: 'none',
+  msUserSelect: 'none',
+}));
+
+const AudioButton = styled(IconButton)(({ theme }) => ({
+  backgroundColor: '#e8e3ff',
+  color: '#7c4dff',
+  '&:hover': {
+    backgroundColor: '#d3c6ff'
+  },
+  '& svg': {
+    fontSize: '1.5rem'
   }
 }));
 
 const ButtonGrid = styled(Box)(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: 'repeat(4, 1fr)',
-  gap: '16px',
-  maxWidth: '800px',
-  margin: '0 auto',
+  gap: theme.spacing(2),
+  padding: theme.spacing(2),
+  marginBottom: theme.spacing(2),
+  width: '100%',
+  maxWidth: '680px',
   [theme.breakpoints.down('sm')]: {
     gridTemplateColumns: 'repeat(2, 1fr)',
-    gap: '12px'
+    gap: theme.spacing(1.5)
   }
 }));
 
 const DifficultyButton = styled(Button)(({ theme }) => ({
-  borderRadius: '12px',
-  padding: theme.spacing(2),
-  fontSize: '1rem',
+  minWidth: '120px',
+  padding: theme.spacing(1.5, 3),
+  borderRadius: theme.spacing(1),
   textTransform: 'none',
-  fontWeight: 600,
-  backgroundColor: '#fff',
+  fontSize: '1rem',
+  fontWeight: 500,
+  backgroundColor: '#e8e3ff',
   color: '#7c4dff',
-  border: 'none',
-  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
-  transition: 'all 0.2s ease-in-out',
   width: '100%',
-  height: '48px',
   '&:hover': {
-    backgroundColor: '#fff',
-    transform: 'translateY(-2px)',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.12)',
-    color: '#5e35b1',
+    backgroundColor: '#d3c6ff'
   },
-  [theme.breakpoints.down('sm')]: {
-    padding: theme.spacing(1.5),
-    fontSize: '0.9rem'
+  '&.forgot': {
+    backgroundColor: '#5e35b1',
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#4527a0'
+    }
+  },
+  '&.hard': {
+    backgroundColor: '#7c4dff',
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#6b42e0'
+    }
   }
-}));
-
-const WordText = styled(Typography)(({ theme }) => ({
-  fontSize: 'clamp(4rem, 10vw, 6rem)',
-  fontWeight: 700,
-  color: theme.palette.text.primary,
-  marginBottom: theme.spacing(2),
-  fontFamily: '"Noto Sans JP", sans-serif',
-  lineHeight: 1.2,
-}));
-
-const ReadingText = styled(Typography)(({ theme }) => ({
-  fontSize: 'clamp(1.5rem, 4vw, 2rem)',
-  color: theme.palette.text.secondary,
-  marginBottom: theme.spacing(2),
-  fontFamily: '"Noto Sans JP", sans-serif',
-  lineHeight: 1.4,
-}));
-
-const MeaningText = styled(Typography)(({ theme }) => ({
-  fontSize: 'clamp(1.75rem, 5vw, 2.5rem)',
-  color: theme.palette.text.primary,
-  fontFamily: '"Noto Sans JP", sans-serif',
-  lineHeight: 1.4,
-  textAlign: 'center',
-  maxWidth: '90%',
 }));
 
 const MatchContainer = styled(Box)(({ theme }) => ({
@@ -483,120 +466,131 @@ export default function VocabularyPage() {
   };
 
   return (
-    <PageWrapper>
-      <Header>
-        <CloseButton onClick={handleClose}>
-          <Close />
-        </CloseButton>
-        <HeaderControls>
-          <CurrentMode>{modeDisplay[studyMode]}</CurrentMode>
-          <MenuButton onClick={handleMenuOpen}>
-            <TuneRounded />
-          </MenuButton>
-          <Menu
-            anchorEl={menuAnchor}
-            open={Boolean(menuAnchor)}
-            onClose={handleMenuClose}
-            PaperProps={{
-              sx: {
-                mt: 1,
-                borderRadius: '12px',
-                minWidth: '160px',
-                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-              }
-            }}
-          >
-            <MenuItem onClick={() => handleModeSelect('flashcard')}>Flashcard</MenuItem>
-            <MenuItem onClick={() => handleModeSelect('match')}>Match Game</MenuItem>
-            <MenuItem onClick={() => handleModeSelect('custom')}>Custom Deck</MenuItem>
-          </Menu>
-        </HeaderControls>
-      </Header>
-      <ProgressBar value={progress} />
-      <ContentArea>
-        {studyMode === 'match' ? (
-          <MatchContainer>
-            <GameHeader>
-              <Timer>{formatTime(elapsedTime)}</Timer>
-              <Typography 
-                variant="subtitle1" 
-                sx={{ 
-                  color: 'text.secondary',
-                  fontWeight: 500,
-                  fontSize: { xs: '0.875rem', sm: '1rem' }
+    <StudyContainer>
+      <Box sx={{ width: '100%', maxWidth: '680px', mb: 2 }}>
+        <Header>
+          <CloseButton onClick={handleClose}>
+            <Close />
+          </CloseButton>
+          <HeaderControls>
+            <CurrentMode>{modeDisplay[studyMode]}</CurrentMode>
+            <MenuButton onClick={handleMenuOpen}>
+              <TuneRounded />
+            </MenuButton>
+            <Menu
+              anchorEl={menuAnchor}
+              open={Boolean(menuAnchor)}
+              onClose={handleMenuClose}
+              PaperProps={{
+                sx: {
+                  mt: 1,
+                  borderRadius: '12px',
+                  minWidth: '160px',
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+                }
+              }}
+            >
+              <MenuItem onClick={() => handleModeSelect('flashcard')}>Flashcard</MenuItem>
+              <MenuItem onClick={() => handleModeSelect('match')}>Match Game</MenuItem>
+              <MenuItem onClick={() => handleModeSelect('custom')}>Custom Deck</MenuItem>
+            </Menu>
+          </HeaderControls>
+        </Header>
+        <ProgressBar value={progress} />
+      </Box>
+
+      {studyMode === 'match' ? (
+        <MatchContainer>
+          <GameHeader>
+            <Timer>{formatTime(elapsedTime)}</Timer>
+          </GameHeader>
+          <MatchGrid container spacing={0}>
+            {matchTiles.map((tile) => (
+              <Grid item xs={6} sm={4} key={tile.id}>
+                <MatchTile
+                  onClick={() => handleTileClick(tile.id)}
+                  isSelected={selectedTile === tile.id}
+                  isMatched={tile.matched}
+                  isWrongMatch={wrongMatch.includes(tile.id)}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: tile.type === 'vocab' ? '1.5rem' : '1rem',
+                      fontWeight: 500,
+                      fontFamily: tile.type === 'vocab' ? '"Noto Sans JP", sans-serif' : 'inherit',
+                      textAlign: 'center',
+                      wordBreak: 'break-word',
+                      userSelect: 'none',
+                      WebkitUserSelect: 'none',
+                      MozUserSelect: 'none',
+                      msUserSelect: 'none',
+                    }}
+                  >
+                    {tile.content}
+                  </Typography>
+                </MatchTile>
+              </Grid>
+            ))}
+          </MatchGrid>
+        </MatchContainer>
+      ) : studyMode === 'flashcard' ? (
+        <FlipCard onClick={() => setIsFlipped(!isFlipped)}>
+          {!isFlipped ? (
+            <>
+              <WordText>{currentWord.word}</WordText>
+              <Typography sx={{ 
+                fontSize: '1.5rem', 
+                color: 'text.secondary',
+                mb: 2 
+              }}>
+                {currentWord.reading}
+              </Typography>
+              <AudioButton 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  // Add audio play logic here
                 }}
               >
-                Round {gameStats.currentRound} of {gameStats.totalRounds}
+                <VolumeUp />
+              </AudioButton>
+            </>
+          ) : (
+            <Box sx={{ 
+              display: 'flex', 
+              flexDirection: 'column',
+              alignItems: 'center',
+              height: '100%',
+              overflow: 'auto'
+            }}>
+              <Typography variant="h3" sx={{ 
+                mb: 4, 
+                color: '#7c4dff', 
+                fontWeight: 600 
+              }}>
+                {currentWord.meaning}
               </Typography>
-            </GameHeader>
-            <MatchGrid container spacing={0}>
-              {matchTiles.map((tile) => (
-                <Grid item xs={6} sm={4} key={tile.id}>
-                  <MatchTile
-                    onClick={() => handleTileClick(tile.id)}
-                    isSelected={selectedTile === tile.id}
-                    isMatched={tile.matched}
-                    isWrongMatch={wrongMatch.includes(tile.id)}
-                  >
-                    <Typography
-                      sx={{
-                        fontSize: tile.type === 'vocab' ? '1.5rem' : '1rem',
-                        fontWeight: 500,
-                        fontFamily: tile.type === 'vocab' ? '"Noto Sans JP", sans-serif' : 'inherit',
-                        textAlign: 'center',
-                        wordBreak: 'break-word'
-                      }}
-                    >
-                      {tile.content}
-                    </Typography>
-                  </MatchTile>
-                </Grid>
-              ))}
-            </MatchGrid>
-          </MatchContainer>
-        ) : studyMode === 'flashcard' ? (
-          <FlipCard onClick={handleFlip} elevation={3}>
-            <Box sx={{ textAlign: 'center' }}>
-              {!isFlipped ? (
-                <>
-                  <WordText>{currentWord.word}</WordText>
-                  <ReadingText>{currentWord.reading}</ReadingText>
-                  <IconButton 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      // Add audio play logic here
-                    }}
-                    sx={{ mt: 2 }}
-                  >
-                    <VolumeUp />
-                  </IconButton>
-                </>
-              ) : (
-                <MeaningText>{currentWord.meaning}</MeaningText>
-              )}
+              {/* Add example sentences here if needed */}
             </Box>
-          </FlipCard>
-        ) : null}
-      </ContentArea>
+          )}
+        </FlipCard>
+      ) : null}
 
-      <FooterArea>
-        {studyMode === 'flashcard' && (
-          <ButtonGrid>
-            <DifficultyButton onClick={() => handleDifficulty('forgot')}>
-              Forgot
-            </DifficultyButton>
-            <DifficultyButton onClick={() => handleDifficulty('hard')}>
-              Hard
-            </DifficultyButton>
-            <DifficultyButton onClick={() => handleDifficulty('good')}>
-              Good
-            </DifficultyButton>
-            <DifficultyButton onClick={() => handleDifficulty('easy')}>
-              Easy
-            </DifficultyButton>
-          </ButtonGrid>
-        )}
-      </FooterArea>
-    </PageWrapper>
+      {studyMode === 'flashcard' && (
+        <ButtonGrid>
+          <DifficultyButton className="forgot" onClick={() => handleDifficulty('forgot')}>
+            Again
+          </DifficultyButton>
+          <DifficultyButton className="hard" onClick={() => handleDifficulty('hard')}>
+            Hard
+          </DifficultyButton>
+          <DifficultyButton onClick={() => handleDifficulty('good')}>
+            Good
+          </DifficultyButton>
+          <DifficultyButton onClick={() => handleDifficulty('easy')}>
+            Easy
+          </DifficultyButton>
+        </ButtonGrid>
+      )}
+    </StudyContainer>
   );
 }

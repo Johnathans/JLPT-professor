@@ -1,733 +1,558 @@
 'use client';
 
 import { useState } from 'react';
-import { useTheme } from '@mui/material/styles';
 import { styled } from '@mui/material/styles';
-import Image, { StaticImageData } from 'next/image';
 import { 
-  Card, 
-  Typography, 
   Box, 
-  Grid,
+  Typography, 
+  Paper, 
+  Radio, 
+  RadioGroup,
+  FormControlLabel,
   Button,
+  TextField,
+  Card,
+  Stack,
   IconButton,
   Chip,
-  Stack,
-  Paper,
-  Collapse,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  ToggleButtonGroup,
-  ToggleButton,
-  Tooltip,
-  alpha,
-  Link
 } from '@mui/material';
 import { 
-  VolumeUp, 
-  ExpandMore as ExpandMoreIcon,
-  ChevronRight,
-  PlayArrow,
-  Pause,
-  MoreHoriz,
-  Book,
-  ViewHeadline,
-  ViewStream,
-  School,
-  ArrowBack,
-  MenuBook,
-  Translate
+  VolumeUp,
+  CheckCircle,
 } from '@mui/icons-material';
 import LearnLayout from '@/components/learn/LearnLayout';
+import React from 'react';
 
 const PageContainer = styled(Box)(({ theme }) => ({
-  maxWidth: 'calc(1400px - 240px)', // updated width
+  maxWidth: '680px',
   margin: '0 auto',
   width: '100%',
   padding: theme.spacing(2, 3),
 }));
 
-const StoryCard = styled(Paper)(({ theme }) => ({
+const ReadingCard = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(3),
+  marginBottom: theme.spacing(3),
   borderRadius: theme.spacing(2),
-  border: `1px solid ${theme.palette.divider}`,
-  transition: 'all 0.2s ease',
-  cursor: 'pointer',
-  '&:hover': {
-    transform: 'translateY(-2px)',
-    boxShadow: theme.shadows[2],
-    borderColor: theme.palette.primary.main,
-  }
-}));
-
-const StoryContainer = styled('div')(({ theme }) => ({
-  backgroundColor: theme.palette.primary.light,
-  borderRadius: theme.shape.borderRadius,
-  padding: theme.spacing(4),
-  marginBottom: theme.spacing(4),
-}));
-
-const StoryStats = styled('div')(({ theme }) => ({
-  display: 'flex',
-  gap: theme.spacing(2),
-  marginTop: theme.spacing(3),
-  '& .MuiChip-root': {
-    backgroundColor: '#fff',
-    '& .MuiChip-icon': {
-      color: theme.palette.primary.main,
-    },
-  },
-}));
-
-const StoryContent = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(4),
   backgroundColor: '#fff',
-  '& > div': {
-    padding: theme.spacing(3),
-    borderBottom: `1px solid ${theme.palette.divider}`,
-    '&:last-child': {
-      borderBottom: 'none',
-    },
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.primary.main, 0.05),
-    },
-    '&.active': {
-      backgroundColor: alpha(theme.palette.primary.main, 0.1),
+}));
+
+const AnswerOption = styled(FormControlLabel)(({ theme }) => ({
+  width: '100%',
+  margin: '8px 0',
+  padding: theme.spacing(2),
+  border: '1px solid #e2e8f0',
+  borderRadius: '12px',
+  transition: 'all 0.2s ease-in-out',
+  '&:hover': {
+    backgroundColor: '#f8fafc',
+    borderColor: '#7c4dff',
+  },
+}));
+
+const BlankInput = styled(TextField)(({ theme }) => ({
+  width: '120px',
+  margin: '0 8px',
+  '& .MuiOutlinedInput-root': {
+    borderRadius: '8px',
+    backgroundColor: '#fff',
+    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#7c4dff',
     },
   },
 }));
 
-const StoryImage = styled('img')(({ theme }) => ({
-  width: '100%',
-  height: '200px',
-  objectFit: 'cover',
-  borderRadius: theme.shape.borderRadius,
-}));
-
-const StoryInfo = styled(Box)({
-  flex: 1,
-});
-
-const StoryControls = styled(Box)(({ theme }) => ({
+const SentenceCard = styled(Card)(({ theme }) => ({
+  padding: theme.spacing(2),
+  marginBottom: theme.spacing(1),
+  backgroundColor: '#fff',
+  borderRadius: '8px',
+  border: '1px solid #e2e8f0',
   display: 'flex',
-  gap: theme.spacing(2),
   alignItems: 'center',
-  marginTop: theme.spacing(3),
-}));
-
-const ViewOptions = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  gap: theme.spacing(1),
-  marginLeft: 'auto',
-}));
-
-const StoryText = styled(Box)(({ theme }) => ({
-  fontSize: '1.25rem',
-  lineHeight: 2.2,
-  letterSpacing: '0.01em',
-  '& > *': {
-    marginRight: theme.spacing(0.25),
-  }
-}));
-
-const Sentence = styled(Box)(({ theme }) => ({
-  position: 'relative',
-  padding: theme.spacing(0.25, 2.5),
-  borderRadius: theme.spacing(0.5),
-  display: 'inline',
-  transition: 'background-color 0.2s',
-  cursor: 'default',
+  gap: theme.spacing(2),
+  cursor: 'pointer',
+  transition: 'all 0.2s ease-in-out',
   '&:hover': {
-    backgroundColor: `${theme.palette.primary.light}20`,
-  }
+    backgroundColor: '#f8fafc',
+    borderColor: '#7c4dff',
+  },
+  '&.selected': {
+    backgroundColor: '#e8e3ff',
+    border: '1px solid #7c4dff',
+  },
 }));
 
-const PlayButton = styled(IconButton)(({ theme }) => ({
-  position: 'absolute',
-  left: 0,
-  top: '50%',
-  transform: 'translateY(-50%)',
-  opacity: 0,
-  padding: theme.spacing(0.25),
-  width: 20,
-  height: 20,
-  minWidth: 20,
-  color: theme.palette.primary.main,
-  backgroundColor: theme.palette.background.paper,
-  boxShadow: theme.shadows[1],
-  '.MuiBox-root:hover &': {
-    opacity: 1,
-  },
+const OrderChip = styled(Chip)(({ theme }) => ({
+  backgroundColor: '#7c4dff',
+  color: '#fff',
+  fontWeight: 'bold',
+}));
+
+const OptionButton = styled(Button)(({ theme }) => ({
+  padding: theme.spacing(1, 2),
+  borderRadius: '8px',
+  textTransform: 'none',
+  minWidth: '80px',
+  flex: '1 0 auto',
+  maxWidth: '150px',
+  border: '1px solid #e2e8f0',
+  backgroundColor: '#fff',
+  color: '#1a1a1a',
   '&:hover': {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: '#f8fafc',
+    borderColor: '#7c4dff',
   },
-  '& .MuiSvgIcon-root': {
-    fontSize: '0.9rem'
-  }
-}));
-
-const ToolsButton = styled(IconButton)(({ theme }) => ({
-  position: 'absolute',
-  right: 0,
-  top: '50%',
-  transform: 'translateY(-50%)',
-  opacity: 0,
-  padding: theme.spacing(0.25),
-  width: 20,
-  height: 20,
-  minWidth: 20,
-  color: theme.palette.primary.main,
-  backgroundColor: theme.palette.background.paper,
-  boxShadow: theme.shadows[1],
-  '.MuiBox-root:hover &': {
-    opacity: 1,
+  '&.selected': {
+    backgroundColor: '#e8e3ff',
+    borderColor: '#7c4dff',
+    color: '#5e35b1',
   },
-  '&:hover': {
-    backgroundColor: theme.palette.background.paper,
-  },
-  '& .MuiSvgIcon-root': {
-    fontSize: '0.9rem'
-  }
-}));
-
-const JapaneseText = styled(Typography)(({ theme }) => ({
-  fontSize: '1.25rem',
-  display: 'inline',
-  fontFamily: '"Noto Sans JP", sans-serif',
-  color: theme.palette.text.primary,
-  '& .kanji': {
-    color: theme.palette.primary.main,
-    fontWeight: 500,
-    position: 'relative',
-  },
-  '& .furigana': {
-    position: 'absolute',
-    top: '-1.2em',
-    left: 0,
-    right: 0,
-    textAlign: 'center',
-    fontSize: '0.7em',
-    color: theme.palette.text.secondary,
-    fontWeight: 'normal',
-  }
-}));
-
-const ToolButton = styled(Button)(({ theme }) => ({
-  justifyContent: 'flex-start',
-  padding: theme.spacing(1),
-  width: '100%',
-  color: theme.palette.text.primary,
-  '&:hover': {
-    backgroundColor: theme.palette.primary.light,
-    color: theme.palette.primary.main,
-  }
-}));
-
-const DifficultyButton = styled(Button)<{ difficulty: 'hard' | 'good' | 'easy' }>(({ theme, difficulty }) => {
-  const colors = {
-    hard: theme.palette.error.main,
-    good: theme.palette.warning.main,
-    easy: theme.palette.success.main,
-  };
-
-  return {
-    backgroundColor: colors[difficulty],
+  '&.correct': {
+    backgroundColor: '#4caf50',
+    borderColor: '#2e7d32',
     color: '#fff',
     '&:hover': {
-      backgroundColor: alpha(colors[difficulty], 0.9),
+      backgroundColor: '#43a047',
     },
-  };
-});
-
-const FlashcardOptions = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  gap: theme.spacing(1),
-  marginTop: theme.spacing(1),
+  },
+  '&.incorrect': {
+    backgroundColor: '#f44336',
+    borderColor: '#c62828',
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#e53935',
+    },
+  },
 }));
 
-const ToolsPopover = styled(Paper)(({ theme }) => ({
-  position: 'absolute',
-  right: theme.spacing(1),
-  top: '100%',
-  marginTop: theme.spacing(0.5),
-  padding: theme.spacing(1),
-  borderRadius: theme.spacing(1),
-  backgroundColor: theme.palette.background.paper,
-  border: `1px solid ${theme.palette.divider}`,
-  boxShadow: theme.shadows[2],
-  zIndex: 10,
-  minWidth: 200,
-}));
-
-const ReadingLayout = styled('div')(({ theme }) => ({
-  display: 'grid',
-  gridTemplateColumns: '1fr 400px',
-  gap: theme.spacing(4),
-  width: '100%',
-  paddingTop: theme.spacing(5),
-  [theme.breakpoints.down('md')]: {
-    gridTemplateColumns: '1fr',
-  }
-}));
-
-const MainContent = styled('div')(({ theme }) => ({
-  flex: 1,
-  position: 'relative',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing(3),
-}));
-
-const AudioSidebar = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(3),
-  backgroundColor: '#fff',
-  borderRadius: theme.shape.borderRadius,
-  position: 'sticky',
-  top: theme.spacing(2),
-  height: 'fit-content',
-  maxHeight: 'calc(100vh - 100px)',
-  overflowY: 'auto',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing(3),
-  [theme.breakpoints.down('md')]: {
-    position: 'static',
-    maxHeight: '400px'
-  }
-}));
-
-const BackButton = styled(Link)(({ theme }) => ({
+const BlankSpan = styled('span')(({ theme }) => ({
+  padding: theme.spacing(0.5, 1.5),
+  margin: theme.spacing(0, 0.5),
+  minWidth: '60px',
+  height: '28px',
   display: 'inline-flex',
   alignItems: 'center',
-  gap: theme.spacing(1),
-  color: theme.palette.primary.main,
-  backgroundColor: alpha(theme.palette.primary.main, 0.05),
-  textDecoration: 'none',
-  position: 'absolute',
-  top: -48,
-  left: 0,
-  fontSize: '0.875rem',
-  padding: theme.spacing(0.5, 1),
-  borderRadius: theme.shape.borderRadius,
-  transition: 'all 0.2s ease',
-  '& svg': {
-    fontSize: '1.2rem',
-  },
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.primary.main, 0.1),
-  },
-}));
-
-const StoryHeader = styled('div')(({ theme }) => ({
-  marginBottom: theme.spacing(4),
-}));
-
-const StatsGrid = styled('div')(({ theme }) => ({
-  display: 'grid',
-  gridTemplateColumns: 'repeat(2, 1fr)',
-  gap: theme.spacing(1.5),
-  marginTop: theme.spacing(2),
-  marginBottom: theme.spacing(3),
-}));
-
-const StatCard = styled('div')(({ theme }) => ({
+  justifyContent: 'center',
+  textAlign: 'center',
+  border: '1px solid #e2e8f0',
+  borderRadius: '4px',
   backgroundColor: '#fff',
-  padding: theme.spacing(1.5),
-  borderRadius: theme.shape.borderRadius,
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing(0.25),
-  boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-  '& .label': {
-    color: theme.palette.text.secondary,
-    fontSize: '0.75rem',
+  fontSize: '0.9rem',
+  transition: 'all 0.2s ease-in-out',
+  '&.filled': {
+    backgroundColor: '#e8e3ff',
+    borderColor: '#7c4dff',
+    color: '#5e35b1',
   },
-  '& .value': {
-    color: theme.palette.primary.main,
+}));
+
+const QuestionText = styled(Typography)(({ theme }) => ({
+  fontSize: '1.1rem',
+  lineHeight: 1.8,
+  letterSpacing: '0.01em',
+  [theme.breakpoints.down('sm')]: {
     fontSize: '1rem',
-    fontWeight: 600,
   },
 }));
 
-const AudioSidebarHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  marginBottom: theme.spacing(3),
-}));
-
-const StoryBadge = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(1),
-  padding: theme.spacing(0.5, 1.5),
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: '#fff',
-  '& svg': {
-    color: theme.palette.primary.main,
-    fontSize: '1.2rem',
-  },
-}));
-
-const StoryBadges = styled('div')(({ theme }) => ({
-  display: 'flex',
-  gap: theme.spacing(1),
-  marginBottom: theme.spacing(3),
-}));
-
-const StoryTextContainer = styled('div')(({ theme }) => ({
-  backgroundColor: '#fff',
-  borderRadius: theme.shape.borderRadius,
-  overflow: 'hidden',
-  '& > div': {
-    padding: theme.spacing(3),
-    borderBottom: `1px solid ${theme.palette.divider}`,
-    cursor: 'pointer',
-    '&:last-child': {
-      borderBottom: 'none',
-    },
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.primary.main, 0.05),
-    },
-    '&.active': {
-      backgroundColor: alpha(theme.palette.primary.main, 0.1),
-    },
-  },
-}));
-
-const AudioSectionHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  marginBottom: theme.spacing(2),
-}));
-
-interface Story {
+interface Question {
   id: string;
-  title: string;
-  description: string;
-  imageUrl: string | StaticImageData;
-  n5KanjiCount: number;
-  n5VocabCount: number;
-  sections: StorySection[];
+  text: string;
+  options: { id: string; text: string; }[];
+  correctAnswer: string;
 }
 
-interface StorySection {
-  japanese: string;
-  translation: string;
-  flashcards: {
-    word: string;
-    reading: string;
-    meaning: string;
-  }[];
+interface FillBlankQuestion {
+  id: string;
+  text: string;
+  blanks: { id: string; answer: string; options: string[]; }[];
 }
 
-const sampleStories: Story[] = [
+interface SentenceOrderQuestion {
+  id: string;
+  sentences: { id: string; text: string; }[];
+  correctOrder: string[];
+}
+
+const sampleQuestions: Question[] = [
   {
     id: '1',
-    title: 'My First Day at Work',
-    description: 'Experience the excitement and nervousness of starting a new job.',
-    imageUrl: '',
-    n5KanjiCount: 15,
-    n5VocabCount: 30,
-    sections: [
-      {
-        japanese: '今日は新しい会社の初日です。朝早く起きて、スーツを着ました。電車は込んでいましたが、時間通りに着きました。オフィスは大きくて綺麗でした。',
-        translation: 'Today is my first day at the new company. I woke up early and put on a suit. The train was crowded, but I arrived on time. The office was big and clean.',
-        flashcards: [
-          { word: '会社', reading: 'かいしゃ', meaning: 'company' },
-          { word: '初日', reading: 'しょにち', meaning: 'first day' },
-          { word: 'スーツ', reading: 'すーつ', meaning: 'suit' }
-        ]
-      }
-    ]
+    text: "山田さんは毎朝6時に起きて、公園でジョギングをします。その後、シャワーを浴びて会社に行きます。\n\n質問：山田さんは朝何をしますか？",
+    options: [
+      { id: 'a', text: '公園で寝ます' },
+      { id: 'b', text: '公園でジョギングをします' },
+      { id: 'c', text: '公園で本を読みます' },
+      { id: 'd', text: '公園で朝ご飯を食べます' },
+    ],
+    correctAnswer: 'b',
   },
   {
     id: '2',
-    title: 'Making Japanese Food',
-    description: 'Learn about cooking traditional Japanese dishes at home.',
-    imageUrl: '', 
-    n5KanjiCount: 20,
-    n5VocabCount: 40,
-    sections: [
-      {
-        japanese: '週末に日本料理を作ることにしました。まず、スーパーに買い物に行きました。野菜、お米、そして魚を買いました。家に帰って、料理を始めました。最初に、お米を研ぎました。次に、魚を焼いて、野菜を切りました。',
-        translation: 'I decided to make Japanese food on the weekend. First, I went shopping at the supermarket. I bought vegetables, rice, and fish. I returned home and started cooking. First, I washed the rice. Next, I grilled the fish and cut the vegetables.',
-        flashcards: [
-          { word: '料理', reading: 'りょうり', meaning: 'cooking' },
-          { word: '週末', reading: 'しゅうまつ', meaning: 'weekend' },
-          { word: '買い物', reading: 'かいもの', meaning: 'shopping' }
-        ]
-      }
-    ]
+    text: "田中さんは休みの日に図書館で本を読みます。\n\n質問：田中さんはどこで本を読みますか？",
+    options: [
+      { id: 'a', text: '家で' },
+      { id: 'b', text: '公園で' },
+      { id: 'c', text: '図書館で' },
+      { id: 'd', text: 'カフェで' },
+    ],
+    correctAnswer: 'c',
   }
 ];
 
-const getAllSentences = (sections: StorySection[]) => {
-  return sections.flatMap((section, sectionIndex) => 
-    section.japanese.split('。').map((sentence, sentenceIndex) => ({
-      text: sentence.trim() + (sentence.trim() ? '。' : ''),
-      translation: section.translation,
-      flashcards: section.flashcards,
-      index: `${sectionIndex}-${sentenceIndex}`
-    })).filter(s => s.text.trim())
-  );
-};
+const sampleFillBlanks: FillBlankQuestion[] = [
+  {
+    id: '1',
+    text: "私は__1__に__2__へ行きます。",
+    blanks: [
+      {
+        id: '1',
+        answer: '電車',
+        options: ['電車', 'バス', '自転車', 'タクシー'],
+      },
+      {
+        id: '2',
+        answer: '学校',
+        options: ['学校', '会社', '公園', '病院'],
+      },
+    ],
+  },
+  {
+    id: '2',
+    text: "__1__で__2__を食べます。",
+    blanks: [
+      {
+        id: '1',
+        answer: '家',
+        options: ['家', '公園', 'レストラン', '学校'],
+      },
+      {
+        id: '2',
+        answer: '朝ご飯',
+        options: ['朝ご飯', '昼ご飯', '晩ご飯', 'おやつ'],
+      },
+    ],
+  }
+];
 
-const AudioLine = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'flex-start',
-  gap: theme.spacing(2),
-  padding: theme.spacing(2),
-  borderRadius: theme.shape.borderRadius,
-  cursor: 'pointer',
-  transition: 'all 0.2s ease',
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.primary.main, 0.05),
+const sampleSentenceOrder: SentenceOrderQuestion[] = [
+  {
+    id: '1',
+    sentences: [
+      { id: 's1', text: '朝ご飯を食べました。' },
+      { id: 's2', text: '歯を磨きました。' },
+      { id: 's3', text: '6時に起きました。' },
+      { id: 's4', text: 'シャワーを浴びました。' },
+    ],
+    correctOrder: ['s3', 's4', 's2', 's1'],
   },
-  '&.active': {
-    backgroundColor: alpha(theme.palette.primary.main, 0.1),
-    borderLeft: `4px solid ${theme.palette.primary.main}`,
-  },
-}));
+  {
+    id: '2',
+    sentences: [
+      { id: 's1', text: '宿題をしました。' },
+      { id: 's2', text: '学校に行きました。' },
+      { id: 's3', text: '朝ご飯を食べました。' },
+      { id: 's4', text: '起きました。' },
+    ],
+    correctOrder: ['s4', 's3', 's2', 's1'],
+  }
+];
 
 export default function ReadingPage() {
-  const [progress, setProgress] = useState(0);
-  const [studyMode, setStudyMode] = useState('flashcard');
-  const [selectedStory, setSelectedStory] = useState<Story | null>(null);
-  const [activeLine, setActiveLine] = useState(-1);
-  const [audioStates, setAudioStates] = useState<boolean[]>([]);
-  const [showTranslation, setShowTranslation] = useState(true);
-  const [flashcardDialogOpen, setFlashcardDialogOpen] = useState(false);
+  const [progress, setProgress] = useState(45);
+  const [studyMode, setStudyMode] = useState('reading-qa');
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState('');
+  const [isAnswered, setIsAnswered] = useState(false);
+  const [blankAnswers, setBlankAnswers] = useState<Record<string, string>>({});
+  const [selectedSentences, setSelectedSentences] = useState<string[]>([]);
 
   const handleModeSelect = (newMode: string) => {
     setStudyMode(newMode);
+    setCurrentQuestionIndex(0);
+    setSelectedAnswer('');
+    setIsAnswered(false);
+    setBlankAnswers({});
+    setSelectedSentences([]);
   };
 
-  const toggleAudio = (index: number) => {
-    setAudioStates(prev => {
-      const newStates = [...prev];
-      newStates[index] = !newStates[index];
-      return newStates;
+  const handleAnswer = () => {
+    setIsAnswered(true);
+    setProgress((prev) => Math.min(prev + 5, 100));
+  };
+
+  const handleNext = () => {
+    const maxIndex = studyMode === 'reading-qa' 
+      ? sampleQuestions.length - 1
+      : studyMode === 'fill-blank'
+      ? sampleFillBlanks.length - 1
+      : sampleSentenceOrder.length - 1;
+
+    setCurrentQuestionIndex((prev) => {
+      if (prev >= maxIndex) {
+        return 0; // Loop back to the first question
+      }
+      return prev + 1;
     });
+    setSelectedAnswer('');
+    setIsAnswered(false);
+    setBlankAnswers({});
+    setSelectedSentences([]);
+  };
+
+  const handleBlankChange = (blankId: string, value: string) => {
+    setBlankAnswers((prev) => ({
+      ...prev,
+      [blankId]: value,
+    }));
+  };
+
+  const handleSentenceClick = (sentenceId: string) => {
+    if (isAnswered) return;
+    
+    setSelectedSentences((prev) => {
+      if (prev.includes(sentenceId)) {
+        return prev.filter(id => id !== sentenceId);
+      } else {
+        return [...prev, sentenceId];
+      }
+    });
+  };
+
+  const getCurrentQuestion = () => {
+    let questions;
+    switch (studyMode) {
+      case 'reading-qa':
+        questions = sampleQuestions;
+        break;
+      case 'fill-blank':
+        questions = sampleFillBlanks;
+        break;
+      case 'sentence-order':
+        questions = sampleSentenceOrder;
+        break;
+      default:
+        questions = sampleQuestions;
+    }
+    
+    // If we're at the end, loop back to the first question
+    const index = currentQuestionIndex % questions.length;
+    const question = questions[index];
+    
+    // Add defensive check
+    if (!question) {
+      console.error('No question found:', { studyMode, currentQuestionIndex, index, questionsLength: questions.length });
+      // Return a default question as fallback
+      return sampleQuestions[0];
+    }
+    
+    return question;
+  };
+
+  const isCorrect = () => {
+    const question = getCurrentQuestion();
+    if (!question) return false;
+
+    switch (studyMode) {
+      case 'reading-qa':
+        return selectedAnswer === (question as Question).correctAnswer;
+      case 'fill-blank':
+        return (question as FillBlankQuestion).blanks.every(
+          blank => blankAnswers[blank.id] === blank.answer
+        );
+      case 'sentence-order':
+        return selectedSentences.join(',') === 
+               (question as SentenceOrderQuestion).correctOrder.join(',');
+      default:
+        return false;
+    }
   };
 
   return (
     <LearnLayout
       progress={progress}
-      mode={studyMode}
+      mode={studyMode === 'reading-qa' ? 'Reading Q&A' : 
+            studyMode === 'fill-blank' ? 'Fill in the Blank' : 
+            'Sentence Order'}
       onModeSelect={handleModeSelect}
       showDifficulty={false}
     >
-      <Box sx={{ width: '100%', maxWidth: '1200px', mx: 'auto' }}>
-        {!selectedStory ? (
-          <Grid container spacing={3}>
-            {sampleStories.map((story) => (
-              <Grid item xs={12} sm={6} key={story.id}>
-                <StoryCard 
-                  elevation={1}
-                  onClick={() => setSelectedStory(story)}
-                >
-                  <Typography variant="h5" fontWeight="bold" gutterBottom>
-                    {story.title}
-                  </Typography>
-                  <Typography color="text.secondary" paragraph>
-                    {story.description}
-                  </Typography>
-                  <StoryStats>
-                    <Chip 
-                      icon={<School />}
-                      label={`${story.n5KanjiCount} Kanji`}
-                      size="small"
-                    />
-                    <Chip 
-                      icon={<MenuBook />}
-                      label={`${story.n5VocabCount} Words`}
-                      size="small"
-                    />
-                  </StoryStats>
-                </StoryCard>
-              </Grid>
-            ))}
-          </Grid>
-        ) : (
-          <ReadingLayout>
-            <MainContent>
-              <StoryHeader>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
-                  <IconButton onClick={() => setSelectedStory(null)}>
-                    <ArrowBack />
-                  </IconButton>
-                  <Typography variant="h4" fontWeight="bold">
-                    {selectedStory.title}
-                  </Typography>
-                </Box>
-
-                <StoryBadges>
-                  <Chip 
-                    icon={<School />}
-                    label={`${selectedStory.n5KanjiCount} Kanji`}
-                    color="primary"
-                    variant="outlined"
-                  />
-                  <Chip 
-                    icon={<MenuBook />}
-                    label={`${selectedStory.n5VocabCount} Words`}
-                    color="primary"
-                    variant="outlined"
-                  />
-                </StoryBadges>
-
-                <Typography color="text.secondary" sx={{ mb: 3 }}>
-                  {selectedStory.description}
-                </Typography>
-
-                <StatsGrid>
-                  <StatCard>
-                    <Typography variant="overline" color="text.secondary">
-                      Difficulty
-                    </Typography>
-                    <Typography variant="h6" fontWeight="bold">
-                      Beginner
-                    </Typography>
-                  </StatCard>
-                  <StatCard>
-                    <Typography variant="overline" color="text.secondary">
-                      Estimated Time
-                    </Typography>
-                    <Typography variant="h6" fontWeight="bold">
-                      10 mins
-                    </Typography>
-                  </StatCard>
-                  <StatCard>
-                    <Typography variant="overline" color="text.secondary">
-                      Words
-                    </Typography>
-                    <Typography variant="h6" fontWeight="bold">
-                      {selectedStory.n5VocabCount}
-                    </Typography>
-                  </StatCard>
-                  <StatCard>
-                    <Typography variant="overline" color="text.secondary">
-                      Kanji
-                    </Typography>
-                    <Typography variant="h6" fontWeight="bold">
-                      {selectedStory.n5KanjiCount}
-                    </Typography>
-                  </StatCard>
-                </StatsGrid>
-
-                {selectedStory.imageUrl && (
-                  <Box sx={{ mt: 3, position: 'relative', width: '100%', height: '300px' }}>
-                    <Image 
-                      src={selectedStory.imageUrl}
-                      alt={selectedStory.title}
-                      fill
-                      style={{ 
-                        objectFit: 'cover',
-                        borderRadius: '8px',
-                      }} 
-                    />
-                  </Box>
-                )}
-              </StoryHeader>
-
-              <StoryTextContainer>
-                {getAllSentences(selectedStory.sections).map(({ text }, index) => (
-                  <Box
-                    key={index}
-                    onClick={() => setActiveLine(index)}
-                    className={activeLine === index ? 'active' : ''}
-                  >
-                    <Typography variant="body1">{text}</Typography>
-                  </Box>
-                ))}
-              </StoryTextContainer>
-            </MainContent>
-
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-              <Stack direction="row" spacing={1}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => setFlashcardDialogOpen(true)}
-                  startIcon={<MenuBook />}
-                  fullWidth
-                  sx={{ py: 1 }}
-                >
-                  Story Vocabulary
-                </Button>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  onClick={() => {/* TODO: Add kanji dialog handler */}}
-                  startIcon={<Translate />}
-                  fullWidth
-                  sx={{ py: 1 }}
-                >
-                  Story Kanji
-                </Button>
-              </Stack>
-
-              <AudioSidebar>
-                <Typography variant="h6" fontWeight="bold" gutterBottom>
-                  Line by Line Audio
-                </Typography>
-
+      <PageContainer>
+        {studyMode === 'reading-qa' && (
+          <Box>
+            <ReadingCard>
+              <Typography variant="body1" sx={{ whiteSpace: 'pre-line', mb: 3 }}>
+                {(getCurrentQuestion() as Question).text}
+              </Typography>
+              <RadioGroup
+                value={selectedAnswer}
+                onChange={(e) => setSelectedAnswer(e.target.value)}
+              >
                 <Stack spacing={1}>
-                  {getAllSentences(selectedStory.sections).map(({ text, translation }, index) => (
-                    <AudioLine
-                      key={index}
-                      className={activeLine === index ? 'active' : ''}
-                      onClick={() => setActiveLine(index)}
-                    >
-                      <IconButton
-                        size="small"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          toggleAudio(index);
-                        }}
-                      >
-                        {audioStates[index] ? <Pause /> : <PlayArrow />}
-                      </IconButton>
-
-                      <Box sx={{ flex: 1 }}>
-                        <Typography variant="body1">{text}</Typography>
-                        {showTranslation && translation && (
-                          <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-                            {translation}
-                          </Typography>
-                        )}
-                      </Box>
-                    </AudioLine>
+                  {(getCurrentQuestion() as Question).options?.map((option) => (
+                    <AnswerOption
+                      key={option?.id || 'default'}
+                      value={option?.id || ''}
+                      control={<Radio />}
+                      label={option?.text || ''}
+                      disabled={isAnswered}
+                    />
                   ))}
                 </Stack>
-              </AudioSidebar>
-            </Box>
-          </ReadingLayout>
+              </RadioGroup>
+            </ReadingCard>
+          </Box>
         )}
-      </Box>
 
-      <Dialog
-        open={flashcardDialogOpen}
-        onClose={() => setFlashcardDialogOpen(false)}
-        maxWidth="sm"
-        fullWidth
-      >
-        <DialogTitle>
-          Flashcards
-          <IconButton
-            onClick={() => setFlashcardDialogOpen(false)}
-            sx={(theme) => ({ position: 'absolute', right: 8, top: 8 })}
+        {studyMode === 'fill-blank' && (
+          <Box>
+            <ReadingCard>
+              <QuestionText paragraph>
+                {(getCurrentQuestion() as FillBlankQuestion).text?.split('__').map((part, index, array) => {
+                  if (index === array.length - 1) return part;
+                  const question = getCurrentQuestion() as FillBlankQuestion;
+                  const blank = question.blanks?.[index];
+                  if (!blank) return part;
+                  
+                  return (
+                    <React.Fragment key={blank.id || index}>
+                      {part}
+                      <BlankSpan className={blankAnswers[blank.id] ? 'filled' : ''}>
+                        {blankAnswers[blank.id] || '＿'}
+                      </BlankSpan>
+                    </React.Fragment>
+                  );
+                })}
+              </QuestionText>
+
+              <Box sx={{ mt: 4 }}>
+                <Typography variant="subtitle2" gutterBottom sx={{ color: 'text.secondary', mb: 2 }}>
+                  タップして空欄を埋めてください:
+                </Typography>
+                {(getCurrentQuestion() as FillBlankQuestion).blanks?.map((blank, blankIndex) => (
+                  <Box key={blank.id} sx={{ mb: 3 }}>
+                    <Typography 
+                      variant="caption" 
+                      sx={{ 
+                        mb: 1.5, 
+                        display: 'block', 
+                        color: 'text.secondary',
+                        fontSize: '0.85rem',
+                        fontWeight: 500 
+                      }}
+                    >
+                      空欄 {blankIndex + 1}:
+                    </Typography>
+                    <Stack 
+                      direction="row" 
+                      spacing={1} 
+                      flexWrap="wrap" 
+                      useFlexGap 
+                      sx={{ 
+                        gap: 1.5,
+                        justifyContent: { xs: 'space-between', sm: 'flex-start' }
+                      }}
+                    >
+                      {blank.options?.map((option) => (
+                        <OptionButton
+                          key={option}
+                          variant="outlined"
+                          onClick={() => handleBlankChange(blank.id, option)}
+                          className={
+                            isAnswered
+                              ? option === blank.answer
+                                ? 'correct'
+                                : blankAnswers[blank.id] === option
+                                ? 'incorrect'
+                                : ''
+                              : blankAnswers[blank.id] === option
+                              ? 'selected'
+                              : ''
+                          }
+                          disabled={isAnswered}
+                        >
+                          {option}
+                        </OptionButton>
+                      ))}
+                    </Stack>
+                  </Box>
+                ))}
+              </Box>
+            </ReadingCard>
+          </Box>
+        )}
+
+        {studyMode === 'sentence-order' && (
+          <Box>
+            <ReadingCard>
+              <Typography variant="subtitle1" gutterBottom>
+                Tap the sentences in the correct order:
+              </Typography>
+              <Stack spacing={1}>
+                {(getCurrentQuestion() as SentenceOrderQuestion).sentences?.map((sentence) => (
+                  <SentenceCard
+                    key={sentence?.id || 'default'}
+                    onClick={() => sentence?.id && handleSentenceClick(sentence.id)}
+                    className={sentence?.id && selectedSentences.includes(sentence.id) ? 'selected' : ''}
+                  >
+                    <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                      {sentence?.id && selectedSentences.includes(sentence.id) && (
+                        <OrderChip
+                          size="small"
+                          label={selectedSentences.indexOf(sentence.id) + 1}
+                          sx={{ mr: 2 }}
+                        />
+                      )}
+                      <Typography>{sentence?.text || ''}</Typography>
+                      {sentence?.id && selectedSentences.includes(sentence.id) && (
+                        <CheckCircle sx={{ ml: 'auto', color: '#7c4dff' }} />
+                      )}
+                    </Box>
+                  </SentenceCard>
+                ))}
+              </Stack>
+            </ReadingCard>
+          </Box>
+        )}
+
+        {isAnswered ? (
+          <Box sx={{ mt: 3, textAlign: 'center' }}>
+            <Typography
+              variant="h6"
+              color={isCorrect() ? 'success.main' : 'error.main'}
+              gutterBottom
+            >
+              {isCorrect() ? '正解です！' : '不正解です。'}
+            </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleNext}
+              sx={{ mt: 2 }}
+            >
+              Next Question
+            </Button>
+          </Box>
+        ) : (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleAnswer}
+            disabled={
+              studyMode === 'reading-qa' ? !selectedAnswer :
+              studyMode === 'fill-blank' ? Object.keys(blankAnswers).length !== 
+                (getCurrentQuestion() as FillBlankQuestion).blanks?.length :
+              studyMode === 'sentence-order' ? selectedSentences.length !==
+                (getCurrentQuestion() as SentenceOrderQuestion).sentences?.length :
+              false
+            }
+            sx={{ mt: 3 }}
+            fullWidth
           >
-            <ChevronRight />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent>
-          {/* Flashcard content */}
-        </DialogContent>
-      </Dialog>
+            Check Answer
+          </Button>
+        )}
+      </PageContainer>
     </LearnLayout>
   );
 }

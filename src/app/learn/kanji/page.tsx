@@ -1,424 +1,386 @@
 "use client";
 
-import { useState, useEffect, useCallback } from 'react';
-import { Box, IconButton, Typography, Grid, Paper } from '@mui/material';
-import { VolumeUp } from '@mui/icons-material';
+import { useState, useEffect } from 'react';
+import { Box, IconButton, Typography, Button, Menu, MenuItem } from '@mui/material';
+import { VolumeUp, VolumeUpOutlined, Close, TuneRounded } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import { useJlptLevel } from '@/contexts/JlptLevelContext';
 import { KanjiData as KanjiDataBasic, N5_KANJI, N4_KANJI, N3_KANJI, N2_KANJI, N1_KANJI } from '@/data/jlpt-kanji-complete';
-import { KanjiQuestion, KanjiData } from '@/types/kanji';
+import { KanjiQuestion } from '@/types/kanji';
 import { createKanjiQuestion } from '@/utils/kanji-compounds';
-import LearnLayout, { FlipCard, MainText, SubText, MeaningText } from '@/components/learn/LearnLayout';
+import { useRouter } from 'next/navigation';
 
 type StudyMode = 'flashcard' | 'match' | 'writing';
 type ExtendedKanjiData = KanjiQuestion;
 
-const MatchContainer = styled(Box)(({ theme }) => ({
+const StudyContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   width: '100%',
-  maxWidth: '600px',
-  margin: '0 auto',
-  padding: theme.spacing(2),
-  position: 'relative',
-  height: '100%'
-}));
-
-const MatchGrid = styled(Grid)(({ theme }) => ({
-  width: '100%',
-  margin: '0 auto',
+  minHeight: '100vh',
   padding: theme.spacing(1),
-  '& .MuiGrid-item': {
-    padding: theme.spacing(1),
-  }
+  backgroundColor: '#f8fafc',
+  position: 'relative'
 }));
 
-const MatchTile = styled(Paper)<{ 
-  isSelected?: boolean; 
-  isMatched?: boolean; 
-  isWrongMatch?: boolean; 
-}>(({ theme, isSelected, isMatched, isWrongMatch }) => ({
-  aspectRatio: '1',
-  cursor: 'pointer',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  padding: theme.spacing(2),
-  borderRadius: theme.spacing(1.5),
-  transition: 'all 0.2s ease-in-out',
-  backgroundColor: isMatched 
-    ? '#ecfdf5' // Light success green
-    : isWrongMatch
-    ? '#fef2f2' // Light error red
-    : isSelected 
-    ? '#e8e3ff'
-    : '#fff',
-  border: `1px solid ${
-    isMatched 
-      ? '#34d399' // Medium success green
-      : isWrongMatch
-      ? '#fca5a5' // Medium error red
-      : isSelected 
-      ? '#7c4dff' 
-      : '#e2e8f0'
-  }`,
-  '&:hover': {
-    backgroundColor: isMatched 
-      ? '#ecfdf5'
-      : isWrongMatch
-      ? '#fef2f2'
-      : '#e8e3ff',
-    transform: isMatched || isWrongMatch ? 'none' : 'translateY(-2px)',
-  },
-}));
-
-const GameHeader = styled(Box)(({ theme }) => ({
+const Header = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
   width: '100%',
-  marginBottom: theme.spacing(2),
-  padding: theme.spacing(0, 1),
-  [theme.breakpoints.down('sm')]: {
-    marginBottom: theme.spacing(1),
-  }
+  maxWidth: '680px',
+  padding: theme.spacing(1),
+  marginBottom: theme.spacing(1),
 }));
 
-const Timer = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.secondary,
-  fontSize: '1.25rem',
+const HeaderControls = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: theme.spacing(2)
+}));
+
+const CurrentMode = styled(Typography)(({ theme }) => ({
+  fontSize: '1rem',
   fontWeight: 500,
-  [theme.breakpoints.down('sm')]: {
-    fontSize: '1rem'
-  }
+  color: theme.palette.text.secondary
 }));
 
-const CompoundCard = styled(Box)(({ theme }) => ({
-  position: 'relative',
+const MenuButton = styled(IconButton)(({ theme }) => ({
   backgroundColor: '#fff',
-  borderRadius: theme.spacing(1.5),
-  padding: theme.spacing(2),
-  marginBottom: theme.spacing(1.5),
-  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.04)',
-  '&:last-child': {
-    marginBottom: 0
+  width: '40px',
+  height: '40px',
+  borderRadius: '12px',
+  color: '#7c4dff',
+  '&:hover': {
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+  },
+}));
+
+const CloseButton = styled(IconButton)(({ theme }) => ({
+  color: theme.palette.text.secondary,
+  backgroundColor: 'rgba(255, 255, 255, 0.8)',
+  width: '40px',
+  height: '40px',
+  borderRadius: '12px',
+  '&:hover': {
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
   }
 }));
 
-interface MatchTileData {
-  id: string;
-  content: string;
-  type: 'kanji' | 'meaning';
-  matched: boolean;
-}
+const ProgressBar = styled(Box)<{ value: number }>(({ theme, value }) => ({
+  width: '100%',
+  maxWidth: '680px',
+  height: '4px',
+  backgroundColor: '#e8e3ff',
+  position: 'relative',
+  borderRadius: '2px',
+  overflow: 'hidden',
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    height: '100%',
+    width: `${value}%`,
+    backgroundColor: '#7c4dff',
+    transition: 'width 0.3s ease'
+  }
+}));
 
-interface GameStats {
-  currentRound: number;
-  totalRounds: number;
-  matchesFound: number;
-  totalMatches: number;
-}
+const KanjiCard = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '100%',
+  maxWidth: '680px',
+  aspectRatio: '16/10',
+  backgroundColor: '#fff',
+  borderRadius: theme.spacing(4),
+  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
+  padding: theme.spacing(4),
+  marginTop: theme.spacing(2),
+  marginBottom: theme.spacing(2),
+  cursor: 'pointer',
+  transition: 'transform 0.2s ease',
+  userSelect: 'none',
+  WebkitUserSelect: 'none',
+  MozUserSelect: 'none',
+  msUserSelect: 'none',
+  '&:hover': {
+    transform: 'translateY(-4px)'
+  },
+  [theme.breakpoints.down('sm')]: {
+    aspectRatio: '4/3.2',
+    padding: theme.spacing(3)
+  }
+}));
 
-const convertToExtendedKanjiData = (basic: KanjiDataBasic): ExtendedKanjiData => {
-  const question = createKanjiQuestion({
-    ...basic,
-    id: Math.floor(Math.random() * 1000000),
-    onyomi: [],
-    onyomi_katakana: [],
-    kunyomi: [],
-    kunyomi_hiragana: [],
-    examples: []
-  });
-  return question;
-};
+const KanjiCharacter = styled(Typography)(({ theme }) => ({
+  fontSize: '12rem',
+  fontFamily: '"Noto Sans JP", sans-serif',
+  fontWeight: 400,
+  color: '#1a1a1a',
+  lineHeight: 1.2,
+  marginBottom: theme.spacing(5),
+  userSelect: 'none',
+  WebkitUserSelect: 'none',
+  MozUserSelect: 'none',
+  msUserSelect: 'none',
+}));
+
+const AudioButton = styled(IconButton)(({ theme }) => ({
+  backgroundColor: '#e8e3ff',
+  color: '#7c4dff',
+  '&:hover': {
+    backgroundColor: '#d3c6ff'
+  },
+  '& svg': {
+    fontSize: '1.5rem'
+  }
+}));
+
+const ButtonGroup = styled(Box)(({ theme }) => ({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(4, 1fr)',
+  gap: theme.spacing(2),
+  padding: theme.spacing(2),
+  marginBottom: theme.spacing(2),
+  width: '100%',
+  maxWidth: '680px',
+  [theme.breakpoints.down('sm')]: {
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gap: theme.spacing(1.5)
+  }
+}));
+
+const DifficultyButton = styled(Button)(({ theme }) => ({
+  minWidth: '120px',
+  padding: theme.spacing(1.5, 3),
+  borderRadius: theme.spacing(1),
+  textTransform: 'none',
+  fontSize: '1rem',
+  fontWeight: 500,
+  backgroundColor: '#e8e3ff',
+  color: '#7c4dff',
+  width: '100%',
+  '&:hover': {
+    backgroundColor: '#d3c6ff'
+  },
+  '&.forgot': {
+    backgroundColor: '#5e35b1',
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#4527a0'
+    }
+  },
+  '&.hard': {
+    backgroundColor: '#7c4dff',
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#6b42e0'
+    }
+  }
+}));
 
 export default function KanjiPage() {
+  const router = useRouter();
   const { level } = useJlptLevel();
-  const [progress, setProgress] = useState(30);
-  const [studyMode, setStudyMode] = useState<StudyMode>('flashcard');
-  const [isFlipped, setIsFlipped] = useState(false);
   const [currentKanji, setCurrentKanji] = useState<ExtendedKanjiData | null>(null);
-  const [matchTiles, setMatchTiles] = useState<MatchTileData[]>([]);
-  const [selectedTile, setSelectedTile] = useState<string | null>(null);
-  const [elapsedTime, setElapsedTime] = useState(0);
-  const [timerActive, setTimerActive] = useState(false);
-  const [gameStats, setGameStats] = useState<GameStats>({
-    currentRound: 1,
-    totalRounds: 10,
-    matchesFound: 0,
-    totalMatches: 3
-  });
-  const [wrongMatch, setWrongMatch] = useState<string[]>([]);
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [studyMode, setStudyMode] = useState<StudyMode>('flashcard');
+  const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
+  const [progress, setProgress] = useState(0);
 
-  const startNewRound = useCallback(() => {
-    const kanjiList = {
-      'N5': N5_KANJI,
-      'N4': N4_KANJI,
-      'N3': N3_KANJI,
-      'N2': N2_KANJI,
-      'N1': N1_KANJI
-    }[level] || N5_KANJI;
-
-    // Get 3 random kanji for the round
-    const matchKanji = [...kanjiList]
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 3)
-      .map(k => ({
-        kanji: k.kanji,
-        meaning: k.meaning
-      }));
-
-    const tiles: MatchTileData[] = [
-      ...matchKanji.map(k => ({
-        id: `k-${k.kanji}`,
-        content: k.kanji,
-        type: 'kanji' as const,
-        matched: false
-      })),
-      ...matchKanji.map(k => ({
-        id: `m-${k.kanji}`,
-        content: k.meaning,
-        type: 'meaning' as const,
-        matched: false
-      }))
-    ].sort(() => Math.random() - 0.5);
-
-    setMatchTiles(tiles);
-    setSelectedTile(null);
+  useEffect(() => {
+    // Load initial kanji
+    const kanjiList = level === 'N5' ? N5_KANJI :
+                     level === 'N4' ? N4_KANJI :
+                     level === 'N3' ? N3_KANJI :
+                     level === 'N2' ? N2_KANJI : N1_KANJI;
+    
+    const randomKanji = kanjiList[Math.floor(Math.random() * kanjiList.length)];
+    setCurrentKanji(convertToExtendedKanjiData(randomKanji));
   }, [level]);
 
-  useEffect(() => {
-    if (studyMode === 'flashcard') {
-      const kanjiList = {
-        'N5': N5_KANJI,
-        'N4': N4_KANJI,
-        'N3': N3_KANJI,
-        'N2': N2_KANJI,
-        'N1': N1_KANJI
-      }[level] || N5_KANJI;
+  const handleClose = () => {
+    router.push('/dashboard');
+  };
 
-      const randomKanji = kanjiList[Math.floor(Math.random() * kanjiList.length)];
-      setCurrentKanji(convertToExtendedKanjiData(randomKanji));
-    } else if (studyMode === 'match') {
-      setGameStats({
-        currentRound: 1,
-        totalRounds: 10,
-        matchesFound: 0,
-        totalMatches: 3
-      });
-      setElapsedTime(0);
-      setTimerActive(true);
-      startNewRound();
-    }
-  }, [level, studyMode, startNewRound]);
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setMenuAnchor(event.currentTarget);
+  };
 
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (timerActive) {
-      interval = setInterval(() => {
-        setElapsedTime(prev => prev + 1);
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [timerActive]);
+  const handleMenuClose = () => {
+    setMenuAnchor(null);
+  };
+
+  const handleModeSelect = (mode: StudyMode) => {
+    setStudyMode(mode);
+    handleMenuClose();
+  };
+
+  const modeDisplay = {
+    flashcard: 'Flashcards',
+    match: 'Match Game',
+    writing: 'Writing Practice'
+  };
 
   const handleDifficulty = (difficulty: 'forgot' | 'hard' | 'good' | 'easy') => {
-    setProgress((prev) => Math.min(prev + 10, 100));
-    setIsFlipped(false);
+    // Update progress based on difficulty
+    const progressIncrement = difficulty === 'forgot' ? 5 :
+                            difficulty === 'hard' ? 10 :
+                            difficulty === 'good' ? 15 :
+                            20; // easy
+    setProgress(prev => Math.min(100, prev + progressIncrement));
+
     // Load next kanji
+    const kanjiList = level === 'N5' ? N5_KANJI :
+                     level === 'N4' ? N4_KANJI :
+                     level === 'N3' ? N3_KANJI :
+                     level === 'N2' ? N2_KANJI : N1_KANJI;
+    
+    const randomKanji = kanjiList[Math.floor(Math.random() * kanjiList.length)];
+    setCurrentKanji(convertToExtendedKanjiData(randomKanji));
+    setIsFlipped(false);
   };
 
-  const handleModeSelect = (mode: string) => {
-    if (mode === 'match') {
-      setStudyMode('match');
-    } else if (mode === 'writing') {
-      setStudyMode('writing');
-    } else {
-      setStudyMode('flashcard');
+  const convertToExtendedKanjiData = (basic: KanjiDataBasic): ExtendedKanjiData => {
+    return createKanjiQuestion({
+      ...basic,
+      id: Math.floor(Math.random() * 1000000),
+      onyomi: [],
+      onyomi_katakana: [],
+      kunyomi: [],
+      kunyomi_hiragana: [],
+      examples: []
+    });
+  };
+
+  const handlePlayAudio = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card flip
+    if (currentKanji && !isPlaying) {
+      setIsPlaying(true);
+      const utterance = new SpeechSynthesisUtterance(currentKanji.kanji);
+      utterance.lang = 'ja-JP';
+      utterance.onend = () => setIsPlaying(false);
+      window.speechSynthesis.speak(utterance);
     }
   };
 
-  const handleTileClick = (tileId: string) => {
-    const clickedTile = matchTiles.find(t => t.id === tileId);
-    if (!clickedTile || clickedTile.matched) return;
-
-    if (!selectedTile) {
-      setSelectedTile(tileId);
-      setWrongMatch([]); // Clear any wrong match state
-    } else {
-      const firstTile = matchTiles.find(t => t.id === selectedTile)!;
-      const secondTile = clickedTile;
-
-      if (firstTile.id.split('-')[1] === secondTile.id.split('-')[1] && firstTile.type !== secondTile.type) {
-        // Match found
-        setMatchTiles(prev => prev.map(tile => 
-          tile.id === firstTile.id || tile.id === secondTile.id
-            ? { ...tile, matched: true }
-            : tile
-        ));
-        
-        setGameStats(prev => {
-          const newMatchesFound = prev.matchesFound + 1;
-          
-          // If all matches found in current round
-          if (newMatchesFound === prev.totalMatches) {
-            // If this was the last round
-            if (prev.currentRound === prev.totalRounds) {
-              setTimerActive(false);
-            } else {
-              // Start new round
-              setTimeout(() => {
-                startNewRound();
-              }, 1000);
-            }
-            
-            return {
-              ...prev,
-              currentRound: prev.currentRound === prev.totalRounds 
-                ? prev.currentRound 
-                : prev.currentRound + 1,
-              matchesFound: 0
-            };
-          }
-          
-          return {
-            ...prev,
-            matchesFound: newMatchesFound
-          };
-        });
-
-        setProgress(prev => Math.min(prev + 5, 100));
-      } else {
-        // Wrong match
-        setWrongMatch([firstTile.id, secondTile.id]);
-        setTimeout(() => {
-          setWrongMatch([]);
-          setSelectedTile(null);
-        }, 1000);
-      }
-      setSelectedTile(null);
-    }
-  };
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-  };
-
-  if (!currentKanji && studyMode === 'flashcard') return null;
+  if (!currentKanji) return null;
 
   return (
-    <LearnLayout 
-      progress={progress}
-      mode={studyMode === 'match' ? 'Match Game' : studyMode === 'writing' ? 'Writing' : 'Flashcards'}
-      onModeSelect={handleModeSelect}
-      onDifficulty={handleDifficulty}
-      showDifficulty={studyMode === 'flashcard'}
-    >
-      {studyMode === 'match' ? (
-        <MatchContainer>
-          <GameHeader>
-            <Timer>{formatTime(elapsedTime)}</Timer>
-            <Typography 
-              variant="subtitle1" 
-              sx={{ 
-                color: 'text.secondary',
-                fontWeight: 500,
-                fontSize: { xs: '0.875rem', sm: '1rem' }
+    <StudyContainer>
+      <Box sx={{ width: '100%', maxWidth: '680px', mb: 2 }}>
+        <Header>
+          <CloseButton onClick={handleClose}>
+            <Close />
+          </CloseButton>
+          <HeaderControls>
+            <CurrentMode>{modeDisplay[studyMode]}</CurrentMode>
+            <MenuButton onClick={handleMenuOpen}>
+              <TuneRounded />
+            </MenuButton>
+            <Menu
+              anchorEl={menuAnchor}
+              open={Boolean(menuAnchor)}
+              onClose={handleMenuClose}
+              PaperProps={{
+                sx: {
+                  mt: 1,
+                  borderRadius: '12px',
+                  minWidth: '160px',
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+                }
               }}
             >
-              Round {gameStats.currentRound} of {gameStats.totalRounds}
+              <MenuItem onClick={() => handleModeSelect('flashcard')}>Flashcard</MenuItem>
+              <MenuItem onClick={() => handleModeSelect('match')}>Match Game</MenuItem>
+              <MenuItem onClick={() => handleModeSelect('writing')}>Writing Practice</MenuItem>
+            </Menu>
+          </HeaderControls>
+        </Header>
+        <ProgressBar value={progress} />
+      </Box>
+
+      <KanjiCard onClick={() => setIsFlipped(!isFlipped)}>
+        {!isFlipped ? (
+          <>
+            <KanjiCharacter>{currentKanji.kanji}</KanjiCharacter>
+            <AudioButton 
+              onClick={handlePlayAudio}
+              disabled={isPlaying}
+            >
+              {isPlaying ? <VolumeUp /> : <VolumeUpOutlined />}
+            </AudioButton>
+          </>
+        ) : (
+          <Box sx={{ 
+            display: 'flex', 
+            flexDirection: 'column',
+            alignItems: 'center',
+            height: '100%',
+            overflow: 'auto'
+          }}>
+            <Typography variant="h3" sx={{ mb: 4, color: '#7c4dff', fontWeight: 600 }}>
+              {currentKanji.meaning}
             </Typography>
-          </GameHeader>
-          <MatchGrid container spacing={0}>
-            {matchTiles.map((tile) => (
-              <Grid item xs={6} sm={4} key={tile.id}>
-                <MatchTile
-                  onClick={() => handleTileClick(tile.id)}
-                  isSelected={selectedTile === tile.id}
-                  isMatched={tile.matched}
-                  isWrongMatch={wrongMatch.includes(tile.id)}
-                >
-                  <Typography
-                    sx={{
-                      fontSize: tile.type === 'kanji' ? '2rem' : '1rem',
-                      fontWeight: 500,
-                      fontFamily: tile.type === 'kanji' ? '"Noto Sans JP", sans-serif' : 'inherit'
-                    }}
-                  >
-                    {tile.content}
+            {currentKanji.compounds.filter(c => c.correct).map((compound, i) => (
+              <Box
+                key={i}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  width: '100%',
+                  p: 2,
+                  borderBottom: '1px solid #e2e8f0',
+                  '&:last-child': {
+                    borderBottom: 'none'
+                  }
+                }}
+              >
+                <Box>
+                  <Typography sx={{ fontWeight: 600, fontSize: '1.25rem' }}>
+                    {compound.word}
                   </Typography>
-                </MatchTile>
-              </Grid>
+                  <Typography variant="body2" color="text.secondary">
+                    {compound.reading} - {compound.meaning}
+                  </Typography>
+                </Box>
+                <IconButton
+                  size="small"
+                  sx={{ color: '#7c4dff' }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // Handle audio
+                  }}
+                >
+                  <VolumeUp />
+                </IconButton>
+              </Box>
             ))}
-          </MatchGrid>
-        </MatchContainer>
-      ) : studyMode === 'flashcard' && currentKanji ? (
-        <FlipCard 
-          onClick={() => setIsFlipped(!isFlipped)}
-          sx={{
-            transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0)',
-            '& > *': {
-              backfaceVisibility: 'hidden',
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }
-          }}
-        >
-          <div style={{ transform: 'rotateY(0)' }}>
-            <MainText>{currentKanji.kanji}</MainText>
-            <SubText>{currentKanji.reading}</SubText>
-          </div>
-          <div style={{ transform: 'rotateY(180deg)' }}>
-            <Box sx={{ width: '100%', maxHeight: '100%', overflow: 'auto', p: 3 }}>
-              <MeaningText sx={{ mb: 4 }}>{currentKanji.meaning}</MeaningText>
-              
-              <Typography variant="h6" sx={{ mb: 2, color: 'text.primary', fontWeight: 600 }}>
-                Common Words
-              </Typography>
-              
-              {currentKanji.compounds.filter(c => c.correct).map((compound, i) => (
-                <CompoundCard key={i}>
-                  <Box sx={{ pr: 5 }}>
-                    <Typography sx={{ fontWeight: 600, fontSize: '1.1rem', mb: 0.5 }}>
-                      {compound.word}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {compound.reading} - {compound.meaning}
-                    </Typography>
-                  </Box>
-                  <IconButton
-                    size="small"
-                    sx={{
-                      position: 'absolute',
-                      right: 12,
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      color: 'primary.main',
-                      '&:hover': {
-                        backgroundColor: 'primary.lighter'
-                      }
-                    }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      // Handle audio
-                    }}
-                  >
-                    <VolumeUp fontSize="small" />
-                  </IconButton>
-                </CompoundCard>
-              ))}
-            </Box>
-          </div>
-        </FlipCard>
-      ) : null}
-    </LearnLayout>
+          </Box>
+        )}
+      </KanjiCard>
+
+      <ButtonGroup>
+        <DifficultyButton className="forgot" onClick={() => handleDifficulty('forgot')}>
+          Again
+        </DifficultyButton>
+        <DifficultyButton className="hard" onClick={() => handleDifficulty('hard')}>
+          Hard
+        </DifficultyButton>
+        <DifficultyButton onClick={() => handleDifficulty('good')}>
+          Good
+        </DifficultyButton>
+        <DifficultyButton onClick={() => handleDifficulty('easy')}>
+          Easy
+        </DifficultyButton>
+      </ButtonGroup>
+    </StudyContainer>
   );
 }

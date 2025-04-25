@@ -12,6 +12,10 @@ const FlashcardContainer = styled(motion.div)(({ theme }) => ({
   aspectRatio: '3/2',
   cursor: 'pointer',
   marginBottom: theme.spacing(2),
+  userSelect: 'none',
+  WebkitUserSelect: 'none',
+  MozUserSelect: 'none',
+  msUserSelect: 'none',
 }));
 
 const FlashcardInner = styled(motion(Card))(({ theme }) => ({
@@ -27,6 +31,10 @@ const FlashcardInner = styled(motion(Card))(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   borderRadius: theme.shape.borderRadius,
   boxShadow: '0px 2px 4px rgba(0,0,0,0.05)',
+  userSelect: 'none',
+  WebkitUserSelect: 'none',
+  MozUserSelect: 'none',
+  msUserSelect: 'none',
 }));
 
 const AudioButton = styled(IconButton)(({ theme }) => ({

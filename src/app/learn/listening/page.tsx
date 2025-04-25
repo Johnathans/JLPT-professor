@@ -9,7 +9,7 @@ import LearnLayout from '@/components/learn/LearnLayout';
 
 const ListeningCard = styled(Paper)(({ theme }) => ({
   width: '100%',
-  maxWidth: '600px',
+  maxWidth: '680px',
   minHeight: '500px',
   display: 'flex',
   flexDirection: 'column',
@@ -50,6 +50,40 @@ const AnswerOption = styled(FormControlLabel)(({ theme }) => ({
   },
 }));
 
+const DictationInput = styled('input')(({ theme }) => ({
+  width: '100%',
+  padding: theme.spacing(2),
+  border: '1px solid #e2e8f0',
+  borderRadius: '12px',
+  fontSize: '1rem',
+  fontFamily: '"Noto Sans JP", sans-serif',
+  '&:focus': {
+    outline: 'none',
+    borderColor: '#7c4dff',
+    boxShadow: '0 0 0 2px rgba(124, 77, 255, 0.1)',
+  },
+}));
+
+const WordButton = styled(Button)(({ theme }) => ({
+  padding: theme.spacing(1, 2),
+  borderRadius: theme.spacing(1),
+  fontSize: '1rem',
+  fontFamily: '"Noto Sans JP", sans-serif',
+  textTransform: 'none',
+  border: '1px solid #e2e8f0',
+  color: theme.palette.text.primary,
+  backgroundColor: '#fff',
+  '&:hover': {
+    backgroundColor: '#f8fafc',
+    borderColor: '#7c4dff',
+  },
+  '&.selected': {
+    backgroundColor: '#e8e3ff',
+    borderColor: '#7c4dff',
+    color: '#7c4dff',
+  }
+}));
+
 const sampleListening = {
   audio: '/audio/conversation1.mp3',
   question: 'What did the woman order?',
@@ -60,6 +94,10 @@ const sampleListening = {
     { id: 'd', text: 'Water' },
   ],
   correctAnswer: 'b',
+  dictation: {
+    text: 'コーヒーを一つお願いします',
+    words: ['コーヒー', 'を', '一つ', 'お願いします'],
+  }
 };
 
 export default function ListeningPage() {
@@ -68,7 +106,10 @@ export default function ListeningPage() {
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [isAnswered, setIsAnswered] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [studyMode, setStudyMode] = useState('flashcard');
+  const [studyMode, setStudyMode] = useState('qa'); // 'qa', 'dictation-type', 'dictation-tap'
+  const [typedAnswer, setTypedAnswer] = useState('');
+  const [selectedWords, setSelectedWords] = useState<string[]>([]);
+  const [availableWords, setAvailableWords] = useState([...sampleListening.dictation.words].sort(() => Math.random() - 0.5));
 
   const handlePlayAudio = () => {
     setIsPlaying(!isPlaying);
@@ -82,20 +123,43 @@ export default function ListeningPage() {
 
   const handleNext = () => {
     setSelectedAnswer('');
+    setTypedAnswer('');
+    setSelectedWords([]);
+    setAvailableWords([...sampleListening.dictation.words].sort(() => Math.random() - 0.5));
     setIsAnswered(false);
     setIsPlaying(false);
   };
 
   const handleModeSelect = (newMode: string) => {
     setStudyMode(newMode);
+    handleNext();
   };
 
-  const isCorrect = selectedAnswer === sampleListening.correctAnswer;
+  const handleWordSelect = (word: string) => {
+    if (!isAnswered) {
+      setSelectedWords([...selectedWords, word]);
+      setAvailableWords(availableWords.filter(w => w !== word));
+    }
+  };
+
+  const handleUndoWord = (index: number) => {
+    if (!isAnswered) {
+      const word = selectedWords[index];
+      setSelectedWords(selectedWords.filter((_, i) => i !== index));
+      setAvailableWords([...availableWords, word]);
+    }
+  };
+
+  const isCorrect = studyMode === 'qa' 
+    ? selectedAnswer === sampleListening.correctAnswer
+    : studyMode === 'dictation-type'
+    ? typedAnswer === sampleListening.dictation.text
+    : selectedWords.join('') === sampleListening.dictation.words.join('');
 
   return (
     <LearnLayout
       progress={progress}
-      mode={studyMode}
+      mode={studyMode === 'qa' ? 'Question & Answer' : studyMode === 'dictation-type' ? 'Dictation (Type)' : 'Dictation (Tap)'}
       onModeSelect={handleModeSelect}
       showDifficulty={false}
     >
@@ -105,32 +169,84 @@ export default function ListeningPage() {
             {isPlaying ? <Pause /> : <PlayArrow />}
           </PlayButton>
 
-          <Typography variant="h6" gutterBottom align="center" sx={{ mb: 3 }}>
-            {sampleListening.question}
-          </Typography>
+          {studyMode === 'qa' && (
+            <>
+              <Typography variant="h6" gutterBottom align="center" sx={{ mb: 3 }}>
+                {sampleListening.question}
+              </Typography>
 
-          <RadioGroup
-            value={selectedAnswer}
-            onChange={(e) => setSelectedAnswer(e.target.value)}
-            sx={{ width: '100%' }}
-          >
-            <Stack spacing={2}>
-              {sampleListening.options.map((option) => (
-                <AnswerOption
-                  key={option.id}
-                  value={option.id}
-                  control={<Radio />}
-                  label={option.text}
-                  disabled={isAnswered}
-                />
-              ))}
-            </Stack>
-          </RadioGroup>
+              <RadioGroup
+                value={selectedAnswer}
+                onChange={(e) => setSelectedAnswer(e.target.value)}
+                sx={{ width: '100%' }}
+              >
+                <Stack spacing={2}>
+                  {sampleListening.options.map((option) => (
+                    <AnswerOption
+                      key={option.id}
+                      value={option.id}
+                      control={<Radio />}
+                      label={option.text}
+                      disabled={isAnswered}
+                    />
+                  ))}
+                </Stack>
+              </RadioGroup>
+            </>
+          )}
+
+          {studyMode === 'dictation-type' && (
+            <Box sx={{ width: '100%', mt: 3 }}>
+              <DictationInput
+                value={typedAnswer}
+                onChange={(e) => setTypedAnswer(e.target.value)}
+                placeholder="Type what you hear..."
+                disabled={isAnswered}
+              />
+            </Box>
+          )}
+
+          {studyMode === 'dictation-tap' && (
+            <Box sx={{ width: '100%', mt: 3 }}>
+              <Box sx={{ mb: 4 }}>
+                <Typography variant="subtitle1" gutterBottom>
+                  Your Answer:
+                </Typography>
+                <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ minHeight: '48px', p: 2, bgcolor: '#f8fafc', borderRadius: 2 }}>
+                  {selectedWords.map((word, index) => (
+                    <WordButton
+                      key={index}
+                      onClick={() => handleUndoWord(index)}
+                      className="selected"
+                      disabled={isAnswered}
+                    >
+                      {word}
+                    </WordButton>
+                  ))}
+                </Stack>
+              </Box>
+              
+              <Typography variant="subtitle1" gutterBottom>
+                Available Words:
+              </Typography>
+              <Stack direction="row" spacing={1} flexWrap="wrap">
+                {availableWords.map((word, index) => (
+                  <WordButton
+                    key={index}
+                    onClick={() => handleWordSelect(word)}
+                    disabled={isAnswered}
+                  >
+                    {word}
+                  </WordButton>
+                ))}
+              </Stack>
+            </Box>
+          )}
         </Box>
       </ListeningCard>
 
       {isAnswered ? (
-        <Box sx={{ mt: 3, width: '100%', maxWidth: '600px' }}>
+        <Box sx={{ mt: 3, width: '100%', maxWidth: '680px' }}>
           <Typography
             variant="h6"
             align="center"
@@ -138,6 +254,11 @@ export default function ListeningPage() {
             sx={{ mb: 2 }}
           >
             {isCorrect ? 'Correct!' : 'Incorrect'}
+            {!isCorrect && studyMode !== 'qa' && (
+              <Typography color="text.secondary" sx={{ mt: 1 }}>
+                Correct answer: {sampleListening.dictation.text}
+              </Typography>
+            )}
           </Typography>
           <Button 
             variant="contained"
@@ -153,8 +274,8 @@ export default function ListeningPage() {
           variant="contained"
           color="primary"
           onClick={handleAnswer}
-          disabled={!selectedAnswer}
-          sx={{ mt: 3, width: '100%', maxWidth: '600px' }}
+          disabled={studyMode === 'qa' ? !selectedAnswer : studyMode === 'dictation-type' ? !typedAnswer : selectedWords.length === 0}
+          sx={{ mt: 3, width: '100%', maxWidth: '680px' }}
         >
           Check Answer
         </Button>
