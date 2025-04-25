@@ -16,6 +16,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import Help from '@mui/icons-material/Help';
 import Star from '@mui/icons-material/Star';
 import Lock from '@mui/icons-material/Lock';
+import Notifications from '@mui/icons-material/Notifications';
 
 // Styled Components
 const AppContainer = styled('div')({
@@ -23,24 +24,6 @@ const AppContainer = styled('div')({
   minHeight: '100vh',
   backgroundColor: '#f8fafc'
 });
-
-const MainContent = styled('div')(({ theme }) => ({
-  flexGrow: 1,
-  width: '100%',
-  backgroundColor: '#f8fafc',
-  overflow: 'auto',
-  padding: theme.spacing(3),
-  marginLeft: 72,
-  transition: 'margin-left 0.3s ease-in-out',
-  '.sidebar-expanded &': {
-    marginLeft: 240
-  },
-  [theme.breakpoints.down('sm')]: {
-    padding: theme.spacing(2),
-    paddingBottom: theme.spacing(8),
-    marginLeft: 0
-  }
-}));
 
 const Sidebar = styled('div')(({ theme }) => ({
   position: 'fixed',
@@ -167,15 +150,11 @@ const FlipCard = styled('div')({
     transition: 'transform 0.6s',
     transformStyle: 'preserve-3d',
     backgroundColor: '#fff',
-    borderRadius: '12px',
-    border: '1px solid rgba(0,0,0,0.08)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '16px'
-  },
-  '&:hover .flip-card-inner': {
-    transform: 'rotateY(180deg)'
+    borderRadius: 12,
+    boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+    '&.flipped': {
+      transform: 'rotateY(180deg)'
+    }
   },
   '.flip-card-front, .flip-card-back': {
     position: 'absolute',
@@ -183,12 +162,15 @@ const FlipCard = styled('div')({
     height: '100%',
     backfaceVisibility: 'hidden',
     display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    padding: 16,
+    borderRadius: 12
   },
   '.flip-card-back': {
-    transform: 'rotateY(180deg)'
+    transform: 'rotateY(180deg)',
+    backgroundColor: '#7c4dff',
+    color: 'white'
   }
 });
 
@@ -246,7 +228,7 @@ const todaysGrammar = [
 
 export default function Dashboard() {
   const router = useRouter();
-  const { jlptLevel } = useJlptLevel();
+  const { level } = useJlptLevel();
   const [activeTab, setActiveTab] = useState('kanji');
   const pathname = '/';
   const [isExpanded, setIsExpanded] = useState(false);
@@ -290,14 +272,44 @@ export default function Dashboard() {
         ))}
       </Sidebar>
 
-      <MainContent className={`main-content ${isExpanded ? 'sidebar-expanded' : ''}`}>
+      <Box 
+        className={`main-content ${isExpanded ? 'sidebar-expanded' : ''}`}
+        sx={{
+          flexGrow: 1,
+          width: '100%',
+          backgroundColor: '#f8fafc',
+          overflow: 'auto',
+          padding: '24px',
+          marginLeft: '36px',
+          transition: 'margin-left 0.3s ease-in-out',
+          '&.sidebar-expanded': {
+            marginLeft: '180px'
+          },
+          '@media (max-width: 600px)': {
+            padding: '16px',
+            paddingBottom: '64px',
+            marginLeft: 0
+          }
+        }}
+      >
         <Box sx={{ 
           p: { xs: 2, sm: 3 },
           pb: { xs: 8, sm: 3 },
-          display: 'flex',
-          flexDirection: 'column',
-          gap: { xs: 2, sm: 3 }
+          position: 'relative'
         }}>
+          <IconButton
+            sx={{
+              position: 'absolute',
+              top: '24px',
+              right: '24px',
+              backgroundColor: '#e8e3ff',
+              '&:hover': {
+                backgroundColor: '#e8e3ff'
+              }
+            }}
+          >
+            <Notifications sx={{ color: '#7c4dff' }} />
+          </IconButton>
           {/* Welcome Message */}
           <Box sx={{ mb: { xs: 2, sm: 3 } }}>
             <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 1 }}>
@@ -321,7 +333,7 @@ export default function Dashboard() {
               fontSize: { xs: '0.875rem', sm: '1rem' },
               mt: 1
             }}>
-              Ready to continue your JLPT N{jlptLevel} journey?
+              Ready to continue your JLPT N{level} journey?
             </Typography>
           </Box>
 
@@ -330,10 +342,14 @@ export default function Dashboard() {
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
             gap: { xs: 2, sm: 3 },
-            width: '100%'
+            width: '100%',
+            '& > *': {
+              flex: '1 1 0',
+              minWidth: 0
+            }
           }}>
             <Box sx={{
-              width: { xs: '100%', md: '520px' },
+              width: { xs: '100%', md: '50%' },
               height: { md: '100%' }
             }}>
               <Typography variant="h6" sx={{ 
@@ -346,7 +362,7 @@ export default function Dashboard() {
               </Typography>
               <ProgressSection sx={{ height: { md: 'calc(100% - 42px)' } }}>
                 <Typography sx={{ mb: 2, color: '#6F767E' }}>
-                  JLPT N{jlptLevel} Progress
+                  JLPT N{level} Progress
                 </Typography>
                 <Box sx={{ 
                   height: 24, 
@@ -444,6 +460,7 @@ export default function Dashboard() {
 
             <Box sx={{
               flex: 1,
+              width: { xs: '100%', md: '50%' },
               height: { md: '100%' }
             }}>
               <Typography variant="h6" sx={{ 
@@ -581,7 +598,16 @@ export default function Dashboard() {
 
           <Box sx={{ mb: 4 }}>
             <Typography variant="h6" sx={{ mb: 2 }}>Study Materials</Typography>
-            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 3 }}>
+            <Box sx={{ 
+              display: 'grid', 
+              gridTemplateColumns: { 
+                xs: '1fr',
+                sm: 'repeat(2, 1fr)',
+                md: 'repeat(4, 1fr)'
+              }, 
+              gap: 3,
+              width: '100%'
+            }}>
               <StudyCard>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
                   <Box sx={{ 
@@ -604,7 +630,7 @@ export default function Dashboard() {
                       fontSize: '0.875rem',
                       color: '#6F767E'
                     }}>
-                      Master {jlptLevel} kanji characters
+                      Master {level} kanji characters
                     </Typography>
                   </Box>
                 </Box>
@@ -632,7 +658,7 @@ export default function Dashboard() {
                       fontSize: '0.875rem',
                       color: '#6F767E'
                     }}>
-                      Essential {jlptLevel} vocabulary
+                      Essential {level} vocabulary
                     </Typography>
                   </Box>
                 </Box>
@@ -660,7 +686,7 @@ export default function Dashboard() {
                       fontSize: '0.875rem',
                       color: '#6F767E'
                     }}>
-                      {jlptLevel} grammar patterns
+                      {level} grammar patterns
                     </Typography>
                   </Box>
                 </Box>
@@ -688,7 +714,7 @@ export default function Dashboard() {
                       fontSize: '0.875rem',
                       color: '#6F767E'
                     }}>
-                      {jlptLevel} listening practice
+                      {level} listening practice
                     </Typography>
                   </Box>
                 </Box>
@@ -714,7 +740,7 @@ export default function Dashboard() {
             ))}
           </BottomNav>
         </Box>
-      </MainContent>
+      </Box>
     </AppContainer>
   );
 }
