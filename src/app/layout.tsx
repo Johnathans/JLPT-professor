@@ -4,7 +4,6 @@ import './globals.css';
 import { Inter, Poppins, Noto_Sans_JP } from 'next/font/google';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { theme } from '@/lib/theme';
-import PwaLayout from '@/components/PwaLayout';
 import PublicLayout from '@/components/PublicLayout';
 import { usePathname } from 'next/navigation';
 import { JlptLevelProvider } from '@/contexts/JlptLevelContext';
@@ -30,16 +29,11 @@ const notoSansJP = Noto_Sans_JP({
   display: 'swap'
 });
 
-// Routes that should use the PWA layout
-const pwaRoutes = [
-  '/dashboard',
-  '/learn',
-  '/tests',
-  '/profile',
-  '/admin',
-  '/decks',
-  '/search',
-  '/history'
+// Routes that should use custom layouts
+const customLayoutRoutes = [
+  '/dashboard',  // Dashboard has its own layout
+  '/learn',      // Learn pages use dashboard layout
+  '/decks'       // Decks pages use dashboard layout
 ];
 
 // Public routes that should use PublicLayout
@@ -67,10 +61,16 @@ export default function RootLayout({
 }) {
   const pathname = usePathname();
   
-  // Check if current path starts with any of the PWA routes
-  const isPwaRoute = pwaRoutes.some(route => pathname?.startsWith(route));
-  // Check if current path is a public route
-  const isPublicRoute = publicRoutes.some(route => pathname?.startsWith(route));
+  // Check if current path matches exactly with any of our route patterns
+  const matchRoute = (path: string, routes: string[]) => {
+    return routes.some(route => {
+      // Exact match or matches the start with a following slash
+      return path === route || (path.startsWith(route) && path[route.length] === '/');
+    });
+  };
+
+  const isCustomLayout = matchRoute(pathname || '', customLayoutRoutes);
+  const isPublicRoute = !isCustomLayout && matchRoute(pathname || '', publicRoutes);
 
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable} ${notoSansJP.variable}`}>
@@ -84,12 +84,12 @@ export default function RootLayout({
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <JlptLevelProvider>
-            {isPwaRoute ? (
-              <PwaLayout>{children}</PwaLayout>
+            {isCustomLayout ? (
+              children
             ) : isPublicRoute ? (
               <PublicLayout>{children}</PublicLayout>
             ) : (
-              <>{children}</>
+              children
             )}
           </JlptLevelProvider>
         </ThemeProvider>
