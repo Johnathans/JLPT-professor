@@ -1,113 +1,128 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { Box, Button, Container, TextField, Typography } from '@mui/material';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useState, Suspense } from 'react';
 import styles from './reset-password.module.css';
 
-export default function ResetPassword() {
+function ResetPasswordContent() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const supabase = createClientComponentClient();
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const supabase = createClientComponentClient();
-
-  // Get the token from the URL
-  const token = searchParams.get('token');
-
-  useEffect(() => {
-    if (!token) {
-      setError('Invalid or missing reset token');
-    }
-  }, [token]);
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
     }
-
-    if (password.length < 8) {
-      setError('Password must be at least 8 characters long');
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters');
       return;
     }
 
-    setLoading(true);
-    setError('');
-    setMessage('');
-
     try {
-      const { error } = await supabase.auth.updateUser({
-        password: password
-      });
-
-      if (error) {
-        throw error;
-      }
-
-      setMessage('Password updated successfully! Redirecting to login...');
-      
-      // Wait 2 seconds before redirecting
+      const { error } = await supabase.auth.updateUser({ password });
+      if (error) throw error;
+      setSuccess(true);
       setTimeout(() => {
         router.push('/login');
       }, 2000);
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while resetting your password');
-    } finally {
-      setLoading(false);
+    } catch (error: any) {
+      setError(error.message);
     }
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.formWrapper}>
-        <h1 className={styles.title}>Reset Password</h1>
+    <Container maxWidth="sm" className={styles.container}>
+      <Box className={styles.formBox}>
+        <Typography variant="h4" component="h1" gutterBottom align="center" sx={{ color: '#1e293b', fontWeight: 600 }}>
+          Reset Password
+        </Typography>
         
-        {error && <div className={styles.error}>{error}</div>}
-        {message && <div className={styles.success}>{message}</div>}
-
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.formGroup}>
-            <label htmlFor="password">New Password</label>
-            <input
-              id="password"
+        {success ? (
+          <Box sx={{ 
+            p: 2, 
+            bgcolor: '#dcfce7', 
+            color: '#16a34a',
+            borderRadius: 2,
+            textAlign: 'center',
+            mb: 2 
+          }}>
+            Password updated successfully! Redirecting to login...
+          </Box>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            {error && (
+              <Box sx={{ 
+                p: 2, 
+                bgcolor: '#fee2e2', 
+                color: '#dc2626',
+                borderRadius: 2,
+                mb: 2 
+              }}>
+                {error}
+              </Box>
+            )}
+            
+            <TextField
+              fullWidth
               type="password"
+              label="New Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your new password"
               required
-              className={styles.input}
+              margin="normal"
+              sx={{ mb: 2 }}
             />
-          </div>
-
-          <div className={styles.formGroup}>
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <input
-              id="confirmPassword"
+            
+            <TextField
+              fullWidth
               type="password"
+              label="Confirm New Password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Confirm your new password"
               required
-              className={styles.input}
+              margin="normal"
+              sx={{ mb: 3 }}
             />
-          </div>
+            
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{
+                bgcolor: '#7c4dff',
+                '&:hover': {
+                  bgcolor: '#5e35b1'
+                },
+                py: 1.5
+              }}
+            >
+              Reset Password
+            </Button>
+          </form>
+        )}
+      </Box>
+    </Container>
+  );
+}
 
-          <button 
-            type="submit" 
-            className={styles.button}
-            disabled={loading || !token}
-          >
-            {loading ? 'Updating Password...' : 'Reset Password'}
-          </button>
-        </form>
+export default function ResetPassword() {
+  return (
+    <Suspense fallback={
+      <div className={styles.container}>
+        <div className={styles.formWrapper}>
+          <h1 className={styles.title}>Loading...</h1>
+        </div>
       </div>
-    </div>
+    }>
+      <ResetPasswordContent />
+    </Suspense>
   );
 }
