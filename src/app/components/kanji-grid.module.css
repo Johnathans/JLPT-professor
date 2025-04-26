@@ -84,13 +84,37 @@
   background: var(--primary-light);
 }
 
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .kanjiGrid {
+    gap: 0.75rem;
+  }
+  
+  .cardFront {
+    font-size: 2.25rem;
+  }
+}
+
 @media (max-width: 1024px) {
+  .kanjiGrid {
+    gap: 0.5rem;
+  }
+  
   .cardFront {
     font-size: 2rem;
   }
 }
 
 @media (max-width: 768px) {
+  .kanjiGridContainer {
+    padding: 0.75rem;
+  }
+
+  .kanjiGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+  }
+  
   .cardFront {
     font-size: 1.75rem;
   }
@@ -101,5 +125,20 @@
   
   .reading {
     font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .kanjiGridContainer {
+    padding: 0.5rem;
+  }
+
+  .kanjiGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.35rem;
+  }
+  
+  .cardFront {
+    font-size: 1.5rem;
   }
 }
