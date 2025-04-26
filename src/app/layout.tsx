@@ -8,6 +8,7 @@ import PublicLayout from '@/components/PublicLayout';
 import { usePathname } from 'next/navigation';
 import { JlptLevelProvider } from '@/contexts/JlptLevelContext';
 import { StudySessionProvider } from '@/contexts/StudySessionContext';
+import Script from 'next/script';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -76,10 +77,23 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable} ${notoSansJP.variable}`}>
       <head>
+        <meta name="google-site-verification" content="DjXH6N1fV_93QxiTStPwWgYW0RE1gRffr1FZxjDqT4g" />
         <link
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&display=swap"
           rel="stylesheet"
         />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-B0MKGKNBV2"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-B0MKGKNBV2');
+          `}
+        </Script>
       </head>
       <body suppressHydrationWarning>
         <ThemeProvider theme={theme}>
