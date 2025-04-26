@@ -149,30 +149,55 @@ export default function Login() {
   const supabase = createClientComponentClient();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isResetting, setIsResetting] = useState(false);
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const { error } = await supabase.auth.signInWithPassword({
         email,
-        password
+        password,
       });
       if (error) throw error;
-    } catch (error) {
-      console.error('Error:', error);
+      router.push('/dashboard');
+    } catch (error: any) {
+      console.error('Error:', error.message);
     }
   };
 
   const handleGoogleLogin = async () => {
     try {
-      await supabase.auth.signInWithOAuth({
+      const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`
-        }
+          redirectTo: `${window.location.origin}/auth/callback`,
+        },
       });
-    } catch (error) {
-      console.error('Error:', error);
+      if (error) throw error;
+    } catch (error: any) {
+      console.error('Error:', error.message);
+    }
+  };
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsResetting(true);
+    setError('');
+    setMessage('');
+
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+
+      if (error) throw error;
+      setMessage('Check your email for the password reset link');
+    } catch (error: any) {
+      setError(error.message);
+    } finally {
+      setIsResetting(false);
     }
   };
 
@@ -291,6 +316,33 @@ export default function Login() {
             <Typography variant="h5" sx={{ fontWeight: 600, mb: 3, color: '#1e293b' }}>
               Welcome Back
             </Typography>
+
+            {message && (
+              <Box sx={{ 
+                mb: 2, 
+                p: 2, 
+                bgcolor: '#dcfce7', 
+                color: '#16a34a',
+                borderRadius: 2,
+                fontSize: '0.875rem'
+              }}>
+                {message}
+              </Box>
+            )}
+
+            {error && (
+              <Box sx={{ 
+                mb: 2, 
+                p: 2, 
+                bgcolor: '#fee2e2', 
+                color: '#dc2626',
+                borderRadius: 2,
+                fontSize: '0.875rem'
+              }}>
+                {error}
+              </Box>
+            )}
+
             <GoogleButton
               variant="outlined"
               startIcon={<GoogleIcon />}
@@ -327,7 +379,7 @@ export default function Login() {
               </LoginButton>
             </form>
             <Box sx={{ mt: 2, textAlign: 'center' }}>
-              <Typography sx={{ color: '#64748b', fontSize: '0.875rem' }}>
+              <Typography sx={{ color: '#64748b', fontSize: '0.875rem', mb: 1 }}>
                 Don't have an account?{' '}
                 <Button
                   sx={{
@@ -343,6 +395,20 @@ export default function Login() {
                   Sign up
                 </Button>
               </Typography>
+              <Button
+                sx={{
+                  textTransform: 'none',
+                  color: '#7c4dff',
+                  fontWeight: 500,
+                  p: 0,
+                  fontSize: '0.875rem',
+                  '&:hover': { backgroundColor: 'transparent', textDecoration: 'underline' }
+                }}
+                onClick={handleForgotPassword}
+                disabled={!email || isResetting}
+              >
+                {isResetting ? 'Sending reset link...' : 'Forgot your password?'}
+              </Button>
             </Box>
           </Box>
         </ContentBox>
