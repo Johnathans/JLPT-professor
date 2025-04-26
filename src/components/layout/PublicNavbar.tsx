@@ -20,6 +20,7 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Menu as MenuIcon } from '@mui/icons-material';
+import { School } from '@mui/icons-material';
 
 const NavbarWrapper = styled(AppBar)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -48,8 +49,7 @@ const Logo = styled(Box)(({ theme }) => ({
 
 const LogoText = styled(Typography)(({ theme }) => ({
   fontSize: '1.25rem',
-  fontWeight: 700,
-  color: theme.palette.primary.main,
+  color: '#000000',
   [theme.breakpoints.down('sm')]: {
     fontSize: '1.125rem',
   }
@@ -70,12 +70,9 @@ const MobileMenuButton = styled(IconButton)(({ theme }) => ({
 }));
 
 const navItems = [
-  { text: 'N5 Kanji', href: '/n5-kanji-list' },
-  { text: 'N4 Kanji', href: '/n4-kanji-list' },
-  { text: 'N3 Kanji', href: '/n3-kanji-list' },
-  { text: 'N2 Kanji', href: '/n2-kanji-list' },
-  { text: 'N1 Kanji', href: '/n1-kanji-list' },
-  { text: 'N5 Vocabulary', href: '/n5-vocabulary' },
+  { text: 'Passing the JLPT', href: '/passing-the-jlpt' },
+  { text: 'Pricing', href: '/pricing' },
+  { text: 'Resources', href: '/resources' },
 ];
 
 export default function PublicNavbar() {
@@ -92,28 +89,30 @@ export default function PublicNavbar() {
         <NavContent maxWidth="xl">
           <Link href="/" passHref style={{ textDecoration: 'none' }}>
             <Logo>
-              <Image 
-                src="/logo.png" 
-                alt="JLPT Professor Logo" 
-                width={36} 
-                height={36}
-              />
-              <LogoText>JLPT Professor</LogoText>
+              <School sx={{ fontSize: 32, color: '#7c4dff' }} />
+              <LogoText sx={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <Box component="span" sx={{ fontWeight: 900 }}>JLPT</Box>
+                <Box component="span" sx={{ fontWeight: 400 }}>Professor</Box>
+              </LogoText>
             </Logo>
           </Link>
 
           <NavLinks direction="row" spacing={2}>
             {navItems.map((item) => (
               <Link 
-                key={item.href} 
+                key={item.href}
                 href={item.href}
                 style={{ textDecoration: 'none' }}
               >
                 <Button
                   sx={{ 
-                    color: pathname === item.href ? 'primary.main' : 'text.primary',
+                    color: '#475569',
+                    textTransform: 'none',
+                    fontWeight: 600,
+                    fontSize: '1rem',
                     '&:hover': {
-                      color: 'primary.main',
+                      color: '#7c4dff',
+                      backgroundColor: 'transparent'
                     }
                   }}
                 >
@@ -123,16 +122,34 @@ export default function PublicNavbar() {
             ))}
             <Link href="/login" style={{ textDecoration: 'none' }}>
               <Button
-                variant="contained"
-                color="primary"
                 sx={{
-                  px: 3,
-                  borderRadius: 2,
+                  color: '#7c4dff',
                   textTransform: 'none',
                   fontWeight: 600,
+                  fontSize: '1rem',
+                  '&:hover': {
+                    backgroundColor: 'rgba(124, 77, 255, 0.04)'
+                  }
                 }}
               >
-                Sign In
+                Login
+              </Button>
+            </Link>
+            <Link href="/signup" style={{ textDecoration: 'none' }}>
+              <Button
+                variant="contained"
+                sx={{
+                  bgcolor: '#7c4dff',
+                  color: '#ffffff',
+                  textTransform: 'none',
+                  fontWeight: 600,
+                  fontSize: '1rem',
+                  '&:hover': {
+                    bgcolor: '#6c3fff'
+                  }
+                }}
+              >
+                Sign Up
               </Button>
             </Link>
           </NavLinks>

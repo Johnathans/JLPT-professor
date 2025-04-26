@@ -1,178 +1,104 @@
-'use client';
-
+import { Box, Container, Grid, Link as MuiLink, Typography } from '@mui/material';
 import Link from 'next/link';
-import Image from 'next/image';
-import { Box, Container, Grid, Typography, Stack } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { School } from '@mui/icons-material';
 
-const FooterWrapper = styled(Box)(({ theme }) => ({
-  backgroundColor: '#fff',
-  borderTop: '1px solid rgba(124, 77, 255, 0.08)',
-  paddingTop: theme.spacing(6),
-  paddingBottom: theme.spacing(6),
-  [theme.breakpoints.down('sm')]: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  }
-}));
-
-const FooterLink = styled(Link)(({ theme }) => ({
-  color: theme.palette.text.secondary,
-  textDecoration: 'none',
-  '&:hover': {
-    color: theme.palette.primary.main,
-  }
-}));
-
-const sections = [
+const footerLinks = [
   {
     title: 'Study',
-    links: [
+    items: [
       { text: 'N5 Kanji', href: '/n5-kanji-list' },
       { text: 'N4 Kanji', href: '/n4-kanji-list' },
-      { text: 'N3 Kanji', href: '/n3-kanji-list' },
-      { text: 'N2 Kanji', href: '/n2-kanji-list' },
-      { text: 'N1 Kanji', href: '/n1-kanji-list' },
-    ]
-  },
-  {
-    title: 'Resources',
-    links: [
       { text: 'N5 Vocabulary', href: '/n5-vocabulary' },
-      { text: 'N5 Verbs', href: '/n5-verbs' },
-      { text: 'N5 Nouns', href: '/n5-nouns' },
-      { text: 'N5 Adjectives', href: '/n5-adjectives' },
-    ]
+      { text: 'Practice Tests', href: '/practice-test' },
+    ],
   },
   {
-    title: 'Practice',
-    links: [
-      { text: 'N5 Stories', href: '/n5-stories' },
-      { text: 'N5 Listening', href: '/n5-listening' },
-      { text: 'Study Guide', href: '/study-guide' },
-    ]
+    title: 'Account',
+    items: [
+      { text: 'Login', href: '/login' },
+      { text: 'Sign Up', href: '/signup' },
+    ],
   },
 ];
 
 export default function PublicFooter() {
   return (
-    <FooterWrapper>
+    <Box
+      component="footer"
+      sx={{
+        py: 6,
+        px: 2,
+        mt: 'auto',
+        backgroundColor: '#ffffff',
+        borderTop: '1px solid',
+        borderColor: 'rgba(124, 77, 255, 0.08)',
+      }}
+    >
       <Container maxWidth="xl">
         <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
-            <Stack spacing={2}>
+            <Box sx={{ mb: 3 }}>
               <Link href="/" style={{ textDecoration: 'none' }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-                  <Image 
-                    src="/logo.png" 
-                    alt="JLPT Professor Logo" 
-                    width={40} 
-                    height={40}
-                  />
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <School sx={{ fontSize: 40, color: '#7c4dff' }} />
                   <Typography 
                     variant="h6" 
                     sx={{ 
-                      fontWeight: 700,
-                      color: 'primary.main'
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      color: '#000000'
                     }}
                   >
-                    JLPT Professor
+                    <Box component="span" sx={{ fontWeight: 900, fontSize: 24 }}>JLPT</Box>
+                    <Box component="span" sx={{ fontWeight: 400, fontSize: 18 }}>Professor</Box>
                   </Typography>
                 </Box>
               </Link>
               <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 300 }}>
-                Your comprehensive guide to mastering Japanese language for JLPT success.
-                Study kanji, vocabulary, and grammar with our structured learning system.
+                Your comprehensive study companion for JLPT success. Practice kanji, vocabulary, and track your progress.
               </Typography>
-            </Stack>
+            </Box>
           </Grid>
-
-          {sections.map((section) => (
-            <Grid item xs={6} sm={4} md={2} key={section.title}>
+          {footerLinks.map((section) => (
+            <Grid item xs={6} md={2} key={section.title}>
               <Typography
-                variant="subtitle2"
-                sx={{
-                  fontWeight: 600,
-                  color: 'text.primary',
-                  mb: 2
-                }}
+                variant="subtitle1"
+                sx={{ fontWeight: 600, mb: 2, color: '#1e293b' }}
               >
                 {section.title}
               </Typography>
-              <Stack spacing={1.5}>
-                {section.links.map((link) => (
-                  <FooterLink key={link.href} href={link.href}>
-                    <Typography variant="body2">
-                      {link.text}
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                {section.items.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: '#64748b',
+                        '&:hover': { color: '#7c4dff' }
+                      }}
+                    >
+                      {item.text}
                     </Typography>
-                  </FooterLink>
+                  </Link>
                 ))}
-              </Stack>
+              </Box>
             </Grid>
           ))}
-
-          <Grid item xs={6} sm={4} md={2}>
-            <Typography
-              variant="subtitle2"
-              sx={{
-                fontWeight: 600,
-                color: 'text.primary',
-                mb: 2
-              }}
-            >
-              Account
-            </Typography>
-            <Stack spacing={1.5}>
-              <FooterLink href="/login">
-                <Typography variant="body2">
-                  Sign In
-                </Typography>
-              </FooterLink>
-              <FooterLink href="/signup">
-                <Typography variant="body2">
-                  Sign Up
-                </Typography>
-              </FooterLink>
-            </Stack>
-          </Grid>
         </Grid>
-
-        <Box 
-          sx={{ 
-            mt: { xs: 4, md: 8 },
-            pt: 3, 
-            borderTop: '1px solid',
-            borderColor: 'divider',
-            display: 'flex',
-            flexDirection: { xs: 'column', sm: 'row' },
-            alignItems: { xs: 'center', sm: 'flex-start' },
-            justifyContent: 'space-between',
-            gap: 2,
-          }}
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          align="center"
+          sx={{ mt: 8 }}
         >
-          <Typography variant="body2" color="text.secondary">
-            © {new Date().getFullYear()} JLPT Professor. All rights reserved.
-          </Typography>
-          <Stack 
-            direction="row" 
-            spacing={3}
-            sx={{
-              textAlign: { xs: 'center', sm: 'left' }
-            }}
-          >
-            <FooterLink href="/privacy">
-              <Typography variant="body2">
-                Privacy Policy
-              </Typography>
-            </FooterLink>
-            <FooterLink href="/terms">
-              <Typography variant="body2">
-                Terms of Service
-              </Typography>
-            </FooterLink>
-          </Stack>
-        </Box>
+          &copy; {new Date().getFullYear()} JLPT Professor. All rights reserved.
+        </Typography>
       </Container>
-    </FooterWrapper>
+    </Box>
   );
 }
