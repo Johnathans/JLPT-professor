@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Typography, Avatar, IconButton, Tabs, Tab, Grid } from '@mui/material';
+import { Box, Typography, Avatar, IconButton, Tabs, Tab, Grid, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/navigation';
 import { useJlptLevel } from '@/contexts/JlptLevelContext';
@@ -17,6 +17,7 @@ import Help from '@mui/icons-material/Help';
 import Star from '@mui/icons-material/Star';
 import Lock from '@mui/icons-material/Lock';
 import Notifications from '@mui/icons-material/Notifications';
+import PlayArrow from '@mui/icons-material/PlayArrow';
 
 // Styled Components
 const AppContainer = styled('div')({
@@ -193,6 +194,98 @@ const BottomNav = styled('div')(({ theme }) => ({
   }
 }));
 
+const SessionCard = styled(Box)(({ theme }) => ({
+  background: '#fff',
+  borderRadius: 12,
+  padding: 24,
+  marginBottom: 24,
+  border: '1px solid rgba(0,0,0,0.08)',
+}));
+
+const ExerciseItem = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  padding: '12px 16px',
+  borderRadius: 8,
+  backgroundColor: 'rgba(124, 77, 255, 0.04)',
+  marginBottom: 8,
+  '&:last-child': {
+    marginBottom: 0
+  }
+}));
+
+const StartButton = styled(Button)(({ theme }) => ({
+  backgroundColor: '#7c4dff',
+  color: '#fff',
+  padding: '10px 24px',
+  borderRadius: 8,
+  textTransform: 'none',
+  fontWeight: 600,
+  '&:hover': {
+    backgroundColor: '#6b42e0',
+  },
+}));
+
+const ExerciseIcon = styled(Box)(({ theme }) => ({
+  width: 40,
+  height: 40,
+  borderRadius: 8,
+  backgroundColor: '#fff',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginRight: 16,
+  fontSize: '1.25rem',
+  fontFamily: '"Noto Sans JP", sans-serif',
+  color: '#7c4dff',
+  border: '1px solid rgba(124, 77, 255, 0.2)',
+}));
+
+const StatsCard = styled(Box)(({ theme }) => ({
+  background: '#fff',
+  borderRadius: 12,
+  padding: 24,
+  border: '1px solid rgba(0,0,0,0.08)',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 16
+}));
+
+const StatItem = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  padding: '12px 16px',
+  borderRadius: 8,
+  backgroundColor: 'rgba(124, 77, 255, 0.04)',
+  transition: 'transform 0.2s ease',
+  '&:hover': {
+    transform: 'translateY(-2px)'
+  }
+}));
+
+const ReviewsCard = styled(Box)(({ theme }) => ({
+  background: '#fff',
+  borderRadius: 12,
+  padding: 24,
+  border: '1px solid rgba(0,0,0,0.08)',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 16
+}));
+
+const ReviewItem = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  padding: '12px 16px',
+  borderRadius: 8,
+  backgroundColor: theme.palette.background.default,
+  '&:hover': {
+    backgroundColor: 'rgba(124, 77, 255, 0.04)'
+  }
+}));
+
 const navItems = [
   { icon: <Home />, label: 'Dashboard', path: '/', active: true },
   { icon: <MenuBook />, label: 'Study Guide', path: '/study-guide' },
@@ -232,6 +325,26 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('kanji');
   const pathname = '/';
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const formatDate = (date: Date): string => {
+    return date.toLocaleDateString('en-US', { 
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  const today = new Date();
+
+  // Mock SRS data - this would come from your backend
+  const srsStats = {
+    new: 15,
+    learning: 42,
+    mastered: 128,
+    dueNow: 8,
+    dueLater: 12,
+    dueTomorrow: 25
+  };
 
   return (
     <AppContainer>
@@ -310,6 +423,7 @@ export default function Dashboard() {
           >
             <Notifications sx={{ color: '#7c4dff' }} />
           </IconButton>
+
           {/* Welcome Message */}
           <Box sx={{ mb: { xs: 2, sm: 3 } }}>
             <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 1 }}>
@@ -348,6 +462,7 @@ export default function Dashboard() {
               minWidth: 0
             }
           }}>
+            {/* Progress Overview - Left Column */}
             <Box sx={{
               width: { xs: '100%', md: '50%' },
               height: { md: '100%' }
@@ -401,6 +516,7 @@ export default function Dashboard() {
                     borderRadius: '0 8px 8px 0'
                   }} />
                 </Box>
+
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                   <Typography sx={{ fontSize: '0.875rem', fontWeight: 600, color: '#1A1D1E' }}>
                     Overall Progress
@@ -458,6 +574,7 @@ export default function Dashboard() {
               </ProgressSection>
             </Box>
 
+            {/* Today's Study Goals - Right Column */}
             <Box sx={{
               flex: 1,
               width: { xs: '100%', md: '50%' },
@@ -596,130 +713,184 @@ export default function Dashboard() {
             </Box>
           </Box>
 
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="h6" sx={{ mb: 2 }}>Study Materials</Typography>
-            <Box sx={{ 
-              display: 'grid', 
-              gridTemplateColumns: { 
-                xs: '1fr',
-                sm: 'repeat(2, 1fr)',
-                md: 'repeat(4, 1fr)'
-              }, 
-              gap: 3,
-              width: '100%'
-            }}>
-              <StudyCard>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-                  <Box sx={{ 
-                    fontSize: '1.5rem',
-                    width: 48,
-                    height: 48,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    background: 'rgba(124, 77, 255, 0.08)',
-                    borderRadius: 8
-                  }}>
-                    力
-                  </Box>
-                  <Box>
-                    <Typography sx={{ fontWeight: 600, mb: 0.5 }}>
-                      Kanji Study
-                    </Typography>
-                    <Typography sx={{ 
-                      fontSize: '0.875rem',
-                      color: '#6F767E'
-                    }}>
-                      Master {level} kanji characters
-                    </Typography>
-                  </Box>
+          {/* Study Session Section - Below Both Columns */}
+          <Box sx={{ 
+            display: 'grid', 
+            gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, 
+            gap: 3, 
+            mt: 3 
+          }}>
+            <SessionCard>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
+                <Box>
+                  <Typography variant="h6" sx={{ fontWeight: 600, color: '#1a1a1a', mb: 1 }}>
+                    Current Study Session
+                  </Typography>
+                  <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
+                    Continue where you left off
+                  </Typography>
                 </Box>
-              </StudyCard>
+                <IconButton
+                  sx={{
+                    bgcolor: '#7c4dff',
+                    color: '#fff',
+                    '&:hover': {
+                      bgcolor: '#6b42e0'
+                    }
+                  }}
+                >
+                  <PlayArrow />
+                </IconButton>
+              </Box>
 
-              <StudyCard>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-                  <Box sx={{ 
-                    fontSize: '1.5rem',
-                    width: 48,
-                    height: 48,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    background: 'rgba(124, 77, 255, 0.08)',
-                    borderRadius: 8
-                  }}>
-                    語
-                  </Box>
-                  <Box>
-                    <Typography sx={{ fontWeight: 600, mb: 0.5 }}>
-                      Vocabulary
-                    </Typography>
-                    <Typography sx={{ 
-                      fontSize: '0.875rem',
-                      color: '#6F767E'
+              <Box sx={{ mb: 3 }}>
+                <ExerciseItem>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box sx={{ 
+                      width: 40,
+                      height: 40,
+                      borderRadius: 2,
+                      bgcolor: 'rgba(124, 77, 255, 0.08)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
                     }}>
-                      Essential {level} vocabulary
-                    </Typography>
+                      <MenuBook sx={{ color: '#7c4dff' }} />
+                    </Box>
+                    <Box>
+                      <Typography sx={{ fontWeight: 500 }}>Vocabulary Practice</Typography>
+                      <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
+                        15 words remaining
+                      </Typography>
+                    </Box>
                   </Box>
-                </Box>
-              </StudyCard>
+                  <Typography sx={{ 
+                    color: '#7c4dff',
+                    fontSize: '0.875rem',
+                    fontWeight: 500
+                  }}>
+                    60%
+                  </Typography>
+                </ExerciseItem>
+              </Box>
 
-              <StudyCard>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-                  <Box sx={{ 
-                    fontSize: '1.5rem',
-                    width: 48,
-                    height: 48,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    background: 'rgba(124, 77, 255, 0.08)',
-                    borderRadius: 8
-                  }}>
-                    文
-                  </Box>
-                  <Box>
-                    <Typography sx={{ fontWeight: 600, mb: 0.5 }}>
-                      Grammar
-                    </Typography>
-                    <Typography sx={{ 
-                      fontSize: '0.875rem',
-                      color: '#6F767E'
-                    }}>
-                      {level} grammar patterns
-                    </Typography>
-                  </Box>
+              <Box>
+                <Typography sx={{ fontWeight: 500, mb: 2 }}>Up Next</Typography>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  <ExerciseItem>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                      <Box sx={{ 
+                        width: 40,
+                        height: 40,
+                        borderRadius: 2,
+                        bgcolor: 'rgba(255, 145, 0, 0.08)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}>
+                        <Assignment sx={{ color: '#ff9100' }} />
+                      </Box>
+                      <Box>
+                        <Typography sx={{ fontWeight: 500 }}>Kanji Writing</Typography>
+                        <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
+                          Practice stroke order
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </ExerciseItem>
+                  <ExerciseItem>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                      <Box sx={{ 
+                        width: 40,
+                        height: 40,
+                        borderRadius: 2,
+                        bgcolor: 'rgba(0, 191, 165, 0.08)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}>
+                        <School sx={{ color: '#00bfa5' }} />
+                      </Box>
+                      <Box>
+                        <Typography sx={{ fontWeight: 500 }}>Grammar Points</Typography>
+                        <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
+                          Learn new patterns
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </ExerciseItem>
                 </Box>
-              </StudyCard>
+              </Box>
+            </SessionCard>
 
-              <StudyCard>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-                  <Box sx={{ 
-                    fontSize: '1.5rem',
-                    width: 48,
-                    height: 48,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    background: 'rgba(124, 77, 255, 0.08)',
-                    borderRadius: 8
-                  }}>
-                    聴
-                  </Box>
-                  <Box>
-                    <Typography sx={{ fontWeight: 600, mb: 0.5 }}>
-                      Listening
-                    </Typography>
-                    <Typography sx={{ 
-                      fontSize: '0.875rem',
-                      color: '#6F767E'
-                    }}>
-                      {level} listening practice
-                    </Typography>
-                  </Box>
+            <SessionCard>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
+                <Box>
+                  <Typography variant="h6" sx={{ fontWeight: 600, color: '#1a1a1a', mb: 1 }}>
+                    Practice Test
+                  </Typography>
+                  <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
+                    Test your knowledge
+                  </Typography>
                 </Box>
-              </StudyCard>
-            </Box>
+                <IconButton
+                  sx={{
+                    bgcolor: '#7c4dff',
+                    color: '#fff',
+                    '&:hover': {
+                      bgcolor: '#6b42e0'
+                    }
+                  }}
+                >
+                  <Quiz />
+                </IconButton>
+              </Box>
+
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <ExerciseItem>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box sx={{ 
+                      width: 40,
+                      height: 40,
+                      borderRadius: 2,
+                      bgcolor: 'rgba(124, 77, 255, 0.08)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      <Star sx={{ color: '#7c4dff' }} />
+                    </Box>
+                    <Box>
+                      <Typography sx={{ fontWeight: 500 }}>Vocabulary Quiz</Typography>
+                      <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
+                        20 questions • 15 minutes
+                      </Typography>
+                    </Box>
+                  </Box>
+                </ExerciseItem>
+                <ExerciseItem>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box sx={{ 
+                      width: 40,
+                      height: 40,
+                      borderRadius: 2,
+                      bgcolor: 'rgba(124, 77, 255, 0.08)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      <Lock sx={{ color: '#7c4dff' }} />
+                    </Box>
+                    <Box>
+                      <Typography sx={{ fontWeight: 500 }}>Grammar Quiz</Typography>
+                      <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
+                        Complete 3 lessons to unlock
+                      </Typography>
+                    </Box>
+                  </Box>
+                </ExerciseItem>
+              </Box>
+            </SessionCard>
           </Box>
 
           <BottomNav>

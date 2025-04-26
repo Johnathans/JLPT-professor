@@ -2,30 +2,39 @@ import { Word } from '@/types/vocabulary';
 
 export const n5VocabularyCombined: Word[] = [
   {
-    word: '私',
-    reading: 'わたし',
+    kanji: '私',
+    kana: 'わたし',
     meaning: 'I, me',
     level: 'N5',
-    sentence: '私は学生です。',
-    sentenceReading: 'わたしはがくせいです。',
-    sentenceMeaning: 'I am a student.'
+    type: 'vocabulary',
+    examples: [{
+      japanese: '私は学生です。',
+      reading: 'わたしはがくせいです。',
+      meaning: 'I am a student.'
+    }]
   },
   {
-    word: '今日',
-    reading: 'きょう',
+    kanji: '今日',
+    kana: 'きょう',
     meaning: 'today',
     level: 'N5',
-    sentence: '今日は晴れです。',
-    sentenceReading: 'きょうははれです。',
-    sentenceMeaning: 'Today is sunny.'
+    type: 'vocabulary',
+    examples: [{
+      japanese: '今日は晴れです。',
+      reading: 'きょうははれです。',
+      meaning: 'Today is sunny.'
+    }]
   },
   {
-    word: '学校',
-    reading: 'がっこう',
+    kanji: '学校',
+    kana: 'がっこう',
     meaning: 'school',
     level: 'N5',
-    sentence: '学校に行きます。',
-    sentenceReading: 'がっこうにいきます。',
-    sentenceMeaning: 'I go to school.'
+    type: 'vocabulary',
+    examples: [{
+      japanese: '学校に行きます。',
+      reading: 'がっこうにいきます。',
+      meaning: 'I go to school.'
+    }]
   }
 ];

@@ -15,7 +15,7 @@ export default function N5VocabularyPage() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const filteredWords = n5VocabularyCombined.filter(word => 
-    word.romaji.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (word.romaji?.toLowerCase().includes(searchQuery.toLowerCase()) ?? false) ||
     word.kana.includes(searchQuery) ||
     word.meaning.toLowerCase().includes(searchQuery.toLowerCase())
   );

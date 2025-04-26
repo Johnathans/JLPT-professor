@@ -1,5 +1,6 @@
 // Google Cloud Text-to-Speech API wrapper
 import { TextToSpeechClient } from '@google-cloud/text-to-speech';
+import { openDB } from 'idb';
 
 let ttsClient: TextToSpeechClient | null = null;
 
@@ -20,16 +21,17 @@ export const synthesizeSpeech = async (
     const request = {
       input: { text },
       voice: { languageCode, name: voiceName },
-      audioConfig: { audioEncoding: 'MP3' },
+      audioConfig: { audioEncoding: 'MP3' as const },
     };
 
-    const [response] = await client.synthesizeSpeech(request);
-    if (!response.audioContent) {
+    const response = await client.synthesizeSpeech(request);
+    const audioContent = response[0].audioContent;
+    if (!audioContent || !(audioContent instanceof Uint8Array)) {
       throw new Error('No audio content received');
     }
 
     // Convert to base64 for web audio
-    const audioBase64 = Buffer.from(response.audioContent).toString('base64');
+    const audioBase64 = Buffer.from(audioContent.buffer).toString('base64');
     return `data:audio/mp3;base64,${audioBase64}`;
   } catch (error) {
     console.error('Error synthesizing speech:', error);

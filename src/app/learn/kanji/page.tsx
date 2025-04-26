@@ -185,25 +185,33 @@ const DifficultyButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function KanjiPage() {
-  const router = useRouter();
   const { level } = useJlptLevel();
+  const router = useRouter();
+  const [studyMode, setStudyMode] = useState<StudyMode>('flashcard');
   const [currentKanji, setCurrentKanji] = useState<ExtendedKanjiData | null>(null);
   const [isFlipped, setIsFlipped] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [studyMode, setStudyMode] = useState<StudyMode>('flashcard');
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
   const [progress, setProgress] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     // Load initial kanji
-    const kanjiList = level === 'N5' ? N5_KANJI :
-                     level === 'N4' ? N4_KANJI :
-                     level === 'N3' ? N3_KANJI :
-                     level === 'N2' ? N2_KANJI : N1_KANJI;
-    
-    const randomKanji = kanjiList[Math.floor(Math.random() * kanjiList.length)];
+    const kanjiSet = {
+      'N5': N5_KANJI,
+      'N4': N4_KANJI,
+      'N3': N3_KANJI,
+      'N2': N2_KANJI,
+      'N1': N1_KANJI
+    }[level];
+
+    const randomKanji = kanjiSet[Math.floor(Math.random() * kanjiSet.length)];
     setCurrentKanji(convertToExtendedKanjiData(randomKanji));
   }, [level]);
+
+  const handleFilterChange = (filter: 'all' | 'known' | 'due') => {
+    // This will be implemented when we add the filtering logic
+    console.log('Filter changed to:', filter);
+  };
 
   const handleClose = () => {
     router.push('/dashboard');
@@ -323,46 +331,129 @@ export default function KanjiPage() {
             flexDirection: 'column',
             alignItems: 'center',
             height: '100%',
-            overflow: 'auto'
+            overflow: 'auto',
+            width: '100%'
           }}>
-            <Typography variant="h3" sx={{ mb: 4, color: '#7c4dff', fontWeight: 600 }}>
-              {currentKanji.meaning}
-            </Typography>
-            {currentKanji.compounds.filter(c => c.correct).map((compound, i) => (
-              <Box
-                key={i}
+            <Box sx={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: 2, 
+              mb: 3,
+              width: '100%'
+            }}>
+              <Typography variant="h3" sx={{ 
+                color: '#7c4dff', 
+                fontWeight: 600,
+                flex: 1
+              }}>
+                {currentKanji.meaning}
+              </Typography>
+              <Typography
                 sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  width: '100%',
-                  p: 2,
-                  borderBottom: '1px solid #e2e8f0',
-                  '&:last-child': {
-                    borderBottom: 'none'
-                  }
+                  px: 1.5,
+                  py: 0.5,
+                  bgcolor: '#e8e3ff',
+                  color: '#7c4dff',
+                  borderRadius: 1,
+                  fontSize: '0.875rem',
+                  fontWeight: 500
                 }}
               >
-                <Box>
-                  <Typography sx={{ fontWeight: 600, fontSize: '1.25rem' }}>
-                    {compound.word}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {compound.reading} - {compound.meaning}
-                  </Typography>
-                </Box>
-                <IconButton
-                  size="small"
-                  sx={{ color: '#7c4dff' }}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    // Handle audio
+                {level}
+              </Typography>
+            </Box>
+
+            <Box sx={{ 
+              display: 'flex', 
+              gap: 3, 
+              mb: 4,
+              width: '100%'
+            }}>
+              <Box>
+                <Typography sx={{ 
+                  color: '#666', 
+                  fontSize: '0.875rem', 
+                  mb: 1,
+                  fontWeight: 500
+                }}>
+                  Reading
+                </Typography>
+                <Typography sx={{ 
+                  fontFamily: '"Noto Sans JP", sans-serif',
+                  fontSize: '1.25rem'
+                }}>
+                  {currentKanji.reading}
+                </Typography>
+              </Box>
+            </Box>
+
+            <Typography sx={{ 
+              color: '#666', 
+              fontSize: '0.875rem', 
+              mb: 2,
+              fontWeight: 500,
+              alignSelf: 'flex-start'
+            }}>
+              Common Compounds
+            </Typography>
+            <Box sx={{ width: '100%' }}>
+              {currentKanji.compounds.filter(c => c.correct).map((compound, i) => (
+                <Box
+                  key={i}
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    width: '100%',
+                    p: 2,
+                    borderBottom: '1px solid #e2e8f0',
+                    '&:last-child': {
+                      borderBottom: 'none'
+                    }
                   }}
                 >
-                  <VolumeUp />
-                </IconButton>
-              </Box>
-            ))}
+                  <Box sx={{ flex: 1 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
+                      <Typography sx={{ 
+                        fontFamily: '"Noto Sans JP", sans-serif',
+                        fontSize: '1.25rem',
+                        fontWeight: 500
+                      }}>
+                        {compound.word}
+                      </Typography>
+                      <Typography sx={{ 
+                        fontFamily: '"Noto Sans JP", sans-serif',
+                        fontSize: '0.875rem',
+                        color: '#666'
+                      }}>
+                        {compound.reading}
+                      </Typography>
+                    </Box>
+                    <Typography sx={{ 
+                      fontSize: '0.875rem',
+                      color: '#666'
+                    }}>
+                      {compound.meaning}
+                    </Typography>
+                  </Box>
+                  <IconButton
+                    size="small"
+                    sx={{ 
+                      color: '#7c4dff',
+                      ml: 1
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // Handle audio
+                      const utterance = new SpeechSynthesisUtterance(compound.word);
+                      utterance.lang = 'ja-JP';
+                      window.speechSynthesis.speak(utterance);
+                    }}
+                  >
+                    <VolumeUp />
+                  </IconButton>
+                </Box>
+              ))}
+            </Box>
           </Box>
         )}
       </KanjiCard>

@@ -4,6 +4,14 @@ export interface ExampleSentence {
   english: string;
 }
 
+export interface Example {
+  japanese: string;
+  reading?: string;
+  romaji?: string;
+  english?: string;
+  meaning?: string;
+}
+
 export interface KanjiInfo {
   kanji: string;
   meaning: string;
@@ -29,12 +37,14 @@ export interface KanjiData {
 
 export interface Word {
   id?: string;
+  word?: string;
   romaji?: string;
   kana: string;
   kanji?: string;
   meaning: string;
   type: string;
-  examples?: ExampleSentence[];
+  partOfSpeech?: string;
+  examples?: Example[];
   kanjiInfo?: KanjiInfo[];
   notes?: string[];
   antonyms?: string[];

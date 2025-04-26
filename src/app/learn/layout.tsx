@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, CircularProgress, Typography, styled, LinearProgress, Tabs, Tab, Button, Select, MenuItem, SelectChangeEvent } from '@mui/material';
+import { Box, CircularProgress, Typography, styled, LinearProgress, Tabs, Tab, Button, Select, MenuItem, SelectChangeEvent, ButtonGroup } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { ArrowBack } from '@mui/icons-material';
@@ -59,7 +59,7 @@ const NavigationSection = styled(Box)({
   gap: '8px'
 });
 
-const StyledSelect = styled(Select<StudyMode>)(({ theme }) => ({
+const StyledSelect = styled(Select)(({ theme }) => ({
   backgroundColor: '#fff',
   '& .MuiSelect-select': {
     padding: theme.spacing(1, 2),
@@ -110,18 +110,20 @@ const SrsBar = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   gap: theme.spacing(1.5),
-  marginBottom: theme.spacing(1)
+  marginBottom: theme.spacing(2)
 }));
 
 const SrsLabel = styled(Typography)({
-  fontSize: '0.75rem',
-  color: '#666',
-  width: '32px'
+  fontSize: '0.875rem',
+  color: '#1f2937',
+  fontWeight: 500,
+  width: '60px'
 });
 
 const SrsCount = styled(Typography)({
-  fontSize: '0.75rem',
-  color: '#666',
+  fontSize: '0.875rem',
+  color: '#1f2937',
+  fontWeight: 500,
   marginLeft: 'auto'
 });
 
@@ -139,6 +141,27 @@ const TimeDisplay = styled(Typography)({
   marginTop: '8px'
 });
 
+const LevelButton = styled(Button)(({ theme }) => ({
+  padding: '6px 12px',
+  minWidth: '48px',
+  fontSize: '0.875rem',
+  color: '#666',
+  backgroundColor: '#fff',
+  border: '1px solid #e2e8f0',
+  '&:hover': {
+    backgroundColor: '#f8fafc',
+    borderColor: '#7c4dff',
+  },
+  '&.active': {
+    backgroundColor: '#7c4dff',
+    color: '#fff',
+    borderColor: '#7c4dff',
+    '&:hover': {
+      backgroundColor: '#6b3fff',
+    }
+  }
+}));
+
 function SidebarComponent({ 
   confidence = 0,
   srsStats = {
@@ -149,187 +172,113 @@ function SidebarComponent({
     suspended: 0
   }
 }) {
-  const [tabValue, setTabValue] = useState(0);
-  const [mode, setMode] = useState<StudyMode>('flashcard');
+  const [level, setLevel] = useState<'N5' | 'N4' | 'N3' | 'N2' | 'N1'>('N5');
   const router = useRouter();
 
-  const handleModeChange = (event: SelectChangeEvent<StudyMode>) => {
-    setMode(event.target.value as StudyMode);
-  };
-
   return (
-    <>
-      <MobileHeader>
+    <Sidebar>
+      <NavigationSection>
         <Button
           startIcon={<ArrowBack />}
           onClick={() => router.push('/dashboard')}
           sx={{ 
             color: '#7c4dff',
             minWidth: 'auto',
-            p: 1
+            p: 1,
+            mb: 2
           }}
         >
-          <Typography 
-            sx={{ 
-              display: { xs: 'none', sm: 'block' }
-            }}
-          >
-            Dashboard
-          </Typography>
+          Dashboard
         </Button>
-        <StyledSelect
-          value={mode}
-          onChange={handleModeChange}
-          size="small"
-          sx={{ flexGrow: 1, maxWidth: 200 }}
-        >
-          <MenuItem value="flashcard">Flashcards</MenuItem>
-          <MenuItem value="writing">Writing Practice</MenuItem>
-          <MenuItem value="match">Matching Game</MenuItem>
-        </StyledSelect>
-      </MobileHeader>
 
-      <Sidebar>
-        <NavigationSection>
-          <Button
-            startIcon={<ArrowBack />}
-            onClick={() => router.push('/dashboard')}
-            sx={{
-              color: '#7c4dff',
-              justifyContent: 'flex-start',
-              px: 2
-            }}
-          >
-            Back to Dashboard
-          </Button>
-          <StyledSelect
-            value={mode}
-            onChange={handleModeChange}
-            fullWidth
-            size="small"
-          >
-            <MenuItem value="flashcard">Flashcards</MenuItem>
-            <MenuItem value="writing">Writing Practice</MenuItem>
-            <MenuItem value="match">Matching Game</MenuItem>
-          </StyledSelect>
-        </NavigationSection>
-
-        <StyledTabs 
-          value={tabValue} 
-          onChange={(e, newValue) => setTabValue(newValue)}
-          variant="fullWidth"
-        >
-          <StyledTab label="This Round" />
-          <StyledTab label="Overall" />
-        </StyledTabs>
-
-        <MasterySection>
-          <Box sx={{ position: 'relative', width: 80, height: 80 }}>
-            <CircularProgress
-              variant="determinate"
-              value={100}
-              size={80}
-              thickness={4}
-              sx={{
-                color: '#e8e3ff',
-                position: 'absolute',
-                top: 0,
-                left: 0
-              }}
-            />
-            <CircularProgress
-              variant="determinate"
-              value={confidence}
-              size={80}
-              thickness={4}
-              sx={{
-                color: '#7c4dff',
-                position: 'absolute',
-                top: 0,
-                left: 0
-              }}
-            />
-            <Typography
-              variant="caption"
-              sx={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                color: '#7c4dff',
-                fontWeight: 600,
-                fontSize: '1rem'
-              }}
-            >
-              {confidence}%
-            </Typography>
-          </Box>
-          <Typography variant="subtitle2" sx={{ color: '#666', fontWeight: 500 }}>
-            {tabValue === 0 ? 'Round Progress' : 'Overall Mastery'}
+        <Box sx={{ mb: 3 }}>
+          <Typography variant="subtitle2" sx={{ mb: 1, color: '#666', fontWeight: 500 }}>
+            JLPT Level
           </Typography>
-        </MasterySection>
+          <ButtonGroup variant="outlined" fullWidth>
+            {['N5', 'N4', 'N3', 'N2', 'N1'].map((jlptLevel) => (
+              <LevelButton
+                key={jlptLevel}
+                className={level === jlptLevel ? 'active' : ''}
+                onClick={() => setLevel(jlptLevel as 'N5' | 'N4' | 'N3' | 'N2' | 'N1')}
+              >
+                {jlptLevel}
+              </LevelButton>
+            ))}
+          </ButtonGroup>
+        </Box>
+      </NavigationSection>
 
-        <SrsSection>
-          <SectionTitle>SRS Status</SectionTitle>
-          <SrsBar>
-            <SrsLabel>New</SrsLabel>
-            <LinearProgress 
-              variant="determinate" 
-              value={(srsStats.new / 50) * 100} 
-              sx={{ 
-                flexGrow: 1,
-                height: 8,
-                borderRadius: 4,
-                backgroundColor: '#e8e3ff',
-                '& .MuiLinearProgress-bar': {
-                  backgroundColor: '#7c4dff'
-                }
-              }} 
-            />
-            <SrsCount>{srsStats.new}</SrsCount>
-          </SrsBar>
-          <SrsBar>
-            <SrsLabel>学習</SrsLabel>
-            <LinearProgress 
-              variant="determinate" 
-              value={(srsStats.learning / 50) * 100}
-              sx={{ 
-                flexGrow: 1,
-                height: 8,
-                borderRadius: 4,
-                backgroundColor: '#fff3e0',
-                '& .MuiLinearProgress-bar': {
-                  backgroundColor: '#ff9100'
-                }
-              }} 
-            />
-            <SrsCount>{srsStats.learning}</SrsCount>
-          </SrsBar>
-          <SrsBar>
-            <SrsLabel>完了</SrsLabel>
-            <LinearProgress 
-              variant="determinate" 
-              value={(srsStats.graduated / 50) * 100}
-              sx={{ 
-                flexGrow: 1,
-                height: 8,
-                borderRadius: 4,
-                backgroundColor: '#e0f2f1',
-                '& .MuiLinearProgress-bar': {
-                  backgroundColor: '#00bfa5'
-                }
-              }} 
-            />
-            <SrsCount>{srsStats.graduated}</SrsCount>
-          </SrsBar>
-        </SrsSection>
+      <SrsSection>
+        <SectionTitle>SRS Status</SectionTitle>
+        <SrsBar>
+          <SrsLabel>New</SrsLabel>
+          <LinearProgress 
+            variant="determinate" 
+            value={(srsStats.new / 50) * 100} 
+            sx={{ 
+              flexGrow: 1,
+              height: 6,
+              borderRadius: 3,
+              backgroundColor: '#e8e3ff',
+              '& .MuiLinearProgress-bar': {
+                backgroundColor: '#7c4dff'
+              }
+            }} 
+          />
+          <SrsCount>{srsStats.new}</SrsCount>
+        </SrsBar>
+        <SrsBar>
+          <SrsLabel>Learning</SrsLabel>
+          <LinearProgress 
+            variant="determinate" 
+            value={(srsStats.learning / 50) * 100}
+            sx={{ 
+              flexGrow: 1,
+              height: 6,
+              borderRadius: 3,
+              backgroundColor: '#fff3e0',
+              '& .MuiLinearProgress-bar': {
+                backgroundColor: '#ff9100'
+              }
+            }} 
+          />
+          <SrsCount>{srsStats.learning}</SrsCount>
+        </SrsBar>
+        <SrsBar>
+          <SrsLabel>Mastered</SrsLabel>
+          <LinearProgress 
+            variant="determinate" 
+            value={(srsStats.graduated / 50) * 100}
+            sx={{ 
+              flexGrow: 1,
+              height: 6,
+              borderRadius: 3,
+              backgroundColor: '#e0f2f1',
+              '& .MuiLinearProgress-bar': {
+                backgroundColor: '#00bfa5'
+              }
+            }} 
+          />
+          <SrsCount>{srsStats.graduated}</SrsCount>
+        </SrsBar>
+      </SrsSection>
 
-        <ProgressSection>
-          <SectionTitle>Study Time</SectionTitle>
-          <TimeDisplay>1:28</TimeDisplay>
-        </ProgressSection>
-      </Sidebar>
-    </>
+      <Box sx={{ mt: 3 }}>
+        <SectionTitle>Reviews</SectionTitle>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+          <Typography variant="body2" sx={{ color: '#7c4dff', fontWeight: 500 }}>
+            Due now: 15
+          </Typography>
+          <Typography variant="body2" sx={{ color: '#666' }}>
+            Due later today: 8
+          </Typography>
+          <Typography variant="body2" sx={{ color: '#666' }}>
+            Due tomorrow: 23
+          </Typography>
+        </Box>
+      </Box>
+    </Sidebar>
   );
 }
 

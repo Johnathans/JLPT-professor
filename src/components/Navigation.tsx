@@ -159,7 +159,7 @@ const LevelBadge = styled('div')(({ theme }) => ({
   }
 }));
 
-const LevelText = styled('div')({
+const LevelText = styled('div')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: '6px',
@@ -173,8 +173,7 @@ const LevelText = styled('div')({
     '& .jlpt': {
       fontSize: '0.875rem',
       fontWeight: 600,
-      color: theme.palette.text.secondary,
-      letterSpacing: '0.02em'
+      color: theme.palette.text.secondary
     }
   },
   '& .studying': {
@@ -183,7 +182,7 @@ const LevelText = styled('div')({
     fontWeight: 500,
     letterSpacing: '0.02em'
   }
-});
+}));
 
 const ProBadge = styled('span')(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,

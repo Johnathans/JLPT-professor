@@ -2,18 +2,25 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { Box, Typography, Button, Stack, IconButton, Menu, MenuItem, Select, Paper, Grid } from '@mui/material';
-import { VolumeUp, Close, TuneRounded } from '@mui/icons-material';
+import { VolumeUp, VolumeUpOutlined, Close, TuneRounded } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/navigation';
 import { n5VocabularyCombined } from '@/data/n5-vocabulary-combined';
-import type { Word } from '@/types/vocabulary';
+import { Word, Example } from '@/types/vocabulary';
 
 interface GameStats {
   currentRound: number;
   totalRounds: number;
-  matchesFound: number;
-  totalMatches: number;
+  correctAnswers: number;
 }
+
+type StudyMode = 'flashcard' | 'match' | 'writing';
+
+const modeDisplay = {
+  flashcard: 'Flashcards',
+  match: 'Match Game',
+  writing: 'Writing Practice'
+};
 
 interface MatchTileData {
   id: string;
@@ -31,6 +38,14 @@ const StudyContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(1),
   backgroundColor: '#f8fafc',
   position: 'relative'
+}));
+
+const MainContent = styled(Box)(({ theme }) => ({
+  flex: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  padding: theme.spacing(1),
 }));
 
 const Header = styled(Box)(({ theme }) => ({
@@ -278,24 +293,18 @@ type Difficulty = 'forgot' | 'hard' | 'good' | 'easy';
 
 export default function VocabularyPage() {
   const router = useRouter();
-  const [progress, setProgress] = useState(45);
+  const [currentWord, setCurrentWord] = useState<Word | null>(null);
   const [isFlipped, setIsFlipped] = useState(false);
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [studyMode, setStudyMode] = useState<'flashcard' | 'match' | 'custom'>('flashcard');
+  const [progress, setProgress] = useState(0);
+  const [studyMode, setStudyMode] = useState<StudyMode>('flashcard');
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
-  const [matchTiles, setMatchTiles] = useState<MatchTileData[]>([]);
-  const [selectedTile, setSelectedTile] = useState<string | null>(null);
-  const [elapsedTime, setElapsedTime] = useState(0);
-  const [timerActive, setTimerActive] = useState(false);
-  const [wrongMatch, setWrongMatch] = useState<string[]>([]);
-  const [gameStats, setGameStats] = useState<GameStats>({
-    currentRound: 1,
-    totalRounds: 10,
-    matchesFound: 0,
-    totalMatches: 3
-  });
+  const [filter, setFilter] = useState<'all' | 'known' | 'due'>('all');
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  const currentWord: Word = n5VocabularyCombined[currentWordIndex];
+  const handleFilterChange = (newFilter: 'all' | 'known' | 'due') => {
+    setFilter(newFilter);
+    handleMenuClose();
+  };
 
   const handleClose = () => {
     router.push('/dashboard');
@@ -309,160 +318,32 @@ export default function VocabularyPage() {
     setMenuAnchor(null);
   };
 
-  const handleModeSelect = (mode: 'flashcard' | 'match' | 'custom') => {
+  const handleModeSelect = (mode: StudyMode) => {
     setStudyMode(mode);
-    setCurrentWordIndex(0);
-    setProgress(0);
-    setIsFlipped(false);
     handleMenuClose();
   };
 
-  const handleAddDeck = () => {
-    console.log('Add custom deck');
-  };
+  useEffect(() => {
+    // Initialize with a random word
+    const randomWord = n5VocabularyCombined[Math.floor(Math.random() * n5VocabularyCombined.length)];
+    setCurrentWord(randomWord);
+  }, []);
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
   };
 
   const handleDifficulty = (difficulty: Difficulty) => {
-    if (difficulty === 'easy') {
-      setProgress(prev => Math.min(prev + 20, 100));
-    } else if (difficulty === 'good') {
-      setProgress(prev => Math.min(prev + 15, 100));
-    } else if (difficulty === 'hard') {
-      setProgress(prev => Math.min(prev + 10, 100));
+    // Get next random word
+    const randomWord = n5VocabularyCombined[Math.floor(Math.random() * n5VocabularyCombined.length)];
+    setCurrentWord(randomWord);
+    setIsFlipped(false);
+
+    if (difficulty === 'forgot') {
+      setProgress(prev => Math.max(prev - 5, 0));
     } else {
       setProgress(prev => Math.min(prev + 5, 100));
     }
-    setCurrentWordIndex((prev) => (prev + 1) % n5VocabularyCombined.length);
-    setIsFlipped(false);
-  };
-
-  const modeDisplay = {
-    flashcard: 'Flashcard',
-    match: 'Match Game',
-    custom: 'Custom Deck'
-  };
-
-  const startNewRound = () => {
-    const vocabList = n5VocabularyCombined;
-
-    // Get 3 random vocabulary words for the round
-    const matchVocab = [...vocabList]
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 3)
-      .map(v => ({
-        word: v.word,
-        meaning: v.meaning
-      }));
-
-    const tiles: MatchTileData[] = [
-      ...matchVocab.map(v => ({
-        id: `v-${v.word}`,
-        content: v.word,
-        type: 'vocab' as const,
-        matched: false
-      })),
-      ...matchVocab.map(v => ({
-        id: `m-${v.word}`,
-        content: v.meaning,
-        type: 'meaning' as const,
-        matched: false
-      }))
-    ].sort(() => Math.random() - 0.5);
-
-    setMatchTiles(tiles);
-    setSelectedTile(null);
-  };
-
-  useEffect(() => {
-    if (studyMode === 'match') {
-      setGameStats({
-        currentRound: 1,
-        totalRounds: 10,
-        matchesFound: 0,
-        totalMatches: 3
-      });
-      setElapsedTime(0);
-      setTimerActive(true);
-      startNewRound();
-    }
-  }, [studyMode]);
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (timerActive) {
-      interval = setInterval(() => {
-        setElapsedTime(prev => prev + 1);
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [timerActive]);
-
-  const handleTileClick = (tileId: string) => {
-    const clickedTile = matchTiles.find(t => t.id === tileId);
-    if (!clickedTile || clickedTile.matched) return;
-
-    if (!selectedTile) {
-      setSelectedTile(tileId);
-      setWrongMatch([]); // Clear any wrong match state
-    } else {
-      const firstTile = matchTiles.find(t => t.id === selectedTile)!;
-      const secondTile = clickedTile;
-
-      if (firstTile.id.split('-')[1] === secondTile.id.split('-')[1] && firstTile.type !== secondTile.type) {
-        // Match found
-        setMatchTiles(prev => prev.map(tile => 
-          tile.id === firstTile.id || tile.id === secondTile.id
-            ? { ...tile, matched: true }
-            : tile
-        ));
-        
-        setGameStats(prev => {
-          const newMatchesFound = prev.matchesFound + 1;
-          
-          if (newMatchesFound === prev.totalMatches) {
-            if (prev.currentRound === prev.totalRounds) {
-              setTimerActive(false);
-            } else {
-              setTimeout(() => {
-                startNewRound();
-              }, 1000);
-            }
-            
-            return {
-              ...prev,
-              currentRound: prev.currentRound === prev.totalRounds 
-                ? prev.currentRound 
-                : prev.currentRound + 1,
-              matchesFound: 0
-            };
-          }
-          
-          return {
-            ...prev,
-            matchesFound: newMatchesFound
-          };
-        });
-
-        setProgress(prev => Math.min(prev + 5, 100));
-      } else {
-        // Wrong match
-        setWrongMatch([firstTile.id, secondTile.id]);
-        setTimeout(() => {
-          setWrongMatch([]);
-          setSelectedTile(null);
-        }, 1000);
-      }
-      setSelectedTile(null);
-    }
-  };
-
-  const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
   return (
@@ -490,107 +371,193 @@ export default function VocabularyPage() {
                 }
               }}
             >
-              <MenuItem onClick={() => handleModeSelect('flashcard')}>Flashcard</MenuItem>
+              <MenuItem onClick={() => handleFilterChange('all')}>All Words</MenuItem>
+              <MenuItem onClick={() => handleFilterChange('known')}>Known Words</MenuItem>
+              <MenuItem onClick={() => handleFilterChange('due')}>Due for Review</MenuItem>
+              <Box sx={{ height: '1px', bgcolor: '#e2e8f0', my: 1 }} />
+              <MenuItem onClick={() => handleModeSelect('flashcard')}>Flashcards</MenuItem>
               <MenuItem onClick={() => handleModeSelect('match')}>Match Game</MenuItem>
-              <MenuItem onClick={() => handleModeSelect('custom')}>Custom Deck</MenuItem>
+              <MenuItem onClick={() => handleModeSelect('writing')}>Writing Practice</MenuItem>
             </Menu>
           </HeaderControls>
         </Header>
         <ProgressBar value={progress} />
       </Box>
-
-      {studyMode === 'match' ? (
-        <MatchContainer>
-          <GameHeader>
-            <Timer>{formatTime(elapsedTime)}</Timer>
-          </GameHeader>
-          <MatchGrid container spacing={0}>
-            {matchTiles.map((tile) => (
-              <Grid item xs={6} sm={4} key={tile.id}>
-                <MatchTile
-                  onClick={() => handleTileClick(tile.id)}
-                  isSelected={selectedTile === tile.id}
-                  isMatched={tile.matched}
-                  isWrongMatch={wrongMatch.includes(tile.id)}
-                >
-                  <Typography
-                    sx={{
-                      fontSize: tile.type === 'vocab' ? '1.5rem' : '1rem',
-                      fontWeight: 500,
-                      fontFamily: tile.type === 'vocab' ? '"Noto Sans JP", sans-serif' : 'inherit',
-                      textAlign: 'center',
-                      wordBreak: 'break-word',
-                      userSelect: 'none',
-                      WebkitUserSelect: 'none',
-                      MozUserSelect: 'none',
-                      msUserSelect: 'none',
-                    }}
-                  >
-                    {tile.content}
-                  </Typography>
-                </MatchTile>
-              </Grid>
-            ))}
-          </MatchGrid>
-        </MatchContainer>
-      ) : studyMode === 'flashcard' ? (
-        <FlipCard onClick={() => setIsFlipped(!isFlipped)}>
-          {!isFlipped ? (
-            <>
-              <WordText>{currentWord.word}</WordText>
-              <Typography sx={{ 
-                fontSize: '1.5rem', 
-                color: 'text.secondary',
-                mb: 2 
-              }}>
-                {currentWord.reading}
-              </Typography>
-              <AudioButton 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  // Add audio play logic here
-                }}
-              >
-                <VolumeUp />
-              </AudioButton>
-            </>
-          ) : (
+      <FlipCard onClick={() => setIsFlipped(!isFlipped)}>
+        {!isFlipped ? (
+          <>
+            <WordText>{currentWord?.kanji || currentWord?.kana}</WordText>
+            <Typography sx={{ 
+              fontSize: '1.5rem', 
+              color: 'text.secondary',
+              mb: 2 
+            }}>
+              {currentWord?.kana}
+            </Typography>
+            <AudioButton 
+              onClick={(e) => {
+                e.stopPropagation();
+                // Add audio play logic here
+              }}
+            >
+              <VolumeUp />
+            </AudioButton>
+          </>
+        ) : (
+          <Box sx={{ 
+            display: 'flex', 
+            flexDirection: 'column',
+            alignItems: 'center',
+            height: '100%',
+            overflow: 'auto',
+            width: '100%'
+          }}>
             <Box sx={{ 
               display: 'flex', 
-              flexDirection: 'column',
-              alignItems: 'center',
-              height: '100%',
-              overflow: 'auto'
+              alignItems: 'center', 
+              gap: 2, 
+              mb: 3,
+              width: '100%'
             }}>
               <Typography variant="h3" sx={{ 
-                mb: 4, 
                 color: '#7c4dff', 
-                fontWeight: 600 
+                fontWeight: 600,
+                flex: 1
               }}>
-                {currentWord.meaning}
+                {currentWord?.meaning}
               </Typography>
-              {/* Add example sentences here if needed */}
+              <Typography
+                sx={{
+                  px: 1.5,
+                  py: 0.5,
+                  bgcolor: '#e8e3ff',
+                  color: '#7c4dff',
+                  borderRadius: 1,
+                  fontSize: '0.875rem',
+                  fontWeight: 500
+                }}
+              >
+                N5
+              </Typography>
             </Box>
-          )}
-        </FlipCard>
-      ) : null}
 
-      {studyMode === 'flashcard' && (
-        <ButtonGrid>
-          <DifficultyButton className="forgot" onClick={() => handleDifficulty('forgot')}>
-            Again
-          </DifficultyButton>
-          <DifficultyButton className="hard" onClick={() => handleDifficulty('hard')}>
-            Hard
-          </DifficultyButton>
-          <DifficultyButton onClick={() => handleDifficulty('good')}>
-            Good
-          </DifficultyButton>
-          <DifficultyButton onClick={() => handleDifficulty('easy')}>
-            Easy
-          </DifficultyButton>
-        </ButtonGrid>
-      )}
+            <Box sx={{ 
+              display: 'flex', 
+              gap: 2, 
+              mb: 4,
+              width: '100%',
+              alignItems: 'center'
+            }}>
+              <Typography sx={{ 
+                fontFamily: '"Noto Sans JP", sans-serif',
+                fontSize: '1.5rem',
+                fontWeight: 500
+              }}>
+                {currentWord?.kanji || currentWord?.kana}
+              </Typography>
+              <Typography sx={{ 
+                fontFamily: '"Noto Sans JP", sans-serif',
+                fontSize: '1rem',
+                color: '#666'
+              }}>
+                {currentWord?.kana}
+              </Typography>
+              <Typography
+                sx={{
+                  ml: 'auto',
+                  px: 1.5,
+                  py: 0.5,
+                  bgcolor: '#f1f5f9',
+                  color: '#64748b',
+                  borderRadius: 1,
+                  fontSize: '0.875rem',
+                  fontWeight: 500
+                }}
+              >
+                {currentWord?.partOfSpeech}
+              </Typography>
+            </Box>
+
+            <Typography sx={{ 
+              color: '#666', 
+              fontSize: '0.875rem', 
+              mb: 2,
+              fontWeight: 500,
+              alignSelf: 'flex-start'
+            }}>
+              Example Sentences
+            </Typography>
+            <Box sx={{ width: '100%' }}>
+              {currentWord?.examples?.map((example: Example, i: number) => (
+                <Box
+                  key={i}
+                  sx={{
+                    p: 2,
+                    borderBottom: '1px solid #e2e8f0',
+                    '&:last-child': {
+                      borderBottom: 'none'
+                    }
+                  }}
+                >
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                    <Typography sx={{ 
+                      fontFamily: '"Noto Sans JP", sans-serif',
+                      fontSize: '1.125rem',
+                      fontWeight: 500,
+                      lineHeight: 1.4
+                    }}>
+                      {example.japanese}
+                    </Typography>
+                    <IconButton
+                      size="small"
+                      sx={{ 
+                        color: '#7c4dff',
+                        ml: 'auto'
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const utterance = new SpeechSynthesisUtterance(example.japanese);
+                        utterance.lang = 'ja-JP';
+                        window.speechSynthesis.speak(utterance);
+                      }}
+                    >
+                      <VolumeUp />
+                    </IconButton>
+                  </Box>
+                  <Typography sx={{ 
+                    fontFamily: '"Noto Sans JP", sans-serif',
+                    fontSize: '0.875rem',
+                    color: '#666',
+                    mb: 1
+                  }}>
+                    {example.reading}
+                  </Typography>
+                  <Typography sx={{ 
+                    fontSize: '0.875rem',
+                    color: '#666'
+                  }}>
+                    {example.meaning}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        )} 
+      </FlipCard>
+      <ButtonGrid>
+        <DifficultyButton className="forgot" onClick={() => handleDifficulty('forgot')}>
+          Again
+        </DifficultyButton>
+        <DifficultyButton className="hard" onClick={() => handleDifficulty('hard')}>
+          Hard
+        </DifficultyButton>
+        <DifficultyButton onClick={() => handleDifficulty('good')}>
+          Good
+        </DifficultyButton>
+        <DifficultyButton onClick={() => handleDifficulty('easy')}>
+          Easy
+        </DifficultyButton>
+      </ButtonGrid>
     </StudyContainer>
   );
 }

@@ -20,6 +20,8 @@ const LogoWrapper = styled('div')(({ theme }) => ({
 
 interface LogoProps {
   size?: number;
+  className?: string;
+  color?: string;
 }
 
 /**
@@ -28,10 +30,12 @@ interface LogoProps {
  * Uses the Material UI School icon in white
  */
 export const Logo: React.FC<LogoProps> = ({ 
-  size = 40
+  size = 40,
+  className,
+  color = '#7c4dff'
 }) => {
   return (
-    <LogoWrapper style={{ width: size, height: size, backgroundColor: '#7c4dff' }}>
+    <LogoWrapper className={className} style={{ width: size, height: size, backgroundColor: color }}>
       <SchoolIcon />
     </LogoWrapper>
   );

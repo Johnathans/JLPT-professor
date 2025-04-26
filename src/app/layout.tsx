@@ -7,6 +7,7 @@ import { theme } from '@/lib/theme';
 import PublicLayout from '@/components/PublicLayout';
 import { usePathname } from 'next/navigation';
 import { JlptLevelProvider } from '@/contexts/JlptLevelContext';
+import { StudySessionProvider } from '@/contexts/StudySessionContext';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -84,13 +85,15 @@ export default function RootLayout({
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <JlptLevelProvider>
-            {isCustomLayout ? (
-              children
-            ) : isPublicRoute ? (
-              <PublicLayout>{children}</PublicLayout>
-            ) : (
-              children
-            )}
+            <StudySessionProvider>
+              {isCustomLayout ? (
+                children
+              ) : isPublicRoute ? (
+                <PublicLayout>{children}</PublicLayout>
+              ) : (
+                children
+              )}
+            </StudySessionProvider>
           </JlptLevelProvider>
         </ThemeProvider>
       </body>

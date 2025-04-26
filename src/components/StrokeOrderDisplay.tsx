@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { getKanjiVgUrl } from '@/services/kanji-service';
+import { kanjiService } from '@/services/kanji-service';
 import JlptLevelBadge from './JlptLevelBadge';
 import styles from '@/styles/word-detail.module.css';
 
@@ -29,7 +29,7 @@ export default function StrokeOrderDisplay({ kanji }: StrokeOrderDisplayProps) {
         }
         
         // Get the SVG URL
-        const url = await getKanjiVgUrl(kanji);
+        const url = await kanjiService.getKanjiVgUrl(kanji);
         
         if (!url) {
           setError('No stroke order data available for this kanji');
