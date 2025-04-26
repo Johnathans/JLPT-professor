@@ -181,8 +181,7 @@ export default function Login() {
     }
   };
 
-  const handleForgotPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleForgotPassword = async () => {
     setIsResetting(true);
     setError('');
     setMessage('');
