@@ -1,184 +1,306 @@
-'use client'
+'use client';
 
-import { Auth } from '@supabase/auth-ui-react'
-import { ThemeSupa } from '@supabase/auth-ui-shared'
-import { createClient } from '@/utils/supabase/client'
-import { getSiteUrl } from '@/utils/auth'
+import { Box, Button, Typography, TextField, Divider } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useRouter } from 'next/navigation';
+import { School } from '@mui/icons-material';
+import { useState } from 'react';
+
+// Custom Google icon with proper colors
+const GoogleIcon = () => (
+  <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+    <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+    <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+    <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+    <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+  </svg>
+);
+
+const PageContainer = styled('div')({
+  minHeight: 'calc(100vh - 160px)',
+  display: 'flex',
+  overflow: 'hidden'
+});
+
+const LeftSection = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  width: '50%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  background: '#f8fafc',
+  [theme.breakpoints.down('md')]: {
+    display: 'none'
+  }
+}));
+
+const RightSection = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  width: '50%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  background: '#ffffff',
+  [theme.breakpoints.down('md')]: {
+    width: '100%'
+  }
+}));
+
+const ContentBox = styled(Box)(({ theme }) => ({
+  width: '100%',
+  maxWidth: 440,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  padding: '0 40px',
+  [theme.breakpoints.down('sm')]: {
+    padding: '0 24px'
+  }
+}));
+
+const StyledButton = styled(Button)(({ theme }) => ({
+  width: '100%',
+  padding: '10px 24px',
+  borderRadius: '8px',
+  textTransform: 'none',
+  fontSize: '15px',
+  fontWeight: 500,
+  marginBottom: theme.spacing(2)
+}));
+
+const GoogleButton = styled(StyledButton)(({ theme }) => ({
+  backgroundColor: '#ffffff',
+  border: '1px solid #e2e8f0',
+  color: '#334155',
+  padding: '10px 16px',
+  '&:hover': {
+    backgroundColor: '#f8fafc',
+    borderColor: '#cbd5e1'
+  },
+  '& .MuiButton-startIcon': {
+    marginRight: theme.spacing(2),
+    marginLeft: theme.spacing(0.5)
+  }
+}));
+
+const SignUpButton = styled(StyledButton)({
+  backgroundColor: '#7c4dff',
+  color: '#ffffff',
+  '&:hover': {
+    backgroundColor: '#6c3fff'
+  }
+});
+
+const StyledTextField = styled(TextField)(({ theme }) => ({
+  width: '100%',
+  marginBottom: '16px',
+  '& .MuiOutlinedInput-root': {
+    borderRadius: '8px',
+    backgroundColor: '#f8fafc',
+    '& fieldset': {
+      borderColor: '#e2e8f0'
+    },
+    '&:hover fieldset': {
+      borderColor: '#cbd5e1'
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#7c4dff'
+    }
+  },
+  '& .MuiInputLabel-root': {
+    '&.Mui-focused': {
+      color: '#7c4dff'
+    }
+  },
+  '& input:-webkit-autofill': {
+    WebkitBoxShadow: '0 0 0 30px #f8fafc inset !important',
+    WebkitTextFillColor: '#334155 !important',
+    caretColor: '#334155'
+  },
+  '& .MuiInputBase-input': {
+    '&:-webkit-autofill': {
+      WebkitBoxShadow: '0 0 0 30px #f8fafc inset !important'
+    }
+  },
+  '& .MuiInputLabel-root.MuiInputLabel-shrink': {
+    '&:not(.Mui-focused)': {
+      color: '#94a3b8'
+    }
+  }
+}));
+
+const StyledDivider = styled(Divider)({
+  width: '100%',
+  margin: '24px 0',
+  color: '#94a3b8',
+  '&.MuiDivider-root': {
+    '&::before, &::after': {
+      borderColor: '#e2e8f0'
+    }
+  }
+});
 
 export default function SignUpPage() {
-  try {
-    const supabase = createClient()
-    const siteUrl = getSiteUrl()
+  const router = useRouter();
+  const supabase = createClientComponentClient();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-    return (
-      <div className="container-fluid p-0">
-        <div className="row g-0" style={{ 
-          minHeight: 'calc(100vh - 72px)'
-        }}>
-          {/* Left column - Branding */}
-          <div className="col-lg-6 d-none d-lg-flex flex-column px-4 px-lg-5 pt-5" style={{ backgroundColor: '#e8e3ff' }}>
-            <div className="mx-auto w-100" style={{ maxWidth: '24rem' }}>
-              <div className="text-lg-start mb-4">
-                <h1 className="display-5 fw-bold" style={{ color: '#1a1a1a' }}>
-                  Start Your JLPT Journey Today
-                </h1>
-                <p className="fs-5" style={{ color: '#4a4a4a' }}>
-                  Join thousands of students preparing for JLPT success. Track your progress, practice with flashcards, and learn at your own pace.
-                </p>
-              </div>
-              <div className="d-flex flex-column gap-3">
-                <div className="d-flex align-items-center" style={{ color: '#4a4a4a' }}>
-                  <svg className="me-3" style={{ width: '1.5rem', height: '1.5rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Personalized study plans
-                </div>
-                <div className="d-flex align-items-center" style={{ color: '#4a4a4a' }}>
-                  <svg className="me-3" style={{ width: '1.5rem', height: '1.5rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Smart flashcard system
-                </div>
-                <div className="d-flex align-items-center" style={{ color: '#4a4a4a' }}>
-                  <svg className="me-3" style={{ width: '1.5rem', height: '1.5rem' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Progress tracking
-                </div>
-              </div>
-            </div>
-          </div>
+  const handleEmailSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      console.error('Passwords do not match');
+      return;
+    }
+    try {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`
+        }
+      });
+      if (error) throw error;
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
-          {/* Right column - Form */}
-          <div className="col-12 col-lg-6 d-flex flex-column px-4 px-lg-5 pt-5">
-            <div className="mx-auto w-100" style={{ maxWidth: '24rem' }}>
-              <div className="d-lg-none text-center mb-4">
-                <div 
-                  className="mx-auto rounded-circle d-flex align-items-center justify-content-center mb-3"
-                  style={{ width: '4rem', height: '4rem', backgroundColor: '#e8e3ff' }}
-                >
-                  <svg 
-                    style={{ width: '2rem', height: '2rem', color: '#7c4dff' }}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <path 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      strokeWidth={2}
-                      d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div className="text-center text-lg-start mb-4">
-                <h2 className="fs-2 fw-bold" style={{ color: '#1a1a1a' }}>
-                  Create your account
-                </h2>
-                <p style={{ color: '#4a4a4a' }}>
-                  Start learning Japanese with JLPT Professor
-                </p>
-              </div>
-              <Auth
-                supabaseClient={supabase}
-                view="sign_up"
-                appearance={{
-                  theme: ThemeSupa,
-                  style: {
-                    container: {
-                      width: '100%',
-                    },
-                    button: {
-                      background: '#7c4dff',
-                      color: 'white',
-                      borderRadius: '0.5rem',
-                      width: '100%',
-                      padding: '0.75rem 1rem',
-                      height: 'auto',
-                    },
-                    input: {
-                      borderRadius: '0.5rem',
-                      border: '1px solid #dee2e6',
-                      padding: '0.75rem 1rem',
-                      width: '100%',
-                      marginBottom: '1rem',
-                    },
-                    label: {
-                      color: '#4a4a4a',
-                      marginBottom: '0.5rem',
-                      fontSize: '0.875rem',
-                    },
-                    message: {
-                      color: '#dc3545',
-                      marginTop: '0.5rem',
-                      fontSize: '0.875rem',
-                    },
-                    anchor: {
-                      color: '#7c4dff',
-                      fontSize: '0.875rem',
-                      textDecoration: 'none',
-                    },
-                    divider: {
-                      background: '#dee2e6',
-                      margin: '1.5rem 0',
-                    },
-                  },
-                  variables: {
-                    default: {
-                      colors: {
-                        brand: '#7c4dff',
-                        brandAccent: '#5e35b1',
-                        inputBackground: 'white',
-                        inputText: '#1a1a1a',
-                        inputBorder: '#dee2e6',
-                        inputBorderHover: '#7c4dff',
-                        inputBorderFocus: '#7c4dff',
-                      },
-                    },
-                  },
+  const handleGoogleSignUp = async () => {
+    try {
+      await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`
+        }
+      });
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  return (
+    <PageContainer>
+      <LeftSection>
+        <ContentBox>
+          <Box sx={{ textAlign: 'center', mb: 6 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, mb: 2 }}>
+              <School sx={{ fontSize: 48, color: '#7c4dff' }} />
+              <Typography variant="h3" sx={{ color: '#1e293b', fontWeight: 700 }}>
+                JLPT Professor
+              </Typography>
+            </Box>
+            <Typography variant="h5" sx={{ color: '#475569', fontWeight: 600, mb: 3 }}>
+              Start Your JLPT Journey Today
+            </Typography>
+            <Typography sx={{ color: '#64748b', maxWidth: 360 }}>
+              Join our community of students preparing for JLPT success
+            </Typography>
+          </Box>
+          <Box sx={{ width: '100%', maxWidth: 360 }}>
+            {[
+              'Personalized study plans',
+              'Smart flashcard system',
+              'Progress tracking'
+            ].map((feature, index) => (
+              <Box
+                key={index}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 2,
+                  mb: 2,
+                  p: 1.5,
+                  borderRadius: 1,
+                  backgroundColor: '#ffffff',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
                 }}
-                localization={{
-                  variables: {
-                    sign_up: {
-                      email_label: 'Email address',
-                      password_label: 'Password',
-                      button_label: 'Sign up',
-                      social_provider_text: 'Sign up with {{provider}}',
-                      link_text: 'Already have an account? Sign in',
-                    },
-                  },
+              >
+                <School sx={{ color: '#7c4dff', fontSize: 20 }} />
+                <Typography sx={{ color: '#475569', fontWeight: 500 }}>
+                  {feature}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
+        </ContentBox>
+      </LeftSection>
+      <RightSection>
+        <ContentBox>
+          <Box sx={{ width: '100%', maxWidth: 360 }}>
+            <Typography variant="h5" sx={{ fontWeight: 600, mb: 3, color: '#1e293b' }}>
+              Create your account
+            </Typography>
+            <GoogleButton
+              variant="outlined"
+              startIcon={<GoogleIcon />}
+              onClick={handleGoogleSignUp}
+            >
+              Sign up with Google
+            </GoogleButton>
+            <StyledDivider>or</StyledDivider>
+            <form onSubmit={handleEmailSignUp} style={{ width: '100%' }}>
+              <StyledTextField
+                label="Email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                autoComplete="email"
+                InputLabelProps={{
+                  shrink: true
                 }}
-                theme="light"
-                providers={['google']}
-                redirectTo={`${siteUrl}/auth/callback`}
               />
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  } catch (error) {
-    // If environment variables are missing, show a maintenance page
-    return (
-      <div className="container-fluid p-0">
-        <div className="row g-0" style={{ 
-          minHeight: 'calc(100vh - 72px)'
-        }}>
-          <div className="col-12 d-flex flex-column px-4 px-lg-5 pt-5">
-            <div className="mx-auto w-100" style={{ maxWidth: '24rem' }}>
-              <div className="text-center text-lg-start mb-4">
-                <h1 className="fs-2 fw-bold" style={{ color: '#1a1a1a' }}>
-                  Maintenance Mode
-                </h1>
-                <p style={{ color: '#4a4a4a' }}>
-                  We're currently performing some updates. Please check back soon!
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
+              <StyledTextField
+                label="Password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                autoComplete="new-password"
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+              <StyledTextField
+                label="Confirm Password"
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                autoComplete="new-password"
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+              <SignUpButton type="submit" variant="contained">
+                Sign up with Email
+              </SignUpButton>
+            </form>
+            <Box sx={{ mt: 2, textAlign: 'center' }}>
+              <Typography sx={{ color: '#64748b', fontSize: '0.875rem' }}>
+                Already have an account?{' '}
+                <Button
+                  sx={{
+                    textTransform: 'none',
+                    color: '#7c4dff',
+                    fontWeight: 500,
+                    p: 0,
+                    ml: 0.5,
+                    '&:hover': { backgroundColor: 'transparent', textDecoration: 'underline' }
+                  }}
+                  onClick={() => router.push('/login')}
+                >
+                  Sign in
+                </Button>
+              </Typography>
+            </Box>
+          </Box>
+        </ContentBox>
+      </RightSection>
+    </PageContainer>
+  );
 }
