@@ -4,7 +4,8 @@ import { Box, Typography, Avatar, IconButton, Tabs, Tab, Grid, Button } from '@m
 import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/navigation';
 import { useJlptLevel } from '@/contexts/JlptLevelContext';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import Home from '@mui/icons-material/Home';
 import MenuBook from '@mui/icons-material/MenuBook';
 import School from '@mui/icons-material/School';
@@ -323,8 +324,21 @@ export default function Dashboard() {
   const router = useRouter();
   const { level } = useJlptLevel();
   const [activeTab, setActiveTab] = useState('kanji');
-  const pathname = '/';
+  const [userName, setUserName] = useState<string>('');
+  const supabase = createClientComponentClient();
   const [isExpanded, setIsExpanded] = useState(false);
+
+  useEffect(() => {
+    async function getUserProfile() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user?.user_metadata?.full_name) {
+        setUserName(user.user_metadata.full_name);
+      } else if (user?.email) {
+        setUserName(user.email.split('@')[0]);
+      }
+    }
+    getUserProfile();
+  }, [supabase]);
 
   const formatDate = (date: Date): string => {
     return date.toLocaleDateString('en-US', { 
@@ -367,14 +381,14 @@ export default function Dashboard() {
             J
           </Avatar>
           <Typography className="user-name" variant="body1" sx={{ fontWeight: 600 }}>
-            John
+            {userName}
           </Typography>
         </UserSection>
         
         {navItems.map((item, index) => (
           <NavItem
             key={index}
-            className={item.path === pathname ? 'active' : ''}
+            className={item.path === '/' ? 'active' : ''}
             onClick={() => router.push(item.path || '/')}
           >
             {item.icon}
@@ -432,14 +446,7 @@ export default function Dashboard() {
                 fontSize: { xs: '2rem', sm: '2.65rem' },
                 color: '#1A1D1E',
               }}>
-                Welcome back,
-              </Typography>
-              <Typography variant="h4" sx={{ 
-                fontWeight: 400,
-                fontSize: { xs: '2rem', sm: '2.65rem' },
-                color: '#1A1D1E',
-              }}>
-                John
+                Welcome back, {userName}
               </Typography>
             </Box>
             <Typography sx={{ 

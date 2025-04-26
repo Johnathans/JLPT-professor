@@ -1,7 +1,7 @@
 'use client';
 
 import { Box, styled } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Home from '@mui/icons-material/Home';
 import MenuBook from '@mui/icons-material/MenuBook';
@@ -62,9 +62,6 @@ const Sidebar = styled('div')(({ theme }) => ({
     opacity: 0,
     transform: 'translateX(-10px)',
     transition: 'all 0.3s ease-in-out'
-  },
-  '.MuiSvgIcon-root': {
-    transition: 'margin 0.3s ease-in-out'
   },
   '&:hover': {
     width: 240,
@@ -141,8 +138,24 @@ const navItems = [
   { icon: <Help />, label: 'Help', path: '/help' }
 ];
 
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+
 function SidebarComponent({ expanded, onExpandedChange }: { expanded: boolean; onExpandedChange: (expanded: boolean) => void }) {
   const router = useRouter();
+  const [userName, setUserName] = useState<string>('');
+  const supabase = createClientComponentClient();
+
+  useEffect(() => {
+    async function getUserProfile() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user?.user_metadata?.full_name) {
+        setUserName(user.user_metadata.full_name);
+      } else if (user?.email) {
+        setUserName(user.email.split('@')[0]);
+      }
+    }
+    getUserProfile();
+  }, [supabase]);
 
   return (
     <Sidebar
@@ -152,7 +165,7 @@ function SidebarComponent({ expanded, onExpandedChange }: { expanded: boolean; o
       <UserSection>
         <AccountCircle sx={{ width: 32, height: 32, color: '#7c4dff' }} />
         <Box sx={{ opacity: expanded ? 1 : 0 }}>
-          <Box className="user-name" sx={{ fontWeight: 600 }}>John</Box>
+          <Box className="user-name" sx={{ fontWeight: 600 }}>{userName}</Box>
         </Box>
       </UserSection>
 
