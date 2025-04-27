@@ -9,6 +9,7 @@ const withPWA = require('next-pwa')({
 const nextConfig = {
   output: 'standalone',
   images: {
+    domains: ['localhost', 'jlpt-professor.vercel.app'],
     remotePatterns: [
       {
         protocol: 'https',
