@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './page.module.css';
 import { Book, GraduationCap, Brain, CheckCircle } from 'lucide-react';
 import KanjiGrid from './components/KanjiGrid';
@@ -12,8 +13,8 @@ export default function Home() {
           <div className={styles.heroContent}>
             <div className={styles.heroMain}>
               <h1 className={styles.title}>
-                Pass the JLPT with
-                <span className={styles.highlight}> AI-Powered</span> Study Tools
+                Study Smarter. Pass Faster.
+                <span className={styles.highlight}> Your JLPT Journey Starts Here</span>
               </h1>
               <p className={styles.subtitle}>
                 Master Japanese faster with personalized learning paths, 
@@ -67,6 +68,48 @@ export default function Home() {
               </div>
               <h3>Smart Progress Tracking</h3>
               <p>Track your learning journey with detailed progress analytics and insights</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Learn Anywhere Section */}
+      <section className={styles.learnAnywhere}>
+        <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>Learn when and where you want</h2>
+          <p className={styles.sectionSubtitle}>
+            Study on your schedule with our mobile and desktop apps
+          </p>
+
+          <div className={styles.learnGrid}>
+            <div className={styles.learnCard}>
+              <Image
+                src="/assets/man-on-jlpt-professor.jpg"
+                alt="Man using JLPT Professor mobile app"
+                width={500}
+                height={375}
+                className={styles.learnImage}
+              />
+              <h3>Learn on mobile</h3>
+              <p>Take your study materials anywhere with our mobile app</p>
+              <Link href="/signup" className={styles.mobileCta}>
+                Get the mobile app
+              </Link>
+            </div>
+
+            <div className={styles.learnCard}>
+              <Image
+                src="/assets/woman-on-jlpt-professor.jpg"
+                alt="Woman using JLPT Professor desktop version"
+                width={500}
+                height={375}
+                className={styles.learnImage}
+              />
+              <h3>Learn on desktop</h3>
+              <p>Enjoy a full-featured experience on your computer</p>
+              <Link href="/signup" className={styles.desktopCta}>
+                Try JLPT Professor for free
+              </Link>
             </div>
           </div>
         </div>

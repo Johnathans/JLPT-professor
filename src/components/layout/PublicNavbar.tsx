@@ -70,7 +70,7 @@ const MobileMenuButton = styled(IconButton)(({ theme }) => ({
 }));
 
 const navItems = [
-  { text: 'Passing the JLPT', href: '/passing-the-jlpt' },
+  { text: 'Passing the JLPT', href: '/study-guide' },
   { text: 'Pricing', href: '/pricing' },
   { text: 'Resources', href: '/resources' },
 ];
