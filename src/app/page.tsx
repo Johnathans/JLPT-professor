@@ -3,6 +3,8 @@ import Image from 'next/image';
 import styles from './page.module.css';
 import { Book, GraduationCap, Brain, CheckCircle } from 'lucide-react';
 import KanjiGrid from './components/KanjiGrid';
+import manOnMobile from '../../public/assets/man-on-jlpt-professor.jpg';
+import womanOnDesktop from '../../public/assets/woman-on-jlpt-professor.jpg';
 
 export default function Home() {
   return (
@@ -83,13 +85,14 @@ export default function Home() {
 
           <div className={styles.learnGrid}>
             <div className={styles.learnCard}>
-              <Image
-                src="/assets/man-on-jlpt-professor.jpg"
-                alt="Man using JLPT Professor mobile app"
-                width={500}
-                height={375}
-                className={styles.learnImage}
-              />
+              <div className={styles.imageWrapper}>
+                <Image
+                  src={manOnMobile}
+                  alt="Man using JLPT Professor mobile app"
+                  placeholder="blur"
+                  className={styles.learnImage}
+                />
+              </div>
               <h3>Learn on mobile</h3>
               <p>Take your study materials anywhere with our mobile app</p>
               <Link href="/signup" className={styles.mobileCta}>
@@ -98,13 +101,14 @@ export default function Home() {
             </div>
 
             <div className={styles.learnCard}>
-              <Image
-                src="/assets/woman-on-jlpt-professor.jpg"
-                alt="Woman using JLPT Professor desktop version"
-                width={500}
-                height={375}
-                className={styles.learnImage}
-              />
+              <div className={styles.imageWrapper}>
+                <Image
+                  src={womanOnDesktop}
+                  alt="Woman using JLPT Professor desktop version"
+                  placeholder="blur"
+                  className={styles.learnImage}
+                />
+              </div>
               <h3>Learn on desktop</h3>
               <p>Enjoy a full-featured experience on your computer</p>
               <Link href="/signup" className={styles.desktopCta}>

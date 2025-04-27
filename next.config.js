@@ -7,6 +7,7 @@ const withPWA = require('next-pwa')({
 })
 
 const nextConfig = {
+  output: 'standalone',
   images: {
     remotePatterns: [
       {
@@ -14,9 +15,7 @@ const nextConfig = {
         hostname: 'placehold.co',
       },
     ],
-    unoptimized: true
   },
-  output: 'standalone',
 }
 
 module.exports = withPWA(nextConfig)
