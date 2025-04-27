@@ -3,8 +3,6 @@ import Image from 'next/image';
 import styles from './page.module.css';
 import { Book, GraduationCap, Brain, CheckCircle } from 'lucide-react';
 import KanjiGrid from './components/KanjiGrid';
-import manOnMobile from '../../public/assets/man-on-jlpt-professor.jpg';
-import womanOnDesktop from '../../public/assets/woman-on-jlpt-professor.jpg';
 
 export default function Home() {
   return (
@@ -87,9 +85,11 @@ export default function Home() {
             <div className={styles.learnCard}>
               <div className={styles.imageWrapper}>
                 <Image
-                  src={manOnMobile}
+                  src="/assets/man-on-jlpt-professor.jpg"
                   alt="Man using JLPT Professor mobile app"
-                  placeholder="blur"
+                  width={500}
+                  height={375}
+                  priority
                   className={styles.learnImage}
                 />
               </div>
@@ -103,9 +103,11 @@ export default function Home() {
             <div className={styles.learnCard}>
               <div className={styles.imageWrapper}>
                 <Image
-                  src={womanOnDesktop}
+                  src="/assets/woman-on-jlpt-professor.jpg"
                   alt="Woman using JLPT Professor desktop version"
-                  placeholder="blur"
+                  width={500}
+                  height={375}
+                  priority
                   className={styles.learnImage}
                 />
               </div>
