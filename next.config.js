@@ -14,7 +14,9 @@ const nextConfig = {
         hostname: 'placehold.co',
       },
     ],
+    unoptimized: true
   },
+  output: 'standalone',
 }
 
 module.exports = withPWA(nextConfig)
