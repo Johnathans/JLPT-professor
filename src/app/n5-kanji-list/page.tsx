@@ -2,16 +2,42 @@
 
 import { useState } from 'react';
 import { N5_KANJI } from '@/data/jlpt-kanji-updated';
-import styles from '@/styles/kanji-list.module.css';
-import heroColors from '@/styles/hero-colors.module.css';
+import styles from './n5-kanji-list.module.css';
 import Link from 'next/link';
 import JlptLevelBadge from '@/components/JlptLevelBadge';
+import { List, Grid } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 const ITEMS_PER_PAGE = 20;
+
+const NOTES_DATA = [
+  {
+    id: 'basic',
+    title: 'Basic Level',
+    content: 'N5 is the starting level of the JLPT and includes approximately 100 basic kanji characters. These are considered the most fundamental kanji needed for basic communication in Japanese.'
+  },
+  {
+    id: 'usage',
+    title: 'Common Usage',
+    content: 'These kanji appear frequently in everyday situations, such as signs, menus, and basic documents. They include numbers, directions, time expressions, and other essential concepts.'
+  },
+  {
+    id: 'tips',
+    title: 'Study Tips',
+    content: "Focus on learning both the readings (kun'yomi and on'yomi) and the meanings. Practice writing each character to reinforce memory, and try to recognize them in real-world contexts like manga or simple texts."
+  },
+  {
+    id: 'review',
+    title: 'Regular Review',
+    content: 'Use the grid view for quick visual recognition and the list view for detailed study. Flip cards to practice recalling readings and meanings. Regular review is key to mastering these foundational characters.'
+  }
+];
 
 export default function N5KanjiListPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
+  const [openNoteId, setOpenNoteId] = useState<string | null>('basic');
 
   const filteredKanji = N5_KANJI.filter(kanji => {
     const onyomiStr = kanji.onyomi?.join(' ').toLowerCase() || '';
@@ -25,169 +51,205 @@ export default function N5KanjiListPage() {
 
   const totalPages = Math.ceil(filteredKanji.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const displayedKanji = filteredKanji.slice(startIndex, startIndex + ITEMS_PER_PAGE);
-
-  const totalKanji = N5_KANJI.length;
+  const endIndex = Math.min(startIndex + ITEMS_PER_PAGE, filteredKanji.length);
+  const displayedKanji = filteredKanji.slice(startIndex, endIndex);
 
   return (
     <div className={styles.container}>
-      <div className={styles.heroWrapper}>
-        <div className={`${styles.heroContent} container`}>
-          <div className={styles.heroLeft}>
-            <div className={styles.heroLeftContent}>
-              <h1 className={`${styles.title} ${heroColors.title}`}>JLPT N5 Kanji</h1>
-              <p className={styles.subtitle}>
-                Master the foundational Japanese kanji required for the JLPT N5 level. 
-                This comprehensive list covers essential characters for basic daily reading and writing.
-              </p>
-              
-              <div className={styles.stats}>
-                <div className={styles.statItem}>
-                  <span className={`${styles.statValue} ${heroColors.statValue}`}>{totalKanji}</span>
-                  <span className={styles.statLabel}>Total Kanji</span>
-                </div>
-                <div className={styles.statItem}>
-                  <span className={`${styles.statValue} ${heroColors.statValue}`}>N5</span>
-                  <span className={styles.statLabel}>JLPT Level</span>
-                </div>
-              </div>
+      <h1 className={styles.heading}>JLPT N5 Kanji</h1>
+      <p className={styles.description}>
+        Master the foundational Japanese kanji required for the JLPT N5 level. 
+        This comprehensive list covers essential characters for basic daily reading and writing.
+      </p>
 
-              <div className={styles.actionButtons}>
-                <Link href="/n5-kanji-list/flashcards" className={styles.flashcardButton}>
-                  <svg className={styles.flashcardIcon} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="2" />
-                    <path d="M3 10H21" stroke="currentColor" strokeWidth="2" />
-                  </svg>
-                  Start Flashcard Learning
-                </Link>
-              </div>
-            </div>
-          </div>
+      <div className={styles.controls}>
+        <div className={styles.searchContainer}>
+          <svg
+            className={styles.searchIcon}
+            width="18"
+            height="18"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM19 19l-4.35-4.35"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <input
+            type="text"
+            placeholder="Search by kanji, reading, or meaning..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className={styles.searchInput}
+          />
+        </div>
 
-          <div className={styles.heroRight}>
-            <div className={styles.kanjiGrid}>
-              {N5_KANJI.slice(0, 9).map((kanji) => (
-                <Link 
-                  href={`/n5-kanji-list/${encodeURIComponent(kanji.kanji)}`} 
-                  key={kanji.kanji}
-                  className={styles.kanjiGridItem}
-                >
-                  <span className={`${styles.kanjiCharacter} ${heroColors.kanjiGridCharacter}`}>{kanji.kanji}</span>
-                  <span className={styles.meaning}>
-                    {typeof kanji.meaning === 'string' ? 
-                      (kanji.meaning as string).split(',')[0].trim() :
-                      Array.isArray(kanji.meaning) && kanji.meaning.length > 0 ?
-                        (kanji.meaning[0] as string).trim() :
-                        ''
-                    }
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
+        <div className={styles.viewToggle}>
+          <button
+            className={`${styles.viewButton} ${viewMode === 'list' ? styles.active : ''}`}
+            onClick={() => setViewMode('list')}
+            title="List View"
+          >
+            <List size={20} />
+          </button>
+          <button
+            className={`${styles.viewButton} ${viewMode === 'grid' ? styles.active : ''}`}
+            onClick={() => setViewMode('grid')}
+            title="Grid View"
+          >
+            <Grid size={20} />
+          </button>
         </div>
       </div>
 
-      <div className={styles.searchContainer}>
-        <svg
-          className={styles.searchIcon}
-          width="18"
-          height="18"
-          viewBox="0 0 20 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM19 19l-4.35-4.35"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-        <input
-          type="text"
-          placeholder="Search by kanji, reading, or meaning..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className={styles.searchInput}
-        />
-      </div>
-
-      <div className={styles.tableContainer}>
-        <table className={styles.table}>
-          <thead className={styles.tableHeader}>
-            <tr>
-              <th>Kanji</th>
-              <th>Reading</th>
-              <th>Meaning</th>
-              <th>Level</th>
-              <th className={styles.actionCell}>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            {displayedKanji.map((kanji, index) => (
-              <tr key={index} className={styles.tableRow}>
-                <td className={`${styles.tableCell} ${styles.kanjiCell}`}>
-                  {kanji.kanji}
-                </td>
-                <td className={`${styles.tableCell} ${styles.kanaCell}`}>
-                  {kanji.onyomi?.length > 0 && (
-                    <span className="onyomi">On: {kanji.onyomi.join(', ')}</span>
-                  )}
-                  {kanji.onyomi?.length > 0 && kanji.kunyomi?.length > 0 && ' '}
-                  {kanji.kunyomi?.length > 0 && (
-                    <span className="kunyomi">Kun: {kanji.kunyomi.join(', ')}</span>
-                  )}
-                </td>
-                <td className={`${styles.tableCell} ${styles.meaningCell}`}>
-                  {typeof kanji.meaning === 'string' ? 
-                    kanji.meaning :
-                    Array.isArray(kanji.meaning) ? 
-                      kanji.meaning.join(', ') :
-                      ''
-                  }
-                </td>
-                <td className={`${styles.tableCell} ${styles.typeCell}`}>
-                  <JlptLevelBadge word={{
-                    ...kanji,
-                    level: 'N5'
-                  }} />
-                </td>
-                <td className={`${styles.tableCell} ${styles.actionCell}`}>
+      {viewMode === 'list' ? (
+        <div className={styles.tableContainer}>
+          <table className={styles.table}>
+            <thead className={styles.tableHeader}>
+              <tr>
+                <th>Kanji</th>
+                <th>Reading</th>
+                <th>Meaning</th>
+                <th>Level</th>
+                <th className={styles.actionCell}>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              {displayedKanji.map((kanji, index) => (
+                <tr key={index} className={styles.tableRow}>
+                  <td className={`${styles.tableCell} ${styles.kanjiCell}`}>
+                    {kanji.kanji}
+                  </td>
+                  <td className={`${styles.tableCell} ${styles.kanaCell}`}>
+                    {kanji.onyomi?.length > 0 && (
+                      <span className="onyomi">On: {kanji.onyomi.join(', ')}</span>
+                    )}
+                    {kanji.onyomi?.length > 0 && kanji.kunyomi?.length > 0 && ' '}
+                    {kanji.kunyomi?.length > 0 && (
+                      <span className="kunyomi">Kun: {kanji.kunyomi.slice(0, 2).join(', ')}</span>
+                    )}
+                  </td>
+                  <td className={`${styles.tableCell} ${styles.meaningCell}`}>
+                    {typeof kanji.meaning === 'string' ? 
+                      kanji.meaning :
+                      Array.isArray(kanji.meaning) ? 
+                        kanji.meaning.join(', ') :
+                        ''
+                    }
+                  </td>
+                  <td className={`${styles.tableCell} ${styles.typeCell}`}>
+                    <JlptLevelBadge word={{
+                      ...kanji,
+                      level: 'N5'
+                    }} />
+                  </td>
+                  <td className={`${styles.tableCell} ${styles.actionCell}`}>
+                    <Link
+                      href={`/n5-kanji-list/${kanji.kanji}`}
+                      className={styles.detailsLink}
+                    >
+                      View
+                      <span className={styles.arrow}> →</span>
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div className={styles.gridContainer}>
+          {displayedKanji.map((kanji, index) => (
+            <div key={index} className={styles.cardWrapper}>
+              <div className={styles.card}>
+                <div className={styles.cardFront}>
+                  <div className={styles.cardLevel}>N5</div>
+                  <div className={styles.cardKanji}>{kanji.kanji}</div>
+                  <div className={styles.cardMeaning}>
+                    {typeof kanji.meaning === 'string' ? 
+                      kanji.meaning.split(',')[0] :
+                      Array.isArray(kanji.meaning) ? 
+                        kanji.meaning[0] :
+                        ''
+                    }
+                  </div>
+                </div>
+                <div className={styles.cardBack}>
+                  <div className={styles.cardReadings}>
+                    {kanji.onyomi?.length > 0 && (
+                      <div className={styles.cardReading}>
+                        <span className={styles.readingLabel}>On:</span>
+                        <span>{kanji.onyomi.join(', ')}</span>
+                      </div>
+                    )}
+                    {kanji.kunyomi?.length > 0 && (
+                      <div className={styles.cardReading}>
+                        <span className={styles.readingLabel}>Kun:</span>
+                        <span>{kanji.kunyomi.slice(0, 2).join(', ')}</span>
+                      </div>
+                    )}
+                  </div>
                   <Link
                     href={`/n5-kanji-list/${kanji.kanji}`}
-                    className={styles.detailsLink}
+                    className={styles.cardLink}
                   >
-                    View →
+                    View Details →
                   </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className={styles.pagination}>
         <div className={styles.pageInfo}>
-          Showing {startIndex + 1} to {Math.min(startIndex + ITEMS_PER_PAGE, filteredKanji.length)} of {filteredKanji.length} kanji
+          Showing {startIndex + 1}-{endIndex} of {filteredKanji.length} kanji
         </div>
         <div className={styles.pageControls}>
           <button
-            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-            disabled={currentPage === 1}
             className={styles.pageButton}
+            onClick={() => setCurrentPage(currentPage - 1)}
+            disabled={currentPage === 1}
           >
             Previous
           </button>
           <button
-            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-            disabled={currentPage === totalPages}
             className={styles.pageButton}
+            onClick={() => setCurrentPage(currentPage + 1)}
+            disabled={endIndex >= filteredKanji.length}
           >
             Next
           </button>
         </div>
+      </div>
+
+      <div className={styles.notesSection}>
+        <h2 className={styles.notesTitle}>About N5 Kanji</h2>
+        <ul className={styles.notesList}>
+          {NOTES_DATA.map((note) => (
+            <li key={note.id} className={styles.noteItem}>
+              <button
+                className={styles.noteButton}
+                onClick={() => setOpenNoteId(openNoteId === note.id ? null : note.id)}
+              >
+                <h3 className={styles.noteHeading}>{note.title}</h3>
+                <ChevronDown 
+                  className={`${styles.chevron} ${openNoteId === note.id ? styles.open : ''}`}
+                  size={20}
+                />
+              </button>
+              <div className={`${styles.noteContent} ${openNoteId === note.id ? styles.open : ''}`}>
+                <p className={styles.noteText}>{note.content}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
