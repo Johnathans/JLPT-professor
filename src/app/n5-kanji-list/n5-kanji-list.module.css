@@ -459,7 +459,7 @@
   }
 
   .typeCell,
-  th:nth-child(4) {
+  .tableHeader th:nth-child(4) {
     display: none;
   }
 
