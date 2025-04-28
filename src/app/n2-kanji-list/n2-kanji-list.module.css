@@ -458,8 +458,11 @@
     width: 40%;
   }
 
-  .typeCell,
-  th:nth-child(4) {
+  .typeCell {
+    display: none;
+  }
+
+  .tableHeader th:nth-child(4) {
     display: none;
   }
 
