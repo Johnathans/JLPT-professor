@@ -160,7 +160,7 @@ export default function N4KanjiListPage() {
                 <th>Kanji</th>
                 <th>Reading</th>
                 <th>Meaning</th>
-                <th>Level</th>
+                <th className={styles.typeCell}>Level</th>
                 <th className={styles.actionCell}>Details</th>
               </tr>
             </thead>
