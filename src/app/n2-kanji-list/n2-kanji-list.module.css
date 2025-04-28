@@ -228,9 +228,9 @@
   width: 35%;
 }
 
-.typeCell {
-  width: 100px;
-  white-space: nowrap;
+.typeCell,
+.tableHeader th:nth-child(4) {
+  display: none;
 }
 
 .actionCell {
@@ -456,14 +456,6 @@
 
   .meaningCell {
     width: 40%;
-  }
-
-  .typeCell {
-    display: none;
-  }
-
-  .tableHeader th:nth-child(4) {
-    display: none;
   }
 
   .actionCell {
