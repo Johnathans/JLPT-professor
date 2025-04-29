@@ -176,7 +176,14 @@ export default function WordDetailPage({ params }: Props) {
               </div>
               <div className={styles.detail}>
                 <span>JLPT Level:</span>
-                <span><JlptLevelBadge word={{ ...word, level: 'N5' }} /></span>
+                <span><JlptLevelBadge word={{
+                  kanji: word.kanji || '',
+                  level: 'N5',
+                  onyomi: rawKanjiData?.onyomi || [],
+                  kunyomi: rawKanjiData?.kunyomi || [],
+                  meaning: [word.meaning],
+                  type: 'kanji'
+                }} /></span>
               </div>
             </div>
           </div>
