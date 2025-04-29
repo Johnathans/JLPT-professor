@@ -7,14 +7,18 @@ import Link from 'next/link';
 import styles from '@/styles/kanji-list.module.css';
 import StrokeOrderDisplay from '@/components/StrokeOrderDisplay';
 import KanjiAudioPlayer from '@/components/KanjiAudioPlayer';
-import n4KanjiRaw from '@/data/n4-kanji-standardized.json';
+import SentenceAudioPlayer from '@/components/SentenceAudioPlayer';
+import SignupCTA from '@/components/SignupCTA';
+import n4KanjiRaw from '@/data/n4-kanji-new.json';
+import { KanjiData } from '@/types/kanji';
+import { getExampleSentences } from '@/services/dictionary';
+import JlptLevelBadge from '@/components/JlptLevelBadge';
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string }>
 }
 
 export default function WordDetailPage({ params }: Props) {
-  // Unwrap the params promise at the component level
   const resolvedParams = use(params);
   
   const [word, setWord] = useState<Word | null>(null);
@@ -22,78 +26,71 @@ export default function WordDetailPage({ params }: Props) {
   const [error, setError] = useState<string | null>(null);
   const [relatedWords, setRelatedWords] = useState<Word[]>([]);
   const [rawKanjiData, setRawKanjiData] = useState<any>(null);
+  const [examples, setExamples] = useState<Array<{ japanese: string; english: string; }>>([]);
 
   useEffect(() => {
-    const decodedSlug = decodeURIComponent(resolvedParams.slug);
-    
-    const foundKanji = n4KanjiComplete.find(k => k.kanji === decodedSlug);
-    const rawKanji = n4KanjiRaw.n4_kanji.find(k => k.kanji === decodedSlug);
-
-    if (foundKanji && rawKanji) {
-      setRawKanjiData(rawKanji);
+    async function loadData() {
+      const decodedSlug = decodeURIComponent(resolvedParams.slug);
+      const sentencesPromise = getExampleSentences(decodedSlug);
       
-      const onyomiText = foundKanji.onyomi.length > 0 ? `On: ${foundKanji.onyomi.join(', ')}` : '';
-      const kunyomiText = foundKanji.kunyomi.length > 0 ? `Kun: ${foundKanji.kunyomi.join(', ')}` : '';
-      const readingText = [onyomiText, kunyomiText].filter(Boolean).join(' ');
+      const foundKanji = n4KanjiComplete.find(k => k.kanji === decodedSlug);
+      const rawKanji = n4KanjiRaw.n4_kanji.find(k => k.kanji === decodedSlug);
 
-      const meaningText = Array.isArray(foundKanji.meaning) 
-        ? foundKanji.meaning.join(', ')
-        : foundKanji.meaning;
-
-      const wordDetail: Partial<Word> = {
-        id: resolvedParams.slug,
-        kanji: foundKanji.kanji,
-        kana: foundKanji.onyomi[0] || foundKanji.kunyomi[0],
-        romaji: foundKanji.onyomi[0] || foundKanji.kunyomi[0],
-        meaning: meaningText,
-        type: 'kanji',
-        examples: [
-          {
-            japanese: `これは${foundKanji.kanji}です。`,
-            romaji: `Kore wa ${foundKanji.kanji} desu.`,
-            english: `This is ${Array.isArray(foundKanji.meaning) ? foundKanji.meaning[0] : foundKanji.meaning}.`
-          },
-          {
-            japanese: `私は${foundKanji.kanji}が好きです。`,
-            romaji: `Watashi wa ${foundKanji.kanji} ga suki desu.`,
-            english: `I like ${Array.isArray(foundKanji.meaning) ? foundKanji.meaning[0] : foundKanji.meaning}.`
-          }
-        ],
-        kanjiInfo: [{
+      if (foundKanji && rawKanji) {
+        setRawKanjiData(rawKanji);
+        
+        const wordDetail: Word = {
+          id: decodedSlug,
           kanji: foundKanji.kanji,
-          meaning: meaningText,
-          onReading: foundKanji.onyomi,
-          kunReading: foundKanji.kunyomi,
-          strokeCount: 0 // We'll need to add this to our data later
-        }]
-      };
-      
-      setWord(wordDetail as Word);
-      
-      if (foundKanji.kanji) {
+          kana: (foundKanji as any).reading || '',
+          romaji: (foundKanji as any).reading || '',
+          meaning: typeof foundKanji.meaning === 'string' ? 
+            foundKanji.meaning : 
+            Array.isArray(foundKanji.meaning) ? 
+              foundKanji.meaning.join(', ') : 
+              '',
+          type: 'kanji'
+        };
+        
+        setWord(wordDetail);
+        
         const related = n4KanjiComplete
-          .filter(k => 
-            k !== foundKanji && 
-            k.kanji && 
-            (k.kanji.includes(foundKanji.kanji || '') || (foundKanji.kanji || '').includes(k.kanji))
-          )
+          .filter(k => k.kanji !== foundKanji.kanji)
           .sort(() => 0.5 - Math.random())
           .slice(0, 4);
         
         setRelatedWords(related.map(k => ({
           id: k.kanji,
           kanji: k.kanji,
-          kana: k.onyomi[0] || k.kunyomi[0],
-          romaji: k.onyomi[0] || k.kunyomi[0],
-          meaning: k.meaning,
+          kana: (k as any).reading || '',
+          romaji: (k as any).reading || '',
+          meaning: typeof k.meaning === 'string' ? 
+            k.meaning : 
+            Array.isArray(k.meaning) ? 
+              k.meaning.join(', ') : 
+              '',
           type: 'kanji'
-        })) as Word[]);
+        })));
+        
+        try {
+          const sentences = await sentencesPromise;
+          console.log('Fetched sentences:', sentences);
+          setExamples(sentences);
+        } catch (error) {
+          console.error('Failed to fetch example sentences:', error);
+          setExamples([{
+            japanese: `${decodedSlug}の例文が見つかりませんでした。`,
+            english: 'No example sentences found for this kanji.'
+          }]);
+        }
+      } else {
+        setError('Word not found');
       }
-    } else {
-      setError('Word not found');
+      
+      setLoading(false);
     }
-    
-    setLoading(false);
+
+    loadData();
   }, [resolvedParams.slug]);
 
   if (loading) {
@@ -101,7 +98,7 @@ export default function WordDetailPage({ params }: Props) {
       <div className={styles.container}>
         <div className={styles.loadingContainer}>
           <div className={styles.loadingSpinner}></div>
-          <p>Loading word details...</p>
+          <p>Loading kanji details...</p>
         </div>
       </div>
     );
@@ -114,7 +111,7 @@ export default function WordDetailPage({ params }: Props) {
           <h2>Error</h2>
           <p>{error || 'Word not found'}</p>
           <Link href="/n4-kanji-list" className={styles.backLink}>
-            ← Back to N4 Kanji List
+            Back to Kanji List
           </Link>
         </div>
       </div>
@@ -123,110 +120,106 @@ export default function WordDetailPage({ params }: Props) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.wordDetailHeader}>
-        <Link href="/n4-kanji-list" className={styles.backLink}>
-          ← Back to N4 Kanji List
-        </Link>
-        <h1 className={styles.wordDetailTitle}>
-          <span className={styles.kanjiHeading}>{word.kanji}</span>
-          <span className={styles.kanaHeading} dangerouslySetInnerHTML={{ __html: word.kana }}></span>
-        </h1>
-        <p className={styles.wordDetailMeaning}>{word.meaning}</p>
-      </div>
+      <Link href="/n4-kanji-list" className={styles.backLink}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+        Back to N4 Kanji List
+      </Link>
 
-      <div className={styles.wordDetailCard}>
-        <div className={styles.wordDetailSection}>
-          <h2>Details</h2>
-          <div className={styles.wordDetailGrid}>
-            <div className={styles.wordDetailItem}>
-              <span className={styles.wordDetailLabel}>Type:</span>
-              <span className={styles.wordDetailValue}>{word.type}</span>
-            </div>
-            <div className={styles.wordDetailItem}>
-              <span className={styles.wordDetailLabel}>JLPT Level:</span>
-              <span className={styles.wordDetailValue}>N4</span>
-            </div>
-            <div className={styles.wordDetailItem}>
-              <span className={styles.wordDetailLabel}>Kanji:</span>
-              <span className={styles.wordDetailValue}>{word.kanji}</span>
-            </div>
-            <div className={styles.wordDetailItem}>
-              <span className={styles.wordDetailLabel}>Reading:</span>
-              <span className={styles.wordDetailValue} dangerouslySetInnerHTML={{ __html: word.kana }}></span>
-            </div>
+      <div className={styles.heroSection}>
+        <div className={styles.leftColumn}>
+          <div className={styles.kanjiCard}>
+            <span className={styles.kanji}>{word.kanji}</span>
+            <p className={styles.meaning}>{word.meaning}</p>
+            
+            {word && rawKanjiData && (
+              <div className={styles.readingsContainer}>
+                {rawKanjiData?.onyomi && rawKanjiData.onyomi.length > 0 && (
+                  <div className={styles.readingBox}>
+                    <div className={styles.readingLabel}>On'yomi</div>
+                    <div className={styles.readingContent}>
+                      <span>{rawKanjiData.onyomi.join('・')}</span>
+                      {word.kanji && <KanjiAudioPlayer kanji={word.kanji} onyomi={rawKanjiData.onyomi} kunyomi={[]} />}
+                    </div>
+                  </div>
+                )}
+                {rawKanjiData?.kunyomi && rawKanjiData.kunyomi.length > 0 && (
+                  <div className={styles.readingBox}>
+                    <div className={styles.readingLabel}>Kun'yomi</div>
+                    <div className={styles.readingContent}>
+                      <span>{rawKanjiData.kunyomi.join('・')}</span>
+                      {word.kanji && <KanjiAudioPlayer kanji={word.kanji} onyomi={[]} kunyomi={rawKanjiData.kunyomi} />}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
 
-        {rawKanjiData && (
-          <div className={styles.wordDetailSection}>
-            <KanjiAudioPlayer
-              kanji={word.kanji || ''}
-              onyomi={rawKanjiData.onyomi}
-              kunyomi={rawKanjiData.kunyomi.map((k: string) => k.replace(/\(.*?\)/g, ''))}
-            />
+        <div className={styles.rightColumn}>
+          <div className={styles.strokeOrder}>
+            {word?.kanji && <StrokeOrderDisplay kanji={word.kanji} />}
+            <div className={styles.details}>
+              <div className={styles.detail}>
+                <span>Type:</span>
+                <span>{word.type}</span>
+              </div>
+              <div className={styles.detail}>
+                <span>JLPT Level:</span>
+                <span><JlptLevelBadge word={{ ...word, level: 'N4' }} /></span>
+              </div>
+            </div>
           </div>
-        )}
+        </div>
+      </div>
 
-        <div className={styles.wordDetailSection}>
+      <div className={styles.content}>
+        <section>
           <h2>Example Sentences</h2>
-          {word.examples && word.examples.length > 0 ? (
-            <ul className={styles.exampleList}>
-              {word.examples.map((example, index) => (
+          {examples && examples.length > 0 ? (
+            <ul className={styles.examples}>
+              {examples.map((example, index) => (
                 <li key={index} className={styles.exampleItem}>
-                  <div className={styles.exampleJapanese}>{example.japanese}</div>
-                  <div className={styles.exampleRomaji}>{example.romaji}</div>
-                  <div className={styles.exampleEnglish}>{example.english}</div>
+                  <div className={styles.exampleContent}>
+                    <div>
+                      <p className={styles.japanese}>{example.japanese}</p>
+                      <p className={styles.english}>{example.english}</p>
+                    </div>
+                    <SentenceAudioPlayer text={example.japanese} />
+                  </div>
                 </li>
               ))}
             </ul>
           ) : (
             <p>No example sentences available.</p>
           )}
-        </div>
+        </section>
 
-        <div className={styles.wordDetailSection}>
-          <h2>Kanji Breakdown</h2>
-          <p>
-            The kanji "{word.kanji}" is commonly used in JLPT N4 vocabulary. 
-            Understanding its components and stroke order will help you master it.
-          </p>
-          <div className={styles.strokeOrderSection}>
-            <StrokeOrderDisplay kanji={word.kanji || ''} />
-          </div>
-        </div>
-
-        <div className={styles.wordDetailSection}>
-          <h2>Study Tips</h2>
-          <p>
-            To memorize this kanji effectively:
-          </p>
-          <ul className={styles.studyTipsList}>
-            <li>Practice writing it multiple times, paying attention to stroke order</li>
-            <li>Create flashcards with the kanji on one side and its readings and meanings on the other</li>
-            <li>Look for this kanji in real Japanese text to reinforce your memory</li>
-            <li>Create mnemonics that connect the kanji's shape to its meaning</li>
-          </ul>
-        </div>
-
-        {relatedWords.length > 0 && (
-          <div className={styles.wordDetailSection}>
-            <h2>Other N4 Kanji</h2>
-            <div className={styles.relatedWordsList}>
+        <section>
+          <h2>Related Kanji</h2>
+          {relatedWords.length > 0 ? (
+            <div className={styles.relatedKanji}>
               {relatedWords.map((relatedWord, index) => (
                 <Link 
                   key={index}
                   href={`/n4-kanji-list/${relatedWord.kanji}`}
-                  className={styles.relatedWordCard}
+                  className={styles.relatedCard}
                 >
-                  <div className={styles.relatedWordKanji}>{relatedWord.kanji}</div>
-                  <div className={styles.relatedWordKana} dangerouslySetInnerHTML={{ __html: relatedWord.kana }}></div>
-                  <div className={styles.relatedWordMeaning}>{relatedWord.meaning}</div>
+                  <div className={styles.relatedKanjiChar}>{relatedWord.kanji}</div>
+                  <div className={styles.relatedReading} dangerouslySetInnerHTML={{ __html: relatedWord.kana }}></div>
+                  <div className={styles.relatedMeaning}>{relatedWord.meaning}</div>
                 </Link>
               ))}
             </div>
-          </div>
-        )}
+          ) : (
+            <p>Coming soon...</p>
+          )}
+        </section>
       </div>
+
+      <SignupCTA />
     </div>
   );
 }

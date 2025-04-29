@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { kanjiService } from '@/services/kanji-service';
-import JlptLevelBadge from './JlptLevelBadge';
 import styles from '@/styles/word-detail.module.css';
 
 interface StrokeOrderDisplayProps {
@@ -150,7 +149,6 @@ export default function StrokeOrderDisplay({ kanji }: StrokeOrderDisplayProps) {
     <div className={styles.strokeOrderContainer}>
       <div className={styles.strokeOrderHeader}>
         <h3 className={styles.strokeOrderTitle}>Stroke Order</h3>
-        <JlptLevelBadge word={kanji} />
       </div>
       <div 
         ref={svgContainerRef}

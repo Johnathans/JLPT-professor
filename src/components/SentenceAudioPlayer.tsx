@@ -3,30 +3,25 @@
 import { useState } from 'react';
 import styles from '@/styles/kanji-list.module.css';
 
-interface KanjiAudioPlayerProps {
-  kanji: string;
-  onyomi: string[];
-  kunyomi: string[];
+interface SentenceAudioPlayerProps {
+  text: string;
 }
 
-export default function KanjiAudioPlayer({ kanji, onyomi, kunyomi }: KanjiAudioPlayerProps) {
+export default function SentenceAudioPlayer({ text }: SentenceAudioPlayerProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const generateAudio = async (reading: string) => {
+  const generateAudio = async () => {
     try {
       setLoading(true);
       setError(null);
 
-      const response = await fetch('/api/test-kanji-audio', {
+      const response = await fetch('/api/sentence-audio', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          kanji,
-          reading,
-        }),
+        body: JSON.stringify({ text }),
       });
 
       if (!response.ok) {
@@ -48,10 +43,10 @@ export default function KanjiAudioPlayer({ kanji, onyomi, kunyomi }: KanjiAudioP
 
   return (
     <button
-      onClick={() => generateAudio(onyomi.length > 0 ? onyomi[0] : kunyomi[0])}
+      onClick={generateAudio}
       disabled={loading}
       className={styles.audioButton}
-      title="Play pronunciation"
+      title="Play sentence"
     >
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
