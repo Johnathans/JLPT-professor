@@ -53,12 +53,42 @@ export async function getKanjiDetails(kanji: string): Promise<KanjiResponse | nu
   }
 }
 
-export async function getExampleSentences(word: string): Promise<string[]> {
-  // Note: This would use the Tatoeba API in production
-  // For now, returning mock data
-  return [
-    `私は${word}が好きです。`,
-    `彼は${word}を使います。`,
-    `${word}はとても面白いです。`
-  ];
+export async function getExampleSentences(word: string): Promise<Array<{
+  japanese: string;
+  english: string;
+}>> {
+  try {
+    // Fetch sentences through our API proxy
+    const response = await fetch(`/api/examples?keyword=${encodeURIComponent(word)}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch examples');
+    }
+
+    const data = await response.json();
+    
+    // Process and filter the results
+    const sentences = data.results
+      .slice(0, 3) // Limit to 3 examples
+      .map((result: any) => ({
+        japanese: result.text,
+        english: result.translations[0]?.text || 'No translation available'
+      }))
+      .filter((example: any) => 
+        // Filter out sentences that are too long or complex
+        example.japanese.length < 30 && 
+        !example.japanese.includes('〜') && 
+        !example.japanese.includes('…')
+      );
+
+    return sentences.length > 0 ? sentences : [{
+      japanese: `${word}の例文が見つかりませんでした。`,
+      english: 'No example sentences found for this kanji.'
+    }];
+  } catch (error) {
+    console.error('Error fetching example sentences:', error);
+    return [{
+      japanese: `${word}の例文が見つかりませんでした。`,
+      english: 'No example sentences found for this kanji.'
+    }];
+  }
 }
