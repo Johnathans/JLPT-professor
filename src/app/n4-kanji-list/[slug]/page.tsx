@@ -29,6 +29,10 @@ export default function WordDetailPage({ params }: Props) {
   const [examples, setExamples] = useState<Array<{ japanese: string; english: string; }>>([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     async function loadData() {
       const decodedSlug = decodeURIComponent(resolvedParams.slug);
       const sentencesPromise = getExampleSentences(decodedSlug);

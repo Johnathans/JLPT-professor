@@ -1,0 +1,5142 @@
+{
+  "examples": {
+    "才": [
+      {
+        "japanese": "彼女は音楽の才能がある。",
+        "english": "She has a genius for music."
+      },
+      {
+        "japanese": "恥を知らないということが、天才の代償なんじゃないかと思う。",
+        "english": "I guess having zero shame is the price of genius."
+      },
+      {
+        "japanese": "トムは天才です。",
+        "english": "Tom is a genius."
+      }
+    ],
+    "王": [
+      {
+        "japanese": "海王星は太陽系の8番目の惑星だ。",
+        "english": "Neptune is the eighth planet of the solar system."
+      },
+      {
+        "japanese": "ヨシヤは八歳のとき王となり、エルサレムで三十一年の間世を治めた。",
+        "english": "Josiah was eight years old when he began to reign, and he reigned in Jerusalem one and thirty years."
+      },
+      {
+        "japanese": "王は城に住んでいます。",
+        "english": "The king lives in the castle."
+      }
+    ],
+    "石": [
+      {
+        "japanese": "子供は猫めがけて石を投げた。",
+        "english": "The child threw a stone at the cat."
+      },
+      {
+        "japanese": "石鹸がないです。",
+        "english": "There's no soap."
+      },
+      {
+        "japanese": "壁はざらざらとした石で出来ていた。",
+        "english": "The wall was made of rough stones."
+      }
+    ],
+    "内": [
+      {
+        "japanese": "トムにボストンを案内してあげたんだ。",
+        "english": "I showed Tom around Boston."
+      },
+      {
+        "japanese": "大学は敷地内にスカッシュコートを完備しています。",
+        "english": "The University grounds include a squash court."
+      },
+      {
+        "japanese": "彼女は内気に見えるが、実際は強い意志の持主だ。",
+        "english": "She seems shy, but has a strong will in practice."
+      }
+    ],
+    "太": [
+      {
+        "japanese": "木星は太陽系で一番大きい惑星です。",
+        "english": "Jupiter is the biggest planet in our solar system."
+      },
+      {
+        "japanese": "太りたくない。",
+        "english": "I don't want to get fat."
+      },
+      {
+        "japanese": "最重要語句は太字になっています。",
+        "english": "The most important words are in bold."
+      }
+    ],
+    "引": [
+      {
+        "japanese": "嵐は多くの損害を引き起こした。",
+        "english": "The storm caused a lot of damage."
+      },
+      {
+        "japanese": "彼は力を込めて弓を引いて遠く矢を射ることを試した。",
+        "english": "He tried to draw the bow with all his strength and shoot an arrow far."
+      },
+      {
+        "japanese": "成人年齢が１８歳に引き下げられた後も、成人式は今まで通り２０歳で行うという自治体が多いようです。",
+        "english": "Even after the legal age of adulthood got lowered to 18, it seems like there's still a lot of places where they continue to do their coming of age ceremonies at 20, as they'd been doing before."
+      }
+    ],
+    "市": [
+      {
+        "japanese": "京都とボストンは姉妹都市である。",
+        "english": "Kyoto and Boston are sister cities."
+      },
+      {
+        "japanese": "市販の家具ではサイズが合わないから、家具を特注する。",
+        "english": "Ready-made furniture won't fit, so I'll order it custom-made."
+      },
+      {
+        "japanese": "岩手県の県庁所在地は盛岡市です。",
+        "english": "Iwate Prefecture's capital is Morioka City."
+      }
+    ],
+    "他": [
+      {
+        "japanese": "他に何か質問がありますか。",
+        "english": "Do you have any other questions?"
+      },
+      {
+        "japanese": "他人の陰口はやめなさい。",
+        "english": "Don't talk about people behind their backs."
+      },
+      {
+        "japanese": "私はレースで最後に出発したが、すぐに他の人たちに追いついた。",
+        "english": "I started last in the race, but I soon caught up with the others."
+      }
+    ],
+    "号": [
+      {
+        "japanese": "赤信号で止まりましたか。",
+        "english": "Did you stop at the red light?"
+      },
+      {
+        "japanese": "電話番号を伺ってもよろしいですか？",
+        "english": "Can I have your number?"
+      },
+      {
+        "japanese": "信号が青になったよ。",
+        "english": "The signal turned green."
+      }
+    ],
+    "平": [
+      {
+        "japanese": "体温を計ってみましたが、平熱でした。",
+        "english": "I took my temperature, but it was normal."
+      },
+      {
+        "japanese": "３年ぶりに平和が戻った。",
+        "english": "Peace has returned after three years of war."
+      },
+      {
+        "japanese": "私の成績は平均より上だよ。",
+        "english": "My grades are above average."
+      }
+    ],
+    "打": [
+      {
+        "japanese": "彼女は彼からその秘密を引き出すだろう。今すぐ彼女に打ち明けた方がいい。",
+        "english": "She will worm the secret out of him. I had better trust her with it at once."
+      },
+      {
+        "japanese": "裸で滝に打たれている男性を見た。",
+        "english": "I saw a man standing naked under the waterfall."
+      },
+      {
+        "japanese": "長時間労働を是とするような、旧態依然とした企業風土を打破しなければならない。",
+        "english": "We must do away with the antiquated corporate culture that makes long working hours acceptable."
+      }
+    ],
+    "申": [
+      {
+        "japanese": "私の次の申し合わせはいつですか。",
+        "english": "When is my next appointment?"
+      },
+      {
+        "japanese": "メアリーと申します。",
+        "english": "My name is Mary."
+      },
+      {
+        "japanese": "その奨学金に申し込むつもりです。",
+        "english": "I'm going to apply for the scholarship."
+      }
+    ],
+    "礼": [
+      {
+        "japanese": "全生徒がプロムの夜礼儀正しく振る舞っているのを見て驚いた。",
+        "english": "It was a surprise to see all the students behaving with decorum on prom night."
+      },
+      {
+        "japanese": "男性の割礼が、性器ヘルペスや癌の原因にもなるウイルス感染のリスクを軽減します。",
+        "english": "Male circumcision decreases the risk of viral infections that cause herpes and cancer."
+      },
+      {
+        "japanese": "お礼の言葉もありません。",
+        "english": "I can never thank you enough."
+      }
+    ],
+    "耳": [
+      {
+        "japanese": "自分の目耳で見聞きしていないものは、本当かもしれないが、本当ではないかもしれない。",
+        "english": "What you don't see and hear with your own ears and eyes might be true, but it might also not be true."
+      },
+      {
+        "japanese": "耳が聞こえないって、どんな感じ？",
+        "english": "What's it like to be deaf?"
+      },
+      {
+        "japanese": "絶対音感のある人は、耳で聞いただけでどの音かがわかるんだって。",
+        "english": "They say that a person who has perfect pitch can tell just by listening what pitch a note is."
+      }
+    ],
+    "交": [
+      {
+        "japanese": "現在、地震の影響で首都圏の交通網が麻痺している状況です。",
+        "english": "Currently, it is a situation in which transport links in the metropolitan area have been paralyzed due to the earthquake."
+      },
+      {
+        "japanese": "私はその交通事故でけがをした。",
+        "english": "I got injured in the traffic accident."
+      },
+      {
+        "japanese": "ディックは交通事故に遭った。",
+        "english": "Dick had a traffic accident."
+      }
+    ],
+    "光": [
+      {
+        "japanese": "私はその光景を見て笑わざるえなかった。",
+        "english": "I couldn't help laughing at the sight."
+      },
+      {
+        "japanese": "僕たち、横浜を観光したよ。",
+        "english": "We did the sights of Yokohama."
+      },
+      {
+        "japanese": "ビーチは観光客でいっぱいだった。",
+        "english": "The beach was crowded with tourists."
+      }
+    ],
+    "回": [
+      {
+        "japanese": "彼が回復する見込みは全くない。",
+        "english": "There is no hope of his recovery."
+      },
+      {
+        "japanese": "姉は頭の回転がいい。",
+        "english": "My sister is quick-thinking."
+      },
+      {
+        "japanese": "配達は毎日２回あります。",
+        "english": "We have two deliveries every day."
+      }
+    ],
+    "当": [
+      {
+        "japanese": "競馬で万馬券を当ててウハウハなんだ。",
+        "english": "I'm tickled pink about winning 10,000 yen at the horse races."
+      },
+      {
+        "japanese": "私は彼が私を助けてくれるものだと当てこんでいた。",
+        "english": "I was banking on him to help me."
+      },
+      {
+        "japanese": "トムの犬にはしっぽがないって、本当？",
+        "english": "Is it true that Tom's dog doesn't have a tail?"
+      }
+    ],
+    "米": [
+      {
+        "japanese": "家にお米や缶詰などストックしてる？",
+        "english": "Do you stock things like rice and canned foods at home?"
+      },
+      {
+        "japanese": "日本酒はお米からできるんだ。",
+        "english": "Sake is made from rice."
+      },
+      {
+        "japanese": "タイではすでに乾燥しすぎて米作ができなくなった地方もある。",
+        "english": "In Thailand it has already become too dry to grow rice in some parts of the country."
+      }
+    ],
+    "声": [
+      {
+        "japanese": "声が小さくて、よく聞こえないよ。",
+        "english": "You speak so quietly I can barely hear you."
+      },
+      {
+        "japanese": "もっと大きな声で話しなさい。",
+        "english": "Raise your voice."
+      },
+      {
+        "japanese": "鳥の声がする？",
+        "english": "Do you hear birds?"
+      }
+    ],
+    "形": [
+      {
+        "japanese": "彼女は喜びの叫びを上げた。包装紙の中の人形に飛びつきたい気持ちだった。",
+        "english": "She let out a cry of joy. She wanted to jump at the doll wrapped in the packaging."
+      },
+      {
+        "japanese": "星雲はその形や見え方によって科学者が分類しています。",
+        "english": "Galaxies are classified by scientists according to their shape and appearance."
+      },
+      {
+        "japanese": "次の文には形容詞と副詞が含まれています。",
+        "english": "The next sentence has adjectives and adverbs."
+      }
+    ],
+    "草": [
+      {
+        "japanese": "テリーに見つからないうちに煙草の火は消した方がいいよ。",
+        "english": "You'd better put your cigarette out before Terry sees it."
+      },
+      {
+        "japanese": "ここに草は生えないよ。",
+        "english": "Grass won't grow here."
+      },
+      {
+        "japanese": "車は草地に飛び込み、しばらくガクンガクンと走って止まったのです。",
+        "english": "The car dove into the field and, after bumping along for a time, came to a halt."
+      }
+    ],
+    "化": [
+      {
+        "japanese": "何か、変化に気づきましたか。",
+        "english": "Did you notice any change?"
+      },
+      {
+        "japanese": "この実写化は原作ファンも納得です。",
+        "english": "Fans of the original will also be satisfied with this live-action adaptation."
+      },
+      {
+        "japanese": "化学のことなら、よく知ってるよ。",
+        "english": "I know chemistry pretty well."
+      }
+    ],
+    "両": [
+      {
+        "japanese": "両親は13の時に亡くなりました。",
+        "english": "My parents died when I was thirteen years old."
+      },
+      {
+        "japanese": "私の両親は私が何処にいるのかを知らない。",
+        "english": "My parents don't know where I am."
+      },
+      {
+        "japanese": "私の両親は二人とも亡くなりました。",
+        "english": "My parents are both dead."
+      }
+    ],
+    "全": [
+      {
+        "japanese": "あなたが安全な場所にいるといいですね。",
+        "english": "I hope you are in a safe place."
+      },
+      {
+        "japanese": "全然痛くないよ。",
+        "english": "It doesn't hurt at all."
+      },
+      {
+        "japanese": "あいつは女の子には全然関心がなかったんだ。",
+        "english": "He was not interested in girls at all."
+      }
+    ],
+    "向": [
+      {
+        "japanese": "飛行機は東に向かって飛んだ。",
+        "english": "The plane flew east."
+      },
+      {
+        "japanese": "向こうに見えるのが有名な作家です。",
+        "english": "The man you see over there is a famous writer."
+      },
+      {
+        "japanese": "彼は何でも大げさに言う傾向がある。",
+        "english": "He has a tendency toward exaggeration."
+      }
+    ],
+    "曲": [
+      {
+        "japanese": "こういう曲好き。っていうか5拍子の曲って無条件に好きなんだよね。",
+        "english": "I love songs like this. Or rather, I love any song with a quintuple meter."
+      },
+      {
+        "japanese": "あの曲が頭から離れない。",
+        "english": "I have that song stuck in my head."
+      },
+      {
+        "japanese": "そこを右に曲がって。",
+        "english": "Turn right there."
+      }
+    ],
+    "次": [
+      {
+        "japanese": "次の日、風邪は治った。",
+        "english": "The next day, the cold was cured."
+      },
+      {
+        "japanese": "空は次第に暗くなった。",
+        "english": "The sky grew darker and darker."
+      },
+      {
+        "japanese": "次のワールドカップって、いつなの？",
+        "english": "When is the next World Cup?"
+      }
+    ],
+    "直": [
+      {
+        "japanese": "直筆サイン入りボールを手に入れることができた。",
+        "english": "I was able to obtain a personally signed ball."
+      },
+      {
+        "japanese": "彼はとても正直だ。",
+        "english": "He is very honest."
+      },
+      {
+        "japanese": "ねえ、仲直りしよう。",
+        "english": "Hey, let's reconcile."
+      }
+    ],
+    "活": [
+      {
+        "japanese": "来年私たちは大学生活が始まります。",
+        "english": "Next year, we'll be starting college."
+      },
+      {
+        "japanese": "彼は生涯を通じて広く旅をし、移動の多い生活を送っていました。",
+        "english": "He traveled widely throughout his lifetime and led a life with a lot of movement."
+      },
+      {
+        "japanese": "現在の科学技術のおかげで私たちの生活は快適になった。",
+        "english": "Modern technology has made our lives more comfortable."
+      }
+    ],
+    "点": [
+      {
+        "japanese": "僕らには何も共通点がない。",
+        "english": "We have nothing in common."
+      },
+      {
+        "japanese": "レポート点の上限を10点とします。",
+        "english": "The highest amount of points possible on reports is 10 points."
+      },
+      {
+        "japanese": "次の交差点を右に曲がりなさい。",
+        "english": "Turn right at the next crossing."
+      }
+    ],
+    "科": [
+      {
+        "japanese": "数学は難しい科目だ。",
+        "english": "Mathematics is a difficult subject."
+      },
+      {
+        "japanese": "どの教科書、使ってる？",
+        "english": "Which textbook are you using?"
+      },
+      {
+        "japanese": "それ科学的に証明されてんの？",
+        "english": "Is that scientifically proven?"
+      }
+    ],
+    "首": [
+      {
+        "japanese": "キエフはウクライナの首都です。",
+        "english": "Kyiv is the capital of Ukraine."
+      },
+      {
+        "japanese": "もし首になったら、最初に何をしますか。",
+        "english": "Suppose you are fired, what will you do first?"
+      },
+      {
+        "japanese": "おまえは首だ。",
+        "english": "You're fired."
+      }
+    ],
+    "欠": [
+      {
+        "japanese": "今日は二人欠席です。",
+        "english": "Today, two students are absent."
+      },
+      {
+        "japanese": "彼は茶碗のふちを欠いた。",
+        "english": "He chipped the edge of the tea cup."
+      },
+      {
+        "japanese": "欠席させて下さい。",
+        "english": "I won't be able to make it."
+      }
+    ],
+    "由": [
+      {
+        "japanese": "あなたたちはこの天国で、何不自由なく、幸せに暮らすのです。",
+        "english": "Here in Heaven, you will all live happily and without any struggles."
+      },
+      {
+        "japanese": "「表現の自由」が侵害されているような気がします。",
+        "english": "I feel like the right to freedom of speech is being encroached on."
+      },
+      {
+        "japanese": "ニュースによると、香港はもう自由ではなくなるということだ。",
+        "english": "When it comes to the news, Hong Kong has already lost its freedom, or so I've heard."
+      }
+    ],
+    "民": [
+      {
+        "japanese": "多くの民族集団において、結婚の贈り物として伝統的にお金が贈られる。",
+        "english": "Many ethnic groups traditionally give money as a wedding gift."
+      },
+      {
+        "japanese": "我々よりはるかに分断されていた国民にリンカンがいったように、我々は敵ではなく友なのだ。",
+        "english": "As Lincoln said to a nation far more divided than ours, we are not enemies but friends."
+      },
+      {
+        "japanese": "そのボートはキューバからの難民で一杯だった。",
+        "english": "That boat was full of refugees from Cuba."
+      }
+    ],
+    "付": [
+      {
+        "japanese": "今の彼女とはいつから付き合ってるの？",
+        "english": "When did you start going out with your current girlfriend?"
+      },
+      {
+        "japanese": "押し付けられると反発しちゃうのが人間っていうものなんじゃないか。",
+        "english": "Isn't it reacting against that forced on us that is \"human\"?"
+      },
+      {
+        "japanese": "トムは目を覚ますと、自分が見慣れない部屋にいることに気付いた。",
+        "english": "Tom awoke to find himself in a strange room."
+      }
+    ],
+    "失": [
+      {
+        "japanese": "失礼ですが、上の記事にある誤りを三つ指摘させてください。",
+        "english": "Excuse me; allow me to point out three errors in the above article."
+      },
+      {
+        "japanese": "それでは、今日はそろそろ失礼させていただきます。",
+        "english": "On that note, I think I will be heading off for the day soon."
+      },
+      {
+        "japanese": "もっと勉強しないときっと失敗するわよ。",
+        "english": "You are bound to fail unless you study harder."
+      }
+    ],
+    "必": [
+      {
+        "japanese": "これは早急に対処する必要があります。",
+        "english": "We need to take care of this immediately."
+      },
+      {
+        "japanese": "今私たちに必要なのは休養です。",
+        "english": "What we need now is a rest."
+      },
+      {
+        "japanese": "お金が必要なら言ってくれればよかったのに。",
+        "english": "You should've told me you needed money."
+      }
+    ],
+    "未": [
+      {
+        "japanese": "１８歳未満の方は入場できません。",
+        "english": "Children under 18 are not admitted."
+      },
+      {
+        "japanese": "まだまだ未熟者ですが、皆さんよろしくお願いします。",
+        "english": "I am still a novice, but I look forward to working with you all."
+      },
+      {
+        "japanese": "科学者たちは未だに癌を完治させる方法を見出していない。",
+        "english": "Scientists haven't found a cure for cancer yet."
+      }
+    ],
+    "末": [
+      {
+        "japanese": "文末のピリオド、付け忘れてるよ。",
+        "english": "You forgot to put a period at the end of the sentence."
+      },
+      {
+        "japanese": "週末はどんな予定？",
+        "english": "What're your plans for the weekend?"
+      },
+      {
+        "japanese": "年末は猫の手も借りたいほど忙しくなる。",
+        "english": "We become very shorthanded at the end of the year."
+      }
+    ],
+    "記": [
+      {
+        "japanese": "この記事を転載することは可能でしょうか。",
+        "english": "Is it possible to reprint this article?"
+      },
+      {
+        "japanese": "三年間日記をつけ続けたんだけど、もうそろそろやめようかな。",
+        "english": "I've been keeping a diary for three years, but I'm thinking it's probably time for me to stop."
+      },
+      {
+        "japanese": "こちらの用紙にご記入いただけますか？",
+        "english": "Will you fill out this form, please?"
+      }
+    ],
+    "組": [
+      {
+        "japanese": "政治番組は信用してないよ。",
+        "english": "I don't trust the government television channel."
+      },
+      {
+        "japanese": "ピクニックテーブルを組み立てるのがこんなに大変だなんて思ってもみなかったよ。",
+        "english": "I never thought it'd be this hard to build a picnic table."
+      },
+      {
+        "japanese": "労働組合はストを呼びかけた。",
+        "english": "The labor union called for a strike."
+      }
+    ],
+    "船": [
+      {
+        "japanese": "豪華客船が港に入った。",
+        "english": "A luxury liner arrived in the harbor."
+      },
+      {
+        "japanese": "その船は合衆国へ向かう何百人もの移民を運んだ。",
+        "english": "The ship carried hundreds of emigrants to the US."
+      },
+      {
+        "japanese": "船で旅行するのがとても好きです。",
+        "english": "I really like travelling by ship."
+      }
+    ],
+    "雪": [
+      {
+        "japanese": "雪を見ると故郷を思い出す。",
+        "english": "Snow reminds me of my hometown."
+      },
+      {
+        "japanese": "今日は雪はないよ。",
+        "english": "There's no snow today."
+      },
+      {
+        "japanese": "天気予報によれば今夜は雪になるそうだ。",
+        "english": "According to the weather report, it will snow tonight."
+      }
+    ],
+    "支": [
+      {
+        "japanese": "彼は自分で夕食の支度をした。",
+        "english": "He prepared supper by himself."
+      },
+      {
+        "japanese": "どうにかしてトムを支える。",
+        "english": "I'll support Tom any way I can."
+      },
+      {
+        "japanese": "部屋代は半年分支払い済みだ。",
+        "english": "The rent is paid for six months."
+      }
+    ],
+    "助": [
+      {
+        "japanese": "僕の方こそありがとう！めっちゃ助かった！",
+        "english": "Thank you, too! You helped me a lot!"
+      },
+      {
+        "japanese": "ただ、助けていただいたお礼が言いたいです。",
+        "english": "I just want to thank you for your help."
+      },
+      {
+        "japanese": "俺たちを助けられるのはおまえだけなんだよ。",
+        "english": "You're the only one who can help us."
+      }
+    ],
+    "君": [
+      {
+        "japanese": "それって、君の自転車？",
+        "english": "Is it your bike?"
+      },
+      {
+        "japanese": "君はいつもテレビばかり見ているね。",
+        "english": "You are watching TV all the time."
+      },
+      {
+        "japanese": "もし君がずっと走っていたら、そこへ間に合って着いただろうに。",
+        "english": "Had you run all the way, you'd have got there in time."
+      }
+    ],
+    "対": [
+      {
+        "japanese": "トムがいたいのなら、僕は反対しないよ。",
+        "english": "If Tom wants to stay, I have no objection."
+      },
+      {
+        "japanese": "私は反対です。",
+        "english": "I oppose it."
+      },
+      {
+        "japanese": "トムってメアリーに絶対話しかけないんだよ。",
+        "english": "Tom never talks to Mary."
+      }
+    ],
+    "局": [
+      {
+        "japanese": "反乱軍は放送局を占拠した。",
+        "english": "The rebels have captured the broadcasting station."
+      },
+      {
+        "japanese": "東京特許許可局はどこですか？",
+        "english": "Where is the Tokyo patent office?"
+      },
+      {
+        "japanese": "これ、郵便局に持って行くんだよね？",
+        "english": "You'll take this to the post office, won't you?"
+      }
+    ],
+    "役": [
+      {
+        "japanese": "祖父は90歳ですが、まだ現役です。",
+        "english": "My grandfather is 90 years old and is still very active."
+      },
+      {
+        "japanese": "退職する重役に敬意を表して送別会が開かれた。",
+        "english": "A farewell party was held in honor of the retiring executive."
+      },
+      {
+        "japanese": "この文は、語学学習者には役に立たないよ。",
+        "english": "This sentence isn't useful for language learners."
+      }
+    ],
+    "投": [
+      {
+        "japanese": "少年は、石を投げました。",
+        "english": "The boy threw a stone."
+      },
+      {
+        "japanese": "トムはメアリーに雪玉を投げた。",
+        "english": "Tom threw a snowball at Mary."
+      },
+      {
+        "japanese": "投擲用のナイフが男たちの首筋に深々と突き刺さっていた。",
+        "english": "Throwing knives were stuck deep into the men's necks."
+      }
+    ],
+    "決": [
+      {
+        "japanese": "それが決まったら知らせるよ。",
+        "english": "I'll let you know when it has been decided."
+      },
+      {
+        "japanese": "トムはついにメアリーと別れる決意をした。",
+        "english": "Tom finally made up his mind to leave Mary."
+      },
+      {
+        "japanese": "彼にとって、妻は彼の命そのものだったと言っても決して大げさではない。",
+        "english": "It is no exaggeration to say that, as far as he was concerned, his wife was life itself to him."
+      }
+    ],
+    "馬": [
+      {
+        "japanese": "馬とポニーって、何が違うの？",
+        "english": "What's the difference between a horse and a pony?"
+      },
+      {
+        "japanese": "それ褒めてんの、馬鹿にしてんの？",
+        "english": "Is it a compliment or an insult?"
+      },
+      {
+        "japanese": "お母さんが馬を叱るの？",
+        "english": "Is Mother scolding the horse?"
+      }
+    ],
+    "番": [
+      {
+        "japanese": "ビルは私の一番の親友です。",
+        "english": "Bill is my best friend."
+      },
+      {
+        "japanese": "テレビ番組が子供たちに悪い影響を与えている。",
+        "english": "TV programs have a bad influence on children."
+      },
+      {
+        "japanese": "これが店で一番いいカメラです。",
+        "english": "This is the best camera in the store."
+      }
+    ],
+    "絵": [
+      {
+        "japanese": "ピカソは1950年にこの絵を描いた。",
+        "english": "Picasso painted this picture in 1950."
+      },
+      {
+        "japanese": "トムは私ほど上手に絵を描けない。",
+        "english": "Tom can't draw as well as I can."
+      },
+      {
+        "japanese": "これは私が自分で描いた絵です。",
+        "english": "This is a picture of my own painting."
+      }
+    ],
+    "数": [
+      {
+        "japanese": "あの家族は日本人の食べ物の好みに詳しいんだよ。彼らはかなりの数の日本人留学生を受け入れているんだ。",
+        "english": "I'm sure that family is familiar with Japanese tastes in food. They've hosted quite a few Japanese exchange students."
+      },
+      {
+        "japanese": "彼は数学がほとんど分かってないのに、ましてや化学なんて。",
+        "english": "He knows little of mathematics, still less of chemistry."
+      },
+      {
+        "japanese": "私はイスラム教徒が多数派の国で生まれました。",
+        "english": "I was born in a Muslim-majority country."
+      }
+    ],
+    "所": [
+      {
+        "japanese": "昔はここに刑務所があったんだよ。",
+        "english": "There used to be a prison here."
+      },
+      {
+        "japanese": "彼が住んでいる場所は町から遠いところです。",
+        "english": "The place where he lives is far from town."
+      },
+      {
+        "japanese": "場所を変えて話しましょう。",
+        "english": "Let's talk somewhere else."
+      }
+    ],
+    "具": [
+      {
+        "japanese": "それに必要な道具は貸してあげるよ。",
+        "english": "I'll lend you the tools you need to do that."
+      },
+      {
+        "japanese": "これは具体的にどういう仕組みなんですか？",
+        "english": "How exactly does this work?"
+      },
+      {
+        "japanese": "具たっぷりのシチューが食べたい。",
+        "english": "I want a stew with a wide variety of ingredients."
+      }
+    ],
+    "受": [
+      {
+        "japanese": "日本の教育制度は戦後アメリカのそれの影響を受けた。",
+        "english": "The educational system in Japan was influenced by that in the USA."
+      },
+      {
+        "japanese": "ワクチンを受けるの？",
+        "english": "Will you get vaccinated?"
+      },
+      {
+        "japanese": "その先生は３年のクラスを受け持っている。",
+        "english": "The teacher is in charge of the third-year class."
+      }
+    ],
+    "和": [
+      {
+        "japanese": "和平会談は明後日です。",
+        "english": "The peace talks will be held the day after tomorrow."
+      },
+      {
+        "japanese": "完璧な平和を。 永遠なる平和を祈ろう。",
+        "english": "Let us pray for a perfect, an eternal, peace."
+      },
+      {
+        "japanese": "その薬を飲んだら、痛みがたちどころに和らいだ。",
+        "english": "The medicine relieved my pain immediately."
+      }
+    ],
+    "定": [
+      {
+        "japanese": "来年日本に行く予定なので、日本語を勉強しています。",
+        "english": "Since I'm planning to go to Japan next year, I'm studying Japanese."
+      },
+      {
+        "japanese": "フライトは予定通りですか？",
+        "english": "Is the flight on schedule?"
+      },
+      {
+        "japanese": "ご結婚のご予定は？",
+        "english": "When are you planning on getting married?"
+      }
+    ],
+    "実": [
+      {
+        "japanese": "真実はただひとつ。",
+        "english": "There is only one truth."
+      },
+      {
+        "japanese": "実にすばらしい考えだ。",
+        "english": "What a wonderful idea!"
+      },
+      {
+        "japanese": "真実は重要なことであろうか。",
+        "english": "Does truth matter?"
+      }
+    ],
+    "泳": [
+      {
+        "japanese": "その水族館では、小さな魚たちが泳いでいる。",
+        "english": "Little fish are swimming in the aquarium."
+      },
+      {
+        "japanese": "私は泳げます。",
+        "english": "I'm able to swim."
+      },
+      {
+        "japanese": "彼はよくその川に泳ぎに行ったものだ。",
+        "english": "He often went swimming in that river."
+      }
+    ],
+    "苦": [
+      {
+        "japanese": "即興でやるのは苦手だ。",
+        "english": "I hate to improvise."
+      },
+      {
+        "japanese": "トムは人の名前を覚えるのが苦手なのよ。",
+        "english": "Tom has trouble remembering people's names."
+      },
+      {
+        "japanese": "彼は頭痛で苦しんでいる。",
+        "english": "He is suffering from a headache."
+      }
+    ],
+    "表": [
+      {
+        "japanese": "時刻表をいただけますか。",
+        "english": "May I have a timetable?"
+      },
+      {
+        "japanese": "現在完了は、過去～現在という長いスパンを表現するものです。",
+        "english": "The present perfect expresses the long span from past to present."
+      },
+      {
+        "japanese": "正義が行動によって表される。",
+        "english": "Justice is expressed through actions."
+      }
+    ],
+    "部": [
+      {
+        "japanese": "メアリーの部屋の壁は、ポスターで埋め尽くされていた。",
+        "english": "The walls of Mary's room were covered with posters."
+      },
+      {
+        "japanese": "お金ね、もう全部使っちゃった。",
+        "english": "I've already spent all my money."
+      },
+      {
+        "japanese": "これ全部飲んじゃってもいい？",
+        "english": "Is it OK if I drink all of this?"
+      }
+    ],
+    "乗": [
+      {
+        "japanese": "馬に乗ったのは、あれが初めてだった？",
+        "english": "Was that the first time you rode a horse?"
+      },
+      {
+        "japanese": "暗い所が怖いっていうのを乗り越える必要がありますね。",
+        "english": "You must conquer your fear of the dark."
+      },
+      {
+        "japanese": "どこで乗り換えればいいでしょうか。",
+        "english": "Where should I transfer?"
+      }
+    ],
+    "客": [
+      {
+        "japanese": "もー、お客さんが来るってだけで、ズボン履かなきゃいけないの？",
+        "english": "So just because we're having guests over I'm supposed to wear pants?"
+      },
+      {
+        "japanese": "私はまるで招かれざる客のような気がした。",
+        "english": "I felt as if I were an uninvited guest."
+      },
+      {
+        "japanese": "お客様が到着されました。",
+        "english": "Our guests have arrived."
+      }
+    ],
+    "相": [
+      {
+        "japanese": "真相をご存じですか？",
+        "english": "Do you know the real facts?"
+      },
+      {
+        "japanese": "私には相談する友達がたくさんいる。",
+        "english": "I have a lot of friends with whom to consult."
+      },
+      {
+        "japanese": "アインシュタインの相対性理論は俺にはわけわかめだ。",
+        "english": "Einstein's theory of relativity is Greek to me."
+      }
+    ],
+    "美": [
+      {
+        "japanese": "パーク・ストリートに美味しいお店があるんだ。",
+        "english": "There's a good restaurant on Park Street."
+      },
+      {
+        "japanese": "「美味しい？」「うん、美味しいよ」",
+        "english": "\"Does it taste good?\" \"Yes, it does.\""
+      },
+      {
+        "japanese": "この美術館は5年間も閉鎖されたままだ。",
+        "english": "This museum has been closed for five years."
+      }
+    ],
+    "負": [
+      {
+        "japanese": "この詩は私の手には負えない。",
+        "english": "This poem is too much for me."
+      },
+      {
+        "japanese": "彼はあっけなく負けてしまった。",
+        "english": "He was beaten too easily."
+      },
+      {
+        "japanese": "彼は負けを認めなかった。",
+        "english": "He didn't acknowledge defeat."
+      }
+    ],
+    "談": [
+      {
+        "japanese": "彼女の冗談は誰にも受けなかった。",
+        "english": "Her joke fell flat."
+      },
+      {
+        "japanese": "トムの冗談って、ホント面白いのよ。",
+        "english": "Tom jokes are really funny."
+      },
+      {
+        "japanese": "ほんの冗談のつもりで言ったんだ。",
+        "english": "I just meant it as a joke."
+      }
+    ],
+    "要": [
+      {
+        "japanese": "そんな大金は必要じゃなかった。",
+        "english": "I never needed that much money."
+      },
+      {
+        "japanese": "価格は需要と供給によって決まる。",
+        "english": "Prices depend on supply and demand."
+      },
+      {
+        "japanese": "今あなたに必要なのは、少し眠ることだと思う。",
+        "english": "I think that what you need now is some sleep."
+      }
+    ],
+    "勝": [
+      {
+        "japanese": "彼はテニスの優勝者です。",
+        "english": "He is a tennis champion."
+      },
+      {
+        "japanese": "「ふん！帰りたいなら、勝手にすればいい！」ピーター・パンは拗ねて、どこかへ飛んで行ってしまいました。",
+        "english": "\"Hmph! Go ahead, go back home if you want!\", Peter Pan said with a sulk as he flew away."
+      },
+      {
+        "japanese": "なんでもかんでも好き勝手にはさせないぞ。",
+        "english": "You shall not have your own way in everything."
+      }
+    ],
+    "速": [
+      {
+        "japanese": "バージョンアップして速くなった気がする。",
+        "english": "I feel like it's gotten faster after the update."
+      },
+      {
+        "japanese": "彼は全力を尽くしたが、すぐにあんな速いランナーには勝てないことがわかった。",
+        "english": "He did his best but soon saw that he could not compete with such a fast runner."
+      },
+      {
+        "japanese": "この車は時速６０キロで走っている。",
+        "english": "This car is going 60km an hour."
+      }
+    ],
+    "配": [
+      {
+        "japanese": "これを配達してもらえますか。",
+        "english": "Can you deliver this?"
+      },
+      {
+        "japanese": "そもそも指名手配されただけでは「犯人」じゃないです。",
+        "english": "In any case, just being wanted by the police isn't enough to make you \"a criminal.\""
+      },
+      {
+        "japanese": "年配の人はよく新しいことをするのを恐れる。",
+        "english": "Older people are often afraid of trying new things."
+      }
+    ],
+    "酒": [
+      {
+        "japanese": "私は以前は葡萄酒が嫌いでしたが、今ではとても好きです。",
+        "english": "I didn't use to like wine, but now I'm quite fond of it."
+      },
+      {
+        "japanese": "「お酒嫌いなの？」「いや、好きなんだけどすごく弱いんだ」",
+        "english": "\"You don't like alcohol?\" \"No, I like drinking, I just have terrible tolerance.\""
+      },
+      {
+        "japanese": "私の父は煙草も吸わないし、酒も飲まない。",
+        "english": "My father neither smokes nor drinks."
+      }
+    ],
+    "進": [
+      {
+        "japanese": "彼らはゆっくり前進した。",
+        "english": "They moved ahead slowly."
+      },
+      {
+        "japanese": "もう１歩進んでいれば、私はがけから落ちていただろう。",
+        "english": "One more step, and I would have fallen off the cliff."
+      },
+      {
+        "japanese": "最も急進的な革命家が革命の翌日には保守になる。",
+        "english": "The most radical revolutionary will become a conservative the day after the revolution."
+      }
+    ],
+    "落": [
+      {
+        "japanese": "ころんでこえだめに落ち、頭からどっぷりと浸かってしまった。",
+        "english": "He fell into the cesspool and got covered from head to toe."
+      },
+      {
+        "japanese": "そのスキャンダルが彼の評判を落とした。",
+        "english": "The scandal detracted from his reputation."
+      },
+      {
+        "japanese": "これは駄洒落です。",
+        "english": "This is a pun."
+      }
+    ],
+    "葉": [
+      {
+        "japanese": "その言葉がぴったり当てはまるな。",
+        "english": "That word describes it perfectly."
+      },
+      {
+        "japanese": "母語で一番長い言葉って、わかる？",
+        "english": "Do you know the longest word in your language?"
+      },
+      {
+        "japanese": "さて。その言葉に信を置いてよいものやら。",
+        "english": "Well now. Are those words to be trusted I wonder?"
+      }
+    ],
+    "路": [
+      {
+        "japanese": "雪崩で道路がふさがった。",
+        "english": "A snowslide obstructed the road."
+      },
+      {
+        "japanese": "この道路は工事中のため通行止めだ。",
+        "english": "This road is closed to traffic for construction work."
+      },
+      {
+        "japanese": "遍路さんたちと一緒に去る事に決めた。",
+        "english": "I decided to go away with the pilgrims."
+      }
+    ],
+    "鳴": [
+      {
+        "japanese": "指を鳴らすのも、トムの悪い癖だよな。",
+        "english": "One of Tom's bad habits is cracking his knuckles."
+      },
+      {
+        "japanese": "ジョンは派手にドラムを打ち鳴らしていた。",
+        "english": "John was beating the drums loudly."
+      },
+      {
+        "japanese": "俺に怒鳴るなよ。",
+        "english": "Don't yell at me."
+      }
+    ],
+    "横": [
+      {
+        "japanese": "横向きに寝ると「いびき」をかきにくい？",
+        "english": "Is snoring less likely if you sleep on your side?"
+      },
+      {
+        "japanese": "通行人はうんざりしながら横を通りすぎた。",
+        "english": "A pedestrian passed by in disgust."
+      },
+      {
+        "japanese": "歩行者は、道路を横断する時は、横断歩道を渡らないとね。",
+        "english": "A pedestrian needs to cross the street at a crosswalk."
+      }
+    ],
+    "調": [
+      {
+        "japanese": "調子はどう？",
+        "english": "How is it going?"
+      },
+      {
+        "japanese": "彼は調和と言う言葉を知らない。",
+        "english": "That guy doesn't know the meaning of the word harmony."
+      },
+      {
+        "japanese": "この財務調査は会社の資産を評価することも含みます。",
+        "english": "This financial audit also includes an evaluation of the company's assets."
+      }
+    ],
+    "頭": [
+      {
+        "japanese": "銅像は頭を持っていない。",
+        "english": "The statue has no head."
+      },
+      {
+        "japanese": "牛小屋には牛が３頭います。",
+        "english": "There are three cows in the cowshed."
+      },
+      {
+        "japanese": "死にかけているのだとという思いがさっと彼女の頭をよぎった。",
+        "english": "The thought flashed through her mind that she was going to die."
+      }
+    ],
+    "顔": [
+      {
+        "japanese": "人間顔だけじゃないよ。",
+        "english": "People are more than what they look like."
+      },
+      {
+        "japanese": "私は顔に冷たい風が当たるのを感じた。",
+        "english": "I felt a cold wind on my face."
+      },
+      {
+        "japanese": "あの顔に見覚えがある。",
+        "english": "I've seen that face before."
+      }
+    ],
+    "最": [
+      {
+        "japanese": "最初は誰も私を信じなかった。",
+        "english": "No one believed me at first."
+      },
+      {
+        "japanese": "最近スマホの調子が悪い。",
+        "english": "My phone has been having some performance issues recently."
+      },
+      {
+        "japanese": "サハラ砂漠は世界で最も大きい砂漠です。",
+        "english": "The Sahara is the largest desert in the world."
+      }
+    ],
+    "争": [
+      {
+        "japanese": "戦争は未だに続いている。",
+        "english": "The war is still going on."
+      },
+      {
+        "japanese": "戦争するよりセックスしよう。",
+        "english": "Make love, not war."
+      },
+      {
+        "japanese": "彼女は子育てについて、彼と言い争った。",
+        "english": "She argued with him about raising children."
+      }
+    ],
+    "伝": [
+      {
+        "japanese": "フランス語で手紙を書くの、手伝ってくれない？",
+        "english": "Could you help me write a letter in French?"
+      },
+      {
+        "japanese": "気持ちを伝えれなくて、もどかしい。",
+        "english": "It's frustrating not being able to convey what I feel."
+      },
+      {
+        "japanese": "トムは、ジョンが探してるとメアリーに伝えた。",
+        "english": "Tom told Mary that John was looking for her."
+      }
+    ],
+    "共": [
+      {
+        "japanese": "彼と私には共通点が何もない。",
+        "english": "I have nothing in common with him."
+      },
+      {
+        "japanese": "私たちはその店を共同で経営している。",
+        "english": "We run the store jointly."
+      },
+      {
+        "japanese": "トムは共和国の大統領に選ばれたんだ。",
+        "english": "Tom was elected President of the Republic."
+      }
+    ],
+    "好": [
+      {
+        "japanese": "子供の頃から冒険が好きだった。",
+        "english": "I have been fond of adventure since I was a child."
+      },
+      {
+        "japanese": "あなたは私の友人が好きですか。",
+        "english": "Do you like my friend?"
+      },
+      {
+        "japanese": "トムはフランス語がめっちゃ好きなのよ。",
+        "english": "Tom really likes French."
+      }
+    ],
+    "成": [
+      {
+        "japanese": "ヤニーは賛成したよ。",
+        "english": "Yanni agreed."
+      },
+      {
+        "japanese": "委員会は十名で構成されている。",
+        "english": "The committee comprises ten members."
+      },
+      {
+        "japanese": "私もちょうど同じことを考えていました。大賛成です。",
+        "english": "I was just thinking of the same thing. I'm all for that."
+      }
+    ],
+    "老": [
+      {
+        "japanese": "老眼鏡どこだっけ？",
+        "english": "Where are my reading glasses?"
+      },
+      {
+        "japanese": "その老婦人は病後かなり体力が弱っている。",
+        "english": "The old lady has been rather feeble since her illness."
+      },
+      {
+        "japanese": "老人が車にひかれた。",
+        "english": "The old man was run over by a car."
+      }
+    ],
+    "位": [
+      {
+        "japanese": "鉛筆は１ダース単位で売られている。",
+        "english": "Pencils are sold by the dozen."
+      },
+      {
+        "japanese": "プエルトリコの位置を地図の上に示しなさい。",
+        "english": "Locate Puerto Rico on a map."
+      },
+      {
+        "japanese": "おまえってほんとに正しい優先順位がわかってないな。",
+        "english": "You really don't have the right priorities!"
+      }
+    ],
+    "初": [
+      {
+        "japanese": "ローマの旅はこれが初めて？",
+        "english": "Is this your first trip to Rome?"
+      },
+      {
+        "japanese": "海草を食べたのは初めてです。",
+        "english": "This is the first time I've had seaweed."
+      },
+      {
+        "japanese": "その病気の初期症状は高熱とのどの痛みです。",
+        "english": "The initial symptoms of the disease are fever and sore throat."
+      }
+    ],
+    "利": [
+      {
+        "japanese": "とても利口な犬もいます。",
+        "english": "Some dogs are very smart."
+      },
+      {
+        "japanese": "表計算ソフトは、覚えておくと何かと便利よ。",
+        "english": "Once you get the hang of it, spreadsheet software is really useful."
+      },
+      {
+        "japanese": "私たちの計画には、更に多くの利点がございます。",
+        "english": "Our plan has lots of additional advantages."
+      }
+    ],
+    "努": [
+      {
+        "japanese": "トムは可哀想に、もう３時間の間、眠ろうとして努力している。",
+        "english": "Poor Tom's been trying to get to sleep for three hours now."
+      },
+      {
+        "japanese": "トマス君、努力してよ！",
+        "english": "Thomas, make some effort!"
+      },
+      {
+        "japanese": "政府は住宅問題の解決に最大限の努力を払っていない。",
+        "english": "The government isn't doing its best to solve the housing problem."
+      }
+    ],
+    "労": [
+      {
+        "japanese": "最近気がかりなことがたくさんあって、夜寝付くのに苦労している。",
+        "english": "I've had a lot on my mind recently and have had trouble falling asleep at night."
+      },
+      {
+        "japanese": "もう疲れたの何のって、疲労困憊だよ。",
+        "english": "I'm as tired as tired can be."
+      },
+      {
+        "japanese": "労働者達は昇給について質問に来た。",
+        "english": "The workers came to ask about their pay raises."
+      }
+    ],
+    "命": [
+      {
+        "japanese": "彼女は若くして死ぬ運命だったのだ。",
+        "english": "It was her fate to die young."
+      },
+      {
+        "japanese": "Aを取るために一生懸命頑張ってたもんだよ。",
+        "english": "I used to try really hard to get straight A's."
+      },
+      {
+        "japanese": "運命は大胆な者に微笑む。",
+        "english": "Fortune favors the bold."
+      }
+    ],
+    "放": [
+      {
+        "japanese": "彼は借金で首が回らなくなり、家を手放さざるを得なかった。",
+        "english": "He was deep in debt, and had to part with his house."
+      },
+      {
+        "japanese": "体が触れられたとき肌の感覚器官は脳に信号を送り、エンドルフィンのような化学物質が放出される。",
+        "english": "When the body is touched, receptors in the skin send messages to the brain causing the release of chemicals such as endorphins."
+      },
+      {
+        "japanese": "その犬を放してはいけない。",
+        "english": "Don't set the dogs loose."
+      }
+    ],
+    "昔": [
+      {
+        "japanese": "こう見えても、私、優等生だったのよ。昔は......。",
+        "english": "Despite how I look, I used to be an honored student, you know. I used to be..."
+      },
+      {
+        "japanese": "もう昔ほど若くはないんだから。",
+        "english": "You're not as young as you used to be."
+      },
+      {
+        "japanese": "彼は昔の彼ではない。",
+        "english": "He is not what he used to be."
+      }
+    ],
+    "育": [
+      {
+        "japanese": "彼は稲を育てている。",
+        "english": "He grows rice."
+      },
+      {
+        "japanese": "彼女は立派な教育を受けた。",
+        "english": "She has received a good education."
+      },
+      {
+        "japanese": "教育は、潜在能力を伸ばすことを目的としています。",
+        "english": "Education aims to develop potential abilities."
+      }
+    ],
+    "指": [
+      {
+        "japanese": "片方の手には５本の指がある。",
+        "english": "We have five fingers on each hand."
+      },
+      {
+        "japanese": "警察官は、私に車を路肩に寄せるよう指示した。",
+        "english": "The patrolman motioned me to pull over."
+      },
+      {
+        "japanese": "妊婦妻がいるのに結婚指輪外して合コンに参加してもいいですか？",
+        "english": "Is it OK for me to remove my wedding ring and go to a dating party when I have a pregnant wife?"
+      }
+    ],
+    "神": [
+      {
+        "japanese": "神は創造者です。天も地も人も、神以外は全て被造物です。",
+        "english": "God is the creator. Heaven and Earth and people and everything apart from God are created."
+      },
+      {
+        "japanese": "神道も仏教も、日本では宗教と言うよりも日常的な習慣の一種のようになってしまっているのです。",
+        "english": "That's because Shintoism and Buddhism are practiced in their daily customs instead of as their religion."
+      },
+      {
+        "japanese": "僕は神経多様性のあるケモナーなのだ。",
+        "english": "I'm a neurodivergent furry."
+      }
+    ],
+    "追": [
+      {
+        "japanese": "このサイトで文を追加する際には、適切な句読点が必要です。今回の場合は、句点が必要になります。",
+        "english": "You must ensure you use correct punctuation when you add sentences to this website. In this case, a full stop is necessary."
+      },
+      {
+        "japanese": "彼女は彼を追い返した。",
+        "english": "She threw him out."
+      },
+      {
+        "japanese": "犬は猫を追いかけようと木に登ろうとしたが、うまくいかなかった。",
+        "english": "The dog's attempts to climb the tree after the cat came to nothing."
+      }
+    ],
+    "戦": [
+      {
+        "japanese": "多くの人がその戦争で死んだ。",
+        "english": "Many people were killed in the war."
+      },
+      {
+        "japanese": "僕も『戦争と平和』は読んでません。",
+        "english": "I haven't read \"War and Peace\" either."
+      },
+      {
+        "japanese": "戦時中、彼は陸軍に所属していた。",
+        "english": "During the war, he served in the army."
+      }
+    ],
+    "良": [
+      {
+        "japanese": "『北の国から』は、北海道富良野市を舞台にしたフジテレビジョン制作のテレビドラマ。",
+        "english": "\"From the North Country\" is a TV drama produced by Fuji TV and set in Furano in Hokkaido."
+      },
+      {
+        "japanese": "それは不良品だ。",
+        "english": "It's defective."
+      },
+      {
+        "japanese": "ムスクの香りは最も良い香りの一つです。",
+        "english": "The scent of musk is one of the best smells there is."
+      }
+    ],
+    "便": [
+      {
+        "japanese": "彼からよく便りがありますか。",
+        "english": "Do you often hear from him?"
+      },
+      {
+        "japanese": "ナンシーは月に一度必ず私に便りをくれる。",
+        "english": "Nancy never fails to write to me once a month."
+      },
+      {
+        "japanese": "表計算ソフトは、覚えておくと何かと便利よ。",
+        "english": "Once you get the hang of it, spreadsheet software is really useful."
+      }
+    ],
+    "働": [
+      {
+        "japanese": "私たちは一日平均八時間働く。",
+        "english": "We average 8 hour's work a day."
+      },
+      {
+        "japanese": "「結婚してからも私働いて構わないわよ」と彼女は言った。",
+        "english": "\"I don't mind if I keep working even after we're married,\" she said."
+      },
+      {
+        "japanese": "労働者達は経営者に給料の引き上げを要求した。",
+        "english": "Laborers required raising of a salary of the manager."
+      }
+    ],
+    "庭": [
+      {
+        "japanese": "おそらくトムは裏庭にいるでしょう。",
+        "english": "Perhaps Tom is in the backyard."
+      },
+      {
+        "japanese": "この庭園、素敵ね。",
+        "english": "This garden is lovely."
+      },
+      {
+        "japanese": "どの家にも庭がありました。",
+        "english": "Every house had a garden."
+      }
+    ],
+    "息": [
+      {
+        "japanese": "彼は安心してホッとため息をもらした。",
+        "english": "He gave a sigh of relief."
+      },
+      {
+        "japanese": "彼女は息子を見殺しにした。",
+        "english": "She abandoned her son to his fate."
+      },
+      {
+        "japanese": "息子にはがっかりした。",
+        "english": "I was disappointed in my son."
+      }
+    ],
+    "流": [
+      {
+        "japanese": "マウンテンバイクのレースがこの数年、日本の若者の間で流行っている。",
+        "english": "Mountain bike racing has caught on with young Japanese in the past few years."
+      },
+      {
+        "japanese": "彼女は手紙を読んで涙を流した。",
+        "english": "She cried as she read the letter."
+      },
+      {
+        "japanese": "この川の約１キロ上流に橋があります。",
+        "english": "There is a bridge about one kilometer up this river."
+      }
+    ],
+    "消": [
+      {
+        "japanese": "無視されたからといって、事実が消えて無くなることはない。",
+        "english": "Facts do not cease to exist because they are ignored."
+      },
+      {
+        "japanese": "彼は火事を消し止めた。",
+        "english": "He extinguished the fire."
+      },
+      {
+        "japanese": "正月太りが解消されないから、我慢しようと思ってはいるんだけど、ついついチョコに手が伸びちゃうのよね。",
+        "english": "Although I still haven't been able to lose the weight I gained over New Year's, I've not been able to keep myself away from chocolate, as much as I've been trying to resist it."
+      }
+    ],
+    "都": [
+      {
+        "japanese": "例えば、大阪はサンフランシスコの姉妹都市です。",
+        "english": "For example, Osaka is the sister city of San Francisco."
+      },
+      {
+        "japanese": "私に関して言えば、土曜日が都合がよい。",
+        "english": "As for myself, Saturday will be convenient."
+      },
+      {
+        "japanese": "シンガポールは都市国家だ。",
+        "english": "Singapore is a city-state."
+      }
+    ],
+    "商": [
+      {
+        "japanese": "トムは私よりも商売経験が豊富だ。",
+        "english": "Tom is more experienced in business than me."
+      },
+      {
+        "japanese": "その会社は様々な商品を扱っている。",
+        "english": "The company deals in various goods."
+      },
+      {
+        "japanese": "彼の商売はうまくいっている。",
+        "english": "His business is doing well."
+      }
+    ],
+    "深": [
+      {
+        "japanese": "何でもかんでもそう深刻に受け止めるな。",
+        "english": "Don't take everything so seriously."
+      },
+      {
+        "japanese": "あんなに愛情深いご両親がいらっしゃるなんてあなたは幸運です。",
+        "english": "You are fortunate to have such loving parents."
+      },
+      {
+        "japanese": "道具としての実需がないから品揃えに深みがでない。",
+        "english": "There's no demand for them as tools, so the product line-up is poor."
+      }
+    ],
+    "球": [
+      {
+        "japanese": "大雨のため、野球の試合は中止になった。",
+        "english": "The baseball game was canceled because of the heavy rain."
+      },
+      {
+        "japanese": "地球の直径は、12,742キロです。",
+        "english": "Earth has a diameter of 12,742 kilometers."
+      },
+      {
+        "japanese": "私は地球上で一番幸せな男だ。",
+        "english": "I am the happiest man on earth."
+      }
+    ],
+    "陽": [
+      {
+        "japanese": "太陽を描く時って、何色を使う？",
+        "english": "What color do you use when you paint the sun?"
+      },
+      {
+        "japanese": "陰陽師身の上知らず。",
+        "english": "The Ying Yang diviner may not predict his own fate."
+      },
+      {
+        "japanese": "陽は知らぬ間に地平線下に沈んだ。",
+        "english": "The sun sank below the horizon before I knew it."
+      }
+    ],
+    "寒": [
+      {
+        "japanese": "悪寒がするわ。",
+        "english": "I have a chill."
+      },
+      {
+        "japanese": "外は寒いけど、家の中は暖かい。",
+        "english": "It's cold outside, but warm in the house."
+      },
+      {
+        "japanese": "今頃ロンドンは寒いに違いない。",
+        "english": "London must be cold now."
+      }
+    ],
+    "悲": [
+      {
+        "japanese": "こうして武田の悲鳴で通りすがりの船に気付いてもらえ、事なきをえました。",
+        "english": "In this way a passing boat noticed them, thanks to Takeda's scream, and they survived without incident."
+      },
+      {
+        "japanese": "悲劇は突然起こった。",
+        "english": "The tragedy happened suddenly."
+      },
+      {
+        "japanese": "お母さんが悲しい曲を聴くといつも泣いてしまいます。",
+        "english": "Mother always cries when she listens to sad songs."
+      }
+    ],
+    "期": [
+      {
+        "japanese": "おそらく君はトムが時間通りに来ることを期待しているのだろうね。",
+        "english": "You're probably expecting Tom to arrive on time."
+      },
+      {
+        "japanese": "これを期待していたんだ！",
+        "english": "I was expecting it!"
+      },
+      {
+        "japanese": "彼女は期末試験ですばらしい成績を取った。",
+        "english": "She earned remarkable grades at the final exams."
+      }
+    ],
+    "歯": [
+      {
+        "japanese": "虫歯は１本もありません。",
+        "english": "I don't have any cavities."
+      },
+      {
+        "japanese": "母は歯の治療のために１日おきに歯医者に通っています。",
+        "english": "My mother visits the dentist's every other day to get her teeth fixed."
+      },
+      {
+        "japanese": "男の人は歯を磨く。",
+        "english": "The man brushes his teeth."
+      }
+    ],
+    "港": [
+      {
+        "japanese": "８時にヒースロー空港に到着する予定です。",
+        "english": "We expect to arrive at Heathrow Airport at eight."
+      },
+      {
+        "japanese": "空港で迷子になりそう。",
+        "english": "I'm afraid of getting lost at the airport."
+      },
+      {
+        "japanese": "空港に近いホテルがいいな。",
+        "english": "I prefer a hotel by the airport."
+      }
+    ],
+    "登": [
+      {
+        "japanese": "犬は壁には登れないよ。",
+        "english": "A dog can't climb up a wall."
+      },
+      {
+        "japanese": "私は以前富士山に登ったことがある。",
+        "english": "I have climbed Mt. Fuji before."
+      },
+      {
+        "japanese": "YouTubeの登録には本名と住所が要ります。",
+        "english": "YouTube registration requires a real name and an address."
+      }
+    ],
+    "亡": [
+      {
+        "japanese": "重傷を負った男性は病院に着いた時既に亡くなっていた。",
+        "english": "The severely injured man was dead on arrival at the hospital."
+      },
+      {
+        "japanese": "東京に来てまだたったの三日間しかたっていないときに、父が亡くなったという知らせを受け取った。",
+        "english": "I had been in Tokyo only three days when I received news of my father's death."
+      },
+      {
+        "japanese": "交通事故により、同乗者が死亡、運転手も重傷を負いました。",
+        "english": "As a result of the car accident, the driver was severely injured, and the passenger died."
+      }
+    ],
+    "合": [
+      {
+        "japanese": "トムとメアリーが付き合ってるって知ってた？",
+        "english": "Did you know that Tom and Mary were dating?"
+      },
+      {
+        "japanese": "月曜日は都合が悪いんです。",
+        "english": "Monday's not good."
+      },
+      {
+        "japanese": "盛り上がりに欠ける試合だった。",
+        "english": "The game lacked excitement."
+      }
+    ],
+    "予": [
+      {
+        "japanese": "シングルを予約したいんですが。",
+        "english": "I'd like to book a single room."
+      },
+      {
+        "japanese": "ところで、予備の電池はあるの？",
+        "english": "By the way, do you have any spare batteries?"
+      },
+      {
+        "japanese": "今日、僕の学校に爆破予告のメールが届いたらしい。",
+        "english": "It seems that my school received a bomb threat today."
+      }
+    ],
+    "反": [
+      {
+        "japanese": "彼の返事は私達の期待に反するものだった。",
+        "english": "His response was contrary to our expectations."
+      },
+      {
+        "japanese": "交通違反のチケットを渡された。",
+        "english": "I got a traffic ticket."
+      },
+      {
+        "japanese": "トムは食べたものの何かでアレルギー反応を起こしている。",
+        "english": "Tom is having an allergic reaction to something he ate."
+      }
+    ],
+    "返": [
+      {
+        "japanese": "自分の過去をじっくりと振り返ってみてもよいところだ。",
+        "english": "It is time to reflect on your past."
+      },
+      {
+        "japanese": "その本読んだら、私に返してくださいね。",
+        "english": "When you've finished reading that book, please give it back to me."
+      },
+      {
+        "japanese": "返金して欲しい。",
+        "english": "I want a refund."
+      }
+    ],
+    "宿": [
+      {
+        "japanese": "宿題はもう終わりましたか。",
+        "english": "Have you finished doing your homework yet?"
+      },
+      {
+        "japanese": "彼女は新宿まで歩いた。",
+        "english": "She walked as far as Shinjuku."
+      },
+      {
+        "japanese": "彼女は弟の宿題を手伝ってやった。",
+        "english": "She assisted her brother with his homework."
+      }
+    ],
+    "想": [
+      {
+        "japanese": "あの程度の技術しかない国が、自動車を作ろうと発想すること自体、我々には理解できない。",
+        "english": "It is incomprehensible to us that a country with that level of technology would even think of making an automobile."
+      },
+      {
+        "japanese": "彼女は可哀想に思って、その子達の面倒をみた。",
+        "english": "She cared for the children out of charity."
+      },
+      {
+        "japanese": "誰もが予想できたことじゃない？",
+        "english": "We could all see it coming, couldn't we?"
+      }
+    ],
+    "感": [
+      {
+        "japanese": "突然、胃に鋭い痛みを感じた。",
+        "english": "I felt a sharp pain in my stomach all of a sudden."
+      },
+      {
+        "japanese": "オーストラリアへ行って初めて、日本はなんと小さい国かと実感した。",
+        "english": "I didn't realize till I visited Australia how small Japan really is."
+      },
+      {
+        "japanese": "全くもって何も感じないよ。",
+        "english": "I feel nothing at all."
+      }
+    ],
+    "暗": [
+      {
+        "japanese": "子供の頃、私はたくさんの詩を暗記した。",
+        "english": "As a child I learned lots of poems by heart."
+      },
+      {
+        "japanese": "家に着いた時にはもう暗かった。",
+        "english": "It was already dark when I got home."
+      },
+      {
+        "japanese": "彼はその詩を暗記した。",
+        "english": "He learned the poem by heart."
+      }
+    ],
+    "様": [
+      {
+        "japanese": "またプロジェクト・グーテンベルクでは、多くの書籍を様々なフォーマットで探すことができます。",
+        "english": "You can also find many books in various formats at Project Gutenberg."
+      },
+      {
+        "japanese": "トムの新しい奥様ってね、初婚の時の娘さんよりも若いのよ。",
+        "english": "Tom's new wife is younger than his daughter from his first marriage."
+      },
+      {
+        "japanese": "昔々ある小さな島に年老いた王様が住んでいました。",
+        "english": "Long, long ago, there lived an old king on a small island."
+      }
+    ],
+    "福": [
+      {
+        "japanese": "妻の思いがけない死は、５０年以上にわたる、幸福な夫婦生活に終止符をうった。",
+        "english": "The untimely death of my wife has brought down the curtain on over 50 years of happily married life."
+      },
+      {
+        "japanese": "世界一の高齢化社会にあって、老人福祉は早急に解決しなければならない課題だ。",
+        "english": "In the society with the fastest aging population, the welfare of the elderly is an urgent problem that must be fixed."
+      },
+      {
+        "japanese": "富は健康や幸福ほど重要ではない。",
+        "english": "Wealth isn't as important as health or happiness."
+      }
+    ],
+    "殺": [
+      {
+        "japanese": "彼はその男を殺した。",
+        "english": "He killed him."
+      },
+      {
+        "japanese": "彼は殺人を白状した。",
+        "english": "He copped to the murder."
+      },
+      {
+        "japanese": "彼は自分の母親にナイフで切り付け殺人未遂で有罪になった。",
+        "english": "He was found guilty of attempted murder for attacking his mother with a knife."
+      }
+    ],
+    "然": [
+      {
+        "japanese": "彼が息子を自慢するのも当然だ。",
+        "english": "He is justly proud of his son."
+      },
+      {
+        "japanese": "オレ、全然モテなくてさ〜、彼女もいないんだ。そっちは彼女いるの？",
+        "english": "I'm not popular with the girls at all, and I don't even have a girlfriend. Do you?"
+      },
+      {
+        "japanese": "トムめっちゃかわいいから、女子校に紛れ込んでても全然違和感ないと思うよ！",
+        "english": "Tom, you're really cute so, I think you would blend in perfectly at an all-girls school."
+      }
+    ],
+    "熱": [
+      {
+        "japanese": "この気持ちが冷めないうちにがんばります！！「鉄は熱いうちに打て」といいますから。",
+        "english": "I'm going to get going before this feeling goes!! Well they do say \"Strike while the iron is hot.\""
+      },
+      {
+        "japanese": "あれ、相当熱いよ。",
+        "english": "That is so hot."
+      },
+      {
+        "japanese": "メアリーは熱々のコーヒーが好きだけど、トムはぬるめが好きなんだ。",
+        "english": "Mary likes her coffee steaming hot, while Tom likes his lukewarm."
+      }
+    ],
+    "選": [
+      {
+        "japanese": "最近新聞を読んでいないので、今年の選挙で誰が候補なのかも分からない。",
+        "english": "I haven't read the paper lately, so I don't know who we're electing this year."
+      },
+      {
+        "japanese": "どっちを選べばいいのか分かんないよ。",
+        "english": "I don't know which to choose."
+      },
+      {
+        "japanese": "どっちでも欲しいの選んでいいよ。",
+        "english": "You may choose whichever you want."
+      }
+    ],
+    "願": [
+      {
+        "japanese": "もしもし、ジョー・カールトンですが、マイケル君をお願いしたいのですが。",
+        "english": "Hello. This is Joe Carlton. May I speak to Michael?"
+      },
+      {
+        "japanese": "トムですけど、アンをお願いします。",
+        "english": "This is Tom speaking. I'd like to speak to Ann."
+      },
+      {
+        "japanese": "ちょっとそれは後にお願いできませんか？",
+        "english": "Couldn't you just do it later?"
+      }
+    ],
+    "情": [
+      {
+        "japanese": "よんどころない事情で、今年の夏は別荘で過ごせないんだ。",
+        "english": "Due to unavoidable circumstances this summer I can't stay in my holiday cottage."
+      },
+      {
+        "japanese": "この件に関して出来るだけの情報を報告してくれ。",
+        "english": "Get me all the information you can on this matter."
+      },
+      {
+        "japanese": "ロジバンの特徴の１つに感情や態度を表す言葉がとても多い事が挙げられます。",
+        "english": "One of the Lojban features are a lot of words that express feelings and the attitude."
+      }
+    ],
+    "疑": [
+      {
+        "japanese": "目を疑ったよ。",
+        "english": "I couldn't believe what I was seeing."
+      },
+      {
+        "japanese": "凶器に残された指紋は容疑者のものと一致する。",
+        "english": "The fingerprints left on the weapon correspond with the suspect's."
+      },
+      {
+        "japanese": "誰も私の疑問に答えてくれなかった。",
+        "english": "Nobody answered my question."
+      }
+    ],
+    "皆": [
+      {
+        "japanese": "クラスの少年たちは皆よく勉強した。",
+        "english": "All the boys in class worked hard."
+      },
+      {
+        "japanese": "皆さんお乗りください。",
+        "english": "All aboard!"
+      },
+      {
+        "japanese": "それがどんなものやら皆目見当がつかない。",
+        "english": "I have no idea of what it is like."
+      }
+    ],
+    "例": [
+      {
+        "japanese": "タトエバに10兆例文があれば良いのに。",
+        "english": "I wish Tatoeba had 10 trillion example sentences."
+      },
+      {
+        "japanese": "人生はしばしば航海に例えられる。",
+        "english": "Life is often compared to a voyage."
+      },
+      {
+        "japanese": "例年通りだった。特に落胆はなかった。共働きの家では当たり前のことだから。",
+        "english": "It was an ordinary year, no especial disappointments. Just the run of the mill goings-on of a dual-income household."
+      }
+    ],
+    "参": [
+      {
+        "japanese": "人参はあまり好きじゃないから、普段は食べないよ。",
+        "english": "I don't like carrots much, so I don't usually eat them."
+      },
+      {
+        "japanese": "人参なんか大っ嫌い。",
+        "english": "I hate carrots."
+      },
+      {
+        "japanese": "大根は人参より高いかもしれない。",
+        "english": "Daikon might be more expensive than the carrots."
+      }
+    ],
+    "完": [
+      {
+        "japanese": "彼の結論は完全な間違いであることが明らかになった。",
+        "english": "His solution turned out to be a complete mistake."
+      },
+      {
+        "japanese": "彼は一日中歩いて完全に疲れていた。",
+        "english": "He was completely tired from walking all day."
+      },
+      {
+        "japanese": "新しい橋は、4月までには完成します。",
+        "english": "The new bridge will be completed by April."
+      }
+    ],
+    "念": [
+      {
+        "japanese": "私は英語をいくらか話せますが、残念ながらよくは理解できません。",
+        "english": "I speak some English, but unfortunately I don't understand much."
+      },
+      {
+        "japanese": "あの、私、残念ですが小用が御座いますので、この辺りで失礼致しますね。",
+        "english": "Ah, unfortunately there is a small matter I need to attend to so I'll take my leave now."
+      },
+      {
+        "japanese": "三日前は残念なことにマグニチュード8.9の地震が日本の東北地方太平洋沖で発生した。",
+        "english": "Unfortunately, three days ago a magnitude 8.8 earthquake struck off the Pacific coast of Japan's Tohoku region."
+      }
+    ],
+    "折": [
+      {
+        "japanese": "幸運にもトムはどこも骨折しなかった。",
+        "english": "Fortunately, Tom didn't break anything."
+      },
+      {
+        "japanese": "最初の信号を右折して。",
+        "english": "Turn right at the first traffic light."
+      },
+      {
+        "japanese": "レントゲン写真は二本の骨折した指を映し出していた。",
+        "english": "The X-ray showed two broken fingers."
+      }
+    ],
+    "望": [
+      {
+        "japanese": "他にご要望はありませんか？",
+        "english": "Would you like anything else?"
+      },
+      {
+        "japanese": "トムは希望があると信じてる。",
+        "english": "Tom thinks there's hope."
+      },
+      {
+        "japanese": "彼女が回復する望みはほとんどない。",
+        "english": "There is little hope of her recovery."
+      }
+    ],
+    "束": [
+      {
+        "japanese": "彼女は約束を守れた。",
+        "english": "She kept her promise."
+      },
+      {
+        "japanese": "彼女は約束を破らない。",
+        "english": "She is sincere in her promise."
+      },
+      {
+        "japanese": "返事は約束できないけどメールはしてくれていいよ。",
+        "english": "I can't promise a reply, but you can send mail to me."
+      }
+    ],
+    "残": [
+      {
+        "japanese": "残念なお知らせがあります。",
+        "english": "I've got bad news."
+      },
+      {
+        "japanese": "子供にお金を残そうなんて考えずにパーッと派手に遊んで使い切って下さいね。",
+        "english": "Don't think about leaving money for your kids, use it all up and enjoy yourself with flair."
+      },
+      {
+        "japanese": "残念ながら、こちらの家はもう売れてしまいました。",
+        "english": "Unfortunately, this house has already been sold."
+      }
+    ],
+    "求": [
+      {
+        "japanese": "集団主義社会では、集団の欲求が個人の欲求よりも強調される。",
+        "english": "In a collectivist society, the desires of a group are emphasized more than the desires of an individual."
+      },
+      {
+        "japanese": "彼らは被災者に何か援助するよう私達に求めた。",
+        "english": "They called on us to do something to help the victims."
+      },
+      {
+        "japanese": "ミッチェル氏は私に週末までに残額を支払うようにと求めた。",
+        "english": "Mr Mitchel demanded that I pay the rest of the money by the end of the week."
+      }
+    ],
+    "約": [
+      {
+        "japanese": "トムは約束を守らないことが多い。",
+        "english": "Tom often fails to keep his word."
+      },
+      {
+        "japanese": "予約の再確認をしたいのですが。",
+        "english": "I'd like to reconfirm my reservation."
+      },
+      {
+        "japanese": "約束は守った方がいい。",
+        "english": "You may as well keep your promise."
+      }
+    ],
+    "性": [
+      {
+        "japanese": "今度のマネージャーさんって、すてきな男性みたいよ。",
+        "english": "The new manager seems like a nice guy."
+      },
+      {
+        "japanese": "礼儀正しくて笑顔の素敵なトムは、男性からも女性からもよくもてる。",
+        "english": "Tom, with his good manners and winning smile, is popular with both men and women."
+      },
+      {
+        "japanese": "男性が好きなのになぜ女性と結婚するの？",
+        "english": "Why would you marry a woman if you like men?"
+      }
+    ],
+    "格": [
+      {
+        "japanese": "せっかく弁護士の資格があるのにもったいない。",
+        "english": "What a waste of your lawyer qualifications!"
+      },
+      {
+        "japanese": "野球人でこれほど神格化された男もいない。",
+        "english": "No baseball player has been as deified as this man."
+      },
+      {
+        "japanese": "価格は消費税込みです。",
+        "english": "The price includes the consumption tax."
+      }
+    ],
+    "能": [
+      {
+        "japanese": "ローマ人がもし始めからラテン語を学んでいたとしたら、世界征服など不可能だっただろう。",
+        "english": "The Romans would never have had enough time for conquering the world if they had first been required to study Latin."
+      },
+      {
+        "japanese": "なるほど、確かに便利な機能ですね。",
+        "english": "I see. That's certainly a useful feature."
+      },
+      {
+        "japanese": "次に何が起きるか知る事は不可能だ。",
+        "english": "There is no knowing what will happen next."
+      }
+    ],
+    "術": [
+      {
+        "japanese": "彼が才能のある芸術家であるということには疑いの余地がない。",
+        "english": "There is no room to doubt that he is a gifted artist."
+      },
+      {
+        "japanese": "科学技術の進展で人類は豊かになった。",
+        "english": "Humanity has only grown from the development in science and technology."
+      },
+      {
+        "japanese": "彼女は学校で美術を学んでいる。",
+        "english": "She is studying fine art at school."
+      }
+    ],
+    "晴": [
+      {
+        "japanese": "明日は晴れよ。",
+        "english": "It will be sunny tomorrow."
+      },
+      {
+        "japanese": "素晴らしい日です。",
+        "english": "It's a beautiful day."
+      },
+      {
+        "japanese": "ダブリンは素晴らしい街ですよ。",
+        "english": "Dublin is a wonderful town."
+      }
+    ],
+    "列": [
+      {
+        "japanese": "列車は定刻に到着した。",
+        "english": "The train got in on time."
+      },
+      {
+        "japanese": "列車はまさに駅を出ようとしていた。",
+        "english": "The train was about to leave the station."
+      },
+      {
+        "japanese": "大雪のために列車は遅れた。",
+        "english": "The train was delayed due to the heavy snowfall."
+      }
+    ],
+    "式": [
+      {
+        "japanese": "多くの日本人が教会で結婚式をする。",
+        "english": "Many Japanese get married in church."
+      },
+      {
+        "japanese": "結婚式まであと数日しかなかった。",
+        "english": "There were only a few days left before the wedding."
+      },
+      {
+        "japanese": "その結婚式は17世紀建立の教会で執り行われます。",
+        "english": "The wedding will be held in a 17th century church."
+      }
+    ],
+    "信": [
+      {
+        "japanese": "彼は信頼できる。",
+        "english": "He can be trusted."
+      },
+      {
+        "japanese": "誰もこの話を信じないだろうからだ。",
+        "english": "That's because I don't suppose anybody will believe this story."
+      },
+      {
+        "japanese": "トムは自信と傲慢の違いが分かっていない。",
+        "english": "Tom doesn't understand the difference between confidence and arrogance."
+      }
+    ],
+    "単": [
+      {
+        "japanese": "生きるのは大変。死ぬのは簡単。",
+        "english": "Life is hard. Death is easy."
+      },
+      {
+        "japanese": "「おぅーい、どうした丹治」「前の学校で習ってない単元があって困っている」",
+        "english": "\"Oy, what's up, Tanji?\" \"I'm having trouble because there's a unit I didn't take at my last school.\""
+      },
+      {
+        "japanese": "この単語の意味は何ですか。",
+        "english": "What is the meaning of this word?"
+      }
+    ],
+    "変": [
+      {
+        "japanese": "風が強すぎて前に進むのも大変だ。",
+        "english": "The wind is so strong that it's difficult even to move forward."
+      },
+      {
+        "japanese": "ひどく変わってしまったので、彼女だと分からなかった。",
+        "english": "She had changed so much that I couldn't recognize her."
+      },
+      {
+        "japanese": "朝のメニューがかれこれ何十年と変わってない。",
+        "english": "The breakfast menu hasn't changed for decades."
+      }
+    ],
+    "夫": [
+      {
+        "japanese": "夫に死なれた女性は未亡人と呼ばれる。",
+        "english": "A woman whose husband is dead is called a widow."
+      },
+      {
+        "japanese": "夫は大抵８時には仕事に出かけます。",
+        "english": "My husband usually leaves for work at 8 o'clock."
+      },
+      {
+        "japanese": "このはしごはわたしの体重を支えるのに十分なほど丈夫なのですか。",
+        "english": "Is this ladder strong enough to bear my weight?"
+      }
+    ],
+    "昨": [
+      {
+        "japanese": "昨日なくした本、見つかったよ。",
+        "english": "I found the book I'd lost yesterday."
+      },
+      {
+        "japanese": "昨日より今日の方が具合が悪い。",
+        "english": "I feel worse today than I did yesterday."
+      },
+      {
+        "japanese": "昨日はどうしてそんなに忙しかったの？",
+        "english": "Why were you so busy yesterday?"
+      }
+    ],
+    "法": [
+      {
+        "japanese": "摂氏から華氏の換算方法って知ってる？",
+        "english": "Do you know how to convert from Celsius to Fahrenheit?"
+      },
+      {
+        "japanese": "釈迦に説法。",
+        "english": "Don't teach fish to swim."
+      },
+      {
+        "japanese": "簡単に合格できる方法ないかなぁ。",
+        "english": "I wonder if there is an easy way to pass the test."
+      }
+    ],
+    "晩": [
+      {
+        "japanese": "今晩は出かける気分ではない。",
+        "english": "I don't feel like going out tonight."
+      },
+      {
+        "japanese": "会社出たら、メールしてね。晩ご飯、温め直すから。",
+        "english": "Let me know when you leave work so I can warm up dinner."
+      },
+      {
+        "japanese": "明日の晩はどう？",
+        "english": "What about tomorrow night?"
+      }
+    ],
+    "猫": [
+      {
+        "japanese": "私は猫を家の外に出した。",
+        "english": "I let the cat out of the house."
+      },
+      {
+        "japanese": "うちの猫、病気なの。",
+        "english": "My cat is sick."
+      },
+      {
+        "japanese": "その猫は首にリボンを巻いていました。",
+        "english": "The cat had a ribbon around its neck."
+      }
+    ],
+    "園": [
+      {
+        "japanese": "俺たち動物園でトムを見かけたよ。",
+        "english": "We saw Tom at the zoo."
+      },
+      {
+        "japanese": "お姉ちゃんと動物園に行ったんだ。",
+        "english": "I went to the zoo with my sister."
+      },
+      {
+        "japanese": "もう一度、僕は公園を眺める。昔と変わらない公園。いまは暗くて誰もいない。",
+        "english": "I look once more upon the park, the same as long ago, now dark and empty."
+      }
+    ],
+    "遠": [
+      {
+        "japanese": "麗しの友よ、私にとってあなたは永遠に若いのだ。",
+        "english": "To me, fair friend, you never can be old."
+      },
+      {
+        "japanese": "もし何か困ったことがあったら、遠慮なく私のところに来てください。",
+        "english": "If you should have any trouble, don't hesitate to come to me."
+      },
+      {
+        "japanese": "年齢を重ねるにつれ、だんだん遠視になってきている。",
+        "english": "I'm getting farsighted as I get older."
+      }
+    ],
+    "係": [
+      {
+        "japanese": "人工環境と自然環境の関係について書きなさい。",
+        "english": "Write about the relationship between the artificial environment and the natural environment."
+      },
+      {
+        "japanese": "僕は無関係だからね。",
+        "english": "I have nothing to do with it."
+      },
+      {
+        "japanese": "需要と供給の間には密接な関係がある。",
+        "english": "There is close relationship between supply and demand."
+      }
+    ],
+    "取": [
+      {
+        "japanese": "誰の目にも容易に彼の落胆ぶりが見て取れた。",
+        "english": "Everyone could easily see his disappointment."
+      },
+      {
+        "japanese": "パーティーの日取りはまだはっきり決まっていない。",
+        "english": "The date of the party is still up in the air."
+      },
+      {
+        "japanese": "彼女は料理学校で２、３のコースを取ろうかと考えている。",
+        "english": "She's thinking of taking a couple of courses at a cooking school."
+      }
+    ],
+    "守": [
+      {
+        "japanese": "私たちは環境を守るように努力しなくてはいけない。",
+        "english": "We must try to protect the environment."
+      },
+      {
+        "japanese": "あいにく父は留守です。",
+        "english": "I'm sorry, my father is out."
+      },
+      {
+        "japanese": "留守中スミスさんという方が来ました。",
+        "english": "A Mr Smith came while you were out."
+      }
+    ],
+    "幸": [
+      {
+        "japanese": "「生きてて幸せ？」「うん。幸せ」",
+        "english": "\"Are you happy to be alive?\" \"Yes, I'm happy.\""
+      },
+      {
+        "japanese": "幸せがドアをノックしますように。",
+        "english": "May happiness knock on your door."
+      },
+      {
+        "japanese": "いつもにこにこしてるから、彼女は幸せみたいです。",
+        "english": "She seems happy because she is always smiling."
+      }
+    ],
+    "箱": [
+      {
+        "japanese": "この箱はちっさすぎるね。",
+        "english": "This box is too small."
+      },
+      {
+        "japanese": "屋根裏のさぁ、古い木箱の中から３枚の銀貨が出てきたんだ。",
+        "english": "I found three silver coins in an old wooden box in the attic."
+      },
+      {
+        "japanese": "先週の日曜日に、私たちは箱根に行きました。",
+        "english": "We went to Hakone last Sunday."
+      }
+    ],
+    "面": [
+      {
+        "japanese": "メアリーは来られないよ。娘さんの面倒を見なくてはいけないんだ。",
+        "english": "Mary can't come. She has to take care of her daughter."
+      },
+      {
+        "japanese": "トムがメアリーの面倒をみる。",
+        "english": "Tom takes care of Mary."
+      },
+      {
+        "japanese": "万が一、何かあったら、どうか子供たちの面倒をみてやってください。",
+        "english": "In case something goes wrong, please take care of my children."
+      }
+    ],
+    "喜": [
+      {
+        "japanese": "旅人は遠方に明かりを見て喜んだ。",
+        "english": "The traveler was delighted at the sight of a light in the distance."
+      },
+      {
+        "japanese": "彼は喜んで君を支援してくれる。",
+        "english": "He is willing to stand by you."
+      },
+      {
+        "japanese": "両親はジェーンがその学校の教師に任じられて喜んだ。",
+        "english": "Jane's parents were pleased about her appointment as a teacher at the school."
+      }
+    ],
+    "治": [
+      {
+        "japanese": "大きな蜘蛛が部屋にいるの！早く退治してちょうだい！",
+        "english": "There's a huge spider in the room! Quick, exterminate it!"
+      },
+      {
+        "japanese": "ロシアや中国は多くの自治区を持ちます。",
+        "english": "Russia and China have many autonomous regions."
+      },
+      {
+        "japanese": "政治に興味がありますか？",
+        "english": "Are you interested in politics?"
+      }
+    ],
+    "笑": [
+      {
+        "japanese": "なんで笑ったの？",
+        "english": "What made you laugh?"
+      },
+      {
+        "japanese": "彼女はかすかに微笑んだ。",
+        "english": "She gave a faint smile."
+      },
+      {
+        "japanese": "こいつ、くすぐると笑うんだ。",
+        "english": "He laughs when he's tickled."
+      }
+    ],
+    "辞": [
+      {
+        "japanese": "仕事辞めた方がいいかな？",
+        "english": "Should I quit my job?"
+      },
+      {
+        "japanese": "この辞書を使っても良いですか。",
+        "english": "Can I use this dictionary?"
+      },
+      {
+        "japanese": "これは、ただのバイトです。大学を卒業したらすぐに辞めます。",
+        "english": "This is just a temp job. I'm out as soon as I'm done with college."
+      }
+    ],
+    "関": [
+      {
+        "japanese": "私にそれに関する理論をもっていると思う。",
+        "english": "I think I have a theory about that."
+      },
+      {
+        "japanese": "その件には関わりたくないんだ。",
+        "english": "I don't want to be involved in that matter."
+      },
+      {
+        "japanese": "私らには関係ないことよ。",
+        "english": "That's not our business."
+      }
+    ],
+    "政": [
+      {
+        "japanese": "私には政治家の素質はありません。",
+        "english": "I am not cut out to be a politician."
+      },
+      {
+        "japanese": "これまた政府の隠ぺい策のようです。",
+        "english": "This looks like another government cover-up."
+      },
+      {
+        "japanese": "彼らは政治に無関心だ。",
+        "english": "They are indifferent to politics."
+      }
+    ],
+    "留": [
+      {
+        "japanese": "留美子さん、この週末にボクとデートしてくれませんか。",
+        "english": "Would you like to go out with me this weekend, Rumiko?"
+      },
+      {
+        "japanese": "当大学では外国人留学生の受け入れ施設が十分でない。",
+        "english": "Our school facilities are inadequate for foreign students."
+      },
+      {
+        "japanese": "私たちの学校は3人のアメリカ人を交換留学生として受け入れた。",
+        "english": "Our school accepted three Americans as exchange students."
+      }
+    ],
+    "険": [
+      {
+        "japanese": "この濃霧の中で飛行するのは危険だ。",
+        "english": "It is dangerous to fly in this heavy fog."
+      },
+      {
+        "japanese": "私たちは険しい山を登った。",
+        "english": "We climbed up the steep mountain."
+      },
+      {
+        "japanese": "『危険な関係』を読んだことがありますか？",
+        "english": "Have you read \"Les Liaisons dangereuses\"?"
+      }
+    ],
+    "危": [
+      {
+        "japanese": "彼は危険を感じて、それに近づかなかった。",
+        "english": "He suspected danger and didn't go near it."
+      },
+      {
+        "japanese": "危険に直面して彼は勇敢だった。",
+        "english": "He was brave in the face of danger."
+      },
+      {
+        "japanese": "トムは危ない男だからね。",
+        "english": "Tom is a dangerous man."
+      }
+    ],
+    "存": [
+      {
+        "japanese": "いくつかのクッキーは無期限にユーザーのハードディスクに保存される。",
+        "english": "Some cookies are stored indefinitely on users' hard drives."
+      },
+      {
+        "japanese": "シロオニタケは毒菌だけど、存在感があって好きだなあ。",
+        "english": "Shiroonitake is a poisonous mushroom but it has real presence, and I like it."
+      },
+      {
+        "japanese": "直射日光を避け、常温で保存してください。",
+        "english": "Avoid direct sunlight and store at room temperature."
+      }
+    ],
+    "原": [
+      {
+        "japanese": "このことはいくつかの原因があって起こった。",
+        "english": "This has come about through several causes."
+      },
+      {
+        "japanese": "その労働者は爆発事故が原因で死亡した。",
+        "english": "The workman died from the explosion."
+      },
+      {
+        "japanese": "原油価格の値下がりが続いている。",
+        "english": "The crude oil price is falling further."
+      }
+    ],
+    "薬": [
+      {
+        "japanese": "麻薬に手を出すとろくなことはない。",
+        "english": "If you mess with drugs, you're asking for trouble."
+      },
+      {
+        "japanese": "２００９年からスーパーやコンビニが薬を扱うことができる。",
+        "english": "Convenience stores and supermarkets can sell medicine since 2009."
+      },
+      {
+        "japanese": "風邪を引いたら、この薬を飲んで下さい。",
+        "english": "Please take this medicine if you catch a cold."
+      }
+    ],
+    "側": [
+      {
+        "japanese": "彼は側転をしました。",
+        "english": "He did a cartwheel."
+      },
+      {
+        "japanese": "列車が私たちの側を通り過ぎた。",
+        "english": "The train passed by us."
+      },
+      {
+        "japanese": "日本では、車は道路の左側を走る。",
+        "english": "In Japan people drive on the left."
+      }
+    ],
+    "席": [
+      {
+        "japanese": "私たちは全員彼女の結婚式に出席しました。",
+        "english": "We were all present at her wedding."
+      },
+      {
+        "japanese": "しばらくの間、席へお掛けしてお待ちしてはいかがでしょうか。",
+        "english": "Perhaps you'd like to sit down a while."
+      },
+      {
+        "japanese": "彼は高校３年間無遅刻無欠席だった。",
+        "english": "He attended the high school for three years without missing a single day or being late."
+      }
+    ],
+    "敗": [
+      {
+        "japanese": "トムは失敗を恐れてるんだ。",
+        "english": "Tom is afraid of failure."
+      },
+      {
+        "japanese": "彼の失敗は私にとって良い教訓になりました。",
+        "english": "His failure taught me a good lesson."
+      },
+      {
+        "japanese": "私の計画は失敗した。",
+        "english": "My plan failed."
+      }
+    ],
+    "果": [
+      {
+        "japanese": "夕食は、果物を少し食べただけよ。",
+        "english": "For dinner I only had a little fruit."
+      },
+      {
+        "japanese": "果物は、ビタミンが豊富です。",
+        "english": "Fruit is rich in vitamins."
+      },
+      {
+        "japanese": "まだ、完了と言うところまで行っていないが、そこそこ成果が出始めてきた。",
+        "english": "It's not yet what you'd call finished but we're starting to get pretty good results."
+      }
+    ],
+    "因": [
+      {
+        "japanese": "現在の日米貿易摩擦の原因は何であると思いますか。",
+        "english": "What do you think has caused the present trade friction between Japan and the U.S.?"
+      },
+      {
+        "japanese": "警察はその交通事故の原因を調べている。",
+        "english": "The police are looking into the cause of the traffic accident."
+      },
+      {
+        "japanese": "そもそもあなたたちの喧嘩の原因は何だったの。",
+        "english": "What was the cause for this fight in the first place?"
+      }
+    ],
+    "常": [
+      {
+        "japanese": "要素Ｃを削除しても同一の結果が得られる可能性が非常に高い。",
+        "english": "It is highly probable that the deletion of element C will still yield the same result."
+      },
+      {
+        "japanese": "辞書は常に手の届くところに置いておきなさい。",
+        "english": "Always have your dictionary near at hand."
+      },
+      {
+        "japanese": "自分を補うために常識的な方々と親しくさせていただいております。",
+        "english": "So as to compensate for myself, I befriend the conventional."
+      }
+    ],
+    "識": [
+      {
+        "japanese": "無意識に上着を脱ぎ棄てました。",
+        "english": "I unconsciously removed my shirt."
+      },
+      {
+        "japanese": "トムはさまざまな言語の知識がありますが、他の人に教えることはできません。",
+        "english": "Tom has knowledge of different languages, but he cannot teach others."
+      },
+      {
+        "japanese": "今日ではコンピューターの知識があれば有利になる。",
+        "english": "It is an advantage today to have a knowledge of computers."
+      }
+    ],
+    "非": [
+      {
+        "japanese": "非常に困っています。",
+        "english": "I am in deep water."
+      },
+      {
+        "japanese": "自分の非を認めない人っているよね。",
+        "english": "Some people can't admit they're wrong."
+      },
+      {
+        "japanese": "その頃、私は非常に貧乏だった。",
+        "english": "I was very poor in those days."
+      }
+    ],
+    "官": [
+      {
+        "japanese": "仕事として警察官をやっています。",
+        "english": "I'm a police officer by profession."
+      },
+      {
+        "japanese": "彼は警官を見て逃げた。",
+        "english": "He ran away at the sight of a policeman."
+      },
+      {
+        "japanese": "その警官は非番だった。",
+        "english": "The policeman was off duty."
+      }
+    ],
+    "察": [
+      {
+        "japanese": "警察はスリを現行犯で逮捕した。",
+        "english": "The police arrested the pickpocket in the act."
+      },
+      {
+        "japanese": "警察がここに来るまでには暗くなっているだろう。",
+        "english": "It will be dark by the time the police come here."
+      },
+      {
+        "japanese": "緊急の時は警察へ電話しなさい。",
+        "english": "In case of emergency, call the police."
+      }
+    ],
+    "愛": [
+      {
+        "japanese": "恋愛はただ性欲の詩的表現をうけたものである。",
+        "english": "Love is merely a lyrical way of referring to lust."
+      },
+      {
+        "japanese": "彼の遺言書には、愛人を相続人とした条項が存在していた。",
+        "english": "There was a provision in his will for his mistress."
+      },
+      {
+        "japanese": "愛は盲目であるが、嫉妬は存在しないものまで見せることがある。",
+        "english": "Love is blind, but jealousy can see even nonexistent things."
+      }
+    ],
+    "警": [
+      {
+        "japanese": "トムはメアリーの警告を全て無視した。",
+        "english": "Tom ignored all of Mary's warnings."
+      },
+      {
+        "japanese": "警察はその殺人を調査中だ。",
+        "english": "The police are investigating the murder."
+      },
+      {
+        "japanese": "キツネは野生的で警戒心が強い動物です。",
+        "english": "Foxes are wild and wary animals."
+      }
+    ],
+    "覚": [
+      {
+        "japanese": "その音で彼女は眠りから覚めた。",
+        "english": "The sound roused her from sleep."
+      },
+      {
+        "japanese": "どこに駐車したか覚えていますか？",
+        "english": "Do you remember where we parked?"
+      },
+      {
+        "japanese": "本当に覚えてないの？",
+        "english": "Are you sure you don't remember?"
+      }
+    ],
+    "説": [
+      {
+        "japanese": "外科医は私に手術を受けるよう説得した。",
+        "english": "The surgeon persuaded me to undergo an operation."
+      },
+      {
+        "japanese": "彼の説明は説得力に欠けている。",
+        "english": "His explanation is unconvincing."
+      },
+      {
+        "japanese": "彼はたくさんの人々の前で演説した。",
+        "english": "He made a speech in front of many people."
+      }
+    ],
+    "告": [
+      {
+        "japanese": "当分の間はアルコールを控えるようにと、医者に忠告された。",
+        "english": "My physician advised me to refrain from alcohol for the time being."
+      },
+      {
+        "japanese": "彼は有罪と宣告された。",
+        "english": "He was declared guilty."
+      },
+      {
+        "japanese": "彼が真実を告げていたものと私は認めます。",
+        "english": "I accept that he was telling the truth."
+      }
+    ],
+    "種": [
+      {
+        "japanese": "それは高レベルの集中力を必要とする種類の仕事だ。",
+        "english": "It's the sort of work that calls for a high level of concentration."
+      },
+      {
+        "japanese": "最も力の強い種や、最も知能の高い種が生き残るのではなく、変化に最も良く適応できる種が生き残るのです。",
+        "english": "It is not the strongest of the species that survives, not the most intelligent, but the one most responsive to change."
+      },
+      {
+        "japanese": "日本の将棋には何種類の駒がありますか。",
+        "english": "How many different pieces are there in Japanese chess?"
+      }
+    ],
+    "達": [
+      {
+        "japanese": "私達は何が起きたのか知りたい。",
+        "english": "We want to know what happened."
+      },
+      {
+        "japanese": "ボストンではトムが唯一の友達だったんだ。",
+        "english": "Tom was my only friend in Boston."
+      },
+      {
+        "japanese": "私達は氷の上を歩いて渡った。",
+        "english": "We walked across the ice."
+      }
+    ],
+    "類": [
+      {
+        "japanese": "彼女は魚類学者と結婚した。",
+        "english": "She married someone who studies fish."
+      },
+      {
+        "japanese": "コアラは有袋類なんだよ。",
+        "english": "Koalas are marsupials."
+      },
+      {
+        "japanese": "トムはめったに魚介類を食べない。",
+        "english": "Tom seldom eats seafood."
+      }
+    ],
+    "報": [
+      {
+        "japanese": "トムは警察に通報しなかった。",
+        "english": "Tom didn't call the police."
+      },
+      {
+        "japanese": "果報は寝て待て。",
+        "english": "Everything comes to those who wait."
+      },
+      {
+        "japanese": "我々は彼の急死の報に大いに驚いた。",
+        "english": "We were greatly surprised at the news of his sudden death."
+      }
+    ],
+    "等": [
+      {
+        "japanese": "我々は法の下で平等である。",
+        "english": "We are equal in the eyes of the law."
+      },
+      {
+        "japanese": "彼等は授業中だ。",
+        "english": "They are in class."
+      },
+      {
+        "japanese": "彼等は自由のために戦った。",
+        "english": "They fought for freedom."
+      }
+    ],
+    "座": [
+      {
+        "japanese": "教会の中で、彼女は私のそばに座った。",
+        "english": "She sat beside me in church."
+      },
+      {
+        "japanese": "双子座の男性と魚座の女性の相性ってどうなんでしょうか？",
+        "english": "Do you think a male Gemini would get on well with a female Pisces?"
+      },
+      {
+        "japanese": "男性の何人かは床に座っていました。",
+        "english": "Some of the men were sitting on the floor."
+      }
+    ],
+    "忘": [
+      {
+        "japanese": "身分証明書を持ってくるのを忘れてしまいました。",
+        "english": "I forgot to bring my I.D. card."
+      },
+      {
+        "japanese": "ドアを閉めるの、忘れないでよ。",
+        "english": "Don't forget to close the door."
+      },
+      {
+        "japanese": "手紙出すの忘れてたよ。",
+        "english": "I forgot to send the letter."
+      }
+    ],
+    "洗": [
+      {
+        "japanese": "もし雨になったら洗濯物を取り込んでね。",
+        "english": "If it rains, take the washing in."
+      },
+      {
+        "japanese": "メアリーは手を洗いました。",
+        "english": "Mary washed her hands."
+      },
+      {
+        "japanese": "食べる前に手を洗いなさい。",
+        "english": "Wash your hands before eating."
+      }
+    ],
+    "許": [
+      {
+        "japanese": "日本の温泉に入湯が許されるよう、トムは小さな蜘蛛の刺青の上にバンドエイドを貼った。",
+        "english": "Tom put a Band-Aid over his small tattoo of a spider so he would be allowed into a Japanese hot spring."
+      },
+      {
+        "japanese": "官軍に入城を許すとはどういう了見だ。",
+        "english": "What do you think you're doing letting the loyalists into the castle?"
+      },
+      {
+        "japanese": "彼のあんな振る舞いは許せない。",
+        "english": "I can't forgive him for behaving like that."
+      }
+    ],
+    "静": [
+      {
+        "japanese": "母親は子供たちに静かにするように言った。",
+        "english": "The mother told the children to be quiet."
+      },
+      {
+        "japanese": "みんな冷静だった。",
+        "english": "Everyone was calm."
+      },
+      {
+        "japanese": "今は、静かです。",
+        "english": "It's quiet now."
+      }
+    ],
+    "煙": [
+      {
+        "japanese": "大概の喫煙者は禁煙したいと言う。",
+        "english": "Most smokers say that they want to quit."
+      },
+      {
+        "japanese": "彼女の車は禁煙ですよ。",
+        "english": "Now remember, you must not smoke in her car."
+      },
+      {
+        "japanese": "煙突から煙がもくもくと出ていた。",
+        "english": "The smoke poured out of the chimney."
+      }
+    ],
+    "加": [
+      {
+        "japanese": "参加費はかかりません。",
+        "english": "There's no membership fee for joining."
+      },
+      {
+        "japanese": "輸入量の急激な増加に我々は驚いた。",
+        "english": "The rapid increase of imports surprised us."
+      },
+      {
+        "japanese": "実数の集合は加法について閉じている。",
+        "english": "The set of real numbers is closed under addition."
+      }
+    ],
+    "容": [
+      {
+        "japanese": "三浦容疑者の拘置中の過ごし方が明らかになった。",
+        "english": "It has become clear what murder-suspect Miura's jail lifestyle is like."
+      },
+      {
+        "japanese": "既に元手があると金儲けがより容易になる。",
+        "english": "It's easier to make money when you already have some."
+      },
+      {
+        "japanese": "容器を見ずに中身を見よ。",
+        "english": "Do not look upon the vessel but upon that which it contains."
+      }
+    ],
+    "易": [
+      {
+        "japanese": "その問題は決して容易ではない。",
+        "english": "The problem is far from easy."
+      },
+      {
+        "japanese": "英語を覚えるのは、容易なことではない。",
+        "english": "Learning English is not a simple task."
+      },
+      {
+        "japanese": "フランス語は習得が容易だと言う人もいる。",
+        "english": "Some people say French is easy to learn."
+      }
+    ],
+    "財": [
+      {
+        "japanese": "市は財政上困難な情勢に立たされた。",
+        "english": "The city was put in a difficult financial situation."
+      },
+      {
+        "japanese": "彼は全財産を車に費やした。",
+        "english": "He spent all of his money on a car."
+      },
+      {
+        "japanese": "バスの中で財布を盗まれたんだ。",
+        "english": "I had my wallet stolen on the bus."
+      }
+    ],
+    "若": [
+      {
+        "japanese": "若ければなあ。",
+        "english": "I wish I were young."
+      },
+      {
+        "japanese": "私たちは非常に若くして結婚しました。",
+        "english": "We got married very young."
+      },
+      {
+        "japanese": "隣の人が若い女の人と不倫しているらしいよ。",
+        "english": "Did you hear that our neighbor was fooling around with a younger woman?"
+      }
+    ],
+    "忙": [
+      {
+        "japanese": "その女性は忙しい。",
+        "english": "She's busy."
+      },
+      {
+        "japanese": "猫の手も借りたいほど忙しい。",
+        "english": "We are very busy and short-handed."
+      },
+      {
+        "japanese": "彼女は忙しかった。",
+        "english": "She was busy."
+      }
+    ],
+    "徒": [
+      {
+        "japanese": "４０％以上の生徒が大学に進学する。",
+        "english": "More than 40 percent of the students go to university."
+      },
+      {
+        "japanese": "学校まで徒歩10分です。",
+        "english": "It's a ten-minute walk to school."
+      },
+      {
+        "japanese": "その教師は生徒のあら探しばかりしている。",
+        "english": "The teacher is always finding fault with his students."
+      }
+    ],
+    "得": [
+      {
+        "japanese": "音大生はみんな初見とか即興とか得意なの？",
+        "english": "Can all university music students do things like sight reading and improvisation?"
+      },
+      {
+        "japanese": "知識を得るのと、その知識を用いるのとは全く別のことである。",
+        "english": "It is one thing to acquire knowledge; it is quite another to apply it."
+      },
+      {
+        "japanese": "彼は娘を説得して、パーティーに同行させた。",
+        "english": "He persuaded his daughter into going to the party with him."
+      }
+    ],
+    "続": [
+      {
+        "japanese": "私の後に続いて言ってください。",
+        "english": "Please repeat after me."
+      },
+      {
+        "japanese": "日本の梅雨は6月初旬から7月中旬まで続く。",
+        "english": "In Japan, the rainy season lasts from the beginning of June to the middle of July."
+      },
+      {
+        "japanese": "先生は２時間もしゃべり続けた。",
+        "english": "The teacher went on talking for two hours."
+      }
+    ],
+    "連": [
+      {
+        "japanese": "彼は後にテロ関連の殺人未遂とテログループへの参加で起訴されました。",
+        "english": "He was later charged with attempted terrorism-related murder and for his participation in a terrorist group."
+      },
+      {
+        "japanese": "連れてきてもらえてうれしいです。",
+        "english": "Thanks for bringing me here."
+      },
+      {
+        "japanese": "ここに連れてくるよ。",
+        "english": "I'll bring her here."
+      }
+    ],
+    "困": [
+      {
+        "japanese": "でかいのは普通に置き場所に困る。",
+        "english": "The big ones are usually hard to find a place for."
+      },
+      {
+        "japanese": "ルームメイトのことなんだけどさ、困ってることがあるんだ。あいつさぁ、俺の食べ物全部食べちゃうんだよ。",
+        "english": "I have a problem with my roommate. He eats all my food."
+      },
+      {
+        "japanese": "しかし、エヴァンス一家は汚れていなくて、食糧に困っていなかった。",
+        "english": "But the Evans were clean and they had enough to eat."
+      }
+    ],
+    "機": [
+      {
+        "japanese": "旅客機のパイロットは乗客の安全に対し責任がある。",
+        "english": "The pilot of an airliner is responsible for the safety of passengers."
+      },
+      {
+        "japanese": "この鳥は今、絶滅の危機に瀕しています。",
+        "english": "This bird is now in danger of extinction."
+      },
+      {
+        "japanese": "いつもこの自販機でお気に入りのコーヒーを買う。",
+        "english": "I always buy my favorite coffee at this vending machine."
+      }
+    ],
+    "飛": [
+      {
+        "japanese": "カモメが低空飛行してるよ。",
+        "english": "The sea gulls are flying low."
+      },
+      {
+        "japanese": "トムとメアリーは公園でシャボン玉を飛ばして遊んでいる。",
+        "english": "Tom and Mary are playing in the park making soap bubbles."
+      },
+      {
+        "japanese": "トムの飛行機が墜落した場所を見つけた。",
+        "english": "I found out where Tom's airplane crashed."
+      }
+    ],
+    "害": [
+      {
+        "japanese": "台風は作物に大きな損害を与えた。",
+        "english": "The typhoon did much damage to the crops."
+      },
+      {
+        "japanese": "もう誰の気分も害したくない。",
+        "english": "I no longer want to offend anyone."
+      },
+      {
+        "japanese": "洪水の被害はごくわずかだった。",
+        "english": "The damage from the flood was negligible."
+      }
+    ],
+    "余": [
+      {
+        "japanese": "余りよい考えではないと思いますが。",
+        "english": "I'm afraid it's not a good idea."
+      },
+      {
+        "japanese": "私にはこんな高級レストランで食事をする余裕はない。",
+        "english": "I can't afford to eat in such an expensive restaurant."
+      },
+      {
+        "japanese": "それは私の手に余る。",
+        "english": "It's beyond me."
+      }
+    ],
+    "難": [
+      {
+        "japanese": "哲学は難しいと思われがちだ。",
+        "english": "Philosophy is often regarded as difficult."
+      },
+      {
+        "japanese": "そんな難しいこと、私に訊かないでください。",
+        "english": "Don't ask me such difficult questions."
+      },
+      {
+        "japanese": "僕はバイク盗難防止装置を買いました。",
+        "english": "I bought an anti-theft system for my bike."
+      }
+    ],
+    "確": [
+      {
+        "japanese": "確約は出来ないけど、何とかやってみましょう。",
+        "english": "I can't promise anything, but I'll do my best."
+      },
+      {
+        "japanese": "彼は確かに頭が切れる。",
+        "english": "He certainly is smart."
+      },
+      {
+        "japanese": "彼がいつ到着するかは明確には分からない。",
+        "english": "I don't know for certain when he will arrive."
+      }
+    ],
+    "在": [
+      {
+        "japanese": "トムのことは気にする必要はない。彼は危険な存在じゃない。",
+        "english": "Don't worry about Tom. He isn't a threat."
+      },
+      {
+        "japanese": "私たちはボストンに行き、そこに一週間滞在した。",
+        "english": "We went to Boston, where we stayed a week."
+      },
+      {
+        "japanese": "この文は現在時制です。",
+        "english": "This sentence is in the present tense."
+      }
+    ],
+    "夢": [
+      {
+        "japanese": "寝ると、だいたい夢をみるね。",
+        "english": "I usually dream when I sleep."
+      },
+      {
+        "japanese": "ただの悪夢だった。",
+        "english": "It was only a nightmare."
+      },
+      {
+        "japanese": "私は、母の夢をときどき見る。",
+        "english": "I sometimes dream of my mother."
+      }
+    ],
+    "産": [
+      {
+        "japanese": "この地方は貴重な鉱物を産出します。",
+        "english": "This region produces precious minerals."
+      },
+      {
+        "japanese": "この間はカンガルーの革の財布を土産に買ってきてくれた。",
+        "english": "The other day he bought a wallet made of kangaroo leather for me."
+      },
+      {
+        "japanese": "カトリック教徒は産児制限に反対している。",
+        "english": "Catholics are against birth control."
+      }
+    ],
+    "倒": [
+      {
+        "japanese": "両替人の金を散らし、その台を倒した。",
+        "english": "He scattered the coins of the money-changers and overturned their table."
+      },
+      {
+        "japanese": "彼は倒れたときにひざを痛めた。",
+        "english": "He hurt his knee when he fell."
+      },
+      {
+        "japanese": "面倒臭いよ。",
+        "english": "I can't be bothered."
+      }
+    ],
+    "妻": [
+      {
+        "japanese": "執事はスミス夫妻の到着を告げた。",
+        "english": "The butler announced Mr. and Mrs. Smith."
+      },
+      {
+        "japanese": "妻はね、養子を欲しがってたんだ。",
+        "english": "My wife wanted to adopt a child."
+      },
+      {
+        "japanese": "トムは妻帯者だ。",
+        "english": "Tom has a wife."
+      }
+    ],
+    "議": [
+      {
+        "japanese": "今、その問題を討議中ですよ。",
+        "english": "The problem is being discussed now."
+      },
+      {
+        "japanese": "トムは危うく会議を忘れるところだった。",
+        "english": "Tom almost forgot about the meeting."
+      },
+      {
+        "japanese": "理事会は海外の持ち株を放棄することを議決しました。",
+        "english": "The Board of Trustees voted to divest the organization's overseas holdings."
+      }
+    ],
+    "犯": [
+      {
+        "japanese": "犯人は警察に逮捕された。",
+        "english": "The criminal was arrested by the police."
+      },
+      {
+        "japanese": "ジャックはその犯罪とは関係がないと言っている。",
+        "english": "Jack insists that he has nothing to do with the crime."
+      },
+      {
+        "japanese": "トムは自分が犯した過ちを認めようとはしなかった。",
+        "english": "Tom refused to admit that he'd made a mistake."
+      }
+    ],
+    "罪": [
+      {
+        "japanese": "彼は有罪であると考えられている。",
+        "english": "He is accounted guilty of the crime."
+      },
+      {
+        "japanese": "彼はその犯罪に加わったことを否定した。",
+        "english": "He denied having taken part in the crime."
+      },
+      {
+        "japanese": "彼が無実なら、当然彼の妻が有罪ということになる。",
+        "english": "If he is innocent, it follows that his wife is guilty."
+      }
+    ],
+    "論": [
+      {
+        "japanese": "僕は議論する事が好きではない。",
+        "english": "I don't like arguing."
+      },
+      {
+        "japanese": "言論の自由が制限されている国もある。",
+        "english": "Freedom of speech is restricted in some countries."
+      },
+      {
+        "japanese": "今日では言論の自由は当然のことと考えられている。",
+        "english": "Nowadays freedom of speech is taken as a matter of course."
+      }
+    ],
+    "経": [
+      {
+        "japanese": "経験とは誰もが自分の失敗に付ける名前である。",
+        "english": "Experience is the name everyone gives to their mistakes."
+      },
+      {
+        "japanese": "彼女は美容院を経営している。",
+        "english": "She runs a beauty shop."
+      },
+      {
+        "japanese": "トムは昨年の夏、九死に一生を得る経験をした。",
+        "english": "Tom had a near death experience last summer."
+      }
+    ],
+    "済": [
+      {
+        "japanese": "それで気が済んだ？",
+        "english": "Are you satisfied?"
+      },
+      {
+        "japanese": "タクシーを拾うよりバスで行ったほうが経済的だ。",
+        "english": "It's more economical to go by bus instead of taking a taxi."
+      },
+      {
+        "japanese": "まあ、済んだことは仕方ないな。",
+        "english": "All right, what's done is done."
+      }
+    ],
+    "判": [
+      {
+        "japanese": "猫に小判。",
+        "english": "Cast pearls before swine."
+      },
+      {
+        "japanese": "向こうではセレブという言葉を「金持ち」の意味では使わない。という事で日本人と判明しました。",
+        "english": "They don't use 'celeb' to mean 'rich man' over there. By which I determine that you are Japanese."
+      },
+      {
+        "japanese": "欲に目がくらんで判断力が無くなったらしい。",
+        "english": "Greed seems to have blinded his good judgement."
+      }
+    ],
+    "制": [
+      {
+        "japanese": "第２次世界大戦のとき、ドイツのナチスはアウシュビッツ強制収容所でたくさんの人を殺しました。",
+        "english": "During the Second World War, German Nazis killed many people at the Auschwitz concentration camp."
+      },
+      {
+        "japanese": "私が学校に行ってた時は、左利きの子は右手で書くように強制されてた。",
+        "english": "When I was in school, left-handed kids were forced to write with their right hands."
+      },
+      {
+        "japanese": "その病院は２４時間体制を整えている。",
+        "english": "The hospital provides around the clock service."
+      }
+    ],
+    "務": [
+      {
+        "japanese": "彼は法律事務所に６年勤務していた。",
+        "english": "He had worked for the law firm for six years."
+      },
+      {
+        "japanese": "自分が刑務所にいることを、友達の誰にも知られたくなかったんだ。",
+        "english": "I didn't want any of my friends to know that I was in prison."
+      },
+      {
+        "japanese": "身命をかけて職務を実践し、すべての警察官の心に火をともしてくれました。",
+        "english": "He risked his life to carry out his duty and inspired police officers everywhere."
+      }
+    ],
+    "資": [
+      {
+        "japanese": "例外もあるが、その会社はたいていは資産をとてもうまく利用している。",
+        "english": "The company, although with some exceptions, usually utilizes its resources very well."
+      },
+      {
+        "japanese": "他の会社に投資するために、私の共同出資者は手を引くことを決めた。",
+        "english": "My partner decided to pull out in order to invest in another company."
+      },
+      {
+        "japanese": "政府はその計画に参加する企業には無利子の融資を行う。",
+        "english": "The government will provide interest-free loans to firms that participate in the program."
+      }
+    ],
+    "権": [
+      {
+        "japanese": "あなたには権利があるのよ。",
+        "english": "You have rights."
+      },
+      {
+        "japanese": "彼は、黒人たちが暴力に頼らずとも平等な権利を勝ち取れると信じていた。",
+        "english": "He believed that blacks could win their fight for equal rights without violence."
+      },
+      {
+        "japanese": "決定権はお前にあるよ。",
+        "english": "It's up to you to decide the matter."
+      }
+    ],
+    "件": [
+      {
+        "japanese": "この件について喜んで相談します。",
+        "english": "I'd gladly speak with you on this subject."
+      },
+      {
+        "japanese": "その事件は真夜中に起こった。",
+        "english": "The incident took place at midnight."
+      },
+      {
+        "japanese": "事件の裏に何かがあるにちがいない。",
+        "english": "There must be something at the back of the matter."
+      }
+    ],
+    "断": [
+      {
+        "japanese": "人を外見で判断してはいけない。",
+        "english": "Don't judge people by their appearance."
+      },
+      {
+        "japanese": "返品お断り。",
+        "english": "No merchandise can be returned."
+      },
+      {
+        "japanese": "我々よりはるかに分断されていた国民にリンカンがいったように、我々は敵ではなく友なのだ。",
+        "english": "As Lincoln said to a nation far more divided than ours, we are not enemies but friends."
+      }
+    ],
+    "任": [
+      {
+        "japanese": "君らは自らの責任において、自らの良心に照らし合わせ、決定を下さなくてはならない。",
+        "english": "You must make decisions about your responsibility in the light of your conscience."
+      },
+      {
+        "japanese": "その件は私に任せて。",
+        "english": "Leave the matter to me."
+      },
+      {
+        "japanese": "なんでも自己責任にするのはやめたほうがいい。",
+        "english": "I think you should stop making only yourself responsible for everything."
+      }
+    ],
+    "責": [
+      {
+        "japanese": "もう責めるのはやめてよ。",
+        "english": "Call off your dogs."
+      },
+      {
+        "japanese": "彼は経営陣に対して、彼が何をするのか説明する責任がある。",
+        "english": "He is accountable to the management for what he does."
+      },
+      {
+        "japanese": "先方のミスに対し、私たちには責任はないと説明しましたが、聞き耳を持ってもらえませんでした。",
+        "english": "I explained to him that we were not responsible for his mistake, but he didn't listen."
+      }
+    ],
+    "増": [
+      {
+        "japanese": "基本的にサイトや雑誌等で販売しているペニス増大サプリメントは効き目がありません。",
+        "english": "Penis enlargement supplements, as sold on sites and in magazines, have essentially no effect."
+      },
+      {
+        "japanese": "運動量を増やすつもりなんだ。",
+        "english": "I'm going to get more exercise."
+      },
+      {
+        "japanese": "日ごとに寒さが増しております。",
+        "english": "It's getting colder day by day."
+      }
+    ],
+    "解": [
+      {
+        "japanese": "私はその作家が言おうとしていることが理解出来ない。",
+        "english": "I can't figure out what the writer is trying to say."
+      },
+      {
+        "japanese": "このようにして問題を解いた。",
+        "english": "I solved the problem in this way."
+      },
+      {
+        "japanese": "トムはコーランを原文で読んで理解したいと思い、それだけのためにアラビア語の勉強を始めた。",
+        "english": "Tom wanted to be able to read the original Quran and solely for that reason he started learning Arabic."
+      }
+    ],
+    "際": [
+      {
+        "japanese": "あれは田中さんのように見えたが、実際は靴箱だった。",
+        "english": "That looked like Mr. Tanaka, but actually it was a shoebox."
+      },
+      {
+        "japanese": "実際あなたを助けることは私には何もできないんです。",
+        "english": "I can't really help you at all."
+      },
+      {
+        "japanese": "私は実際それほどフランス語が得意ではないと思う。",
+        "english": "I think I'm really not so good at French."
+      }
+    ],
+    "認": [
+      {
+        "japanese": "ご確認をお願いいたします。",
+        "english": "Please check."
+      },
+      {
+        "japanese": "インターネット接続を確認してみてください。",
+        "english": "Please check your internet connection."
+      },
+      {
+        "japanese": "彼女はフランス語を喋れないことを認めた。",
+        "english": "She acknowledged that she couldn't speak French."
+      }
+    ],
+    "過": [
+      {
+        "japanese": "彼はワインなしでは一日も過ごせない。",
+        "english": "He can't go without wine for even a day."
+      },
+      {
+        "japanese": "彼女は５時ちょっと過ぎに帰ってきた。",
+        "english": "She came back soon after five o'clock."
+      },
+      {
+        "japanese": "電車に乗ってウトッとしてたら、駅を寝過ごしてしまった。",
+        "english": "I dozed off in the train and slept right past my station."
+      }
+    ],
+    "寝": [
+      {
+        "japanese": "寝る前に焚き火の火を消した方がいいだろう。",
+        "english": "You had better put out the fire before you go to bed."
+      },
+      {
+        "japanese": "子どもはもう寝る時間でしょ。",
+        "english": "It's time the kids went to bed."
+      },
+      {
+        "japanese": "夕飯も食べずに寝ちゃったよ。",
+        "english": "He went to bed without having had an evening meal."
+      }
+    ],
+    "置": [
+      {
+        "japanese": "その公園は市の中央に位置している。",
+        "english": "The park lies in the center of the city."
+      },
+      {
+        "japanese": "ここに置いておいて。",
+        "english": "Leave it here."
+      },
+      {
+        "japanese": "物置に３つテーブルがあります。",
+        "english": "There are three tables in the storeroom."
+      }
+    ],
+    "費": [
+      {
+        "japanese": "あまりに旅に時間を費やす者は、最後には己の国でよそものとなる。",
+        "english": "Those who spend too much time traveling become strangers in their own country."
+      },
+      {
+        "japanese": "私の車、かなり燃費がいいのよ。",
+        "english": "My car gets pretty good gas mileage."
+      },
+      {
+        "japanese": "入院費についておたずねしたいのですが。",
+        "english": "I'd like to get information about your hospital fee."
+      }
+    ],
+    "示": [
+      {
+        "japanese": "当サイト上に表示された登録商標を 、違法に又は無断で使用することはできません。",
+        "english": "Trademarks placed on the site shall not be used or reproduced in any matter without permission."
+      },
+      {
+        "japanese": "「立入禁止」という表示を無視して、彼女は扉を押し開けて中に立ち入った。",
+        "english": "Disregarding the \"No Entry\" sign, she pushed open the door and walked inside."
+      },
+      {
+        "japanese": "地図の赤丸は学校を示す。",
+        "english": "Red circles on the map mark schools."
+      }
+    ],
+    "観": [
+      {
+        "japanese": "観光案内所にお問い合わせください。",
+        "english": "Please refer to the tourist information office."
+      },
+      {
+        "japanese": "トムってめっちゃ悲観的だよね。",
+        "english": "Tom is very pessimistic."
+      },
+      {
+        "japanese": "観光ビザなら持ってるよ。",
+        "english": "I have a tourist visa."
+      }
+    ],
+    "値": [
+      {
+        "japanese": "修理する価値がある？",
+        "english": "Is it worth fixing?"
+      },
+      {
+        "japanese": "私には生きる価値がない。",
+        "english": "I don't deserve to live."
+      },
+      {
+        "japanese": "野菜の値段が下がっている。",
+        "english": "The prices of vegetables are down."
+      }
+    ],
+    "吸": [
+      {
+        "japanese": "スーザンは決してタバコを吸わない。",
+        "english": "Susan never smokes."
+      },
+      {
+        "japanese": "「マッチ持ってる？」「ごめん、タバコ吸わないんで」",
+        "english": "\"Do you have a match?\" \"Sorry, I don't smoke.\""
+      },
+      {
+        "japanese": "トムは大麻を吸ってる。",
+        "english": "Tom smokes pot."
+      }
+    ],
+    "状": [
+      {
+        "japanese": "現状では、私たちは降参するしかない。",
+        "english": "Under the circumstances we have no choice but to surrender."
+      },
+      {
+        "japanese": "このような状況の中で、医者はどうすべきなのでしょうか。",
+        "english": "In this kind of situation, what is the doctor supposed to do?"
+      },
+      {
+        "japanese": "親として誠に情けない状態にありました。",
+        "english": "As a parent I was in a truly pitiable state."
+      }
+    ],
+    "収": [
+      {
+        "japanese": "収穫したトマトの中からいいものだけをよって、市場に持って行こう。",
+        "english": "Let's choose the best of the tomato crop and take them to the market."
+      },
+      {
+        "japanese": "「調子はどう？」「絶好調だよ。着実に増収増益を続けているよ」",
+        "english": "\"How are things going?\" \"Terrific. Income and profit are continuing to rise steadily.\""
+      },
+      {
+        "japanese": "好天のおかげで作物すべてを一日で収穫できた。",
+        "english": "Thanks to the nice weather, we were able to harvest all of the crops in a day."
+      }
+    ],
+    "職": [
+      {
+        "japanese": "それでも、早期の退職を選択する人は多い。",
+        "english": "Nevertheless, many are choosing early retirement."
+      },
+      {
+        "japanese": "トムは求職中だ。",
+        "english": "Tom is looking for a job."
+      },
+      {
+        "japanese": "退職されてどれくらいになられますか？",
+        "english": "How long have you been retired?"
+      }
+    ],
+    "規": [
+      {
+        "japanese": "規則は守らなければならない。",
+        "english": "We must observe the rules."
+      },
+      {
+        "japanese": "憲法の規定に従い衆院の議決が参院に優越する。",
+        "english": "Under the Constitution, the lower chamber's resolutions override those of the upper chamber."
+      },
+      {
+        "japanese": "どんな規則にも例外はあります。",
+        "english": "Every rule has exceptions."
+      }
+    ],
+    "割": [
+      {
+        "japanese": "私はこのテレビを分割で買った。",
+        "english": "I bought this TV on the installment plan."
+      },
+      {
+        "japanese": "窓を割ったのは誰だ。",
+        "english": "Who broke the window?"
+      },
+      {
+        "japanese": "水割りにしてください。",
+        "english": "I'd like whiskey and water."
+      }
+    ],
+    "演": [
+      {
+        "japanese": "君が演説をして誰も来なかったらどうするの？",
+        "english": "What if you gave a speech and nobody came?"
+      },
+      {
+        "japanese": "我々は彼に演説を頼んだ。",
+        "english": "We called upon him for a speech."
+      },
+      {
+        "japanese": "「ロミオとジュリエット」が劇場で上演されている。",
+        "english": "Romeo and Juliet is on at the theatre."
+      }
+    ],
+    "師": [
+      {
+        "japanese": "その猟師は森の中深く入り込み、二度と帰らなかった。",
+        "english": "The hunter went deep into the forest, never to return."
+      },
+      {
+        "japanese": "医師たちは病気と闘っている。",
+        "english": "Doctors are fighting against disease."
+      },
+      {
+        "japanese": "随分と怠慢な教師だな！",
+        "english": "What a lazy teacher!"
+      }
+    ],
+    "備": [
+      {
+        "japanese": "備えあれば患いなし。",
+        "english": "Lay up for a rainy day."
+      },
+      {
+        "japanese": "明日出掛ける準備はできてるの？",
+        "english": "Can you be ready to leave tomorrow?"
+      },
+      {
+        "japanese": "アップデートの準備ができました。",
+        "english": "The update is ready."
+      }
+    ],
+    "優": [
+      {
+        "japanese": "彼は俳優です。",
+        "english": "He is an actor."
+      },
+      {
+        "japanese": "これは優れた繊維源である。",
+        "english": "This is an excellent source of fibre."
+      },
+      {
+        "japanese": "トムのこと優しいって言いてたけど、本当にそうね。",
+        "english": "You said Tom was kind and he certainly is, isn't he?"
+      }
+    ],
+    "宅": [
+      {
+        "japanese": "私は今日少し早く帰宅しなければならない。",
+        "english": "I need to go home a little early today."
+      },
+      {
+        "japanese": "この家は耐火住宅だ。",
+        "english": "This house is fireproof."
+      },
+      {
+        "japanese": "ご自宅の電話番号は何番ですか。",
+        "english": "What's your home phone number?"
+      }
+    ],
+    "現": [
+      {
+        "japanese": "現在、学校教育への信頼が揺らいでいます。",
+        "english": "At present, trust in school education is wavering."
+      },
+      {
+        "japanese": "負傷者が現場から運ばれて行った。",
+        "english": "The injured were removed from the scene."
+      },
+      {
+        "japanese": "彼が金を盗んでいる現場を抑えた。",
+        "english": "I caught him stealing the money."
+      }
+    ],
+    "呼": [
+      {
+        "japanese": "昔々、ある村に緑ずきんちゃんと呼ばれる少女が住んでいました。",
+        "english": "Once upon a time, there lived in a village a little girl called Little Green Hood."
+      },
+      {
+        "japanese": "私の名前が人ごみの中で呼ばれるのを耳にした。",
+        "english": "I heard my name called in the crowd."
+      },
+      {
+        "japanese": "トムったら、上司のことバカって呼んだのよ。",
+        "english": "Tom called his boss an idiot."
+      }
+    ],
+    "違": [
+      {
+        "japanese": "これは注文と違います。",
+        "english": "This isn't what I ordered."
+      },
+      {
+        "japanese": "違うよ、出かけてないよ。",
+        "english": "No, I didn't go out."
+      },
+      {
+        "japanese": "第二言語から自分の母語へと翻訳するほうが、その逆よりも間違いが少ないでしょう。",
+        "english": "If you translate from your second language into your own native language, rather than the other way around, you're less likely to make mistakes."
+      }
+    ],
+    "差": [
+      {
+        "japanese": "私が送って差し上げましょう。",
+        "english": "I will serve you as an escort."
+      },
+      {
+        "japanese": "性別による差別は禁じられています。",
+        "english": "Discrimination on the basis of gender is prohibited."
+      },
+      {
+        "japanese": "物差しを使って線を引きなさい。",
+        "english": "Draw a line with a ruler."
+      }
+    ],
+    "供": [
+      {
+        "japanese": "子供達は庭で遊んでいた。",
+        "english": "The children played in the garden."
+      },
+      {
+        "japanese": "おとぎ話が終わるか終わらないかのうちに子供が寝てしまった。",
+        "english": "Just as the fairy tale finished, the child had already fallen asleep."
+      },
+      {
+        "japanese": "インターネットは子供のいるべき場所じゃないって今でも思ってる。",
+        "english": "I still believe the Internet is not a place for children."
+      }
+    ],
+    "限": [
+      {
+        "japanese": "私の知る限りでは、彼は信頼できる。",
+        "english": "As far as I know, he is reliable."
+      },
+      {
+        "japanese": "この付近一帯は、喫煙制限区域です。",
+        "english": "This whole area is a smoking restricted area."
+      },
+      {
+        "japanese": "当選メール来ても期限が今日までかよ。",
+        "english": "Even if the winning email arrives, the deadline is today."
+      }
+    ],
+    "与": [
+      {
+        "japanese": "テレビ番組が子供たちに悪い影響を与えている。",
+        "english": "TV programs have a bad influence on children."
+      },
+      {
+        "japanese": "牛は私達に牛乳を与え、鶏は卵を与える。",
+        "english": "The cows grant us their milk, and the chickens grant us their eggs."
+      },
+      {
+        "japanese": "人の人生に良い影響を与えたい。",
+        "english": "I want to make an impact in someone's life."
+      }
+    ],
+    "渡": [
+      {
+        "japanese": "私たちは彼が道を歩いて渡っていたのを見ました。",
+        "english": "We saw him walking across the street."
+      },
+      {
+        "japanese": "屋上からは、何マイルも見渡せる。",
+        "english": "You can see for miles from the roof."
+      },
+      {
+        "japanese": "トムは道路を渡る前に左右を確認した。",
+        "english": "Tom looked both ways before crossing the road."
+      }
+    ],
+    "景": [
+      {
+        "japanese": "ドアが開いている光景を見たことに対して、私は非常に驚いた。",
+        "english": "I was very surprised that the door was open."
+      },
+      {
+        "japanese": "景気が良い。",
+        "english": "The economy is good."
+      },
+      {
+        "japanese": "感動的な光景だった。",
+        "english": "It was a moving sight."
+      }
+    ],
+    "抜": [
+      {
+        "japanese": "彼は底抜けの馬鹿だ。",
+        "english": "He's an absolute fool."
+      },
+      {
+        "japanese": "彼女は彼に知られることなく家から抜け出した。",
+        "english": "She snuck out the house without him knowing."
+      },
+      {
+        "japanese": "トム抜きでは出発しない。",
+        "english": "We won't leave without Tom."
+      }
+    ],
+    "候": [
+      {
+        "japanese": "一般的に言えば、日本の気候は温和だ。",
+        "english": "Generally speaking, the climate of Japan is mild."
+      },
+      {
+        "japanese": "これって、よくない兆候かしら？",
+        "english": "Is this a bad sign?"
+      },
+      {
+        "japanese": "ヴァレンシアは対立候補よりもはるかに生徒会長候補に相応しい。",
+        "english": "Valencia is a much fitter candidate for student body president than her competitors."
+      }
+    ],
+    "構": [
+      {
+        "japanese": "構想を実現するためには努力が欠かせない。",
+        "english": "In order to realise this plan, putting an effort will be necessary."
+      },
+      {
+        "japanese": "帰りたいなら帰っても構いません。",
+        "english": "You may go home if you want to."
+      },
+      {
+        "japanese": "いつ電話してくれても構わないから。",
+        "english": "You may call me anytime."
+      }
+    ],
+    "捕": [
+      {
+        "japanese": "私は昨日大きな魚を捕まえました。",
+        "english": "I caught a big fish yesterday."
+      },
+      {
+        "japanese": "ネズミ、捕まえたよ。",
+        "english": "I caught a mouse."
+      },
+      {
+        "japanese": "メアリーが逮捕されることは、トムには分かっていたんだよ。",
+        "english": "Tom knew that Mary was going to be arrested."
+      }
+    ],
+    "慣": [
+      {
+        "japanese": "心配いらないよ。そのうち慣れるよ。",
+        "english": "Don't worry. You'll get used to it over time."
+      },
+      {
+        "japanese": "社会ごとに違った習慣がある。",
+        "english": "Each society has a different institution."
+      },
+      {
+        "japanese": "午前6時に起きるというのは、最初はきつかったが、今では慣れてしまった。",
+        "english": "Getting up at 6 a.m. was hard at first, but now I'm used to it."
+      }
+    ],
+    "満": [
+      {
+        "japanese": "公園の桜はどれも満開だ。",
+        "english": "All the cherry trees in the park are in full bloom."
+      },
+      {
+        "japanese": "バスは満員だった。",
+        "english": "The bus was filled to capacity."
+      },
+      {
+        "japanese": "ホールは満員だった。",
+        "english": "The hall was filled to capacity."
+      }
+    ],
+    "掛": [
+      {
+        "japanese": "盛大な溜息をつきながら、テーブルの上にどさどさとパンを置き、椅子にどっかりと腰掛ける。",
+        "english": "Heaving a great sigh I plunk my bread on the table and flump onto the chair."
+      },
+      {
+        "japanese": "奇妙な男で、彼は人から話し掛けられないと口をきかない。",
+        "english": "A strange fellow, he never speaks unless spoken to."
+      },
+      {
+        "japanese": "トムは本当にあなたのことを気に掛けているんです。",
+        "english": "Tom really cares about you."
+      }
+    ],
+    "居": [
+      {
+        "japanese": "朝からメアリーの虫の居所が悪いんだけどさ、トム、何かした？",
+        "english": "Mary has been really ticked off all morning, Tom, did something happen?"
+      },
+      {
+        "japanese": "カナダのお客様に居酒屋料理をサーブしています。",
+        "english": "I serve pub food to Canadian customers."
+      },
+      {
+        "japanese": "居間でテレビゲームをしていた時に、母が一緒に買い物に行かないかと尋ねてきた。",
+        "english": "While I was playing video games in the living room, Mom asked me if I would go shopping with her."
+      }
+    ],
+    "突": [
+      {
+        "japanese": "トムは６時半にベッドから転がり出ると、もつれた足でキッチンへ行き、トースターに二枚パンを突っ込んだ。",
+        "english": "Tom rolled out of bed at 6:30, shuffled into the kitchen and put two slices of bread into the toaster."
+      },
+      {
+        "japanese": "事故は突然に起こった。",
+        "english": "The accident happened all of a sudden."
+      },
+      {
+        "japanese": "霧の中から突然船が現れた。",
+        "english": "A boat suddenly appeared out of the mist."
+      }
+    ],
+    "招": [
+      {
+        "japanese": "悪天候が多くの事故を招いた。",
+        "english": "The bad weather caused many accidents."
+      },
+      {
+        "japanese": "彼らは招かれなかった。",
+        "english": "They were not invited."
+      },
+      {
+        "japanese": "トムはメアリーの誕生日会に招待されてた？",
+        "english": "Was Tom invited to Mary's birthday party?"
+      }
+    ],
+    "段": [
+      {
+        "japanese": "食べ物は良くなかったが、とにかく値段は安かった。",
+        "english": "The food wasn't good, but at least it was cheap."
+      },
+      {
+        "japanese": "普段から一人で旅してるの？",
+        "english": "Do you usually travel alone?"
+      },
+      {
+        "japanese": "彼の命を救おうと手段を尽くした。",
+        "english": "I tried everything to keep him alive."
+      }
+    ],
+    "腹": [
+      {
+        "japanese": "「お腹減ってきた」「僕も」「ご飯にする？」「うん」",
+        "english": "\"I'm getting hungry.\" \"Me, too.\" \"Let's eat.\" \"OK.\""
+      },
+      {
+        "japanese": "最近お腹がぽっこり出てきちゃったからさ、明日からジムに通うことにしたよ。",
+        "english": "I've developed a bit of a gut lately, so I've decided that, starting tomorrow, I'm going to go to the gym."
+      },
+      {
+        "japanese": "お腹が空いてなかったから、コーヒーだけにしたわ。",
+        "english": "I only ordered coffee, since I wasn't hungry."
+      }
+    ],
+    "痛": [
+      {
+        "japanese": "頭が割れそうに痛い。",
+        "english": "I have a splitting headache."
+      },
+      {
+        "japanese": "痛い！ やめてよ！",
+        "english": "Ow! Stop it!"
+      },
+      {
+        "japanese": "その痛みは、トムが耐えきれないほどだった。",
+        "english": "The pain was more than Tom could stand."
+      }
+    ],
+    "退": [
+      {
+        "japanese": "退職してうれしくないのですか。",
+        "english": "Aren't you glad you're retired?"
+      },
+      {
+        "japanese": "ちょっぴり退屈だ。",
+        "english": "I'm just a little bored."
+      },
+      {
+        "japanese": "この先生は退屈です。",
+        "english": "This teacher is boring."
+      }
+    ],
+    "迷": [
+      {
+        "japanese": "ご迷惑でなければ、お願いしたいのですが。",
+        "english": "If it's not too much trouble, I would like some help."
+      },
+      {
+        "japanese": "俺たち洞窟の中で迷子になってしまったんだ。",
+        "english": "We got lost in the cave."
+      },
+      {
+        "japanese": "いってらっしゃい、でも迷子にならないでね。",
+        "english": "Have fun, but don't get lost."
+      }
+    ],
+    "訪": [
+      {
+        "japanese": "多くのカナダ人旅行者がボストンを訪れています。",
+        "english": "A lot of Canadian tourists visit Boston."
+      },
+      {
+        "japanese": "明日彼を訪問します。",
+        "english": "I'll call on him tomorrow."
+      },
+      {
+        "japanese": "私たちは南フランスを訪ね歩いた。",
+        "english": "We traveled through the south of France."
+      }
+    ],
+    "怒": [
+      {
+        "japanese": "彼女は彼を怒りの目でちらりと見た。",
+        "english": "She flashed him her angry eyes."
+      },
+      {
+        "japanese": "彼は何故あんなに怒ってるんだろう。",
+        "english": "I wonder why he is so angry."
+      },
+      {
+        "japanese": "まだトムのこと怒ってるの？",
+        "english": "Are you still angry with Tom?"
+      }
+    ],
+    "眠": [
+      {
+        "japanese": "私は大学に入学すると、ろくに睡眠時間もとれなかった。",
+        "english": "Once I started college, I barely had time to sleep."
+      },
+      {
+        "japanese": "トムはとても眠そうにしている。",
+        "english": "Tom looks very sleepy."
+      },
+      {
+        "japanese": "私が行ってみると、その少年はぐっすり眠っていた。",
+        "english": "I found the boy fast asleep."
+      }
+    ],
+    "靴": [
+      {
+        "japanese": "靴下に大きな穴があいてるよ。",
+        "english": "There is a big hole in your stocking."
+      },
+      {
+        "japanese": "靴の裏にガムがこびりついちゃった。",
+        "english": "There's gum stuck to the bottom of my shoe."
+      },
+      {
+        "japanese": "すぐ靴下に穴があく。",
+        "english": "Holes soon open up in my socks."
+      }
+    ],
+    "途": [
+      {
+        "japanese": "救急車で病院に運ばれる途中に、息を引き取ったのだという。",
+        "english": "According to the media, he took his last breath in the ambulance while being taken to the hospital."
+      },
+      {
+        "japanese": "あなたの家に向かってる途中で、車が故障しちゃったの。",
+        "english": "My car broke down halfway to your house."
+      },
+      {
+        "japanese": "テレビで商品が紹介された途端、注文の電話がじゃんじゃんかかってきた。",
+        "english": "As soon as the product was introduced on TV, the calls for orders started pouring in."
+      }
+    ],
+    "給": [
+      {
+        "japanese": "市は困窮者に毛布を支給した。",
+        "english": "The city supplied the needy with blankets."
+      },
+      {
+        "japanese": "今月は給料が多かった。",
+        "english": "My salary was high this month."
+      },
+      {
+        "japanese": "３週間仕事を探して、やっと給料のよい仕事を見つけた。",
+        "english": "After spending three weeks looking for a job, he found a well-paid one."
+      }
+    ],
+    "冷": [
+      {
+        "japanese": "その銃どうしたの？本物？危ないから下ろしなさい。冷や冷やするから。",
+        "english": "What are you doing with that gun? Is that real? Put it down, that's dangerous. You're freaking me out a little."
+      },
+      {
+        "japanese": "このような辞書には、「冷蔵庫」という言葉を使った例文が少なくとも2つは載っているはずだ。",
+        "english": "In a dictionary like this one there should be at least two sentences with \"fridge\"."
+      },
+      {
+        "japanese": "私は冷凍野菜は買わずに、いつも生野菜を買います。",
+        "english": "I always buy fresh vegetables instead of frozen ones."
+      }
+    ],
+    "処": [
+      {
+        "japanese": "あなたはあの車をどう処理したのですか？",
+        "english": "What did you do with that car?"
+      },
+      {
+        "japanese": "科学者たちは、IBMのメインフレームを使って計算処理を行いました。",
+        "english": "The scientists used an IBM mainframe computer to make their calculations."
+      },
+      {
+        "japanese": "「何処に行っていたの？」「歯医者に行っていたのだ」",
+        "english": "\"Where have you been?\" \"I've been to the dentist.\""
+      }
+    ],
+    "婦": [
+      {
+        "japanese": "私は看護婦です。",
+        "english": "I'm a nurse."
+      },
+      {
+        "japanese": "看護婦の指示に従ってください。",
+        "english": "Please follow the nurse's directions."
+      },
+      {
+        "japanese": "あの看護婦さんはとてもやさしくて礼儀正しいです。",
+        "english": "That nurse is very kind and polite."
+      }
+    ],
+    "程": [
+      {
+        "japanese": "この程度の怪我なら痛いはずが、何故か痛くも何ともない。",
+        "english": "An injury like this should hurt, but it doesn't at all, for some reason."
+      },
+      {
+        "japanese": "理学部を卒業した学生のほとんどが修士課程に進み、そのほぼ半数が博士課程に進む。",
+        "english": "Most graduates of the Department of Science proceed to a master's program, and roughly half of those continue on to their PhD."
+      },
+      {
+        "japanese": "失礼にも程がある！",
+        "english": "How rude of you!"
+      }
+    ],
+    "精": [
+      {
+        "japanese": "妖精を信じてるの？",
+        "english": "Do you believe in fairies?"
+      },
+      {
+        "japanese": "彼の首を切り終わった後，ボクは自分が射精していたことに気がついたのです・・・。",
+        "english": "After I fired him, I realised I had ejaculated."
+      },
+      {
+        "japanese": "被告は精神状態を理由に無罪を宣告された。",
+        "english": "The defendant was found not guilty by reason of insanity."
+      }
+    ],
+    "絶": [
+      {
+        "japanese": "トムの絶え間ない口論に苛立つクラスメートもいたが、クラスの大半はただ彼を無視することを覚えた。",
+        "english": "Tom's constant arguing irritates some of his classmates. However, most of the class has just learned to ignore him."
+      },
+      {
+        "japanese": "私はもう絶対にトムとはキャンプに行きません。",
+        "english": "I'll never go camping with Tom again."
+      },
+      {
+        "japanese": "雨が一日中絶え間なく降っていた。",
+        "english": "The rain fell relentlessly all day long."
+      }
+    ],
+    "杯": [
+      {
+        "japanese": "会社の帰りに、ちょっと一杯やってかないか。",
+        "english": "Want to grab a drink on the way home?"
+      },
+      {
+        "japanese": "コーヒーを一杯飲むと頭が冴える。",
+        "english": "I feel more alert after drinking a cup of coffee."
+      },
+      {
+        "japanese": "私には一杯のコーヒーが必要なの。",
+        "english": "I need a cup of coffee."
+      }
+    ],
+    "積": [
+      {
+        "japanese": "車にスペアタイヤを積んでますか？",
+        "english": "Does your car have a spare tire?"
+      },
+      {
+        "japanese": "流しの横にお皿を積んでおいてくだされば、後で私が洗います。",
+        "english": "If you stack the dishes up by the sink, I'll do them later."
+      },
+      {
+        "japanese": "見積もりは出してくれたの？",
+        "english": "Did he give you an estimate?"
+      }
+    ],
+    "寄": [
+      {
+        "japanese": "近くにお越しの際はぜひお立ち寄りください。",
+        "english": "Please drop in when you happen to be in the neighborhood."
+      },
+      {
+        "japanese": "どうぞお立ち寄りください。",
+        "english": "Please drop in on us."
+      },
+      {
+        "japanese": "眉間に皺を寄せていた。",
+        "english": "She wrinkled her brows."
+      }
+    ],
+    "娘": [
+      {
+        "japanese": "メアリーは私の娘じゃないですよ。姪っ子なんですよ。",
+        "english": "Mary isn't my daughter. She's my niece."
+      },
+      {
+        "japanese": "メアリーはおてんば娘なんだ。",
+        "english": "Mary is a tomboy."
+      },
+      {
+        "japanese": "娘は未熟児でした。",
+        "english": "My daughter was premature."
+      }
+    ],
+    "怖": [
+      {
+        "japanese": "私たちは競争を怖れません。",
+        "english": "We're not afraid of competition."
+      },
+      {
+        "japanese": "トムに話しかけるのが怖い。",
+        "english": "I'm scared to talk to Tom."
+      },
+      {
+        "japanese": "彼は蛇を怖がっている。",
+        "english": "He is afraid of snakes."
+      }
+    ],
+    "恐": [
+      {
+        "japanese": "彼女は犬がとても恐い。",
+        "english": "She is much afraid of dogs."
+      },
+      {
+        "japanese": "しかし私は恐れなかった。",
+        "english": "But I wasn't afraid."
+      },
+      {
+        "japanese": "この翻訳は誤解を招く恐れがあります。",
+        "english": "This translation is misleading."
+      }
+    ],
+    "婚": [
+      {
+        "japanese": "どんな人と結婚したいですか？",
+        "english": "What kind of person do you want to get married to?"
+      },
+      {
+        "japanese": "2006年上海では15万組の夫婦が結婚すると予想されている。",
+        "english": "One hundred and fifty thousand couples are expected to get married in Shanghai in 2006."
+      },
+      {
+        "japanese": "「彼女と結婚するつもりなんだ」「やめといた方がいいよ」",
+        "english": "\"I'm going to marry her.\" \"You shouldn't.\""
+      }
+    ],
+    "遊": [
+      {
+        "japanese": "子供達は浜辺で遊ぶのが好きだ。",
+        "english": "Children like playing on the beach."
+      },
+      {
+        "japanese": "彼女は友人たちと遊んでいる。",
+        "english": "She is playing with her friends."
+      },
+      {
+        "japanese": "猛烈な暑さのため、私たちは外で遊ぶことができなかった。",
+        "english": "We couldn't play outdoors because of the intense heat."
+      }
+    ],
+    "貧": [
+      {
+        "japanese": "ただの貧乏学生です。",
+        "english": "I'm just a poor student."
+      },
+      {
+        "japanese": "彼は貧乏なままだった。",
+        "english": "He remained a poor man."
+      },
+      {
+        "japanese": "貧しいからといって人を軽蔑してはならない。",
+        "english": "Don't despise a man because he is poor."
+      }
+    ],
+    "適": [
+      {
+        "japanese": "その上、かれは美男であったから、女学校の教師には不適任であった。",
+        "english": "Moreover, because he was handsome, he was ill-suited to working as a teacher in a girls' school."
+      },
+      {
+        "japanese": "私はその仕事の適任者に選ばれたことを大変喜んでいる。",
+        "english": "I'm very glad that I've been singled out as being a suitable person for the job."
+      },
+      {
+        "japanese": "洗濯機で該当オプションを適用した。",
+        "english": "I've entered the appropriate settings on the washing machine."
+      }
+    ],
+    "押": [
+      {
+        "japanese": "緊急の時はこのボタンを押しなさい。",
+        "english": "Press this button in case of emergency."
+      },
+      {
+        "japanese": "すみません、途中でうっかり送信ボタンを押してしまいました。",
+        "english": "Sorry! I mistakenly clicked on \"Send\" before I was finished."
+      },
+      {
+        "japanese": "もし彼の後押しがあったならば、彼女は市長に選ばれていただろう。",
+        "english": "With his support, she might have been elected mayor."
+      }
+    ],
+    "更": [
+      {
+        "japanese": "語順の変更を提案します。",
+        "english": "I suggest changing the word order."
+      },
+      {
+        "japanese": "富む者は更に富み、貧しき者は更に貧しくなっていく。",
+        "english": "The rich get richer and the poor get poorer."
+      },
+      {
+        "japanese": "映画「ノートルダムのせむし男」は題名変更され、今は「ノートルダムの鐘」と言われます。",
+        "english": "The movie \"The Hunchback of Notre-Dame\" has been renamed and is now called \"The Bell of Notre-Dame\"."
+      }
+    ],
+    "浮": [
+      {
+        "japanese": "何も思い浮かばない。",
+        "english": "I can't think of anything."
+      },
+      {
+        "japanese": "浮かない顔してるけど、何かあったの？",
+        "english": "You look depressed. Did something happen?"
+      },
+      {
+        "japanese": "油は水に浮く性質がある。",
+        "english": "Oil floats on water."
+      }
+    ],
+    "越": [
+      {
+        "japanese": "こちらにお越しいただきありがとうございます。",
+        "english": "I appreciate you coming here."
+      },
+      {
+        "japanese": "トムは三ヶ月前にボストンへ引っ越した。",
+        "english": "Tom moved to Boston just three months ago."
+      },
+      {
+        "japanese": "来週君に手紙か電話を寄越すよ。",
+        "english": "I'll write you or I'll phone you next week."
+      }
+    ],
+    "背": [
+      {
+        "japanese": "父は背が高いです。",
+        "english": "My father is tall."
+      },
+      {
+        "japanese": "ルールに背いてはいけない。",
+        "english": "You should not go against the rules."
+      },
+      {
+        "japanese": "君が一番背が高いな。",
+        "english": "You are tallest."
+      }
+    ],
+    "盗": [
+      {
+        "japanese": "もし花瓶がみつからなければ、ジョンがそれを盗んだということで責められるだろう。",
+        "english": "If the vase is not found, John may be accused of stealing it."
+      },
+      {
+        "japanese": "彼らは私の果実園からりんごを盗んだ。",
+        "english": "They stole apples from my orchard."
+      },
+      {
+        "japanese": "彼はお金を盗んだことを否定した。",
+        "english": "He denied having stolen the money."
+      }
+    ],
+    "除": [
+      {
+        "japanese": "君の作文は２、３の誤りを除けば完璧だ。",
+        "english": "Your composition is perfect except for a few mistakes."
+      },
+      {
+        "japanese": "買い物と、家の掃除、それから夕ご飯作ってあげるね。",
+        "english": "I'll do your shopping, clean up the house, and cook your dinner for you."
+      },
+      {
+        "japanese": "大掃除の時間だよ！",
+        "english": "It's time for spring cleaning!"
+      }
+    ],
+    "幾": [
+      {
+        "japanese": "林檎は幾つですか？",
+        "english": "How many apples are there?"
+      },
+      {
+        "japanese": "郵便番号は、全部で幾つあるんだっけ？",
+        "english": "How many postcodes are there in total?"
+      },
+      {
+        "japanese": "実際は、幾つぐらいなのかな？",
+        "english": "How old are they, actually?"
+      }
+    ],
+    "散": [
+      {
+        "japanese": "散歩をしながら、トムは鮮やかな赤とオレンジ色の紅葉を堪能しました。",
+        "english": "While taking a walk, Tom enjoyed the autumn leaves in vibrant red and orange."
+      },
+      {
+        "japanese": "彼らは四方八方に散らばった。",
+        "english": "They were scattered in all directions."
+      },
+      {
+        "japanese": "私たちは公園を散歩しました。",
+        "english": "We took a walk in the park."
+      }
+    ],
+    "似": [
+      {
+        "japanese": "バカな真似はよせ。",
+        "english": "You're acting like a fool."
+      },
+      {
+        "japanese": "鯨は魚と形が似ている。",
+        "english": "Whales are similar to fishes in shape."
+      },
+      {
+        "japanese": "あのドレスはきっとメアリーに似合う。",
+        "english": "I'm sure that dress will look good on Mary."
+      }
+    ],
+    "富": [
+      {
+        "japanese": "列車の窓越しに富士山が見えた。",
+        "english": "I saw Mt Fuji through the train window."
+      },
+      {
+        "japanese": "最近アフガニスタンでは、豊富な鉱物資源が発見された。",
+        "english": "Rich mineral deposits have been discovered recently in Afghanistan."
+      },
+      {
+        "japanese": "富む者は更に富み、貧しき者は更に貧しくなっていく。",
+        "english": "The rich get richer and the poor get poorer."
+      }
+    ],
+    "探": [
+      {
+        "japanese": "仕事をお探しですか？",
+        "english": "Are you looking for a job?"
+      },
+      {
+        "japanese": "ポストを探して辺りを見回した。",
+        "english": "I looked about for the mailbox."
+      },
+      {
+        "japanese": "トムは探偵だ。",
+        "english": "Tom is a detective."
+      }
+    ],
+    "迎": [
+      {
+        "japanese": "彼は至る所で歓迎された。",
+        "english": "He was welcomed everywhere."
+      },
+      {
+        "japanese": "忘れずに駅まで迎えに来てください。",
+        "english": "Remember to meet me at the station."
+      },
+      {
+        "japanese": "来る日も来る日もその犬は主人を迎えに駅へ行った。",
+        "english": "Day in, day out the dog went to the station to wait for its master."
+      }
+    ],
+    "祖": [
+      {
+        "japanese": "祖父から相続されたお金で家を買いました。",
+        "english": "I bought a house with the money that I inherited from my grandfather."
+      },
+      {
+        "japanese": "私は祖父が死んだ年に生まれた。",
+        "english": "I was born in the year that Grandfather died."
+      },
+      {
+        "japanese": "祖母は私に新しいドレスを作ってくれた。",
+        "english": "My grandmother made me a new dress."
+      }
+    ],
+    "雑": [
+      {
+        "japanese": "この雑誌は広く読まれている。",
+        "english": "This magazine is widely read."
+      },
+      {
+        "japanese": "雑草を抜いて、花に水をやっていただけますか？",
+        "english": "Could you please pull the weeds and water the flowers?"
+      },
+      {
+        "japanese": "トムは仕事が雑だ。",
+        "english": "Tom works sloppily."
+      }
+    ],
+    "賛": [
+      {
+        "japanese": "自分の意見に賛成かどうか、彼女が尋ねてきました。",
+        "english": "She asked me if I agreed with her."
+      },
+      {
+        "japanese": "トムに賛成でしょ？",
+        "english": "You agree with Tom, right?"
+      },
+      {
+        "japanese": "ブラックさんがその計画に賛成する見込みがありますか。",
+        "english": "Is there any likelihood that Mr Black will agree to the plan?"
+      }
+    ],
+    "込": [
+      {
+        "japanese": "彼はボートに乗り込んだ。",
+        "english": "He boarded the ship."
+      },
+      {
+        "japanese": "リンゴがたくさん詰め込まれた紙袋ってオシャレだよね。",
+        "english": "A paper bag filled to the brim with apples looks very cool, right?"
+      },
+      {
+        "japanese": "サイトの雰囲気を乱す書き込みはご遠慮ください。",
+        "english": "Please refrain from making posts that disrupt this site's atmosphere."
+      }
+    ],
+    "欲": [
+      {
+        "japanese": "何か飲み物が欲しいな。",
+        "english": "I want something to drink."
+      },
+      {
+        "japanese": "何か他に僕にして欲しいことはないですか。",
+        "english": "Is there anything else you want me to do?"
+      },
+      {
+        "japanese": "掘っ建て小屋でもいいから自分の家が欲しい。",
+        "english": "I want my own house, even if it's a shack."
+      }
+    ],
+    "閉": [
+      {
+        "japanese": "目を閉じてください。",
+        "english": "Close your eyes, please."
+      },
+      {
+        "japanese": "ガスの元栓を閉めなさい。",
+        "english": "Turn off the gas."
+      },
+      {
+        "japanese": "メアリーは窓を全部閉めたまま、部屋の中に閉じこもった。",
+        "english": "Mary shut herself up in the room, with all the windows closed."
+      }
+    ],
+    "窓": [
+      {
+        "japanese": "トムは窓の外をじっと見続けた。",
+        "english": "Tom continued to stare out the window."
+      },
+      {
+        "japanese": "彼は窓から入ってきた。",
+        "english": "He came in through the window."
+      },
+      {
+        "japanese": "窓から外を見るんじゃないぞ。仕事に集中しろ。",
+        "english": "Don't look out the window. Concentrate on your work."
+      }
+    ],
+    "否": [
+      {
+        "japanese": "私は彼女の安否が気がかりなんだ。",
+        "english": "I am concerned for her safety."
+      },
+      {
+        "japanese": "私の計画は拒否された。",
+        "english": "My plan was rejected."
+      },
+      {
+        "japanese": "君の意見を否定するようで話しにくいんだけど、率直に言わせてもらうよ。",
+        "english": "It's hard to say this without sounding like I'm disagreeing with you, but let me be upfront about it."
+      }
+    ],
+    "暮": [
+      {
+        "japanese": "金もなし、仕事もなし、友達もなし。彼は、本当に途方に暮れた。",
+        "english": "No money, no job, no friends. He was truly at loose ends."
+      },
+      {
+        "japanese": "お歳暮は日本独自の習慣の一つである。",
+        "english": "Sending year-end gifts is one of the customs peculiar to Japan."
+      },
+      {
+        "japanese": "ホームレスのあの人たちはその日暮らしです。",
+        "english": "Those homeless people are living hand-to-mouth."
+      }
+    ],
+    "誤": [
+      {
+        "japanese": "私たちの誰もが誤りを犯すのです。",
+        "english": "We all make mistakes."
+      },
+      {
+        "japanese": "私のことを誤解しないでください。",
+        "english": "Please don't misunderstand me."
+      },
+      {
+        "japanese": "誤解があるようです。",
+        "english": "I'm afraid there's a misunderstanding."
+      }
+    ],
+    "降": [
+      {
+        "japanese": "一晩中雪が降っています。",
+        "english": "It's been snowing all night."
+      },
+      {
+        "japanese": "昨日からずっと雨が降っている。",
+        "english": "It has been raining since yesterday."
+      },
+      {
+        "japanese": "所によって、雪が降るかもしれません。",
+        "english": "Depending on your location, there's a chance of snow."
+      }
+    ],
+    "勤": [
+      {
+        "japanese": "こちらが私の勤務先の住所です。",
+        "english": "This is my business address."
+      },
+      {
+        "japanese": "トムは夜勤で働いている。",
+        "english": "Tom works the night shift."
+      },
+      {
+        "japanese": "あなたの妹は私の友だちの中で一番勤勉だ。",
+        "english": "Your sister is the most diligent of all my friends."
+      }
+    ],
+    "刻": [
+      {
+        "japanese": "なぜ遅刻したのですか。",
+        "english": "Why were you late?"
+      },
+      {
+        "japanese": "トムの腕にはハートのタトゥーが刻まれていました。",
+        "english": "Tom had a heart tattooed on his arm."
+      },
+      {
+        "japanese": "学校に遅刻するな。",
+        "english": "Don't be late for school."
+      }
+    ],
+    "遅": [
+      {
+        "japanese": "急ぎなさい。そうしないと遅れるよ。",
+        "english": "Hurry up, or you will be late."
+      },
+      {
+        "japanese": "渋滞で遅れました。",
+        "english": "I was delayed by a traffic jam."
+      },
+      {
+        "japanese": "彼はよく会社に遅れる。",
+        "english": "He's often late for work."
+      }
+    ],
+    "破": [
+      {
+        "japanese": "約束を破ってごめんなさい。",
+        "english": "I'm sorry I broke my promise."
+      },
+      {
+        "japanese": "水道管が凍って破裂したんです。",
+        "english": "The water pipes froze and then burst."
+      },
+      {
+        "japanese": "竜巻で村全体が破壊された。",
+        "english": "The tornado destroyed the whole village."
+      }
+    ],
+    "互": [
+      {
+        "japanese": "私たちはとっても仲良しでお互いの家をよく行き来する仲でした。",
+        "english": "We were very good friends and often visited each other's homes."
+      },
+      {
+        "japanese": "このシステムのもとでは、生徒は交替で教えあい、お互いに助け合わなければなりません。",
+        "english": "The basis of this system is that the students must take turns in teaching, they have to help each other."
+      },
+      {
+        "japanese": "我々の相互理解が必要である。",
+        "english": "It's necessary that we come to a mutual understanding."
+      }
+    ],
+    "彼": [
+      {
+        "japanese": "彼女には不幸が絶えない。",
+        "english": "She is dogged by misfortune."
+      },
+      {
+        "japanese": "彼は突然わっと泣き出した。",
+        "english": "He burst into tears."
+      },
+      {
+        "japanese": "彼女は魅力的だ。",
+        "english": "She is attractive."
+      }
+    ],
+    "恥": [
+      {
+        "japanese": "私は多くの人のいる前で恥をかかされた。",
+        "english": "I was put to shame in the presence of many people."
+      },
+      {
+        "japanese": "これを悪しく考える者らは恥じよ。",
+        "english": "Shame be to him who thinks evil of it."
+      },
+      {
+        "japanese": "僕はハグをしたかったけど、もししたら君を恥ずかしくさせると思ったんだ。",
+        "english": "I wanted to hug you, but I knew it would embarrass you if I did."
+      }
+    ],
+    "払": [
+      {
+        "japanese": "彼は咳払いをした。",
+        "english": "He cleared his throat."
+      },
+      {
+        "japanese": "払いたかったんだ。",
+        "english": "I wanted to pay."
+      },
+      {
+        "japanese": "私はその古本に倍額を払った。",
+        "english": "I paid double the price for the secondhand book."
+      }
+    ],
+    "舞": [
+      {
+        "japanese": "歌舞伎ってご存知ですか？",
+        "english": "Do you know kabuki?"
+      },
+      {
+        "japanese": "その有名な女優を見舞いに来た人がたくさんいた。",
+        "english": "There were a lot of people who came to ask for the famous actress."
+      },
+      {
+        "japanese": "今年その地方は厳しいかんばつに見舞われた。",
+        "english": "This year the region has been hit by a severe drought."
+      }
+    ],
+    "頼": [
+      {
+        "japanese": "本当にこの情報は信頼できる？",
+        "english": "Are you sure this information is reliable?"
+      },
+      {
+        "japanese": "弁護士は依頼人の無罪を主張した。",
+        "english": "The lawyer insisted on the client's innocence."
+      },
+      {
+        "japanese": "私がお金を返すように頼むと、彼は聞こえないふりをします。",
+        "english": "When I ask him to pay me back, he turns a deaf ear."
+      }
+    ],
+    "戻": [
+      {
+        "japanese": "私が戻るまでここで待ってなさい。",
+        "english": "Wait here till I return."
+      },
+      {
+        "japanese": "１時間で戻ってきます。",
+        "english": "I'll be back in an hour."
+      },
+      {
+        "japanese": "トムが戻ってくる前に、とんずらしちゃおうよ。",
+        "english": "Let's skip out before Tom gets back."
+      }
+    ],
+    "抱": [
+      {
+        "japanese": "不満を抱く部下も多かった。",
+        "english": "There were many subordinates who harbored complaints."
+      },
+      {
+        "japanese": "トムはメアリーにキスをして、二人は抱き合った。",
+        "english": "Tom kissed Mary and they hugged each other."
+      },
+      {
+        "japanese": "彼は先生に対して激しい憎悪を抱いていた。",
+        "english": "He had an intense hatred of his teacher."
+      }
+    ],
+    "緒": [
+      {
+        "japanese": "一人じゃないよ。トムと一緒にいるんだ。",
+        "english": "I'm not alone. I'm with Tom."
+      },
+      {
+        "japanese": "トムとメアリーは一緒に水族館へ行った。",
+        "english": "Tom and Mary went to the aquarium together."
+      },
+      {
+        "japanese": "本当にトムと一緒にボストンに行きたいの？",
+        "english": "Are you sure you want to go to Boston with Tom?"
+      }
+    ],
+    "逃": [
+      {
+        "japanese": "私はその試合を見逃さないように、急いでテレビを付けた。",
+        "english": "I rushed to turn on the TV so I wouldn't miss that game."
+      },
+      {
+        "japanese": "逃げるな。",
+        "english": "Don't you go away."
+      },
+      {
+        "japanese": "その男は町から逃げ出した。",
+        "english": "The man got away from the city."
+      }
+    ],
+    "御": [
+      {
+        "japanese": "攻撃は最大の防御なり。",
+        "english": "Attack is the best form of defense."
+      },
+      {
+        "japanese": "厄介事は御免だよ私は。",
+        "english": "I don't want any trouble."
+      },
+      {
+        "japanese": "御両親によろしくお伝え下さい。",
+        "english": "Please remember me to your parents."
+      }
+    ],
+    "吹": [
+      {
+        "japanese": "外では冷たい北風が轟々と吹き荒れていた。",
+        "english": "The cold north wind was roaring outside."
+      },
+      {
+        "japanese": "私はろうそくの火を吹き消した。",
+        "english": "I blew the candle out."
+      },
+      {
+        "japanese": "強風が吹けば高層ビルは揺れるだろう。",
+        "english": "Tall buildings may sway in a strong wind."
+      }
+    ],
+    "到": [
+      {
+        "japanese": "私は午後四時に球場に到着したが、試合はすでに始まっていた。",
+        "english": "I arrived at the stadium at 4:00 p.m., but the game had already started."
+      },
+      {
+        "japanese": "トムの飛行機の到着時間を知っていますか。",
+        "english": "Do you know when Tom's plane is arriving?"
+      },
+      {
+        "japanese": "私は彼女が帰ろうとしていたちょうどそのときに到着した。",
+        "english": "I arrived at the moment she was leaving."
+      }
+    ],
+    "髪": [
+      {
+        "japanese": "彼女は髪を風になびかせながら浜辺に立っていた。",
+        "english": "She stood on the beach with her hair waving in the wind."
+      },
+      {
+        "japanese": "トムは髪をくしでといている。",
+        "english": "Tom is combing his hair."
+      },
+      {
+        "japanese": "洗髪いたしますか。",
+        "english": "Would you like to have your hair washed?"
+      }
+    ],
+    "疲": [
+      {
+        "japanese": "長旅でさぞお疲れでしょう。",
+        "english": "You must be tired after such a long trip."
+      },
+      {
+        "japanese": "君は疲れた？",
+        "english": "Are you tired?"
+      },
+      {
+        "japanese": "トムは疲れていて不機嫌だった。",
+        "english": "Tom was tired and cross."
+      }
+    ],
+    "歳": [
+      {
+        "japanese": "友達は１７歳です。",
+        "english": "My friend is seventeen years old."
+      },
+      {
+        "japanese": "私たち二人とも13歳です。",
+        "english": "We're both thirteen years old."
+      },
+      {
+        "japanese": "君はもう１８歳なのだから車の免許が取れます。",
+        "english": "Now that you are eighteen, you can get a driver's license."
+      }
+    ],
+    "偶": [
+      {
+        "japanese": "東京で偶然彼に会った。",
+        "english": "I met him in Tokyo by chance."
+      },
+      {
+        "japanese": "この物語には偶然が多いです。",
+        "english": "In this book, lots of coincidences happen."
+      },
+      {
+        "japanese": "純粋な幸せは偶然に見つかるって言ってた。",
+        "english": "They say that true happiness is found accidentally."
+      }
+    ],
+    "偉": [
+      {
+        "japanese": "彼女は偉大な画家になった。",
+        "english": "She became a great artist."
+      },
+      {
+        "japanese": "何度も何度も打ちのめされても、頑張って続けるなんてすごく偉いよ。",
+        "english": "It's so admirable how you keep fighting, even when you've been knocked down over and over again."
+      },
+      {
+        "japanese": "鈴木氏は偉大な科学者だ。",
+        "english": "Mr Suzuki is a great scientist."
+      }
+    ],
+    "頂": [
+      {
+        "japanese": "夕食にお呼び頂けて、とても嬉しいです。",
+        "english": "I'm glad to have been invited to dinner."
+      },
+      {
+        "japanese": "「私も頂いていいですか」「ああ、勿論構わないよ、今日は会社持ちだからね」",
+        "english": "\"May I have one as well?\" \"Yes, certainly. Today's on the company after all.\""
+      },
+      {
+        "japanese": "一緒に頂きました。",
+        "english": "We ate together."
+      }
+    ]
+  }
+}

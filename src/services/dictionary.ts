@@ -30,6 +30,24 @@ interface KanjiResponse {
   unicode?: string;
 }
 
+interface KanjiExamples {
+  examples: {
+    [key: string]: Array<{
+      japanese: string;
+      english: string;
+    }>;
+  };
+}
+
+interface ExampleData {
+  examples: {
+    [key: string]: Array<{
+      japanese: string;
+      english: string;
+    }>;
+  };
+}
+
 export async function searchWord(word: string): Promise<JishoResponse> {
   const response = await fetch(`/api/dictionary?keyword=${encodeURIComponent(word)}&type=word`);
   if (!response.ok) {
@@ -53,39 +71,57 @@ export async function getKanjiDetails(kanji: string): Promise<KanjiResponse | nu
   }
 }
 
-export async function getExampleSentences(word: string): Promise<Array<{
+import { getJlptLevelForKanji } from '@/data/n5-kanji-complete';
+
+// Import all example files
+import n5Examples from '@/data/examples/n5/examples.json';
+import n4Examples from '@/data/examples/n4/examples.json';
+import n3Examples from '@/data/examples/n3/examples.json';
+import n2Examples from '@/data/examples/n2/examples.json';
+import n1Examples from '@/data/examples/n1/examples.json';
+
+export async function getExampleSentences(word: string, forcedLevel?: string): Promise<Array<{
   japanese: string;
   english: string;
 }>> {
   try {
-    // Fetch sentences through our API proxy
-    const response = await fetch(`/api/examples?keyword=${encodeURIComponent(word)}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch examples');
+    // If a level is forced (e.g. we're on an N2 page), use that
+    // Otherwise try to detect the level
+    const level = forcedLevel || getJlptLevelForKanji(word);
+    
+    // Select the appropriate example file based on level
+    let examples: Array<{ japanese: string; english: string; }> | undefined;
+    switch (level) {
+      case 'N5':
+        examples = (n5Examples as ExampleData).examples[word];
+        break;
+      case 'N4':
+        examples = (n4Examples as ExampleData).examples[word];
+        break;
+      case 'N3':
+        examples = (n3Examples as ExampleData).examples[word];
+        break;
+      case 'N2':
+        examples = (n2Examples as ExampleData).examples[word];
+        break;
+      case 'N1':
+        examples = (n1Examples as ExampleData).examples[word];
+        break;
+      default:
+        examples = undefined;
     }
 
-    const data = await response.json();
-    
-    // Process and filter the results
-    const sentences = data.results
-      .slice(0, 3) // Limit to 3 examples
-      .map((result: any) => ({
-        japanese: result.text,
-        english: result.translations[0]?.text || 'No translation available'
-      }))
-      .filter((example: any) => 
-        // Filter out sentences that are too long or complex
-        example.japanese.length < 30 && 
-        !example.japanese.includes('〜') && 
-        !example.japanese.includes('…')
-      );
+    if (examples && examples.length > 0) {
+      return examples;
+    }
 
-    return sentences.length > 0 ? sentences : [{
+    // If no examples found, return a default message
+    return [{
       japanese: `${word}の例文が見つかりませんでした。`,
       english: 'No example sentences found for this kanji.'
     }];
-  } catch (error) {
-    console.error('Error fetching example sentences:', error);
+  } catch (err: any) {
+    console.error('Error getting example sentences:', err);
     return [{
       japanese: `${word}の例文が見つかりませんでした。`,
       english: 'No example sentences found for this kanji.'

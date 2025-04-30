@@ -28,6 +28,10 @@ export default function WordDetailPage({ params }: Props) {
   const [examples, setExamples] = useState<Array<{ japanese: string; english: string; }>>([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     async function loadData() {
       const decodedSlug = decodeURIComponent(resolvedParams.slug);
       
@@ -214,7 +218,7 @@ export default function WordDetailPage({ params }: Props) {
                     className={styles.relatedCard}
                   >
                     <div className={styles.relatedKanjiChar}>{relatedWord.kanji}</div>
-                    <div className={styles.relatedReading} dangerouslySetInnerHTML={{ __html: relatedWord.kana }}></div>
+                    <div className={styles.relatedReading}>{relatedWord.kana}</div>
                     <div className={styles.relatedMeaning}>{relatedWord.meaning}</div>
                   </Link>
                 ))}
