@@ -1,8 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Kuroshiro from 'kuroshiro';
-import KuromojiAnalyzer from 'kuroshiro-analyzer-kuromoji';
 import styles from '@/styles/kuroshiro.module.css';
 
 interface Props {
@@ -12,11 +10,16 @@ interface Props {
 export default function KanjiTooltip({ text }: Props) {
   const [furiganaHtml, setFuriganaHtml] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function initKuroshiro() {
       try {
+        // Dynamically import Kuroshiro only on client side
+        const [Kuroshiro, KuromojiAnalyzer] = await Promise.all([
+          import('kuroshiro').then(m => m.default),
+          import('kuroshiro-analyzer-kuromoji').then(m => m.default)
+        ]);
+
         const kuroshiro = new Kuroshiro();
         await kuroshiro.init(new KuromojiAnalyzer({ 
           dictPath: '/dict'  // This path should be relative to the public directory

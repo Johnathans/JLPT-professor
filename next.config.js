@@ -16,12 +16,22 @@ const nextConfig = {
       },
     ],
   },
-  // Enable JSON imports
+  // Enable JSON imports and handle Kuroshiro modules
   webpack: (config) => {
     config.module.rules.push({
       test: /\.json$/,
       type: 'json',
     });
+
+    // Handle Kuroshiro modules
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      path: false,
+      stream: false,
+      zlib: false,
+    };
+
     return config;
   },
 }
