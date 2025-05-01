@@ -3,6 +3,9 @@
 import { N3_KANJI, N4_KANJI, N5_KANJI } from '@/data/jlpt-kanji-updated';
 import { KanjiData } from '@/data/jlpt-kanji-updated';
 import styles from '@/styles/test-imports.module.css';
+import KanjiTooltip from '@/components/KanjiTooltip';
+import KuroshiroTest from '@/components/KuroshiroTest';
+import SentenceAudioPlayer from '@/components/SentenceAudioPlayer';
 
 const formatReadings = (readings: string | string[] | undefined): string[] => {
   if (!readings) return [];
@@ -59,6 +62,53 @@ export default function TestImportsPage() {
           {N5_KANJI.slice(0, 10).map((kanji, index) => (
             <KanjiCard key={index} kanji={kanji} />
           ))}
+        </div>
+      </div>
+
+      <div className={styles.testSection}>
+        <h2>Test Kuroshiro</h2>
+        <div className="space-y-4">
+          <KuroshiroTest text="母は風邪で寝込んでいます。" />
+          <KuroshiroTest text="日本語を勉強しています。" />
+          <KuroshiroTest text="新しい車を買いました。" />
+        </div>
+      </div>
+
+      <div className={styles.testSection}>
+        <h2>Voice Test</h2>
+        <div className="container mx-auto p-4">
+          <h1 className="text-2xl font-bold mb-4">Voice Test</h1>
+          
+          <div className="space-y-8">
+            <div className="bg-white p-6 rounded-lg shadow-sm">
+              <h2 className="text-xl font-semibold mb-4">Example Sentences with Chirp HD Voice</h2>
+              <div className="space-y-4">
+                <div className="p-4 bg-gray-50 rounded">
+                  <div className="text-lg mb-2">
+                    <KanjiTooltip text="私は毎日日本語を勉強します。" />
+                  </div>
+                  <div className="text-gray-600 mb-2">I study Japanese every day.</div>
+                  <SentenceAudioPlayer text="私は毎日日本語を勉強します。" />
+                </div>
+
+                <div className="p-4 bg-gray-50 rounded">
+                  <div className="text-lg mb-2">
+                    <KanjiTooltip text="東京に住んでいる友達に会いに行きます。" />
+                  </div>
+                  <div className="text-gray-600 mb-2">I'm going to meet my friend who lives in Tokyo.</div>
+                  <SentenceAudioPlayer text="東京に住んでいる友達に会いに行きます。" />
+                </div>
+
+                <div className="p-4 bg-gray-50 rounded">
+                  <div className="text-lg mb-2">
+                    <KanjiTooltip text="この本は面白いですから、ぜひ読んでください。" />
+                  </div>
+                  <div className="text-gray-600 mb-2">This book is interesting, so please read it.</div>
+                  <SentenceAudioPlayer text="この本は面白いですから、ぜひ読んでください。" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

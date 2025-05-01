@@ -320,6 +320,23 @@
   transform: none;
 }
 
+.exampleContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+}
+
+.exampleContent > div:first-child {
+  flex: 1;
+}
+
+.exampleContent > *:last-child {
+  flex-shrink: 0;
+  align-self: center;
+}
+
 .strokeOrderSection {
   background-color: white;
   border-radius: 12px;

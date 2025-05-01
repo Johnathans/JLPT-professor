@@ -38,11 +38,12 @@ export async function generateSpeech(text: string) {
     input: { text },
     voice: { 
       languageCode: 'ja-JP',
-      name: 'ja-JP-Neural2-B' // Male voice
+      name: 'ja-JP-Standard-C', // Female voice C
+      model: 'chirp-hd' // Use Chirp HD model
     },
     audioConfig: { 
       audioEncoding: protos.google.cloud.texttospeech.v1.AudioEncoding.MP3,
-      speakingRate: 1.0, 
+      speakingRate: 0.75, 
       pitch: 0.0 // Natural pitch
     },
   };
