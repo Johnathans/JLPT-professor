@@ -19,7 +19,7 @@ export default function KanjiTooltip({ text }: Props) {
       try {
         const kuroshiro = new Kuroshiro();
         await kuroshiro.init(new KuromojiAnalyzer({ 
-          dictPath: '/dict'
+          dictPath: '/dict'  // This path should be relative to the public directory
         }));
         
         // Convert to furigana with HTML ruby tags
@@ -32,7 +32,8 @@ export default function KanjiTooltip({ text }: Props) {
         setIsLoading(false);
       } catch (err) {
         console.error('Error initializing Kuroshiro:', err);
-        setError(err instanceof Error ? err.message : 'Unknown error');
+        // Fallback to plain text if there's an error
+        setFuriganaHtml(text);
         setIsLoading(false);
       }
     }
@@ -41,11 +42,7 @@ export default function KanjiTooltip({ text }: Props) {
   }, [text]);
 
   if (isLoading) {
-    return <span className="text-gray-400">Loading readings...</span>;
-  }
-
-  if (error) {
-    return <span className="text-red-500">Error loading readings</span>;
+    return <span className="text-gray-400">{text}</span>;
   }
 
   return (
