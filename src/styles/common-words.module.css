@@ -1,0 +1,57 @@
+.container {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #2d2d2d;
+}
+
+.wordGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.wordPill {
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.wordPill:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.japanese {
+  font-size: 1.125rem;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.word {
+  font-size: 1.25rem;
+  color: #2d2d2d;
+  font-weight: 500;
+}
+
+.reading {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.meaning {
+  font-size: 0.875rem;
+  color: #4b5563;
+  margin-top: 0.25rem;
+  line-height: 1.4;
+}

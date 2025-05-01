@@ -14,6 +14,7 @@ import { KanjiData } from '@/types/kanji';
 import { getExampleSentences } from '@/services/dictionary';
 import JlptLevelBadge from '@/components/JlptLevelBadge';
 import KanjiTooltip from '@/components/KanjiTooltip';
+import CommonWords from '@/components/CommonWords';
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -219,8 +220,12 @@ export default function WordDetailPage({ params }: Props) {
           </div>
         </section>
 
-        <section>
-          <h2>Related Kanji</h2>
+        <section className="mt-8">
+          {word.kanji && <CommonWords kanji={word.kanji} level="n5" />}
+        </section>
+
+        <section className="mt-8">
+          <h2 className="text-2xl font-bold mb-4">Related Kanji</h2>
           {relatedWords.length > 0 ? (
             <div className={styles.relatedKanji}>
               {relatedWords.map((relatedWord, index) => (
