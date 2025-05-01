@@ -13,6 +13,8 @@ import n4KanjiRaw from '@/data/n4-kanji-new.json';
 import { KanjiData } from '@/types/kanji';
 import { getExampleSentences } from '@/services/dictionary';
 import JlptLevelBadge from '@/components/JlptLevelBadge';
+import CommonWords from '@/components/CommonWords';
+import KanjiTooltip from '@/components/KanjiTooltip';
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -55,6 +57,9 @@ export default function WordDetailPage({ params }: Props) {
               '',
           type: 'kanji'
         };
+        
+        // Debug log
+        console.log('Setting word:', wordDetail);
         
         setWord(wordDetail);
         
@@ -188,28 +193,34 @@ export default function WordDetailPage({ params }: Props) {
 
       <div className={styles.content}>
         <section>
-          <h2>Example Sentences</h2>
-          {examples && examples.length > 0 ? (
-            <ul className={styles.examples}>
-              {examples.map((example, index) => (
-                <li key={index} className={styles.exampleItem}>
+          <h2 className="text-2xl font-bold mb-4">Example Sentences</h2>
+          <div className={styles.examples}>
+            {examples && examples.length > 0 ? (
+              examples.map((example, index) => (
+                <div key={index} className={styles.exampleItem}>
                   <div className={styles.exampleContent}>
                     <div>
-                      <p className={styles.japanese}>{example.japanese}</p>
-                      <p className={styles.english}>{example.english}</p>
+                      <div className={styles.exampleJapanese}>
+                        <KanjiTooltip text={example.japanese} />
+                      </div>
+                      <div className={styles.exampleEnglish}>{example.english}</div>
                     </div>
                     <SentenceAudioPlayer text={example.japanese} />
                   </div>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No example sentences available.</p>
-          )}
+                </div>
+              ))
+            ) : (
+              <p>No example sentences available.</p>
+            )}
+          </div>
         </section>
 
-        <section>
-          <h2>Related Kanji</h2>
+        <section className="mt-8">
+          {word.kanji && <CommonWords kanji={word.kanji} level="n4" />}
+        </section>
+
+        <section className="mt-8">
+          <h2 className="text-2xl font-bold mb-4">Related Kanji</h2>
           {relatedWords.length > 0 ? (
             <div className={styles.relatedKanji}>
               {relatedWords.map((relatedWord, index) => (

@@ -12,6 +12,8 @@ import SignupCTA from '@/components/SignupCTA';
 import n3KanjiRaw from '@/data/n3-kanji-standardized.json';
 import { getExampleSentences } from '@/services/dictionary';
 import JlptLevelBadge from '@/components/JlptLevelBadge';
+import CommonWords from '@/components/CommonWords';
+import KanjiTooltip from '@/components/KanjiTooltip';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -194,8 +196,10 @@ export default function WordDetailPage({ params }: Props) {
                   <li key={index} className={styles.exampleItem}>
                     <div className={styles.exampleContent}>
                       <div>
-                        <p className={styles.japanese}>{example.japanese}</p>
-                        <p className={styles.english}>{example.english}</p>
+                        <div className={styles.japanese}>
+                          <KanjiTooltip text={example.japanese} />
+                        </div>
+                        <div className={styles.english}>{example.english}</div>
                       </div>
                       <SentenceAudioPlayer text={example.japanese} />
                     </div>
@@ -205,6 +209,10 @@ export default function WordDetailPage({ params }: Props) {
             ) : (
               <p>No example sentences available.</p>
             )}
+          </section>
+
+          <section className="mt-8">
+            {word.kanji && <CommonWords kanji={word.kanji} level="n3" />}
           </section>
 
           <section>

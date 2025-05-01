@@ -12,6 +12,8 @@ type CommonWordsData = {
 
 // Import with type assertion
 const n5CommonWords = require('@/data/common-words/n5-common-words.json') as CommonWordsData;
+const n4CommonWords = require('@/data/common-words/n4-common-words.json') as CommonWordsData;
+const n3CommonWords = require('@/data/common-words/n3-common-words.json') as CommonWordsData;
 
 interface CommonWord {
   word: string;
@@ -30,10 +32,15 @@ export default function CommonWords({ kanji, level = 'n5' }: CommonWordsProps) {
   let words: CommonWord[] = [];
   if (level === 'n5') {
     words = n5CommonWords[kanji] || [];
+  } else if (level === 'n4') {
+    words = n4CommonWords[kanji] || [];
+  } else if (level === 'n3') {
+    words = n3CommonWords[kanji] || [];
   }
 
   // Add debug logging
   console.log('Kanji:', kanji);
+  console.log('Level:', level);
   console.log('Words found:', words);
 
   if (words.length === 0) {
