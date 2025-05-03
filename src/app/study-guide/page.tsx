@@ -25,8 +25,6 @@ import {
   TableBody,
   Button
 } from '@mui/material';
-import JlptScoreChart from '@/components/charts/JlptScoreChart';
-import StudyTimeChart from '@/components/charts/StudyTimeChart';
 import StudyHoursChart from '@/components/charts/StudyHoursChart';
 
 type JLPTLevel = 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
