@@ -53,7 +53,8 @@ const publicRoutes = [
   '/n5-stories',
   '/n5-listening',
   '/login',
-  '/signup'
+  '/signup',
+  '/study-guide'  // Added study guide to public routes
 ];
 
 export default function RootLayout({
