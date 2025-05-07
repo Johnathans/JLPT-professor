@@ -281,19 +281,19 @@ function SidebarComponent({
   );
 }
 
-type TestMode = 'vocabulary' | 'kanji-onyomi' | 'kanji-kunyomi' | 'kanji-meaning';
+type StudyMode = 'vocabulary' | 'kanji-onyomi' | 'kanji-kunyomi' | 'kanji-meaning';
 
-const TestModeLabels: Record<TestMode, string> = {
+const StudyModeLabels: Record<StudyMode, string> = {
   'vocabulary': 'Vocabulary',
   'kanji-onyomi': 'Kanji On\'yomi',
   'kanji-kunyomi': 'Kanji Kun\'yomi',
   'kanji-meaning': 'Kanji Meaning'
 };
 
-export default function TestLayout() {
+export default function StudyLayout() {
   const [isExpanded, setIsExpanded] = useState(false);
   const { isDarkMode, toggleDarkMode } = useColorMode();
-  const [testMode, setTestMode] = useState<TestMode>('vocabulary');
+  const [studyMode, setStudyMode] = useState<StudyMode>('vocabulary');
   const [settingsAnchor, setSettingsAnchor] = useState<null | HTMLElement>(null);
   const [accuracy, setAccuracy] = useState(0);
   const [remainingCards, setRemainingCards] = useState(0);
@@ -306,13 +306,13 @@ export default function TestLayout() {
     setSettingsAnchor(null);
   };
 
-  const handleTestModeChange = (mode: TestMode) => {
-    setTestMode(mode);
+  const handleStudyModeChange = (mode: StudyMode) => {
+    setStudyMode(mode);
     handleSettingsClose();
   };
 
   const renderQuestion = () => {
-    switch (testMode) {
+    switch (studyMode) {
       case 'vocabulary':
         return (
           <>
@@ -341,8 +341,8 @@ export default function TestLayout() {
               父
             </JapaneseSentence>
             <EnglishTranslation darkMode={isDarkMode}>
-              {testMode === 'kanji-onyomi' ? 'Select the correct on\'yomi reading' :
-               testMode === 'kanji-kunyomi' ? 'Select the correct kun\'yomi reading' :
+              {studyMode === 'kanji-onyomi' ? 'Select the correct on\'yomi reading' :
+               studyMode === 'kanji-kunyomi' ? 'Select the correct kun\'yomi reading' :
                'Select the correct meaning'}
             </EnglishTranslation>
           </>
@@ -351,7 +351,7 @@ export default function TestLayout() {
   };
 
   const renderChoices = () => {
-    switch (testMode) {
+    switch (studyMode) {
       case 'vocabulary':
         return (
           <ChoiceGrid>
@@ -471,18 +471,18 @@ export default function TestLayout() {
               }
             }}
           >
-            {Object.entries(TestModeLabels).map(([mode, label]) => (
+            {Object.entries(StudyModeLabels).map(([mode, label]) => (
               <MenuItem 
                 key={mode}
-                onClick={() => handleTestModeChange(mode as TestMode)}
+                onClick={() => handleStudyModeChange(mode as StudyMode)}
                 sx={{
                   minWidth: '180px',
-                  color: testMode === mode ? '#7c4dff' : isDarkMode ? '#fff' : '#1f2937',
-                  backgroundColor: testMode === mode ? 
+                  color: studyMode === mode ? '#7c4dff' : isDarkMode ? '#fff' : '#1f2937',
+                  backgroundColor: studyMode === mode ? 
                     (isDarkMode ? '#3a3052' : '#f3f0ff') : 
                     'transparent',
                   '&:hover': {
-                    backgroundColor: testMode === mode ? 
+                    backgroundColor: studyMode === mode ? 
                       (isDarkMode ? '#3a3052' : '#f3f0ff') : 
                       (isDarkMode ? '#383838' : '#f3f4f6')
                   }
