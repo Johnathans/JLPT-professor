@@ -86,6 +86,10 @@
   filter: brightness(0);
 }
 
+.dark .logoSvg {
+  filter: brightness(0) invert(1);
+}
+
 .logoText {
   font-weight: 600;
   color: #333;
