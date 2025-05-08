@@ -83,7 +83,7 @@
 .logoSvg {
   width: 42px;
   height: 42px;
-  filter: invert(40%) sepia(93%) saturate(1352%) hue-rotate(235deg) brightness(99%) contrast(98%);
+  filter: brightness(0);
 }
 
 .logoText {
