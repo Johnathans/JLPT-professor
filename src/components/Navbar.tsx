@@ -23,7 +23,7 @@ const Navbar: React.FC<NavbarProps> = ({ className, forceDarkMode }) => {
         <div className={styles.logo}>
           <div className={styles.logoIcon}>
             <img 
-              src="/assets/4307713_biology_education_human_laboratory_professor_icon.svg" 
+              src="/assets/1169415_professor_teacher_scientist_icon.svg" 
               alt="Professor" 
               className={styles.logoSvg}
             />
