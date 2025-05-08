@@ -23,6 +23,8 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useJlptLevel } from '@/hooks/useJlptLevel';
 import { useColorMode } from '@/contexts/ThemeContext';
 import Link from 'next/link';
+import Navbar from '@/components/Navbar';
+import styles from '@/styles/dashboard.module.css';
 
 const LayoutRoot = styled('div')(({ theme, darkMode }: { theme?: any, darkMode: boolean }) => ({
   minHeight: '100vh',
@@ -281,10 +283,11 @@ function SidebarComponent({
   );
 }
 
-type StudyMode = 'vocabulary' | 'kanji-onyomi' | 'kanji-kunyomi' | 'kanji-meaning';
+type StudyMode = 'vocabulary' | 'sentences' | 'kanji-onyomi' | 'kanji-kunyomi' | 'kanji-meaning';
 
 const StudyModeLabels: Record<StudyMode, string> = {
   'vocabulary': 'Vocabulary',
+  'sentences': 'Sentences',
   'kanji-onyomi': 'Kanji On\'yomi',
   'kanji-kunyomi': 'Kanji Kun\'yomi',
   'kanji-meaning': 'Kanji Meaning'
@@ -293,6 +296,7 @@ const StudyModeLabels: Record<StudyMode, string> = {
 export default function StudyLayout() {
   const [isExpanded, setIsExpanded] = useState(false);
   const { isDarkMode, toggleDarkMode } = useColorMode();
+  // Default to vocabulary mode
   const [studyMode, setStudyMode] = useState<StudyMode>('vocabulary');
   const [settingsAnchor, setSettingsAnchor] = useState<null | HTMLElement>(null);
   const [accuracy, setAccuracy] = useState(0);
@@ -314,6 +318,17 @@ export default function StudyLayout() {
   const renderQuestion = () => {
     switch (studyMode) {
       case 'vocabulary':
+        return (
+          <>
+            <JapaneseSentence darkMode={isDarkMode}>
+              父
+            </JapaneseSentence>
+            <EnglishTranslation darkMode={isDarkMode}>
+              Select the correct meaning
+            </EnglishTranslation>
+          </>
+        );
+      case 'sentences':
         return (
           <>
             <JapaneseSentence darkMode={isDarkMode}>
@@ -355,6 +370,15 @@ export default function StudyLayout() {
       case 'vocabulary':
         return (
           <ChoiceGrid>
+            <ChoiceButton darkMode={isDarkMode}>father</ChoiceButton>
+            <ChoiceButton darkMode={isDarkMode}>mother</ChoiceButton>
+            <ChoiceButton darkMode={isDarkMode}>older brother</ChoiceButton>
+            <ChoiceButton darkMode={isDarkMode}>older sister</ChoiceButton>
+          </ChoiceGrid>
+        );
+      case 'sentences':
+        return (
+          <ChoiceGrid>
             <ChoiceButton darkMode={isDarkMode}>父</ChoiceButton>
             <ChoiceButton darkMode={isDarkMode}>母</ChoiceButton>
             <ChoiceButton darkMode={isDarkMode}>兄</ChoiceButton>
@@ -392,19 +416,29 @@ export default function StudyLayout() {
   };
 
   return (
-    <LayoutRoot darkMode={isDarkMode}>
-      <Sidebar
-        expanded={isExpanded}
-        darkMode={isDarkMode}
-        onMouseEnter={() => setIsExpanded(true)}
-        onMouseLeave={() => setIsExpanded(false)}
-      >
-        <SidebarComponent 
-          expanded={isExpanded} 
-          onExpandedChange={setIsExpanded} 
-          darkMode={isDarkMode}
-        />
-      </Sidebar>
+    <>
+      {/* Add the shared Navbar with the same dark mode state */}
+      <div className={`${styles.studyNavContainer} ${styles.container} ${isDarkMode ? styles.dark : ''}`}>
+        <Navbar forceDarkMode={isDarkMode} />
+      </div>
+      
+      {/* Keep the original layout structure */}
+      <LayoutRoot darkMode={isDarkMode}>
+        {/* Keep the original sidebar but make it invisible */}
+        <div style={{ visibility: 'hidden', position: 'absolute', zIndex: -1 }}>
+          <Sidebar
+            expanded={isExpanded}
+            darkMode={isDarkMode}
+            onMouseEnter={() => setIsExpanded(true)}
+            onMouseLeave={() => setIsExpanded(false)}
+          >
+            <SidebarComponent 
+              expanded={isExpanded} 
+              onExpandedChange={setIsExpanded} 
+              darkMode={isDarkMode}
+            />
+          </Sidebar>
+        </div>
       <MainContent sidebarExpanded={isExpanded} darkMode={isDarkMode}>
         <TopBar>
           <Link href="/dashboard" passHref>
@@ -512,10 +546,14 @@ export default function StudyLayout() {
             <span>accuracy</span>
           </StatItem>
           <StatItem 
+            className="cards-remaining"
             sx={{ 
               color: isDarkMode ? '#aaa' : '#6F767E',
               '& .value': {
                 color: isDarkMode ? '#fff' : '#1f2937'
+              },
+              '&.cards-remaining .value': {
+                color: '#7c4dff'
               }
             }}
           >
@@ -530,5 +568,6 @@ export default function StudyLayout() {
         </ContentCard>
       </MainContent>
     </LayoutRoot>
+    </>
   );
 }

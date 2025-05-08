@@ -1,924 +1,578 @@
 'use client';
 
-import { Box, Typography, Avatar, IconButton, Tabs, Tab, Grid, Button } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { useRouter } from 'next/navigation';
-import { useJlptLevel } from '@/contexts/JlptLevelContext';
-import React, { useState, useEffect } from 'react';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import Home from '@mui/icons-material/Home';
-import MenuBook from '@mui/icons-material/MenuBook';
-import School from '@mui/icons-material/School';
-import Quiz from '@mui/icons-material/Quiz';
-import Settings from '@mui/icons-material/Settings';
-import Assignment from '@mui/icons-material/Assignment';
-import Insights from '@mui/icons-material/Insights';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import Help from '@mui/icons-material/Help';
-import Star from '@mui/icons-material/Star';
-import Lock from '@mui/icons-material/Lock';
-import Notifications from '@mui/icons-material/Notifications';
-import PlayArrow from '@mui/icons-material/PlayArrow';
+import React, { useEffect } from 'react';
+import styles from '@/styles/dashboard.module.css';
+import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
+import { Clock, Book, Edit3 } from 'react-feather';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import GoalSettingModal, { DailyGoals } from './GoalSettingModal';
+import { useColorMode } from '@/contexts/ThemeContext';
+import Navbar from '@/components/Navbar';
 
-// Styled Components
-const AppContainer = styled('div')({
-  display: 'flex',
-  minHeight: '100vh',
-  backgroundColor: '#f8fafc'
-});
-
-const Sidebar = styled('div')(({ theme }) => ({
-  position: 'fixed',
-  left: 0,
-  top: 0,
-  bottom: 0,
-  width: 72,
-  backgroundColor: '#fff',
-  borderRight: '1px solid rgba(0,0,0,0.08)',
-  transition: 'all 0.3s ease-in-out',
-  overflow: 'hidden',
-  zIndex: 1000,
-  display: 'flex',
-  flexDirection: 'column',
-  padding: '16px 12px',
-  gap: '8px',
-  '& .nav-text': {
-    opacity: 0,
-    transform: 'translateX(-10px)',
-    transition: 'all 0.3s ease-in-out'
+const mockData = {
+  user: {
+    firstName: "John",
+    lastName: "Smith",
+    progress: {
+      remainingKanji: 243,
+      remainingWords: 1875,
+      currentLevel: "N4"
+    }
   },
-  '& .user-name': {
-    opacity: 0,
-    transform: 'translateX(-10px)',
-    transition: 'all 0.3s ease-in-out'
-  },
-  '.MuiSvgIcon-root': {
-    transition: 'margin 0.3s ease-in-out'
-  },
-  '&:hover': {
-    width: 240,
-    '& .nav-text, & .user-name': {
-      opacity: 1,
-      transform: 'translateX(0)'
+  jlptLevels: [
+    {
+      id: "n5",
+      name: "N5",
+      description: "Basic Japanese knowledge",
+      modules: [
+        {
+          id: "n5-1",
+          title: "Fast Track Level 1",
+          description: "1,000 Sentences",
+          tag: "Fluency Fast Track",
+          status: "in_progress",
+          progress: {
+            playing: 7,
+            mastered: 0,
+            playingPercentage: 0.7,
+            masteredPercentage: 0
+          },
+          dailyActivity: {
+            played: 2,
+            new: 0,
+            review: 2
+          }
+        },
+        {
+          id: "n5-2",
+          title: "Fast Track Level 2",
+          description: "1,000 Sentences",
+          tag: "Fluency Fast Track",
+          status: "available",
+          progress: {
+            playing: 0,
+            mastered: 0,
+            playingPercentage: 0,
+            masteredPercentage: 0
+          },
+          dailyActivity: {
+            played: 0,
+            new: 0,
+            review: 0
+          }
+        },
+        {
+          id: "n5-3",
+          title: "Kanji Essentials",
+          description: "103 Kanji Characters",
+          tag: "Kanji",
+          status: "locked",
+          progress: {
+            playing: 0,
+            mastered: 0,
+            playingPercentage: 0,
+            masteredPercentage: 0
+          },
+          dailyActivity: {
+            played: 0,
+            new: 0,
+            review: 0
+          }
+        },
+        {
+          id: "n5-4",
+          title: "Core Vocabulary",
+          description: "800 Essential Words",
+          tag: "Vocabulary",
+          status: "locked",
+          progress: {
+            playing: 0,
+            mastered: 0,
+            playingPercentage: 0,
+            masteredPercentage: 0
+          },
+          dailyActivity: {
+            played: 0,
+            new: 0,
+            review: 0
+          }
+        },
+        {
+          id: "n5-5",
+          title: "Grammar Foundations",
+          description: "Basic Sentence Patterns",
+          tag: "Grammar",
+          status: "locked",
+          progress: {
+            playing: 0,
+            mastered: 0,
+            playingPercentage: 0,
+            masteredPercentage: 0
+          },
+          dailyActivity: {
+            played: 0,
+            new: 0,
+            review: 0
+          }
+        }
+      ]
     },
-    '& + .main-content': {
-      marginLeft: 240
+    {
+      id: "n4",
+      name: "N4",
+      description: "Basic Japanese knowledge",
+      modules: [
+        {
+          id: "n4-1",
+          title: "Intermediate Kanji",
+          description: "181 Kanji Characters",
+          tag: "Kanji",
+          status: "locked",
+          progress: {
+            playing: 0,
+            mastered: 0,
+            playingPercentage: 0,
+            masteredPercentage: 0
+          },
+          dailyActivity: {
+            played: 0,
+            new: 0,
+            review: 0
+          }
+        },
+        {
+          id: "n4-2",
+          title: "Expanded Vocabulary",
+          description: "1,500 Words",
+          tag: "Vocabulary",
+          status: "locked",
+          progress: {
+            playing: 0,
+            mastered: 0,
+            playingPercentage: 0,
+            masteredPercentage: 0
+          },
+          dailyActivity: {
+            played: 0,
+            new: 0,
+            review: 0
+          }
+        }
+      ]
+    },
+    {
+      id: "n3",
+      name: "N3",
+      description: "Intermediate Japanese knowledge",
+      modules: []
+    },
+    {
+      id: "n2",
+      name: "N2",
+      description: "Pre-advanced Japanese knowledge",
+      modules: []
+    },
+    {
+      id: "n1",
+      name: "N1",
+      description: "Advanced Japanese knowledge",
+      modules: []
     }
+  ],
+  srs: {
+    new: 42,
+    learning: 78,
+    mastered: 156,
+    readyForReview: 8,
+    accuracy: 87
   },
-  [theme.breakpoints.down('sm')]: {
-    display: 'none'
-  }
-}));
-
-const UserSection = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '12px',
-  padding: '8px',
-  marginBottom: '16px',
-  borderRadius: '12px',
-  cursor: 'pointer',
-  transition: 'background-color 0.2s ease',
-  '&:hover': {
-    backgroundColor: 'rgba(124, 77, 255, 0.04)'
-  }
-});
-
-const NavItem = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '12px',
-  padding: '12px',
-  borderRadius: '12px',
-  cursor: 'pointer',
-  transition: 'all 0.2s ease',
-  color: '#6F767E',
-  position: 'relative',
-  '&:hover': {
-    backgroundColor: 'rgba(124, 77, 255, 0.04)',
-    color: '#7c4dff'
+  dailyGoal: {
+    total: 30,
+    completed: 21,
+    categories: {
+      vocabulary: { total: 10, completed: 8 },
+      kanji: { total: 5, completed: 4 },
+      grammar: { total: 5, completed: 3 },
+      listening: { total: 5, completed: 3 },
+      reading: { total: 5, completed: 3 }
+    },
+    timeRemaining: "5h 20m"
   },
-  '.MuiSvgIcon-root': {
-    width: 24,
-    height: 24,
-    flexShrink: 0
+  streak: 1,
+  playedToday: {
+    total: 4,
+    new: 4,
+    review: 0
   },
-  '.nav-text': {
-    fontSize: '0.9375rem',
-    fontWeight: 500,
-    whiteSpace: 'nowrap',
-    opacity: 0,
-    transform: 'translateX(-10px)',
-    transition: 'all 0.3s ease-in-out',
-    color: 'inherit'
+  level: {
+    current: 0,
+    pointsToNext: 76
   },
-  '&.active': {
-    color: '#7c4dff',
-    backgroundColor: 'rgba(124, 77, 255, 0.08)',
-    fontWeight: 600
-  }
-}));
-
-const ProgressSection = styled(Box)({
-  background: '#fff',
-  borderRadius: 12,
-  padding: 24,
-  marginBottom: 24
-});
-
-const StudyCard = styled(Box)({
-  background: '#fff',
-  borderRadius: 12,
-  padding: 20,
-  border: '1px solid rgba(0,0,0,0.08)',
-  cursor: 'pointer',
-  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-  '&:hover': {
-    transform: 'translateY(-2px)',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
-  }
-});
-
-const FlipCard = styled('div')({
-  width: '100%',
-  height: '100%',
-  perspective: '1000px',
-  cursor: 'pointer',
-  '.flip-card-inner': {
-    position: 'relative',
-    width: '100%',
-    height: '100%',
-    textAlign: 'center',
-    transition: 'transform 0.6s',
-    transformStyle: 'preserve-3d',
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-    '&.flipped': {
-      transform: 'rotateY(180deg)'
-    }
+  leaderboard: {
+    rank: 382
   },
-  '.flip-card-front, .flip-card-back': {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    backfaceVisibility: 'hidden',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 16,
-    borderRadius: 12
-  },
-  '.flip-card-back': {
-    transform: 'rotateY(180deg)',
-    backgroundColor: '#7c4dff',
-    color: 'white'
-  }
-});
+  history: [
+    { date: '2025-04-29', count: 0 },
+    { date: '2025-04-30', count: 2 },
+    { date: '2025-05-01', count: 1 },
+    { date: '2025-05-02', count: 3 },
+    { date: '2025-05-03', count: 5 },
+    { date: '2025-05-04', count: 2 },
+    { date: '2025-05-05', count: 4 }
+  ]
+};
 
-const BottomNav = styled('div')(({ theme }) => ({
-  display: 'none',
-  [theme.breakpoints.down('sm')]: {
-    display: 'flex',
-    position: 'fixed',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 56,
-    backgroundColor: 'white',
-    borderTop: '1px solid',
-    borderColor: theme.palette.divider,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    zIndex: 1000,
-    padding: '0 16px'
-  }
-}));
-
-const SessionCard = styled(Box)(({ theme }) => ({
-  background: '#fff',
-  borderRadius: 12,
-  padding: 24,
-  marginBottom: 24,
-  border: '1px solid rgba(0,0,0,0.08)',
-}));
-
-const ExerciseItem = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: '12px 16px',
-  borderRadius: 8,
-  backgroundColor: 'rgba(124, 77, 255, 0.04)',
-  marginBottom: 8,
-  '&:last-child': {
-    marginBottom: 0
-  }
-}));
-
-const StartButton = styled(Button)(({ theme }) => ({
-  backgroundColor: '#7c4dff',
-  color: '#fff',
-  padding: '10px 24px',
-  borderRadius: 8,
-  textTransform: 'none',
-  fontWeight: 600,
-  '&:hover': {
-    backgroundColor: '#6b42e0',
-  },
-}));
-
-const ExerciseIcon = styled(Box)(({ theme }) => ({
-  width: 40,
-  height: 40,
-  borderRadius: 8,
-  backgroundColor: '#fff',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  marginRight: 16,
-  fontSize: '1.25rem',
-  fontFamily: '"Noto Sans JP", sans-serif',
-  color: '#7c4dff',
-  border: '1px solid rgba(124, 77, 255, 0.2)',
-}));
-
-const StatsCard = styled(Box)(({ theme }) => ({
-  background: '#fff',
-  borderRadius: 12,
-  padding: 24,
-  border: '1px solid rgba(0,0,0,0.08)',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: 16
-}));
-
-const StatItem = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  padding: '12px 16px',
-  borderRadius: 8,
-  backgroundColor: 'rgba(124, 77, 255, 0.04)',
-  transition: 'transform 0.2s ease',
-  '&:hover': {
-    transform: 'translateY(-2px)'
-  }
-}));
-
-const ReviewsCard = styled(Box)(({ theme }) => ({
-  background: '#fff',
-  borderRadius: 12,
-  padding: 24,
-  border: '1px solid rgba(0,0,0,0.08)',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: 16
-}));
-
-const ReviewItem = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  padding: '12px 16px',
-  borderRadius: 8,
-  backgroundColor: theme.palette.background.default,
-  '&:hover': {
-    backgroundColor: 'rgba(124, 77, 255, 0.04)'
-  }
-}));
-
-const navItems = [
-  { icon: <Home />, label: 'Dashboard', path: '/', active: true },
-  { icon: <MenuBook />, label: 'Study Guide', path: '/study-guide' },
-  { icon: <School />, label: 'Practice Tests', path: '/practice-test' },
-  { icon: <Quiz />, label: 'JLPT Test', path: '/jlpt-test' },
-  { icon: <Settings />, label: 'Settings', path: '/settings' },
-  { icon: <Assignment />, label: 'Study Plan', path: '/study-plan' },
-  { icon: <Insights />, label: 'Progress', path: '/progress' },
-  { icon: <AccountCircle />, label: 'Profile', path: '/profile' },
-  { icon: <Help />, label: 'Help', path: '/help' }
-];
-
-const todaysKanji = [
-  { kanji: '力', meaning: 'Power', reading: 'ちから (chikara)' },
-  { kanji: '山', meaning: 'Mountain', reading: 'やま (yama)' },
-  { kanji: '川', meaning: 'River', reading: 'かわ (kawa)' },
-  { kanji: '木', meaning: 'Tree', reading: 'き (ki)' }
-];
-
-const todaysVocab = [
-  { word: '勉強', meaning: 'Study', reading: 'べんきょう (benkyou)' },
-  { word: '学校', meaning: 'School', reading: 'がっこう (gakkou)' },
-  { word: '先生', meaning: 'Teacher', reading: 'せんせい (sensei)' },
-  { word: '学生', meaning: 'Student', reading: 'がくせい (gakusei)' }
-];
-
-const todaysGrammar = [
-  { pattern: 'ています', meaning: 'Present continuous' },
-  { pattern: 'ました', meaning: 'Past tense' },
-  { pattern: 'たい', meaning: 'Want to do' },
-  { pattern: 'ない', meaning: 'Negative' }
-];
-
-export default function Dashboard() {
-  const router = useRouter();
-  const { level } = useJlptLevel();
-  const [activeTab, setActiveTab] = useState('kanji');
-  const [userName, setUserName] = useState<string>('');
-  const supabase = createClientComponentClient();
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  useEffect(() => {
-    async function getUserProfile() {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user?.user_metadata?.full_name) {
-        setUserName(user.user_metadata.full_name);
-      } else if (user?.email) {
-        setUserName(user.email.split('@')[0]);
-      }
-    }
-    getUserProfile();
-  }, [supabase]);
-
-  const formatDate = (date: Date): string => {
-    return date.toLocaleDateString('en-US', { 
-      weekday: 'long',
-      month: 'long',
-      day: 'numeric'
-    });
-  };
-
-  const today = new Date();
-
-  // Mock SRS data - this would come from your backend
-  const srsStats = {
-    new: 15,
-    learning: 42,
-    mastered: 128,
-    dueNow: 8,
-    dueLater: 12,
-    dueTomorrow: 25
-  };
+export default function TestDashboard() {
+  const { isDarkMode, toggleDarkMode } = useColorMode();
+  const [showGoalModal, setShowGoalModal] = React.useState(false);
+  const [activeJlptLevel, setActiveJlptLevel] = React.useState("n5");
+  const brandPurple = '#7c4dff';
+  const [dailyGoals, setDailyGoals] = React.useState<DailyGoals>({
+    vocabulary: mockData.dailyGoal.categories.vocabulary.total,
+    kanji: mockData.dailyGoal.categories.kanji.total,
+    grammar: mockData.dailyGoal.categories.grammar.total,
+    listening: mockData.dailyGoal.categories.listening.total,
+    reading: mockData.dailyGoal.categories.reading.total
+  });
 
   return (
-    <AppContainer>
-      <Sidebar 
-        className="sidebar"
-        onMouseEnter={() => setIsExpanded(true)}
-        onMouseLeave={() => setIsExpanded(false)}
-      >
-        <UserSection>
-          <Avatar 
-            sx={{ 
-              width: 36,
-              height: 36,
-              bgcolor: '#7c4dff',
-              fontSize: '1rem',
-              fontWeight: 600,
-              flexShrink: 0
-            }}
-          >
-            J
-          </Avatar>
-          <Typography className="user-name" variant="body1" sx={{ fontWeight: 600 }}>
-            {userName}
-          </Typography>
-        </UserSection>
+    <div className={`${styles.container} ${isDarkMode ? styles.dark : ''}`}>
+      {/* Shared Navigation Component */}
+      <Navbar />
+
+      {/* Main Content */}
+      <main className={styles.main}>
+        <div className={styles.welcomeHeader}>
+          <h1><span className={styles.welcomeText}>ようこそ,</span> <span className={styles.userName}>{mockData.user.firstName}</span></h1>
+          <p>Only <span className={styles.highlightStat}>{mockData.user.progress.remainingKanji} kanji</span> and <span className={styles.highlightStat}>{mockData.user.progress.remainingWords} words</span> left to memorize for {mockData.user.progress.currentLevel}</p>
+        </div>
         
-        {navItems.map((item, index) => (
-          <NavItem
-            key={index}
-            className={item.path === '/' ? 'active' : ''}
-            onClick={() => router.push(item.path || '/')}
-          >
-            {item.icon}
-            <Typography className="nav-text">
-              {item.label}
-            </Typography>
-          </NavItem>
-        ))}
-      </Sidebar>
-
-      <Box 
-        className={`main-content ${isExpanded ? 'sidebar-expanded' : ''}`}
-        sx={{
-          flexGrow: 1,
-          width: '100%',
-          backgroundColor: '#f8fafc',
-          overflow: 'auto',
-          padding: '24px',
-          marginLeft: '36px',
-          transition: 'margin-left 0.3s ease-in-out',
-          '&.sidebar-expanded': {
-            marginLeft: '180px'
-          },
-          '@media (max-width: 600px)': {
-            padding: '16px',
-            paddingBottom: '64px',
-            marginLeft: 0
-          }
-        }}
-      >
-        <Box sx={{ 
-          p: { xs: 2, sm: 3 },
-          pb: { xs: 8, sm: 3 },
-          position: 'relative'
-        }}>
-          <IconButton
-            sx={{
-              position: 'absolute',
-              top: '24px',
-              right: '24px',
-              backgroundColor: '#e8e3ff',
-              '&:hover': {
-                backgroundColor: '#e8e3ff'
-              }
-            }}
-          >
-            <Notifications sx={{ color: '#7c4dff' }} />
-          </IconButton>
-
-          {/* Welcome Message */}
-          <Box sx={{ mb: { xs: 2, sm: 3 } }}>
-            <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 1 }}>
-              <Typography variant="h4" sx={{ 
-                fontWeight: 900,
-                fontSize: { xs: '2rem', sm: '2.65rem' },
-                color: '#1A1D1E',
-              }}>
-                Welcome back, {userName}
-              </Typography>
-            </Box>
-            <Typography sx={{ 
-              color: '#6F767E',
-              fontSize: { xs: '0.875rem', sm: '1rem' },
-              mt: 1
-            }}>
-              Ready to continue your JLPT N{level} journey?
-            </Typography>
-          </Box>
-
-          {/* Main Content */}
-          <Box sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
-            gap: { xs: 2, sm: 3 },
-            width: '100%',
-            '& > *': {
-              flex: '1 1 0',
-              minWidth: 0
-            }
-          }}>
-            {/* Progress Overview - Left Column */}
-            <Box sx={{
-              width: { xs: '100%', md: '50%' },
-              height: { md: '100%' }
-            }}>
-              <Typography variant="h6" sx={{ 
-                mb: 2, 
-                fontWeight: 700,
-                color: '#1A1D1E',
-                fontSize: { xs: '1.25rem', md: '1.35rem' }
-              }}>
-                Progress Overview
-              </Typography>
-              <ProgressSection sx={{ height: { md: 'calc(100% - 42px)' } }}>
-                <Typography sx={{ mb: 2, color: '#6F767E' }}>
-                  JLPT N{level} Progress
-                </Typography>
-                <Box sx={{ 
-                  height: 24, 
-                  background: '#F5F5F5',
-                  borderRadius: 2,
-                  mb: 2,
-                  overflow: 'hidden',
-                  display: 'flex'
-                }}>
-                  <Box sx={{ 
-                    width: '40%',
-                    height: '100%',
-                    background: '#7c4dff',
-                    borderRadius: '8px 0 0 8px'
-                  }} />
-                  <Box sx={{ 
-                    width: '25%',
-                    height: '100%',
-                    background: '#7c4dff',
-                    opacity: 0.8,
-                    borderLeft: '2px solid #F5F5F5'
-                  }} />
-                  <Box sx={{ 
-                    width: '25%',
-                    height: '100%',
-                    background: '#7c4dff',
-                    opacity: 0.6,
-                    borderLeft: '2px solid #F5F5F5'
-                  }} />
-                  <Box sx={{ 
-                    width: '10%',
-                    height: '100%',
-                    background: '#7c4dff',
-                    opacity: 0.4,
-                    borderLeft: '2px solid #F5F5F5',
-                    borderRadius: '0 8px 8px 0'
-                  }} />
-                </Box>
-
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                  <Typography sx={{ fontSize: '0.875rem', fontWeight: 600, color: '#1A1D1E' }}>
-                    Overall Progress
-                  </Typography>
-                  <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
-                    1,250/3,000 items
-                  </Typography>
-                </Box>
-                <Box sx={{ mb: 3 }}>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: '#7c4dff', opacity: 0.8 }} />
-                      <Typography sx={{ fontSize: '0.875rem', fontWeight: 600, color: '#1A1D1E' }}>
-                        Vocabulary (40%)
-                      </Typography>
-                    </Box>
-                    <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
-                      800/2,000 words
-                    </Typography>
-                  </Box>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: '#7c4dff', opacity: 0.6 }} />
-                      <Typography sx={{ fontSize: '0.875rem', fontWeight: 600, color: '#1A1D1E' }}>
-                        Kanji (25%)
-                      </Typography>
-                    </Box>
-                    <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
-                      250/500 characters
-                    </Typography>
-                  </Box>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: '#7c4dff', opacity: 0.4 }} />
-                      <Typography sx={{ fontSize: '0.875rem', fontWeight: 600, color: '#1A1D1E' }}>
-                        Grammar (25%)
-                      </Typography>
-                    </Box>
-                    <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
-                      100/300 points
-                    </Typography>
-                  </Box>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: '#7c4dff', opacity: 0.2 }} />
-                      <Typography sx={{ fontSize: '0.875rem', fontWeight: 600, color: '#1A1D1E' }}>
-                        Listening (10%)
-                      </Typography>
-                    </Box>
-                    <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
-                      100/200 exercises
-                    </Typography>
-                  </Box>
-                </Box>
-              </ProgressSection>
-            </Box>
-
-            {/* Today's Study Goals - Right Column */}
-            <Box sx={{
-              flex: 1,
-              width: { xs: '100%', md: '50%' },
-              height: { md: '100%' }
-            }}>
-              <Typography variant="h6" sx={{ 
-                mb: 2,
-                fontWeight: 700,
-                color: '#1A1D1E',
-                fontSize: { xs: '1.25rem', md: '1.35rem' }
-              }}>
-                Today's Study Goals
-              </Typography>
-              <ProgressSection sx={{ height: { md: 'calc(100% - 42px)' } }}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 2 }}>
-                  <Tabs 
-                    value={activeTab} 
-                    onChange={(e, newValue) => setActiveTab(newValue)} 
-                    aria-label="study goals"
-                    variant="scrollable"
-                    scrollButtons="auto"
-                    allowScrollButtonsMobile
-                  >
-                    <Tab label="Kanji" value="kanji" />
-                    <Tab label="Vocabulary" value="vocabulary" />
-                    <Tab label="Grammar" value="grammar" />
-                    <Tab label="Reading" value="reading" />
-                    <Tab label="Listening" value="listening" />
-                  </Tabs>
-                </Box>
-                
-                <Grid container spacing={2} sx={{ p: 2, borderRadius: 2, mb: 3 }}>
-                  {activeTab === 'kanji' && todaysKanji.map((item, index) => (
-                    <Grid item xs={6} sm={3} key={index} sx={{ height: '120px' }}>
-                      <FlipCard>
-                        <Box className="flip-card-inner">
-                          <Box className="flip-card-front">
-                            <Typography sx={{ 
-                              fontSize: { xs: '1.5rem', sm: '1.75rem' },
-                              fontWeight: 900,
-                              color: '#000000',
-                              textAlign: 'center',
-                              mb: 1
-                            }}>
-                              {item.kanji}
-                            </Typography>
-                          </Box>
-                          <Box className="flip-card-back">
-                            <Typography sx={{ 
-                              fontSize: '1rem',
-                              fontWeight: 500,
-                              color: '#7c4dff',
-                              mb: 1
-                            }}>
-                              {item.meaning}
-                            </Typography>
-                            <Typography sx={{ 
-                              fontSize: '0.875rem',
-                              color: '#6F767E'
-                            }}>
-                              {item.reading}
-                            </Typography>
-                          </Box>
-                        </Box>
-                      </FlipCard>
-                    </Grid>
-                  ))}
+        <div className={styles.grid}>
+          {/* SRS Stats Card */}
+          <div className={styles.card}>
+            <div className={styles.srsCardContent}>
+              <div className={styles.srsHeader}>
+                <h3>JLPT PROGRESS</h3>
+              </div>
+              
+              <div className={styles.srsStatsGrid}>
+                <div className={styles.statColumn}>
+                  <div className={styles.srsStatItem}>
+                    <div className={styles.srsStatValue}>{mockData.srs.new}</div>
+                    <div className={styles.srsStatLabel}>NEW</div>
+                  </div>
                   
-                  {activeTab === 'vocabulary' && todaysVocab.map((item, index) => (
-                    <Grid item xs={6} sm={3} key={index} sx={{ height: '120px' }}>
-                      <FlipCard>
-                        <Box className="flip-card-inner">
-                          <Box className="flip-card-front">
-                            <Typography sx={{ 
-                              fontSize: '1.25rem',
-                              fontWeight: 900,
-                              color: '#000000',
-                              textAlign: 'center',
-                              mb: 1
-                            }}>
-                              {item.word}
-                            </Typography>
-                          </Box>
-                          <Box className="flip-card-back">
-                            <Typography sx={{ 
-                              fontSize: '1rem',
-                              fontWeight: 500,
-                              color: '#7c4dff',
-                              mb: 1
-                            }}>
-                              {item.meaning}
-                            </Typography>
-                            <Typography sx={{ 
-                              fontSize: '0.875rem',
-                              color: '#6F767E'
-                            }}>
-                              {item.reading}
-                            </Typography>
-                          </Box>
-                        </Box>
-                      </FlipCard>
-                    </Grid>
-                  ))}
+                  <div className={styles.srsStatItem}>
+                    <div className={styles.srsStatValue}>{mockData.srs.learning}</div>
+                    <div className={styles.srsStatLabel}>LEARNING</div>
+                  </div>
+                  
+                  <div className={styles.srsStatItem}>
+                    <div className={styles.srsStatValue}>{mockData.srs.mastered}</div>
+                    <div className={styles.srsStatLabel}>MASTERED</div>
+                  </div>
+                </div>
+                
+                <div className={styles.accuracyColumn}>
+                  <div className={styles.accuracyContainer}>
+                    <div className={styles.accuracyLabel}>Average Accuracy</div>
+                    <div className={styles.accuracyValue}>{mockData.srs.accuracy}%</div>
+                    <div className={styles.accuracyBar}>
+                      <div 
+                        className={styles.accuracyProgress} 
+                        style={{ width: `${mockData.srs.accuracy}%` }}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className={styles.reviewContainer}>
+                    <div className={styles.reviewCount}>
+                      <span>{mockData.srs.readyForReview}</span> ready for review
+                    </div>
+                    <div className={styles.buttonGroup}>
+                      <button className={styles.reviewButton}>REVIEW</button>
+                      <button onClick={() => window.location.href = '/study'} className={styles.studyButton}>STUDY</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-                  {activeTab === 'grammar' && todaysGrammar.map((item, index) => (
-                    <Grid item xs={6} sm={3} key={index} sx={{ height: '120px' }}>
-                      <FlipCard>
-                        <Box className="flip-card-inner">
-                          <Box className="flip-card-front">
-                            <Typography sx={{ 
-                              fontSize: '1rem',
-                              fontWeight: 900,
-                              color: '#000000',
-                              textAlign: 'center',
-                              mb: 1
-                            }}>
-                              {item.pattern}
-                            </Typography>
-                          </Box>
-                          <Box className="flip-card-back">
-                            <Typography sx={{ 
-                              fontSize: '1rem',
-                              fontWeight: 500,
-                              color: '#7c4dff',
-                              mb: 1
-                            }}>
-                              {item.meaning}
-                            </Typography>
-                          </Box>
-                        </Box>
-                      </FlipCard>
-                    </Grid>
-                  ))}
-                </Grid>
-              </ProgressSection>
-            </Box>
-          </Box>
+          {/* Streak Card */}
+          <div className={styles.card}>
+            <div className={styles.cardHeader}>
+              <div className={styles.cardTitle}>
+                <div className={styles.streakIcon}>
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 3L4 14H13L11 21L20 10H11L13 3Z" fill="currentColor" />
+                  </svg>
+                </div>
+                <h3>Streak</h3>
+              </div>
+              <button className={styles.viewButton}>View Details</button>
+            </div>
+            
+            <div className={styles.streakCount}>
+              <span className={styles.bigNumber}>{mockData.streak}</span> days
+            </div>
+            
+            <div className={styles.weekDays}>
+              {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, index) => (
+                <div key={day + index} className={styles.dayContainer}>
+                  <div className={`${styles.dayCircle} ${index < 4 ? styles.completed : ''}`}>
+                    {index < 4 && (
+                      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="currentColor" />
+                      </svg>
+                    )}
+                  </div>
+                  <div className={styles.dayLabel}>{day}</div>
+                </div>
+              ))}
+            </div>
+            
+            <div className={styles.streakStats}>
+              <div className={styles.statItem}>
+                <div className={styles.statLabel}>Longest Streak</div>
+                <div className={styles.statValue}>100 days</div>
+              </div>
+              <div className={styles.statItem}>
+                <div className={styles.statLabel}>Total Study Days</div>
+                <div className={styles.statValue}>131</div>
+              </div>
+            </div>
+          </div>
 
-          {/* Study Session Section - Below Both Columns */}
-          <Box sx={{ 
-            display: 'grid', 
-            gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, 
-            gap: 3, 
-            mt: 3 
-          }}>
-            <SessionCard>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
-                <Box>
-                  <Typography variant="h6" sx={{ fontWeight: 600, color: '#1a1a1a', mb: 1 }}>
-                    Current Study Session
-                  </Typography>
-                  <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
-                    Continue where you left off
-                  </Typography>
-                </Box>
-                <IconButton
-                  sx={{
-                    bgcolor: '#7c4dff',
-                    color: '#fff',
-                    '&:hover': {
-                      bgcolor: '#6b42e0'
-                    }
-                  }}
-                >
-                  <PlayArrow />
-                </IconButton>
-              </Box>
-
-              <Box sx={{ mb: 3 }}>
-                <ExerciseItem>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                    <Box sx={{ 
-                      width: 40,
-                      height: 40,
-                      borderRadius: 2,
-                      bgcolor: 'rgba(124, 77, 255, 0.08)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}>
-                      <MenuBook sx={{ color: '#7c4dff' }} />
-                    </Box>
-                    <Box>
-                      <Typography sx={{ fontWeight: 500 }}>Vocabulary Practice</Typography>
-                      <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
-                        15 words remaining
-                      </Typography>
-                    </Box>
-                  </Box>
-                  <Typography sx={{ 
-                    color: '#7c4dff',
-                    fontSize: '0.875rem',
-                    fontWeight: 500
-                  }}>
-                    60%
-                  </Typography>
-                </ExerciseItem>
-              </Box>
-
-              <Box>
-                <Typography sx={{ fontWeight: 500, mb: 2 }}>Up Next</Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                  <ExerciseItem>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                      <Box sx={{ 
-                        width: 40,
-                        height: 40,
-                        borderRadius: 2,
-                        bgcolor: 'rgba(255, 145, 0, 0.08)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}>
-                        <Assignment sx={{ color: '#ff9100' }} />
-                      </Box>
-                      <Box>
-                        <Typography sx={{ fontWeight: 500 }}>Kanji Writing</Typography>
-                        <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
-                          Practice stroke order
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </ExerciseItem>
-                  <ExerciseItem>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                      <Box sx={{ 
-                        width: 40,
-                        height: 40,
-                        borderRadius: 2,
-                        bgcolor: 'rgba(0, 191, 165, 0.08)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}>
-                        <School sx={{ color: '#00bfa5' }} />
-                      </Box>
-                      <Box>
-                        <Typography sx={{ fontWeight: 500 }}>Grammar Points</Typography>
-                        <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
-                          Learn new patterns
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </ExerciseItem>
-                </Box>
-              </Box>
-            </SessionCard>
-
-            <SessionCard>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
-                <Box>
-                  <Typography variant="h6" sx={{ fontWeight: 600, color: '#1a1a1a', mb: 1 }}>
-                    Practice Test
-                  </Typography>
-                  <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
-                    Test your knowledge
-                  </Typography>
-                </Box>
-                <IconButton
-                  sx={{
-                    bgcolor: '#7c4dff',
-                    color: '#fff',
-                    '&:hover': {
-                      bgcolor: '#6b42e0'
-                    }
-                  }}
-                >
-                  <Quiz />
-                </IconButton>
-              </Box>
-
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <ExerciseItem>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                    <Box sx={{ 
-                      width: 40,
-                      height: 40,
-                      borderRadius: 2,
-                      bgcolor: 'rgba(124, 77, 255, 0.08)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}>
-                      <Star sx={{ color: '#7c4dff' }} />
-                    </Box>
-                    <Box>
-                      <Typography sx={{ fontWeight: 500 }}>Vocabulary Quiz</Typography>
-                      <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
-                        20 questions • 15 minutes
-                      </Typography>
-                    </Box>
-                  </Box>
-                </ExerciseItem>
-                <ExerciseItem>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                    <Box sx={{ 
-                      width: 40,
-                      height: 40,
-                      borderRadius: 2,
-                      bgcolor: 'rgba(124, 77, 255, 0.08)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}>
-                      <Lock sx={{ color: '#7c4dff' }} />
-                    </Box>
-                    <Box>
-                      <Typography sx={{ fontWeight: 500 }}>Grammar Quiz</Typography>
-                      <Typography sx={{ fontSize: '0.875rem', color: '#6F767E' }}>
-                        Complete 3 lessons to unlock
-                      </Typography>
-                    </Box>
-                  </Box>
-                </ExerciseItem>
-              </Box>
-            </SessionCard>
-          </Box>
-
-          <BottomNav>
-            {navItems.slice(0, 5).map((item, index) => (
-              <IconButton
-                key={index}
-                size="small"
-                onClick={() => router.push(item.path || '/')}
-                sx={{
-                  color: 'text.secondary',
-                  '&:hover': {
-                    color: '#7c4dff',
-                  },
-                }}
+          {/* Daily Goal Card */}
+          <div className={`${styles.card} ${styles.goalCard}`}>
+            <div className={styles.cardHeader}>
+              <div className={styles.cardTitle}>
+                <h3>DAILY GOAL</h3>
+              </div>
+              <button 
+                className={styles.editButton} 
+                aria-label="Edit daily goal"
+                onClick={() => setShowGoalModal(true)}
               >
-                {item.icon}
-              </IconButton>
-            ))}
-          </BottomNav>
-        </Box>
-      </Box>
-    </AppContainer>
+                <Edit3 size={16} />
+              </button>
+            </div>
+            
+            <div className={styles.dailyGoalContent}>
+              <div className={styles.goalProgress}>
+                <div className={styles.circularProgress}>
+                  <CircularProgressbar
+                    value={(mockData.dailyGoal.completed / mockData.dailyGoal.total) * 100}
+                    text={`${mockData.dailyGoal.completed}/${mockData.dailyGoal.total}`}
+                    strokeWidth={10}
+                    styles={buildStyles({
+                      textSize: '1.5rem',
+                      pathColor: brandPurple,
+                      textColor: isDarkMode ? '#fff' : '#333',
+                      trailColor: '#e8e3ff',
+                    })}
+                  />
+                </div>
+                <div className={styles.timeRemaining}>
+                  <Clock size={16} />
+                  <span>{mockData.dailyGoal.timeRemaining} left today</span>
+                </div>
+              </div>
+              
+              <div className={styles.goalCategories}>
+                <div className={styles.categoryItem}>
+                  <div className={styles.categoryHeader}>
+                    <div className={styles.categoryLabel}>Vocabulary</div>
+                    <div className={styles.categoryCount}>
+                      {mockData.dailyGoal.categories.vocabulary.completed}/{mockData.dailyGoal.categories.vocabulary.total}
+                    </div>
+                  </div>
+                  <div className={styles.categoryBar}>
+                    <div 
+                      className={styles.categoryProgress} 
+                      style={{ 
+                        width: `${(mockData.dailyGoal.categories.vocabulary.completed / mockData.dailyGoal.categories.vocabulary.total) * 100}%` 
+                      }}
+                    />
+                  </div>
+                </div>
+                
+                <div className={styles.categoryItem}>
+                  <div className={styles.categoryHeader}>
+                    <div className={styles.categoryLabel}>Kanji</div>
+                    <div className={styles.categoryCount}>
+                      {mockData.dailyGoal.categories.kanji.completed}/{mockData.dailyGoal.categories.kanji.total}
+                    </div>
+                  </div>
+                  <div className={styles.categoryBar}>
+                    <div 
+                      className={styles.categoryProgress} 
+                      style={{ 
+                        width: `${(mockData.dailyGoal.categories.kanji.completed / mockData.dailyGoal.categories.kanji.total) * 100}%` 
+                      }}
+                    />
+                  </div>
+                </div>
+                
+                <div className={styles.categoryItem}>
+                  <div className={styles.categoryHeader}>
+                    <div className={styles.categoryLabel}>Grammar</div>
+                    <div className={styles.categoryCount}>
+                      {mockData.dailyGoal.categories.grammar.completed}/{mockData.dailyGoal.categories.grammar.total}
+                    </div>
+                  </div>
+                  <div className={styles.categoryBar}>
+                    <div 
+                      className={styles.categoryProgress} 
+                      style={{ 
+                        width: `${(mockData.dailyGoal.categories.grammar.completed / mockData.dailyGoal.categories.grammar.total) * 100}%` 
+                      }}
+                    />
+                  </div>
+                </div>
+                
+                <div className={styles.categoryItem}>
+                  <div className={styles.categoryHeader}>
+                    <div className={styles.categoryLabel}>Listening</div>
+                    <div className={styles.categoryCount}>
+                      {mockData.dailyGoal.categories.listening.completed}/{mockData.dailyGoal.categories.listening.total}
+                    </div>
+                  </div>
+                  <div className={styles.categoryBar}>
+                    <div 
+                      className={styles.categoryProgress} 
+                      style={{ 
+                        width: `${(mockData.dailyGoal.categories.listening.completed / mockData.dailyGoal.categories.listening.total) * 100}%` 
+                      }}
+                    />
+                  </div>
+                </div>
+                
+                <div className={styles.categoryItem}>
+                  <div className={styles.categoryHeader}>
+                    <div className={styles.categoryLabel}>Reading</div>
+                    <div className={styles.categoryCount}>
+                      {mockData.dailyGoal.categories.reading.completed}/{mockData.dailyGoal.categories.reading.total}
+                    </div>
+                  </div>
+                  <div className={styles.categoryBar}>
+                    <div 
+                      className={styles.categoryProgress} 
+                      style={{ 
+                        width: `${(mockData.dailyGoal.categories.reading.completed / mockData.dailyGoal.categories.reading.total) * 100}%` 
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* JLPT Study Path Section */}
+          <div className={styles.studyPathSection} style={{ gridColumn: '1 / -1' }}>
+            <div className={styles.sectionHeader}>
+              <h2>Learning Modules</h2>
+              <p>Complete these modules to master your Japanese skills</p>
+            </div>
+            
+            <div className={styles.jlptLevelTabs}>
+              {mockData.jlptLevels.map((level) => (
+                <button 
+                  key={level.id}
+                  className={`${styles.jlptLevelTab} ${activeJlptLevel === level.id ? styles.activeTab : ''}`}
+                  onClick={() => setActiveJlptLevel(level.id)}
+                >
+                  {level.name}
+                </button>
+              ))}
+            </div>
+            
+            <div className={styles.modulesContainer}>
+              
+              <div className={styles.modulesList} style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem', width: '100%' }}>
+                {mockData.jlptLevels.find(level => level.id === activeJlptLevel)?.modules.map((module) => (
+                  <div 
+                    key={module.id} 
+                    className={`${styles.moduleCard} ${styles[module.status]}`}
+                  >
+                    <div className={styles.moduleHeader}>
+                      <div className={styles.moduleStatus}>
+                        {module.status === 'in_progress' && 'IN PROGRESS'}
+                        {module.status === 'available' && 'AVAILABLE'}
+                        {module.status === 'locked' && 'LOCKED'}
+                        {module.status === 'completed' && 'COMPLETED'}
+                      </div>
+                      <div className={styles.moduleTag}>{module.tag}</div>
+                    </div>
+                    
+                    <h3 className={styles.moduleTitle}>{module.title}</h3>
+                    <div className={styles.moduleDescription}>{module.description}</div>
+                    
+                    <div className={styles.moduleProgress}>
+                      <div className={styles.progressItem}>
+                        <div className={styles.progressLabel}>Playing: {module.progress.playing}</div>
+                        <div className={styles.progressBar}>
+                          <div 
+                            className={styles.progressFill} 
+                            style={{ width: `${module.progress.playingPercentage * 100}%` }}
+                          />
+                        </div>
+                      </div>
+                      
+                      <div className={styles.progressItem}>
+                        <div className={styles.progressLabel}>Mastered: {module.progress.mastered}</div>
+                        <div className={styles.progressBar}>
+                          <div 
+                            className={styles.progressFill} 
+                            style={{ width: `${module.progress.masteredPercentage * 100}%` }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className={styles.moduleActions}>
+                      {module.status !== 'locked' && (
+                        <button className={styles.playButton}>PLAY</button>
+                      )}
+                      
+                      {(module.status === 'in_progress' || module.status === 'completed') && (
+                        <button className={styles.reviewButton}>
+                          REVIEW {module.dailyActivity.review > 0 && `(${module.dailyActivity.review})`}
+                        </button>
+                      )}
+                    </div>
+                    
+                    {module.dailyActivity.played > 0 && (
+                      <div className={styles.dailyActivity}>
+                        <div className={styles.activityIcon}>✓</div>
+                        <div className={styles.activityText}>
+                          Played today: {module.dailyActivity.played} / 
+                          New: {module.dailyActivity.new} / 
+                          Review: {module.dailyActivity.review}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      
+      {/* Goal Setting Modal */}
+      <GoalSettingModal 
+        isOpen={showGoalModal}
+        onClose={() => setShowGoalModal(false)}
+        initialGoals={dailyGoals}
+        onSave={(newGoals) => {
+          setDailyGoals(newGoals);
+          // In a real app, we would save this to the database
+          console.log('New daily goals:', newGoals);
+        }}
+      />
+    </div>
   );
 }
