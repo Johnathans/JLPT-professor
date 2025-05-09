@@ -142,7 +142,7 @@ const JapaneseSentence = styled(Box)(({ darkMode }: { darkMode: boolean }) => ({
   textAlign: 'center',
   color: darkMode ? '#fff' : '#1f2937',
   margin: '12px 0',
-  fontFamily: '"Futehodo Maru Gothic", sans-serif',
+  fontFamily: '"Noto Sans JP", sans-serif',
   fontWeight: 400,
   '& .highlight': {
     color: '#7c4dff',
@@ -182,7 +182,7 @@ const ChoiceButton = styled(Button)<{ correct?: boolean; incorrect?: boolean; da
     padding: '20px 32px',
     borderRadius: '12px',
     fontSize: '20px',
-    fontFamily: '"Futehodo Maru Gothic", sans-serif',
+    fontFamily: '"Noto Sans JP", sans-serif',
     fontWeight: 400,
     backgroundColor: correct ? '#4caf50' : 
                    incorrect ? '#f44336' : 
@@ -600,7 +600,7 @@ export default function StudyLayout() {
               sx={{ 
                 fontSize: '96px', 
                 margin: '0 !important',
-                fontFamily: '"Futehodo Maru Gothic", sans-serif',
+                fontFamily: '"Noto Sans JP", sans-serif',
                 '@media (max-width: 900px)': { fontSize: '72px' } 
               }}
             >
