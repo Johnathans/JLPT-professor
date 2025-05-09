@@ -25,6 +25,7 @@ import { useColorMode } from '@/contexts/ThemeContext';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import styles from '@/styles/dashboard.module.css';
+import { SentenceEntry } from '@/types/sentence';
 
 const LayoutRoot = styled('div')(({ theme, darkMode }: { theme?: any, darkMode: boolean }) => ({
   minHeight: '100vh',
@@ -330,8 +331,9 @@ export default function StudyLayout() {
   const [accuracy, setAccuracy] = useState(0);
   const [remainingCards, setRemainingCards] = useState(0);
   
-  // State for vocabulary and kanji data
+  // State for vocabulary, sentences, and kanji data
   const [vocabularyData, setVocabularyData] = useState<VocabularyItem[]>([]);
+  const [sentenceData, setSentenceData] = useState<SentenceEntry[]>([]);
   const [kanjiData, setKanjiData] = useState<KanjiItem[]>([]);
   const [currentItem, setCurrentItem] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
@@ -353,6 +355,8 @@ export default function StudyLayout() {
     // Load appropriate data based on new study mode
     if (mode === 'vocabulary') {
       loadVocabularyData(jlptLevel);
+    } else if (mode === 'sentences') {
+      loadSentenceData(jlptLevel);
     } else if (mode.startsWith('kanji')) {
       loadKanjiData(jlptLevel);
     }
@@ -366,6 +370,8 @@ export default function StudyLayout() {
     // Load appropriate data based on study mode
     if (studyMode === 'vocabulary') {
       loadVocabularyData(level);
+    } else if (studyMode === 'sentences') {
+      loadSentenceData(level);
     } else if (studyMode.startsWith('kanji')) {
       loadKanjiData(level);
     }
@@ -411,6 +417,26 @@ export default function StudyLayout() {
     }
   };
   
+  // Function to load sentence data for the selected JLPT level
+  const loadSentenceData = async (level: JlptLevel) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/study/sentences?level=${level}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch sentence data');
+      }
+      const data = await response.json();
+      setSentenceData(data);
+      setCurrentItem(0);
+      generateSentenceChoices(data, 0);
+      setRemainingCards(data.length);
+    } catch (error) {
+      console.error('Error loading sentence data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
   // Function to limit meanings to a maximum of three
   const limitMeanings = (meaning: string): string => {
     // Split by common delimiters (semicolons, slashes with spaces around them)
@@ -436,6 +462,29 @@ export default function StudyLayout() {
       .sort(() => 0.5 - Math.random())
       .slice(0, 3)
       .map(item => limitMeanings(item.meaning));
+    
+    const allChoices = [...otherChoices, correctAnswer];
+    const shuffledChoices = allChoices.sort(() => 0.5 - Math.random());
+    
+    setChoices(shuffledChoices);
+    setCorrectAnswerIndex(shuffledChoices.indexOf(correctAnswer));
+  };
+  
+  // Function to generate choices for sentence study
+  const generateSentenceChoices = (data: SentenceEntry[], index: number) => {
+    if (!data || data.length === 0) return;
+    
+    // For sentences, we'll use the associated kanji as the missing word
+    // and provide other kanji as distractors
+    const currentSentence = data[index];
+    const correctAnswer = currentSentence.associatedKanji[0]; // Use the first associated kanji
+    
+    // Get other kanji from other sentences as distractors
+    const otherChoices = data
+      .filter((item, i) => i !== index && item.associatedKanji.length > 0)
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 3)
+      .map(item => item.associatedKanji[0]);
     
     const allChoices = [...otherChoices, correctAnswer];
     const shuffledChoices = allChoices.sort(() => 0.5 - Math.random());
@@ -573,13 +622,30 @@ export default function StudyLayout() {
           </>
         );
       case 'sentences':
+        if (!sentenceData || sentenceData.length === 0 || currentItem >= sentenceData.length) {
+          return (
+            <Typography sx={{ textAlign: 'center', fontSize: '24px', color: isDarkMode ? '#fff' : '#1f2937' }}>
+              No sentence data available for this level
+            </Typography>
+          );
+        }
+        
+        // Create a sentence with a blank where the kanji should be
+        const currentSentence = sentenceData[currentItem];
+        const kanjiToReplace = currentSentence.associatedKanji[0];
+        const japaneseWithBlank = currentSentence.japanese.replace(
+          kanjiToReplace, 
+          `<span class="highlight">＿＿＿</span>`
+        );
+        
         return (
           <>
-            <JapaneseSentence darkMode={isDarkMode}>
-              私の<span className="highlight">＿＿＿</span>は医者です。
-            </JapaneseSentence>
+            <JapaneseSentence 
+              darkMode={isDarkMode}
+              dangerouslySetInnerHTML={{ __html: japaneseWithBlank }}
+            />
             <EnglishTranslation darkMode={isDarkMode}>
-              My father is a doctor.
+              {currentSentence.english}
             </EnglishTranslation>
           </>
         );
@@ -651,10 +717,15 @@ export default function StudyLayout() {
       case 'sentences':
         return (
           <ChoiceGrid>
-            <ChoiceButton darkMode={isDarkMode}>父</ChoiceButton>
-            <ChoiceButton darkMode={isDarkMode}>母</ChoiceButton>
-            <ChoiceButton darkMode={isDarkMode}>兄</ChoiceButton>
-            <ChoiceButton darkMode={isDarkMode}>姉</ChoiceButton>
+            {choices.map((choice, index) => (
+              <ChoiceButton 
+                key={index}
+                darkMode={isDarkMode}
+                onClick={() => handleAnswerSelection(index)}
+              >
+                {choice}
+              </ChoiceButton>
+            ))}
           </ChoiceGrid>
         );
       case 'kanji-onyomi':
