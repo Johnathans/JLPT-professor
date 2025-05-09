@@ -284,6 +284,31 @@ function SidebarComponent({
 }
 
 type StudyMode = 'vocabulary' | 'sentences' | 'kanji-onyomi' | 'kanji-kunyomi' | 'kanji-meaning';
+type JlptLevel = 'n1' | 'n2' | 'n3' | 'n4' | 'n5';
+
+interface VocabularyItem {
+  id: string;
+  word: string;
+  reading: string;
+  meaning: string;
+  jlptLevel: string;
+  partOfSpeech: string;
+  frequencyRank: number;
+  tags: string[];
+}
+
+interface KanjiItem {
+  id: string;
+  kanji: string;
+  meanings: string[];
+  onyomi: string[];
+  kunyomi: string[];
+  info: {
+    grade: number;
+    jlpt: number;
+    strokeCount: number;
+  };
+}
 
 const StudyModeLabels: Record<StudyMode, string> = {
   'vocabulary': 'Vocabulary',
@@ -298,9 +323,18 @@ export default function StudyLayout() {
   const { isDarkMode, toggleDarkMode } = useColorMode();
   // Default to vocabulary mode
   const [studyMode, setStudyMode] = useState<StudyMode>('vocabulary');
+  const [jlptLevel, setJlptLevel] = useState<JlptLevel>('n5');
   const [settingsAnchor, setSettingsAnchor] = useState<null | HTMLElement>(null);
   const [accuracy, setAccuracy] = useState(0);
   const [remainingCards, setRemainingCards] = useState(0);
+  
+  // State for vocabulary and kanji data
+  const [vocabularyData, setVocabularyData] = useState<VocabularyItem[]>([]);
+  const [kanjiData, setKanjiData] = useState<KanjiItem[]>([]);
+  const [currentItem, setCurrentItem] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [choices, setChoices] = useState<string[]>([]);
+  const [correctAnswerIndex, setCorrectAnswerIndex] = useState<number>(0);
 
   const handleSettingsClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setSettingsAnchor(event.currentTarget);
@@ -313,15 +347,223 @@ export default function StudyLayout() {
   const handleStudyModeChange = (mode: StudyMode) => {
     setStudyMode(mode);
     handleSettingsClose();
+    
+    // Load appropriate data based on new study mode
+    if (mode === 'vocabulary') {
+      loadVocabularyData(jlptLevel);
+    } else if (mode.startsWith('kanji')) {
+      loadKanjiData(jlptLevel);
+    }
   };
+  
+  // Handle level selection
+  const handleLevelChange = (level: JlptLevel) => {
+    setJlptLevel(level);
+    handleSettingsClose();
+    
+    // Load appropriate data based on study mode
+    if (studyMode === 'vocabulary') {
+      loadVocabularyData(level);
+    } else if (studyMode.startsWith('kanji')) {
+      loadKanjiData(level);
+    }
+  };
+  
+  // Function to load vocabulary data for the selected JLPT level
+  const loadVocabularyData = async (level: JlptLevel) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/study/vocabulary?level=${level}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch vocabulary data');
+      }
+      const data = await response.json();
+      setVocabularyData(data);
+      setCurrentItem(0);
+      generateVocabularyChoices(data, 0);
+      setRemainingCards(data.length);
+    } catch (error) {
+      console.error('Error loading vocabulary data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  // Function to load kanji data for the selected JLPT level
+  const loadKanjiData = async (level: JlptLevel) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/study/kanji?level=${level}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch kanji data');
+      }
+      const data = await response.json();
+      setKanjiData(data);
+      setCurrentItem(0);
+      generateKanjiChoices(data, 0, studyMode);
+      setRemainingCards(data.length);
+    } catch (error) {
+      console.error('Error loading kanji data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  // Function to limit meanings to a maximum of three
+  const limitMeanings = (meaning: string): string => {
+    // Split by common delimiters (semicolons, slashes with spaces around them)
+    const meaningParts = meaning.split(/\s*[;\/]\s*/);
+    
+    // Take only the first three meanings
+    const limitedParts = meaningParts.slice(0, 3);
+    
+    // Join them back with semicolons
+    return limitedParts.join('; ');
+  };
+  
+  // Function to generate choices for vocabulary study
+  const generateVocabularyChoices = (data: VocabularyItem[], index: number) => {
+    if (!data || data.length === 0) return;
+    
+    // Get the full meaning and limit it to three meanings max
+    const fullMeaning = data[index].meaning;
+    const correctAnswer = limitMeanings(fullMeaning);
+    
+    const otherChoices = data
+      .filter((item, i) => i !== index)
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 3)
+      .map(item => limitMeanings(item.meaning));
+    
+    const allChoices = [...otherChoices, correctAnswer];
+    const shuffledChoices = allChoices.sort(() => 0.5 - Math.random());
+    
+    setChoices(shuffledChoices);
+    setCorrectAnswerIndex(shuffledChoices.indexOf(correctAnswer));
+  };
+  
+  // Function to generate choices for kanji study
+  const generateKanjiChoices = (data: KanjiItem[], index: number, mode: StudyMode) => {
+    if (!data || data.length === 0) return;
+    
+    let correctAnswer: string;
+    let otherChoices: string[];
+    
+    if (mode === 'kanji-onyomi') {
+      // Make sure the current kanji has onyomi readings
+      if (!data[index].onyomi || data[index].onyomi.length === 0) {
+        // If no onyomi, move to the next kanji
+        setCurrentItem((prev) => (prev + 1) % data.length);
+        generateKanjiChoices(data, (index + 1) % data.length, mode);
+        return;
+      }
+      
+      correctAnswer = data[index].onyomi[0] || '';
+      otherChoices = data
+        .filter((item, i) => i !== index && item.onyomi && item.onyomi.length > 0)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3)
+        .map(item => item.onyomi[0]);
+    } else if (mode === 'kanji-kunyomi') {
+      // Make sure the current kanji has kunyomi readings
+      if (!data[index].kunyomi || data[index].kunyomi.length === 0) {
+        // If no kunyomi, move to the next kanji
+        setCurrentItem((prev) => (prev + 1) % data.length);
+        generateKanjiChoices(data, (index + 1) % data.length, mode);
+        return;
+      }
+      
+      correctAnswer = data[index].kunyomi[0] || '';
+      otherChoices = data
+        .filter((item, i) => i !== index && item.kunyomi && item.kunyomi.length > 0)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3)
+        .map(item => item.kunyomi[0]);
+    } else { // kanji-meaning
+      // For kanji meanings, we'll take up to 3 meanings and join them
+      const meaningArray = data[index].meanings || [];
+      const limitedMeanings = meaningArray.slice(0, 3);
+      correctAnswer = limitedMeanings.join('; ');
+      
+      otherChoices = data
+        .filter((item, i) => i !== index && item.meanings && item.meanings.length > 0)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3)
+        .map(item => {
+          const meanings = item.meanings || [];
+          return meanings.slice(0, 3).join('; ');
+        });
+    }
+    
+    const allChoices = [...otherChoices, correctAnswer];
+    const shuffledChoices = allChoices.sort(() => 0.5 - Math.random());
+    
+    setChoices(shuffledChoices);
+    setCorrectAnswerIndex(shuffledChoices.indexOf(correctAnswer));
+  };
+  
+  // Handle answer selection
+  const handleAnswerSelection = (selectedIndex: number) => {
+    // Check if answer is correct
+    const isCorrect = selectedIndex === correctAnswerIndex;
+    
+    // Update accuracy
+    setAccuracy(prev => {
+      const total = vocabularyData.length || kanjiData.length || 1;
+      const correct = isCorrect ? 1 : 0;
+      return Math.round(((prev * total) + correct) / total);
+    });
+    
+    // Move to next item
+    setTimeout(() => {
+      const nextItem = currentItem + 1;
+      const dataLength = studyMode === 'vocabulary' ? vocabularyData.length : kanjiData.length;
+      
+      if (nextItem < dataLength) {
+        setCurrentItem(nextItem);
+        setRemainingCards(dataLength - nextItem);
+        
+        // Generate new choices for the next item
+        if (studyMode === 'vocabulary') {
+          generateVocabularyChoices(vocabularyData, nextItem);
+        } else {
+          generateKanjiChoices(kanjiData, nextItem, studyMode);
+        }
+      }
+    }, 1500);
+  };
+  
+  // Load initial data when component mounts
+  useEffect(() => {
+    if (studyMode === 'vocabulary') {
+      loadVocabularyData(jlptLevel);
+    } else if (studyMode.startsWith('kanji')) {
+      loadKanjiData(jlptLevel);
+    }
+  }, []);
 
   const renderQuestion = () => {
+    if (loading) {
+      return (
+        <Typography sx={{ textAlign: 'center', fontSize: '24px', color: isDarkMode ? '#fff' : '#1f2937' }}>
+          Loading...
+        </Typography>
+      );
+    }
+    
     switch (studyMode) {
       case 'vocabulary':
+        if (!vocabularyData || vocabularyData.length === 0 || currentItem >= vocabularyData.length) {
+          return (
+            <Typography sx={{ textAlign: 'center', fontSize: '24px', color: isDarkMode ? '#fff' : '#1f2937' }}>
+              No vocabulary data available for this level
+            </Typography>
+          );
+        }
         return (
           <>
             <JapaneseSentence darkMode={isDarkMode}>
-              父
+              {vocabularyData[currentItem].word}
             </JapaneseSentence>
             <EnglishTranslation darkMode={isDarkMode}>
               Select the correct meaning
@@ -342,6 +584,13 @@ export default function StudyLayout() {
       case 'kanji-onyomi':
       case 'kanji-kunyomi':
       case 'kanji-meaning':
+        if (!kanjiData || kanjiData.length === 0 || currentItem >= kanjiData.length) {
+          return (
+            <Typography sx={{ textAlign: 'center', fontSize: '24px', color: isDarkMode ? '#fff' : '#1f2937' }}>
+              No kanji data available for this level
+            </Typography>
+          );
+        }
         return (
           <>
             <JapaneseSentence 
@@ -353,7 +602,7 @@ export default function StudyLayout() {
                 '@media (max-width: 900px)': { fontSize: '72px' } 
               }}
             >
-              父
+              {kanjiData[currentItem].kanji}
             </JapaneseSentence>
             <EnglishTranslation darkMode={isDarkMode}>
               {studyMode === 'kanji-onyomi' ? 'Select the correct on\'yomi reading' :
@@ -366,14 +615,35 @@ export default function StudyLayout() {
   };
 
   const renderChoices = () => {
+    if (loading) {
+      return (
+        <Typography sx={{ textAlign: 'center' }}>
+          Loading choices...
+        </Typography>
+      );
+    }
+    
+    if (choices.length === 0) {
+      return (
+        <Typography sx={{ textAlign: 'center', color: isDarkMode ? '#aaa' : '#6F767E' }}>
+          No choices available
+        </Typography>
+      );
+    }
+    
     switch (studyMode) {
       case 'vocabulary':
         return (
           <ChoiceGrid>
-            <ChoiceButton darkMode={isDarkMode}>father</ChoiceButton>
-            <ChoiceButton darkMode={isDarkMode}>mother</ChoiceButton>
-            <ChoiceButton darkMode={isDarkMode}>older brother</ChoiceButton>
-            <ChoiceButton darkMode={isDarkMode}>older sister</ChoiceButton>
+            {choices.map((choice, index) => (
+              <ChoiceButton 
+                key={index}
+                darkMode={isDarkMode}
+                onClick={() => handleAnswerSelection(index)}
+              >
+                {choice}
+              </ChoiceButton>
+            ))}
           </ChoiceGrid>
         );
       case 'sentences':
@@ -386,30 +656,19 @@ export default function StudyLayout() {
           </ChoiceGrid>
         );
       case 'kanji-onyomi':
-        return (
-          <ChoiceGrid>
-            <ChoiceButton darkMode={isDarkMode}>フ</ChoiceButton>
-            <ChoiceButton darkMode={isDarkMode}>チチ</ChoiceButton>
-            <ChoiceButton darkMode={isDarkMode}>トウ</ChoiceButton>
-            <ChoiceButton darkMode={isDarkMode}>オヤ</ChoiceButton>
-          </ChoiceGrid>
-        );
       case 'kanji-kunyomi':
-        return (
-          <ChoiceGrid>
-            <ChoiceButton darkMode={isDarkMode}>ちち</ChoiceButton>
-            <ChoiceButton darkMode={isDarkMode}>とう</ChoiceButton>
-            <ChoiceButton darkMode={isDarkMode}>おや</ChoiceButton>
-            <ChoiceButton darkMode={isDarkMode}>ふ</ChoiceButton>
-          </ChoiceGrid>
-        );
       case 'kanji-meaning':
         return (
           <ChoiceGrid>
-            <ChoiceButton darkMode={isDarkMode}>Father</ChoiceButton>
-            <ChoiceButton darkMode={isDarkMode}>Parent</ChoiceButton>
-            <ChoiceButton darkMode={isDarkMode}>Family</ChoiceButton>
-            <ChoiceButton darkMode={isDarkMode}>Man</ChoiceButton>
+            {choices.map((choice, index) => (
+              <ChoiceButton 
+                key={index}
+                darkMode={isDarkMode}
+                onClick={() => handleAnswerSelection(index)}
+              >
+                {choice}
+              </ChoiceButton>
+            ))}
           </ChoiceGrid>
         );
     }
@@ -473,6 +732,7 @@ export default function StudyLayout() {
                 <DarkModeIcon sx={{ color: '#7c4dff' }} />
               )}
             </ModeButton>
+
             <ModeButton 
               onClick={handleSettingsClick}
               sx={{
@@ -505,6 +765,9 @@ export default function StudyLayout() {
               }
             }}
           >
+            <Typography sx={{ px: 2, py: 1, color: isDarkMode ? '#aaa' : '#6F767E', fontSize: '14px' }}>
+              Study Mode
+            </Typography>
             {Object.entries(StudyModeLabels).map(([mode, label]) => (
               <MenuItem 
                 key={mode}
@@ -526,6 +789,29 @@ export default function StudyLayout() {
               </MenuItem>
             ))}
             <Divider sx={{ my: 1, borderColor: isDarkMode ? '#333' : '#e5e7eb' }} />
+            <Typography sx={{ px: 2, py: 1, color: isDarkMode ? '#aaa' : '#6F767E', fontSize: '14px' }}>
+              JLPT Level: <span style={{ color: '#7c4dff', fontWeight: 'bold' }}>{jlptLevel.toUpperCase()}</span>
+            </Typography>
+            {['n1', 'n2', 'n3', 'n4', 'n5'].map((level) => (
+              <MenuItem 
+                key={level}
+                onClick={() => handleLevelChange(level as JlptLevel)}
+                sx={{
+                  minWidth: '120px',
+                  color: jlptLevel === level ? '#7c4dff' : isDarkMode ? '#fff' : '#1f2937',
+                  backgroundColor: jlptLevel === level ? 
+                    (isDarkMode ? '#3a3052' : '#f3f0ff') : 
+                    'transparent',
+                  '&:hover': {
+                    backgroundColor: jlptLevel === level ? 
+                      (isDarkMode ? '#3a3052' : '#f3f0ff') : 
+                      (isDarkMode ? '#383838' : '#f3f4f6')
+                  }
+                }}
+              >
+                {level.toUpperCase()}
+              </MenuItem>
+            ))}
           </Menu>
         </TopBar>
 
