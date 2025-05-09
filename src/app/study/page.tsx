@@ -197,7 +197,10 @@ const ChoiceButton = styled(Button)<{ correct?: boolean; incorrect?: boolean; da
     '&:hover': {
       backgroundColor: correct ? '#43a047' : 
                      incorrect ? '#e53935' : 
-                     darkMode ? '#383838' : '#f9fafb'
+                     darkMode ? '#3a3052' : '#f3f0ff',
+      color: correct || incorrect ? '#fff' : 
+             darkMode ? '#fff' : '#7c4dff',
+      borderColor: darkMode ? '#7c4dff' : '#7c4dff'
     },
     '@media (max-width: 900px)': {
       padding: '20px 24px',
@@ -553,22 +556,46 @@ export default function StudyLayout() {
     setCorrectAnswerIndex(shuffledChoices.indexOf(correctAnswer));
   };
   
+  // State for tracking selected answer and showing feedback
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [showingFeedback, setShowingFeedback] = useState(false);
+  
   // Handle answer selection
   const handleAnswerSelection = (selectedIndex: number) => {
+    // Prevent selecting multiple answers while showing feedback
+    if (showingFeedback) return;
+    
+    // Set the selected answer and show feedback
+    setSelectedAnswer(selectedIndex);
+    setShowingFeedback(true);
+    
     // Check if answer is correct
     const isCorrect = selectedIndex === correctAnswerIndex;
     
     // Update accuracy
     setAccuracy(prev => {
-      const total = vocabularyData.length || kanjiData.length || 1;
+      const total = vocabularyData.length || sentenceData.length || kanjiData.length || 1;
       const correct = isCorrect ? 1 : 0;
       return Math.round(((prev * total) + correct) / total);
     });
     
-    // Move to next item
+    // Move to next item after a delay
     setTimeout(() => {
+      // Reset feedback state
+      setSelectedAnswer(null);
+      setShowingFeedback(false);
+      
       const nextItem = currentItem + 1;
-      const dataLength = studyMode === 'vocabulary' ? vocabularyData.length : kanjiData.length;
+      let dataLength;
+      
+      // Determine data length based on study mode
+      if (studyMode === 'vocabulary') {
+        dataLength = vocabularyData.length;
+      } else if (studyMode === 'sentences') {
+        dataLength = sentenceData.length;
+      } else {
+        dataLength = kanjiData.length;
+      }
       
       if (nextItem < dataLength) {
         setCurrentItem(nextItem);
@@ -577,6 +604,8 @@ export default function StudyLayout() {
         // Generate new choices for the next item
         if (studyMode === 'vocabulary') {
           generateVocabularyChoices(vocabularyData, nextItem);
+        } else if (studyMode === 'sentences') {
+          generateSentenceChoices(sentenceData, nextItem);
         } else {
           generateKanjiChoices(kanjiData, nextItem, studyMode);
         }
@@ -707,6 +736,8 @@ export default function StudyLayout() {
               <ChoiceButton 
                 key={index}
                 darkMode={isDarkMode}
+                correct={showingFeedback && index === correctAnswerIndex}
+                incorrect={showingFeedback && index === selectedAnswer && index !== correctAnswerIndex}
                 onClick={() => handleAnswerSelection(index)}
               >
                 {choice}
@@ -721,6 +752,8 @@ export default function StudyLayout() {
               <ChoiceButton 
                 key={index}
                 darkMode={isDarkMode}
+                correct={showingFeedback && index === correctAnswerIndex}
+                incorrect={showingFeedback && index === selectedAnswer && index !== correctAnswerIndex}
                 onClick={() => handleAnswerSelection(index)}
               >
                 {choice}
@@ -737,6 +770,8 @@ export default function StudyLayout() {
               <ChoiceButton 
                 key={index}
                 darkMode={isDarkMode}
+                correct={showingFeedback && index === correctAnswerIndex}
+                incorrect={showingFeedback && index === selectedAnswer && index !== correctAnswerIndex}
                 onClick={() => handleAnswerSelection(index)}
               >
                 {choice}
