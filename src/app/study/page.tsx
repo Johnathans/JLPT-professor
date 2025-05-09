@@ -332,6 +332,8 @@ export default function StudyLayout() {
   // State for tab navigation in settings menu
   const [settingsTab, setSettingsTab] = useState<'vocabulary' | 'kanji' | 'listening' | 'reading' | 'grammar'>('vocabulary');
   const [accuracy, setAccuracy] = useState(0);
+  const [totalAnswered, setTotalAnswered] = useState(0);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
   const [remainingCards, setRemainingCards] = useState(0);
   
   // State for vocabulary, sentences, and kanji data
@@ -353,9 +355,15 @@ export default function StudyLayout() {
 
   const handleStudyModeChange = (mode: StudyMode) => {
     setStudyMode(mode);
-    handleSettingsClose();
+    setSettingsAnchor(null);
+    setCurrentItem(0);
     
-    // Load appropriate data based on new study mode
+    // Reset accuracy counters
+    setAccuracy(0);
+    setTotalAnswered(0);
+    setCorrectAnswers(0);
+    
+    // Load appropriate data based on mode
     if (mode === 'vocabulary') {
       loadVocabularyData(jlptLevel);
     } else if (mode === 'sentences') {
@@ -369,6 +377,11 @@ export default function StudyLayout() {
   const handleLevelChange = (level: JlptLevel) => {
     setJlptLevel(level);
     // Removed handleSettingsClose() to keep menu open after level selection
+    
+    // Reset accuracy counters
+    setAccuracy(0);
+    setTotalAnswered(0);
+    setCorrectAnswers(0);
     
     // Load appropriate data based on study mode
     if (studyMode === 'vocabulary') {
@@ -572,12 +585,17 @@ export default function StudyLayout() {
     // Check if answer is correct
     const isCorrect = selectedIndex === correctAnswerIndex;
     
-    // Update accuracy
-    setAccuracy(prev => {
-      const total = vocabularyData.length || sentenceData.length || kanjiData.length || 1;
-      const correct = isCorrect ? 1 : 0;
-      return Math.round(((prev * total) + correct) / total);
-    });
+    // Update accuracy by tracking total answered and correct answers
+    const newTotalAnswered = totalAnswered + 1;
+    const newCorrectAnswers = correctAnswers + (isCorrect ? 1 : 0);
+    
+    // Update state
+    setTotalAnswered(newTotalAnswered);
+    setCorrectAnswers(newCorrectAnswers);
+    
+    // Calculate accuracy percentage
+    const newAccuracy = Math.round((newCorrectAnswers / newTotalAnswered) * 100);
+    setAccuracy(newAccuracy);
     
     // Move to next item after a delay
     setTimeout(() => {
