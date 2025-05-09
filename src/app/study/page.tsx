@@ -325,6 +325,8 @@ export default function StudyLayout() {
   const [studyMode, setStudyMode] = useState<StudyMode>('vocabulary');
   const [jlptLevel, setJlptLevel] = useState<JlptLevel>('n5');
   const [settingsAnchor, setSettingsAnchor] = useState<null | HTMLElement>(null);
+  // State for tab navigation in settings menu
+  const [settingsTab, setSettingsTab] = useState<'vocabulary' | 'kanji' | 'listening' | 'reading' | 'grammar'>('vocabulary');
   const [accuracy, setAccuracy] = useState(0);
   const [remainingCards, setRemainingCards] = useState(0);
   
@@ -359,7 +361,7 @@ export default function StudyLayout() {
   // Handle level selection
   const handleLevelChange = (level: JlptLevel) => {
     setJlptLevel(level);
-    handleSettingsClose();
+    // Removed handleSettingsClose() to keep menu open after level selection
     
     // Load appropriate data based on study mode
     if (studyMode === 'vocabulary') {
@@ -761,57 +763,176 @@ export default function StudyLayout() {
               '& .MuiPaper-root': {
                 backgroundColor: isDarkMode ? '#2d2d2d' : '#fff',
                 border: isDarkMode ? '1px solid #333' : 'none',
-                boxShadow: isDarkMode ? 'none' : undefined
+                boxShadow: isDarkMode ? 'none' : undefined,
+                width: '400px',
+                padding: '8px 0'
               }
             }}
           >
-            <Typography sx={{ px: 2, py: 1, color: isDarkMode ? '#aaa' : '#6F767E', fontSize: '14px' }}>
-              Study Mode
-            </Typography>
-            {Object.entries(StudyModeLabels).map(([mode, label]) => (
-              <MenuItem 
-                key={mode}
-                onClick={() => handleStudyModeChange(mode as StudyMode)}
-                sx={{
-                  minWidth: '180px',
-                  color: studyMode === mode ? '#7c4dff' : isDarkMode ? '#fff' : '#1f2937',
-                  backgroundColor: studyMode === mode ? 
-                    (isDarkMode ? '#3a3052' : '#f3f0ff') : 
-                    'transparent',
-                  '&:hover': {
-                    backgroundColor: studyMode === mode ? 
-                      (isDarkMode ? '#3a3052' : '#f3f0ff') : 
-                      (isDarkMode ? '#383838' : '#f3f4f6')
-                  }
-                }}
-              >
-                {label}
-              </MenuItem>
-            ))}
+            {/* JLPT Level Selection - Moved to the top */}
+            <Box sx={{ px: 2, py: 1, mb: 1 }}>
+              <Typography sx={{ color: isDarkMode ? '#aaa' : '#6F767E', fontSize: '14px', fontWeight: 'bold', mb: 1 }}>
+                JLPT Level
+              </Typography>
+              <Box sx={{ display: 'flex', gap: '8px', justifyContent: 'space-between' }}>
+                {['n1', 'n2', 'n3', 'n4', 'n5'].map((level) => (
+                  <Box
+                    key={level}
+                    onClick={() => handleLevelChange(level as JlptLevel)}
+                    sx={{
+                      width: '48px',
+                      height: '48px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderRadius: '8px',
+                      cursor: 'pointer',
+                      fontWeight: 'bold',
+                      fontSize: '16px',
+                      color: jlptLevel === level ? '#fff' : isDarkMode ? '#ddd' : '#1f2937',
+                      backgroundColor: jlptLevel === level ? 
+                        '#7c4dff' : 
+                        isDarkMode ? '#383838' : '#f3f4f6',
+                      '&:hover': {
+                        backgroundColor: jlptLevel === level ? 
+                          '#6a3de8' : 
+                          isDarkMode ? '#444' : '#e9ebef'
+                      },
+                      transition: 'all 0.2s ease'
+                    }}
+                  >
+                    {level.toUpperCase()}
+                  </Box>
+                ))}
+              </Box>
+            </Box>
+            
             <Divider sx={{ my: 1, borderColor: isDarkMode ? '#333' : '#e5e7eb' }} />
-            <Typography sx={{ px: 2, py: 1, color: isDarkMode ? '#aaa' : '#6F767E', fontSize: '14px' }}>
-              JLPT Level: <span style={{ color: '#7c4dff', fontWeight: 'bold' }}>{jlptLevel.toUpperCase()}</span>
-            </Typography>
-            {['n1', 'n2', 'n3', 'n4', 'n5'].map((level) => (
-              <MenuItem 
-                key={level}
-                onClick={() => handleLevelChange(level as JlptLevel)}
-                sx={{
-                  minWidth: '120px',
-                  color: jlptLevel === level ? '#7c4dff' : isDarkMode ? '#fff' : '#1f2937',
-                  backgroundColor: jlptLevel === level ? 
-                    (isDarkMode ? '#3a3052' : '#f3f0ff') : 
-                    'transparent',
-                  '&:hover': {
-                    backgroundColor: jlptLevel === level ? 
-                      (isDarkMode ? '#3a3052' : '#f3f0ff') : 
-                      (isDarkMode ? '#383838' : '#f3f4f6')
-                  }
-                }}
-              >
-                {level.toUpperCase()}
-              </MenuItem>
-            ))}
+            
+            {/* Learning Area Tabs */}
+            <Box sx={{ px: 2, py: 1 }}>
+              <Typography sx={{ color: isDarkMode ? '#aaa' : '#6F767E', fontSize: '14px', fontWeight: 'bold', mb: 1 }}>
+                Learning Area
+              </Typography>
+              <Box sx={{ 
+                display: 'flex', 
+                flexDirection: 'column',
+                gap: 1,
+                mb: 2
+              }}>
+                {['vocabulary', 'kanji', 'listening', 'reading', 'grammar'].map((tab) => (
+                  <Box
+                    key={tab}
+                    onClick={() => setSettingsTab(tab as any)}
+                    sx={{
+                      py: 1.2,
+                      px: 2,
+                      textAlign: 'left',
+                      borderRadius: '8px',
+                      cursor: 'pointer',
+                      fontSize: '14px',
+                      fontWeight: settingsTab === tab ? 'bold' : 'normal',
+                      color: settingsTab === tab ? '#fff' : isDarkMode ? '#ddd' : '#1f2937',
+                      backgroundColor: settingsTab === tab ? '#7c4dff' : isDarkMode ? '#383838' : '#f3f4f6',
+                      textTransform: 'capitalize',
+                      '&:hover': {
+                        backgroundColor: settingsTab === tab ? '#7c4dff' : isDarkMode ? '#444' : '#e9ebef'
+                      },
+                      transition: 'all 0.2s ease'
+                    }}
+                  >
+                    {tab}
+                  </Box>
+                ))}
+              </Box>
+            </Box>
+            
+            {/* Study Mode Options based on selected tab */}
+            <Box sx={{ px: 2, py: 1 }}>
+              <Typography sx={{ color: isDarkMode ? '#aaa' : '#6F767E', fontSize: '14px', fontWeight: 'bold', mb: 1 }}>
+                Question Style
+              </Typography>
+              
+              {/* Show different options based on the selected tab */}
+              {settingsTab === 'vocabulary' && (
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+                  {['vocabulary', 'sentences'].map((mode) => (
+                    <Box
+                      key={mode}
+                      onClick={() => handleStudyModeChange(mode as StudyMode)}
+                      sx={{
+                        py: 1.5,
+                        px: 2,
+                        borderRadius: '8px',
+                        cursor: 'pointer',
+                        fontSize: '14px',
+                        fontWeight: studyMode === mode ? 'bold' : 'normal',
+                        color: studyMode === mode ? '#7c4dff' : isDarkMode ? '#ddd' : '#1f2937',
+                        backgroundColor: studyMode === mode ? 
+                          (isDarkMode ? '#3a3052' : '#f3f0ff') : 
+                          isDarkMode ? '#383838' : '#f3f4f6',
+                        '&:hover': {
+                          backgroundColor: studyMode === mode ? 
+                            (isDarkMode ? '#3a3052' : '#f3f0ff') : 
+                            (isDarkMode ? '#444' : '#e9ebef')
+                        }
+                      }}
+                    >
+                      {StudyModeLabels[mode as StudyMode]}
+                    </Box>
+                  ))}
+                </Box>
+              )}
+              
+              {settingsTab === 'kanji' && (
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+                  {['kanji-meaning', 'kanji-onyomi', 'kanji-kunyomi'].map((mode) => (
+                    <Box
+                      key={mode}
+                      onClick={() => handleStudyModeChange(mode as StudyMode)}
+                      sx={{
+                        py: 1.5,
+                        px: 2,
+                        borderRadius: '8px',
+                        cursor: 'pointer',
+                        fontSize: '14px',
+                        fontWeight: studyMode === mode ? 'bold' : 'normal',
+                        color: studyMode === mode ? '#7c4dff' : isDarkMode ? '#ddd' : '#1f2937',
+                        backgroundColor: studyMode === mode ? 
+                          (isDarkMode ? '#3a3052' : '#f3f0ff') : 
+                          isDarkMode ? '#383838' : '#f3f4f6',
+                        '&:hover': {
+                          backgroundColor: studyMode === mode ? 
+                            (isDarkMode ? '#3a3052' : '#f3f0ff') : 
+                            (isDarkMode ? '#444' : '#e9ebef')
+                        }
+                      }}
+                    >
+                      {StudyModeLabels[mode as StudyMode]}
+                    </Box>
+                  ))}
+                </Box>
+              )}
+              
+              {/* Placeholders for future modes */}
+              {settingsTab === 'listening' && (
+                <Box sx={{ color: isDarkMode ? '#aaa' : '#6F767E', fontSize: '14px', textAlign: 'center', py: 2 }}>
+                  Listening practice coming soon
+                </Box>
+              )}
+              
+              {settingsTab === 'reading' && (
+                <Box sx={{ color: isDarkMode ? '#aaa' : '#6F767E', fontSize: '14px', textAlign: 'center', py: 2 }}>
+                  Reading practice coming soon
+                </Box>
+              )}
+              
+              {settingsTab === 'grammar' && (
+                <Box sx={{ color: isDarkMode ? '#aaa' : '#6F767E', fontSize: '14px', textAlign: 'center', py: 2 }}>
+                  Grammar practice coming soon
+                </Box>
+              )}
+            </Box>
           </Menu>
         </TopBar>
 
