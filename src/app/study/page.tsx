@@ -485,7 +485,7 @@ export default function StudyLayout() {
       console.log(`loadVocabularyData: using startIndex ${validStartIndex} (from ${startIndex})`);
       setCurrentItem(validStartIndex);
       generateVocabularyChoices(data, validStartIndex);
-      setRemainingCards(data.length);
+      setRemainingCards(calculateRemainingCards(data.length, validStartIndex));
     } catch (error) {
       console.error('Error loading vocabulary data:', error);
     } finally {
@@ -511,7 +511,7 @@ export default function StudyLayout() {
       const modeToUse = mode || studyMode;
       console.log('Loading kanji data with mode:', modeToUse);
       generateKanjiChoices(data, validStartIndex, modeToUse);
-      setRemainingCards(data.length);
+      setRemainingCards(calculateRemainingCards(data.length, validStartIndex));
     } catch (error) {
       console.error('Error loading kanji data:', error);
     } finally {
@@ -534,7 +534,7 @@ export default function StudyLayout() {
       console.log(`loadSentenceData: using startIndex ${validStartIndex} (from ${startIndex})`);
       setCurrentItem(validStartIndex);
       generateSentenceChoices(data, validStartIndex);
-      setRemainingCards(data.length);
+      setRemainingCards(calculateRemainingCards(data.length, validStartIndex));
     } catch (error) {
       console.error('Error loading sentence data:', error);
     } finally {
@@ -542,6 +542,11 @@ export default function StudyLayout() {
     }
   };
   
+  // Helper function to calculate remaining cards consistently
+  const calculateRemainingCards = (total: number, current: number): number => {
+    return Math.max(0, total - current);
+  };
+
   // Function to limit meanings to a maximum of three
   const limitMeanings = (meaning: string): string => {
     // Split by common delimiters (semicolons, slashes with spaces around them)
@@ -786,7 +791,7 @@ export default function StudyLayout() {
       totalAnswered: validTotalAnswered,
       correctAnswers: validCorrectAnswers,
       accuracy: validAccuracy,
-      remainingCards: dataLength - currentItem
+      remainingCards: calculateRemainingCards(dataLength, currentItem)
     });
     
     console.log('Saving metrics with values:', {
@@ -794,7 +799,7 @@ export default function StudyLayout() {
       totalAnswered: validTotalAnswered,
       correctAnswers: validCorrectAnswers,
       accuracy: validAccuracy,
-      remainingCards: dataLength - currentItem
+      remainingCards: calculateRemainingCards(dataLength, currentItem)
     });
     
     // Move to next item after a delay
@@ -817,7 +822,7 @@ export default function StudyLayout() {
       
       if (nextItem < dataLength) {
         setCurrentItem(nextItem);
-        setRemainingCards(dataLength - nextItem);
+        setRemainingCards(calculateRemainingCards(dataLength, nextItem));
         
         // Calculate new accuracy, ensuring valid values
         const validTotalAnswered = isNaN(totalAnswered) ? 0 : totalAnswered;
@@ -831,14 +836,14 @@ export default function StudyLayout() {
           totalAnswered: validTotalAnswered,
           correctAnswers: validCorrectAnswers,
           accuracy: newAccuracy,
-          remainingCards: dataLength - nextItem
+          remainingCards: calculateRemainingCards(dataLength, nextItem)
         });
         console.log(`Updated metrics for ${studyMode}:`, {
           currentItem: nextItem,
           totalAnswered: validTotalAnswered,
           correctAnswers: validCorrectAnswers,
           accuracy: newAccuracy,
-          remainingCards: dataLength - nextItem
+          remainingCards: calculateRemainingCards(dataLength, nextItem)
         });
         
         // Generate new choices for the next item
