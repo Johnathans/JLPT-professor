@@ -25,6 +25,7 @@ import { useColorMode } from '@/contexts/ThemeContext';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import styles from '@/styles/dashboard.module.css';
+import { playCorrectSound, playWrongSound } from '@/utils/soundEffects';
 import { SentenceEntry } from '@/types/sentence';
 
 const LayoutRoot = styled('div', {
@@ -674,6 +675,27 @@ export default function StudyLayout() {
     
     // Check if answer is correct
     const isCorrect = selectedIndex === correctAnswerIndex;
+    
+    // Play sound effect based on whether the answer is correct
+    if (isCorrect) {
+      // Play correct sound
+      try {
+        const audio = new Audio('/audio/ui/correct-6033.mp3');
+        audio.volume = 1.0;
+        audio.play().catch(e => console.error('Error playing correct sound:', e));
+      } catch (error) {
+        console.error('Error playing correct sound:', error);
+      }
+    } else {
+      // Play wrong sound
+      try {
+        const audio = new Audio('/audio/ui/wronganswer-37702.mp3');
+        audio.volume = 1.0;
+        audio.play().catch(e => console.error('Error playing wrong sound:', e));
+      } catch (error) {
+        console.error('Error playing wrong sound:', error);
+      }
+    }
     
     // Update accuracy by tracking total answered and correct answers
     const newTotalAnswered = totalAnswered + 1;
