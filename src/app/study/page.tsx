@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Box, TextField, Button, IconButton, styled, Menu, MenuItem, Typography, Divider } from '@mui/material';
+import { Box, TextField, Button, IconButton, styled, Menu, MenuItem, Typography, Divider, CircularProgress } from '@mui/material';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import KeyboardIcon from '@mui/icons-material/Keyboard';
 import CheckIcon from '@mui/icons-material/Check';
@@ -663,6 +663,31 @@ export default function StudyLayout() {
   // State for tracking selected answer and showing feedback
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showingFeedback, setShowingFeedback] = useState(false);
+  const [isAudioLoading, setIsAudioLoading] = useState(false); // For sentence audio playback
+  
+  // Function to play sentence audio using Google TTS
+  const playSentenceAudio = async (text: string) => {
+    try {
+      setIsAudioLoading(true);
+      const response = await fetch('/api/sentence-audio', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to generate audio');
+      }
+      
+      const data = await response.json();
+      const audio = new Audio(data.url);
+      await audio.play();
+    } catch (error) {
+      console.error('Error playing sentence audio:', error);
+    } finally {
+      setIsAudioLoading(false);
+    }
+  };
   
   // Handle answer selection
   const handleAnswerSelection = (selectedIndex: number) => {
@@ -799,10 +824,29 @@ export default function StudyLayout() {
         
         return (
           <>
-            <JapaneseSentence 
-              darkMode={isDarkMode}
-              dangerouslySetInnerHTML={{ __html: japaneseWithBlank }}
-            />
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
+              <JapaneseSentence 
+                darkMode={isDarkMode}
+                dangerouslySetInnerHTML={{ __html: japaneseWithBlank }}
+              />
+              <IconButton 
+                onClick={() => playSentenceAudio(currentSentence.japanese)}
+                disabled={isAudioLoading}
+                sx={{ 
+                  ml: 2, 
+                  backgroundColor: '#7c4dff', 
+                  color: 'white',
+                  '&:hover': { backgroundColor: '#5e35b1' },
+                  '&.Mui-disabled': { backgroundColor: '#d1c4e9', color: '#9e9e9e' }
+                }}
+              >
+                {isAudioLoading ? (
+                  <CircularProgress size={24} sx={{ color: 'white' }} />
+                ) : (
+                  <VolumeUpIcon />
+                )}
+              </IconButton>
+            </Box>
             <EnglishTranslation darkMode={isDarkMode}>
               {currentSentence.english}
             </EnglishTranslation>
