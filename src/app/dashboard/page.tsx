@@ -491,7 +491,7 @@ export default function TestDashboard() {
             
             <div className={styles.modulesContainer}>
               
-              <div className={styles.modulesList} style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem', width: '100%' }}>
+              <div className={styles.modulesList}>
                 {mockData.jlptLevels.find(level => level.id === activeJlptLevel)?.modules.map((module) => (
                   <div 
                     key={module.id} 
