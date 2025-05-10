@@ -1,6 +1,15 @@
 export type StudyMode = 'vocabulary' | 'sentences' | 'kanji-meaning' | 'kanji-onyomi' | 'kanji-kunyomi' | 'kanji-match';
 export type JlptLevel = 'n1' | 'n2' | 'n3' | 'n4' | 'n5';
 
+// Interface for tracking study progress metrics
+export interface ProgressMetrics {
+  currentItem: number;
+  totalAnswered: number;
+  correctAnswers: number;
+  accuracy: number;
+  remainingCards: number;
+}
+
 // Interface for vocabulary items
 export interface VocabularyItem {
   id: string;

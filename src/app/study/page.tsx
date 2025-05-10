@@ -395,7 +395,7 @@ export default function StudyLayout() {
   const [currentItem, setCurrentItem] = useState<number>(0);
   
   // Use the study progress context
-  const { getCurrentProgress, saveCurrentProgress, resetLevelProgress, resetAllProgress } = useStudyProgress();
+  const { getProgressMetrics, saveProgressMetrics, resetLevelProgress, resetAllProgress } = useStudyProgress();
   const [loading, setLoading] = useState<boolean>(true);
   const [choices, setChoices] = useState<string[]>([]);
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState<number>(0);
@@ -410,30 +410,38 @@ export default function StudyLayout() {
   };
 
   const handleStudyModeChange = (mode: StudyMode) => {
-    // Save current progress before switching modes
-    saveCurrentProgress(studyMode, jlptLevel, currentItem);
+    // Save current progress and metrics before switching modes
+    saveProgressMetrics(studyMode, jlptLevel, {
+      currentItem,
+      totalAnswered,
+      correctAnswers,
+      accuracy,
+      remainingCards
+    });
     
-    // Get saved progress for the new mode
-    const savedProgress = getCurrentProgress(mode, jlptLevel);
-    console.log(`Switching to ${mode}, saved progress: ${savedProgress}`);
+    // Get saved metrics for the new mode
+    const savedMetrics = getProgressMetrics(mode, jlptLevel);
+    console.log(`Switching to ${mode}, saved metrics:`, savedMetrics);
     
     // Update the mode
     setStudyMode(mode);
     setSettingsAnchor(null);
     
-    // Reset accuracy counters
-    setAccuracy(0);
-    setTotalAnswered(0);
-    setCorrectAnswers(0);
+    // Restore saved metrics
+    setCurrentItem(savedMetrics.currentItem);
+    setTotalAnswered(savedMetrics.totalAnswered);
+    setCorrectAnswers(savedMetrics.correctAnswers);
+    setAccuracy(savedMetrics.accuracy);
+    setRemainingCards(savedMetrics.remainingCards);
     
     // Load appropriate data based on mode, passing the saved progress
     if (mode === 'vocabulary') {
-      loadVocabularyData(jlptLevel, savedProgress);
+      loadVocabularyData(jlptLevel, savedMetrics.currentItem);
     } else if (mode === 'sentences') {
-      loadSentenceData(jlptLevel, savedProgress);
+      loadSentenceData(jlptLevel, savedMetrics.currentItem);
     } else if (mode.startsWith('kanji')) {
       // Pass the mode explicitly to ensure it's used immediately
-      loadKanjiData(jlptLevel, mode, savedProgress);
+      loadKanjiData(jlptLevel, mode, savedMetrics.currentItem);
     }
   };
   
@@ -758,6 +766,37 @@ export default function StudyLayout() {
     const newAccuracy = Math.round((newCorrectAnswers / newTotalAnswered) * 100);
     setAccuracy(newAccuracy);
     
+    // Save metrics after answering
+    let dataLength = 0;
+    if (studyMode === 'vocabulary') {
+      dataLength = vocabularyData.length;
+    } else if (studyMode === 'sentences') {
+      dataLength = sentenceData.length;
+    } else {
+      dataLength = kanjiData.length;
+    }
+    
+    // Ensure values are valid numbers
+    const validAccuracy = isNaN(newAccuracy) ? 0 : newAccuracy;
+    const validTotalAnswered = isNaN(newTotalAnswered) ? 0 : newTotalAnswered;
+    const validCorrectAnswers = isNaN(newCorrectAnswers) ? 0 : newCorrectAnswers;
+    
+    saveProgressMetrics(studyMode, jlptLevel, {
+      currentItem,
+      totalAnswered: validTotalAnswered,
+      correctAnswers: validCorrectAnswers,
+      accuracy: validAccuracy,
+      remainingCards: dataLength - currentItem
+    });
+    
+    console.log('Saving metrics with values:', {
+      currentItem,
+      totalAnswered: validTotalAnswered,
+      correctAnswers: validCorrectAnswers,
+      accuracy: validAccuracy,
+      remainingCards: dataLength - currentItem
+    });
+    
     // Move to next item after a delay
     setTimeout(() => {
       // Reset feedback state
@@ -780,9 +819,27 @@ export default function StudyLayout() {
         setCurrentItem(nextItem);
         setRemainingCards(dataLength - nextItem);
         
-        // Save progress to context
-        saveCurrentProgress(studyMode, jlptLevel, nextItem);
-        console.log(`Updated progress for ${studyMode} to ${nextItem}`);
+        // Calculate new accuracy, ensuring valid values
+        const validTotalAnswered = isNaN(totalAnswered) ? 0 : totalAnswered;
+        const validCorrectAnswers = isNaN(correctAnswers) ? 0 : correctAnswers;
+        const newAccuracy = validTotalAnswered > 0 ? 
+          Math.round((validCorrectAnswers / validTotalAnswered) * 100) : 0;
+        
+        // Save all metrics to context
+        saveProgressMetrics(studyMode, jlptLevel, {
+          currentItem: nextItem,
+          totalAnswered: validTotalAnswered,
+          correctAnswers: validCorrectAnswers,
+          accuracy: newAccuracy,
+          remainingCards: dataLength - nextItem
+        });
+        console.log(`Updated metrics for ${studyMode}:`, {
+          currentItem: nextItem,
+          totalAnswered: validTotalAnswered,
+          correctAnswers: validCorrectAnswers,
+          accuracy: newAccuracy,
+          remainingCards: dataLength - nextItem
+        });
         
         // Generate new choices for the next item
         if (studyMode === 'vocabulary') {
@@ -798,16 +855,23 @@ export default function StudyLayout() {
   
   // Load initial data when component mounts
   useEffect(() => {
-    // Get saved progress for the current mode
-    const savedProgress = getCurrentProgress(studyMode, jlptLevel);
-    console.log(`Initial load for ${studyMode}, saved progress: ${savedProgress}`);
+    // Get saved metrics for the current mode
+    const savedMetrics = getProgressMetrics(studyMode, jlptLevel);
+    console.log(`Initial load for ${studyMode}, saved metrics:`, savedMetrics);
+    
+    // Restore saved metrics
+    setCurrentItem(savedMetrics.currentItem);
+    setTotalAnswered(savedMetrics.totalAnswered);
+    setCorrectAnswers(savedMetrics.correctAnswers);
+    setAccuracy(savedMetrics.accuracy);
+    setRemainingCards(savedMetrics.remainingCards);
     
     if (studyMode === 'vocabulary') {
-      loadVocabularyData(jlptLevel, savedProgress);
+      loadVocabularyData(jlptLevel, savedMetrics.currentItem);
     } else if (studyMode === 'sentences') {
-      loadSentenceData(jlptLevel, savedProgress);
+      loadSentenceData(jlptLevel, savedMetrics.currentItem);
     } else if (studyMode.startsWith('kanji')) {
-      loadKanjiData(jlptLevel, studyMode, savedProgress);
+      loadKanjiData(jlptLevel, studyMode, savedMetrics.currentItem);
     }
     
     // Reset progress when navigating away from the study page

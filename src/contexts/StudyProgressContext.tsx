@@ -1,22 +1,44 @@
 'use client';
 
-import { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
-import { StudyMode, JlptLevel } from '@/types/study';
+import { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
+import { StudyMode, JlptLevel, ProgressMetrics } from '../types/study';
+
+// Progress metrics interface is now imported from '../types/study'
 
 // Define the state structure
 type ProgressState = {
   [key in StudyMode]?: {
-    [key in JlptLevel]?: number;
+    [key in JlptLevel]?: ProgressMetrics;
   };
 };
 
 // Define the action types
 type ProgressAction =
-  | { type: 'UPDATE_PROGRESS'; mode: StudyMode; level: JlptLevel; value: number }
+  | { type: 'UPDATE_PROGRESS'; mode: StudyMode; level: JlptLevel; metrics: ProgressMetrics }
   | { type: 'RESET_LEVEL_PROGRESS'; level: JlptLevel }
   | { type: 'RESET_ALL_PROGRESS' };
 
-// Initial state with all modes and levels initialized to 0
+// Default metrics for initializing progress
+const defaultMetrics: ProgressMetrics = {
+  currentItem: 0,
+  totalAnswered: 0,
+  correctAnswers: 0,
+  accuracy: 0,
+  remainingCards: 0
+};
+
+// Helper function to validate metrics and ensure no NaN values
+const validateMetrics = (metrics: ProgressMetrics): ProgressMetrics => {
+  return {
+    currentItem: metrics.currentItem || 0,
+    totalAnswered: isNaN(metrics.totalAnswered) ? 0 : metrics.totalAnswered,
+    correctAnswers: isNaN(metrics.correctAnswers) ? 0 : metrics.correctAnswers,
+    accuracy: isNaN(metrics.accuracy) ? 0 : metrics.accuracy,
+    remainingCards: metrics.remainingCards || 0
+  };
+};
+
+// Initial state with all modes and levels initialized with default metrics
 const createInitialState = (): ProgressState => {
   const modes: StudyMode[] = ['vocabulary', 'sentences', 'kanji-meaning', 'kanji-onyomi', 'kanji-kunyomi', 'kanji-match'];
   const levels: JlptLevel[] = ['n1', 'n2', 'n3', 'n4', 'n5'];
@@ -26,7 +48,7 @@ const createInitialState = (): ProgressState => {
   modes.forEach(mode => {
     state[mode] = {};
     levels.forEach(level => {
-      state[mode]![level] = 0;
+      state[mode]![level] = { ...defaultMetrics };
     });
   });
   
@@ -61,7 +83,7 @@ const progressReducer = (state: ProgressState, action: ProgressAction): Progress
         ...state,
         [action.mode]: {
           ...state[action.mode],
-          [action.level]: action.value
+          [action.level]: validateMetrics(action.metrics)
         }
       };
       break;
@@ -73,7 +95,7 @@ const progressReducer = (state: ProgressState, action: ProgressAction): Progress
         if (newState[mode as StudyMode]) {
           newState[mode as StudyMode] = {
             ...newState[mode as StudyMode],
-            [action.level]: 0
+            [action.level]: { ...defaultMetrics }
           };
         }
       });
@@ -103,8 +125,8 @@ const progressReducer = (state: ProgressState, action: ProgressAction): Progress
 type ProgressContextType = {
   progressState: ProgressState;
   progressDispatch: React.Dispatch<ProgressAction>;
-  getCurrentProgress: (mode: StudyMode, level: JlptLevel) => number;
-  saveCurrentProgress: (mode: StudyMode, level: JlptLevel, value: number) => void;
+  getProgressMetrics: (mode: StudyMode, level: JlptLevel) => ProgressMetrics;
+  saveProgressMetrics: (mode: StudyMode, level: JlptLevel, metrics: ProgressMetrics) => void;
   resetLevelProgress: (level: JlptLevel) => void;
   resetAllProgress: () => void;
 };
@@ -116,15 +138,13 @@ export const StudyProgressProvider = ({ children }: { children: ReactNode }) => 
   const [progressState, progressDispatch] = useReducer(progressReducer, null, loadInitialState);
 
   // Helper functions for common operations
-  const getCurrentProgress = (mode: StudyMode, level: JlptLevel): number => {
-    const progress = progressState[mode]?.[level] ?? 0;
-    console.log(`Context: Getting progress for ${mode}/${level}: ${progress}`);
-    return progress;
+  const getProgressMetrics = (mode: StudyMode, level: JlptLevel): ProgressMetrics => {
+    const metrics = progressState[mode]?.[level] || defaultMetrics;
+    return validateMetrics(metrics);
   };
   
-  const saveCurrentProgress = (mode: StudyMode, level: JlptLevel, value: number): void => {
-    console.log(`Context: Saving progress for ${mode}/${level} to ${value}`);
-    progressDispatch({ type: 'UPDATE_PROGRESS', mode, level, value });
+  const saveProgressMetrics = (mode: StudyMode, level: JlptLevel, metrics: ProgressMetrics): void => {
+    progressDispatch({ type: 'UPDATE_PROGRESS', mode, level, metrics: validateMetrics(metrics) });
   };
   
   const resetLevelProgress = (level: JlptLevel): void => {
@@ -140,8 +160,8 @@ export const StudyProgressProvider = ({ children }: { children: ReactNode }) => 
       value={{ 
         progressState, 
         progressDispatch, 
-        getCurrentProgress, 
-        saveCurrentProgress, 
+        getProgressMetrics, 
+        saveProgressMetrics, 
         resetLevelProgress, 
         resetAllProgress 
       }}
