@@ -1,11 +1,10 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
+import { useState, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { useJlptLevel } from '@/contexts/JlptLevelContext';
-import type { JlptLevel } from '@/types/module';
+import type { JlptLevel } from '@/contexts/JlptLevelContext';
 import { styled, useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import BrandLogo from '@/components/BrandLogo';
@@ -28,7 +27,9 @@ import {
   Badge,
   InputBase,
   Stack,
-  Grid
+  Grid,
+  Menu,
+  MenuItem
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import {
@@ -41,7 +42,6 @@ import {
   AutoStories,
   Translate,
   Add,
-  Menu,
   Assessment,
   Circle as CircleIcon,
   KeyboardArrowDown as KeyboardArrowDownIcon,
@@ -63,7 +63,8 @@ interface MenuItem {
   pro?: boolean;
 }
 
-const drawerWidth = 280; // Reduced from 320 for a cleaner look
+const CollapsedDrawerWidth = 72;
+const ExpandedDrawerWidth = 280;
 
 const LogoText = styled(Typography)(({ theme }) => ({
   fontFamily: "'Inter', sans-serif",
@@ -198,439 +199,166 @@ const ProBadge = styled('span')(({ theme }) => ({
   right: -8
 }));
 
-const MobileMenu = styled(Paper)(({ theme }) => ({
+const Sidebar = styled('div')<{ isExpanded: boolean }>(({ theme, isExpanded }) => ({
   position: 'fixed',
-  bottom: 0,
   left: 0,
-  right: 0,
-  backgroundColor: theme.palette.background.paper,
-  padding: theme.spacing(1),
+  top: 0,
+  bottom: 0,
+  width: isExpanded ? ExpandedDrawerWidth : CollapsedDrawerWidth,
+  backgroundColor: '#fff',
+  borderRight: '1px solid rgba(0,0,0,0.08)',
+  overflow: 'hidden',
   zIndex: 1000,
-  borderTop: `1px solid ${theme.palette.divider}`,
-  '@media (min-width: 744px)': {
+  display: 'flex',
+  flexDirection: 'column',
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  '@media (max-width: 744px)': {
     display: 'none'
   }
 }));
 
-const MobileMenuGrid = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  width: '100%',
-  '& > a': {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    color: theme.palette.text.secondary,
-    textDecoration: 'none',
-    padding: theme.spacing(1),
-    borderRadius: theme.shape.borderRadius,
-    transition: 'all 0.2s ease-in-out',
-    '&.active': {
-      color: theme.palette.primary.main,
-      backgroundColor: theme.palette.primary.light
-    },
-    '& .MuiSvgIcon-root': {
-      fontSize: '1.5rem',
-      marginBottom: theme.spacing(0.5)
-    }
-  }
-}));
-
-const AddButton = styled(IconButton)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.main,
-  color: '#fff',
-  padding: theme.spacing(1.5),
-  marginTop: '-20px',
-  width: '48px',
-  height: '48px',
-  '&:hover': {
-    backgroundColor: theme.palette.primary.dark
-  },
-  '& .MuiSvgIcon-root': {
-    fontSize: '1.75rem'
-  }
-}));
-
-const AddBottomSheet = styled(Dialog)(({ theme }) => ({
-  '& .MuiDialog-container': {
-    alignItems: 'flex-end'
-  },
-  '& .MuiPaper-root': {
-    margin: 0,
-    width: '100%',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    maxHeight: '80vh',
-    overflowY: 'auto',
-    paddingTop: theme.spacing(2)
-  }
-}));
-
-const AddMenuGrid = styled(Box)(({ theme }) => ({
-  display: 'grid',
-  gridTemplateColumns: 'repeat(2, 1fr)',
-  gap: theme.spacing(2),
-  padding: theme.spacing(2)
-}));
-
-const AddMenuCard = styled(ButtonBase)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  padding: theme.spacing(3),
-  backgroundColor: theme.palette.background.paper,
-  border: `1px solid ${theme.palette.divider}`,
-  borderRadius: theme.shape.borderRadius,
-  gap: theme.spacing(1.5),
-  width: '100%',
-  transition: 'all 0.2s ease',
-  '&:hover': {
-    backgroundColor: theme.palette.primary.light,
-    borderColor: theme.palette.primary.main
-  },
-  '& .icon-wrapper': {
-    width: 48,
-    height: 48,
-    borderRadius: '50%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: theme.palette.primary.light,
-    marginBottom: theme.spacing(1)
-  },
-  '& .MuiSvgIcon-root': {
-    fontSize: '1.75rem',
-    color: theme.palette.primary.main
-  },
-  '& .MuiTypography-root': {
-    fontSize: '0.9375rem',
-    fontWeight: 500,
-    color: theme.palette.text.primary
-  },
-  '& .description': {
-    fontSize: '0.75rem',
-    color: theme.palette.text.secondary,
-    textAlign: 'center'
-  }
-}));
-
-const CreateDeckButton = styled(ButtonBase)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
+const CollapsedListItem = styled(ListItemButton, {
+  shouldForwardProp: (prop) => prop !== 'active'
+})<{ active?: boolean }>(({ theme, active }) => ({
   justifyContent: 'center',
-  gap: theme.spacing(1.5),
-  padding: theme.spacing(1.5, 3),
-  height: 48,
-  borderRadius: theme.shape.borderRadius,
-  width: '80%',
-  margin: '0 auto',
-  backgroundColor: theme.palette.background.paper,
-  border: `1px solid ${theme.palette.divider}`,
-  transition: 'all 0.2s ease-in-out',
-  '&:hover': {
-    backgroundColor: theme.palette.primary.light,
-    borderColor: theme.palette.primary.main,
-    transform: 'translateY(-1px)',
-    boxShadow: '0 3px 8px rgba(124, 77, 255, 0.08)'
-  },
-  '& .MuiSvgIcon-root': {
-    fontSize: '1.25rem',
-    color: theme.palette.primary.main
-  },
-  '& .MuiTypography-root': {
-    fontSize: '0.9375rem',
-    fontWeight: 600,
-    color: theme.palette.primary.main
-  }
-}));
-
-const CreateDeckContainer = styled(Box)({
-  padding: '32px 16px',
-  marginTop: 'auto'
-});
-
-const StudyCard = styled(ButtonBase)(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper,
-  border: `1px solid ${theme.palette.divider}`,
-  borderRadius: theme.shape.borderRadius,
   padding: theme.spacing(2),
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: theme.spacing(1),
-  transition: 'all 0.2s ease-in-out',
-  width: '100%',
-  textAlign: 'center',
-  '&:hover': {
-    backgroundColor: theme.palette.primary.light,
-    borderColor: theme.palette.primary.main,
-    transform: 'translateY(-2px)',
-    boxShadow: '0 3px 8px rgba(124, 77, 255, 0.08)'
+  marginBottom: theme.spacing(0.5),
+  borderRadius: theme.shape.borderRadius,
+  '& .MuiListItemIcon-root': {
+    minWidth: 'unset',
+    marginRight: 0
   },
-  '& .icon-wrapper': {
-    width: 40,
-    height: 40,
-    borderRadius: '50%',
+  ...(active && {
     backgroundColor: theme.palette.primary.light,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: theme.spacing(0.5),
-    transition: 'all 0.2s ease-in-out',
-    '& .MuiSvgIcon-root': {
-      fontSize: '1.5rem',
+    '& .MuiListItemIcon-root': {
       color: theme.palette.primary.main
     }
-  },
-  '&:hover .icon-wrapper': {
-    backgroundColor: theme.palette.primary.main,
-    '& .MuiSvgIcon-root': {
-      color: '#fff'
-    }
-  },
-  '& .label': {
-    fontSize: '0.875rem',
-    fontWeight: 600,
-    color: theme.palette.text.primary
-  }
+  })
 }));
 
-const StudyGrid = styled(Grid)(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  marginTop: theme.spacing(3),
-  marginBottom: theme.spacing(2)
+const ExpandedListItem = styled(ListItemButton, {
+  shouldForwardProp: (prop) => prop !== 'active'
+})<{ active?: boolean }>(({ theme, active }) => ({
+  padding: theme.spacing(1.5, 2),
+  marginBottom: theme.spacing(0.5),
+  borderRadius: theme.shape.borderRadius,
+  '& .MuiListItemIcon-root': {
+    minWidth: 40,
+    color: theme.palette.text.secondary
+  },
+  ...(active && {
+    backgroundColor: theme.palette.primary.light,
+    '& .MuiListItemIcon-root': {
+      color: theme.palette.primary.main
+    },
+    '& .MuiTypography-root': {
+      fontWeight: 600,
+      color: theme.palette.primary.main
+    }
+  })
 }));
 
 export default function Navigation() {
   const pathname = usePathname();
   const router = useRouter();
   const theme = useTheme();
-  const isMobile = useMediaQuery('(max-width: 744px)');
-  const [addMenuAnchor, setAddMenuAnchor] = useState<null | HTMLElement>(null);
-  const { level } = useJlptLevel();
+  const { level, setLevel } = useJlptLevel();
+  const [isExpanded, setIsExpanded] = useState(false);
+  const expandTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   const studyItems = [
-    { icon: <Home />, label: 'Home', path: '/dashboard' },
-    { icon: <Add />, label: 'Create Deck', path: '/decks/create' },
     { icon: <School />, label: 'Kanji', path: '/learn/kanji' },
     { icon: <MenuBook />, label: 'Vocabulary', path: '/learn/vocabulary' },
+    { icon: <Translate />, label: 'Grammar', path: '/learn/grammar' },
     { icon: <AutoStories />, label: 'Reading', path: '/learn/reading' },
-    { icon: <HeadphonesIcon />, label: 'Listening', path: '/learn/listening' },
-    { icon: <EditIcon />, label: 'Grammar', path: '/learn/grammar' },
     { icon: <QuizIcon />, label: 'Quiz', path: '/learn/quiz' }
   ];
 
-  const drawer = (
-    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <LogoContainer>
-        <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-          <Stack direction="row" spacing={1.5} alignItems="center">
-            <BrandLogo size={36} />
-            <LogoText variant="h6">
-              <span className="bold">JLPT</span> Professor
-            </LogoText>
-          </Stack>
-        </Link>
-      </LogoContainer>
-
-      <LevelBadge onClick={() => router.push('/profile')}>
-        <LevelText>
-          <div className="level">
-            {level} <span className="jlpt">JLPT</span>
-          </div>
-          <div className="studying">Currently Studying</div>
-        </LevelText>
-        <KeyboardArrowDownIcon />
-      </LevelBadge>
-
-      <StudyGrid container spacing={2}>
-        {studyItems.map((item) => (
-          <Grid item xs={6} key={item.path}>
-            <StudyCard
-              onClick={() => router.push(item.path)}
-            >
-              <div className="icon-wrapper">
-                {item.icon}
-              </div>
-              <span className="label">{item.label}</span>
-            </StudyCard>
-          </Grid>
-        ))}
-      </StudyGrid>
-
-      <CreateDeckContainer>
-        <CreateDeckButton onClick={() => router.push('/decks')}>
-          <MenuBook sx={{ fontSize: '1.25rem' }} />
-          <Typography>Manage Flashcards</Typography>
-        </CreateDeckButton>
-      </CreateDeckContainer>
-    </Box>
-  );
-
-  const handleAddClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAddMenuAnchor(event.currentTarget);
-  };
-
-  const handleAddClose = () => {
-    setAddMenuAnchor(null);
-  };
-
-  const getPageTitle = () => {
-    switch (pathname) {
-      case '/dashboard':
-        return 'Dashboard';
-      case '/learn/kanji':
-        return 'Learn Kanji';
-      case '/learn/vocabulary':
-        return 'Learn Vocabulary';
-      case '/learn/grammar':
-        return 'Learn Grammar';
-      case '/learn/reading':
-        return 'Reading Practice';
-      case '/search':
-        return 'Search';
-      case '/history':
-        return 'History';
-      case '/profile':
-        return 'Profile';
-      default:
-        if (pathname.startsWith('/learn/')) {
-          return 'Learning';
-        }
-        return '';
+  const handleMouseEnter = () => {
+    if (expandTimeoutRef.current) {
+      clearTimeout(expandTimeoutRef.current);
     }
+    setIsExpanded(true);
   };
 
-  const addMenuItems = [
-    { 
-      icon: <School />, 
-      text: 'Learn Kanji', 
-      description: 'Master new kanji characters',
-      path: '/learn/kanji' 
-    },
-    { 
-      icon: <MenuBook />, 
-      text: 'Learn Vocabulary', 
-      description: 'Build your Japanese vocabulary',
-      path: '/learn/vocabulary' 
-    },
-    { 
-      icon: <Translate />, 
-      text: 'Learn Grammar', 
-      description: 'Study Japanese grammar patterns',
-      path: '/learn/grammar' 
-    },
-    { 
-      icon: <AutoStories />, 
-      text: 'Reading Practice', 
-      description: 'Improve your reading skills',
-      path: '/learn/reading' 
-    }
-  ];
+  const handleMouseLeave = () => {
+    expandTimeoutRef.current = setTimeout(() => {
+      setIsExpanded(false);
+    }, 300);
+  };
 
   return (
-    <>
-      <Box 
-        component="nav" 
-        sx={{ 
-          width: drawerWidth,
-          '@media (max-width: 744px)': {
-            display: 'none'
-          }
-        }}
-      >
-        <Drawer 
-          variant="permanent" 
-          sx={{ 
-            '& .MuiDrawer-paper': {
-              width: drawerWidth,
-              boxSizing: 'border-box',
-              borderRight: `1px solid ${theme.palette.divider}`,
-              bgcolor: 'background.paper'
-            },
-            '@media (max-width: 744px)': {
-              display: 'none'
-            }
-          }} 
-          open
-        >
-          {drawer}
-        </Drawer>
-      </Box>
+    <Sidebar 
+      isExpanded={isExpanded}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <LogoContainer>
+        <BrandLogo size={32} />
+        {isExpanded && (
+          <LogoText>
+            JLPT <span className="bold">Professor</span>
+          </LogoText>
+        )}
+      </LogoContainer>
 
-      {isMobile && (
-        <MobileMenu elevation={0}>
-          <MobileMenuGrid>
-            <Link
-              href="/dashboard"
-              className={pathname === '/dashboard' ? 'active' : ''}
-            >
-              <Home />
-              <Typography variant="caption">
-                Dashboard
-              </Typography>
-            </Link>
-            <Link
-              href="/history"
-              className={pathname === '/history' ? 'active' : ''}
-            >
-              <History />
-              <Typography variant="caption">
-                History
-              </Typography>
-            </Link>
-            <AddButton onClick={handleAddClick}>
-              <Add />
-            </AddButton>
-            <Link
-              href="/search"
-              className={pathname === '/search' ? 'active' : ''}
-            >
-              <SearchIcon />
-              <Typography variant="caption">
-                Search
-              </Typography>
-            </Link>
-            <Link
-              href="/profile"
-              className={pathname === '/profile' ? 'active' : ''}
-            >
-              <Person />
-              <Typography variant="caption">
-                Profile
-              </Typography>
-            </Link>
-          </MobileMenuGrid>
-        </MobileMenu>
-      )}
+      <StyledList>
+        {studyItems.map((item) => (
+          <ListItem key={item.path} disablePadding>
+            {isExpanded ? (
+              <ExpandedListItem
+                active={pathname === item.path}
+                onClick={() => router.push(item.path)}
+              >
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.label} />
+              </ExpandedListItem>
+            ) : (
+              <CollapsedListItem
+                active={pathname === item.path}
+                onClick={() => router.push(item.path)}
+              >
+                <ListItemIcon>{item.icon}</ListItemIcon>
+              </CollapsedListItem>
+            )}
+          </ListItem>
+        ))}
+      </StyledList>
 
-      <AddBottomSheet
-        open={Boolean(addMenuAnchor)}
-        onClose={handleAddClose}
-        TransitionComponent={Slide}
-        TransitionProps={{
-          direction: 'up'
-        } as Partial<TransitionProps>}
-      >
-        <AddMenuGrid>
-          {addMenuItems.map((item) => (
-            <AddMenuCard
-              key={item.path}
-              onClick={() => {
-                router.push(item.path);
-                handleAddClose();
-              }}
-            >
-              <div className="icon-wrapper">
-                {item.icon}
+      {isExpanded && (
+        <>
+          <LevelBadge>
+            <LevelText>
+              <div className="level">
+                {level} <KeyboardArrowDownIcon />
               </div>
-              <Typography>{item.text}</Typography>
-              <Typography className="description">{item.description}</Typography>
-            </AddMenuCard>
-          ))}
-        </AddMenuGrid>
-      </AddBottomSheet>
-    </>
+            </LevelText>
+          </LevelBadge>
+          <Menu
+            anchorEl={null}
+            open={false}
+            onClose={() => {}}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+          >
+            {(['N5', 'N4', 'N3', 'N2', 'N1'] as JlptLevel[]).map((jlptLevel) => (
+              <MenuItem 
+                key={jlptLevel} 
+                onClick={() => setLevel(jlptLevel)}
+                selected={level === jlptLevel}
+              >
+                {jlptLevel}
+              </MenuItem>
+            ))}
+          </Menu>
+        </>
+      )}
+    </Sidebar>
   );
 }

@@ -4,161 +4,169 @@
   padding: 2rem;
 }
 
-/* Hero Section */
 .hero {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #e8e3ff 0%, #ffffff 100%);
+  margin-bottom: 2rem;
+}
+
+.heroContent {
+  text-align: left;
+  padding: 0 2rem;
+}
+
+.statsContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.statItem {
   text-align: center;
-  padding: 4rem 2rem;
-  background: linear-gradient(135deg, #f8f9ff 0%, #e8e3ff 100%);
-  border-radius: 24px;
-  margin-bottom: 3rem;
+  padding: 1.5rem;
+  background: #e8e3ff;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+  border: 1px solid #e8e3ff;
 }
 
-.title {
-  font-size: 3.5rem;
-  font-weight: 800;
-  color: #333;
-  margin-bottom: 1rem;
-}
-
-.subtitle {
-  font-size: 1.25rem;
-  color: #666;
-  margin-bottom: 2.5rem;
+.statItem:hover {
+  transform: translateY(-4px);
+  border-color: #7c4dff;
 }
 
 .levelSelector {
   display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
 }
 
 .levelButton {
   padding: 0.75rem 1.5rem;
-  border: 2px solid #7c4dff;
+  border: 2px solid #e8e3ff;
   background: white;
-  color: #7c4dff;
-  border-radius: 100px;
-  font-size: 1.125rem;
+  border-radius: 8px;
+  font-size: 1.25rem;
   font-weight: 600;
+  color: #7c4dff;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .levelButton:hover {
+  border-color: #7c4dff;
   background: #e8e3ff;
 }
 
 .levelButtonActive {
   background: #7c4dff;
+  border-color: #7c4dff;
   color: white;
 }
 
 .levelButtonActive:hover {
   background: #5e35b1;
+  border-color: #5e35b1;
 }
 
-/* Overview Section */
-.overview {
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.content {
+  padding: 2rem;
   background: white;
-  border-radius: 24px;
-  padding: 3rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .levelIntro {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid #e8e3ff;
+  border-bottom: 1px solid #eee;
 }
 
 .levelIntro h2 {
-  font-size: 2.5rem;
-  color: #7c4dff;
+  font-size: 2rem;
+  color: #333;
   margin-bottom: 1rem;
 }
 
 .levelIntro p {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   color: #666;
   max-width: 800px;
   margin: 0 auto 1.5rem;
 }
 
 .estimatedTime {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background: #f8f9ff;
-  border-radius: 100px;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #f3f4f6;
+  border-radius: 9999px;
   font-weight: 500;
-  color: #5e35b1;
-}
-
-/* Exam Sections */
-.examSections {
-  margin-bottom: 4rem;
+  color: #374151;
+  margin-top: 1rem;
 }
 
 .sectionTitle {
-  font-size: 2rem;
+  font-size: 1.75rem;
   color: #333;
   margin-bottom: 2rem;
   text-align: center;
 }
 
-.sectionsGrid {
+.grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
+  margin-bottom: 3rem;
 }
 
-.examSection {
-  background: #f8f9ff;
-  border-radius: 16px;
-  padding: 2rem;
+.card {
   height: 100%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-.sectionHeader {
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid #e8e3ff;
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-.sectionHeader h4 {
-  font-size: 1.5rem;
-  color: #7c4dff;
-  margin-bottom: 0.5rem;
-}
-
-.sectionMeta {
-  display: flex;
-  gap: 1rem;
-  color: #666;
-  font-size: 0.875rem;
-}
-
-.sectionMeta span {
-  background: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 100px;
-}
-
-.contentCategory h5 {
-  font-size: 1.125rem;
+.card h4 {
+  font-size: 1.25rem;
   color: #333;
-  margin: 1.5rem 0 0.75rem;
+  margin-bottom: 1rem;
 }
 
-.contentList {
+.card p {
+  color: #666;
+  line-height: 1.5;
+}
+
+.list {
   list-style: none;
   padding: 0;
 }
 
-.contentList li {
+.list li {
   margin-bottom: 0.75rem;
   padding-left: 1.5rem;
   position: relative;
@@ -166,226 +174,180 @@
   line-height: 1.5;
 }
 
-.contentList li::before {
+.list li::before {
   content: "•";
   color: #7c4dff;
   position: absolute;
   left: 0;
 }
 
-/* Study Plan */
-.studyPlan {
-  margin-bottom: 4rem;
-}
-
-.weeklyGoals {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.goalCard {
-  background: white;
-  border: 1px solid #e8e3ff;
-  border-radius: 16px;
-  padding: 2rem;
-  height: 100%;
-}
-
-.goalCard h4 {
-  font-size: 1.25rem;
-  color: #7c4dff;
-  margin-bottom: 1rem;
-}
-
-.taskList {
-  list-style: none;
-  padding: 0;
-}
-
-.taskList li {
-  margin-bottom: 0.75rem;
-  padding-left: 1.5rem;
-  position: relative;
-  color: #666;
-}
-
-.taskList li::before {
-  content: "✓";
-  color: #7c4dff;
-  position: absolute;
-  left: 0;
-}
-
-/* Resources */
-.resources {
-  margin-bottom: 4rem;
-}
-
-.resourcesGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-.resourceCategory {
-  background: #f8f9ff;
-  border-radius: 16px;
-  padding: 2rem;
-}
-
-.resourceCategory h4 {
-  font-size: 1.25rem;
-  color: #333;
-  margin-bottom: 1rem;
-}
-
-.resourceCategory ul {
-  list-style: none;
-  padding: 0;
-}
-
-.resourceCategory li {
-  margin-bottom: 0.75rem;
-  padding-left: 1.5rem;
-  position: relative;
-  color: #666;
-}
-
-.resourceCategory li::before {
-  content: "→";
-  color: #7c4dff;
-  position: absolute;
-  left: 0;
-}
-
-/* Tips */
-.tips {
-  margin-bottom: 4rem;
-}
-
-.tipsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.tipCard {
-  background: white;
-  border: 1px solid #e8e3ff;
-  border-radius: 16px;
-  padding: 2rem;
-  position: relative;
-}
-
-.tipNumber {
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #7c4dff;
-  color: white;
-  padding: 0.25rem 1rem;
-  border-radius: 100px;
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.tipCard p {
-  color: #666;
-  line-height: 1.6;
-  margin-top: 1rem;
-}
-
-/* Practice Area */
-.practiceArea {
-  margin-top: 4rem;
-}
-
-.practiceGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-
-.practiceCard {
-  background: white;
-  border: 1px solid #e8e3ff;
-  border-radius: 16px;
-  padding: 2rem;
-  text-align: center;
+.practiceLink {
   text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.practiceCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(124, 77, 255, 0.1);
-  border-color: #7c4dff;
+  color: inherit;
+  display: block;
 }
 
 .practiceIcon {
   font-size: 2rem;
-  margin-bottom: 1rem;
   display: block;
+  margin-bottom: 1rem;
 }
 
-.practiceCard h4 {
-  color: #333;
+.examInfo {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: #f8fafc;
+  border-radius: 12px;
+}
+
+.examSection {
+  padding: 1.5rem;
+  text-align: center;
+  background: white !important;
+  border: 1px solid #e8e3ff;
+  transition: transform 0.2s ease;
+}
+
+.examSection:hover {
+  transform: translateY(-4px);
+  border-color: #7c4dff;
+}
+
+.examTableContainer {
+  margin: 2rem auto;
+  max-width: 1000px;
+}
+
+.examTable {
+  margin-bottom: 1rem;
+  border: 1px solid #e8e3ff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.examTable th,
+.examTable td {
+  border-bottom: 1px solid #e8e3ff;
+}
+
+.totalRow {
+  background-color: #f8fafc;
+  font-weight: bold;
+}
+
+.totalRow td {
+  border-top: 2px solid #7c4dff;
+}
+
+.skillsTable {
+  margin: 2rem auto;
+  max-width: 1000px;
+  border: 1px solid #e8e3ff;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+}
+
+.skillsTable :global(.MuiTableHead-root) th {
+  background-color: #7c4dff;
+  color: white;
+  font-weight: 600;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+.skillsTable :global(.MuiTableCell-root) {
+  padding: 1rem;
+  border-bottom: 1px solid #e8e3ff;
+  vertical-align: middle;
+}
+
+.skillsTable tr:last-child td {
+  border-bottom: none;
+}
+
+.skillsTable :global(.MuiTableRow-root):hover td {
+  background-color: #f8fafc;
+}
+
+.skillCell {
+  min-width: 150px;
+  color: white !important;
+}
+
+.levelCell {
+  min-width: 120px;
+  text-align: center;
+  color: white !important;
+}
+
+.exampleCell {
+  min-width: 200px;
+  color: white !important;
+}
+
+.japaneseText {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 1.1em;
+  line-height: 1.6;
+  display: block;
   margin-bottom: 0.5rem;
 }
 
-.practiceCard p {
-  color: #666;
-  font-size: 0.875rem;
+.chartContainer {
+  margin: 2rem auto;
+  max-width: 800px;
+  padding: 2rem;
+  background: white;
+  border: 1px solid #e8e3ff;
+  border-radius: 8px;
 }
 
-/* Responsive Design */
+.chartContainer:hover {
+  border-color: #7c4dff;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 1rem;
   }
 
   .hero {
-    padding: 3rem 1rem;
+    padding: 2rem 0;
   }
 
-  .title {
-    font-size: 2.5rem;
+  .heroContent {
+    text-align: center;
+    padding: 0 1rem;
   }
 
-  .overview {
-    padding: 2rem;
+  .statsContainer {
+    margin-top: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1rem;
   }
 
-  .sectionsGrid,
-  .weeklyGoals,
-  .resourcesGrid,
-  .tipsGrid,
-  .practiceGrid {
-    grid-template-columns: 1fr;
+  .statItem {
+    padding: 1rem;
+  }
+
+  .levelSelector {
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .levelButton {
     padding: 0.5rem 1rem;
     font-size: 1rem;
   }
-}
 
-@media (max-width: 480px) {
-  .title {
-    font-size: 2rem;
+  .content {
+    padding: 1rem;
   }
 
-  .sectionTitle {
-    font-size: 1.5rem;
-  }
-
-  .examSection,
-  .goalCard,
-  .resourceCategory,
-  .tipCard,
-  .practiceCard {
-    padding: 1.5rem;
+  .grid {
+    grid-template-columns: 1fr;
   }
 }

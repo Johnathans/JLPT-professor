@@ -176,6 +176,39 @@ const ChoiceGrid = styled(Box)({
   }
 });
 
+const MatchGrid = styled(Box)({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(4, 1fr)',
+  gap: '16px',
+  width: '100%',
+  maxWidth: '800px',
+  margin: '0 auto',
+  '@media (max-width: 900px)': {
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gap: '12px'
+  }
+});
+
+const MatchCard = styled(Box)<{ isSelected?: boolean; isCorrect?: boolean; darkMode: boolean }>(({ isSelected, isCorrect, darkMode }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  minHeight: '120px',
+  padding: '16px',
+  borderRadius: '12px',
+  cursor: 'pointer',
+  transition: 'all 0.2s ease',
+  fontSize: '32px',
+  fontFamily: '"Noto Sans JP", sans-serif',
+  backgroundColor: isCorrect ? '#f2fcfa' : darkMode ? '#383838' : '#f3f4f6',
+  border: `1px solid ${isCorrect ? '#e8faf3' : darkMode ? '#444' : '#e5e7eb'}`,
+  color: darkMode && !isCorrect ? '#fff' : '#1f2937',
+  position: 'relative',
+  '&:hover': {
+    backgroundColor: isCorrect ? '#f2fcfa' : darkMode ? '#444' : '#e9ebef',
+  }
+}));
+
 const ChoiceButton = styled(Button)<{ correct?: boolean; incorrect?: boolean; darkMode?: boolean }>(
   ({ correct, incorrect, darkMode }) => ({
     width: '100%',
@@ -287,7 +320,7 @@ function SidebarComponent({
   );
 }
 
-type StudyMode = 'vocabulary' | 'sentences' | 'kanji-onyomi' | 'kanji-kunyomi' | 'kanji-meaning';
+type StudyMode = 'vocabulary' | 'sentences' | 'kanji-onyomi' | 'kanji-kunyomi' | 'kanji-meaning' | 'kanji-match';
 type JlptLevel = 'n1' | 'n2' | 'n3' | 'n4' | 'n5';
 
 interface VocabularyItem {
@@ -319,7 +352,8 @@ const StudyModeLabels: Record<StudyMode, string> = {
   'sentences': 'Sentences',
   'kanji-onyomi': 'Kanji On\'yomi',
   'kanji-kunyomi': 'Kanji Kun\'yomi',
-  'kanji-meaning': 'Kanji Meaning'
+  'kanji-meaning': 'Kanji Meaning',
+  'kanji-match': 'Kanji Match'
 };
 
 export default function StudyLayout() {
@@ -344,6 +378,7 @@ export default function StudyLayout() {
   const [loading, setLoading] = useState<boolean>(true);
   const [choices, setChoices] = useState<string[]>([]);
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState<number>(0);
+  const [currentQuestion, setCurrentQuestion] = useState<string>('');
 
   const handleSettingsClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setSettingsAnchor(event.currentTarget);
@@ -509,9 +544,43 @@ export default function StudyLayout() {
     setCorrectAnswerIndex(shuffledChoices.indexOf(correctAnswer));
   };
   
+  // Function to prepare kanji match cards with 8 options
+  const prepareKanjiMatchCards = (data: KanjiItem[]) => {
+    console.log('prepareKanjiMatchCards called with data length:', data.length);
+    if (!data || data.length < 8) return;
+    
+    // Select 8 random kanji from the data
+    const shuffledKanji = [...data].sort(() => 0.5 - Math.random()).slice(0, 8);
+    
+    // Choose one kanji as the correct answer
+    const correctKanjiIndex = Math.floor(Math.random() * shuffledKanji.length);
+    const correctKanji = shuffledKanji[correctKanjiIndex];
+    
+    // Create cards with kanji characters
+    const cards = shuffledKanji.map(item => item.kanji);
+    
+    // Set the target meaning to be matched
+    const targetMeaning = correctKanji.meanings[0];
+    
+    // Set state
+    setChoices(cards);
+    setCorrectAnswerIndex(correctKanjiIndex);
+    
+    // Set the question text
+    setCurrentQuestion(`Which kanji means "${targetMeaning}"?`);
+  };
+
   // Function to generate choices for kanji study
   const generateKanjiChoices = (data: KanjiItem[], index: number, mode: StudyMode) => {
+    console.log('generateKanjiChoices called with mode:', mode);
     if (!data || data.length === 0) return;
+    
+    // If it's kanji match mode, use the special function
+    if (mode === 'kanji-match') {
+      console.log('Detected kanji-match mode, calling prepareKanjiMatchCards');
+      prepareKanjiMatchCards(data);
+      return;
+    }
     
     let correctAnswer: string;
     let otherChoices: string[];
@@ -726,6 +795,30 @@ export default function StudyLayout() {
             </EnglishTranslation>
           </>
         );
+      case 'kanji-match':
+        if (!kanjiData || kanjiData.length < 8) {
+          return (
+            <Typography sx={{ textAlign: 'center', fontSize: '24px', color: isDarkMode ? '#fff' : '#1f2937' }}>
+              Not enough kanji data available for this level
+            </Typography>
+          );
+        }
+        return (
+          <>
+            <Typography 
+              sx={{ 
+                textAlign: 'center', 
+                fontSize: '32px', 
+                fontWeight: 500,
+                color: isDarkMode ? '#fff' : '#1f2937',
+                margin: '0 0 24px',
+                '@media (max-width: 900px)': { fontSize: '28px' }
+              }}
+            >
+              {currentQuestion}
+            </Typography>
+          </>
+        );
     }
   };
 
@@ -778,6 +871,35 @@ export default function StudyLayout() {
               </ChoiceButton>
             ))}
           </ChoiceGrid>
+        );
+      case 'kanji-match':
+        return (
+          <MatchGrid>
+            {choices.map((choice, index) => (
+              <MatchCard 
+                key={index}
+                darkMode={isDarkMode}
+                isCorrect={showingFeedback && index === correctAnswerIndex}
+                isSelected={showingFeedback && index === selectedAnswer}
+                onClick={() => handleAnswerSelection(index)}
+              >
+                {choice}
+                {showingFeedback && index === correctAnswerIndex && (
+                  <Box 
+                    sx={{ 
+                      position: 'absolute', 
+                      top: '8px', 
+                      right: '8px',
+                      color: '#10b981',
+                      display: 'flex'
+                    }}
+                  >
+                    <CheckIcon fontSize="small" />
+                  </Box>
+                )}
+              </MatchCard>
+            ))}
+          </MatchGrid>
         );
       case 'kanji-onyomi':
       case 'kanji-kunyomi':
@@ -1010,7 +1132,7 @@ export default function StudyLayout() {
               
               {settingsTab === 'kanji' && (
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-                  {['kanji-meaning', 'kanji-onyomi', 'kanji-kunyomi'].map((mode) => (
+                  {['kanji-meaning', 'kanji-onyomi', 'kanji-kunyomi', 'kanji-match'].map((mode) => (
                     <Box
                       key={mode}
                       onClick={() => handleStudyModeChange(mode as StudyMode)}

@@ -87,7 +87,7 @@
 }
 
 .dark .logoSvg {
-  filter: brightness(0) invert(1);
+  filter: invert(37%) sepia(74%) saturate(7471%) hue-rotate(248deg) brightness(97%) contrast(98%);
 }
 
 .logoText {

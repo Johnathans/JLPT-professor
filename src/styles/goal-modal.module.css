@@ -1,0 +1,414 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+}
+
+.modalContent {
+  background-color: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+:global(.dark-mode) .modalContent,
+.dark .modalContent {
+  background-color: #1f1f1f;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  border-bottom: 1px solid #eee;
+}
+
+:global(.dark-mode) .modalHeader,
+.dark .modalHeader {
+  border-bottom: 1px solid #333;
+}
+
+.modalHeader h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #333;
+  font-weight: 600;
+}
+
+:global(.dark-mode) .modalHeader h2,
+.dark .modalHeader h2 {
+  color: #fff;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+:global(.dark-mode) .closeButton,
+.dark .closeButton {
+  color: #aaa;
+}
+
+.closeButton:hover {
+  background-color: #f0f0f0;
+  color: #7c4dff;
+}
+
+:global(.dark-mode) .closeButton:hover,
+.dark .closeButton:hover {
+  background-color: #333;
+  color: #7c4dff;
+}
+
+.modalBody {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.modalDescription {
+  color: #666;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+:global(.dark-mode) .modalDescription,
+.dark .modalDescription {
+  color: #aaa;
+}
+
+.presetButtons {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.presetButton {
+  background-color: #e8e3ff;
+  color: #7c4dff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  flex: 1;
+}
+
+:global(.dark-mode) .presetButton,
+.dark .presetButton {
+  background-color: #3a3052;
+}
+
+.presetButton:hover {
+  background-color: #d8d0ff;
+}
+
+:global(.dark-mode) .presetButton:hover,
+.dark .presetButton:hover {
+  background-color: #4a3f69;
+}
+
+.goalCategory {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+:global(.dark-mode) .goalCategory,
+.dark .goalCategory {
+  border-bottom: 1px solid #333;
+}
+
+.categoryLabel {
+  font-weight: 500;
+  color: #333;
+}
+
+:global(.dark-mode) .categoryLabel,
+.dark .categoryLabel {
+  color: #eee;
+}
+
+.counterControl {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.counterButton {
+  background-color: #f5f5f5;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+:global(.dark-mode) .counterButton,
+.dark .counterButton {
+  background-color: #333;
+  color: #aaa;
+}
+
+.counterButton:hover:not(:disabled) {
+  background-color: #e8e3ff;
+  color: #7c4dff;
+}
+
+:global(.dark-mode) .counterButton:hover:not(:disabled),
+.dark .counterButton:hover:not(:disabled) {
+  background-color: #3a3052;
+  color: #7c4dff;
+}
+
+.counterButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.counterInput {
+  width: 50px;
+  height: 32px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 1rem;
+  color: #333;
+  background-color: white;
+}
+
+:global(.dark-mode) .counterInput,
+.dark .counterInput {
+  border: 1px solid #444;
+  color: #eee;
+  background-color: #2a2a2a;
+}
+
+.counterInput:focus {
+  outline: none;
+  border-color: #7c4dff;
+}
+
+.totalItems {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-top: 1px solid #eee;
+  margin-top: 0.5rem;
+}
+
+:global(.dark-mode) .totalItems,
+.dark .totalItems {
+  border-top: 1px solid #333;
+}
+
+.totalLabel {
+  font-weight: 600;
+  color: #333;
+}
+
+:global(.dark-mode) .totalLabel,
+.dark .totalLabel {
+  color: #eee;
+}
+
+.totalValue {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #7c4dff;
+}
+
+.estimatedTime {
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+:global(.dark-mode) .estimatedTime,
+.dark .estimatedTime {
+  color: #999;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-top: 1px solid #eee;
+}
+
+:global(.dark-mode) .modalFooter,
+.dark .modalFooter {
+  border-top: 1px solid #333;
+}
+
+.cancelButton {
+  background-color: #f5f5f5;
+  color: #666;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+:global(.dark-mode) .cancelButton,
+.dark .cancelButton {
+  background-color: #333;
+  color: #aaa;
+}
+
+.cancelButton:hover {
+  background-color: #eee;
+}
+
+:global(.dark-mode) .cancelButton:hover,
+.dark .cancelButton:hover {
+  background-color: #444;
+}
+
+.saveButton {
+  background-color: #7c4dff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.saveButton:hover {
+  background-color: #6b42e0;
+}
+
+/* Dark mode styles */
+:global(.dark) .modalContent {
+  background-color: #222;
+  border-color: #333;
+}
+
+:global(.dark) .modalHeader {
+  border-bottom-color: #333;
+}
+
+:global(.dark) .modalHeader h2 {
+  color: #fff;
+}
+
+:global(.dark) .closeButton {
+  color: #999;
+}
+
+:global(.dark) .closeButton:hover {
+  background-color: #333;
+}
+
+:global(.dark) .modalDescription {
+  color: #999;
+}
+
+:global(.dark) .presetButton {
+  background-color: #333;
+}
+
+:global(.dark) .presetButton:hover {
+  background-color: #444;
+}
+
+:global(.dark) .goalCategory {
+  border-bottom-color: #333;
+}
+
+:global(.dark) .categoryLabel {
+  color: #fff;
+}
+
+:global(.dark) .counterButton {
+  background-color: #333;
+  color: #999;
+}
+
+:global(.dark) .counterButton:hover:not(:disabled) {
+  background-color: #444;
+}
+
+:global(.dark) .counterInput {
+  background-color: #333;
+  border-color: #444;
+  color: #fff;
+}
+
+:global(.dark) .totalItems {
+  border-top-color: #333;
+}
+
+:global(.dark) .totalLabel {
+  color: #fff;
+}
+
+:global(.dark) .estimatedTime {
+  color: #999;
+}
+
+:global(.dark) .modalFooter {
+  border-top-color: #333;
+}
+
+:global(.dark) .cancelButton {
+  background-color: #333;
+  color: #999;
+}
+
+:global(.dark) .cancelButton:hover {
+  background-color: #444;
+}
+
+@media (max-width: 600px) {
+  .presetButtons {
+    flex-direction: column;
+  }
+  
+  .modalContent {
+    width: 95%;
+  }
+}

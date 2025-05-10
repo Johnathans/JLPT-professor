@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+@font-face {
+  font-family: 'Futehodo Maru Gothic';
+  src: url('/fonts/FutehodoMaruGothic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* JLPT Professor Brand Colors */
   --primary-color: #7c4dff;
@@ -11,6 +19,7 @@
   
   /* System Colors */
   --text-color: #1a1a1a;
+  --bg-color: #ffffff;
   --text-secondary: #666666;
   --background-color: #ffffff;
   --border-color: #eaeaea;
@@ -29,13 +38,27 @@
 }
 
 /* Base Styles */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html.dark-mode {
+  --text-color: #ffffff;
+  --bg-color: #121212;
+  background-color: #121212;
+  color: #ffffff;
+}
+
 body {
   font-family: var(--font-family);
   color: var(--text-color);
-  background-color: var(--background-color);
+  background-color: var(--bg-color);
   line-height: 1.5;
   margin: 0;
   padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Typography */

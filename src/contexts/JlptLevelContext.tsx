@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode } from 'react';
 
-type JlptLevel = 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
+export type JlptLevel = 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
 
 interface JlptLevelContextType {
   level: JlptLevel;
@@ -17,8 +17,13 @@ export function JlptLevelProvider({ children }: { children: ReactNode }) {
   const [level, setLevel] = useState<JlptLevel>('N5');
   const [userId, setUserId] = useState<string | null>(null);
 
+  const handleSetLevel = (newLevel: JlptLevel) => {
+    console.log('JlptLevelContext: Setting level to:', newLevel);
+    setLevel(newLevel);
+  };
+
   return (
-    <JlptLevelContext.Provider value={{ level, setLevel, userId, setUserId }}>
+    <JlptLevelContext.Provider value={{ level, setLevel: handleSetLevel, userId, setUserId }}>
       {children}
     </JlptLevelContext.Provider>
   );

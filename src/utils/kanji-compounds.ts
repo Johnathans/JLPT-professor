@@ -1,7 +1,6 @@
 import { Word } from '@/types/word';
 import { KanjiData, CompoundWord } from '@/types/kanji';
 import { n5VocabularyCombined } from '@/data/n5-vocabulary-combined';
-import { N5_KANJI, N4_KANJI, N3_KANJI, N2_KANJI, N1_KANJI } from '@/data/jlpt-kanji-complete';
 
 /**
  * Find compound words containing a specific kanji from our vocabulary data
@@ -28,18 +27,15 @@ export function findCompoundWords(kanji: string): CompoundWord[] {
  * Generate plausible but incorrect compound words for a kanji
  */
 export function generateFakeCompounds(kanji: string, count: number = 2): CompoundWord[] {
-  // Get all kanji from the same level and one level higher
-  const kanjiLevel = [...N5_KANJI, ...N4_KANJI].map(k => k.kanji)
-    .filter(k => k !== kanji);
-  
+  // Generate fake compounds using random combinations
   const fakeCompounds: CompoundWord[] = [];
   
   // Create compounds by combining with random kanji
   for (let i = 0; i < count; i++) {
-    const randomKanji = kanjiLevel[Math.floor(Math.random() * kanjiLevel.length)];
+    const randomWord = n5VocabularyCombined[Math.floor(Math.random() * n5VocabularyCombined.length)];
     fakeCompounds.push({
-      word: Math.random() < 0.5 ? kanji + randomKanji : randomKanji + kanji,
-      reading: 'にほんご', // Default reading
+      word: Math.random() < 0.5 ? kanji + randomWord.kanji : randomWord.kanji + kanji,
+      reading: randomWord.kana,
       meaning: 'Incorrect compound',
       level: 'N5'
     });
@@ -51,7 +47,7 @@ export function generateFakeCompounds(kanji: string, count: number = 2): Compoun
 /**
  * Convert a KanjiData into a KanjiQuestion with compounds
  */
-export function createKanjiQuestion(kanjiData: KanjiData) {
+export function createKanjiQuestion(kanjiData: KanjiData): KanjiData {
   const realCompounds = findCompoundWords(kanjiData.kanji);
   const fakeCompounds = generateFakeCompounds(kanjiData.kanji, 2);
   

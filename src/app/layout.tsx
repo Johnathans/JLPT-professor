@@ -8,6 +8,7 @@ import PublicLayout from '@/components/PublicLayout';
 import { usePathname } from 'next/navigation';
 import { JlptLevelProvider } from '@/contexts/JlptLevelContext';
 import { StudySessionProvider } from '@/contexts/StudySessionContext';
+import { ColorModeProvider } from '@/contexts/ThemeContext';
 import Script from 'next/script';
 
 const inter = Inter({ 
@@ -83,6 +84,16 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&display=swap"
           rel="stylesheet"
         />
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function() {
+            try {
+              const savedTheme = localStorage.getItem('theme');
+              if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+              }
+            } catch (e) {}
+          })()
+        `}} />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-B0MKGKNBV2"
           strategy="afterInteractive"
@@ -97,20 +108,22 @@ export default function RootLayout({
         </Script>
       </head>
       <body suppressHydrationWarning>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <JlptLevelProvider>
-            <StudySessionProvider>
-              {isCustomLayout ? (
-                children
-              ) : isPublicRoute ? (
-                <PublicLayout>{children}</PublicLayout>
-              ) : (
-                children
-              )}
-            </StudySessionProvider>
-          </JlptLevelProvider>
-        </ThemeProvider>
+        <ColorModeProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <JlptLevelProvider>
+              <StudySessionProvider>
+                {isCustomLayout ? (
+                  children
+                ) : isPublicRoute ? (
+                  <PublicLayout>{children}</PublicLayout>
+                ) : (
+                  children
+                )}
+              </StudySessionProvider>
+            </JlptLevelProvider>
+          </ThemeProvider>
+        </ColorModeProvider>
       </body>
     </html>
   );

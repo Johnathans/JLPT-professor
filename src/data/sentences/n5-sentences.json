@@ -1,0 +1,2374 @@
+{
+  "sentences": [
+    {
+      "id": "9ac5ff04-075c-4db6-8a9e-b19c43c22de8",
+      "japanese": "今日は良い天気ですね。",
+      "english": "It's nice weather today.",
+      "level": "N5",
+      "associatedKanji": [
+        "日"
+      ],
+      "tags": []
+    },
+    {
+      "id": "91a41f92-d7a2-4aea-aff7-38f86b91789a",
+      "japanese": "日本語を勉強しています。",
+      "english": "I am studying Japanese.",
+      "level": "N5",
+      "associatedKanji": [
+        "日"
+      ],
+      "tags": []
+    },
+    {
+      "id": "438c7397-c89a-49d7-b6c8-b9ddeae8184e",
+      "japanese": "日曜日は休みです。",
+      "english": "Sunday is a day off.",
+      "level": "N5",
+      "associatedKanji": [
+        "日"
+      ],
+      "tags": []
+    },
+    {
+      "id": "a8c9905f-921e-4d74-b653-4f554b9b1a8d",
+      "japanese": "一人で行きます。",
+      "english": "I'll go alone.",
+      "level": "N5",
+      "associatedKanji": [
+        "一"
+      ],
+      "tags": []
+    },
+    {
+      "id": "3bec1eae-48d3-4058-910f-3ebf426f031e",
+      "japanese": "一番好きな食べ物は何ですか。",
+      "english": "What is your favorite food?",
+      "level": "N5",
+      "associatedKanji": [
+        "一"
+      ],
+      "tags": []
+    },
+    {
+      "id": "954c3bde-6d06-4a1d-884b-7fcb66be0dfe",
+      "japanese": "一緒に行きましょう。",
+      "english": "Let's go together.",
+      "level": "N5",
+      "associatedKanji": [
+        "一"
+      ],
+      "tags": []
+    },
+    {
+      "id": "17b3d62f-24f3-4616-979e-90aaa8f923b9",
+      "japanese": "国産品のように見えて、実は外国産という食品が、氾濫している。",
+      "english": "Foods that seem to be domestic products but are actually foreign-made are flooding the market.",
+      "level": "N5",
+      "associatedKanji": [
+        "国"
+      ],
+      "tags": []
+    },
+    {
+      "id": "1b493ad2-331b-433b-a6e6-c654cb6f66a1",
+      "japanese": "両国は互いに同盟を結んでいた。",
+      "english": "The two countries were leagued with each other.",
+      "level": "N5",
+      "associatedKanji": [
+        "国"
+      ],
+      "tags": []
+    },
+    {
+      "id": "e3be531f-bbcc-436c-a845-8ed844acceca",
+      "japanese": "この国で仕事に就くのは難しいよ。",
+      "english": "It's hard to get a job in this country.",
+      "level": "N5",
+      "associatedKanji": [
+        "国"
+      ],
+      "tags": []
+    },
+    {
+      "id": "655ce306-8bc1-4693-88f2-0e980eaeb28b",
+      "japanese": "図書館の前の木の下で、お昼ごはんを食べている男性が何人かいました。",
+      "english": "There were some men eating their lunches under the trees in front of the library.",
+      "level": "N5",
+      "associatedKanji": [
+        "人"
+      ],
+      "tags": []
+    },
+    {
+      "id": "d77a0c5e-9c49-4e08-b42e-350694449b40",
+      "japanese": "もっと立派な人になりたい。",
+      "english": "I want to be a better person.",
+      "level": "N5",
+      "associatedKanji": [
+        "人"
+      ],
+      "tags": []
+    },
+    {
+      "id": "4d882918-8b3b-4d5f-ab14-236edbcce764",
+      "japanese": "トムはマイクを握ると人格が変わる。",
+      "english": "Tom's personality changes completely when he grabs the mic.",
+      "level": "N5",
+      "associatedKanji": [
+        "人"
+      ],
+      "tags": []
+    },
+    {
+      "id": "2770cee0-1bd6-4555-ab15-d2f2975ceb8e",
+      "japanese": "私は１９４５年に広島で生まれました。",
+      "english": "I was born in Hiroshima in 1945.",
+      "level": "N5",
+      "associatedKanji": [
+        "年"
+      ],
+      "tags": []
+    },
+    {
+      "id": "44521fef-2a99-4425-9885-2646bf5ac888",
+      "japanese": "旅行者の数が近年大きく増加した。",
+      "english": "The number of tourists has increased greatly in recent years.",
+      "level": "N5",
+      "associatedKanji": [
+        "年"
+      ],
+      "tags": []
+    },
+    {
+      "id": "1b93cf37-518b-48e5-b600-35e394325bd6",
+      "japanese": "今は一年で一番暑い季節です。",
+      "english": "It's the hottest season of the year now.",
+      "level": "N5",
+      "associatedKanji": [
+        "年"
+      ],
+      "tags": []
+    },
+    {
+      "id": "9b26219a-2279-4adc-94a2-351f43518150",
+      "japanese": "これだけで厄介払いできたら安いもので、みな大喜びした。",
+      "english": "We were all pleased to be so cheaply quit of him.",
+      "level": "N5",
+      "associatedKanji": [
+        "大"
+      ],
+      "tags": []
+    },
+    {
+      "id": "0fab28a8-56bb-46b2-a4f9-0913ecca2c10",
+      "japanese": "多くの本を読むことが大切です。",
+      "english": "It is important for you to read many books.",
+      "level": "N5",
+      "associatedKanji": [
+        "大"
+      ],
+      "tags": []
+    },
+    {
+      "id": "001816be-ccb0-4608-858c-0bf1faee3877",
+      "japanese": "世界の大半の言語はSOVの語順をとりますが、主要な言語はSVOの語順をとります。",
+      "english": "Most languages in the world follow the SOV word order, but major languages follow the SVO word order.",
+      "level": "N5",
+      "associatedKanji": [
+        "大"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ffd910e4-3427-4920-a2db-30b301bda587",
+      "japanese": "木の葉は十月に落ち始める。",
+      "english": "Leaves begin to fall in October.",
+      "level": "N5",
+      "associatedKanji": [
+        "十"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ec4963d0-bfeb-47af-b184-06107f140e25",
+      "japanese": "急いで！電車の時間まであと三十分しかないんだよ。",
+      "english": "Hurry up! There's only 30 minutes left before the train leaves.",
+      "level": "N5",
+      "associatedKanji": [
+        "十"
+      ],
+      "tags": []
+    },
+    {
+      "id": "4cf56fd1-6792-48b1-91e0-228f0814498b",
+      "japanese": "その警官は最終のバスは十時に出発すると言った。",
+      "english": "The policeman told me that the last bus leaves at ten.",
+      "level": "N5",
+      "associatedKanji": [
+        "十"
+      ],
+      "tags": []
+    },
+    {
+      "id": "4d056f95-a0a0-4542-a347-47099a836135",
+      "japanese": "二人で行きましょう。",
+      "english": "Let's go together.",
+      "level": "N5",
+      "associatedKanji": [
+        "二"
+      ],
+      "tags": []
+    },
+    {
+      "id": "08ff1b0a-40f2-46bc-ba84-7f84ea43c20c",
+      "japanese": "二つの選択肢があります。",
+      "english": "There are two choices.",
+      "level": "N5",
+      "associatedKanji": [
+        "二"
+      ],
+      "tags": []
+    },
+    {
+      "id": "6493c391-53d7-4261-b795-300338341902",
+      "japanese": "二階に住んでいます。",
+      "english": "I live on the second floor.",
+      "level": "N5",
+      "associatedKanji": [
+        "二"
+      ],
+      "tags": []
+    },
+    {
+      "id": "883af927-2a5e-44ae-b904-ba78f739d624",
+      "japanese": "トムがフランス語を話せないのは本当ですか？",
+      "english": "Is it true Tom can't speak French?",
+      "level": "N5",
+      "associatedKanji": [
+        "本"
+      ],
+      "tags": []
+    },
+    {
+      "id": "d9a4ffee-e685-4744-8014-a252fe4c8851",
+      "japanese": "本当のカナダ人は絶対そんなことしないだろう。",
+      "english": "A real Canadian would never do such a thing.",
+      "level": "N5",
+      "associatedKanji": [
+        "本"
+      ],
+      "tags": []
+    },
+    {
+      "id": "28440338-4041-4d78-b9be-5834511040d4",
+      "japanese": "本当にそれが欲しいやつなの？",
+      "english": "Are you sure that's what you want?",
+      "level": "N5",
+      "associatedKanji": [
+        "本"
+      ],
+      "tags": []
+    },
+    {
+      "id": "748fd8ec-60eb-42a9-b61b-c2ee73cd03df",
+      "japanese": "１日が終わると背中が疲れ、足が痛みました。",
+      "english": "At the end of every day, his back was tired and his legs hurt.",
+      "level": "N5",
+      "associatedKanji": [
+        "中"
+      ],
+      "tags": []
+    },
+    {
+      "id": "f5df8283-80d5-4cb7-8002-2474d66384b9",
+      "japanese": "今月中にウインドウズの次のバージョンが出る見込みはないと思う。",
+      "english": "I think it's unlikely that the next version of Windows will come out before the end of this month.",
+      "level": "N5",
+      "associatedKanji": [
+        "中"
+      ],
+      "tags": []
+    },
+    {
+      "id": "2fa71f2b-e8fe-4964-958a-34ff2f5ea763",
+      "japanese": "いつか世界中を旅できるように、お金を貯めてるんだ。",
+      "english": "I'm saving my money so that one day I can have a trip around the world.",
+      "level": "N5",
+      "associatedKanji": [
+        "中"
+      ],
+      "tags": []
+    },
+    {
+      "id": "8faa05a2-20d9-4487-9925-ecaa6bd3b80c",
+      "japanese": "そう長くはかからない。",
+      "english": "It doesn't take very long.",
+      "level": "N5",
+      "associatedKanji": [
+        "長"
+      ],
+      "tags": []
+    },
+    {
+      "id": "96113fd2-62d7-4d5a-bd31-ad9e84fb5590",
+      "japanese": "くじらは長い間水に潜っていられる。",
+      "english": "Whales can remain submerged for a long time.",
+      "level": "N5",
+      "associatedKanji": [
+        "長"
+      ],
+      "tags": []
+    },
+    {
+      "id": "2a62772d-f15f-4b76-82c2-8ad167f3fe1c",
+      "japanese": "トムは今日校長に中指を立てました。",
+      "english": "Tom gave the middle finger to the principal today.",
+      "level": "N5",
+      "associatedKanji": [
+        "長"
+      ],
+      "tags": []
+    },
+    {
+      "id": "0057ef0a-b643-4cf6-92af-fac9c7aec93f",
+      "japanese": "言葉が口先まで出かかっているのだが、自分のいいたいことをどう表現したらいいのかよくわからない。",
+      "english": "The words are on the tip of my tongue, but I don't quite know how to put what I want to say.",
+      "level": "N5",
+      "associatedKanji": [
+        "出"
+      ],
+      "tags": []
+    },
+    {
+      "id": "7958b779-8aee-4b4a-9529-e0886a792b2e",
+      "japanese": "彼はテキサスかどこかその辺の出身だった。",
+      "english": "He was from Texas or thereabout.",
+      "level": "N5",
+      "associatedKanji": [
+        "出"
+      ],
+      "tags": []
+    },
+    {
+      "id": "08bf4409-9399-42c1-8a4f-911994876c2a",
+      "japanese": "どこの大学を出たかなんて、さほど重要なことじゃない。",
+      "english": "It doesn't matter all that much what college you graduated from.",
+      "level": "N5",
+      "associatedKanji": [
+        "出"
+      ],
+      "tags": []
+    },
+    {
+      "id": "59d7882c-df17-4bda-8e03-4e3e555ef8ed",
+      "japanese": "三つ子の魂百までとは本当によく言ったものだ。",
+      "english": "'The child is father to the man' is certainly well said.",
+      "level": "N5",
+      "associatedKanji": [
+        "三"
+      ],
+      "tags": []
+    },
+    {
+      "id": "767332e5-4140-465d-a039-e762b6161c24",
+      "japanese": "ロボットの背の下部に、三箇のボタンがあった。",
+      "english": "There were three buttons on the lower back of the robot.",
+      "level": "N5",
+      "associatedKanji": [
+        "三"
+      ],
+      "tags": []
+    },
+    {
+      "id": "dc87564e-7061-42b6-aa72-db57ea41de19",
+      "japanese": "別荘にもどって、三時のおやつ。",
+      "english": "Returned to the villa, afternoon snack.",
+      "level": "N5",
+      "associatedKanji": [
+        "三"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ac6d9c7d-c9ed-4d84-b796-226df84c00cc",
+      "japanese": "六時までに戻ります。",
+      "english": "I'll be back by six o'clock.",
+      "level": "N5",
+      "associatedKanji": [
+        "時"
+      ],
+      "tags": []
+    },
+    {
+      "id": "1c2f56e2-7fae-4e60-b749-11f3799d5643",
+      "japanese": "明日の朝、何時にロビーに集合すればいいですか？",
+      "english": "What time should I come to the lobby tomorrow?",
+      "level": "N5",
+      "associatedKanji": [
+        "時"
+      ],
+      "tags": []
+    },
+    {
+      "id": "63516118-6d5e-4bdf-902f-fe8369255e71",
+      "japanese": "彼はとても素晴らしい時間を過ごせたと彼らに伝えた。",
+      "english": "He told them that he had had a wonderful time.",
+      "level": "N5",
+      "associatedKanji": [
+        "時"
+      ],
+      "tags": []
+    },
+    {
+      "id": "60de1a0f-b913-4b36-a8e3-5bc504b1400f",
+      "japanese": "トムに話に行きました。",
+      "english": "I went to talk to Tom.",
+      "level": "N5",
+      "associatedKanji": [
+        "行"
+      ],
+      "tags": []
+    },
+    {
+      "id": "2ebff7c3-77b4-4c2b-be40-5c7277af3ee1",
+      "japanese": "私は毎日学校に行きます。",
+      "english": "I go to school every day.",
+      "level": "N5",
+      "associatedKanji": [
+        "行"
+      ],
+      "tags": []
+    },
+    {
+      "id": "b1bf7210-d291-40b7-9d50-35194c0baf77",
+      "japanese": "一緒に行きましょう。",
+      "english": "Let's go together.",
+      "level": "N5",
+      "associatedKanji": [
+        "行"
+      ],
+      "tags": []
+    },
+    {
+      "id": "d9d4ae83-c247-4431-89fa-bbae89c73cfe",
+      "japanese": "日本では年末になると年中行事のように各地で第九の演奏会が開かれる。",
+      "english": "At the end of the year in Japan, concerts of Beethoven's Ninth are held in various regions as if it's an annual event.",
+      "level": "N5",
+      "associatedKanji": [
+        "九"
+      ],
+      "tags": []
+    },
+    {
+      "id": "871d9387-b0cb-438c-8f12-318b20e62183",
+      "japanese": "ふだん九時には寝るよ。",
+      "english": "I usually go to bed at nine.",
+      "level": "N5",
+      "associatedKanji": [
+        "九"
+      ],
+      "tags": []
+    },
+    {
+      "id": "d8d370e7-6d50-48d6-82d1-51ee73b43255",
+      "japanese": "北海道は九州と比べるととても寒い。",
+      "english": "Hokkaido is very cold compared with Kyushu.",
+      "level": "N5",
+      "associatedKanji": [
+        "九"
+      ],
+      "tags": []
+    },
+    {
+      "id": "5d0b648f-86a3-460e-a048-66e4c5c6ac56",
+      "japanese": "今夜七時に、電話するよ。",
+      "english": "I'll ring you up at seven this evening.",
+      "level": "N5",
+      "associatedKanji": [
+        "七"
+      ],
+      "tags": []
+    },
+    {
+      "id": "7eb70de6-5b82-4306-8a1e-a7ec1730d832",
+      "japanese": "トムさんの享年は九十七歳です。",
+      "english": "Tom died when he was 97.",
+      "level": "N5",
+      "associatedKanji": [
+        "七"
+      ],
+      "tags": []
+    },
+    {
+      "id": "c3afe565-462e-437a-bd0c-94bb772bdbcc",
+      "japanese": "七歳です。",
+      "english": "He's seven years old.",
+      "level": "N5",
+      "associatedKanji": [
+        "七"
+      ],
+      "tags": []
+    },
+    {
+      "id": "259839df-bfac-4cc2-a18b-dc31547dac33",
+      "japanese": "その本なら、入院中に読んだよ。",
+      "english": "I read that book while I was in the hospital.",
+      "level": "N5",
+      "associatedKanji": [
+        "入"
+      ],
+      "tags": []
+    },
+    {
+      "id": "835dc644-dc0e-442d-af82-f2278f41e585",
+      "japanese": "有料会員専用のコミュに入会出来る特典があります。",
+      "english": "There's the perk of letting you join communities for paying members.",
+      "level": "N5",
+      "associatedKanji": [
+        "入"
+      ],
+      "tags": []
+    },
+    {
+      "id": "eb8ae854-5977-4d0f-a8c2-91136f360f6b",
+      "japanese": "私たちの学校は3人のアメリカ人を交換留学生として受け入れた。",
+      "english": "Our school accepted three Americans as exchange students.",
+      "level": "N5",
+      "associatedKanji": [
+        "入"
+      ],
+      "tags": []
+    },
+    {
+      "id": "dc0b5cf1-1fd7-4863-a2d6-43a02a3d1714",
+      "japanese": "あのレースは八百長だった。",
+      "english": "The race was fixed.",
+      "level": "N5",
+      "associatedKanji": [
+        "八"
+      ],
+      "tags": []
+    },
+    {
+      "id": "b58e6f5e-2889-4be7-9bb2-63312c0a5909",
+      "japanese": "明日八時に起こしてください。",
+      "english": "Please call me at eight tomorrow morning.",
+      "level": "N5",
+      "associatedKanji": [
+        "八"
+      ],
+      "tags": []
+    },
+    {
+      "id": "60e6b711-72bb-4e91-a5cd-0f61a50422a8",
+      "japanese": "ボブは十中八九、入学試験に失敗するだろう。",
+      "english": "Ten to one, Bob will fail the entrance exam.",
+      "level": "N5",
+      "associatedKanji": [
+        "八"
+      ],
+      "tags": []
+    },
+    {
+      "id": "0a706a25-968a-48e6-99be-22f9a1704302",
+      "japanese": "テーブルの上に茶碗があります。",
+      "english": "There is a cup on the table.",
+      "level": "N5",
+      "associatedKanji": [
+        "上"
+      ],
+      "tags": []
+    },
+    {
+      "id": "c68a1ceb-d4be-4627-bd31-8d0a4ce7f572",
+      "japanese": "週末までに仕上げなきゃならない仕事が3つもあるんだよ。",
+      "english": "I have 3 projects that I need to finish up by the weekend!",
+      "level": "N5",
+      "associatedKanji": [
+        "上"
+      ],
+      "tags": []
+    },
+    {
+      "id": "79f2bb43-c182-4773-8014-d8e0c0d17f7c",
+      "japanese": "私はもうこれ以上彼女にがまんできません。",
+      "english": "I can't deal with her anymore.",
+      "level": "N5",
+      "associatedKanji": [
+        "上"
+      ],
+      "tags": []
+    },
+    {
+      "id": "df129e7c-7d23-49c8-a5e5-ed8ba46c4dd2",
+      "japanese": "この辺りで家賃が５万円を下ることはまずありませんよ。",
+      "english": "You'll be unlikely to find any rent that's under ₤300 in this area.",
+      "level": "N5",
+      "associatedKanji": [
+        "下"
+      ],
+      "tags": []
+    },
+    {
+      "id": "9707563c-b480-4f78-99e0-a07caab781bb",
+      "japanese": "ベッドの下にモンスターがいる。",
+      "english": "There's a monster under my bed.",
+      "level": "N5",
+      "associatedKanji": [
+        "下"
+      ],
+      "tags": []
+    },
+    {
+      "id": "5b7fb126-3e5b-462e-9102-7e9725b5075e",
+      "japanese": "私に飲み物を下さい。",
+      "english": "Give me something to drink.",
+      "level": "N5",
+      "associatedKanji": [
+        "下"
+      ],
+      "tags": []
+    },
+    {
+      "id": "5ca03744-9fdc-4dee-9345-10f8ca26987e",
+      "japanese": "彼女はとても頭が良い。",
+      "english": "She is very intelligent.",
+      "level": "N5",
+      "associatedKanji": [
+        "女"
+      ],
+      "tags": []
+    },
+    {
+      "id": "89ea6870-238e-4c4c-a8a5-927f53edf5a4",
+      "japanese": "彼女は写真をフレームに戻した。",
+      "english": "She put the photo back in the frame.",
+      "level": "N5",
+      "associatedKanji": [
+        "女"
+      ],
+      "tags": []
+    },
+    {
+      "id": "1795ac6d-ec6c-436a-a725-f5cadb2f4798",
+      "japanese": "あなたは彼女の父親を知っていますか？",
+      "english": "Do you know her father?",
+      "level": "N5",
+      "associatedKanji": [
+        "女"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ddf94134-ce89-415f-9423-3d5e7d06698d",
+      "japanese": "私は去年の夏、その山に登った。",
+      "english": "I climbed the mountain last summer.",
+      "level": "N5",
+      "associatedKanji": [
+        "山"
+      ],
+      "tags": []
+    },
+    {
+      "id": "fd096978-3dbf-4dcf-bf08-5e9f3565890e",
+      "japanese": "山田さんは旅行社から出された見積もりに渋い顔をした。",
+      "english": "Mr Yamada frowned on the estimate presented by a travel agency.",
+      "level": "N5",
+      "associatedKanji": [
+        "山"
+      ],
+      "tags": []
+    },
+    {
+      "id": "9a11e977-459f-4d44-a729-451b9c8a8cba",
+      "japanese": "あの山はどれくらいの高さがありますか。",
+      "english": "How high is that mountain?",
+      "level": "N5",
+      "associatedKanji": [
+        "山"
+      ],
+      "tags": []
+    },
+    {
+      "id": "384e53ff-89aa-4a3a-9e4d-7ce1fa5e9aaa",
+      "japanese": "この川は太平洋に流れ込みます。",
+      "english": "This river flows into the Pacific Ocean.",
+      "level": "N5",
+      "associatedKanji": [
+        "川"
+      ],
+      "tags": []
+    },
+    {
+      "id": "bc8b312f-5ece-4c68-aa6b-013c580ac1ca",
+      "japanese": "トムは川のあっち側に住んでます。",
+      "english": "Tom lives on that side of the river.",
+      "level": "N5",
+      "associatedKanji": [
+        "川"
+      ],
+      "tags": []
+    },
+    {
+      "id": "7d7fdf47-f278-4172-81ac-ab3d6d7ae116",
+      "japanese": "トムは４階の自宅から、隣の川土手が崩れていくのを不安げな面持ちで見つめていた。",
+      "english": "From his fourth-story apartment, Tom eyed the collapsing river bank next door with an uneasy look on his face.",
+      "level": "N5",
+      "associatedKanji": [
+        "川"
+      ],
+      "tags": []
+    },
+    {
+      "id": "17b1da73-4f0d-43f3-822b-db48d5d3d782",
+      "japanese": "彼らは小さな土でできたお家に住んでいました。",
+      "english": "They lived in a little clay house.",
+      "level": "N5",
+      "associatedKanji": [
+        "土"
+      ],
+      "tags": []
+    },
+    {
+      "id": "5206e991-2a5c-4cb6-8300-218f3148a2c6",
+      "japanese": "先週の土曜日、公園へ行った。",
+      "english": "I went to the park last Saturday.",
+      "level": "N5",
+      "associatedKanji": [
+        "土"
+      ],
+      "tags": []
+    },
+    {
+      "id": "bb9a379a-c02d-4e8c-b1b5-81e6f61e67fd",
+      "japanese": "老人ホームの建築を計画している南フランスの丘に、小さな土地を買った。",
+      "english": "I bought a small lot on the hillside in Southern France where I plan to build a retirement home.",
+      "level": "N5",
+      "associatedKanji": [
+        "土"
+      ],
+      "tags": []
+    },
+    {
+      "id": "f1b259b5-5fa4-4b8c-89d5-5678580f508c",
+      "japanese": "このホールには２千人収容できる。",
+      "english": "This hall holds 2,000 people.",
+      "level": "N5",
+      "associatedKanji": [
+        "千"
+      ],
+      "tags": []
+    },
+    {
+      "id": "c60bfa05-df44-498d-8adb-90af9ec8931b",
+      "japanese": "この空港は新千歳空港ほど便数が多くないので、送迎デッキから見ても最初は飛行機がいませんでした。",
+      "english": "This airport doesn't have as many flights as New Chitose Airport and even looking from the observation deck at first there were no planes.",
+      "level": "N5",
+      "associatedKanji": [
+        "千"
+      ],
+      "tags": []
+    },
+    {
+      "id": "4ede31bd-c923-467b-b7e2-0355bf96f7a8",
+      "japanese": "何千もの人々がそこにいた。",
+      "english": "Thousands of people were there.",
+      "level": "N5",
+      "associatedKanji": [
+        "千"
+      ],
+      "tags": []
+    },
+    {
+      "id": "69ad9a3f-a8a1-4d57-bb88-2ac9de7bc588",
+      "japanese": "息子に家を建ててやったんだ。",
+      "english": "I built my son a new house.",
+      "level": "N5",
+      "associatedKanji": [
+        "子"
+      ],
+      "tags": []
+    },
+    {
+      "id": "7102dafe-4b93-4678-b763-609b66fb34c4",
+      "japanese": "猫好きの人になら、この子猫たち差し上げますよ。",
+      "english": "I'll give these kittens to whoever likes cats.",
+      "level": "N5",
+      "associatedKanji": [
+        "子"
+      ],
+      "tags": []
+    },
+    {
+      "id": "fbc27adf-7e6f-4012-a953-1f896adca342",
+      "japanese": "極端な食事制限をする拒食症の女子高生が増えている。",
+      "english": "The number of anorexic high school girls practicing extreme dietary restrictions is increasing.",
+      "level": "N5",
+      "associatedKanji": [
+        "子"
+      ],
+      "tags": []
+    },
+    {
+      "id": "b79edc56-bde6-442d-b083-698a8e3e0b23",
+      "japanese": "先日小学校のクラス会に出席したが、みんなすっかり変わってしまっていた。",
+      "english": "I went to my primary school reunion a few days ago, but it was almost impossible to recognise anyone.",
+      "level": "N5",
+      "associatedKanji": [
+        "小"
+      ],
+      "tags": []
+    },
+    {
+      "id": "fd14e161-ec5f-4d68-8370-ae56e22a8215",
+      "japanese": "彼は小さな村で育った。",
+      "english": "He grew up in a little village.",
+      "level": "N5",
+      "associatedKanji": [
+        "小"
+      ],
+      "tags": []
+    },
+    {
+      "id": "d960cda0-1360-4a2a-aec0-6ea13a05898d",
+      "japanese": "この犬小屋を作るのに五時間かかった。",
+      "english": "It took me five hours to make this kennel.",
+      "level": "N5",
+      "associatedKanji": [
+        "小"
+      ],
+      "tags": []
+    },
+    {
+      "id": "064186e3-e321-4551-83f3-a98701b7bafe",
+      "japanese": "四十五十は鼻たれ小僧。",
+      "english": "A 40- or 50-year-old is a snot-nosed brat.",
+      "level": "N5",
+      "associatedKanji": [
+        "五"
+      ],
+      "tags": []
+    },
+    {
+      "id": "c0a286e5-fd39-41e6-849d-38cad63cec9b",
+      "japanese": "私は五時に目覚めさせられた。",
+      "english": "I was awakened at five o'clock.",
+      "level": "N5",
+      "associatedKanji": [
+        "五"
+      ],
+      "tags": []
+    },
+    {
+      "id": "e89cb8ac-4f80-4939-975c-cbd8eda44fe2",
+      "japanese": "あと五分！あと五分待って下さい！",
+      "english": "Five more minutes! Please wait five more minutes!",
+      "level": "N5",
+      "associatedKanji": [
+        "五"
+      ],
+      "tags": []
+    },
+    {
+      "id": "00b5d421-36c3-4121-8a3d-bc743ee3a0ba",
+      "japanese": "高校のとき、毎朝六時に起きました。",
+      "english": "When I was in high school, I woke up at 6 every morning.",
+      "level": "N5",
+      "associatedKanji": [
+        "六"
+      ],
+      "tags": []
+    },
+    {
+      "id": "dfff2d5f-877a-4da2-8fc2-e0441cfdbf72",
+      "japanese": "私は六時半に帰ります。",
+      "english": "I will be back at half past six.",
+      "level": "N5",
+      "associatedKanji": [
+        "六"
+      ],
+      "tags": []
+    },
+    {
+      "id": "33e27e1f-65e8-433c-9ae2-42d9207de6a8",
+      "japanese": "トムさんとメアリさんは農場に住んで、十六人の子供を持っている。",
+      "english": "Tom and Mary live on a farm and have 16 children.",
+      "level": "N5",
+      "associatedKanji": [
+        "六"
+      ],
+      "tags": []
+    },
+    {
+      "id": "e9e84596-66fc-4329-bc4d-63778397717d",
+      "japanese": "私は一人につき千円ずつ渡した。",
+      "english": "I gave them one thousand yen each.",
+      "level": "N5",
+      "associatedKanji": [
+        "円"
+      ],
+      "tags": []
+    },
+    {
+      "id": "6770f76d-4bf0-4eec-96eb-cb64958a0299",
+      "japanese": "この販売機は百円硬貨しか使えない。",
+      "english": "This vending machine takes only hundred-yen coins.",
+      "level": "N5",
+      "associatedKanji": [
+        "円"
+      ],
+      "tags": []
+    },
+    {
+      "id": "3c01e353-c2d6-4ef1-a52e-01a33632d40a",
+      "japanese": "私の給料は３０万円だ。",
+      "english": "My salary is 300,000 yen.",
+      "level": "N5",
+      "associatedKanji": [
+        "円"
+      ],
+      "tags": []
+    },
+    {
+      "id": "7495eed7-c66a-4dc2-951a-684ef1e07ec6",
+      "japanese": "天網恢恢疎にして漏らさずの言葉通り、天罰覿面だ。",
+      "english": "They say fate will catch up with you. That was God's way of punishing him.",
+      "level": "N5",
+      "associatedKanji": [
+        "天"
+      ],
+      "tags": []
+    },
+    {
+      "id": "82132189-8b8a-4b70-953c-aa26c00077cb",
+      "japanese": "うちはかかあ天下です。",
+      "english": "My wife wears the pants in our house.",
+      "level": "N5",
+      "associatedKanji": [
+        "天"
+      ],
+      "tags": []
+    },
+    {
+      "id": "d8307218-3d02-4db4-8089-054398e0dbcb",
+      "japanese": "雨天の場合にはお電話下さい。",
+      "english": "Telephone me if it rains.",
+      "level": "N5",
+      "associatedKanji": [
+        "天"
+      ],
+      "tags": []
+    },
+    {
+      "id": "6da8caab-767c-4619-8a29-586d880c4e1c",
+      "japanese": "間違ってたらごめんね。あなたの誕生日って３月１４日じゃなかった？",
+      "english": "Forgive me if I am wrong, but is your birthday on the 14th March?",
+      "level": "N5",
+      "associatedKanji": [
+        "月"
+      ],
+      "tags": []
+    },
+    {
+      "id": "00efaa98-aef2-45c7-93b4-2abdf6bf1c2a",
+      "japanese": "「あなたはいつ泳ぎますか」「７月です」",
+      "english": "\"When do you swim?\" \"I swim in July.\"",
+      "level": "N5",
+      "associatedKanji": [
+        "月"
+      ],
+      "tags": []
+    },
+    {
+      "id": "4b7a68db-84f4-4d20-9895-d101f62173a9",
+      "japanese": "メアリーには来月子供が生まれる。",
+      "english": "Mary is going to have a baby next month.",
+      "level": "N5",
+      "associatedKanji": [
+        "月"
+      ],
+      "tags": []
+    },
+    {
+      "id": "2474cba6-8613-41bd-a671-2f0d05cb9438",
+      "japanese": "村人達は川に木の橋をかけた。",
+      "english": "The village people built a wooden bridge across the river.",
+      "level": "N5",
+      "associatedKanji": [
+        "木"
+      ],
+      "tags": []
+    },
+    {
+      "id": "9542ba24-8a66-4368-8628-773784157181",
+      "japanese": "日本の寺院の大半は木造だ。",
+      "english": "The majority of Japanese temples are made out of wood.",
+      "level": "N5",
+      "associatedKanji": [
+        "木"
+      ],
+      "tags": []
+    },
+    {
+      "id": "1323af2d-04ec-4c8e-a513-35cdfe0f393a",
+      "japanese": "この木は樹齢約300年です。",
+      "english": "This tree is approximately three hundred years old.",
+      "level": "N5",
+      "associatedKanji": [
+        "木"
+      ],
+      "tags": []
+    },
+    {
+      "id": "5e2c0b4b-610e-480b-83ab-623fe0ad3801",
+      "japanese": "シャワーの水が出ません。",
+      "english": "There's no water coming out of the shower.",
+      "level": "N5",
+      "associatedKanji": [
+        "水"
+      ],
+      "tags": []
+    },
+    {
+      "id": "64b11400-e0f4-444d-b92e-37ef075f1628",
+      "japanese": "植物は水が無ければ枯れる。",
+      "english": "Plants die without water.",
+      "level": "N5",
+      "associatedKanji": [
+        "水"
+      ],
+      "tags": []
+    },
+    {
+      "id": "c390c23a-59e8-4175-b0f9-c17425b53cf5",
+      "japanese": "床は、水で濡れていた。",
+      "english": "The floor was wet with water.",
+      "level": "N5",
+      "associatedKanji": [
+        "水"
+      ],
+      "tags": []
+    },
+    {
+      "id": "04b2b846-e8f9-4754-a50e-fcb6632caa96",
+      "japanese": "タバコの火を消すの、忘れないでよ。",
+      "english": "Don't forget to extinguish your cigarette.",
+      "level": "N5",
+      "associatedKanji": [
+        "火"
+      ],
+      "tags": []
+    },
+    {
+      "id": "0290a0ca-da56-4b6b-a1bf-0f99b00e4863",
+      "japanese": "豪快な花火を打ち上げました。",
+      "english": "They set off fireworks with a great bang.",
+      "level": "N5",
+      "associatedKanji": [
+        "火"
+      ],
+      "tags": []
+    },
+    {
+      "id": "8cb753b7-64cc-44d2-9830-14c4fbeb4419",
+      "japanese": "火力とお鍋と貝の種類によるわ。",
+      "english": "It depends on the strength of the flame, the pan used and the type of ingredients.",
+      "level": "N5",
+      "associatedKanji": [
+        "火"
+      ],
+      "tags": []
+    },
+    {
+      "id": "5bb9765f-ef5d-45c6-a599-62f34d8d360a",
+      "japanese": "次の角を右に曲がってください。",
+      "english": "Turn right at the next corner.",
+      "level": "N5",
+      "associatedKanji": [
+        "右"
+      ],
+      "tags": []
+    },
+    {
+      "id": "e3df5fcb-e01b-4393-ad66-673eda67f7d4",
+      "japanese": "道を渡る前には、右左を見るんだよ。",
+      "english": "Look both ways before you cross the street.",
+      "level": "N5",
+      "associatedKanji": [
+        "右"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ac72b056-0676-4ba8-a650-dbe903264e04",
+      "japanese": "彼女は森の中で右も左も分からなくなった。",
+      "english": "She lost her way in the forest.",
+      "level": "N5",
+      "associatedKanji": [
+        "右"
+      ],
+      "tags": []
+    },
+    {
+      "id": "d347e691-2560-44a7-8d58-8178f3484a78",
+      "japanese": "四月は一年の４番目の月です。",
+      "english": "April is the fourth month of the year.",
+      "level": "N5",
+      "associatedKanji": [
+        "四"
+      ],
+      "tags": []
+    },
+    {
+      "id": "607741e3-2218-441f-98a2-f13151a6b927",
+      "japanese": "列車でならここからたった四分だ。",
+      "english": "It's only four minutes from here by train.",
+      "level": "N5",
+      "associatedKanji": [
+        "四"
+      ],
+      "tags": []
+    },
+    {
+      "id": "7f170184-bd49-4d8e-8d94-c45e7b7da6e0",
+      "japanese": "一年には四つの季節がある。",
+      "english": "There are four seasons in a year.",
+      "level": "N5",
+      "associatedKanji": [
+        "四"
+      ],
+      "tags": []
+    },
+    {
+      "id": "a7bb3999-f5fe-4507-9a1d-51157b36c399",
+      "japanese": "私たちは角を左に曲がり、車を北へと走らせた。",
+      "english": "We turned left at the corner and drove north.",
+      "level": "N5",
+      "associatedKanji": [
+        "左"
+      ],
+      "tags": []
+    },
+    {
+      "id": "79dd5e01-7de5-42a1-8051-ae1dccafc6bc",
+      "japanese": "僕は左利きです。",
+      "english": "I'm left-handed.",
+      "level": "N5",
+      "associatedKanji": [
+        "左"
+      ],
+      "tags": []
+    },
+    {
+      "id": "876c913b-489d-4007-b568-e84e02b7ddbc",
+      "japanese": "道を渡るとき、車が来ていないかどうか左右を確認しなければならない。",
+      "english": "When crossing the street, you must look both ways to make sure there are no cars.",
+      "level": "N5",
+      "associatedKanji": [
+        "左"
+      ],
+      "tags": []
+    },
+    {
+      "id": "af6a4ae5-5406-45d7-9f2e-8623a9dc93ff",
+      "japanese": "彼は面白みのない人だ。",
+      "english": "He has no sense of humor.",
+      "level": "N5",
+      "associatedKanji": [
+        "白"
+      ],
+      "tags": []
+    },
+    {
+      "id": "88181b09-6034-4ec2-9e5f-d1e7c6190ecf",
+      "japanese": "赤ワインが好きな人もいれば、白ワインが好きな人もいる。",
+      "english": "Some like red wine, others like white wine.",
+      "level": "N5",
+      "associatedKanji": [
+        "白"
+      ],
+      "tags": []
+    },
+    {
+      "id": "3490ab2f-b3a3-4512-97c1-1fb825f48230",
+      "japanese": "黒と白の犬を飼ってるよ。",
+      "english": "I have a black and white dog.",
+      "level": "N5",
+      "associatedKanji": [
+        "白"
+      ],
+      "tags": []
+    },
+    {
+      "id": "e196fda1-a1b4-4c30-908a-e2839aafdde0",
+      "japanese": "準備万端整っています。",
+      "english": "Everything is all arranged.",
+      "level": "N5",
+      "associatedKanji": [
+        "万"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ddc84f8a-86f3-475a-a89d-242f82bed2bc",
+      "japanese": "ねえ、万事うまく行ってる？",
+      "english": "Hey, is everything all right?",
+      "level": "N5",
+      "associatedKanji": [
+        "万"
+      ],
+      "tags": []
+    },
+    {
+      "id": "50d84faa-fc53-4208-8677-21f4381a9c48",
+      "japanese": "えっ、結納品にン十万円？",
+      "english": "Eh? Hundreds of thousands of Yen plus betrothal gifts?",
+      "level": "N5",
+      "associatedKanji": [
+        "万"
+      ],
+      "tags": []
+    },
+    {
+      "id": "cc9d74d1-b958-4d61-b1f3-728fc55d7701",
+      "japanese": "今までにオーストラリアへ行ったことある？",
+      "english": "Have you ever been to Australia?",
+      "level": "N5",
+      "associatedKanji": [
+        "今"
+      ],
+      "tags": []
+    },
+    {
+      "id": "62b61bdc-b9ed-48a6-b326-2264938a3ab3",
+      "japanese": "今日は汗ばむような陽気だ。",
+      "english": "It's warm enough today to bring out a slight sweat.",
+      "level": "N5",
+      "associatedKanji": [
+        "今"
+      ],
+      "tags": []
+    },
+    {
+      "id": "6b674e0c-473f-4b0a-8e47-049118019591",
+      "japanese": "トムは今年ピッチャーとして昨年より上手になった。",
+      "english": "Tom is a better pitcher this year than he was last year.",
+      "level": "N5",
+      "associatedKanji": [
+        "今"
+      ],
+      "tags": []
+    },
+    {
+      "id": "1ef7b146-fe1a-41cc-a500-60088cb1de45",
+      "japanese": "例によって、彼女は午後の会議に遅れて来た。",
+      "english": "As is often the case with her, she was late for the meeting this afternoon.",
+      "level": "N5",
+      "associatedKanji": [
+        "午"
+      ],
+      "tags": []
+    },
+    {
+      "id": "0498276f-7d07-4e65-82b6-aa6880b798dc",
+      "japanese": "午後にそれをよくやる。",
+      "english": "I often do that in the evening.",
+      "level": "N5",
+      "associatedKanji": [
+        "午"
+      ],
+      "tags": []
+    },
+    {
+      "id": "34bfc786-7090-4cb8-b47a-59b5422c016c",
+      "japanese": "あいにく午後から雨になりますよ。",
+      "english": "I am afraid it will rain in the afternoon.",
+      "level": "N5",
+      "associatedKanji": [
+        "午"
+      ],
+      "tags": []
+    },
+    {
+      "id": "f44db451-5163-4fd2-a52d-789e3315fcf6",
+      "japanese": "私の親友は中国人です。",
+      "english": "My best friend is Chinese.",
+      "level": "N5",
+      "associatedKanji": [
+        "友"
+      ],
+      "tags": []
+    },
+    {
+      "id": "90243429-b204-49f6-b63a-815e0d2866fe",
+      "japanese": "一日おきに、入院してる友達のお見舞いに行ってるんです。",
+      "english": "I go to visit my friend in the hospital every other day.",
+      "level": "N5",
+      "associatedKanji": [
+        "友"
+      ],
+      "tags": []
+    },
+    {
+      "id": "33c42fab-ea96-46d8-ad06-1fcce5e0ce96",
+      "japanese": "友達から「元気だよ」って便りが届くと嬉しくなる。",
+      "english": "I'm always happy when I hear from my friends that they are \"doing fine\".",
+      "level": "N5",
+      "associatedKanji": [
+        "友"
+      ],
+      "tags": []
+    },
+    {
+      "id": "baef7d46-69bd-4933-b0d8-abb626c743cc",
+      "japanese": "あそこが私の父が働いているビルです。",
+      "english": "That's the building where my father works.",
+      "level": "N5",
+      "associatedKanji": [
+        "父"
+      ],
+      "tags": []
+    },
+    {
+      "id": "7f51139c-38ae-4e19-8aa9-46f124183c3e",
+      "japanese": "父さんが誕生日にって時計をくれたんだ。",
+      "english": "My father gave me a watch for my birthday.",
+      "level": "N5",
+      "associatedKanji": [
+        "父"
+      ],
+      "tags": []
+    },
+    {
+      "id": "7cf8e6ad-11be-4346-b03b-7e8f359107bf",
+      "japanese": "僕のお母さんは、父さんが死んですぐに、僕より10歳も若い男と再婚した。",
+      "english": "As soon as my father passed, my mother remarried with a man 10 years younger than I.",
+      "level": "N5",
+      "associatedKanji": [
+        "父"
+      ],
+      "tags": []
+    },
+    {
+      "id": "a96e4408-866f-4e1c-89d6-775247449f50",
+      "japanese": "北斗の拳が大好きだよ！",
+      "english": "I love Fist of the North Star!",
+      "level": "N5",
+      "associatedKanji": [
+        "北"
+      ],
+      "tags": []
+    },
+    {
+      "id": "6c254213-aff0-4777-a9d8-e60feabe0dfb",
+      "japanese": "北京は中国の首都だ。",
+      "english": "Beijing is the capital of China.",
+      "level": "N5",
+      "associatedKanji": [
+        "北"
+      ],
+      "tags": []
+    },
+    {
+      "id": "b2401255-eb99-4f68-9fee-23e2cdb19414",
+      "japanese": "あれは北斗七星だよ。",
+      "english": "That's the Big Dipper.",
+      "level": "N5",
+      "associatedKanji": [
+        "北"
+      ],
+      "tags": []
+    },
+    {
+      "id": "5114b360-7cad-4ccd-9039-1a5bc56956f0",
+      "japanese": "昨日の夜の２時半って、起きてた？",
+      "english": "Were you awake at 2:30 last night?",
+      "level": "N5",
+      "associatedKanji": [
+        "半"
+      ],
+      "tags": []
+    },
+    {
+      "id": "87fa56f2-7a29-4d57-b5c6-485bfec94d56",
+      "japanese": "７時半には起きなければいけないんじゃなかったの？",
+      "english": "I thought you had to get up by 7:30.",
+      "level": "N5",
+      "associatedKanji": [
+        "半"
+      ],
+      "tags": []
+    },
+    {
+      "id": "bd17da73-1474-44ab-b08a-ffb4be7bb0c8",
+      "japanese": "男性たちは半袖のシャツを着ている。",
+      "english": "The men are wearing short sleeves.",
+      "level": "N5",
+      "associatedKanji": [
+        "半"
+      ],
+      "tags": []
+    },
+    {
+      "id": "b090b48f-ad95-4ed8-ba47-1f3b27d6693e",
+      "japanese": "外相は、戦争は避けられないと言った。",
+      "english": "The Foreign Minister said that war was inevitable.",
+      "level": "N5",
+      "associatedKanji": [
+        "外"
+      ],
+      "tags": []
+    },
+    {
+      "id": "dae5940d-b82e-4901-9659-9efff9f917b7",
+      "japanese": "梅雨時は雨降りが多くて外出の計画が立てにくい。",
+      "english": "It rains so often in the wet season that it's hard to plan outings.",
+      "level": "N5",
+      "associatedKanji": [
+        "外"
+      ],
+      "tags": []
+    },
+    {
+      "id": "d1075c9d-60f6-4cbc-89f3-20afc85e4bed",
+      "japanese": "彼の娘婿は海外の支店に転勤になった。",
+      "english": "His son-in-law was transferred to an overseas branch.",
+      "level": "N5",
+      "associatedKanji": [
+        "外"
+      ],
+      "tags": []
+    },
+    {
+      "id": "cf739840-2a9f-4e6c-ad25-7d60db5b186f",
+      "japanese": "物心ついた時には父と祖母と3人暮らしでした。",
+      "english": "When I became aware of my surroundings, I was living with my father and grandmother.",
+      "level": "N5",
+      "associatedKanji": [
+        "母"
+      ],
+      "tags": []
+    },
+    {
+      "id": "54b9de4a-3467-4198-835e-f5983293747b",
+      "japanese": "トム、お母さんはここにいるわよ。",
+      "english": "Tom, your mom's here.",
+      "level": "N5",
+      "associatedKanji": [
+        "母"
+      ],
+      "tags": []
+    },
+    {
+      "id": "0853937f-dacb-4e70-b914-e4391f49fc70",
+      "japanese": "母は風邪で寝込んでいます。",
+      "english": "My mother is laid up with a cold.",
+      "level": "N5",
+      "associatedKanji": [
+        "母"
+      ],
+      "tags": []
+    },
+    {
+      "id": "3b33942d-786a-469c-afb4-8a5ea3842328",
+      "japanese": "夏休みの間、郵便局で働いていた。",
+      "english": "I worked in a post office during the summer vacation.",
+      "level": "N5",
+      "associatedKanji": [
+        "休"
+      ],
+      "tags": []
+    },
+    {
+      "id": "5a78a168-399b-4c0b-9127-52dcc6cee0f7",
+      "japanese": "夏休みの間、私は夜中に夕食を食べていた。",
+      "english": "During summer breaks, I ate dinner at midnight.",
+      "level": "N5",
+      "associatedKanji": [
+        "休"
+      ],
+      "tags": []
+    },
+    {
+      "id": "9a55432a-8938-4f5e-8135-aa9fa196cf2b",
+      "japanese": "少しの間、休んでもよろしいですか。",
+      "english": "May I take a rest for a while?",
+      "level": "N5",
+      "associatedKanji": [
+        "休"
+      ],
+      "tags": []
+    },
+    {
+      "id": "0864b48b-553b-4cc0-80c5-b537e57028e4",
+      "japanese": "ビルは先週仕事を首になった。",
+      "english": "Bill was canned from his job last week.",
+      "level": "N5",
+      "associatedKanji": [
+        "先"
+      ],
+      "tags": []
+    },
+    {
+      "id": "5b1a3f9a-da5f-4a74-8e93-009ce8d4c23d",
+      "japanese": "あのお店の手羽先が大好きなの。",
+      "english": "I love the chicken wings from that restaurant.",
+      "level": "N5",
+      "associatedKanji": [
+        "先"
+      ],
+      "tags": []
+    },
+    {
+      "id": "c86cf0f9-1e9e-4d4a-96bf-38e2858c4653",
+      "japanese": "彼らは２人ともよい先生です。",
+      "english": "They are both good teachers.",
+      "level": "N5",
+      "associatedKanji": [
+        "先"
+      ],
+      "tags": []
+    },
+    {
+      "id": "2f985308-b150-4a14-b679-5101b1b10f94",
+      "japanese": "トムとメアリーは名字が一緒よ。",
+      "english": "Tom and Mary have the same last name.",
+      "level": "N5",
+      "associatedKanji": [
+        "名"
+      ],
+      "tags": []
+    },
+    {
+      "id": "6260693e-0993-40f0-8dbf-059499e5badf",
+      "japanese": "すみませんが、お名前を忘れてしまいました。",
+      "english": "I'm sorry, but I have forgotten your name.",
+      "level": "N5",
+      "associatedKanji": [
+        "名"
+      ],
+      "tags": []
+    },
+    {
+      "id": "54341523-0a66-4e8d-b680-ab082125c853",
+      "japanese": "putsの名前はputs=put(出力する）+s(「文字列(string)」の頭文字）に由来します。",
+      "english": "The word \"puts\" comes from \"put\" (output) + \"s\" (the first character of \"string\")",
+      "level": "N5",
+      "associatedKanji": [
+        "名"
+      ],
+      "tags": []
+    },
+    {
+      "id": "6a43addb-48d8-4c07-9200-366d09671d2b",
+      "japanese": "あなたの過去は気にしません。",
+      "english": "I don't care about your past.",
+      "level": "N5",
+      "associatedKanji": [
+        "気"
+      ],
+      "tags": []
+    },
+    {
+      "id": "3d686080-8e83-427f-b674-f5e99362e405",
+      "japanese": "彼女は今日来るような気がする。",
+      "english": "I have an idea she will come today.",
+      "level": "N5",
+      "associatedKanji": [
+        "気"
+      ],
+      "tags": []
+    },
+    {
+      "id": "c69aed72-ca29-46a0-8beb-8ec2da6b0016",
+      "japanese": "私は陽気で軽い男より、ちょっと翳のある渋い男に惹かれるの。",
+      "english": "Rather than light-hearted and cheerful men, I'm attracted to sober men with a bit of a dark side to them.",
+      "level": "N5",
+      "associatedKanji": [
+        "気"
+      ],
+      "tags": []
+    },
+    {
+      "id": "cfce42b1-f905-43dc-9726-8f2549e0203d",
+      "japanese": "経費として二千二百ドルを計上しております。",
+      "english": "2200 dollars have been allocated for expenses.",
+      "level": "N5",
+      "associatedKanji": [
+        "百"
+      ],
+      "tags": []
+    },
+    {
+      "id": "8457185f-f7b3-46d5-ade4-4b34b9689370",
+      "japanese": "その教会は何百年も前に建てられた。",
+      "english": "The church was built hundreds of years ago.",
+      "level": "N5",
+      "associatedKanji": [
+        "百"
+      ],
+      "tags": []
+    },
+    {
+      "id": "6cfee43b-f7af-4da4-b008-aa3d2b2090d0",
+      "japanese": "この宝石は、ひとつ百万円以上のお値段です。",
+      "english": "These jewels are priced at over a million yen each.",
+      "level": "N5",
+      "associatedKanji": [
+        "百"
+      ],
+      "tags": []
+    },
+    {
+      "id": "9c8a25af-6700-4f36-b50e-4e737c38cf57",
+      "japanese": "あの男性とお知り合いなんですか？",
+      "english": "Are you acquainted with the man?",
+      "level": "N5",
+      "associatedKanji": [
+        "男"
+      ],
+      "tags": []
+    },
+    {
+      "id": "47c4a0d2-cb10-49be-a9b3-4add52bfc7d6",
+      "japanese": "犬は男に噛みついた。",
+      "english": "The dog bit the man.",
+      "level": "N5",
+      "associatedKanji": [
+        "男"
+      ],
+      "tags": []
+    },
+    {
+      "id": "42fb4c56-7e00-45c1-aebd-91f24dd527c1",
+      "japanese": "そんな男とは付き合うな。",
+      "english": "Don't keep company with such a man.",
+      "level": "N5",
+      "associatedKanji": [
+        "男"
+      ],
+      "tags": []
+    },
+    {
+      "id": "d0999c1a-a218-4a21-a021-2e232a4b676d",
+      "japanese": "見てるだけで、よだれが出そう。",
+      "english": "Just looking at the food made my mouth water.",
+      "level": "N5",
+      "associatedKanji": [
+        "見"
+      ],
+      "tags": []
+    },
+    {
+      "id": "50c60731-3c86-490e-932e-3dd0060025c4",
+      "japanese": "テレビを見たくないです。",
+      "english": "I don't want to watch TV.",
+      "level": "N5",
+      "associatedKanji": [
+        "見"
+      ],
+      "tags": []
+    },
+    {
+      "id": "53aa9e8c-7123-45a0-a71e-79cd4f276160",
+      "japanese": "メアリーは笑いながら、学校に行くトムを見送りました。",
+      "english": "Mary was smiling as she saw Tom off to school.",
+      "level": "N5",
+      "associatedKanji": [
+        "見"
+      ],
+      "tags": []
+    },
+    {
+      "id": "369fc0df-585d-409d-a2f9-eea4b4f61310",
+      "japanese": "車を３台持っているとは、彼女は金持ちにちがいない。",
+      "english": "She must be rich to have three cars.",
+      "level": "N5",
+      "associatedKanji": [
+        "車"
+      ],
+      "tags": []
+    },
+    {
+      "id": "81ca0c68-33bf-4a35-bfe0-92cfd3dcfacb",
+      "japanese": "本当に車を買い替えた方がいい。",
+      "english": "You really should buy a new car.",
+      "level": "N5",
+      "associatedKanji": [
+        "車"
+      ],
+      "tags": []
+    },
+    {
+      "id": "23a132c1-dd2c-4341-b096-32596c8dda20",
+      "japanese": "この電車はニューヨーク行きです。",
+      "english": "This train is bound for New York.",
+      "level": "N5",
+      "associatedKanji": [
+        "車"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ff091d2a-9e20-4cb8-9a34-302a29cb6afb",
+      "japanese": "トムとメアリーは毎日一緒に昼食をとっている。",
+      "english": "Tom and Mary eat lunch together every day.",
+      "level": "N5",
+      "associatedKanji": [
+        "毎"
+      ],
+      "tags": []
+    },
+    {
+      "id": "5add329f-58b3-4741-a565-e67af40296d7",
+      "japanese": "私の弟は夏になると毎日泳いでいます。",
+      "english": "My brother swims every day in summer.",
+      "level": "N5",
+      "associatedKanji": [
+        "毎"
+      ],
+      "tags": []
+    },
+    {
+      "id": "a65d38d0-901c-4a15-971b-07d9a45b1bfe",
+      "japanese": "私が通っている学校では、八月六日は平和の大切さを心に刻む１日として毎年『平和学習』が行われます。",
+      "english": "At the school I attend, August 6th is observed each year as \"Peace Learning Day\" to emphasize the importance of peace.",
+      "level": "N5",
+      "associatedKanji": [
+        "毎"
+      ],
+      "tags": []
+    },
+    {
+      "id": "bc40147c-9a8e-463c-ae0b-e0103b947498",
+      "japanese": "太陽が西に傾いた。",
+      "english": "The sun declined westward.",
+      "level": "N5",
+      "associatedKanji": [
+        "西"
+      ],
+      "tags": []
+    },
+    {
+      "id": "4a44d012-78ad-4675-a0f2-032f5f15e79c",
+      "japanese": "昭和１０年は西暦１９３５年です。",
+      "english": "The 10th year of Showa is 1935 in the Western calendar.",
+      "level": "N5",
+      "associatedKanji": [
+        "西"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ce3ade7a-eb74-4b8b-acb2-dddfbb1dbff6",
+      "japanese": "福沢諭吉は日本に西洋思想を広めた。",
+      "english": "Yukichi Fukuzawa introduced Western ideas into Japan.",
+      "level": "N5",
+      "associatedKanji": [
+        "西"
+      ],
+      "tags": []
+    },
+    {
+      "id": "37dee835-c1aa-41de-b301-4507258d4ae7",
+      "japanese": "そこの君、何か落としたよ。",
+      "english": "Young man, you dropped something!",
+      "level": "N5",
+      "associatedKanji": [
+        "何"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ca49dc6e-48a5-42d8-be32-3067aa8bafc6",
+      "japanese": "好きな食べ物は何ですか？",
+      "english": "What's your favorite food?",
+      "level": "N5",
+      "associatedKanji": [
+        "何"
+      ],
+      "tags": []
+    },
+    {
+      "id": "6d9352df-5873-4a85-9ea5-6d81cf56a5a1",
+      "japanese": "すぐに何かおかしいと感じました。",
+      "english": "I sensed immediately that something was wrong.",
+      "level": "N5",
+      "associatedKanji": [
+        "何"
+      ],
+      "tags": []
+    },
+    {
+      "id": "3259cbec-6ff5-4593-b3d9-5967422cfa63",
+      "japanese": "過去ではなく、未来に向けて取り組むのが当社の方針です。",
+      "english": "Our policy is to build for the future, not the past.",
+      "level": "N5",
+      "associatedKanji": [
+        "来"
+      ],
+      "tags": []
+    },
+    {
+      "id": "97f7e33c-0ace-4fb3-a4f9-eb8bc6766206",
+      "japanese": "明日も来ていい？",
+      "english": "Can I come tomorrow too?",
+      "level": "N5",
+      "associatedKanji": [
+        "来"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ee134b0b-ff04-474f-bee4-c6aebbcf2e3c",
+      "japanese": "彼はあすは来られるかもしれない。",
+      "english": "He may be able to come tomorrow.",
+      "level": "N5",
+      "associatedKanji": [
+        "来"
+      ],
+      "tags": []
+    },
+    {
+      "id": "634a11d4-ef83-432d-8e95-59f39f94708e",
+      "japanese": "山田君ってさ、同じ学年の女子には人気ないけど、下級生にはモテるんだよね。",
+      "english": "Yamada isn't very popular with the girls in his school year, but he's popular amongst the younger students.",
+      "level": "N5",
+      "associatedKanji": [
+        "学"
+      ],
+      "tags": []
+    },
+    {
+      "id": "7093daf3-de51-4b40-97cf-928eba38645b",
+      "japanese": "この学校の生徒はみな、英語のほかに、もう一つ外国語を学ばなければなりません。",
+      "english": "Any student of this school must learn one more foreign language besides English.",
+      "level": "N5",
+      "associatedKanji": [
+        "学"
+      ],
+      "tags": []
+    },
+    {
+      "id": "176f8051-0b33-4e71-ac5b-1c8c831f1d9d",
+      "japanese": "数学にかけては彼はクラスの誰にも引けを取らない。",
+      "english": "When it comes to mathematics, he is second to none in his class.",
+      "level": "N5",
+      "associatedKanji": [
+        "学"
+      ],
+      "tags": []
+    },
+    {
+      "id": "f47b2b89-37d5-4827-91a9-6273e36d961d",
+      "japanese": "彼は金髪だ。",
+      "english": "He has blond hair.",
+      "level": "N5",
+      "associatedKanji": [
+        "金"
+      ],
+      "tags": []
+    },
+    {
+      "id": "758a382a-cb1c-4c0e-87e8-e0394e87ea25",
+      "japanese": "扉の傍に、精巧な、軽金属製のロボット——侵入者を防ぐためのロボットが、冷かに立っていた。",
+      "english": "Near the door, an elaborate metal robot -- a robot designed to keep away intruders, was standing coldly.",
+      "level": "N5",
+      "associatedKanji": [
+        "金"
+      ],
+      "tags": []
+    },
+    {
+      "id": "112d9e36-f9b7-4ba2-87a1-df41ea2459d1",
+      "japanese": "細かいお金持ってない？",
+      "english": "Do you have any small change?",
+      "level": "N5",
+      "associatedKanji": [
+        "金"
+      ],
+      "tags": []
+    },
+    {
+      "id": "0e20f1a4-6b92-4806-bfcd-537a1b25e05d",
+      "japanese": "もう雨はたくさんだ。",
+      "english": "We have had enough of rain.",
+      "level": "N5",
+      "associatedKanji": [
+        "雨"
+      ],
+      "tags": []
+    },
+    {
+      "id": "e3088068-a4c7-4bec-b24d-4292c7405085",
+      "japanese": "雨模様だ。",
+      "english": "It looks rainy.",
+      "level": "N5",
+      "associatedKanji": [
+        "雨"
+      ],
+      "tags": []
+    },
+    {
+      "id": "9a69039e-0a67-4148-849d-3a308fbca7e4",
+      "japanese": "雨は間もなく止むでしょう。",
+      "english": "It will stop raining soon.",
+      "level": "N5",
+      "associatedKanji": [
+        "雨"
+      ],
+      "tags": []
+    },
+    {
+      "id": "23215366-6b5c-4aa8-9dc8-5850039dd11a",
+      "japanese": "彼は東京暮らしが気に入っています。",
+      "english": "He likes to live in Tokyo.",
+      "level": "N5",
+      "associatedKanji": [
+        "東"
+      ],
+      "tags": []
+    },
+    {
+      "id": "05e0b279-51e1-4a03-848b-4ac7bc177c49",
+      "japanese": "彼は東京に引っ越した。",
+      "english": "He moved to Tokyo.",
+      "level": "N5",
+      "associatedKanji": [
+        "東"
+      ],
+      "tags": []
+    },
+    {
+      "id": "06695dd1-c9a8-4e94-8824-ea8bea32e9e6",
+      "japanese": "東京は世界で最も大きな都市の一つです。",
+      "english": "Tokyo is one of the largest cities in the world.",
+      "level": "N5",
+      "associatedKanji": [
+        "東"
+      ],
+      "tags": []
+    },
+    {
+      "id": "4604f106-65c0-4267-a39c-9011a748032e",
+      "japanese": "お前が俺と一緒に来るか、あいつに聞いてみたんだけど、あの野郎、返事すらしなかった。",
+      "english": "I asked him if you will come with me, but he didn't even answer.",
+      "level": "N5",
+      "associatedKanji": [
+        "前"
+      ],
+      "tags": []
+    },
+    {
+      "id": "0406df81-0ee9-4582-b13f-ccbd002db66b",
+      "japanese": "「やっと赤ちゃんの名前が決まったんだ！」「当てさせて。トムでしょう？」「それがね、違うの。ジョンよ」",
+      "english": "\"We've finally decided on a name for our baby!\" \"Let me guess. It's Tom, isn't it?\" \"Actually, no; it's John.\"",
+      "level": "N5",
+      "associatedKanji": [
+        "前"
+      ],
+      "tags": []
+    },
+    {
+      "id": "d10b3a86-a539-4b64-93d9-27a9bff64c50",
+      "japanese": "バスに乗るとき、私はいつも前の席に乗る。",
+      "english": "When in a bus, I always sit at the front.",
+      "level": "N5",
+      "associatedKanji": [
+        "前"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ccde1c8a-957b-48ff-9a86-54db9acdf928",
+      "japanese": "ＡＳＥＡＮという文字は東南アジア諸国連合を表します。",
+      "english": "The letters ASEAN stand for the Association of Southeast Asian Nations.",
+      "level": "N5",
+      "associatedKanji": [
+        "南"
+      ],
+      "tags": []
+    },
+    {
+      "id": "0395c579-fb86-49b7-a524-73eaf58ebcc8",
+      "japanese": "「南瓜は、何玉欲しい？」「３玉、お願いします」",
+      "english": "\"How many pumpkins do you want?\" \"Three, please.\"",
+      "level": "N5",
+      "associatedKanji": [
+        "南"
+      ],
+      "tags": []
+    },
+    {
+      "id": "7ef3b3c0-1d1c-47e7-b39d-992b2b4e0bd0",
+      "japanese": "今年の恵方は南南東です。",
+      "english": "South-southeast is the lucky direction of the year.",
+      "level": "N5",
+      "associatedKanji": [
+        "南"
+      ],
+      "tags": []
+    },
+    {
+      "id": "6f2762c3-c61b-481d-8cd2-83665b598f00",
+      "japanese": "夕食が終わった後、彼らはトランプをして楽しんだ。",
+      "english": "Dinner finished, they enjoyed playing cards.",
+      "level": "N5",
+      "associatedKanji": [
+        "後"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ae29afc9-9fd5-41e2-8b49-46a078de98ba",
+      "japanese": "夕飯の後は何も食べないようにしてます。",
+      "english": "I try not to eat anything after dinner.",
+      "level": "N5",
+      "associatedKanji": [
+        "後"
+      ],
+      "tags": []
+    },
+    {
+      "id": "5da2e94f-c753-4f94-ab4f-14cc7560a985",
+      "japanese": "２時間後にここを出発する。",
+      "english": "I will leave here in two hours.",
+      "level": "N5",
+      "associatedKanji": [
+        "後"
+      ],
+      "tags": []
+    },
+    {
+      "id": "2cc7e789-e4d7-47f3-a5ae-e32c01806c1a",
+      "japanese": "チーズは、ウシ、ヤギ、ヒツジやその他の哺乳類の乳から作られる固形の食べ物だ。",
+      "english": "Cheese is a solid food made from the milk of cows, goats, sheep, and other mammals.",
+      "level": "N5",
+      "associatedKanji": [
+        "食"
+      ],
+      "tags": []
+    },
+    {
+      "id": "43f6f113-da0c-467e-b027-e69bcb8ae5ff",
+      "japanese": "昼食はどうだった？",
+      "english": "How was lunch?",
+      "level": "N5",
+      "associatedKanji": [
+        "食"
+      ],
+      "tags": []
+    },
+    {
+      "id": "6c88fd5a-a33b-4c55-a5cb-347e69d73bc0",
+      "japanese": "今日はたくさん食べたよ。",
+      "english": "I've had a lot to eat today.",
+      "level": "N5",
+      "associatedKanji": [
+        "食"
+      ],
+      "tags": []
+    },
+    {
+      "id": "7f709665-3653-4ef8-8aed-9eaf7287fae4",
+      "japanese": "高校の時、人気者だった？",
+      "english": "Were you popular in high school?",
+      "level": "N5",
+      "associatedKanji": [
+        "校"
+      ],
+      "tags": []
+    },
+    {
+      "id": "433c08dd-25fb-4b38-8a15-07125a15a79e",
+      "japanese": "もう学校へ行かせないでください。",
+      "english": "Please don't make me go to school anymore.",
+      "level": "N5",
+      "associatedKanji": [
+        "校"
+      ],
+      "tags": []
+    },
+    {
+      "id": "8a36852f-fe71-4b86-993b-e809837d6832",
+      "japanese": "この学校では学生に教科書を支給しています。",
+      "english": "This school supplies textbooks to its students.",
+      "level": "N5",
+      "associatedKanji": [
+        "校"
+      ],
+      "tags": []
+    },
+    {
+      "id": "8b553b4e-a3f8-4b7f-aa02-876d0ccd2c81",
+      "japanese": "彼は天井に手が届くほど背が高い。",
+      "english": "He is such a tall man that he can touch the ceiling.",
+      "level": "N5",
+      "associatedKanji": [
+        "高"
+      ],
+      "tags": []
+    },
+    {
+      "id": "94c3347c-91d2-40b6-9df4-f9f7ca060fbe",
+      "japanese": "彼はそのクラスで一番背が高い。",
+      "english": "He is the tallest person in the class.",
+      "level": "N5",
+      "associatedKanji": [
+        "高"
+      ],
+      "tags": []
+    },
+    {
+      "id": "9bdbee5c-6a7b-4147-b270-db75e82e6037",
+      "japanese": "一番高いのにします。",
+      "english": "I'll take the most expensive one.",
+      "level": "N5",
+      "associatedKanji": [
+        "高"
+      ],
+      "tags": []
+    },
+    {
+      "id": "4d2588b7-97c1-48b9-98da-683472be38e4",
+      "japanese": "時間通りに済ませて定時で帰る。",
+      "english": "We get it done on time and leave on schedule.",
+      "level": "N5",
+      "associatedKanji": [
+        "間"
+      ],
+      "tags": []
+    },
+    {
+      "id": "f5205917-3b4d-4f82-9635-4a28188953f4",
+      "japanese": "あっという間に数時間、数日、数週間が経ってしまった。",
+      "english": "Just like that, hours, days and weeks passed.",
+      "level": "N5",
+      "associatedKanji": [
+        "間"
+      ],
+      "tags": []
+    },
+    {
+      "id": "4327d256-091b-428a-a8ea-8f6b8794d24f",
+      "japanese": "待ち時間はどれくらいになりますか？",
+      "english": "How long will we have to wait?",
+      "level": "N5",
+      "associatedKanji": [
+        "間"
+      ],
+      "tags": []
+    },
+    {
+      "id": "38c3dc2c-872b-4949-8935-c20c7360141e",
+      "japanese": "そんな奇妙な話は聞いたことがない。",
+      "english": "I've never heard of such a strange story.",
+      "level": "N5",
+      "associatedKanji": [
+        "話"
+      ],
+      "tags": []
+    },
+    {
+      "id": "d6685617-6d7d-4487-a0e4-05f34919dc8c",
+      "japanese": "私は人前で話をするのが嫌いだ。",
+      "english": "I don't like to speak in public.",
+      "level": "N5",
+      "associatedKanji": [
+        "話"
+      ],
+      "tags": []
+    },
+    {
+      "id": "9b7141c0-b85a-4e4e-b6bc-5b337b54d158",
+      "japanese": "その件について、知っていることはすべてお話しましょう。",
+      "english": "I'll tell you all I know about it.",
+      "level": "N5",
+      "associatedKanji": [
+        "話"
+      ],
+      "tags": []
+    },
+    {
+      "id": "2f95c8a1-f2c7-4202-a26b-54863b11c365",
+      "japanese": "電車が遅れようと遅れまいと問題ではない。",
+      "english": "It makes no difference whether the train is delayed or not.",
+      "level": "N5",
+      "associatedKanji": [
+        "電"
+      ],
+      "tags": []
+    },
+    {
+      "id": "16c69ebe-167a-4688-8e0d-ff683cf66e88",
+      "japanese": "ボストン行きの電車はいつ出発するの？",
+      "english": "When does the train leave for Boston?",
+      "level": "N5",
+      "associatedKanji": [
+        "電"
+      ],
+      "tags": []
+    },
+    {
+      "id": "0e9249ad-02e7-44ad-9189-1d0fbfe73664",
+      "japanese": "私たちは電気ハエたたきの世界での生産と販売について新しいデータを持っている。",
+      "english": "We have new data about production and sale of electric fly swatters worldwide.",
+      "level": "N5",
+      "associatedKanji": [
+        "電"
+      ],
+      "tags": []
+    },
+    {
+      "id": "bb0680f2-b123-448c-886b-05c1ae9eef9a",
+      "japanese": "私の話聞いてた？",
+      "english": "Have you been listening to me?",
+      "level": "N5",
+      "associatedKanji": [
+        "聞"
+      ],
+      "tags": []
+    },
+    {
+      "id": "83d47463-abb9-4b4d-b254-8ef2d99bc45a",
+      "japanese": "その歌をもう一度聞きたいです。",
+      "english": "I'd like to hear that song again.",
+      "level": "N5",
+      "associatedKanji": [
+        "聞"
+      ],
+      "tags": []
+    },
+    {
+      "id": "3d5e99dd-7cf6-464e-82cc-29972879248c",
+      "japanese": "新聞の広告で、家庭教師を見つけました。",
+      "english": "I found a tutor through a newspaper ad.",
+      "level": "N5",
+      "associatedKanji": [
+        "聞"
+      ],
+      "tags": []
+    },
+    {
+      "id": "b577215c-4b0c-4e56-9255-69af6cc1919e",
+      "japanese": "次の月曜、フランス語のテストがあるの。",
+      "english": "We have a French test next Monday.",
+      "level": "N5",
+      "associatedKanji": [
+        "語"
+      ],
+      "tags": []
+    },
+    {
+      "id": "d92d7f96-5c58-49c4-a0b3-99e3bffc4dc5",
+      "japanese": "この単語が分かりません。",
+      "english": "I don't understand this word.",
+      "level": "N5",
+      "associatedKanji": [
+        "語"
+      ],
+      "tags": []
+    },
+    {
+      "id": "a10a1e41-4550-4920-b4e8-d4b92b4b4cfb",
+      "japanese": "トルコ語を習ってるんだ。",
+      "english": "I am learning Turkish.",
+      "level": "N5",
+      "associatedKanji": [
+        "語"
+      ],
+      "tags": []
+    },
+    {
+      "id": "5e9a8575-3aab-4e8e-8d7d-789b67f8a51a",
+      "japanese": "夫はいつもベッドで本を読むんです。",
+      "english": "My husband is always reading in bed.",
+      "level": "N5",
+      "associatedKanji": [
+        "読"
+      ],
+      "tags": []
+    },
+    {
+      "id": "c40126ec-2481-4d2c-b38d-881a1fff7d9c",
+      "japanese": "本を読んでいるうちに、彼は眠ってしまった。",
+      "english": "While reading a book, he fell asleep.",
+      "level": "N5",
+      "associatedKanji": [
+        "読"
+      ],
+      "tags": []
+    },
+    {
+      "id": "0b62fc01-d104-4bcc-9519-a51857d1148f",
+      "japanese": "小説は以前ほど読まれていない。",
+      "english": "Novels aren't being read as much as they were in the past.",
+      "level": "N5",
+      "associatedKanji": [
+        "読"
+      ],
+      "tags": []
+    },
+    {
+      "id": "a9eab1cf-86bd-4224-af91-4118fa44f17b",
+      "japanese": "今や兄は大学生になったから、おおいに読書をしなければなりません。",
+      "english": "Now that my brother is a university student, he has to do a lot of reading.",
+      "level": "N5",
+      "associatedKanji": [
+        "生"
+      ],
+      "tags": []
+    },
+    {
+      "id": "7ba6c2f7-2ab4-4c0c-ad2b-c93ead40d835",
+      "japanese": "先生、私、病気なんですか？",
+      "english": "Am I sick, Doctor?",
+      "level": "N5",
+      "associatedKanji": [
+        "生"
+      ],
+      "tags": []
+    },
+    {
+      "id": "ee24305c-a609-4f05-a966-f9dd84df61bb",
+      "japanese": "先生のあきれた視線が僕に向けられる。",
+      "english": "My teacher, exasperated, now shifts his eyes upon me.",
+      "level": "N5",
+      "associatedKanji": [
+        "生"
+      ],
+      "tags": []
+    },
+    {
+      "id": "5dc294b1-1852-4515-839b-e8149ad07f89",
+      "japanese": "トムに手紙を書いた方がいいぞ。",
+      "english": "You should write Tom a letter.",
+      "level": "N5",
+      "associatedKanji": [
+        "書"
+      ],
+      "tags": []
+    },
+    {
+      "id": "b150cec1-2ed0-4668-8185-4c183b223795",
+      "japanese": "彼女は本の絵をノートに書き移した。",
+      "english": "She transferred the picture in the book to her notebook.",
+      "level": "N5",
+      "associatedKanji": [
+        "書"
+      ],
+      "tags": []
+    },
+    {
+      "id": "364aabdb-7a57-4b93-90bb-0b9057edc9e8",
+      "japanese": "彼はお母さんに手紙を書く。",
+      "english": "He writes letters to his mother.",
+      "level": "N5",
+      "associatedKanji": [
+        "書"
+      ],
+      "tags": []
+    }
+  ]
+}

@@ -5,13 +5,12 @@ import { Box, IconButton, Typography, Button, Menu, MenuItem } from '@mui/materi
 import { VolumeUp, VolumeUpOutlined, Close, TuneRounded } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import { useJlptLevel } from '@/contexts/JlptLevelContext';
-import { KanjiData as KanjiDataBasic, N5_KANJI, N4_KANJI, N3_KANJI, N2_KANJI, N1_KANJI } from '@/data/jlpt-kanji-complete';
-import { KanjiQuestion } from '@/types/kanji';
-import { createKanjiQuestion } from '@/utils/kanji-compounds';
+import { KANJI_DATA } from '@/app/admin/kanji/data';
+import type { JlptLevel } from '@/contexts/JlptLevelContext';
+import type { KanjiData } from '@/app/admin/kanji/data';
 import { useRouter } from 'next/navigation';
 
 type StudyMode = 'flashcard' | 'match' | 'writing';
-type ExtendedKanjiData = KanjiQuestion;
 
 const StudyContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -164,7 +163,6 @@ const DifficultyButton = styled(Button)(({ theme }) => ({
   fontWeight: 500,
   backgroundColor: '#e8e3ff',
   color: '#7c4dff',
-  width: '100%',
   '&:hover': {
     backgroundColor: '#d3c6ff'
   },
@@ -184,294 +182,223 @@ const DifficultyButton = styled(Button)(({ theme }) => ({
   }
 }));
 
+const ReadingBadge = styled(Box)({
+  padding: '8px 16px',
+  borderRadius: '8px',
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: '8px',
+  fontFamily: '"Noto Sans JP", sans-serif',
+});
+
+const OnYomiBadge = styled(ReadingBadge)({
+  backgroundColor: '#fff494',
+});
+
+const KunYomiBadge = styled(ReadingBadge)({
+  backgroundColor: '#ff9d4d',
+});
+
+const ReadingLabel = styled('span')({
+  fontWeight: 600,
+  fontSize: '0.875rem',
+  color: '#000',
+});
+
+const ReadingText = styled('span')({
+  fontSize: '1.125rem',
+  color: '#000',
+});
+
+const Example = styled(Typography)({
+  fontSize: '1.25rem',
+  color: '#000',
+  textAlign: 'center',
+  marginTop: '24px',
+  fontFamily: '"Noto Sans JP", sans-serif',
+});
+
 export default function KanjiPage() {
-  const { level } = useJlptLevel();
   const router = useRouter();
-  const [studyMode, setStudyMode] = useState<StudyMode>('flashcard');
-  const [currentKanji, setCurrentKanji] = useState<ExtendedKanjiData | null>(null);
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
-  const [progress, setProgress] = useState(0);
+  const { level } = useJlptLevel();
+  const [kanjiList, setKanjiList] = useState<KanjiData[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [showAnswer, setShowAnswer] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [mode, setMode] = useState<StudyMode>('flashcard');
+  const [modeAnchorEl, setModeAnchorEl] = useState<null | HTMLElement>(null);
 
   useEffect(() => {
-    // Load initial kanji
-    const kanjiSet = {
-      'N5': N5_KANJI,
-      'N4': N4_KANJI,
-      'N3': N3_KANJI,
-      'N2': N2_KANJI,
-      'N1': N1_KANJI
-    }[level];
-
-    const randomKanji = kanjiSet[Math.floor(Math.random() * kanjiSet.length)];
-    setCurrentKanji(convertToExtendedKanjiData(randomKanji));
-  }, [level]);
-
-  const handleFilterChange = (filter: 'all' | 'known' | 'due') => {
-    // This will be implemented when we add the filtering logic
-    console.log('Filter changed to:', filter);
-  };
-
-  const handleClose = () => {
-    router.push('/dashboard');
-  };
+    console.log('KanjiPage: Level changed to:', level);
+    console.log('KANJI_DATA:', KANJI_DATA); // Log the entire KANJI_DATA object
+    // Convert N5 to n5 format for accessing KANJI_DATA
+    const newLevel = level.toLowerCase() as keyof typeof KANJI_DATA;
+    console.log('Converted level:', newLevel); // Log the converted level
+    const newKanjiList = KANJI_DATA[newLevel];
+    console.log('KanjiPage: New kanji list:', newKanjiList); // Log the full kanji list
+    if (!newKanjiList) {
+      console.error('No kanji list found for level:', newLevel);
+    }
+    setKanjiList(newKanjiList || []); // Add fallback to empty array
+    setCurrentIndex(0); // Reset to first kanji when level changes
+    setShowAnswer(false);
+  }, [level]); // This effect runs both on mount and when level changes
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMenuAnchor(event.currentTarget);
+    setModeAnchorEl(event.currentTarget);
   };
 
   const handleMenuClose = () => {
-    setMenuAnchor(null);
+    setModeAnchorEl(null);
   };
 
-  const handleModeSelect = (mode: StudyMode) => {
-    setStudyMode(mode);
+  const handleModeSelect = (newMode: StudyMode) => {
+    setMode(newMode);
     handleMenuClose();
   };
 
-  const modeDisplay = {
-    flashcard: 'Flashcards',
-    match: 'Match Game',
-    writing: 'Writing Practice'
+  const handlePlayAudio = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsPlaying(true);
+    const utterance = new SpeechSynthesisUtterance(kanjiList[currentIndex].kanji);
+    utterance.lang = 'ja-JP';
+    utterance.onend = () => {
+      setIsPlaying(false);
+    };
+    window.speechSynthesis.speak(utterance);
   };
 
   const handleDifficulty = (difficulty: 'forgot' | 'hard' | 'good' | 'easy') => {
-    // Update progress based on difficulty
-    const progressIncrement = difficulty === 'forgot' ? 5 :
-                            difficulty === 'hard' ? 10 :
-                            difficulty === 'good' ? 15 :
-                            20; // easy
-    setProgress(prev => Math.min(100, prev + progressIncrement));
-
-    // Load next kanji
-    const kanjiList = level === 'N5' ? N5_KANJI :
-                     level === 'N4' ? N4_KANJI :
-                     level === 'N3' ? N3_KANJI :
-                     level === 'N2' ? N2_KANJI : N1_KANJI;
-    
-    const randomKanji = kanjiList[Math.floor(Math.random() * kanjiList.length)];
-    setCurrentKanji(convertToExtendedKanjiData(randomKanji));
-    setIsFlipped(false);
-  };
-
-  const convertToExtendedKanjiData = (basic: KanjiDataBasic): ExtendedKanjiData => {
-    return createKanjiQuestion({
-      ...basic,
-      id: Math.floor(Math.random() * 1000000),
-      onyomi: [],
-      onyomi_katakana: [],
-      kunyomi: [],
-      kunyomi_hiragana: [],
-      examples: []
-    });
-  };
-
-  const handlePlayAudio = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent card flip
-    if (currentKanji && !isPlaying) {
-      setIsPlaying(true);
-      const utterance = new SpeechSynthesisUtterance(currentKanji.kanji);
-      utterance.lang = 'ja-JP';
-      utterance.onend = () => setIsPlaying(false);
-      window.speechSynthesis.speak(utterance);
+    if (currentIndex < kanjiList.length - 1) {
+      setCurrentIndex(prev => prev + 1);
+      setShowAnswer(false);
+    } else {
+      router.push('/dashboard');
     }
   };
 
-  if (!currentKanji) return null;
-
   return (
     <StudyContainer>
-      <Box sx={{ width: '100%', maxWidth: '680px', mb: 2 }}>
-        <Header>
-          <CloseButton onClick={handleClose}>
+      <Header>
+        <HeaderControls>
+          <CloseButton onClick={() => router.push('/dashboard')}>
             <Close />
           </CloseButton>
-          <HeaderControls>
-            <CurrentMode>{modeDisplay[studyMode]}</CurrentMode>
-            <MenuButton onClick={handleMenuOpen}>
-              <TuneRounded />
-            </MenuButton>
-            <Menu
-              anchorEl={menuAnchor}
-              open={Boolean(menuAnchor)}
-              onClose={handleMenuClose}
-              PaperProps={{
-                sx: {
-                  mt: 1,
-                  borderRadius: '12px',
-                  minWidth: '160px',
-                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-                }
-              }}
-            >
-              <MenuItem onClick={() => handleModeSelect('flashcard')}>Flashcard</MenuItem>
-              <MenuItem onClick={() => handleModeSelect('match')}>Match Game</MenuItem>
-              <MenuItem onClick={() => handleModeSelect('writing')}>Writing Practice</MenuItem>
-            </Menu>
-          </HeaderControls>
-        </Header>
-        <ProgressBar value={progress} />
-      </Box>
+          <CurrentMode>
+            {mode === 'flashcard' ? 'Flashcards' : mode === 'match' ? 'Matching' : 'Writing'}
+          </CurrentMode>
+        </HeaderControls>
+        <HeaderControls>
+          <MenuButton onClick={handleMenuOpen}>
+            <TuneRounded />
+          </MenuButton>
+        </HeaderControls>
+      </Header>
 
-      <KanjiCard onClick={() => setIsFlipped(!isFlipped)}>
-        {!isFlipped ? (
-          <>
-            <KanjiCharacter>{currentKanji.kanji}</KanjiCharacter>
-            <AudioButton 
-              onClick={handlePlayAudio}
-              disabled={isPlaying}
-            >
-              {isPlaying ? <VolumeUp /> : <VolumeUpOutlined />}
-            </AudioButton>
-          </>
-        ) : (
-          <Box sx={{ 
-            display: 'flex', 
-            flexDirection: 'column',
-            alignItems: 'center',
-            height: '100%',
-            overflow: 'auto',
-            width: '100%'
-          }}>
-            <Box sx={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: 2, 
-              mb: 3,
-              width: '100%'
-            }}>
-              <Typography variant="h3" sx={{ 
-                color: '#7c4dff', 
-                fontWeight: 600,
-                flex: 1
+      <Menu
+        anchorEl={modeAnchorEl}
+        open={Boolean(modeAnchorEl)}
+        onClose={handleMenuClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+      >
+        <MenuItem onClick={() => handleModeSelect('flashcard')}>Flashcards</MenuItem>
+        <MenuItem onClick={() => handleModeSelect('match')}>Matching</MenuItem>
+        <MenuItem onClick={() => handleModeSelect('writing')}>Writing</MenuItem>
+      </Menu>
+
+      <ProgressBar value={((currentIndex + 1) / kanjiList.length) * 100} />
+
+      {kanjiList.length > 0 ? (
+        <>
+          <KanjiCard onClick={() => setShowAnswer(prev => !prev)}>
+            {!showAnswer ? (
+              <>
+                <KanjiCharacter>
+                  {kanjiList[currentIndex].kanji}
+                </KanjiCharacter>
+
+                <AudioButton onClick={(e) => {
+                  e.stopPropagation(); // Prevent card flip when clicking audio button
+                  handlePlayAudio(e);
+                }}>
+                  {isPlaying ? <VolumeUpOutlined /> : <VolumeUp />}
+                </AudioButton>
+              </>
+            ) : (
+              <Box sx={{ 
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: 3,
+                py: 2
               }}>
-                {currentKanji.meaning}
-              </Typography>
-              <Typography
-                sx={{
-                  px: 1.5,
-                  py: 0.5,
-                  bgcolor: '#e8e3ff',
-                  color: '#7c4dff',
-                  borderRadius: 1,
-                  fontSize: '0.875rem',
-                  fontWeight: 500
-                }}
-              >
-                {level}
-              </Typography>
-            </Box>
-
-            <Box sx={{ 
-              display: 'flex', 
-              gap: 3, 
-              mb: 4,
-              width: '100%'
-            }}>
-              <Box>
-                <Typography sx={{ 
-                  color: '#666', 
-                  fontSize: '0.875rem', 
-                  mb: 1,
+                <Typography variant="h3" sx={{ 
+                  fontSize: '2rem',
+                  mb: 2,
                   fontWeight: 500
                 }}>
-                  Reading
+                  {kanjiList[currentIndex].meanings.slice(0, 3).join(', ')}
                 </Typography>
-                <Typography sx={{ 
-                  fontFamily: '"Noto Sans JP", sans-serif',
-                  fontSize: '1.25rem'
-                }}>
-                  {currentKanji.reading}
-                </Typography>
-              </Box>
-            </Box>
 
-            <Typography sx={{ 
-              color: '#666', 
-              fontSize: '0.875rem', 
-              mb: 2,
-              fontWeight: 500,
-              alignSelf: 'flex-start'
-            }}>
-              Common Compounds
-            </Typography>
-            <Box sx={{ width: '100%' }}>
-              {currentKanji.compounds.filter(c => c.correct).map((compound, i) => (
-                <Box
-                  key={i}
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    width: '100%',
-                    p: 2,
-                    borderBottom: '1px solid #e2e8f0',
-                    '&:last-child': {
-                      borderBottom: 'none'
-                    }
-                  }}
-                >
-                  <Box sx={{ flex: 1 }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 0.5 }}>
-                      <Typography sx={{ 
-                        fontFamily: '"Noto Sans JP", sans-serif',
-                        fontSize: '1.25rem',
-                        fontWeight: 500
-                      }}>
-                        {compound.word}
-                      </Typography>
-                      <Typography sx={{ 
-                        fontFamily: '"Noto Sans JP", sans-serif',
-                        fontSize: '0.875rem',
-                        color: '#666'
-                      }}>
-                        {compound.reading}
-                      </Typography>
-                    </Box>
-                    <Typography sx={{ 
-                      fontSize: '0.875rem',
-                      color: '#666'
-                    }}>
-                      {compound.meaning}
-                    </Typography>
-                  </Box>
-                  <IconButton
-                    size="small"
-                    sx={{ 
-                      color: '#7c4dff',
-                      ml: 1
-                    }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      // Handle audio
-                      const utterance = new SpeechSynthesisUtterance(compound.word);
-                      utterance.lang = 'ja-JP';
-                      window.speechSynthesis.speak(utterance);
-                    }}
-                  >
-                    <VolumeUp />
-                  </IconButton>
+                <Box sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  gap: 2,
+                  width: '100%',
+                  mb: 2
+                }}>
+                  <OnYomiBadge>
+                    <ReadingLabel>ON:</ReadingLabel>
+                    <ReadingText>
+                      {kanjiList[currentIndex].onyomi.length > 0 
+                        ? kanjiList[currentIndex].onyomi.slice(0, 3).join('、')
+                        : '—'}
+                    </ReadingText>
+                  </OnYomiBadge>
+
+                  <KunYomiBadge>
+                    <ReadingLabel>KUN:</ReadingLabel>
+                    <ReadingText>
+                      {kanjiList[currentIndex].kunyomi.length > 0 
+                        ? kanjiList[currentIndex].kunyomi.slice(0, 3).join('、')
+                        : '—'}
+                    </ReadingText>
+                  </KunYomiBadge>
                 </Box>
-              ))}
-            </Box>
-          </Box>
-        )}
-      </KanjiCard>
 
-      <ButtonGroup>
-        <DifficultyButton className="forgot" onClick={() => handleDifficulty('forgot')}>
-          Again
-        </DifficultyButton>
-        <DifficultyButton className="hard" onClick={() => handleDifficulty('hard')}>
-          Hard
-        </DifficultyButton>
-        <DifficultyButton onClick={() => handleDifficulty('good')}>
-          Good
-        </DifficultyButton>
-        <DifficultyButton onClick={() => handleDifficulty('easy')}>
-          Easy
-        </DifficultyButton>
-      </ButtonGroup>
+                {kanjiList[currentIndex].info?.examples?.[0] && (
+                  <Example>
+                    {kanjiList[currentIndex].info.examples[0]}
+                  </Example>
+                )}
+              </Box>
+            )}
+          </KanjiCard>
+
+          <ButtonGroup>
+            <DifficultyButton className="forgot" onClick={() => handleDifficulty('forgot')}>
+              Again
+            </DifficultyButton>
+            <DifficultyButton className="hard" onClick={() => handleDifficulty('hard')}>
+              Hard
+            </DifficultyButton>
+            <DifficultyButton onClick={() => handleDifficulty('good')}>
+              Good
+            </DifficultyButton>
+            <DifficultyButton onClick={() => handleDifficulty('easy')}>
+              Easy
+            </DifficultyButton>
+          </ButtonGroup>
+        </>
+      ) : null}
     </StudyContainer>
   );
 }

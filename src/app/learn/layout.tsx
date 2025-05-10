@@ -1,11 +1,21 @@
 'use client';
 
-import { Box, CircularProgress, Typography, styled, LinearProgress, Tabs, Tab, Button, Select, MenuItem, SelectChangeEvent, ButtonGroup } from '@mui/material';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { ArrowBack } from '@mui/icons-material';
-
-type StudyMode = 'flashcard' | 'writing' | 'match';
+import { Box, styled } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
+import Home from '@mui/icons-material/Home';
+import MenuBook from '@mui/icons-material/MenuBook';
+import School from '@mui/icons-material/School';
+import Quiz from '@mui/icons-material/Quiz';
+import Settings from '@mui/icons-material/Settings';
+import Assignment from '@mui/icons-material/Assignment';
+import Insights from '@mui/icons-material/Insights';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import Help from '@mui/icons-material/Help';
+import AutoStories from '@mui/icons-material/AutoStories';
+import Translate from '@mui/icons-material/Translate';
+import { useJlptLevel } from '@/contexts/JlptLevelContext';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
 const LayoutRoot = styled('div')({
   display: 'flex',
@@ -18,11 +28,15 @@ const MainContent = styled('div')(({ theme }) => ({
   width: '100%',
   backgroundColor: '#f8fafc',
   overflow: 'auto',
-  padding: theme.spacing(1),
-  marginLeft: 240,
+  padding: theme.spacing(3),
+  marginLeft: 72,
+  transition: 'margin-left 0.3s ease-in-out',
+  '.sidebar-expanded &': {
+    marginLeft: 240
+  },
   [theme.breakpoints.down('sm')]: {
-    padding: theme.spacing(1),
-    paddingTop: theme.spacing(1),
+    padding: theme.spacing(2),
+    paddingBottom: theme.spacing(8),
     marginLeft: 0
   }
 }));
@@ -32,252 +46,145 @@ const Sidebar = styled('div')(({ theme }) => ({
   left: 0,
   top: 0,
   bottom: 0,
-  width: 240,
+  width: 72,
   backgroundColor: '#fff',
   borderRight: '1px solid rgba(0,0,0,0.08)',
+  transition: 'all 0.3s ease-in-out',
   overflow: 'hidden',
   zIndex: 1000,
   display: 'flex',
   flexDirection: 'column',
-  padding: '24px',
-  gap: '24px',
-  [theme.breakpoints.down('sm')]: {
-    display: 'none'
-  }
-}));
-
-const MobileHeader = styled('div')(({ theme }) => ({
-  display: 'none',
-  [theme.breakpoints.down('sm')]: {
-    display: 'none'
-  }
-}));
-
-const NavigationSection = styled(Box)({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '8px'
-});
-
-const StyledSelect = styled(Select)(({ theme }) => ({
-  backgroundColor: '#fff',
-  '& .MuiSelect-select': {
-    padding: theme.spacing(1, 2),
-  }
-}));
-
-const StyledTabs = styled(Tabs)({
-  minHeight: 36,
-  '& .MuiTabs-indicator': {
-    backgroundColor: '#7c4dff'
-  }
-});
-
-const StyledTab = styled(Tab)({
-  minHeight: 36,
-  padding: '6px 12px',
-  fontSize: '0.875rem',
-  textTransform: 'none',
-  fontWeight: 500,
-  color: '#666',
-  '&.Mui-selected': {
-    color: '#7c4dff',
-    fontWeight: 600
-  }
-});
-
-const SectionTitle = styled(Typography)(({ theme }) => ({
-  fontSize: '0.875rem',
-  fontWeight: 600,
-  color: '#666',
-  marginBottom: theme.spacing(2)
-}));
-
-const MasterySection = styled(Box)({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: '8px'
-});
-
-const SrsSection = styled(Box)({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '8px'
-});
-
-const SrsBar = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(1.5),
-  marginBottom: theme.spacing(2)
-}));
-
-const SrsLabel = styled(Typography)({
-  fontSize: '0.875rem',
-  color: '#1f2937',
-  fontWeight: 500,
-  width: '60px'
-});
-
-const SrsCount = styled(Typography)({
-  fontSize: '0.875rem',
-  color: '#1f2937',
-  fontWeight: 500,
-  marginLeft: 'auto'
-});
-
-const ProgressSection = styled(Box)({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '4px'
-});
-
-const TimeDisplay = styled(Typography)({
-  fontSize: '1.5rem',
-  fontWeight: 600,
-  color: '#7c4dff',
-  textAlign: 'center',
-  marginTop: '8px'
-});
-
-const LevelButton = styled(Button)(({ theme }) => ({
-  padding: '6px 12px',
-  minWidth: '48px',
-  fontSize: '0.875rem',
-  color: '#666',
-  backgroundColor: '#fff',
-  border: '1px solid #e2e8f0',
+  padding: '16px 12px',
+  gap: '8px',
+  '& .nav-text': {
+    opacity: 0,
+    transform: 'translateX(-10px)',
+    transition: 'all 0.3s ease-in-out'
+  },
+  '& .user-name': {
+    opacity: 0,
+    transform: 'translateX(-10px)',
+    transition: 'all 0.3s ease-in-out'
+  },
   '&:hover': {
-    backgroundColor: '#f8fafc',
-    borderColor: '#7c4dff',
+    width: 240,
+    '& .nav-text, & .user-name': {
+      opacity: 1,
+      transform: 'translateX(0)'
+    },
+    '& + .main-content': {
+      marginLeft: 240
+    }
+  },
+  [theme.breakpoints.down('sm')]: {
+    display: 'none'
+  }
+}));
+
+const UserSection = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '12px',
+  padding: '8px',
+  marginBottom: '16px',
+  borderRadius: '12px',
+  cursor: 'pointer',
+  transition: 'background-color 0.2s ease',
+  '&:hover': {
+    backgroundColor: 'rgba(124, 77, 255, 0.04)'
+  }
+});
+
+const NavItem = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '12px',
+  padding: '12px',
+  borderRadius: '12px',
+  cursor: 'pointer',
+  transition: 'all 0.2s ease',
+  color: '#6F767E',
+  position: 'relative',
+  '&:hover': {
+    backgroundColor: 'rgba(124, 77, 255, 0.04)',
+    color: '#7c4dff'
+  },
+  '.MuiSvgIcon-root': {
+    width: 24,
+    height: 24,
+    flexShrink: 0
+  },
+  '.nav-text': {
+    fontSize: '0.9375rem',
+    fontWeight: 500,
+    whiteSpace: 'nowrap',
+    opacity: 0,
+    transform: 'translateX(-10px)',
+    transition: 'all 0.3s ease-in-out',
+    color: 'inherit'
   },
   '&.active': {
-    backgroundColor: '#7c4dff',
-    color: '#fff',
-    borderColor: '#7c4dff',
-    '&:hover': {
-      backgroundColor: '#6b3fff',
-    }
+    color: '#7c4dff',
+    backgroundColor: 'rgba(124, 77, 255, 0.08)',
+    fontWeight: 600
   }
 }));
 
-function SidebarComponent({ 
-  confidence = 0,
-  srsStats = {
-    new: 12,
-    learning: 34,
-    graduated: 8,
-    buried: 2,
-    suspended: 0
-  }
-}) {
-  const [level, setLevel] = useState<'N5' | 'N4' | 'N3' | 'N2' | 'N1'>('N5');
+const navItems = [
+  { icon: <Home />, label: 'Dashboard', path: '/dashboard' },
+  { icon: <School />, label: 'Kanji', path: '/learn/kanji' },
+  { icon: <MenuBook />, label: 'Vocabulary', path: '/learn/vocabulary' },
+  { icon: <Translate />, label: 'Grammar', path: '/learn/grammar' },
+  { icon: <AutoStories />, label: 'Reading', path: '/learn/reading' },
+  { icon: <Quiz />, label: 'Mock Exam', path: '/mock-exam' },
+  { icon: <Assignment />, label: 'Progress', path: '/progress' },
+  { icon: <Insights />, label: 'Analytics', path: '/analytics' },
+  { icon: <Settings />, label: 'Settings', path: '/settings' },
+  { icon: <Help />, label: 'Help', path: '/help' }
+];
+
+function SidebarComponent({ expanded, onExpandedChange }: { expanded: boolean; onExpandedChange: (expanded: boolean) => void }) {
   const router = useRouter();
+  const pathname = usePathname();
+  const [userName, setUserName] = useState<string>('');
+  const supabase = createClientComponentClient();
+  const { level } = useJlptLevel();
+
+  useEffect(() => {
+    async function getUserProfile() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user?.user_metadata?.full_name) {
+        setUserName(user.user_metadata.full_name);
+      } else if (user?.email) {
+        setUserName(user.email.split('@')[0]);
+      }
+    }
+    getUserProfile();
+  }, [supabase]);
 
   return (
-    <Sidebar>
-      <NavigationSection>
-        <Button
-          startIcon={<ArrowBack />}
-          onClick={() => router.push('/dashboard')}
-          sx={{ 
-            color: '#7c4dff',
-            minWidth: 'auto',
-            p: 1,
-            mb: 2
-          }}
+    <Sidebar
+      onMouseEnter={() => onExpandedChange(true)}
+      onMouseLeave={() => onExpandedChange(false)}
+    >
+      <UserSection>
+        <AccountCircle sx={{ width: 32, height: 32, color: '#7c4dff' }} />
+        <Box sx={{ opacity: expanded ? 1 : 0 }}>
+          <Box className="user-name" sx={{ fontWeight: 600 }}>{userName}</Box>
+          <Box className="user-name" sx={{ fontSize: '0.875rem', color: '#6F767E' }}>{level}</Box>
+        </Box>
+      </UserSection>
+
+      {navItems.map((item) => (
+        <NavItem
+          key={item.path}
+          className={pathname === item.path ? 'active' : ''}
+          onClick={() => router.push(item.path)}
         >
-          Dashboard
-        </Button>
-
-        <Box sx={{ mb: 3 }}>
-          <Typography variant="subtitle2" sx={{ mb: 1, color: '#666', fontWeight: 500 }}>
-            JLPT Level
-          </Typography>
-          <ButtonGroup variant="outlined" fullWidth>
-            {['N5', 'N4', 'N3', 'N2', 'N1'].map((jlptLevel) => (
-              <LevelButton
-                key={jlptLevel}
-                className={level === jlptLevel ? 'active' : ''}
-                onClick={() => setLevel(jlptLevel as 'N5' | 'N4' | 'N3' | 'N2' | 'N1')}
-              >
-                {jlptLevel}
-              </LevelButton>
-            ))}
-          </ButtonGroup>
-        </Box>
-      </NavigationSection>
-
-      <SrsSection>
-        <SectionTitle>SRS Status</SectionTitle>
-        <SrsBar>
-          <SrsLabel>New</SrsLabel>
-          <LinearProgress 
-            variant="determinate" 
-            value={(srsStats.new / 50) * 100} 
-            sx={{ 
-              flexGrow: 1,
-              height: 6,
-              borderRadius: 3,
-              backgroundColor: '#e8e3ff',
-              '& .MuiLinearProgress-bar': {
-                backgroundColor: '#7c4dff'
-              }
-            }} 
-          />
-          <SrsCount>{srsStats.new}</SrsCount>
-        </SrsBar>
-        <SrsBar>
-          <SrsLabel>Learning</SrsLabel>
-          <LinearProgress 
-            variant="determinate" 
-            value={(srsStats.learning / 50) * 100}
-            sx={{ 
-              flexGrow: 1,
-              height: 6,
-              borderRadius: 3,
-              backgroundColor: '#fff3e0',
-              '& .MuiLinearProgress-bar': {
-                backgroundColor: '#ff9100'
-              }
-            }} 
-          />
-          <SrsCount>{srsStats.learning}</SrsCount>
-        </SrsBar>
-        <SrsBar>
-          <SrsLabel>Mastered</SrsLabel>
-          <LinearProgress 
-            variant="determinate" 
-            value={(srsStats.graduated / 50) * 100}
-            sx={{ 
-              flexGrow: 1,
-              height: 6,
-              borderRadius: 3,
-              backgroundColor: '#e0f2f1',
-              '& .MuiLinearProgress-bar': {
-                backgroundColor: '#00bfa5'
-              }
-            }} 
-          />
-          <SrsCount>{srsStats.graduated}</SrsCount>
-        </SrsBar>
-      </SrsSection>
-
-      <Box sx={{ mt: 3 }}>
-        <SectionTitle>Reviews</SectionTitle>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-          <Typography variant="body2" sx={{ color: '#7c4dff', fontWeight: 500 }}>
-            Due now: 15
-          </Typography>
-          <Typography variant="body2" sx={{ color: '#666' }}>
-            Due later today: 8
-          </Typography>
-          <Typography variant="body2" sx={{ color: '#666' }}>
-            Due tomorrow: 23
-          </Typography>
-        </Box>
-      </Box>
+          {item.icon}
+          <span className="nav-text">{item.label}</span>
+        </NavItem>
+      ))}
     </Sidebar>
   );
 }
@@ -287,10 +194,12 @@ export default function LearnLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <LayoutRoot>
-      <SidebarComponent confidence={20} srsStats={{ new: 12, learning: 34, graduated: 8, buried: 2, suspended: 0 }} />
-      <MainContent>
+      <SidebarComponent expanded={isExpanded} onExpandedChange={setIsExpanded} />
+      <MainContent className={`main-content ${isExpanded ? 'sidebar-expanded' : ''}`}>
         {children}
       </MainContent>
     </LayoutRoot>

@@ -18,3 +18,14 @@ export interface Word {
   examples?: Example[];
   level: 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
 }
+
+export interface VocabularyData {
+  id: string;
+  word: string;
+  reading: string;
+  meaning: string;
+  jlptLevel: string;
+  partOfSpeech: string;
+  frequencyRank: number;
+  tags: string[];
+}

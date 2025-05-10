@@ -33,19 +33,6 @@ export interface KanjiExample {
   focus_word: string;
 }
 
-export interface KanjiData {
-  id: number;
-  kanji: string;
-  reading: string;
-  meaning: string;
-  level: string;
-  onyomi: string[];
-  onyomi_katakana: string[];
-  kunyomi: string[];
-  kunyomi_hiragana: string[];
-  examples: KanjiExample[];
-}
-
 export interface CompoundWord {
   word: string;
   reading: string;
@@ -53,6 +40,20 @@ export interface CompoundWord {
   level: string;
 }
 
+export interface KanjiData {
+  id: number;
+  kanji: string;
+  reading: string;
+  meaning: string;
+  level: string;
+  onyomi: readonly string[];
+  onyomi_katakana: readonly string[];
+  kunyomi: readonly string[];
+  kunyomi_hiragana: readonly string[];
+  examples: readonly KanjiExample[];
+  compounds: readonly (CompoundWord & { correct: boolean })[];
+}
+
 export interface KanjiQuestion extends KanjiData {
-  compounds: (CompoundWord & { correct: boolean })[];
+  correct: boolean;
 }
