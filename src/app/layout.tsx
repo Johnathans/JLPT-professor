@@ -9,6 +9,7 @@ import { usePathname } from 'next/navigation';
 import { JlptLevelProvider } from '@/contexts/JlptLevelContext';
 import { StudySessionProvider } from '@/contexts/StudySessionContext';
 import { ColorModeProvider } from '@/contexts/ThemeContext';
+import { StudyProgressProvider } from '@/contexts/StudyProgressContext';
 import Script from 'next/script';
 
 const inter = Inter({ 
@@ -112,15 +113,17 @@ export default function RootLayout({
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <JlptLevelProvider>
-              <StudySessionProvider>
-                {isCustomLayout ? (
-                  children
-                ) : isPublicRoute ? (
-                  <PublicLayout>{children}</PublicLayout>
-                ) : (
-                  children
-                )}
-              </StudySessionProvider>
+              <StudyProgressProvider>
+                <StudySessionProvider>
+                  {isCustomLayout ? (
+                    children
+                  ) : isPublicRoute ? (
+                    <PublicLayout>{children}</PublicLayout>
+                  ) : (
+                    children
+                  )}
+                </StudySessionProvider>
+              </StudyProgressProvider>
             </JlptLevelProvider>
           </ThemeProvider>
         </ColorModeProvider>

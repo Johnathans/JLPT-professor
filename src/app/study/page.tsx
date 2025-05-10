@@ -21,6 +21,8 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import { useRouter, usePathname } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useJlptLevel } from '@/hooks/useJlptLevel';
+import { useStudyProgress } from '@/contexts/StudyProgressContext';
+import { StudyMode, JlptLevel } from '@/types/study';
 import { useColorMode } from '@/contexts/ThemeContext';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
@@ -337,8 +339,7 @@ function SidebarComponent({
   );
 }
 
-type StudyMode = 'vocabulary' | 'sentences' | 'kanji-onyomi' | 'kanji-kunyomi' | 'kanji-meaning' | 'kanji-match';
-type JlptLevel = 'n1' | 'n2' | 'n3' | 'n4' | 'n5';
+// Using types imported from @/types/study
 
 interface VocabularyItem {
   id: string;
@@ -392,6 +393,9 @@ export default function StudyLayout() {
   const [sentenceData, setSentenceData] = useState<SentenceEntry[]>([]);
   const [kanjiData, setKanjiData] = useState<KanjiItem[]>([]);
   const [currentItem, setCurrentItem] = useState<number>(0);
+  
+  // Use the study progress context
+  const { getCurrentProgress, saveCurrentProgress, resetLevelProgress, resetAllProgress } = useStudyProgress();
   const [loading, setLoading] = useState<boolean>(true);
   const [choices, setChoices] = useState<string[]>([]);
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState<number>(0);
@@ -406,29 +410,40 @@ export default function StudyLayout() {
   };
 
   const handleStudyModeChange = (mode: StudyMode) => {
+    // Save current progress before switching modes
+    saveCurrentProgress(studyMode, jlptLevel, currentItem);
+    
+    // Get saved progress for the new mode
+    const savedProgress = getCurrentProgress(mode, jlptLevel);
+    console.log(`Switching to ${mode}, saved progress: ${savedProgress}`);
+    
+    // Update the mode
     setStudyMode(mode);
     setSettingsAnchor(null);
-    setCurrentItem(0);
     
     // Reset accuracy counters
     setAccuracy(0);
     setTotalAnswered(0);
     setCorrectAnswers(0);
     
-    // Load appropriate data based on mode
+    // Load appropriate data based on mode, passing the saved progress
     if (mode === 'vocabulary') {
-      loadVocabularyData(jlptLevel);
+      loadVocabularyData(jlptLevel, savedProgress);
     } else if (mode === 'sentences') {
-      loadSentenceData(jlptLevel);
+      loadSentenceData(jlptLevel, savedProgress);
     } else if (mode.startsWith('kanji')) {
       // Pass the mode explicitly to ensure it's used immediately
-      loadKanjiData(jlptLevel, mode);
+      loadKanjiData(jlptLevel, mode, savedProgress);
     }
   };
   
   // Handle level selection
   const handleLevelChange = (level: JlptLevel) => {
+    // Reset progress for the selected level
+    resetLevelProgress(level);
+    
     setJlptLevel(level);
+    setCurrentItem(0);
     // Removed handleSettingsClose() to keep menu open after level selection
     
     // Reset accuracy counters
@@ -438,17 +453,17 @@ export default function StudyLayout() {
     
     // Load appropriate data based on study mode
     if (studyMode === 'vocabulary') {
-      loadVocabularyData(level);
+      loadVocabularyData(level, 0);
     } else if (studyMode === 'sentences') {
-      loadSentenceData(level);
+      loadSentenceData(level, 0);
     } else if (studyMode.startsWith('kanji')) {
       // Pass the current study mode explicitly to ensure it's used immediately
-      loadKanjiData(level, studyMode);
+      loadKanjiData(level, studyMode, 0);
     }
   };
   
   // Function to load vocabulary data for the selected JLPT level
-  const loadVocabularyData = async (level: JlptLevel) => {
+  const loadVocabularyData = async (level: JlptLevel, startIndex?: number) => {
     setLoading(true);
     try {
       const response = await fetch(`/api/study/vocabulary?level=${level}`);
@@ -457,8 +472,11 @@ export default function StudyLayout() {
       }
       const data = await response.json();
       setVocabularyData(data);
-      setCurrentItem(0);
-      generateVocabularyChoices(data, 0);
+      // Use startIndex if provided and valid, otherwise start from 0
+      const validStartIndex = startIndex !== undefined && startIndex < data.length ? startIndex : 0;
+      console.log(`loadVocabularyData: using startIndex ${validStartIndex} (from ${startIndex})`);
+      setCurrentItem(validStartIndex);
+      generateVocabularyChoices(data, validStartIndex);
       setRemainingCards(data.length);
     } catch (error) {
       console.error('Error loading vocabulary data:', error);
@@ -468,7 +486,7 @@ export default function StudyLayout() {
   };
   
   // Function to load kanji data for the selected JLPT level
-  const loadKanjiData = async (level: JlptLevel, mode?: StudyMode) => {
+  const loadKanjiData = async (level: JlptLevel, mode?: StudyMode, startIndex?: number) => {
     setLoading(true);
     try {
       const response = await fetch(`/api/study/kanji?level=${level}`);
@@ -477,11 +495,14 @@ export default function StudyLayout() {
       }
       const data = await response.json();
       setKanjiData(data);
-      setCurrentItem(0);
+      // Use startIndex if provided and valid, otherwise start from 0
+      const validStartIndex = startIndex !== undefined && startIndex < data.length ? startIndex : 0;
+      console.log(`loadKanjiData: using startIndex ${validStartIndex} (from ${startIndex})`);
+      setCurrentItem(validStartIndex);
       // Use the passed mode parameter if provided, otherwise use the current studyMode
       const modeToUse = mode || studyMode;
       console.log('Loading kanji data with mode:', modeToUse);
-      generateKanjiChoices(data, 0, modeToUse);
+      generateKanjiChoices(data, validStartIndex, modeToUse);
       setRemainingCards(data.length);
     } catch (error) {
       console.error('Error loading kanji data:', error);
@@ -491,7 +512,7 @@ export default function StudyLayout() {
   };
   
   // Function to load sentence data for the selected JLPT level
-  const loadSentenceData = async (level: JlptLevel) => {
+  const loadSentenceData = async (level: JlptLevel, startIndex?: number) => {
     setLoading(true);
     try {
       const response = await fetch(`/api/study/sentences?level=${level}`);
@@ -500,8 +521,11 @@ export default function StudyLayout() {
       }
       const data = await response.json();
       setSentenceData(data);
-      setCurrentItem(0);
-      generateSentenceChoices(data, 0);
+      // Use startIndex if provided and valid, otherwise start from 0
+      const validStartIndex = startIndex !== undefined && startIndex < data.length ? startIndex : 0;
+      console.log(`loadSentenceData: using startIndex ${validStartIndex} (from ${startIndex})`);
+      setCurrentItem(validStartIndex);
+      generateSentenceChoices(data, validStartIndex);
       setRemainingCards(data.length);
     } catch (error) {
       console.error('Error loading sentence data:', error);
@@ -756,6 +780,10 @@ export default function StudyLayout() {
         setCurrentItem(nextItem);
         setRemainingCards(dataLength - nextItem);
         
+        // Save progress to context
+        saveCurrentProgress(studyMode, jlptLevel, nextItem);
+        console.log(`Updated progress for ${studyMode} to ${nextItem}`);
+        
         // Generate new choices for the next item
         if (studyMode === 'vocabulary') {
           generateVocabularyChoices(vocabularyData, nextItem);
@@ -770,11 +798,28 @@ export default function StudyLayout() {
   
   // Load initial data when component mounts
   useEffect(() => {
+    // Get saved progress for the current mode
+    const savedProgress = getCurrentProgress(studyMode, jlptLevel);
+    console.log(`Initial load for ${studyMode}, saved progress: ${savedProgress}`);
+    
     if (studyMode === 'vocabulary') {
-      loadVocabularyData(jlptLevel);
+      loadVocabularyData(jlptLevel, savedProgress);
+    } else if (studyMode === 'sentences') {
+      loadSentenceData(jlptLevel, savedProgress);
     } else if (studyMode.startsWith('kanji')) {
-      loadKanjiData(jlptLevel);
+      loadKanjiData(jlptLevel, studyMode, savedProgress);
     }
+    
+    // Reset progress when navigating away from the study page
+    return () => {
+      if (typeof window !== 'undefined') {
+        const currentPath = window.location.pathname;
+        if (!currentPath.includes('/study')) {
+          // Reset all progress when navigating away from study page
+          resetAllProgress();
+        }
+      }
+    };
   }, []);
 
   const renderQuestion = () => {
