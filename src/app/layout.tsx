@@ -77,7 +77,7 @@ export default function RootLayout({
   const isPublicRoute = !isCustomLayout && matchRoute(pathname || '', publicRoutes);
 
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable} ${notoSansJP.variable}`}>
+    <html lang="en" className={`${inter.variable} ${poppins.variable} ${notoSansJP.variable}`} suppressHydrationWarning>
       <head>
         <meta name="google-site-verification" content="DjXH6N1fV_93QxiTStPwWgYW0RE1gRffr1FZxjDqT4g" />
         <link

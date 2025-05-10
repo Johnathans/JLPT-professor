@@ -27,14 +27,18 @@ import Navbar from '@/components/Navbar';
 import styles from '@/styles/dashboard.module.css';
 import { SentenceEntry } from '@/types/sentence';
 
-const LayoutRoot = styled('div')(({ theme, darkMode }: { theme?: any, darkMode: boolean }) => ({
+const LayoutRoot = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'darkMode',
+})(({ theme, darkMode }: { theme?: any, darkMode: boolean }) => ({
   minHeight: '100vh',
   display: 'flex',
   backgroundColor: darkMode ? '#121212' : '#f3f4f6',
   transition: 'background-color 0.2s ease'
 }));
 
-const Sidebar = styled(Box)(({ expanded, darkMode }: { expanded: boolean, darkMode: boolean }) => ({
+const Sidebar = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'expanded' && prop !== 'darkMode',
+})(({ expanded, darkMode }: { expanded: boolean, darkMode: boolean }) => ({
   width: expanded ? 240 : 72,
   backgroundColor: darkMode ? '#1e1e1e' : '#fff',
   borderRight: `1px solid ${darkMode ? '#333' : '#e5e7eb'}`,
@@ -50,7 +54,9 @@ const Sidebar = styled(Box)(({ expanded, darkMode }: { expanded: boolean, darkMo
   }
 }));
 
-const MainContent = styled(Box)(({ sidebarExpanded, darkMode }: { sidebarExpanded: boolean, darkMode: boolean }) => ({
+const MainContent = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'sidebarExpanded' && prop !== 'darkMode',
+})(({ sidebarExpanded, darkMode }: { sidebarExpanded: boolean, darkMode: boolean }) => ({
   flexGrow: 1,
   marginLeft: sidebarExpanded ? 240 : 72,
   padding: '24px 40px 40px',
@@ -115,7 +121,9 @@ const StatItem = styled(Box)({
   }
 });
 
-const ContentCard = styled(Box)(({ darkMode }: { darkMode: boolean }) => ({
+const ContentCard = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'darkMode',
+})(({ darkMode }: { darkMode: boolean }) => ({
   backgroundColor: darkMode ? '#1e1e1e' : '#fff',
   borderRadius: '20px',
   padding: '48px',
@@ -137,7 +145,9 @@ const ContentCard = styled(Box)(({ darkMode }: { darkMode: boolean }) => ({
   }
 }));
 
-const JapaneseSentence = styled(Box)(({ darkMode }: { darkMode: boolean }) => ({
+const JapaneseSentence = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'darkMode',
+})(({ darkMode }: { darkMode: boolean }) => ({
   fontSize: '42px',
   lineHeight: 1.7,
   textAlign: 'center',
@@ -154,7 +164,9 @@ const JapaneseSentence = styled(Box)(({ darkMode }: { darkMode: boolean }) => ({
   }
 }));
 
-const EnglishTranslation = styled(Box)(({ darkMode }: { darkMode: boolean }) => ({
+const EnglishTranslation = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'darkMode',
+})(({ darkMode }: { darkMode: boolean }) => ({
   fontSize: '20px',
   color: darkMode ? '#aaa' : '#6F767E',
   textAlign: 'center',
@@ -189,7 +201,9 @@ const MatchGrid = styled(Box)({
   }
 });
 
-const MatchCard = styled(Box)<{ isSelected?: boolean; isCorrect?: boolean; isIncorrect?: boolean; darkMode: boolean }>(({ isSelected, isCorrect, isIncorrect, darkMode }) => ({
+const MatchCard = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'isSelected' && prop !== 'isCorrect' && prop !== 'isIncorrect' && prop !== 'darkMode',
+})<{ isSelected?: boolean; isCorrect?: boolean; isIncorrect?: boolean; darkMode: boolean }>(({ isSelected, isCorrect, isIncorrect, darkMode }) => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -209,7 +223,9 @@ const MatchCard = styled(Box)<{ isSelected?: boolean; isCorrect?: boolean; isInc
   }
 }));
 
-const ChoiceButton = styled(Button)<{ correct?: boolean; incorrect?: boolean; darkMode?: boolean }>(
+const ChoiceButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== 'correct' && prop !== 'incorrect' && prop !== 'darkMode',
+})<{ correct?: boolean; incorrect?: boolean; darkMode?: boolean }>(
   ({ correct, incorrect, darkMode }) => ({
     width: '100%',
     justifyContent: 'center',
