@@ -189,7 +189,7 @@ const MatchGrid = styled(Box)({
   }
 });
 
-const MatchCard = styled(Box)<{ isSelected?: boolean; isCorrect?: boolean; darkMode: boolean }>(({ isSelected, isCorrect, darkMode }) => ({
+const MatchCard = styled(Box)<{ isSelected?: boolean; isCorrect?: boolean; isIncorrect?: boolean; darkMode: boolean }>(({ isSelected, isCorrect, isIncorrect, darkMode }) => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -200,12 +200,12 @@ const MatchCard = styled(Box)<{ isSelected?: boolean; isCorrect?: boolean; darkM
   transition: 'all 0.2s ease',
   fontSize: '32px',
   fontFamily: '"Noto Sans JP", sans-serif',
-  backgroundColor: isCorrect ? '#f2fcfa' : darkMode ? '#383838' : '#f3f4f6',
-  border: `1px solid ${isCorrect ? '#e8faf3' : darkMode ? '#444' : '#e5e7eb'}`,
-  color: darkMode && !isCorrect ? '#fff' : '#1f2937',
+  backgroundColor: isCorrect ? '#f2fcfa' : isIncorrect ? '#fff1f0' : darkMode ? '#383838' : '#f3f4f6',
+  border: `1px solid ${isCorrect ? '#e8faf3' : isIncorrect ? '#ffccc7' : darkMode ? '#444' : '#e5e7eb'}`,
+  color: darkMode && !isCorrect && !isIncorrect ? '#fff' : '#1f2937',
   position: 'relative',
   '&:hover': {
-    backgroundColor: isCorrect ? '#f2fcfa' : darkMode ? '#444' : '#e9ebef',
+    backgroundColor: isCorrect ? '#f2fcfa' : isIncorrect ? '#fff1f0' : darkMode ? '#444' : '#e9ebef',
   }
 }));
 
@@ -885,7 +885,7 @@ export default function StudyLayout() {
                 key={index}
                 darkMode={isDarkMode}
                 isCorrect={showingFeedback && index === correctAnswerIndex}
-                isSelected={showingFeedback && index === selectedAnswer}
+                isIncorrect={showingFeedback && index === selectedAnswer && index !== correctAnswerIndex}
                 onClick={() => handleAnswerSelection(index)}
               >
                 {choice}
@@ -900,6 +900,19 @@ export default function StudyLayout() {
                     }}
                   >
                     <CheckIcon fontSize="small" />
+                  </Box>
+                )}
+                {showingFeedback && index === selectedAnswer && index !== correctAnswerIndex && (
+                  <Box 
+                    sx={{ 
+                      position: 'absolute', 
+                      top: '8px', 
+                      right: '8px',
+                      color: '#f5222d',
+                      display: 'flex'
+                    }}
+                  >
+                    <CloseIcon fontSize="small" />
                   </Box>
                 )}
               </MatchCard>
