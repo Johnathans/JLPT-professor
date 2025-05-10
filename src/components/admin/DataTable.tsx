@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Table,
@@ -31,7 +31,7 @@ interface Column {
   label: string;
   minWidth?: number;
   align?: 'right' | 'left' | 'center';
-  format?: (value: any) => string;
+  format?: (value: any) => string | React.ReactNode;
 }
 
 interface DataTableProps<T> {

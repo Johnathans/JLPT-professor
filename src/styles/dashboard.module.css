@@ -5,7 +5,8 @@
   transition: background-color 0.3s ease;
 }
 
-:global(.dark-mode) {
+/* Global dark mode styles are now handled in globals.css */
+.darkModeStyles {
   background-color: #121212;
   color: #fff;
 }

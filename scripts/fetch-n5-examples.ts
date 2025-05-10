@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const { n5KanjiComplete } = require('../src/data/n5-kanji-complete');
+import * as fs from 'fs';
+import * as path from 'path';
+import { n5KanjiComplete } from '../src/data/n5-kanji-complete';
 
 const TATOEBA_API = 'https://tatoeba.org/en/api_v0/search';
 const EXAMPLES_PER_KANJI = 3;
@@ -71,11 +71,9 @@ async function main() {
  * Auto-generated on ${new Date().toISOString()}
  */
 
-const KanjiData = require('@/types/word').KanjiData;
+import { KanjiData } from '@/types/word';
 
-export = {
-  n5KanjiWithExamples: ${JSON.stringify(updatedKanji, null, 2)}
-};
+export const n5KanjiWithExamples = ${JSON.stringify(updatedKanji, null, 2)};
 `;
 
   fs.writeFileSync(outputPath, fileContent);
