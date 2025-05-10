@@ -404,7 +404,8 @@ export default function StudyLayout() {
     } else if (mode === 'sentences') {
       loadSentenceData(jlptLevel);
     } else if (mode.startsWith('kanji')) {
-      loadKanjiData(jlptLevel);
+      // Pass the mode explicitly to ensure it's used immediately
+      loadKanjiData(jlptLevel, mode);
     }
   };
   
@@ -424,7 +425,8 @@ export default function StudyLayout() {
     } else if (studyMode === 'sentences') {
       loadSentenceData(level);
     } else if (studyMode.startsWith('kanji')) {
-      loadKanjiData(level);
+      // Pass the current study mode explicitly to ensure it's used immediately
+      loadKanjiData(level, studyMode);
     }
   };
   
@@ -449,7 +451,7 @@ export default function StudyLayout() {
   };
   
   // Function to load kanji data for the selected JLPT level
-  const loadKanjiData = async (level: JlptLevel) => {
+  const loadKanjiData = async (level: JlptLevel, mode?: StudyMode) => {
     setLoading(true);
     try {
       const response = await fetch(`/api/study/kanji?level=${level}`);
@@ -459,7 +461,10 @@ export default function StudyLayout() {
       const data = await response.json();
       setKanjiData(data);
       setCurrentItem(0);
-      generateKanjiChoices(data, 0, studyMode);
+      // Use the passed mode parameter if provided, otherwise use the current studyMode
+      const modeToUse = mode || studyMode;
+      console.log('Loading kanji data with mode:', modeToUse);
+      generateKanjiChoices(data, 0, modeToUse);
       setRemainingCards(data.length);
     } catch (error) {
       console.error('Error loading kanji data:', error);
