@@ -66,7 +66,7 @@ const MainContent = styled(Box, {
   transition: 'margin-left 0.2s ease',
   display: 'flex',
   flexDirection: 'column',
-  gap: '24px',
+  gap: '12px',
   maxWidth: '1400px',
   '@media (max-width: 900px)': {
     marginLeft: 0,
@@ -81,7 +81,7 @@ const TopBar = styled(Box)({
   width: '100%',
   maxWidth: '900px',
   margin: '0 auto',
-  marginBottom: '16px',
+  marginBottom: '8px',
   '@media (max-width: 900px)': {
     padding: '0 4px'
   }
@@ -100,7 +100,6 @@ const StatsBar = styled(Box)({
   justifyContent: 'space-between',
   alignItems: 'center',
   padding: '16px 32px',
-  borderBottom: '1px solid #e5e7eb',
   width: '100%',
   maxWidth: '900px',
   margin: '0 auto',
