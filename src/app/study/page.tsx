@@ -27,7 +27,7 @@ import { useColorMode } from '@/contexts/ThemeContext';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import styles from '@/styles/dashboard.module.css';
-import { playCorrectSound, playWrongSound } from '@/utils/soundEffects';
+import { playCorrectSound, playWrongSound, playFlipSound } from '@/utils/soundEffects';
 import { SentenceEntry } from '@/types/sentence';
 
 const LayoutRoot = styled('div', {
@@ -370,7 +370,10 @@ const StudyModeLabels: Record<StudyMode, string> = {
   'kanji-onyomi': 'Kanji On\'yomi',
   'kanji-kunyomi': 'Kanji Kun\'yomi',
   'kanji-meaning': 'Kanji Meaning',
-  'kanji-match': 'Kanji Match'
+  'kanji-match': 'Kanji Match',
+  'flashcard-vocabulary': 'Vocabulary Flashcards',
+  'flashcard-kanji': 'Kanji Flashcards',
+  'flashcard-sentences': 'Sentence Flashcards'
 };
 
 export default function StudyLayout() {
@@ -399,6 +402,13 @@ export default function StudyLayout() {
   const [choices, setChoices] = useState<string[]>([]);
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState<number>(0);
   const [currentQuestion, setCurrentQuestion] = useState<string>('');
+  
+  // Flashcard specific state
+  const [isFlipped, setIsFlipped] = useState(false);
+  
+  // State for tracking selected answer and showing feedback
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [showingFeedback, setShowingFeedback] = useState(false);
 
   const handleSettingsClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setSettingsAnchor(event.currentTarget);
@@ -433,14 +443,18 @@ export default function StudyLayout() {
     setAccuracy(savedMetrics.accuracy);
     setRemainingCards(savedMetrics.remainingCards);
     
+    // Reset flashcard state when changing modes
+    setIsFlipped(false);
+  
     // Load appropriate data based on mode, passing the saved progress
-    if (mode === 'vocabulary') {
+    if (mode === 'vocabulary' || mode === 'flashcard-vocabulary') {
       loadVocabularyData(jlptLevel, savedMetrics.currentItem);
-    } else if (mode === 'sentences') {
+    } else if (mode === 'sentences' || mode === 'flashcard-sentences') {
       loadSentenceData(jlptLevel, savedMetrics.currentItem);
     } else if (mode.startsWith('kanji')) {
       // Pass the mode explicitly to ensure it's used immediately
-      loadKanjiData(jlptLevel, mode, savedMetrics.currentItem);
+      const kanjiMode = mode === 'flashcard-kanji' ? 'kanji-meaning' : mode;
+      loadKanjiData(jlptLevel, kanjiMode, savedMetrics.currentItem);
     }
   };
   
@@ -696,9 +710,7 @@ export default function StudyLayout() {
     setCorrectAnswerIndex(shuffledChoices.indexOf(correctAnswer));
   };
   
-  // State for tracking selected answer and showing feedback
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-  const [showingFeedback, setShowingFeedback] = useState(false);
+  // State for audio loading
   const [isAudioLoading, setIsAudioLoading] = useState(false); // For sentence audio playback
   
   // Function to play sentence audio using Google TTS
@@ -890,6 +902,228 @@ export default function StudyLayout() {
     };
   }, []);
 
+  // Render flashcard
+  const renderFlashcard = () => {
+    if (loading) {
+      return (
+        <Typography sx={{ textAlign: 'center', fontSize: '24px', color: isDarkMode ? '#fff' : '#1f2937' }}>
+          Loading...
+        </Typography>
+      );
+    }
+    
+    // Check if data is available
+    if ((studyMode === 'flashcard-vocabulary' && (!vocabularyData || vocabularyData.length === 0 || currentItem >= vocabularyData.length)) ||
+        (studyMode === 'flashcard-sentences' && (!sentenceData || sentenceData.length === 0 || currentItem >= sentenceData.length)) ||
+        (studyMode === 'flashcard-kanji' && (!kanjiData || kanjiData.length === 0 || currentItem >= kanjiData.length))) {
+      return (
+        <Box sx={{ textAlign: 'center', padding: 4 }}>
+          <Typography variant="h5" sx={{ color: isDarkMode ? '#fff' : '#1f2937', marginBottom: 2 }}>
+            No data available for this mode
+          </Typography>
+          <Typography sx={{ color: isDarkMode ? '#bbb' : '#6b7280' }}>
+            Please try selecting a different JLPT level or study mode
+          </Typography>
+        </Box>
+      );
+    }
+    
+    let content;
+    let meaning;
+    
+    if (studyMode === 'flashcard-vocabulary' && vocabularyData && vocabularyData[currentItem]) {
+      const item = vocabularyData[currentItem];
+      content = (
+        <Box sx={{ textAlign: 'center', padding: 2 }}>
+          <Typography variant="h4" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937' }}>
+            {item.word || 'N/A'}
+          </Typography>
+          <Typography variant="h6" sx={{ color: isDarkMode ? '#bbb' : '#6b7280' }}>
+            {item.reading || 'N/A'}
+          </Typography>
+        </Box>
+      );
+      meaning = item.meaning || 'No meaning available';
+    } else if (studyMode === 'flashcard-sentences' && sentenceData && sentenceData[currentItem]) {
+      const item = sentenceData[currentItem];
+      content = (
+        <Box sx={{ textAlign: 'center', padding: 2 }}>
+          <Typography variant="h5" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937' }}>
+            {item.japanese || 'N/A'}
+          </Typography>
+        </Box>
+      );
+      meaning = item.english || 'No translation available';
+    } else if (studyMode === 'flashcard-kanji' && kanjiData && kanjiData[currentItem]) {
+      const item = kanjiData[currentItem];
+      content = (
+        <Box sx={{ textAlign: 'center', padding: 2 }}>
+          <Typography variant="h3" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937' }}>
+            {item.kanji || 'N/A'}
+          </Typography>
+        </Box>
+      );
+      meaning = `${item.meanings?.[0] || 'No meaning'} (${item.onyomi?.[0] || 'N/A'} / ${item.kunyomi?.[0] || 'N/A'})`;
+    } else {
+      // Fallback content if something unexpected happens
+      content = (
+        <Box sx={{ textAlign: 'center', padding: 2 }}>
+          <Typography variant="h5" sx={{ color: isDarkMode ? '#fff' : '#1f2937' }}>
+            Error loading content
+          </Typography>
+        </Box>
+      );
+      meaning = 'Please try again or select a different mode';
+    }
+    
+    return (
+      <Box 
+        sx={{ 
+          border: '1px solid', 
+          borderColor: isDarkMode ? '#4b5563' : '#e5e7eb',
+          borderRadius: 2,
+          padding: 3,
+          backgroundColor: isDarkMode ? '#1f2937' : '#fff',
+          boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+          minHeight: '200px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          transition: 'all 0.3s ease',
+          margin: '0 auto',
+          maxWidth: '600px'
+        }}
+      >
+        {!isFlipped ? (
+          <>
+            {content}
+            <Button 
+              variant="contained" 
+              color="primary"
+              onClick={() => {
+                playFlipSound();
+                setIsFlipped(true);
+              }}
+              sx={{ 
+                marginTop: 2,
+                backgroundColor: '#7c4dff',
+                '&:hover': {
+                  backgroundColor: '#6b42e0'
+                }
+              }}
+            >
+              Show Meaning
+            </Button>
+          </>
+        ) : (
+          <>
+            <Typography variant="h5" sx={{ textAlign: 'center', marginBottom: 3, color: isDarkMode ? '#fff' : '#1f2937' }}>
+              {meaning}
+            </Typography>
+            <Box sx={{ display: 'flex', gap: 2 }}>
+              <Button 
+                variant="contained" 
+                color="error"
+                onClick={() => handleFlashcardAnswer(false)}
+                sx={{ 
+                  backgroundColor: '#f44336',
+                  '&:hover': {
+                    backgroundColor: '#d32f2f'
+                  }
+                }}
+              >
+                I Forgot This
+              </Button>
+              <Button 
+                variant="contained" 
+                color="success"
+                onClick={() => handleFlashcardAnswer(true)}
+                sx={{ 
+                  backgroundColor: '#4caf50',
+                  '&:hover': {
+                    backgroundColor: '#388e3c'
+                  }
+                }}
+              >
+                I Knew This
+              </Button>
+            </Box>
+          </>
+        )}
+      </Box>
+    );
+  };
+  
+  // Handle flashcard answer
+  const handleFlashcardAnswer = (knewAnswer: boolean) => {
+    try {
+      // Play sound based on user's self-assessment
+      if (knewAnswer) {
+        playCorrectSound();
+      } else {
+        playWrongSound();
+      }
+      
+      // Reset flip state for next card
+      setIsFlipped(false);
+      
+      // Get the appropriate data length based on mode
+      let dataLength = 0;
+      let hasValidData = false;
+      
+      if (studyMode === 'flashcard-vocabulary' && vocabularyData) {
+        dataLength = vocabularyData.length;
+        hasValidData = dataLength > 0;
+      } else if (studyMode === 'flashcard-sentences' && sentenceData) {
+        dataLength = sentenceData.length;
+        hasValidData = dataLength > 0;
+      } else if (studyMode === 'flashcard-kanji' && kanjiData) {
+        dataLength = kanjiData.length;
+        hasValidData = dataLength > 0;
+      }
+      
+      // Only proceed if we have valid data
+      if (hasValidData) {
+        // Move to next item
+        const nextItem = currentItem + 1;
+        
+        // Update accuracy
+        const newTotalAnswered = totalAnswered + 1;
+        const newCorrectAnswers = correctAnswers + (knewAnswer ? 1 : 0);
+        setTotalAnswered(newTotalAnswered);
+        setCorrectAnswers(newCorrectAnswers);
+        const newAccuracy = Math.round((newCorrectAnswers / newTotalAnswered) * 100);
+        setAccuracy(newAccuracy);
+        
+        // Save progress metrics
+        saveProgressMetrics(studyMode, jlptLevel, {
+          currentItem,
+          totalAnswered: newTotalAnswered,
+          correctAnswers: newCorrectAnswers,
+          accuracy: newAccuracy,
+          remainingCards: calculateRemainingCards(dataLength, currentItem)
+        });
+        
+        // Move to next card after a delay
+        setTimeout(() => {
+          if (nextItem < dataLength) {
+            setCurrentItem(nextItem);
+            setRemainingCards(calculateRemainingCards(dataLength, nextItem));
+          } else {
+            // We've reached the end of the data
+            console.log('Reached the end of the flashcards');
+            // You could add some UI feedback here to show completion
+          }
+        }, 1500);
+      } else {
+        console.error('No valid data available for the current study mode');
+      }
+    } catch (error) {
+      console.error('Error in handleFlashcardAnswer:', error);
+    }
+  };
+  
   const renderQuestion = () => {
     if (loading) {
       return (
@@ -897,6 +1131,11 @@ export default function StudyLayout() {
           Loading...
         </Typography>
       );
+    }
+    
+    // Handle flashcard modes
+    if (studyMode.startsWith('flashcard-')) {
+      return renderFlashcard();
     }
     
     switch (studyMode) {
@@ -1023,12 +1262,9 @@ export default function StudyLayout() {
   };
 
   const renderChoices = () => {
-    if (loading) {
-      return (
-        <Typography sx={{ textAlign: 'center' }}>
-          Loading choices...
-        </Typography>
-      );
+    // Don't show choices in flashcard mode
+    if (loading || studyMode.startsWith('flashcard-')) {
+      return null;
     }
     
     if (choices.length === 0) {
@@ -1315,7 +1551,7 @@ export default function StudyLayout() {
               {/* Show different options based on the selected tab */}
               {settingsTab === 'vocabulary' && (
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-                  {['vocabulary', 'sentences'].map((mode) => (
+                  {['vocabulary', 'sentences', 'flashcard-vocabulary', 'flashcard-sentences'].map((mode) => (
                     <Box
                       key={mode}
                       onClick={() => handleStudyModeChange(mode as StudyMode)}
@@ -1345,7 +1581,7 @@ export default function StudyLayout() {
               
               {settingsTab === 'kanji' && (
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-                  {['kanji-meaning', 'kanji-onyomi', 'kanji-kunyomi', 'kanji-match'].map((mode) => (
+                  {['kanji-meaning', 'kanji-onyomi', 'kanji-kunyomi', 'kanji-match', 'flashcard-kanji'].map((mode) => (
                     <Box
                       key={mode}
                       onClick={() => handleStudyModeChange(mode as StudyMode)}

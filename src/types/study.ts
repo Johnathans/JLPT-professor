@@ -1,4 +1,4 @@
-export type StudyMode = 'vocabulary' | 'sentences' | 'kanji-meaning' | 'kanji-onyomi' | 'kanji-kunyomi' | 'kanji-match';
+export type StudyMode = 'vocabulary' | 'sentences' | 'kanji-meaning' | 'kanji-onyomi' | 'kanji-kunyomi' | 'kanji-match' | 'flashcard-vocabulary' | 'flashcard-kanji' | 'flashcard-sentences';
 export type JlptLevel = 'n1' | 'n2' | 'n3' | 'n4' | 'n5';
 
 // Interface for tracking study progress metrics
