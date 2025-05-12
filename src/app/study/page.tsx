@@ -226,19 +226,21 @@ const MatchCard = styled(Box, {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  minHeight: '120px',
-  padding: '16px',
-  borderRadius: '12px',
+  minHeight: '140px',
+  padding: '20px',
+  borderRadius: '8px',
   cursor: 'pointer',
   transition: 'all 0.2s ease',
   fontSize: '32px',
   fontFamily: '"Noto Sans JP", sans-serif',
   backgroundColor: isCorrect ? '#f2fcfa' : isIncorrect ? '#fff1f0' : darkMode ? '#383838' : '#f3f4f6',
   border: `1px solid ${isCorrect ? '#e8faf3' : isIncorrect ? '#ffccc7' : darkMode ? '#444' : '#e5e7eb'}`,
+  borderBottom: isCorrect ? '4px solid #10b981' : isIncorrect ? '4px solid #f5222d' : '4px solid #7c4dff',
   color: darkMode && !isCorrect && !isIncorrect ? '#fff' : '#1f2937',
   position: 'relative',
   '&:hover': {
     backgroundColor: isCorrect ? '#f2fcfa' : isIncorrect ? '#fff1f0' : darkMode ? '#444' : '#e9ebef',
+    borderBottom: isCorrect ? '4px solid #0ca678' : isIncorrect ? '4px solid #e01e5a' : '4px solid #6b42e0',
   }
 }));
 
@@ -248,11 +250,11 @@ const ChoiceButton = styled(Button, {
   ({ correct, incorrect, darkMode }) => ({
     width: '100%',
     justifyContent: 'center',
-    padding: '20px 32px',
-    borderRadius: '12px',
+    padding: '18px 32px',
+    borderRadius: '8px',
     fontSize: '20px',
     fontFamily: '"Noto Sans JP", sans-serif',
-    fontWeight: 400,
+    fontWeight: 500,
     backgroundColor: correct ? '#4caf50' : 
                    incorrect ? '#f44336' : 
                    darkMode ? '#2d2d2d' : '#fff',
@@ -262,17 +264,25 @@ const ChoiceButton = styled(Button, {
     borderColor: correct ? '#4caf50' : 
                 incorrect ? '#f44336' : 
                 darkMode ? '#333' : '#e5e7eb',
+    borderBottom: correct ? '4px solid #388e3c' : 
+                 incorrect ? '4px solid #d32f2f' : 
+                 '4px solid #7c4dff',
+    height: '64px',
     '&:hover': {
       backgroundColor: correct ? '#43a047' : 
                      incorrect ? '#e53935' : 
                      darkMode ? '#3a3052' : '#f3f0ff',
       color: correct || incorrect ? '#fff' : 
              darkMode ? '#fff' : '#7c4dff',
-      borderColor: darkMode ? '#7c4dff' : '#7c4dff'
+      borderColor: darkMode ? '#7c4dff' : '#7c4dff',
+      borderBottom: correct ? '4px solid #2e7d32' : 
+                   incorrect ? '4px solid #c62828' : 
+                   '4px solid #6b42e0'
     },
     '@media (max-width: 900px)': {
-      padding: '20px 24px',
-      fontSize: '18px'
+      padding: '16px 24px',
+      fontSize: '18px',
+      height: '60px'
     }
   })
 );
@@ -1821,10 +1831,22 @@ export default function StudyLayout() {
         </StatsBar>
 
         {!studyMode.startsWith('flashcard-') && (
-          <ContentCard darkMode={isDarkMode}>
-          {renderQuestion()}
-          {renderChoices()}
-          </ContentCard>
+          <>
+            <ContentCard darkMode={isDarkMode}>
+              {renderQuestion()}
+            </ContentCard>
+            <Box sx={{ 
+              width: '100%',
+              maxWidth: '900px',
+              margin: '24px auto 0',
+              padding: '0 16px',
+              '@media (max-width: 900px)': {
+                margin: '16px auto 0'
+              }
+            }}>
+              {renderChoices()}
+            </Box>
+          </>
         )}
         
         {studyMode.startsWith('flashcard-') && renderQuestion()}
