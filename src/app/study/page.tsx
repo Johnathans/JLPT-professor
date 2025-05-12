@@ -937,52 +937,52 @@ export default function StudyLayout() {
       const item = vocabularyData[currentItem];
       frontContent = (
         <>
-          <Typography variant="h2" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '3.5rem' }}>
+          <Typography variant="h2" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '3.5rem', userSelect: 'none' }}>
             {item.word || 'N/A'}
           </Typography>
-          <Typography variant="h4" sx={{ color: isDarkMode ? '#bbb' : '#6b7280', fontSize: '1.8rem' }}>
+          <Typography variant="h4" sx={{ color: isDarkMode ? '#bbb' : '#6b7280', fontSize: '1.8rem', userSelect: 'none' }}>
             {item.reading || 'N/A'}
           </Typography>
         </>
       );
       backContent = (
-        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem' }}>
+        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem', userSelect: 'none' }}>
           {item.meaning || 'No meaning available'}
         </Typography>
       );
     } else if (studyMode === 'flashcard-sentences' && sentenceData && sentenceData[currentItem]) {
       const item = sentenceData[currentItem];
       frontContent = (
-        <Typography variant="h3" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2.2rem', lineHeight: 1.5 }}>
+        <Typography variant="h3" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2.2rem', lineHeight: 1.5, userSelect: 'none' }}>
           {item.japanese || 'N/A'}
         </Typography>
       );
       backContent = (
-        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem', lineHeight: 1.5 }}>
+        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem', lineHeight: 1.5, userSelect: 'none' }}>
           {item.english || 'No translation available'}
         </Typography>
       );
     } else if (studyMode === 'flashcard-kanji' && kanjiData && kanjiData[currentItem]) {
       const item = kanjiData[currentItem];
       frontContent = (
-        <Typography variant="h1" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '5rem' }}>
+        <Typography variant="h1" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '5rem', userSelect: 'none' }}>
           {item.kanji || 'N/A'}
         </Typography>
       );
       backContent = (
-        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem' }}>
+        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem', userSelect: 'none' }}>
           {`${item.meanings?.[0] || 'No meaning'} (${item.onyomi?.[0] || 'N/A'} / ${item.kunyomi?.[0] || 'N/A'})`}
         </Typography>
       );
     } else {
       // Fallback content if something unexpected happens
       frontContent = (
-        <Typography variant="h5" sx={{ color: isDarkMode ? '#fff' : '#1f2937' }}>
+        <Typography variant="h5" sx={{ color: isDarkMode ? '#fff' : '#1f2937', userSelect: 'none' }}>
           Error loading content
         </Typography>
       );
       backContent = (
-        <Typography variant="h5" sx={{ color: isDarkMode ? '#fff' : '#1f2937' }}>
+        <Typography variant="h5" sx={{ color: isDarkMode ? '#fff' : '#1f2937', userSelect: 'none' }}>
           Please try again or select a different mode
         </Typography>
       );
@@ -997,71 +997,130 @@ export default function StudyLayout() {
         width: '100%',
         flex: 1
       }}>
+        {/* Flashcard with 3D flip effect */}
         <Box 
-          onClick={() => {
-            playFlipSound();
-            setIsFlipped(!isFlipped);
-          }}
           sx={{ 
-            backgroundColor: isDarkMode ? '#1e1e1e' : '#fff',
-            borderRadius: '20px',
-            padding: '48px',
-            boxShadow: isDarkMode ? 'none' : '0 2px 4px rgba(0,0,0,0.05)',
-            border: isDarkMode ? '1px solid #333' : 'none',
             width: '100%',
             maxWidth: '900px',
             margin: '0 auto',
             position: 'relative',
             minHeight: '60vh',
             flex: 1,
-            transition: 'all 0.3s ease',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
             marginBottom: '24px',
+            perspective: '1000px', // Add perspective for 3D effect
             cursor: 'pointer',
-            '&:hover': {
-              boxShadow: isDarkMode ? '0 4px 12px rgba(0, 0, 0, 0.2)' : '0 4px 12px rgba(124, 77, 255, 0.15)'
-            },
             '@media (max-width: 900px)': {
-              padding: '32px 24px',
-              borderRadius: '16px',
               minHeight: '50vh',
               marginBottom: '16px'
             },
             '@media (max-width: 600px)': {
-              padding: '24px 16px',
               minHeight: '40vh'
             }
           }}
         >
-          {!isFlipped && (
-            <Box 
+          {/* Flashcard inner container that will flip */}
+          <Box
+            onClick={() => {
+              playFlipSound();
+              setIsFlipped(!isFlipped);
+            }}
+            sx={{
+              position: 'relative',
+              width: '100%',
+              height: '100%',
+              transformStyle: 'preserve-3d', // Preserve 3D effect for children
+              transition: 'transform 0.6s ease',
+              transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+              minHeight: 'inherit',
+            }}
+          >
+            {/* Front face */}
+            <Box
               sx={{
                 position: 'absolute',
-                top: '16px',
-                right: '16px',
-                backgroundColor: '#7c4dff',
-                color: 'white',
-                fontWeight: 'bold',
-                fontSize: '14px',
-                padding: '4px 8px',
-                borderRadius: '4px',
-                userSelect: 'none',
-                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                width: '100%',
+                height: '100%',
+                backfaceVisibility: 'hidden', // Hide back of element during flip
+                backgroundColor: isDarkMode ? '#1e1e1e' : '#fff',
+                borderRadius: '20px',
+                padding: '48px',
+                boxShadow: isDarkMode ? 'none' : '0 2px 4px rgba(0,0,0,0.05)',
+                border: isDarkMode ? '1px solid #333' : 'none',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                '&:hover': {
+                  boxShadow: isDarkMode ? '0 4px 12px rgba(0, 0, 0, 0.2)' : '0 4px 12px rgba(124, 77, 255, 0.15)'
+                },
+                '@media (max-width: 900px)': {
+                  padding: '32px 24px',
+                  borderRadius: '16px',
+                },
                 '@media (max-width: 600px)': {
-                  top: '12px',
-                  right: '12px',
-                  fontSize: '12px',
-                  padding: '3px 6px'
+                  padding: '24px 16px',
                 }
               }}
             >
-              {jlptLevel.toUpperCase()}
+              {/* JLPT Level Badge */}
+              <Box 
+                sx={{
+                  position: 'absolute',
+                  top: '16px',
+                  right: '16px',
+                  backgroundColor: '#7c4dff',
+                  color: 'white',
+                  fontWeight: 'bold',
+                  fontSize: '14px',
+                  padding: '4px 8px',
+                  borderRadius: '4px',
+                  userSelect: 'none',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                  '@media (max-width: 600px)': {
+                    top: '12px',
+                    right: '12px',
+                    fontSize: '12px',
+                    padding: '3px 6px'
+                  }
+                }}
+              >
+                {jlptLevel.toUpperCase()}
+              </Box>
+              {frontContent}
             </Box>
-          )}
-          {isFlipped ? backContent : frontContent}
+            
+            {/* Back face */}
+            <Box
+              sx={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                backfaceVisibility: 'hidden', // Hide back of element during flip
+                transform: 'rotateY(180deg)', // Rotate back face
+                backgroundColor: isDarkMode ? '#1e1e1e' : '#fff',
+                borderRadius: '20px',
+                padding: '48px',
+                boxShadow: isDarkMode ? 'none' : '0 2px 4px rgba(0,0,0,0.05)',
+                border: isDarkMode ? '1px solid #333' : 'none',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                '&:hover': {
+                  boxShadow: isDarkMode ? '0 4px 12px rgba(0, 0, 0, 0.2)' : '0 4px 12px rgba(124, 77, 255, 0.15)'
+                },
+                '@media (max-width: 900px)': {
+                  padding: '32px 24px',
+                  borderRadius: '16px',
+                },
+                '@media (max-width: 600px)': {
+                  padding: '24px 16px',
+                }
+              }}
+            >
+              {backContent}
+            </Box>
+          </Box>
         </Box>
         
         <Box sx={{ 
