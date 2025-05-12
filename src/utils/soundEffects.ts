@@ -20,35 +20,52 @@ export enum SoundEffect {
  * @param effect The sound effect to play
  * @param volume Volume level (0.0 to 1.0)
  */
+// Cache for preloaded audio elements
+const audioCache: Record<string, HTMLAudioElement> = {};
+
+// Preload all sound effects when the module is imported
+if (typeof window !== 'undefined') {
+  Object.values(SoundEffect).forEach(effect => {
+    const soundPath = `/audio/ui/${effect}.mp3`;
+    audioCache[effect] = new Audio(soundPath);
+    // Preload the audio file
+    audioCache[effect].load();
+  });
+}
+
 export function playSound(effect: SoundEffect, volume: number = 1.0): void {
   try {
     // Only run on client side
     if (typeof window === 'undefined') return;
     
-    // Use the full path that works in the test component
-    const soundPath = `/audio/ui/${effect}.mp3`;
+    // Get the cached audio element or create a new one if not cached
+    let audio = audioCache[effect];
+    if (!audio) {
+      const soundPath = `/audio/ui/${effect}.mp3`;
+      audio = new Audio(soundPath);
+      audioCache[effect] = audio;
+    }
     
-    // Create a new audio element each time
-    const audio = new Audio(soundPath);
+    // Reset the audio to the beginning and set volume
+    audio.currentTime = 0;
     audio.volume = volume;
     
-    // Add event listeners for debugging
-    audio.onloadeddata = () => {
-      console.log(`Sound ${effect} loaded successfully`);
-    };
-    
-    audio.onerror = (e) => {
-      console.error(`Error loading sound ${effect}:`, e);
-    };
-    
     // Play with promise handling
-    audio.play()
-      .then(() => {
-        console.log(`Sound ${effect} playing`);
-      })
-      .catch(error => {
-        console.error(`Error playing sound ${effect}:`, error);
-      });
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          // Sound is playing
+        })
+        .catch(error => {
+          console.error(`Error playing sound ${effect}:`, error);
+          // On error, try creating a new audio instance as fallback
+          const soundPath = `/audio/ui/${effect}.mp3`;
+          const newAudio = new Audio(soundPath);
+          newAudio.volume = volume;
+          newAudio.play().catch(e => console.error('Fallback audio failed:', e));
+        });
+    }
   } catch (error) {
     console.error('Error in playSound:', error);
   }
