@@ -176,8 +176,8 @@ const ContentCard = styled(Box, {
 const JapaneseSentence = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'darkMode',
 })(({ darkMode }: { darkMode: boolean }) => ({
-  fontSize: '42px',
-  lineHeight: 1.7,
+  fontSize: '120px',
+  lineHeight: 1.3,
   textAlign: 'center',
   color: darkMode ? '#fff' : '#1f2937',
   margin: '12px 0',
@@ -188,14 +188,14 @@ const JapaneseSentence = styled(Box, {
     padding: '0 8px'
   },
   '@media (max-width: 900px)': {
-    fontSize: '40px'
+    fontSize: '96px'
   }
 }));
 
 const EnglishTranslation = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'darkMode',
 })(({ darkMode }: { darkMode: boolean }) => ({
-  fontSize: '20px',
+  fontSize: '32px',
   color: darkMode ? '#aaa' : '#6F767E',
   textAlign: 'center',
   marginBottom: '24px',
