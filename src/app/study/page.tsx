@@ -176,7 +176,7 @@ const ContentCard = styled(Box, {
 const JapaneseSentence = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'darkMode',
 })(({ darkMode }: { darkMode: boolean }) => ({
-  fontSize: '80px',
+  fontSize: '70px',
   lineHeight: 1.3,
   textAlign: 'center',
   color: darkMode ? '#fff' : '#1f2937',
@@ -188,22 +188,25 @@ const JapaneseSentence = styled(Box, {
     padding: '0 8px'
   },
   '@media (max-width: 900px)': {
-    fontSize: '70px'
+    fontSize: '60px'
   },
   '@media (max-width: 600px)': {
-    fontSize: '60px'
+    fontSize: '50px'
   }
 }));
 
 const EnglishTranslation = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'darkMode',
 })(({ darkMode }: { darkMode: boolean }) => ({
-  fontSize: '32px',
+  fontSize: '24px',
   color: darkMode ? '#aaa' : '#6F767E',
   textAlign: 'center',
   marginBottom: '24px',
   '@media (max-width: 900px)': {
     fontSize: '18px'
+  },
+  '@media (max-width: 600px)': {
+    fontSize: '16px'
   }
 }));
 
@@ -1408,7 +1411,7 @@ export default function StudyLayout() {
         
         return (
           <>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
               <JapaneseSentence 
                 darkMode={isDarkMode}
                 dangerouslySetInnerHTML={{ __html: japaneseWithBlank }}
@@ -1417,7 +1420,7 @@ export default function StudyLayout() {
                 onClick={() => playSentenceAudio(currentSentence.japanese)}
                 disabled={isAudioLoading}
                 sx={{ 
-                  ml: 2, 
+                  mt: 2, 
                   backgroundColor: '#7c4dff', 
                   color: 'white',
                   '&:hover': { backgroundColor: '#5e35b1' },
