@@ -937,52 +937,52 @@ export default function StudyLayout() {
       const item = vocabularyData[currentItem];
       frontContent = (
         <>
-          <Typography variant="h2" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '3.5rem' }}>
+          <Typography variant="h2" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '3.5rem', userSelect: 'none' }}>
             {item.word || 'N/A'}
           </Typography>
-          <Typography variant="h4" sx={{ color: isDarkMode ? '#bbb' : '#6b7280', fontSize: '1.8rem' }}>
+          <Typography variant="h4" sx={{ color: isDarkMode ? '#bbb' : '#6b7280', fontSize: '1.8rem', userSelect: 'none' }}>
             {item.reading || 'N/A'}
           </Typography>
         </>
       );
       backContent = (
-        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem' }}>
+        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem', userSelect: 'none' }}>
           {item.meaning || 'No meaning available'}
         </Typography>
       );
     } else if (studyMode === 'flashcard-sentences' && sentenceData && sentenceData[currentItem]) {
       const item = sentenceData[currentItem];
       frontContent = (
-        <Typography variant="h3" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2.2rem', lineHeight: 1.5 }}>
+        <Typography variant="h3" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2.2rem', lineHeight: 1.5, userSelect: 'none' }}>
           {item.japanese || 'N/A'}
         </Typography>
       );
       backContent = (
-        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem', lineHeight: 1.5 }}>
+        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem', lineHeight: 1.5, userSelect: 'none' }}>
           {item.english || 'No translation available'}
         </Typography>
       );
     } else if (studyMode === 'flashcard-kanji' && kanjiData && kanjiData[currentItem]) {
       const item = kanjiData[currentItem];
       frontContent = (
-        <Typography variant="h1" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '5rem' }}>
+        <Typography variant="h1" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '5rem', userSelect: 'none' }}>
           {item.kanji || 'N/A'}
         </Typography>
       );
       backContent = (
-        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem' }}>
+        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem', userSelect: 'none' }}>
           {`${item.meanings?.[0] || 'No meaning'} (${item.onyomi?.[0] || 'N/A'} / ${item.kunyomi?.[0] || 'N/A'})`}
         </Typography>
       );
     } else {
       // Fallback content if something unexpected happens
       frontContent = (
-        <Typography variant="h5" sx={{ color: isDarkMode ? '#fff' : '#1f2937' }}>
+        <Typography variant="h5" sx={{ color: isDarkMode ? '#fff' : '#1f2937', userSelect: 'none' }}>
           Error loading content
         </Typography>
       );
       backContent = (
-        <Typography variant="h5" sx={{ color: isDarkMode ? '#fff' : '#1f2937' }}>
+        <Typography variant="h5" sx={{ color: isDarkMode ? '#fff' : '#1f2937', userSelect: 'none' }}>
           Please try again or select a different mode
         </Typography>
       );
