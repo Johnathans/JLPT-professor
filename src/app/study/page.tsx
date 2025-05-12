@@ -937,52 +937,52 @@ export default function StudyLayout() {
       const item = vocabularyData[currentItem];
       frontContent = (
         <>
-          <Typography variant="h2" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '3.5rem', userSelect: 'none' }}>
+          <Typography variant="h2" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '3.5rem' }}>
             {item.word || 'N/A'}
           </Typography>
-          <Typography variant="h4" sx={{ color: isDarkMode ? '#bbb' : '#6b7280', fontSize: '1.8rem', userSelect: 'none' }}>
+          <Typography variant="h4" sx={{ color: isDarkMode ? '#bbb' : '#6b7280', fontSize: '1.8rem' }}>
             {item.reading || 'N/A'}
           </Typography>
         </>
       );
       backContent = (
-        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem', userSelect: 'none' }}>
+        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem' }}>
           {item.meaning || 'No meaning available'}
         </Typography>
       );
     } else if (studyMode === 'flashcard-sentences' && sentenceData && sentenceData[currentItem]) {
       const item = sentenceData[currentItem];
       frontContent = (
-        <Typography variant="h3" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2.2rem', lineHeight: 1.5, userSelect: 'none' }}>
+        <Typography variant="h3" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2.2rem', lineHeight: 1.5 }}>
           {item.japanese || 'N/A'}
         </Typography>
       );
       backContent = (
-        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem', lineHeight: 1.5, userSelect: 'none' }}>
+        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem', lineHeight: 1.5 }}>
           {item.english || 'No translation available'}
         </Typography>
       );
     } else if (studyMode === 'flashcard-kanji' && kanjiData && kanjiData[currentItem]) {
       const item = kanjiData[currentItem];
       frontContent = (
-        <Typography variant="h1" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '5rem', userSelect: 'none' }}>
+        <Typography variant="h1" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '5rem' }}>
           {item.kanji || 'N/A'}
         </Typography>
       );
       backContent = (
-        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem', userSelect: 'none' }}>
+        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem' }}>
           {`${item.meanings?.[0] || 'No meaning'} (${item.onyomi?.[0] || 'N/A'} / ${item.kunyomi?.[0] || 'N/A'})`}
         </Typography>
       );
     } else {
       // Fallback content if something unexpected happens
       frontContent = (
-        <Typography variant="h5" sx={{ color: isDarkMode ? '#fff' : '#1f2937', userSelect: 'none' }}>
+        <Typography variant="h5" sx={{ color: isDarkMode ? '#fff' : '#1f2937' }}>
           Error loading content
         </Typography>
       );
       backContent = (
-        <Typography variant="h5" sx={{ color: isDarkMode ? '#fff' : '#1f2937', userSelect: 'none' }}>
+        <Typography variant="h5" sx={{ color: isDarkMode ? '#fff' : '#1f2937' }}>
           Please try again or select a different mode
         </Typography>
       );
@@ -1036,6 +1036,31 @@ export default function StudyLayout() {
             }
           }}
         >
+          {!isFlipped && (
+            <Box 
+              sx={{
+                position: 'absolute',
+                top: '16px',
+                right: '16px',
+                backgroundColor: '#7c4dff',
+                color: 'white',
+                fontWeight: 'bold',
+                fontSize: '14px',
+                padding: '4px 8px',
+                borderRadius: '4px',
+                userSelect: 'none',
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                '@media (max-width: 600px)': {
+                  top: '12px',
+                  right: '12px',
+                  fontSize: '12px',
+                  padding: '3px 6px'
+                }
+              }}
+            >
+              {jlptLevel.toUpperCase()}
+            </Box>
+          )}
           {isFlipped ? backContent : frontContent}
         </Box>
         
