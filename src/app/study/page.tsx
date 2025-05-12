@@ -7,6 +7,7 @@ import KeyboardIcon from '@mui/icons-material/Keyboard';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import FlipIcon from '@mui/icons-material/Flip';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import TranslateIcon from '@mui/icons-material/Translate';
@@ -1004,8 +1005,7 @@ export default function StudyLayout() {
           transition: 'all 0.3s ease',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
+          justifyContent: 'space-between',
           '@media (max-width: 900px)': {
             padding: '40px 24px',
             borderRadius: '16px',
@@ -1013,66 +1013,90 @@ export default function StudyLayout() {
           }
         }}
       >
-        {!isFlipped ? (
-          <Box 
+        <Box 
+          sx={{ 
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            height: '100%',
+            flex: 1,
+            padding: '20px 0 40px'
+          }}
+        >
+          {isFlipped ? backContent : frontContent}
+        </Box>
+        
+        <Box sx={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center', 
+          width: '100%',
+          marginTop: 2
+        }}>
+          <Button 
+            variant="outlined" 
+            onClick={() => handleFlashcardAnswer(false)}
+            startIcon={<CloseIcon />}
             sx={{ 
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '100%',
-              height: '100%',
-              cursor: 'pointer'
+              color: '#7c4dff',
+              borderColor: '#7c4dff',
+              backgroundColor: 'white',
+              '&:hover': {
+                backgroundColor: 'rgba(124, 77, 255, 0.04)',
+                borderColor: '#6b42e0'
+              },
+              padding: '8px 16px',
+              textTransform: 'none',
+              fontWeight: 500
             }}
+          >
+            I Forgot This
+          </Button>
+          
+          <Button 
+            variant="contained" 
             onClick={() => {
               playFlipSound();
-              setIsFlipped(true);
+              setIsFlipped(!isFlipped);
             }}
-          >
-            {frontContent}
-          </Box>
-        ) : (
-          <Box 
+            startIcon={<FlipIcon />}
             sx={{ 
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '100%',
-              height: '100%'
+              backgroundColor: '#7c4dff',
+              color: 'white',
+              '&:hover': {
+                backgroundColor: '#6b42e0'
+              },
+              padding: '8px 20px',
+              textTransform: 'none',
+              fontWeight: 500,
+              mx: 2
             }}
           >
-            {backContent}
-            <Box sx={{ display: 'flex', gap: 2, marginTop: 3 }}>
-              <Button 
-                variant="contained" 
-                color="error"
-                onClick={() => handleFlashcardAnswer(false)}
-                sx={{ 
-                  backgroundColor: '#f44336',
-                  '&:hover': {
-                    backgroundColor: '#d32f2f'
-                  }
-                }}
-              >
-                I Forgot This
-              </Button>
-              <Button 
-                variant="contained" 
-                color="success"
-                onClick={() => handleFlashcardAnswer(true)}
-                sx={{ 
-                  backgroundColor: '#4caf50',
-                  '&:hover': {
-                    backgroundColor: '#388e3c'
-                  }
-                }}
-              >
-                I Knew This
-              </Button>
-            </Box>
-          </Box>
-        )}
+            Flip
+          </Button>
+          
+          <Button 
+            variant="outlined" 
+            onClick={() => handleFlashcardAnswer(true)}
+            endIcon={<CheckIcon />}
+            sx={{ 
+              color: '#7c4dff',
+              borderColor: '#7c4dff',
+              backgroundColor: 'white',
+              '&:hover': {
+                backgroundColor: 'rgba(124, 77, 255, 0.04)',
+                borderColor: '#6b42e0'
+              },
+              padding: '8px 16px',
+              textTransform: 'none',
+              fontWeight: 500
+            }}
+          >
+            I Knew This
+          </Button>
+        </Box>
       </Box>
     );
   };
