@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Box, TextField, Button, IconButton, styled, Menu, MenuItem, Typography, Divider, CircularProgress } from '@mui/material';
+import React, { useState, useEffect, useRef } from 'react';
+import { Flag } from 'react-feather';
+import { Box, TextField, Button, IconButton, styled, Menu, MenuItem, Typography, Divider, CircularProgress, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText } from '@mui/material';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import KeyboardIcon from '@mui/icons-material/Keyboard';
 import CheckIcon from '@mui/icons-material/Check';
@@ -469,6 +470,8 @@ export default function StudyLayout() {
   const [studyMode, setStudyMode] = useState<StudyMode>('vocabulary');
   const [jlptLevel, setJlptLevel] = useState<JlptLevel>('n5');
   const [settingsAnchor, setSettingsAnchor] = useState<null | HTMLElement>(null);
+  // State for flag button
+  const [showFlagDialog, setShowFlagDialog] = useState<boolean>(false);
   // State for tab navigation in settings menu
   const [settingsTab, setSettingsTab] = useState<'vocabulary' | 'kanji' | 'listening' | 'reading' | 'grammar'>('vocabulary');
   const [accuracy, setAccuracy] = useState(0);
@@ -1922,6 +1925,109 @@ export default function StudyLayout() {
         )}
         
         {studyMode.startsWith('flashcard-') && renderQuestion()}
+        
+        {/* Flag Button */}
+        <IconButton
+          onClick={() => setShowFlagDialog(true)}
+          sx={{
+            position: 'fixed',
+            bottom: '20px',
+            right: '20px',
+            backgroundColor: isDarkMode ? 'rgba(45, 45, 45, 0.9)' : 'rgba(255, 255, 255, 0.9)',
+            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
+            color: '#f44336',
+            '&:hover': {
+              backgroundColor: isDarkMode ? 'rgba(55, 55, 55, 0.9)' : 'rgba(245, 245, 245, 0.9)',
+            },
+            zIndex: 1000,
+          }}
+        >
+          <Flag size={20} />
+        </IconButton>
+        
+        {/* Flag Dialog */}
+        <Dialog
+          open={showFlagDialog}
+          onClose={() => setShowFlagDialog(false)}
+          aria-labelledby="flag-dialog-title"
+          PaperProps={{
+            style: {
+              backgroundColor: isDarkMode ? '#2d2d2d' : '#ffffff',
+              color: isDarkMode ? '#ffffff' : '#1f2937',
+              borderRadius: '12px',
+              padding: '8px',
+            },
+          }}
+        >
+          <DialogTitle id="flag-dialog-title" sx={{ color: isDarkMode ? '#ffffff' : '#1f2937' }}>
+            Flag this content
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText sx={{ color: isDarkMode ? '#dddddd' : '#4b5563' }}>
+              Please let us know what's wrong with this content. This will help us improve our study materials.
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="flag-reason"
+              label="Reason"
+              type="text"
+              fullWidth
+              variant="outlined"
+              multiline
+              rows={4}
+              sx={{
+                mt: 2,
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: isDarkMode ? '#555555' : '#e5e7eb',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: isDarkMode ? '#777777' : '#d1d5db',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#7c4dff',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  color: isDarkMode ? '#aaaaaa' : '#6b7280',
+                },
+                '& .MuiInputBase-input': {
+                  color: isDarkMode ? '#ffffff' : '#1f2937',
+                },
+              }}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button 
+              onClick={() => setShowFlagDialog(false)} 
+              sx={{ 
+                color: isDarkMode ? '#dddddd' : '#4b5563',
+                '&:hover': {
+                  backgroundColor: isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.04)',
+                },
+              }}
+            >
+              Cancel
+            </Button>
+            <Button 
+              onClick={() => {
+                // Here you would handle the submission
+                // For now, just close the dialog
+                setShowFlagDialog(false);
+              }} 
+              sx={{ 
+                color: '#ffffff',
+                backgroundColor: '#7c4dff',
+                '&:hover': {
+                  backgroundColor: '#6b42e0',
+                },
+              }}
+            >
+              Submit
+            </Button>
+          </DialogActions>
+        </Dialog>
       </MainContent>
     </LayoutRoot>
     </>
