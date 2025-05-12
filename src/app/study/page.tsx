@@ -191,8 +191,8 @@ const ContentCard = styled(Box, {
   transition: 'background-color 0.2s ease',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center',
-  gap: '24px',
+  justifyContent: 'space-between',
+  gap: '16px',
   overflow: 'auto',
   '@media (max-width: 900px)': {
     padding: '32px 24px',
@@ -201,46 +201,61 @@ const ContentCard = styled(Box, {
     maxHeight: '50vh'
   },
   '@media (max-width: 600px)': {
-    padding: '24px 20px',
+    padding: '16px 16px 20px',
     minHeight: '50vh',
-    maxHeight: '55vh'
+    maxHeight: '55vh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   }
 }));
 
 const JapaneseSentence = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'darkMode',
 })(({ darkMode }: { darkMode: boolean }) => ({
-  fontSize: '70px',
-  lineHeight: 1.3,
+  fontSize: '160px',
+  lineHeight: 1.2,
   textAlign: 'center',
   color: darkMode ? '#fff' : '#1f2937',
   margin: '12px 0',
   fontFamily: '"Noto Sans JP", sans-serif',
   fontWeight: 400,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  flex: '1',
   '& .highlight': {
     color: '#7c4dff',
     padding: '0 8px'
   },
   '@media (max-width: 900px)': {
-    fontSize: '60px'
+    fontSize: '130px',
+    lineHeight: 1.2
   },
   '@media (max-width: 600px)': {
-    fontSize: '50px'
+    fontSize: '150px',
+    margin: '0',
+    lineHeight: '1.1'
   }
 }));
 
 const EnglishTranslation = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'darkMode',
 })(({ darkMode }: { darkMode: boolean }) => ({
-  fontSize: '24px',
+  fontSize: '20px',
   color: darkMode ? '#aaa' : '#6F767E',
   textAlign: 'center',
   marginBottom: '24px',
+  marginTop: 'auto',
+  paddingTop: '16px',
   '@media (max-width: 900px)': {
-    fontSize: '18px'
+    fontSize: '18px',
+    paddingTop: '16px'
   },
   '@media (max-width: 600px)': {
-    fontSize: '16px'
+    fontSize: '16px',
+    paddingTop: '10px',
+    marginBottom: '12px'
   }
 }));
 
@@ -1927,23 +1942,27 @@ export default function StudyLayout() {
         {studyMode.startsWith('flashcard-') && renderQuestion()}
         
         {/* Flag Button */}
-        <IconButton
+        <Box
           onClick={() => setShowFlagDialog(true)}
           sx={{
             position: 'fixed',
             bottom: '20px',
             right: '20px',
-            backgroundColor: isDarkMode ? 'rgba(45, 45, 45, 0.9)' : 'rgba(255, 255, 255, 0.9)',
-            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
-            color: '#f44336',
-            '&:hover': {
-              backgroundColor: isDarkMode ? 'rgba(55, 55, 55, 0.9)' : 'rgba(245, 245, 245, 0.9)',
-            },
+            padding: '8px 12px',
+            borderRadius: '4px',
+            backgroundColor: 'transparent',
+            cursor: 'pointer',
             zIndex: 1000,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            '&:hover': {
+              backgroundColor: isDarkMode ? 'rgba(55, 55, 55, 0.2)' : 'rgba(0, 0, 0, 0.05)',
+            },
           }}
         >
-          <Flag size={20} />
-        </IconButton>
+          <Flag size={20} color={isDarkMode ? '#aaaaaa' : '#cccccc'} />
+        </Box>
         
         {/* Flag Dialog */}
         <Dialog
