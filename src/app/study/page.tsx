@@ -248,10 +248,10 @@ const MatchCard = styled(Box, {
   transition: 'all 0.2s ease',
   fontSize: '32px',
   fontFamily: '"Noto Sans JP", sans-serif',
-  backgroundColor: isCorrect ? '#f2fcfa' : isIncorrect ? '#fff1f0' : darkMode ? '#383838' : '#f3f4f6',
-  border: `1px solid ${isCorrect ? '#e8faf3' : isIncorrect ? '#ffccc7' : darkMode ? '#444' : '#e5e7eb'}`,
+  backgroundColor: isCorrect ? '#f2fcfa' : isIncorrect ? '#fff1f0' : darkMode ? '#383838' : '#f3f0ff',
+  border: `1px solid ${isCorrect ? '#e8faf3' : isIncorrect ? '#ffccc7' : darkMode ? '#444' : '#7c4dff'}`,
   borderBottom: isCorrect ? '6px solid #10b981' : isIncorrect ? '6px solid #f5222d' : '6px solid #7c4dff',
-  color: darkMode && !isCorrect && !isIncorrect ? '#fff' : '#1f2937',
+  color: darkMode && !isCorrect && !isIncorrect ? '#fff' : '#7c4dff',
   position: 'relative',
   '&:hover': {
     backgroundColor: isCorrect ? '#f2fcfa' : isIncorrect ? '#fff1f0' : darkMode ? '#444' : '#e9ebef',
@@ -272,13 +272,13 @@ const ChoiceButton = styled(Button, {
     fontWeight: 500,
     backgroundColor: correct ? '#4caf50' : 
                    incorrect ? '#f44336' : 
-                   darkMode ? '#2d2d2d' : '#fff',
+                   darkMode ? '#2d2d2d' : '#9370ff',
     color: correct || incorrect ? '#fff' : 
-          darkMode ? '#fff' : '#1f2937',
+          darkMode ? '#fff' : '#ffffff',
     border: '1px solid',
     borderColor: correct ? '#4caf50' : 
                 incorrect ? '#f44336' : 
-                darkMode ? '#333' : '#e5e7eb',
+                darkMode ? '#333' : '#7c4dff',
     borderBottom: correct ? '6px solid #388e3c' : 
                  incorrect ? '6px solid #d32f2f' : 
                  '6px solid #7c4dff',
@@ -286,10 +286,10 @@ const ChoiceButton = styled(Button, {
     '&:hover': {
       backgroundColor: correct ? '#43a047' : 
                      incorrect ? '#e53935' : 
-                     darkMode ? '#3a3052' : '#f3f0ff',
+                     darkMode ? '#3a3052' : '#7c4dff',
       color: correct || incorrect ? '#fff' : 
-             darkMode ? '#fff' : '#7c4dff',
-      borderColor: darkMode ? '#7c4dff' : '#7c4dff',
+             darkMode ? '#fff' : '#ffffff',
+      borderColor: darkMode ? '#7c4dff' : '#6b42e0',
       borderBottom: correct ? '6px solid #2e7d32' : 
                    incorrect ? '6px solid #c62828' : 
                    '6px solid #6b42e0'
@@ -607,23 +607,23 @@ export default function StudyLayout() {
     return Math.max(0, total - current);
   };
 
-  // Function to limit meanings to a maximum of three
+  // Function to limit meanings to a maximum of two
   const limitMeanings = (meaning: string): string => {
     // Split by common delimiters (semicolons, slashes with spaces around them)
     const meaningParts = meaning.split(/\s*[;\/]\s*/);
     
-    // Take only the first three meanings
-    const limitedParts = meaningParts.slice(0, 3);
+    // Take only the first two meanings
+    const limitedParts = meaningParts.slice(0, 2);
     
     // Join them back with semicolons
     return limitedParts.join('; ');
   };
-  
+
   // Function to generate choices for vocabulary study
   const generateVocabularyChoices = (data: VocabularyItem[], index: number) => {
     if (!data || data.length === 0) return;
     
-    // Get the full meaning and limit it to three meanings max
+    // Get the full meaning and limit it to two meanings max
     const fullMeaning = data[index].meaning;
     const correctAnswer = limitMeanings(fullMeaning);
     
