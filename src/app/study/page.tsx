@@ -83,15 +83,46 @@ const ModeButton = styled(IconButton)({
 
 const StatsBar = styled(Box)({
   display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  padding: '16px 32px',
+  flexDirection: 'column',
   width: '100%',
   maxWidth: '900px',
-  margin: '0 auto',
+  margin: '0 auto 24px',
+  padding: '0 32px',
   '@media (max-width: 900px)': {
-    padding: '12px 16px'
+    padding: '0 16px'
   }
+});
+
+const ProgressBar = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'progress' && prop !== 'darkMode',
+})(({ progress, darkMode }: { progress: number, darkMode: boolean }) => ({
+  width: '100%',
+  height: '16px',
+  backgroundColor: darkMode ? '#333' : '#e8e3ff',
+  borderRadius: '8px',
+  position: 'relative',
+  overflow: 'hidden',
+  boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    height: '100%',
+    width: `${progress}%`,
+    backgroundColor: '#7c4dff',
+    borderRadius: '8px',
+    transition: 'width 0.3s ease-in-out'
+  }
+}));
+
+const ProgressInfo = styled(Box)({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginBottom: '8px',
+  fontSize: '14px',
+  fontWeight: 500
 });
 
 const StatItem = styled(Box)({
@@ -1783,36 +1814,10 @@ export default function StudyLayout() {
         </TopBar>
 
         <StatsBar>
-          <StatItem 
-            className="accuracy"
-            sx={{ 
-              color: isDarkMode ? '#aaa' : '#6F767E',
-              '& .value': {
-                color: isDarkMode ? '#fff' : '#1f2937'
-              },
-              '&.accuracy .value': {
-                color: '#7c4dff'
-              }
-            }}
-          >
-            <span className="value">{accuracy}%</span>
-            <span>accuracy</span>
-          </StatItem>
-          <StatItem 
-            className="cards-remaining"
-            sx={{ 
-              color: isDarkMode ? '#aaa' : '#6F767E',
-              '& .value': {
-                color: isDarkMode ? '#fff' : '#1f2937'
-              },
-              '&.cards-remaining .value': {
-                color: '#7c4dff'
-              }
-            }}
-          >
-            <span className="value">{remainingCards}</span>
-            <span>cards remaining</span>
-          </StatItem>
+          <ProgressBar 
+            progress={Math.max(0, Math.min(100, ((totalAnswered - remainingCards) / Math.max(1, totalAnswered)) * 100))} 
+            darkMode={isDarkMode} 
+          />
         </StatsBar>
 
         {!studyMode.startsWith('flashcard-') && (
