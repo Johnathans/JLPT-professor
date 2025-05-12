@@ -7,7 +7,7 @@ import KeyboardIcon from '@mui/icons-material/Keyboard';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import FlipIcon from '@mui/icons-material/Flip';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import TranslateIcon from '@mui/icons-material/Translate';
@@ -1041,15 +1041,17 @@ export default function StudyLayout() {
         
         <Box sx={{ 
           display: 'flex', 
-          justifyContent: 'space-between', 
+          justifyContent: 'center', 
           alignItems: 'center', 
           width: '100%',
           maxWidth: '900px',
           margin: '0 auto',
           padding: '0 16px',
+          gap: '16px',
           '@media (max-width: 600px)': {
             flexDirection: 'row',
-            flexWrap: 'nowrap'
+            flexWrap: 'nowrap',
+            gap: '8px'
           }
         }}>
           <Button 
@@ -1064,13 +1066,16 @@ export default function StudyLayout() {
                 backgroundColor: 'rgba(124, 77, 255, 0.04)',
                 borderColor: '#6b42e0'
               },
-              padding: '8px 16px',
+              padding: '10px 20px',
               textTransform: 'none',
               fontWeight: 500,
+              borderRadius: '8px',
+              minWidth: '160px',
               '@media (max-width: 600px)': {
-                padding: '8px',
+                padding: '8px 12px',
                 fontSize: '13px',
-                flex: 1
+                flex: 1,
+                minWidth: 'unset'
               }
             }}
           >
@@ -1083,22 +1088,23 @@ export default function StudyLayout() {
               playFlipSound();
               setIsFlipped(!isFlipped);
             }}
-            startIcon={<FlipIcon />}
+            startIcon={<AutorenewIcon />}
             sx={{ 
               backgroundColor: '#7c4dff',
               color: 'white',
               '&:hover': {
                 backgroundColor: '#6b42e0'
               },
-              padding: '8px 20px',
+              padding: '10px 20px',
               textTransform: 'none',
               fontWeight: 500,
-              mx: 2,
+              borderRadius: '8px',
+              minWidth: '120px',
               '@media (max-width: 600px)': {
                 padding: '8px 12px',
                 fontSize: '13px',
-                mx: 1,
-                flex: 1
+                flex: 1,
+                minWidth: 'unset'
               }
             }}
           >
@@ -1108,7 +1114,7 @@ export default function StudyLayout() {
           <Button 
             variant="outlined" 
             onClick={() => handleFlashcardAnswer(true)}
-            endIcon={<CheckIcon />}
+            startIcon={<CheckIcon />}
             sx={{ 
               color: '#7c4dff',
               borderColor: '#7c4dff',
@@ -1117,13 +1123,16 @@ export default function StudyLayout() {
                 backgroundColor: 'rgba(124, 77, 255, 0.04)',
                 borderColor: '#6b42e0'
               },
-              padding: '8px 16px',
+              padding: '10px 20px',
               textTransform: 'none',
               fontWeight: 500,
+              borderRadius: '8px',
+              minWidth: '160px',
               '@media (max-width: 600px)': {
-                padding: '8px',
+                padding: '8px 12px',
                 fontSize: '13px',
-                flex: 1
+                flex: 1,
+                minWidth: 'unset'
               }
             }}
           >
