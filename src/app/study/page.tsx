@@ -937,40 +937,40 @@ export default function StudyLayout() {
       const item = vocabularyData[currentItem];
       frontContent = (
         <>
-          <Typography variant="h4" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937' }}>
+          <Typography variant="h2" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '3.5rem' }}>
             {item.word || 'N/A'}
           </Typography>
-          <Typography variant="h6" sx={{ color: isDarkMode ? '#bbb' : '#6b7280' }}>
+          <Typography variant="h4" sx={{ color: isDarkMode ? '#bbb' : '#6b7280', fontSize: '1.8rem' }}>
             {item.reading || 'N/A'}
           </Typography>
         </>
       );
       backContent = (
-        <Typography variant="h5" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937' }}>
+        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem' }}>
           {item.meaning || 'No meaning available'}
         </Typography>
       );
     } else if (studyMode === 'flashcard-sentences' && sentenceData && sentenceData[currentItem]) {
       const item = sentenceData[currentItem];
       frontContent = (
-        <Typography variant="h5" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937' }}>
+        <Typography variant="h3" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2.2rem', lineHeight: 1.5 }}>
           {item.japanese || 'N/A'}
         </Typography>
       );
       backContent = (
-        <Typography variant="h5" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937' }}>
+        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem', lineHeight: 1.5 }}>
           {item.english || 'No translation available'}
         </Typography>
       );
     } else if (studyMode === 'flashcard-kanji' && kanjiData && kanjiData[currentItem]) {
       const item = kanjiData[currentItem];
       frontContent = (
-        <Typography variant="h3" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937' }}>
+        <Typography variant="h1" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937', fontSize: '5rem' }}>
           {item.kanji || 'N/A'}
         </Typography>
       );
       backContent = (
-        <Typography variant="h5" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937' }}>
+        <Typography variant="h4" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937', fontSize: '2rem' }}>
           {`${item.meanings?.[0] || 'No meaning'} (${item.onyomi?.[0] || 'N/A'} / ${item.kunyomi?.[0] || 'N/A'})`}
         </Typography>
       );
@@ -990,8 +990,18 @@ export default function StudyLayout() {
     
     // Use a Box component with the same styling as ContentCard for consistent appearance
     return (
-      <>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        width: '100%',
+        flex: 1
+      }}>
         <Box 
+          onClick={() => {
+            playFlipSound();
+            setIsFlipped(!isFlipped);
+          }}
           sx={{ 
             backgroundColor: isDarkMode ? '#1e1e1e' : '#fff',
             borderRadius: '20px',
@@ -1003,16 +1013,26 @@ export default function StudyLayout() {
             margin: '0 auto',
             position: 'relative',
             minHeight: '60vh',
+            flex: 1,
             transition: 'all 0.3s ease',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
             marginBottom: '24px',
+            cursor: 'pointer',
+            '&:hover': {
+              boxShadow: isDarkMode ? '0 4px 12px rgba(0, 0, 0, 0.2)' : '0 4px 12px rgba(124, 77, 255, 0.15)'
+            },
             '@media (max-width: 900px)': {
-              padding: '40px 24px',
+              padding: '32px 24px',
               borderRadius: '16px',
-              minHeight: 'unset'
+              minHeight: '50vh',
+              marginBottom: '16px'
+            },
+            '@media (max-width: 600px)': {
+              padding: '24px 16px',
+              minHeight: '40vh'
             }
           }}
         >
@@ -1026,7 +1046,11 @@ export default function StudyLayout() {
           width: '100%',
           maxWidth: '900px',
           margin: '0 auto',
-          padding: '0 16px'
+          padding: '0 16px',
+          '@media (max-width: 600px)': {
+            flexDirection: 'row',
+            flexWrap: 'nowrap'
+          }
         }}>
           <Button 
             variant="outlined" 
@@ -1042,7 +1066,12 @@ export default function StudyLayout() {
               },
               padding: '8px 16px',
               textTransform: 'none',
-              fontWeight: 500
+              fontWeight: 500,
+              '@media (max-width: 600px)': {
+                padding: '8px',
+                fontSize: '13px',
+                flex: 1
+              }
             }}
           >
             I Forgot This
@@ -1064,7 +1093,13 @@ export default function StudyLayout() {
               padding: '8px 20px',
               textTransform: 'none',
               fontWeight: 500,
-              mx: 2
+              mx: 2,
+              '@media (max-width: 600px)': {
+                padding: '8px 12px',
+                fontSize: '13px',
+                mx: 1,
+                flex: 1
+              }
             }}
           >
             Flip
@@ -1084,13 +1119,18 @@ export default function StudyLayout() {
               },
               padding: '8px 16px',
               textTransform: 'none',
-              fontWeight: 500
+              fontWeight: 500,
+              '@media (max-width: 600px)': {
+                padding: '8px',
+                fontSize: '13px',
+                flex: 1
+              }
             }}
           >
             I Knew This
           </Button>
         </Box>
-      </>
+      </Box>
     );
   };
   
