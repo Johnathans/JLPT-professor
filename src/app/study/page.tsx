@@ -27,6 +27,7 @@ import { useColorMode } from '@/contexts/ThemeContext';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import styles from '@/styles/dashboard.module.css';
+import flashcardStyles from '@/styles/flashcards.module.css';
 import { playCorrectSound, playWrongSound, playFlipSound } from '@/utils/soundEffects';
 import { SentenceEntry } from '@/types/sentence';
 
@@ -131,15 +132,15 @@ const ContentCard = styled(Box, {
   padding: '48px',
   boxShadow: darkMode ? 'none' : '0 2px 4px rgba(0,0,0,0.05)',
   border: darkMode ? '1px solid #333' : 'none',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '32px',
   width: '100%',
   maxWidth: '900px',
   margin: '0 auto',
   position: 'relative',
   minHeight: '60vh',
   transition: 'background-color 0.2s ease',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '32px',
   '@media (max-width: 900px)': {
     padding: '40px 24px',
     borderRadius: '16px',
@@ -928,100 +929,121 @@ export default function StudyLayout() {
       );
     }
     
-    let content;
-    let meaning;
+    let frontContent;
+    let backContent;
     
     if (studyMode === 'flashcard-vocabulary' && vocabularyData && vocabularyData[currentItem]) {
       const item = vocabularyData[currentItem];
-      content = (
-        <Box sx={{ textAlign: 'center', padding: 2 }}>
+      frontContent = (
+        <>
           <Typography variant="h4" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937' }}>
             {item.word || 'N/A'}
           </Typography>
           <Typography variant="h6" sx={{ color: isDarkMode ? '#bbb' : '#6b7280' }}>
             {item.reading || 'N/A'}
           </Typography>
-        </Box>
+        </>
       );
-      meaning = item.meaning || 'No meaning available';
+      backContent = (
+        <Typography variant="h5" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937' }}>
+          {item.meaning || 'No meaning available'}
+        </Typography>
+      );
     } else if (studyMode === 'flashcard-sentences' && sentenceData && sentenceData[currentItem]) {
       const item = sentenceData[currentItem];
-      content = (
-        <Box sx={{ textAlign: 'center', padding: 2 }}>
-          <Typography variant="h5" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937' }}>
-            {item.japanese || 'N/A'}
-          </Typography>
-        </Box>
+      frontContent = (
+        <Typography variant="h5" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937' }}>
+          {item.japanese || 'N/A'}
+        </Typography>
       );
-      meaning = item.english || 'No translation available';
+      backContent = (
+        <Typography variant="h5" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937' }}>
+          {item.english || 'No translation available'}
+        </Typography>
+      );
     } else if (studyMode === 'flashcard-kanji' && kanjiData && kanjiData[currentItem]) {
       const item = kanjiData[currentItem];
-      content = (
-        <Box sx={{ textAlign: 'center', padding: 2 }}>
-          <Typography variant="h3" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937' }}>
-            {item.kanji || 'N/A'}
-          </Typography>
-        </Box>
+      frontContent = (
+        <Typography variant="h3" sx={{ marginBottom: 1, color: isDarkMode ? '#fff' : '#1f2937' }}>
+          {item.kanji || 'N/A'}
+        </Typography>
       );
-      meaning = `${item.meanings?.[0] || 'No meaning'} (${item.onyomi?.[0] || 'N/A'} / ${item.kunyomi?.[0] || 'N/A'})`;
+      backContent = (
+        <Typography variant="h5" sx={{ textAlign: 'center', color: isDarkMode ? '#fff' : '#1f2937' }}>
+          {`${item.meanings?.[0] || 'No meaning'} (${item.onyomi?.[0] || 'N/A'} / ${item.kunyomi?.[0] || 'N/A'})`}
+        </Typography>
+      );
     } else {
       // Fallback content if something unexpected happens
-      content = (
-        <Box sx={{ textAlign: 'center', padding: 2 }}>
-          <Typography variant="h5" sx={{ color: isDarkMode ? '#fff' : '#1f2937' }}>
-            Error loading content
-          </Typography>
-        </Box>
+      frontContent = (
+        <Typography variant="h5" sx={{ color: isDarkMode ? '#fff' : '#1f2937' }}>
+          Error loading content
+        </Typography>
       );
-      meaning = 'Please try again or select a different mode';
+      backContent = (
+        <Typography variant="h5" sx={{ color: isDarkMode ? '#fff' : '#1f2937' }}>
+          Please try again or select a different mode
+        </Typography>
+      );
     }
     
+    // Use a Box component with the same styling as ContentCard for consistent appearance
     return (
       <Box 
         sx={{ 
-          border: '1px solid', 
-          borderColor: isDarkMode ? '#4b5563' : '#e5e7eb',
-          borderRadius: 2,
-          padding: 3,
-          backgroundColor: isDarkMode ? '#1f2937' : '#fff',
-          boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-          minHeight: '200px',
+          backgroundColor: isDarkMode ? '#1e1e1e' : '#fff',
+          borderRadius: '20px',
+          padding: '48px',
+          boxShadow: isDarkMode ? 'none' : '0 2px 4px rgba(0,0,0,0.05)',
+          border: isDarkMode ? '1px solid #333' : 'none',
+          width: '100%',
+          maxWidth: '900px',
+          margin: '0 auto',
+          position: 'relative',
+          minHeight: '60vh',
+          transition: 'all 0.3s ease',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          transition: 'all 0.3s ease',
-          margin: '0 auto',
-          maxWidth: '600px'
+          '@media (max-width: 900px)': {
+            padding: '40px 24px',
+            borderRadius: '16px',
+            minHeight: 'unset'
+          }
         }}
       >
         {!isFlipped ? (
-          <>
-            {content}
-            <Button 
-              variant="contained" 
-              color="primary"
-              onClick={() => {
-                playFlipSound();
-                setIsFlipped(true);
-              }}
-              sx={{ 
-                marginTop: 2,
-                backgroundColor: '#7c4dff',
-                '&:hover': {
-                  backgroundColor: '#6b42e0'
-                }
-              }}
-            >
-              Show Meaning
-            </Button>
-          </>
+          <Box 
+            sx={{ 
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '100%',
+              height: '100%',
+              cursor: 'pointer'
+            }}
+            onClick={() => {
+              playFlipSound();
+              setIsFlipped(true);
+            }}
+          >
+            {frontContent}
+          </Box>
         ) : (
-          <>
-            <Typography variant="h5" sx={{ textAlign: 'center', marginBottom: 3, color: isDarkMode ? '#fff' : '#1f2937' }}>
-              {meaning}
-            </Typography>
-            <Box sx={{ display: 'flex', gap: 2 }}>
+          <Box 
+            sx={{ 
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '100%',
+              height: '100%'
+            }}
+          >
+            {backContent}
+            <Box sx={{ display: 'flex', gap: 2, marginTop: 3 }}>
               <Button 
                 variant="contained" 
                 color="error"
@@ -1049,7 +1071,7 @@ export default function StudyLayout() {
                 I Knew This
               </Button>
             </Box>
-          </>
+          </Box>
         )}
       </Box>
     );
@@ -1664,10 +1686,14 @@ export default function StudyLayout() {
           </StatItem>
         </StatsBar>
 
-        <ContentCard darkMode={isDarkMode}>
+        {!studyMode.startsWith('flashcard-') && (
+          <ContentCard darkMode={isDarkMode}>
           {renderQuestion()}
           {renderChoices()}
-        </ContentCard>
+          </ContentCard>
+        )}
+        
+        {studyMode.startsWith('flashcard-') && renderQuestion()}
       </MainContent>
     </LayoutRoot>
     </>
