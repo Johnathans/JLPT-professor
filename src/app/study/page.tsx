@@ -41,37 +41,21 @@ const LayoutRoot = styled('div', {
   transition: 'background-color 0.2s ease'
 }));
 
-const Sidebar = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'expanded' && prop !== 'darkMode',
-})(({ expanded, darkMode }: { expanded: boolean, darkMode: boolean }) => ({
-  width: expanded ? 240 : 72,
-  backgroundColor: darkMode ? '#1e1e1e' : '#fff',
-  borderRight: `1px solid ${darkMode ? '#333' : '#e5e7eb'}`,
-  transition: 'width 0.2s ease, background-color 0.2s ease',
-  height: '100vh',
-  position: 'fixed',
-  left: 0,
-  top: 0,
-  display: 'flex',
-  flexDirection: 'column',
-  '@media (max-width: 900px)': {
-    display: 'none'
-  }
-}));
+// Sidebar removed for cleaner interface
 
 const MainContent = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'sidebarExpanded' && prop !== 'darkMode',
-})(({ sidebarExpanded, darkMode }: { sidebarExpanded: boolean, darkMode: boolean }) => ({
+  shouldForwardProp: (prop) => prop !== 'darkMode',
+})(({ darkMode }: { darkMode: boolean }) => ({
   flexGrow: 1,
-  marginLeft: sidebarExpanded ? 240 : 72,
+  marginLeft: 0, // No sidebar, so no margin needed
   padding: '24px 40px 40px',
   transition: 'margin-left 0.2s ease',
   display: 'flex',
   flexDirection: 'column',
   gap: '12px',
   maxWidth: '1400px',
+  width: '100%',
   '@media (max-width: 900px)': {
-    marginLeft: 0,
     padding: '16px 16px 24px'
   }
 }));
@@ -379,7 +363,7 @@ const StudyModeLabels: Record<StudyMode, string> = {
 };
 
 export default function StudyLayout() {
-  const [isExpanded, setIsExpanded] = useState(false);
+  // Sidebar state removed as it's not needed on study page
   const { isDarkMode, toggleDarkMode } = useColorMode();
   // Default to vocabulary mode
   const [studyMode, setStudyMode] = useState<StudyMode>('vocabulary');
@@ -1558,28 +1542,11 @@ export default function StudyLayout() {
   return (
     <>
       {/* Add the shared Navbar with the same dark mode state */}
-      <div className={`${styles.studyNavContainer} ${styles.container} ${isDarkMode ? styles.dark : ''}`}>
-        <Navbar forceDarkMode={isDarkMode} />
-      </div>
+      {/* Navbar removed for cleaner interface */}
       
-      {/* Keep the original layout structure */}
+      {/* Simplified layout structure without sidebar */}
       <LayoutRoot darkMode={isDarkMode}>
-        {/* Keep the original sidebar but make it invisible */}
-        <div style={{ visibility: 'hidden', position: 'absolute', zIndex: -1 }}>
-          <Sidebar
-            expanded={isExpanded}
-            darkMode={isDarkMode}
-            onMouseEnter={() => setIsExpanded(true)}
-            onMouseLeave={() => setIsExpanded(false)}
-          >
-            <SidebarComponent 
-              expanded={isExpanded} 
-              onExpandedChange={setIsExpanded} 
-              darkMode={isDarkMode}
-            />
-          </Sidebar>
-        </div>
-      <MainContent sidebarExpanded={isExpanded} darkMode={isDarkMode}>
+      <MainContent darkMode={isDarkMode}>
         <TopBar>
           <Link href="/dashboard" passHref>
             <Button 
