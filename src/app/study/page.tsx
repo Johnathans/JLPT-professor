@@ -1146,18 +1146,22 @@ export default function StudyLayout() {
               color: '#7c4dff',
               borderColor: '#7c4dff',
               backgroundColor: 'white',
+              borderBottom: '4px solid #7c4dff',
               '&:hover': {
                 backgroundColor: 'rgba(124, 77, 255, 0.04)',
-                borderColor: '#6b42e0'
+                borderColor: '#6b42e0',
+                borderBottom: '4px solid #6b42e0'
               },
-              padding: '10px 20px',
+              padding: '14px 24px',
               textTransform: 'none',
-              fontWeight: 500,
+              fontWeight: 600,
+              fontSize: '16px',
               borderRadius: '8px',
-              minWidth: '160px',
+              minWidth: '180px',
+              height: '56px',
               '@media (max-width: 600px)': {
-                padding: '8px 12px',
-                fontSize: '13px',
+                padding: '12px 16px',
+                fontSize: '14px',
                 flex: 1,
                 minWidth: 'unset'
               }
@@ -1176,17 +1180,21 @@ export default function StudyLayout() {
             sx={{ 
               backgroundColor: '#7c4dff',
               color: 'white',
+              borderBottom: '4px solid #5e35b1',
               '&:hover': {
-                backgroundColor: '#6b42e0'
+                backgroundColor: '#6b42e0',
+                borderBottom: '4px solid #4527a0'
               },
-              padding: '10px 20px',
+              padding: '14px 24px',
               textTransform: 'none',
-              fontWeight: 500,
+              fontWeight: 600,
+              fontSize: '16px',
               borderRadius: '8px',
-              minWidth: '120px',
+              minWidth: '140px',
+              height: '56px',
               '@media (max-width: 600px)': {
-                padding: '8px 12px',
-                fontSize: '13px',
+                padding: '12px 16px',
+                fontSize: '14px',
                 flex: 1,
                 minWidth: 'unset'
               }
@@ -1203,18 +1211,22 @@ export default function StudyLayout() {
               color: '#7c4dff',
               borderColor: '#7c4dff',
               backgroundColor: 'white',
+              borderBottom: '4px solid #7c4dff',
               '&:hover': {
                 backgroundColor: 'rgba(124, 77, 255, 0.04)',
-                borderColor: '#6b42e0'
+                borderColor: '#6b42e0',
+                borderBottom: '4px solid #6b42e0'
               },
-              padding: '10px 20px',
+              padding: '14px 24px',
               textTransform: 'none',
-              fontWeight: 500,
+              fontWeight: 600,
+              fontSize: '16px',
               borderRadius: '8px',
-              minWidth: '160px',
+              minWidth: '180px',
+              height: '56px',
               '@media (max-width: 600px)': {
-                padding: '8px 12px',
-                fontSize: '13px',
+                padding: '12px 16px',
+                fontSize: '14px',
                 flex: 1,
                 minWidth: 'unset'
               }
