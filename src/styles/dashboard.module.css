@@ -167,15 +167,31 @@
   transition: color 0.2s;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   color: #666;
   position: relative;
   white-space: nowrap;
   width: 80%;
-  text-align: center;
+  text-align: left;
+  gap: 0.75rem;
 }
 
-/* Icons removed from navbar */
+.navIcon {
+  color: #666;
+  min-width: 20px;
+}
+
+.navItem:hover .navIcon {
+  color: #7c4dff;
+}
+
+.navItem.active .navIcon {
+  color: #7c4dff;
+}
+
+.dark .navItem.active .navIcon {
+  color: #a78bff;
+}
 
 .navItem span {
   opacity: 1;

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Moon, Sun } from 'react-feather';
+import { Moon, Sun, Home, BookOpen, RefreshCw, BarChart2, LogOut } from 'react-feather';
 import styles from '@/styles/dashboard.module.css';
 import { useColorMode } from '@/contexts/ThemeContext';
 import Link from 'next/link';
@@ -34,24 +34,30 @@ const Navbar: React.FC<NavbarProps> = ({ className, forceDarkMode }) => {
       <div className={styles.navContent}>
         <Link href="/dashboard" className={styles.navLink}>
           <div className={`${styles.navItem} ${pathname === '/dashboard' ? styles.active : ''}`}>
+            <Home size={20} className={styles.navIcon} />
             <span>Dashboard</span>
           </div>
         </Link>
         <Link href="/study" className={styles.navLink}>
           <div className={`${styles.navItem} ${pathname === '/study' ? styles.active : ''}`}>
+            <BookOpen size={20} className={styles.navIcon} />
             <span>Study</span>
           </div>
         </Link>
         <div className={styles.navItem}>
+          <RefreshCw size={20} className={styles.navIcon} />
           <span>Review</span>
         </div>
         <div className={styles.navItem}>
+          <BarChart2 size={20} className={styles.navIcon} />
           <span>Progress</span>
         </div>
         <div className={styles.navItem}>
+          <LogOut size={20} className={styles.navIcon} />
           <span>Logout</span>
         </div>
         <div className={styles.navItem} onClick={toggleDarkMode}>
+          {isDarkMode ? <Sun size={20} className={styles.navIcon} /> : <Moon size={20} className={styles.navIcon} />}
           <span>{isDarkMode ? 'Light Mode' : 'Dark Mode'}</span>
           <div className={`${styles.toggle} ${isDarkMode ? styles.active : ''}`}>
             <div className={styles.toggleThumb} />
