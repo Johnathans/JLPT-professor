@@ -163,13 +163,13 @@ const ContentCard = styled(Box, {
   '@media (max-width: 900px)': {
     padding: '32px 24px',
     borderRadius: '16px',
-    minHeight: '40vh',
-    maxHeight: '45vh'
+    minHeight: '45vh',
+    maxHeight: '50vh'
   },
   '@media (max-width: 600px)': {
     padding: '24px 20px',
-    minHeight: '35vh',
-    maxHeight: '40vh'
+    minHeight: '50vh',
+    maxHeight: '55vh'
   }
 }));
 
@@ -1055,11 +1055,11 @@ export default function StudyLayout() {
             perspective: '1000px', // Add perspective for 3D effect
             cursor: 'pointer',
             '@media (max-width: 900px)': {
-              minHeight: '50vh',
+              minHeight: '60vh',
               marginBottom: '16px'
             },
             '@media (max-width: 600px)': {
-              minHeight: '40vh'
+              minHeight: '65vh'
             }
           }}
         >
