@@ -7,3 +7,9 @@ export interface SentenceEntry {
   tags: string[];
   audioUrl?: string;
 }
+
+export interface WordEntry {
+  word: string;
+  reading?: string;
+  meaning?: string;
+}
