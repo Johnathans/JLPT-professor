@@ -18,9 +18,8 @@
 
 /* Navigation Styles */
 .nav {
-  width: 60px;
+  width: 240px;
   background-color: white;
-  transition: width 0.3s ease;
   position: fixed;
   height: 100vh;
   color: #666;
@@ -37,9 +36,7 @@
   }
 }
 
-.nav:hover {
-  width: 240px;
-}
+/* Removed hover expansion since navbar is now always expanded */
 
 .dark .nav {
   background-color: #222;
@@ -69,7 +66,8 @@
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: center;
+  width: 100%;
 }
 
 .logoIcon {
@@ -92,16 +90,24 @@
 }
 
 .logoText {
-  font-weight: 600;
   color: #333;
   white-space: nowrap;
-  opacity: 0;
-  transition: opacity 0.2s ease;
+  opacity: 1;
+  display: flex;
+  gap: 0.2rem;
+  font-size: 1.6rem;
+  justify-content: center;
 }
 
-.nav:hover .logoText {
-  opacity: 1;
+.jlptText {
+  font-weight: 900;
 }
+
+.professorText {
+  font-weight: 400;
+}
+
+/* Removed since logo text is now always visible */
 
 .dark .logoText {
   color: #fff;
@@ -134,16 +140,12 @@
   border: none;
   background: none;
   outline: none;
-  width: 0;
-  color: #333;
-  transition: width 0.3s ease;
-  padding: 0;
-}
-
-.nav:hover .searchInput {
   width: 100%;
+  color: #333;
   padding: 0 0.5rem;
 }
+
+/* Removed since search input is now always visible */
 
 .dark .searchInput {
   color: #fff;
@@ -155,60 +157,90 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  align-items: center;
 }
 
 .navItem {
   padding: 0.8rem 1rem;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: color 0.2s;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
   color: #666;
   position: relative;
   white-space: nowrap;
+  width: 80%;
+  text-align: center;
 }
 
-.navItem svg {
-  min-width: 20px;
-}
+/* Icons removed from navbar */
 
 .navItem span {
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.nav:hover .navItem span {
   opacity: 1;
 }
 
+/* Pro Box Styles */
+.proBox {
+  margin: 0 auto 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background-color: #7c4dff;
+  border-radius: 6px;
+  text-align: center;
+  width: 70%;
+  box-shadow: 0 2px 4px rgba(124, 77, 255, 0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.proBox:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(124, 77, 255, 0.3);
+}
+
+.proBox span {
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+}
+
+.dark .proBox {
+  background-color: #8f67ff;
+  box-shadow: 0 2px 8px rgba(143, 103, 255, 0.4);
+}
+
+/* Removed since nav item text is now always visible */
+
 .navItem:hover {
-  background-color: #f5f5f5;
   color: #7c4dff;
 }
 
 .dark .navItem:hover {
-  background-color: #333;
   color: #7c4dff;
 }
 
 .navItem.active {
   color: #7c4dff;
-  background-color: #f5f5f5;
+  font-weight: 600;
 }
 
 .dark .navItem.active {
-  background-color: #333;
+  color: #a78bff;
 }
 
 .navItem span {
-  font-weight: 500;
+  font-weight: 700;
+  font-size: 1.2rem;
 }
 
 .navFooter {
   margin-top: auto;
   border-top: 1px solid #eee;
   padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .toggle {
@@ -274,25 +306,94 @@
 }
 
 .jlptLevelIndicator {
-  background-color: #7c4dff;
-  color: white;
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
+  background-color: white;
+  color: #7c4dff;
+  border-radius: 12px;
+  padding: 0.75rem 1.25rem;
   font-weight: 700;
-  font-size: 1.25rem;
-  margin-right: 1rem;
-  min-width: 60px;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(124, 77, 255, 0.3);
+  font-size: 1.5rem;
+  margin-right: 1.5rem;
+  min-width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 6px rgba(124, 77, 255, 0.2);
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.jlptLevelIndicator:hover {
+  background-color: #6b42e0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(124, 77, 255, 0.4);
 }
 
 .dark .jlptLevelIndicator {
-  background-color: #6b42e0;
-  box-shadow: 0 2px 4px rgba(124, 77, 255, 0.5);
+  background-color: #2d2d2d;
+  color: #a78bff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.dark .jlptLevelIndicator:hover {
+  background-color: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .jlptLevelText {
   font-weight: 700;
+  margin-right: 0.5rem;
+}
+
+.jlptLevelDropdownIcon {
+  transition: transform 0.2s ease;
+}
+
+.jlptLevelIndicator:hover .jlptLevelDropdownIcon {
+  transform: translateY(2px);
+}
+
+.jlptLevelDropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  min-width: 100%;
+  overflow: hidden;
+}
+
+.dark .jlptLevelDropdown {
+  background-color: #2d2d2d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.jlptLevelOption {
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.jlptLevelOption:hover {
+  background-color: #f3f0ff;
+}
+
+.dark .jlptLevelOption:hover {
+  background-color: #3a3052;
+}
+
+.jlptLevelOption.activeLevel {
+  background-color: #f3f0ff;
+  color: #7c4dff;
+}
+
+.dark .jlptLevelOption.activeLevel {
+  background-color: #3a3052;
+  color: #a78bff;
 }
 
 .jlptProgressBarWrapper {
@@ -340,8 +441,7 @@
 .main {
   flex: 1;
   padding: 2rem;
-  margin-left: 60px;
-  transition: margin-left 0.3s ease;
+  margin-left: 240px;
 }
 
 @media (max-width: 768px) {
@@ -400,9 +500,7 @@
   color: #999;
 }
 
-.nav:hover ~ .main {
-  margin-left: 240px;
-}
+/* Removed hover effect on main content since navbar is now always expanded */
 
 .grid {
   display: grid;
@@ -836,6 +934,14 @@
   text-decoration: none;
   text-align: center;
   display: inline-block;
+}
+
+.navLink {
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .studyButton:hover {
