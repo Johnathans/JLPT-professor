@@ -60,6 +60,38 @@ const MainContent = styled(Box, {
   }
 }));
 
+// Animation for the +2 points indicator
+const ScoreAnimation = styled(Box)({
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  color: '#4caf50',
+  fontWeight: 'bold',
+  fontSize: '32px',
+  zIndex: 1000,
+  textShadow: '0 0 5px rgba(255, 255, 255, 0.7)',
+  animation: 'scoreAnimation 1.5s ease-out forwards',
+  '@keyframes scoreAnimation': {
+    '0%': {
+      opacity: 0,
+      transform: 'translate(-50%, -50%)'
+    },
+    '10%': {
+      opacity: 1,
+      transform: 'translate(-50%, -60%)'
+    },
+    '80%': {
+      opacity: 1,
+      transform: 'translate(-50%, -100%)'
+    },
+    '100%': {
+      opacity: 0,
+      transform: 'translate(-50%, -120%)'
+    }
+  }
+});
+
 const TopBar = styled(Box)({
   display: 'flex',
   justifyContent: 'space-between',
@@ -68,6 +100,7 @@ const TopBar = styled(Box)({
   maxWidth: '900px',
   margin: '0 auto',
   marginBottom: '8px',
+  position: 'relative', // Added for proper animation positioning
   '@media (max-width: 900px)': {
     padding: '0 4px'
   }
@@ -764,7 +797,8 @@ export default function StudyLayout() {
   };
   
   // State for audio loading
-  const [isAudioLoading, setIsAudioLoading] = useState(false); // For sentence audio playback
+  const [isAudioLoading, setIsAudioLoading] = useState(false);
+  const [showScoreAnimation, setShowScoreAnimation] = useState(false); // For sentence audio playback
   
   // Function to play sentence audio using Google TTS
   const playSentenceAudio = async (text: string) => {
@@ -809,6 +843,11 @@ export default function StudyLayout() {
         const audio = new Audio('/audio/ui/correct-6033.mp3');
         audio.volume = 1.0;
         audio.play().catch(e => console.error('Error playing correct sound:', e));
+        
+        // Show the +2 score animation
+        setShowScoreAnimation(true);
+        // Hide the animation after 1.5 seconds (matching the animation duration)
+        setTimeout(() => setShowScoreAnimation(false), 1500);
       } catch (error) {
         console.error('Error playing correct sound:', error);
       }
@@ -1296,6 +1335,11 @@ export default function StudyLayout() {
       // Play sound based on user's self-assessment
       if (knewAnswer) {
         playCorrectSound();
+        
+        // Show the +2 score animation for correct answers
+        setShowScoreAnimation(true);
+        // Hide the animation after 1.5 seconds (matching the animation duration)
+        setTimeout(() => setShowScoreAnimation(false), 1500);
       } else {
         playWrongSound();
       }
@@ -1615,6 +1659,9 @@ export default function StudyLayout() {
       <LayoutRoot darkMode={isDarkMode}>
       <MainContent darkMode={isDarkMode}>
         <TopBar>
+          <Box sx={{ position: 'absolute', width: '100%', height: '100%', pointerEvents: 'none' }}>
+            {showScoreAnimation && <ScoreAnimation>+2</ScoreAnimation>}
+          </Box>
           <Link href="/dashboard" passHref>
             <Button 
               startIcon={<ArrowBackIcon sx={{ color: '#7c4dff' }} />}
