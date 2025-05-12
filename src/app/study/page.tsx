@@ -176,7 +176,7 @@ const ContentCard = styled(Box, {
 const JapaneseSentence = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'darkMode',
 })(({ darkMode }: { darkMode: boolean }) => ({
-  fontSize: '120px',
+  fontSize: '80px',
   lineHeight: 1.3,
   textAlign: 'center',
   color: darkMode ? '#fff' : '#1f2937',
@@ -188,7 +188,10 @@ const JapaneseSentence = styled(Box, {
     padding: '0 8px'
   },
   '@media (max-width: 900px)': {
-    fontSize: '96px'
+    fontSize: '70px'
+  },
+  '@media (max-width: 600px)': {
+    fontSize: '60px'
   }
 }));
 
