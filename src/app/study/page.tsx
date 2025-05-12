@@ -852,28 +852,16 @@ export default function StudyLayout() {
     
     // Play sound effect based on whether the answer is correct
     if (isCorrect) {
-      // Play correct sound
-      try {
-        const audio = new Audio('/audio/ui/correct-6033.mp3');
-        audio.volume = 1.0;
-        audio.play().catch(e => console.error('Error playing correct sound:', e));
-        
-        // Show the +2 score animation
-        setShowScoreAnimation(true);
-        // Hide the animation after 1.5 seconds (matching the animation duration)
-        setTimeout(() => setShowScoreAnimation(false), 1500);
-      } catch (error) {
-        console.error('Error playing correct sound:', error);
-      }
+      // Play correct sound using the preloaded utility
+      playCorrectSound(1.0);
+      
+      // Show the +2 score animation immediately
+      setShowScoreAnimation(true);
+      // Hide the animation after 1.5 seconds (matching the animation duration)
+      setTimeout(() => setShowScoreAnimation(false), 1500);
     } else {
-      // Play wrong sound
-      try {
-        const audio = new Audio('/audio/ui/wronganswer-37702.mp3');
-        audio.volume = 1.0;
-        audio.play().catch(e => console.error('Error playing wrong sound:', e));
-      } catch (error) {
-        console.error('Error playing wrong sound:', error);
-      }
+      // Play wrong sound using the preloaded utility
+      playWrongSound(1.0);
     }
     
     // Update accuracy by tracking total answered and correct answers
