@@ -145,22 +145,31 @@ const ContentCard = styled(Box, {
 })(({ darkMode }: { darkMode: boolean }) => ({
   backgroundColor: darkMode ? '#1e1e1e' : '#fff',
   borderRadius: '20px',
-  padding: '48px',
+  padding: '40px',
   boxShadow: darkMode ? 'none' : '0 2px 4px rgba(0,0,0,0.05)',
   border: darkMode ? '1px solid #333' : 'none',
   width: '100%',
   maxWidth: '900px',
   margin: '0 auto',
   position: 'relative',
-  minHeight: '60vh',
+  minHeight: '45vh',
+  maxHeight: '50vh',
   transition: 'background-color 0.2s ease',
   display: 'flex',
   flexDirection: 'column',
-  gap: '32px',
+  justifyContent: 'center',
+  gap: '24px',
+  overflow: 'auto',
   '@media (max-width: 900px)': {
-    padding: '40px 24px',
+    padding: '32px 24px',
     borderRadius: '16px',
-    minHeight: 'unset'
+    minHeight: '40vh',
+    maxHeight: '45vh'
+  },
+  '@media (max-width: 600px)': {
+    padding: '24px 20px',
+    minHeight: '35vh',
+    maxHeight: '40vh'
   }
 }));
 
@@ -197,13 +206,16 @@ const EnglishTranslation = styled(Box, {
 
 const ChoiceGrid = styled(Box)({
   display: 'grid',
-  gridTemplateColumns: 'repeat(2, 1fr)',
-  gap: '20px',
+  gridTemplateColumns: '1fr 1fr',
+  gap: '16px',
   width: '100%',
-  maxWidth: '800px',
+  maxWidth: '900px',
   margin: '0 auto',
   '@media (max-width: 900px)': {
-    gap: '16px'
+    gap: '14px'
+  },
+  '@media (max-width: 600px)': {
+    gap: '12px'
   }
 });
 
@@ -212,10 +224,13 @@ const MatchGrid = styled(Box)({
   gridTemplateColumns: 'repeat(4, 1fr)',
   gap: '16px',
   width: '100%',
-  maxWidth: '800px',
+  maxWidth: '900px',
   margin: '0 auto',
   '@media (max-width: 900px)': {
     gridTemplateColumns: 'repeat(2, 1fr)',
+    gap: '14px'
+  },
+  '@media (max-width: 600px)': {
     gap: '12px'
   }
 });
@@ -226,8 +241,8 @@ const MatchCard = styled(Box, {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  minHeight: '140px',
-  padding: '20px',
+  minHeight: '160px',
+  padding: '24px',
   borderRadius: '8px',
   cursor: 'pointer',
   transition: 'all 0.2s ease',
@@ -235,12 +250,12 @@ const MatchCard = styled(Box, {
   fontFamily: '"Noto Sans JP", sans-serif',
   backgroundColor: isCorrect ? '#f2fcfa' : isIncorrect ? '#fff1f0' : darkMode ? '#383838' : '#f3f4f6',
   border: `1px solid ${isCorrect ? '#e8faf3' : isIncorrect ? '#ffccc7' : darkMode ? '#444' : '#e5e7eb'}`,
-  borderBottom: isCorrect ? '4px solid #10b981' : isIncorrect ? '4px solid #f5222d' : '4px solid #7c4dff',
+  borderBottom: isCorrect ? '6px solid #10b981' : isIncorrect ? '6px solid #f5222d' : '6px solid #7c4dff',
   color: darkMode && !isCorrect && !isIncorrect ? '#fff' : '#1f2937',
   position: 'relative',
   '&:hover': {
     backgroundColor: isCorrect ? '#f2fcfa' : isIncorrect ? '#fff1f0' : darkMode ? '#444' : '#e9ebef',
-    borderBottom: isCorrect ? '4px solid #0ca678' : isIncorrect ? '4px solid #e01e5a' : '4px solid #6b42e0',
+    borderBottom: isCorrect ? '6px solid #0ca678' : isIncorrect ? '6px solid #e01e5a' : '6px solid #6b42e0',
   }
 }));
 
@@ -250,9 +265,9 @@ const ChoiceButton = styled(Button, {
   ({ correct, incorrect, darkMode }) => ({
     width: '100%',
     justifyContent: 'center',
-    padding: '18px 32px',
+    padding: '20px 32px',
     borderRadius: '8px',
-    fontSize: '20px',
+    fontSize: '22px',
     fontFamily: '"Noto Sans JP", sans-serif',
     fontWeight: 500,
     backgroundColor: correct ? '#4caf50' : 
@@ -264,10 +279,10 @@ const ChoiceButton = styled(Button, {
     borderColor: correct ? '#4caf50' : 
                 incorrect ? '#f44336' : 
                 darkMode ? '#333' : '#e5e7eb',
-    borderBottom: correct ? '4px solid #388e3c' : 
-                 incorrect ? '4px solid #d32f2f' : 
-                 '4px solid #7c4dff',
-    height: '64px',
+    borderBottom: correct ? '6px solid #388e3c' : 
+                 incorrect ? '6px solid #d32f2f' : 
+                 '6px solid #7c4dff',
+    height: '72px',
     '&:hover': {
       backgroundColor: correct ? '#43a047' : 
                      incorrect ? '#e53935' : 
@@ -275,14 +290,19 @@ const ChoiceButton = styled(Button, {
       color: correct || incorrect ? '#fff' : 
              darkMode ? '#fff' : '#7c4dff',
       borderColor: darkMode ? '#7c4dff' : '#7c4dff',
-      borderBottom: correct ? '4px solid #2e7d32' : 
-                   incorrect ? '4px solid #c62828' : 
-                   '4px solid #6b42e0'
+      borderBottom: correct ? '6px solid #2e7d32' : 
+                   incorrect ? '6px solid #c62828' : 
+                   '6px solid #6b42e0'
     },
     '@media (max-width: 900px)': {
-      padding: '16px 24px',
+      padding: '18px 24px',
+      fontSize: '20px',
+      height: '68px'
+    },
+    '@media (max-width: 600px)': {
+      padding: '16px 20px',
       fontSize: '18px',
-      height: '60px'
+      height: '64px'
     }
   })
 );
@@ -1171,11 +1191,11 @@ export default function StudyLayout() {
               color: '#7c4dff',
               borderColor: '#7c4dff',
               backgroundColor: 'white',
-              borderBottom: '4px solid #7c4dff',
+              borderBottom: '6px solid #7c4dff',
               '&:hover': {
                 backgroundColor: 'rgba(124, 77, 255, 0.04)',
                 borderColor: '#6b42e0',
-                borderBottom: '4px solid #6b42e0'
+                borderBottom: '6px solid #6b42e0'
               },
               padding: '14px 24px',
               textTransform: 'none',
@@ -1205,10 +1225,10 @@ export default function StudyLayout() {
             sx={{ 
               backgroundColor: '#7c4dff',
               color: 'white',
-              borderBottom: '4px solid #5e35b1',
+              borderBottom: '6px solid #5e35b1',
               '&:hover': {
                 backgroundColor: '#6b42e0',
-                borderBottom: '4px solid #4527a0'
+                borderBottom: '6px solid #4527a0'
               },
               padding: '14px 24px',
               textTransform: 'none',
@@ -1236,11 +1256,11 @@ export default function StudyLayout() {
               color: '#7c4dff',
               borderColor: '#7c4dff',
               backgroundColor: 'white',
-              borderBottom: '4px solid #7c4dff',
+              borderBottom: '6px solid #7c4dff',
               '&:hover': {
                 backgroundColor: 'rgba(124, 77, 255, 0.04)',
                 borderColor: '#6b42e0',
-                borderBottom: '4px solid #6b42e0'
+                borderBottom: '6px solid #6b42e0'
               },
               padding: '14px 24px',
               textTransform: 'none',
@@ -1838,10 +1858,13 @@ export default function StudyLayout() {
             <Box sx={{ 
               width: '100%',
               maxWidth: '900px',
-              margin: '24px auto 0',
+              margin: '20px auto 0',
               padding: '0 16px',
               '@media (max-width: 900px)': {
                 margin: '16px auto 0'
+              },
+              '@media (max-width: 600px)': {
+                margin: '12px auto 0'
               }
             }}>
               {renderChoices()}
