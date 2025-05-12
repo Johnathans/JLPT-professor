@@ -646,23 +646,20 @@ export default function StudyLayout() {
     return Math.max(0, total - current);
   };
 
-  // Function to limit meanings to a maximum of two
+  // Function to get only the first meaning
   const limitMeanings = (meaning: string): string => {
     // Split by common delimiters (semicolons, slashes with spaces around them)
     const meaningParts = meaning.split(/\s*[;\/]\s*/);
     
-    // Take only the first two meanings
-    const limitedParts = meaningParts.slice(0, 2);
-    
-    // Join them back with semicolons
-    return limitedParts.join('; ');
+    // Take only the first meaning
+    return meaningParts[0];
   };
 
   // Function to generate choices for vocabulary study
   const generateVocabularyChoices = (data: VocabularyItem[], index: number) => {
     if (!data || data.length === 0) return;
     
-    // Get the full meaning and limit it to two meanings max
+    // Get the full meaning and limit it to the first meaning only
     const fullMeaning = data[index].meaning;
     const correctAnswer = limitMeanings(fullMeaning);
     
@@ -774,10 +771,9 @@ export default function StudyLayout() {
         .slice(0, 3)
         .map(item => item.kunyomi[0]);
     } else { // kanji-meaning
-      // For kanji meanings, we'll take up to 3 meanings and join them
+      // For kanji meanings, we'll take only the first meaning
       const meaningArray = data[index].meanings || [];
-      const limitedMeanings = meaningArray.slice(0, 3);
-      correctAnswer = limitedMeanings.join('; ');
+      correctAnswer = meaningArray[0] || '';
       
       otherChoices = data
         .filter((item, i) => i !== index && item.meanings && item.meanings.length > 0)
@@ -785,7 +781,7 @@ export default function StudyLayout() {
         .slice(0, 3)
         .map(item => {
           const meanings = item.meanings || [];
-          return meanings.slice(0, 3).join('; ');
+          return meanings[0] || '';
         });
     }
     
