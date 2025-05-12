@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '@/styles/dashboard.module.css';
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
-import { Clock, Book, Edit3 } from 'react-feather';
+import { Clock, Book, Edit3, ChevronDown } from 'react-feather';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import GoalSettingModal, { DailyGoals } from './GoalSettingModal';
@@ -226,7 +226,8 @@ const mockData = {
 export default function TestDashboard() {
   const { isDarkMode, toggleDarkMode } = useColorMode();
   const [showGoalModal, setShowGoalModal] = React.useState(false);
-  const [activeJlptLevel, setActiveJlptLevel] = React.useState("n5");
+  const [activeJlptLevel, setActiveJlptLevel] = useState("n5");
+  const [jlptLevelMenuOpen, setJlptLevelMenuOpen] = useState(false);
   const brandPurple = '#7c4dff';
   const [dailyGoals, setDailyGoals] = React.useState<DailyGoals>({
     vocabulary: mockData.dailyGoal.categories.vocabulary.total,
@@ -246,8 +247,32 @@ export default function TestDashboard() {
         {/* JLPT Level Progress Section */}
         <div className={styles.jlptProgressSection}>
           <div className={styles.jlptProgressContainer}>
-            <div className={styles.jlptLevelIndicator}>
+            <div 
+              className={styles.jlptLevelIndicator}
+              onClick={() => setJlptLevelMenuOpen(!jlptLevelMenuOpen)}
+            >
               <span className={styles.jlptLevelText}>{mockData.user.progress.currentLevel}</span>
+              <ChevronDown size={20} className={styles.jlptLevelDropdownIcon} />
+              
+              {/* JLPT Level Dropdown Menu */}
+              {jlptLevelMenuOpen && (
+                <div className={styles.jlptLevelDropdown}>
+                  {mockData.jlptLevels.map(level => (
+                    <div 
+                      key={level.id} 
+                      className={`${styles.jlptLevelOption} ${level.name === mockData.user.progress.currentLevel ? styles.activeLevel : ''}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        // In a real app, we would update the user's current level
+                        console.log(`Selected level: ${level.name}`);
+                        setJlptLevelMenuOpen(false);
+                      }}
+                    >
+                      {level.name}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             <div className={styles.jlptProgressBarWrapper}>
               <div 
