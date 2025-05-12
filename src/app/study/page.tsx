@@ -990,39 +990,30 @@ export default function StudyLayout() {
     
     // Use a Box component with the same styling as ContentCard for consistent appearance
     return (
-      <Box 
-        sx={{ 
-          backgroundColor: isDarkMode ? '#1e1e1e' : '#fff',
-          borderRadius: '20px',
-          padding: '48px',
-          boxShadow: isDarkMode ? 'none' : '0 2px 4px rgba(0,0,0,0.05)',
-          border: isDarkMode ? '1px solid #333' : 'none',
-          width: '100%',
-          maxWidth: '900px',
-          margin: '0 auto',
-          position: 'relative',
-          minHeight: '60vh',
-          transition: 'all 0.3s ease',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          '@media (max-width: 900px)': {
-            padding: '40px 24px',
-            borderRadius: '16px',
-            minHeight: 'unset'
-          }
-        }}
-      >
+      <>
         <Box 
           sx={{ 
+            backgroundColor: isDarkMode ? '#1e1e1e' : '#fff',
+            borderRadius: '20px',
+            padding: '48px',
+            boxShadow: isDarkMode ? 'none' : '0 2px 4px rgba(0,0,0,0.05)',
+            border: isDarkMode ? '1px solid #333' : 'none',
+            width: '100%',
+            maxWidth: '900px',
+            margin: '0 auto',
+            position: 'relative',
+            minHeight: '60vh',
+            transition: 'all 0.3s ease',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            width: '100%',
-            height: '100%',
-            flex: 1,
-            padding: '20px 0 40px'
+            marginBottom: '24px',
+            '@media (max-width: 900px)': {
+              padding: '40px 24px',
+              borderRadius: '16px',
+              minHeight: 'unset'
+            }
           }}
         >
           {isFlipped ? backContent : frontContent}
@@ -1033,7 +1024,9 @@ export default function StudyLayout() {
           justifyContent: 'space-between', 
           alignItems: 'center', 
           width: '100%',
-          marginTop: 2
+          maxWidth: '900px',
+          margin: '0 auto',
+          padding: '0 16px'
         }}>
           <Button 
             variant="outlined" 
@@ -1097,7 +1090,7 @@ export default function StudyLayout() {
             I Knew This
           </Button>
         </Box>
-      </Box>
+      </>
     );
   };
   
