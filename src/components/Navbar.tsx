@@ -57,9 +57,7 @@ const Navbar: React.FC<NavbarProps> = ({ className, forceDarkMode }) => {
             <div className={styles.toggleThumb} />
           </div>
         </div>
-      </div>
-
-      <div className={styles.navFooter}>
+        
         <div className={styles.proBox}>
           <span>JLPT Professor Pro</span>
         </div>

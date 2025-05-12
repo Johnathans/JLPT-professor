@@ -158,6 +158,7 @@
   flex-direction: column;
   gap: 0.25rem;
   align-items: center;
+  margin-bottom: auto; /* Push content to the top */
 }
 
 .navItem {
@@ -182,7 +183,7 @@
 
 /* Pro Box Styles */
 .proBox {
-  margin: 0 auto 0.5rem;
+  margin: 1.5rem auto 0.5rem;
   padding: 0.5rem 0.75rem;
   background-color: #7c4dff;
   border-radius: 6px;
