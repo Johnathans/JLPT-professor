@@ -241,6 +241,24 @@ export default function TestDashboard() {
       {/* Shared Navigation Component */}
       <Navbar />
 
+      {/* JLPT Level Progress Bar */}
+      <div className={styles.jlptProgressContainer}>
+        <div className={styles.jlptLevelIndicator}>
+          <span className={styles.jlptLevelText}>{mockData.user.progress.currentLevel}</span>
+        </div>
+        <div className={styles.jlptProgressBarWrapper}>
+          <div 
+            className={styles.jlptProgressBarFill} 
+            style={{ 
+              width: `${Math.min(100, (mockData.srs.mastered / (mockData.srs.mastered + mockData.user.progress.remainingKanji + mockData.user.progress.remainingWords)) * 100)}%` 
+            }}
+          />
+          <span className={styles.jlptProgressText}>
+            {Math.round((mockData.srs.mastered / (mockData.srs.mastered + mockData.user.progress.remainingKanji + mockData.user.progress.remainingWords)) * 100)}% Complete
+          </span>
+        </div>
+      </div>
+
       {/* Main Content */}
       <main className={styles.main}>
         <div className={styles.welcomeHeader}>
