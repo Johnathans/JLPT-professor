@@ -48,13 +48,6 @@ const Navbar: React.FC<NavbarProps> = ({ className, forceDarkMode }) => {
         <div className={styles.navItem}>
           <span>Progress</span>
         </div>
-      </div>
-
-      <div className={styles.navFooter}>
-        <div className={styles.proBox}>
-          <span>JLPT Professor Pro</span>
-        </div>
-        
         <div className={styles.navItem}>
           <span>Logout</span>
         </div>
@@ -63,6 +56,12 @@ const Navbar: React.FC<NavbarProps> = ({ className, forceDarkMode }) => {
           <div className={`${styles.toggle} ${isDarkMode ? styles.active : ''}`}>
             <div className={styles.toggleThumb} />
           </div>
+        </div>
+      </div>
+
+      <div className={styles.navFooter}>
+        <div className={styles.proBox}>
+          <span>JLPT Professor Pro</span>
         </div>
       </div>
     </nav>
