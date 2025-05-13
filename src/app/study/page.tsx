@@ -120,7 +120,7 @@ const StatsBar = styled(Box)({
   flexDirection: 'column',
   width: '100%',
   maxWidth: '900px',
-  margin: '0 auto 12px', // Reduced from 24px to 12px
+  margin: '0 auto 8px', // Further reduced from 12px to 8px
   padding: '0 32px',
   '@media (max-width: 900px)': {
     padding: '0 16px'
@@ -1942,7 +1942,7 @@ export default function StudyLayout() {
           </Menu>
         </TopBar>
 
-        <StatsBar>
+        <StatsBar sx={{ marginTop: '-4px', marginBottom: '4px' }}>
           <ProgressBar 
             progress={Math.max(0, Math.min(100, ((totalAnswered - remainingCards) / Math.max(1, totalAnswered)) * 100))} 
             darkMode={isDarkMode} 
