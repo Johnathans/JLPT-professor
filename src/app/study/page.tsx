@@ -494,8 +494,11 @@ export default function StudyLayout() {
 
   // State for flag button
   const [showFlagDialog, setShowFlagDialog] = useState<boolean>(false);
-  // State for tab navigation in settings menu
+  // State for settings menu
+  const [showSettings, setShowSettings] = useState(false);
   const [settingsTab, setSettingsTab] = useState<'vocabulary' | 'kanji' | 'listening' | 'reading' | 'grammar'>('vocabulary');
+  const [settingsDropdownOpen, setSettingsDropdownOpen] = useState(false);
+  const [questionStyleDropdownOpen, setQuestionStyleDropdownOpen] = useState(false);
   const [accuracy, setAccuracy] = useState(0);
   const [totalAnswered, setTotalAnswered] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
@@ -509,6 +512,25 @@ export default function StudyLayout() {
   
   // State for card limit selection
   const [cardLimit, setCardLimit] = useState<number | undefined>(undefined);
+  
+  // Effect to handle click outside settings menu and dropdowns
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      // Close dropdowns when clicking outside their area
+      if (settingsDropdownOpen || questionStyleDropdownOpen) {
+        const target = event.target as HTMLElement;
+        if (!target.closest('.dropdown-trigger')) {
+          setSettingsDropdownOpen(false);
+          setQuestionStyleDropdownOpen(false);
+        }
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [settingsDropdownOpen, questionStyleDropdownOpen]);
   
   // Use the study progress context
   const { getProgressMetrics, saveProgressMetrics, resetLevelProgress, resetAllProgress } = useStudyProgress();
@@ -560,7 +582,8 @@ export default function StudyLayout() {
     
     // Update the mode
     setStudyMode(mode);
-    setSettingsAnchor(null);
+    // Don't close the settings menu automatically - let user press Start button
+    // setSettingsAnchor(null);
     
     // Restore saved metrics
     setCurrentItem(savedMetrics.currentItem);
@@ -2016,6 +2039,7 @@ export default function StudyLayout() {
                 Learning Area
               </Typography>
               <Box 
+                className="dropdown-trigger"
                 sx={{
                   py: 1.5,
                   px: 2,
@@ -2030,73 +2054,64 @@ export default function StudyLayout() {
                   alignItems: 'center',
                   mb: 2,
                   border: `1px solid ${isDarkMode ? '#444' : '#e5e7eb'}`,
+                  position: 'relative',
                   '&:hover': {
                     backgroundColor: isDarkMode ? '#444' : '#e9ebef'
                   }
                 }}
-                onClick={(e) => {
-                  const element = e.currentTarget;
-                  const rect = element.getBoundingClientRect();
-                  const dropdown = document.createElement('div');
-                  dropdown.style.position = 'absolute';
-                  dropdown.style.top = `${rect.bottom}px`;
-                  dropdown.style.left = `${rect.left}px`;
-                  dropdown.style.width = `${rect.width}px`;
-                  dropdown.style.backgroundColor = isDarkMode ? '#383838' : '#fff';
-                  dropdown.style.borderRadius = '8px';
-                  dropdown.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-                  dropdown.style.zIndex = '1000';
-                  dropdown.style.overflow = 'hidden';
-                  
-                  const options = ['vocabulary', 'kanji', 'listening', 'reading', 'grammar'];
-                  options.forEach(option => {
-                    const item = document.createElement('div');
-                    item.textContent = option.charAt(0).toUpperCase() + option.slice(1);
-                    item.style.padding = '12px 16px';
-                    item.style.cursor = 'pointer';
-                    item.style.textTransform = 'capitalize';
-                    item.style.color = option === settingsTab ? '#7c4dff' : (isDarkMode ? '#ddd' : '#1f2937');
-                    item.style.backgroundColor = option === settingsTab ? (isDarkMode ? '#3a3052' : '#f3f0ff') : 'transparent';
-                    item.style.fontWeight = option === settingsTab ? 'bold' : 'normal';
-                    
-                    item.addEventListener('mouseover', () => {
-                      item.style.backgroundColor = option === settingsTab ? 
-                        (isDarkMode ? '#3a3052' : '#f3f0ff') : 
-                        (isDarkMode ? '#444' : '#e9ebef');
-                    });
-                    
-                    item.addEventListener('mouseout', () => {
-                      item.style.backgroundColor = option === settingsTab ? 
-                        (isDarkMode ? '#3a3052' : '#f3f0ff') : 
-                        'transparent';
-                    });
-                    
-                    item.addEventListener('click', () => {
-                      setSettingsTab(option as any);
-                      document.body.removeChild(dropdown);
-                    });
-                    
-                    dropdown.appendChild(item);
-                  });
-                  
-                  document.body.appendChild(dropdown);
-                  
-                  const closeDropdown = (e: MouseEvent) => {
-                    if (!dropdown.contains(e.target as Node)) {
-                      document.body.removeChild(dropdown);
-                      document.removeEventListener('click', closeDropdown);
-                    }
-                  };
-                  
-                  setTimeout(() => {
-                    document.addEventListener('click', closeDropdown);
-                  }, 0);
+                onClick={() => {
+                  // Toggle dropdown visibility
+                  setSettingsDropdownOpen(!settingsDropdownOpen);
                 }}
               >
                 <span style={{ textTransform: 'capitalize' }}>{settingsTab}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                   <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
                 </svg>
+                
+                {/* Dropdown Menu */}
+                {settingsDropdownOpen && (
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      top: '100%',
+                      left: 0,
+                      right: 0,
+                      backgroundColor: isDarkMode ? '#383838' : '#fff',
+                      borderRadius: '8px',
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                      zIndex: 1000,
+                      mt: 1
+                    }}
+                  >
+                    {['vocabulary', 'kanji', 'listening', 'reading', 'grammar'].map((option) => (
+                      <Box
+                        key={option}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSettingsTab(option as any);
+                          setSettingsDropdownOpen(false);
+                        }}
+                        sx={{
+                          py: 1.5,
+                          px: 2,
+                          cursor: 'pointer',
+                          textTransform: 'capitalize',
+                          color: option === settingsTab ? '#7c4dff' : isDarkMode ? '#ddd' : '#1f2937',
+                          backgroundColor: option === settingsTab ? (isDarkMode ? '#3a3052' : '#f3f0ff') : 'transparent',
+                          fontWeight: option === settingsTab ? 'bold' : 'normal',
+                          '&:hover': {
+                            backgroundColor: option === settingsTab ? 
+                              (isDarkMode ? '#3a3052' : '#f3f0ff') : 
+                              (isDarkMode ? '#444' : '#e9ebef')
+                          }
+                        }}
+                      >
+                        {option}
+                      </Box>
+                    ))}
+                  </Box>
+                )}
               </Box>
             </Box>
             
@@ -2124,6 +2139,7 @@ export default function StudyLayout() {
                 
                 return (
                   <Box 
+                    className="dropdown-trigger"
                     sx={{
                       py: 1.5,
                       px: 2,
@@ -2138,73 +2154,64 @@ export default function StudyLayout() {
                       alignItems: 'center',
                       mb: 2,
                       border: `1px solid ${isDarkMode ? '#444' : '#e5e7eb'}`,
+                      position: 'relative',
                       '&:hover': {
                         backgroundColor: isDarkMode ? '#444' : '#e9ebef'
                       }
                     }}
-                    onClick={(e) => {
+                    onClick={() => {
                       if (availableModes.length === 0) return;
-                      
-                      const element = e.currentTarget;
-                      const rect = element.getBoundingClientRect();
-                      const dropdown = document.createElement('div');
-                      dropdown.style.position = 'absolute';
-                      dropdown.style.top = `${rect.bottom}px`;
-                      dropdown.style.left = `${rect.left}px`;
-                      dropdown.style.width = `${rect.width}px`;
-                      dropdown.style.backgroundColor = isDarkMode ? '#383838' : '#fff';
-                      dropdown.style.borderRadius = '8px';
-                      dropdown.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-                      dropdown.style.zIndex = '1000';
-                      dropdown.style.overflow = 'hidden';
-                      
-                      availableModes.forEach(mode => {
-                        const item = document.createElement('div');
-                        item.textContent = StudyModeLabels[mode];
-                        item.style.padding = '12px 16px';
-                        item.style.cursor = 'pointer';
-                        item.style.color = mode === studyMode ? '#7c4dff' : (isDarkMode ? '#ddd' : '#1f2937');
-                        item.style.backgroundColor = mode === studyMode ? (isDarkMode ? '#3a3052' : '#f3f0ff') : 'transparent';
-                        item.style.fontWeight = mode === studyMode ? 'bold' : 'normal';
-                        
-                        item.addEventListener('mouseover', () => {
-                          item.style.backgroundColor = mode === studyMode ? 
-                            (isDarkMode ? '#3a3052' : '#f3f0ff') : 
-                            (isDarkMode ? '#444' : '#e9ebef');
-                        });
-                        
-                        item.addEventListener('mouseout', () => {
-                          item.style.backgroundColor = mode === studyMode ? 
-                            (isDarkMode ? '#3a3052' : '#f3f0ff') : 
-                            'transparent';
-                        });
-                        
-                        item.addEventListener('click', () => {
-                          handleStudyModeChange(mode);
-                          document.body.removeChild(dropdown);
-                        });
-                        
-                        dropdown.appendChild(item);
-                      });
-                      
-                      document.body.appendChild(dropdown);
-                      
-                      const closeDropdown = (e: MouseEvent) => {
-                        if (!dropdown.contains(e.target as Node)) {
-                          document.body.removeChild(dropdown);
-                          document.removeEventListener('click', closeDropdown);
-                        }
-                      };
-                      
-                      setTimeout(() => {
-                        document.addEventListener('click', closeDropdown);
-                      }, 0);
+                      // Toggle dropdown visibility
+                      setQuestionStyleDropdownOpen(!questionStyleDropdownOpen);
                     }}
                   >
                     <span>{StudyModeLabels[currentMode]}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                       <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
                     </svg>
+                    
+                    {/* Dropdown Menu */}
+                    {questionStyleDropdownOpen && availableModes.length > 0 && (
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          top: '100%',
+                          left: 0,
+                          right: 0,
+                          backgroundColor: isDarkMode ? '#383838' : '#fff',
+                          borderRadius: '8px',
+                          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                          zIndex: 1000,
+                          mt: 1
+                        }}
+                      >
+                        {availableModes.map((mode) => (
+                          <Box
+                            key={mode}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleStudyModeChange(mode);
+                              setQuestionStyleDropdownOpen(false);
+                            }}
+                            sx={{
+                              py: 1.5,
+                              px: 2,
+                              cursor: 'pointer',
+                              color: mode === studyMode ? '#7c4dff' : isDarkMode ? '#ddd' : '#1f2937',
+                              backgroundColor: mode === studyMode ? (isDarkMode ? '#3a3052' : '#f3f0ff') : 'transparent',
+                              fontWeight: mode === studyMode ? 'bold' : 'normal',
+                              '&:hover': {
+                                backgroundColor: mode === studyMode ? 
+                                  (isDarkMode ? '#3a3052' : '#f3f0ff') : 
+                                  (isDarkMode ? '#444' : '#e9ebef')
+                              }
+                            }}
+                          >
+                            {StudyModeLabels[mode]}
+                          </Box>
+                        ))}
+                      </Box>
+                    )}
                   </Box>
                 );
               })()}
@@ -2262,7 +2269,7 @@ export default function StudyLayout() {
 
         <StatsBar sx={{ marginTop: '-4px', marginBottom: '4px' }}>
           <ProgressBar 
-            progress={Math.max(0, Math.min(100, ((totalAnswered - remainingCards) / Math.max(1, totalAnswered)) * 100))} 
+            progress={Math.max(0, Math.min(100, (currentItem / Math.max(1, vocabularyData.length || kanjiData.length || sentenceData.length)) * 100))} 
             darkMode={isDarkMode} 
           />
         </StatsBar>
