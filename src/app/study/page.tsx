@@ -321,6 +321,7 @@ const ChoiceButton = styled(Button, {
   shouldForwardProp: (prop) => prop !== 'correct' && prop !== 'incorrect' && prop !== 'darkMode',
 })<{ correct?: boolean; incorrect?: boolean; darkMode?: boolean }>(
   ({ correct, incorrect, darkMode }) => ({
+    '-webkit-tap-highlight-color': 'transparent', // Disable default mobile tap highlight
     width: '100%',
     justifyContent: 'center',
     padding: '20px 32px',
@@ -842,9 +843,14 @@ export default function StudyLayout() {
   };
   
   // Handle answer selection
-  const handleAnswerSelection = (selectedIndex: number) => {
+  const handleAnswerSelection = (selectedIndex: number, event?: React.MouseEvent<Element>) => {
     // Prevent selecting multiple answers while showing feedback
     if (showingFeedback) return;
+    
+    // Blur the button to remove focus on mobile
+    if (event?.currentTarget && 'blur' in event.currentTarget) {
+      (event.currentTarget as HTMLElement).blur();
+    }
     
     // Set the selected answer and show feedback
     setSelectedAnswer(selectedIndex);
@@ -1609,11 +1615,11 @@ export default function StudyLayout() {
           <ChoiceGrid>
             {choices.map((choice, index) => (
               <ChoiceButton 
-                key={index}
+                key={`${currentItem}-${index}`}
                 darkMode={isDarkMode}
                 correct={showingFeedback && index === correctAnswerIndex}
                 incorrect={showingFeedback && index === selectedAnswer && index !== correctAnswerIndex}
-                onClick={() => handleAnswerSelection(index)}
+                onClick={(e) => handleAnswerSelection(index, e)}
               >
                 {choice}
               </ChoiceButton>
@@ -1625,11 +1631,11 @@ export default function StudyLayout() {
           <ChoiceGrid>
             {choices.map((choice, index) => (
               <ChoiceButton 
-                key={index}
+                key={`${currentItem}-${index}`}
                 darkMode={isDarkMode}
                 correct={showingFeedback && index === correctAnswerIndex}
                 incorrect={showingFeedback && index === selectedAnswer && index !== correctAnswerIndex}
-                onClick={() => handleAnswerSelection(index)}
+                onClick={(e) => handleAnswerSelection(index, e)}
               >
                 {choice}
               </ChoiceButton>
@@ -1641,11 +1647,11 @@ export default function StudyLayout() {
           <MatchGrid>
             {choices.map((choice, index) => (
               <MatchCard 
-                key={index}
+                key={`${currentItem}-${index}`}
                 darkMode={isDarkMode}
                 isCorrect={showingFeedback && index === correctAnswerIndex}
                 isIncorrect={showingFeedback && index === selectedAnswer && index !== correctAnswerIndex}
-                onClick={() => handleAnswerSelection(index)}
+                onClick={(e) => handleAnswerSelection(index, e)}
               >
                 {choice}
                 {showingFeedback && index === correctAnswerIndex && (
@@ -1685,11 +1691,11 @@ export default function StudyLayout() {
           <ChoiceGrid>
             {choices.map((choice, index) => (
               <ChoiceButton 
-                key={index}
+                key={`${currentItem}-${index}`}
                 darkMode={isDarkMode}
                 correct={showingFeedback && index === correctAnswerIndex}
                 incorrect={showingFeedback && index === selectedAnswer && index !== correctAnswerIndex}
-                onClick={() => handleAnswerSelection(index)}
+                onClick={(e) => handleAnswerSelection(index, e)}
               >
                 {choice}
               </ChoiceButton>
