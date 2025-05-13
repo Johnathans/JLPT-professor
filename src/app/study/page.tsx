@@ -1721,7 +1721,7 @@ export default function StudyLayout() {
                 }
               }}
             >
-              Back to Dashboard
+              Dashboard
             </Button>
           </Link>
           <Box sx={{ display: 'flex', gap: 1 }}>
