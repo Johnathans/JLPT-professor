@@ -120,7 +120,7 @@ const StatsBar = styled(Box)({
   flexDirection: 'column',
   width: '100%',
   maxWidth: '900px',
-  margin: '0 auto 24px',
+  margin: '0 auto 12px', // Reduced from 24px to 12px
   padding: '0 32px',
   '@media (max-width: 900px)': {
     padding: '0 16px'
@@ -1957,15 +1957,15 @@ export default function StudyLayout() {
             <Box sx={{ 
               width: '100%',
               maxWidth: '900px',
-              margin: '20px auto 0',
+              margin: '12px auto 0', // Reduced from 20px to 12px
               padding: '0 16px',
-              marginBottom: '60px', // Add bottom margin to prevent overlap with flag button
+              marginBottom: '60px', // Bottom margin to prevent overlap with flag button
               '@media (max-width: 900px)': {
-                margin: '16px auto 0',
+                margin: '10px auto 0', // Reduced from 16px to 10px
                 marginBottom: '60px'
               },
               '@media (max-width: 600px)': {
-                margin: '12px auto 0',
+                margin: '8px auto 0', // Reduced from 12px to 8px
                 marginBottom: '60px'
               }
             }}>
