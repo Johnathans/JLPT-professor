@@ -121,8 +121,11 @@ const StatsBar = styled(Box)({
   width: '100%',
   maxWidth: '900px',
   margin: '0 auto 8px', // Further reduced from 12px to 8px
-  padding: '0 32px',
+  padding: '0 40px',
   '@media (max-width: 900px)': {
+    padding: '0 24px'
+  },
+  '@media (max-width: 600px)': {
     padding: '0 16px'
   }
 });
