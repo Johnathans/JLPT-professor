@@ -986,7 +986,7 @@ export default function StudyLayout() {
     setStudiedItems(prev => [
       ...prev,
       {
-        id: `${jlptLevel}-${currentItem}`,
+        id: `${jlptLevel}-${currentItem}-${Date.now()}`,
         question: currentQuestion,
         answer: correctAnswer,
         userAnswer: isCorrect ? undefined : userAnswer,
@@ -1480,7 +1480,7 @@ export default function StudyLayout() {
         setStudiedItems(prev => [
           ...prev,
           {
-            id: `${jlptLevel}-${currentItem}`,
+            id: `${jlptLevel}-${currentItem}-${Date.now()}`,
             question: currentQuestion,
             answer: currentAnswer,
             isCorrect: knewAnswer
