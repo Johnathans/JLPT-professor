@@ -202,8 +202,8 @@ const ContentCard = styled(Box, {
   },
   '@media (max-width: 600px)': {
     padding: '16px 16px 20px',
-    minHeight: '50vh',
-    maxHeight: '55vh',
+    minHeight: '45vh',
+    maxHeight: '50vh', // Reduce max height to leave more room for buttons
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between'
@@ -1430,9 +1430,31 @@ export default function StudyLayout() {
         }
         return (
           <>
-            <JapaneseSentence darkMode={isDarkMode}>
+            <Box 
+              sx={{
+                fontSize: '96px',
+                lineHeight: 1.3,
+                textAlign: 'center',
+                color: isDarkMode ? '#fff' : '#1f2937',
+                fontFamily: '"Noto Sans JP", sans-serif',
+                fontWeight: 400,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flex: 1,
+                height: '100%',
+                '@media (max-width: 900px)': {
+                  fontSize: '80px',
+                  lineHeight: 1.2
+                },
+                '@media (max-width: 600px)': {
+                  fontSize: '70px',
+                  lineHeight: 1.1
+                }
+              }}
+            >
               {vocabularyData[currentItem].word}
-            </JapaneseSentence>
+            </Box>
             <EnglishTranslation darkMode={isDarkMode}>
               Select the correct meaning
             </EnglishTranslation>
@@ -1458,9 +1480,30 @@ export default function StudyLayout() {
         return (
           <>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
-              <JapaneseSentence 
-                darkMode={isDarkMode}
+              <Box 
                 dangerouslySetInnerHTML={{ __html: japaneseWithBlank }}
+                sx={{
+                  fontSize: '48px',
+                  lineHeight: 1.5,
+                  textAlign: 'center',
+                  color: isDarkMode ? '#fff' : '#1f2937',
+                  margin: '12px 0',
+                  fontFamily: '"Noto Sans JP", sans-serif',
+                  fontWeight: 400,
+                  '& .highlight': {
+                    color: '#7c4dff',
+                    padding: '0 8px'
+                  },
+                  '@media (max-width: 900px)': {
+                    fontSize: '40px',
+                    lineHeight: 1.4
+                  },
+                  '@media (max-width: 600px)': {
+                    fontSize: '36px',
+                    margin: '0',
+                    lineHeight: '1.3'
+                  }
+                }}
               />
               <IconButton 
                 onClick={() => playSentenceAudio(currentSentence.japanese)}
@@ -1503,7 +1546,8 @@ export default function StudyLayout() {
                 fontSize: '96px', 
                 margin: '0 !important',
                 fontFamily: '"Noto Sans JP", sans-serif',
-                '@media (max-width: 900px)': { fontSize: '72px' } 
+                '@media (max-width: 900px)': { fontSize: '90px' },
+                '@media (max-width: 600px)': { fontSize: '120px' }
               }}
             >
               {kanjiData[currentItem].kanji}
@@ -1915,11 +1959,14 @@ export default function StudyLayout() {
               maxWidth: '900px',
               margin: '20px auto 0',
               padding: '0 16px',
+              marginBottom: '60px', // Add bottom margin to prevent overlap with flag button
               '@media (max-width: 900px)': {
-                margin: '16px auto 0'
+                margin: '16px auto 0',
+                marginBottom: '60px'
               },
               '@media (max-width: 600px)': {
-                margin: '12px auto 0'
+                margin: '12px auto 0',
+                marginBottom: '60px'
               }
             }}>
               {renderChoices()}
