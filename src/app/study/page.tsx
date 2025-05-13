@@ -2010,129 +2010,252 @@ export default function StudyLayout() {
             
             <Divider sx={{ my: 1, borderColor: isDarkMode ? '#333' : '#e5e7eb' }} />
             
-            {/* Learning Area Tabs */}
+            {/* Learning Area Dropdown */}
             <Box sx={{ px: 2, py: 1 }}>
               <Typography sx={{ color: isDarkMode ? '#aaa' : '#6F767E', fontSize: '14px', fontWeight: 'bold', mb: 1 }}>
                 Learning Area
               </Typography>
-              <Box sx={{ 
-                display: 'flex', 
-                flexDirection: 'column',
-                gap: 1,
-                mb: 2
-              }}>
-                {['vocabulary', 'kanji', 'listening', 'reading', 'grammar'].map((tab) => (
-                  <Box
-                    key={tab}
-                    onClick={() => setSettingsTab(tab as any)}
-                    sx={{
-                      py: 1.2,
-                      px: 2,
-                      textAlign: 'left',
-                      borderRadius: '8px',
-                      cursor: 'pointer',
-                      fontSize: '14px',
-                      fontWeight: settingsTab === tab ? 'bold' : 'normal',
-                      color: settingsTab === tab ? '#fff' : isDarkMode ? '#ddd' : '#1f2937',
-                      backgroundColor: settingsTab === tab ? '#7c4dff' : isDarkMode ? '#383838' : '#f3f4f6',
-                      textTransform: 'capitalize',
-                      '&:hover': {
-                        backgroundColor: settingsTab === tab ? '#7c4dff' : isDarkMode ? '#444' : '#e9ebef'
-                      },
-                      transition: 'all 0.2s ease'
-                    }}
-                  >
-                    {tab}
-                  </Box>
-                ))}
+              <Box 
+                sx={{
+                  py: 1.5,
+                  px: 2,
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontSize: '16px',
+                  fontWeight: 'medium',
+                  color: isDarkMode ? '#fff' : '#1f2937',
+                  backgroundColor: isDarkMode ? '#383838' : '#f3f4f6',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  mb: 2,
+                  border: `1px solid ${isDarkMode ? '#444' : '#e5e7eb'}`,
+                  '&:hover': {
+                    backgroundColor: isDarkMode ? '#444' : '#e9ebef'
+                  }
+                }}
+                onClick={(e) => {
+                  const element = e.currentTarget;
+                  const rect = element.getBoundingClientRect();
+                  const dropdown = document.createElement('div');
+                  dropdown.style.position = 'absolute';
+                  dropdown.style.top = `${rect.bottom}px`;
+                  dropdown.style.left = `${rect.left}px`;
+                  dropdown.style.width = `${rect.width}px`;
+                  dropdown.style.backgroundColor = isDarkMode ? '#383838' : '#fff';
+                  dropdown.style.borderRadius = '8px';
+                  dropdown.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+                  dropdown.style.zIndex = '1000';
+                  dropdown.style.overflow = 'hidden';
+                  
+                  const options = ['vocabulary', 'kanji', 'listening', 'reading', 'grammar'];
+                  options.forEach(option => {
+                    const item = document.createElement('div');
+                    item.textContent = option.charAt(0).toUpperCase() + option.slice(1);
+                    item.style.padding = '12px 16px';
+                    item.style.cursor = 'pointer';
+                    item.style.textTransform = 'capitalize';
+                    item.style.color = option === settingsTab ? '#7c4dff' : (isDarkMode ? '#ddd' : '#1f2937');
+                    item.style.backgroundColor = option === settingsTab ? (isDarkMode ? '#3a3052' : '#f3f0ff') : 'transparent';
+                    item.style.fontWeight = option === settingsTab ? 'bold' : 'normal';
+                    
+                    item.addEventListener('mouseover', () => {
+                      item.style.backgroundColor = option === settingsTab ? 
+                        (isDarkMode ? '#3a3052' : '#f3f0ff') : 
+                        (isDarkMode ? '#444' : '#e9ebef');
+                    });
+                    
+                    item.addEventListener('mouseout', () => {
+                      item.style.backgroundColor = option === settingsTab ? 
+                        (isDarkMode ? '#3a3052' : '#f3f0ff') : 
+                        'transparent';
+                    });
+                    
+                    item.addEventListener('click', () => {
+                      setSettingsTab(option as any);
+                      document.body.removeChild(dropdown);
+                    });
+                    
+                    dropdown.appendChild(item);
+                  });
+                  
+                  document.body.appendChild(dropdown);
+                  
+                  const closeDropdown = (e: MouseEvent) => {
+                    if (!dropdown.contains(e.target as Node)) {
+                      document.body.removeChild(dropdown);
+                      document.removeEventListener('click', closeDropdown);
+                    }
+                  };
+                  
+                  setTimeout(() => {
+                    document.addEventListener('click', closeDropdown);
+                  }, 0);
+                }}
+              >
+                <span style={{ textTransform: 'capitalize' }}>{settingsTab}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                </svg>
               </Box>
             </Box>
             
-            {/* Study Mode Options based on selected tab */}
+            {/* Question Style Dropdown */}
             <Box sx={{ px: 2, py: 1 }}>
               <Typography sx={{ color: isDarkMode ? '#aaa' : '#6F767E', fontSize: '14px', fontWeight: 'bold', mb: 1 }}>
                 Question Style
               </Typography>
               
-              {/* Show different options based on the selected tab */}
-              {settingsTab === 'vocabulary' && (
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-                  {['vocabulary', 'sentences', 'flashcard-vocabulary', 'flashcard-sentences'].map((mode) => (
-                    <Box
-                      key={mode}
-                      onClick={() => handleStudyModeChange(mode as StudyMode)}
-                      sx={{
-                        py: 1.5,
-                        px: 2,
-                        borderRadius: '8px',
-                        cursor: 'pointer',
-                        fontSize: '14px',
-                        fontWeight: studyMode === mode ? 'bold' : 'normal',
-                        color: studyMode === mode ? '#7c4dff' : isDarkMode ? '#ddd' : '#1f2937',
-                        backgroundColor: studyMode === mode ? 
-                          (isDarkMode ? '#3a3052' : '#f3f0ff') : 
-                          isDarkMode ? '#383838' : '#f3f4f6',
-                        '&:hover': {
-                          backgroundColor: studyMode === mode ? 
+              {/* Get available modes based on selected tab */}
+              {(() => {
+                let availableModes: StudyMode[] = [];
+                let currentMode = studyMode;
+                
+                if (settingsTab === 'vocabulary') {
+                  availableModes = ['vocabulary', 'sentences', 'flashcard-vocabulary', 'flashcard-sentences'] as StudyMode[];
+                } else if (settingsTab === 'kanji') {
+                  availableModes = ['kanji-meaning', 'kanji-onyomi', 'kanji-kunyomi', 'kanji-match', 'flashcard-kanji'] as StudyMode[];
+                }
+                
+                // If current mode doesn't match the selected tab, select the first available mode
+                if (availableModes.length > 0 && !availableModes.includes(currentMode)) {
+                  currentMode = availableModes[0];
+                }
+                
+                return (
+                  <Box 
+                    sx={{
+                      py: 1.5,
+                      px: 2,
+                      borderRadius: '8px',
+                      cursor: 'pointer',
+                      fontSize: '16px',
+                      fontWeight: 'medium',
+                      color: isDarkMode ? '#fff' : '#1f2937',
+                      backgroundColor: isDarkMode ? '#383838' : '#f3f4f6',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      mb: 2,
+                      border: `1px solid ${isDarkMode ? '#444' : '#e5e7eb'}`,
+                      '&:hover': {
+                        backgroundColor: isDarkMode ? '#444' : '#e9ebef'
+                      }
+                    }}
+                    onClick={(e) => {
+                      if (availableModes.length === 0) return;
+                      
+                      const element = e.currentTarget;
+                      const rect = element.getBoundingClientRect();
+                      const dropdown = document.createElement('div');
+                      dropdown.style.position = 'absolute';
+                      dropdown.style.top = `${rect.bottom}px`;
+                      dropdown.style.left = `${rect.left}px`;
+                      dropdown.style.width = `${rect.width}px`;
+                      dropdown.style.backgroundColor = isDarkMode ? '#383838' : '#fff';
+                      dropdown.style.borderRadius = '8px';
+                      dropdown.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+                      dropdown.style.zIndex = '1000';
+                      dropdown.style.overflow = 'hidden';
+                      
+                      availableModes.forEach(mode => {
+                        const item = document.createElement('div');
+                        item.textContent = StudyModeLabels[mode];
+                        item.style.padding = '12px 16px';
+                        item.style.cursor = 'pointer';
+                        item.style.color = mode === studyMode ? '#7c4dff' : (isDarkMode ? '#ddd' : '#1f2937');
+                        item.style.backgroundColor = mode === studyMode ? (isDarkMode ? '#3a3052' : '#f3f0ff') : 'transparent';
+                        item.style.fontWeight = mode === studyMode ? 'bold' : 'normal';
+                        
+                        item.addEventListener('mouseover', () => {
+                          item.style.backgroundColor = mode === studyMode ? 
                             (isDarkMode ? '#3a3052' : '#f3f0ff') : 
-                            (isDarkMode ? '#444' : '#e9ebef')
-                        }
-                      }}
-                    >
-                      {StudyModeLabels[mode as StudyMode]}
-                    </Box>
-                  ))}
-                </Box>
-              )}
-              
-              {settingsTab === 'kanji' && (
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-                  {['kanji-meaning', 'kanji-onyomi', 'kanji-kunyomi', 'kanji-match', 'flashcard-kanji'].map((mode) => (
-                    <Box
-                      key={mode}
-                      onClick={() => handleStudyModeChange(mode as StudyMode)}
-                      sx={{
-                        py: 1.5,
-                        px: 2,
-                        borderRadius: '8px',
-                        cursor: 'pointer',
-                        fontSize: '14px',
-                        fontWeight: studyMode === mode ? 'bold' : 'normal',
-                        color: studyMode === mode ? '#7c4dff' : isDarkMode ? '#ddd' : '#1f2937',
-                        backgroundColor: studyMode === mode ? 
-                          (isDarkMode ? '#3a3052' : '#f3f0ff') : 
-                          isDarkMode ? '#383838' : '#f3f4f6',
-                        '&:hover': {
-                          backgroundColor: studyMode === mode ? 
+                            (isDarkMode ? '#444' : '#e9ebef');
+                        });
+                        
+                        item.addEventListener('mouseout', () => {
+                          item.style.backgroundColor = mode === studyMode ? 
                             (isDarkMode ? '#3a3052' : '#f3f0ff') : 
-                            (isDarkMode ? '#444' : '#e9ebef')
+                            'transparent';
+                        });
+                        
+                        item.addEventListener('click', () => {
+                          handleStudyModeChange(mode);
+                          document.body.removeChild(dropdown);
+                        });
+                        
+                        dropdown.appendChild(item);
+                      });
+                      
+                      document.body.appendChild(dropdown);
+                      
+                      const closeDropdown = (e: MouseEvent) => {
+                        if (!dropdown.contains(e.target as Node)) {
+                          document.body.removeChild(dropdown);
+                          document.removeEventListener('click', closeDropdown);
                         }
-                      }}
-                    >
-                      {StudyModeLabels[mode as StudyMode]}
-                    </Box>
-                  ))}
-                </Box>
-              )}
+                      };
+                      
+                      setTimeout(() => {
+                        document.addEventListener('click', closeDropdown);
+                      }, 0);
+                    }}
+                  >
+                    <span>{StudyModeLabels[currentMode]}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                      <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                  </Box>
+                );
+              })()}
               
               {/* Placeholders for future modes */}
-              {settingsTab === 'listening' && (
-                <Box sx={{ color: isDarkMode ? '#aaa' : '#6F767E', fontSize: '14px', textAlign: 'center', py: 2 }}>
-                  Listening practice coming soon
+              {(settingsTab === 'listening' || settingsTab === 'reading' || settingsTab === 'grammar') && (
+                <Box sx={{ 
+                  color: isDarkMode ? '#aaa' : '#6F767E', 
+                  fontSize: '14px', 
+                  textAlign: 'center', 
+                  py: 2,
+                  backgroundColor: isDarkMode ? '#383838' : '#f3f4f6',
+                  borderRadius: '8px',
+                  padding: '16px'
+                }}>
+                  {settingsTab.charAt(0).toUpperCase() + settingsTab.slice(1)} practice coming soon
                 </Box>
               )}
-              
-              {settingsTab === 'reading' && (
-                <Box sx={{ color: isDarkMode ? '#aaa' : '#6F767E', fontSize: '14px', textAlign: 'center', py: 2 }}>
-                  Reading practice coming soon
-                </Box>
-              )}
-              
-              {settingsTab === 'grammar' && (
-                <Box sx={{ color: isDarkMode ? '#aaa' : '#6F767E', fontSize: '14px', textAlign: 'center', py: 2 }}>
-                  Grammar practice coming soon
-                </Box>
-              )}
+            </Box>
+            
+            {/* Start Button */}
+            <Box sx={{ px: 2, py: 2 }}>
+              <Button
+                variant="contained"
+                fullWidth
+                onClick={() => {
+                  // Close the settings menu
+                  handleSettingsClose();
+                  
+                  // Reload data with the current settings
+                  if (studyMode.includes('vocabulary') || studyMode === 'sentences') {
+                    loadVocabularyData(jlptLevel);
+                  } else if (studyMode.includes('kanji')) {
+                    loadKanjiData(jlptLevel, studyMode);
+                  } else if (studyMode.includes('sentence')) {
+                    loadSentenceData(jlptLevel);
+                  }
+                }}
+                sx={{
+                  backgroundColor: '#7c4dff',
+                  color: '#ffffff',
+                  fontWeight: 'bold',
+                  py: 1.5,
+                  borderRadius: '8px',
+                  '&:hover': {
+                    backgroundColor: '#6a3de8'
+                  }
+                }}
+              >
+                Start Study Session
+              </Button>
             </Box>
           </Menu>
         </TopBar>
