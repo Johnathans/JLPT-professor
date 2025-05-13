@@ -1034,7 +1034,11 @@ export default function StudyLayout() {
         dataLength = kanjiData.length;
       }
       
-      if (nextItem < dataLength) {
+      // Check if we've reached the card limit (if set) or the end of the data
+      const hasReachedLimit = cardLimit ? nextItem >= cardLimit : false;
+      console.log(`Quiz mode - Next item: ${nextItem}, Data length: ${dataLength}, Card limit: ${cardLimit}, Has reached limit: ${hasReachedLimit}`);
+      
+      if (nextItem < dataLength && !hasReachedLimit) {
         setCurrentItem(nextItem);
         setRemainingCards(calculateRemainingCards(dataLength, nextItem));
         
@@ -1521,7 +1525,11 @@ export default function StudyLayout() {
         
         // Move to next card after a delay
         setTimeout(() => {
-          if (nextItem < dataLength) {
+          // Check if we've reached the card limit (if set) or the end of the data
+        const hasReachedLimit = cardLimit ? nextItem >= cardLimit : false;
+        console.log(`Flashcard mode - Next item: ${nextItem}, Data length: ${dataLength}, Card limit: ${cardLimit}, Has reached limit: ${hasReachedLimit}`);
+        
+        if (nextItem < dataLength && !hasReachedLimit) {
             setCurrentItem(nextItem);
             setRemainingCards(calculateRemainingCards(dataLength, nextItem));
           } else {
