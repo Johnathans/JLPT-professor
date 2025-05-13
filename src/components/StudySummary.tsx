@@ -80,7 +80,7 @@ const ActionButton = styled(Button)(({ theme }) => ({
 }));
 
 const ItemRow = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'darkMode',
+  shouldForwardProp: (prop) => prop !== 'darkMode' && prop !== 'isCorrect',
 })<{ darkMode: boolean; isCorrect?: boolean }>(({ darkMode, isCorrect }) => ({
   padding: '12px 16px',
   borderRadius: '8px',

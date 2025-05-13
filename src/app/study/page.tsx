@@ -655,6 +655,13 @@ export default function StudyLayout() {
       setRemainingCards(calculateRemainingCards(data.length, validStartIndex));
     } catch (error) {
       console.error('Error loading vocabulary data:', error);
+      // Log more details about the error
+      if (error instanceof Error) {
+        console.error('Error message:', error.message);
+        console.error('Error stack:', error.stack);
+      }
+      // Set empty data to prevent undefined errors
+      setVocabularyData([]);
     } finally {
       setLoading(false);
     }
@@ -721,7 +728,9 @@ export default function StudyLayout() {
   
   // Helper function to calculate remaining cards consistently
   const calculateRemainingCards = (total: number, current: number): number => {
-    return Math.max(0, total - current);
+    // If cardLimit is set, use it as the total instead of the data length
+    const effectiveTotal = cardLimit ? Math.min(cardLimit, total) : total;
+    return Math.max(0, effectiveTotal - current);
   };
 
   // Function to get only the first meaning
@@ -2241,14 +2250,23 @@ export default function StudyLayout() {
                   // Close the settings menu
                   handleSettingsClose();
                   
+                  // Reset current item to start from the beginning
+                  setCurrentItem(0);
+                  setTotalAnswered(0);
+                  setCorrectAnswers(0);
+                  setAccuracy(0);
+                  setStudiedItems([]);
+                  
                   // Reload data with the current settings
                   if (studyMode.includes('vocabulary') || studyMode === 'sentences') {
-                    loadVocabularyData(jlptLevel);
+                    loadVocabularyData(jlptLevel, 0);
                   } else if (studyMode.includes('kanji')) {
-                    loadKanjiData(jlptLevel, studyMode);
+                    loadKanjiData(jlptLevel, studyMode, 0);
                   } else if (studyMode.includes('sentence')) {
-                    loadSentenceData(jlptLevel);
+                    loadSentenceData(jlptLevel, 0);
                   }
+                  
+                  console.log(`Starting study session with card limit: ${cardLimit || 'All'}`);
                 }}
                 sx={{
                   backgroundColor: '#7c4dff',
@@ -2269,7 +2287,7 @@ export default function StudyLayout() {
 
         <StatsBar sx={{ marginTop: '-4px', marginBottom: '4px' }}>
           <ProgressBar 
-            progress={Math.max(0, Math.min(100, (currentItem / Math.max(1, vocabularyData.length || kanjiData.length || sentenceData.length)) * 100))} 
+            progress={Math.max(0, Math.min(100, (currentItem / Math.max(1, cardLimit || vocabularyData.length || kanjiData.length || sentenceData.length)) * 100))} 
             darkMode={isDarkMode} 
           />
         </StatsBar>
