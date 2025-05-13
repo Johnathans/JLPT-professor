@@ -32,6 +32,7 @@ import styles from '@/styles/dashboard.module.css';
 import flashcardStyles from '@/styles/flashcards.module.css';
 import { playCorrectSound, playWrongSound, playFlipSound } from '@/utils/soundEffects';
 import { SentenceEntry } from '@/types/sentence';
+import StudySummary from '@/components/StudySummary';
 
 const LayoutRoot = styled('div', {
   shouldForwardProp: (prop) => prop !== 'darkMode',
@@ -321,7 +322,7 @@ const ChoiceButton = styled(Button, {
   shouldForwardProp: (prop) => prop !== 'correct' && prop !== 'incorrect' && prop !== 'darkMode',
 })<{ correct?: boolean; incorrect?: boolean; darkMode?: boolean }>(
   ({ correct, incorrect, darkMode }) => ({
-    '-webkit-tap-highlight-color': 'transparent', // Disable default mobile tap highlight
+    WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Disable default mobile tap highlight
     width: '100%',
     justifyContent: 'center',
     padding: '20px 32px',
@@ -489,6 +490,8 @@ export default function StudyLayout() {
   const [studyMode, setStudyMode] = useState<StudyMode>('vocabulary');
   const [jlptLevel, setJlptLevel] = useState<JlptLevel>('n5');
   const [settingsAnchor, setSettingsAnchor] = useState<null | HTMLElement>(null);
+
+
   // State for flag button
   const [showFlagDialog, setShowFlagDialog] = useState<boolean>(false);
   // State for tab navigation in settings menu
@@ -504,6 +507,9 @@ export default function StudyLayout() {
   const [kanjiData, setKanjiData] = useState<KanjiItem[]>([]);
   const [currentItem, setCurrentItem] = useState<number>(0);
   
+  // State for card limit selection
+  const [cardLimit, setCardLimit] = useState<number | undefined>(undefined);
+  
   // Use the study progress context
   const { getProgressMetrics, saveProgressMetrics, resetLevelProgress, resetAllProgress } = useStudyProgress();
   const [loading, setLoading] = useState<boolean>(true);
@@ -517,6 +523,18 @@ export default function StudyLayout() {
   // State for tracking selected answer and showing feedback
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showingFeedback, setShowingFeedback] = useState(false);
+
+  // State for tracking studied items and session completion
+  const [studiedItems, setStudiedItems] = useState<Array<{
+    id: string;
+    question: string;
+    answer: string;
+    userAnswer?: string;
+    isCorrect: boolean;
+  }>>([]);
+  const [isSessionComplete, setIsSessionComplete] = useState(false);
+  const [sessionStartTime, setSessionStartTime] = useState<number>(Date.now());
+  const [timeSpent, setTimeSpent] = useState<number>(0);
 
   const handleSettingsClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setSettingsAnchor(event.currentTarget);
@@ -595,7 +613,12 @@ export default function StudyLayout() {
   const loadVocabularyData = async (level: JlptLevel, startIndex?: number) => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/study/vocabulary?level=${level}`);
+      const url = new URL(`/api/study/vocabulary`, window.location.origin);
+      url.searchParams.append('level', level);
+      if (cardLimit) {
+        url.searchParams.append('limit', cardLimit.toString());
+      }
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Failed to fetch vocabulary data');
       }
@@ -618,7 +641,12 @@ export default function StudyLayout() {
   const loadKanjiData = async (level: JlptLevel, mode?: StudyMode, startIndex?: number) => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/study/kanji?level=${level}`);
+      const url = new URL(`/api/study/kanji`, window.location.origin);
+      url.searchParams.append('level', level);
+      if (cardLimit) {
+        url.searchParams.append('limit', cardLimit.toString());
+      }
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Failed to fetch kanji data');
       }
@@ -644,7 +672,12 @@ export default function StudyLayout() {
   const loadSentenceData = async (level: JlptLevel, startIndex?: number) => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/study/sentences?level=${level}`);
+      const url = new URL(`/api/study/sentences`, window.location.origin);
+      url.searchParams.append('level', level);
+      if (cardLimit) {
+        url.searchParams.append('limit', cardLimit.toString());
+      }
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Failed to fetch sentence data');
       }
@@ -887,13 +920,56 @@ export default function StudyLayout() {
     
     // Save metrics after answering
     let dataLength = 0;
+    let currentQuestion = '';
+    let correctAnswer = '';
+    let userAnswer = '';
+    
+    // Get the current item data based on study mode
     if (studyMode === 'vocabulary') {
       dataLength = vocabularyData.length;
+      if (vocabularyData[currentItem]) {
+        currentQuestion = vocabularyData[currentItem].word;
+        correctAnswer = vocabularyData[currentItem].meaning;
+        userAnswer = choices[selectedIndex];
+      }
     } else if (studyMode === 'sentences') {
       dataLength = sentenceData.length;
+      if (sentenceData[currentItem]) {
+        currentQuestion = sentenceData[currentItem].japanese;
+        correctAnswer = sentenceData[currentItem].associatedKanji[0];
+        userAnswer = choices[selectedIndex];
+      }
     } else {
       dataLength = kanjiData.length;
+      if (kanjiData[currentItem]) {
+        if (studyMode === 'kanji-meaning') {
+          currentQuestion = kanjiData[currentItem].kanji;
+          correctAnswer = kanjiData[currentItem].meanings[0] || '';
+        } else if (studyMode === 'kanji-onyomi') {
+          currentQuestion = kanjiData[currentItem].kanji;
+          correctAnswer = kanjiData[currentItem].onyomi[0] || '';
+        } else if (studyMode === 'kanji-kunyomi') {
+          currentQuestion = kanjiData[currentItem].kanji;
+          correctAnswer = kanjiData[currentItem].kunyomi[0] || '';
+        } else if (studyMode === 'kanji-match') {
+          currentQuestion = currentQuestion || 'Which kanji means...?';
+          correctAnswer = kanjiData[currentItem].kanji;
+        }
+        userAnswer = choices[selectedIndex];
+      }
     }
+    
+    // Add the current item to studied items
+    setStudiedItems(prev => [
+      ...prev,
+      {
+        id: `${jlptLevel}-${currentItem}`,
+        question: currentQuestion,
+        answer: correctAnswer,
+        userAnswer: isCorrect ? undefined : userAnswer,
+        isCorrect
+      }
+    ]);
     
     // Ensure values are valid numbers
     const validAccuracy = isNaN(newAccuracy) ? 0 : newAccuracy;
@@ -908,14 +984,6 @@ export default function StudyLayout() {
       remainingCards: calculateRemainingCards(dataLength, currentItem)
     });
     
-    console.log('Saving metrics with values:', {
-      currentItem,
-      totalAnswered: validTotalAnswered,
-      correctAnswers: validCorrectAnswers,
-      accuracy: validAccuracy,
-      remainingCards: calculateRemainingCards(dataLength, currentItem)
-    });
-    
     // Move to next item after a delay
     setTimeout(() => {
       // Reset feedback state
@@ -923,9 +991,9 @@ export default function StudyLayout() {
       setShowingFeedback(false);
       
       const nextItem = currentItem + 1;
-      let dataLength;
       
       // Determine data length based on study mode
+      let dataLength;
       if (studyMode === 'vocabulary') {
         dataLength = vocabularyData.length;
       } else if (studyMode === 'sentences') {
@@ -952,13 +1020,6 @@ export default function StudyLayout() {
           accuracy: newAccuracy,
           remainingCards: calculateRemainingCards(dataLength, nextItem)
         });
-        console.log(`Updated metrics for ${studyMode}:`, {
-          currentItem: nextItem,
-          totalAnswered: validTotalAnswered,
-          correctAnswers: validCorrectAnswers,
-          accuracy: newAccuracy,
-          remainingCards: calculateRemainingCards(dataLength, nextItem)
-        });
         
         // Generate new choices for the next item
         if (studyMode === 'vocabulary') {
@@ -968,6 +1029,10 @@ export default function StudyLayout() {
         } else {
           generateKanjiChoices(kanjiData, nextItem, studyMode);
         }
+      } else {
+        // Session is complete
+        setTimeSpent(Math.floor((Date.now() - sessionStartTime) / 1000));
+        setIsSessionComplete(true);
       }
     }, 1500);
   };
@@ -1361,16 +1426,43 @@ export default function StudyLayout() {
       // Get the appropriate data length based on mode
       let dataLength = 0;
       let hasValidData = false;
+      let currentQuestion = '';
+      let currentAnswer = '';
       
       if (studyMode === 'flashcard-vocabulary' && vocabularyData) {
         dataLength = vocabularyData.length;
         hasValidData = dataLength > 0;
+        if (hasValidData && currentItem < vocabularyData.length) {
+          currentQuestion = vocabularyData[currentItem].word;
+          currentAnswer = vocabularyData[currentItem].meaning;
+        }
       } else if (studyMode === 'flashcard-sentences' && sentenceData) {
         dataLength = sentenceData.length;
         hasValidData = dataLength > 0;
+        if (hasValidData && currentItem < sentenceData.length) {
+          currentQuestion = sentenceData[currentItem].japanese;
+          currentAnswer = sentenceData[currentItem].english;
+        }
       } else if (studyMode === 'flashcard-kanji' && kanjiData) {
         dataLength = kanjiData.length;
         hasValidData = dataLength > 0;
+        if (hasValidData && currentItem < kanjiData.length) {
+          currentQuestion = kanjiData[currentItem].kanji;
+          currentAnswer = kanjiData[currentItem].meanings[0] || '';
+        }
+      }
+      
+      // Add the current item to studied items
+      if (hasValidData && currentQuestion && currentAnswer) {
+        setStudiedItems(prev => [
+          ...prev,
+          {
+            id: `${jlptLevel}-${currentItem}`,
+            question: currentQuestion,
+            answer: currentAnswer,
+            isCorrect: knewAnswer
+          }
+        ]);
       }
       
       // Only proceed if we have valid data
@@ -1402,8 +1494,8 @@ export default function StudyLayout() {
             setRemainingCards(calculateRemainingCards(dataLength, nextItem));
           } else {
             // We've reached the end of the data
-            console.log('Reached the end of the flashcards');
-            // You could add some UI feedback here to show completion
+            setTimeSpent(Math.floor((Date.now() - sessionStartTime) / 1000));
+            setIsSessionComplete(true);
           }
         }, 1500);
       } else {
@@ -1411,6 +1503,30 @@ export default function StudyLayout() {
       }
     } catch (error) {
       console.error('Error in handleFlashcardAnswer:', error);
+    }
+  };
+  
+  // Reset the study session to start over
+  const handleRestartSession = () => {
+    // Reset session state
+    setIsSessionComplete(false);
+    setStudiedItems([]);
+    setSessionStartTime(Date.now());
+    setTimeSpent(0);
+    setCurrentItem(0);
+    
+    // Reset progress metrics
+    setTotalAnswered(0);
+    setCorrectAnswers(0);
+    setAccuracy(0);
+    
+    // Load fresh data for the current mode
+    if (studyMode.includes('vocabulary') || studyMode === 'sentences') {
+      loadVocabularyData(jlptLevel);
+    } else if (studyMode.includes('kanji')) {
+      loadKanjiData(jlptLevel, studyMode);
+    } else if (studyMode.includes('sentence')) {
+      loadSentenceData(jlptLevel);
     }
   };
   
@@ -1705,14 +1821,32 @@ export default function StudyLayout() {
     }
   };
 
+  if (isSessionComplete) {
+    return (
+      <LayoutRoot darkMode={isDarkMode}>
+        <MainContent darkMode={isDarkMode}>
+          <Box sx={{ padding: '24px', width: '100%' }}>
+            <StudySummary
+              isDarkMode={isDarkMode}
+              jlptLevel={jlptLevel}
+              studyMode={studyMode}
+              totalAnswered={totalAnswered}
+              correctAnswers={correctAnswers}
+              accuracy={accuracy}
+              timeSpent={timeSpent}
+              studiedItems={studiedItems}
+              onRestart={handleRestartSession}
+            />
+          </Box>
+        </MainContent>
+      </LayoutRoot>
+    );
+  }
+  
   return (
     <>
-      {/* Add the shared Navbar with the same dark mode state */}
-      {/* Navbar removed for cleaner interface */}
-      
-      {/* Simplified layout structure without sidebar */}
       <LayoutRoot darkMode={isDarkMode}>
-      <MainContent darkMode={isDarkMode}>
+        <MainContent darkMode={isDarkMode}>
         <TopBar>
           <Box sx={{ position: 'absolute', width: '100%', height: '100%', pointerEvents: 'none' }}>
             {showScoreAnimation && <ScoreAnimation>+2</ScoreAnimation>}
@@ -1817,6 +1951,58 @@ export default function StudyLayout() {
                     }}
                   >
                     {level.toUpperCase()}
+                  </Box>
+                ))}
+              </Box>
+            </Box>
+            
+            {/* Card Limit Selection */}
+            <Box sx={{ px: 2, py: 1, mb: 1 }}>
+              <Typography sx={{ color: isDarkMode ? '#aaa' : '#6F767E', fontSize: '14px', fontWeight: 'bold', mb: 1 }}>
+                Card Limit
+              </Typography>
+              <Box sx={{ display: 'flex', gap: '8px', justifyContent: 'space-between' }}>
+                {[10, 25, 50, 100, 'All'].map((limit) => (
+                  <Box
+                    key={limit.toString()}
+                    onClick={() => {
+                      if (limit === 'All') {
+                        setCardLimit(undefined);
+                      } else {
+                        setCardLimit(limit as number);
+                      }
+                      // Reload data with the new limit
+                      if (studyMode.includes('vocabulary') || studyMode === 'sentences') {
+                        loadVocabularyData(jlptLevel);
+                      } else if (studyMode.includes('kanji')) {
+                        loadKanjiData(jlptLevel, studyMode);
+                      } else if (studyMode.includes('sentence')) {
+                        loadSentenceData(jlptLevel);
+                      }
+                    }}
+                    sx={{
+                      flex: 1,
+                      height: '48px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderRadius: '8px',
+                      cursor: 'pointer',
+                      fontWeight: 'bold',
+                      fontSize: '14px',
+                      color: (cardLimit === limit || (limit === 'All' && cardLimit === undefined)) ? '#fff' : isDarkMode ? '#ddd' : '#1f2937',
+                      backgroundColor: (cardLimit === limit || (limit === 'All' && cardLimit === undefined)) ? 
+                        '#7c4dff' : 
+                        isDarkMode ? '#383838' : '#f3f4f6',
+                      '&:hover': {
+                        backgroundColor: (cardLimit === limit || (limit === 'All' && cardLimit === undefined)) ? 
+                          '#6a3de8' : 
+                          isDarkMode ? '#444' : '#e9ebef'
+                      },
+                      transition: 'all 0.2s ease'
+                    }}
+                  >
+                    {limit}
                   </Box>
                 ))}
               </Box>
