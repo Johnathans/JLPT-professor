@@ -1,87 +1,34 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { Box, IconButton, Typography, Button, Menu, MenuItem } from '@mui/material';
-import { VolumeUp, VolumeUpOutlined, Close, TuneRounded } from '@mui/icons-material';
+import { Box, IconButton, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { N5Kanji, N4Kanji, N3Kanji, N2Kanji, N1Kanji } from '@/data/jlpt';
-import type { KanjiData } from '@/data/jlpt';
+import { Close } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
+import { N5Kanji } from '@/data/jlpt';
+import type { KanjiData } from '@/data/jlpt';
 
-type StudyMode = 'flashcard' | 'match' | 'writing';
 
 const StudyContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+  gap: theme.spacing(2),
+  position: 'relative',
   width: '100%',
-  minHeight: '100vh',
-  padding: theme.spacing(1),
-  backgroundColor: '#f8fafc',
-  position: 'relative'
-}));
-
-const Header = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  width: '100%',
-  maxWidth: '680px',
-  padding: theme.spacing(1),
-  marginBottom: theme.spacing(1),
-}));
-
-const HeaderControls = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(2)
-}));
-
-const CurrentMode = styled(Typography)(({ theme }) => ({
-  fontSize: '1rem',
-  fontWeight: 500,
-  color: theme.palette.text.secondary
-}));
-
-const MenuButton = styled(IconButton)(({ theme }) => ({
-  backgroundColor: '#fff',
-  width: '40px',
-  height: '40px',
-  borderRadius: '12px',
-  color: '#7c4dff',
-  '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-  },
 }));
 
 const CloseButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.text.secondary,
   backgroundColor: 'rgba(255, 255, 255, 0.8)',
-  width: '40px',
-  height: '40px',
+  width: '48px',
+  height: '48px',
   borderRadius: '12px',
   '&:hover': {
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
-  }
-}));
-
-const ProgressBar = styled(Box)<{ value: number }>(({ theme, value }) => ({
-  width: '100%',
-  maxWidth: '680px',
-  height: '4px',
-  backgroundColor: '#e8e3ff',
-  position: 'relative',
-  borderRadius: '2px',
-  overflow: 'hidden',
-  '&::after': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    height: '100%',
-    width: `${value}%`,
-    backgroundColor: '#7c4dff',
-    transition: 'width 0.3s ease'
+  },
+  '& .MuiSvgIcon-root': {
+    fontSize: '1.5rem'
   }
 }));
 
@@ -93,91 +40,38 @@ const KanjiCard = styled(Box)(({ theme }) => ({
   width: '100%',
   maxWidth: '680px',
   aspectRatio: '16/10',
-  backgroundColor: '#fff',
   borderRadius: theme.spacing(4),
-  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
+
   padding: theme.spacing(4),
-  marginTop: theme.spacing(2),
+  marginTop: theme.spacing(1),
   marginBottom: theme.spacing(2),
   cursor: 'pointer',
-  transition: 'transform 0.2s ease',
   userSelect: 'none',
   WebkitUserSelect: 'none',
   MozUserSelect: 'none',
   msUserSelect: 'none',
-  '&:hover': {
-    transform: 'translateY(-4px)'
-  },
   [theme.breakpoints.down('sm')]: {
     aspectRatio: '4/3.2',
     padding: theme.spacing(3)
   }
 }));
 
+
 const KanjiCharacter = styled(Typography)(({ theme }) => ({
-  fontSize: '12rem',
+  fontSize: '16rem',
   fontFamily: '"Noto Sans JP", sans-serif',
   fontWeight: 400,
   color: '#1a1a1a',
   lineHeight: 1.2,
+  marginTop: theme.spacing(40),
+  [theme.breakpoints.down('sm')]: {
+    marginTop: theme.spacing(20),
+  },
   marginBottom: theme.spacing(5),
   userSelect: 'none',
   WebkitUserSelect: 'none',
   MozUserSelect: 'none',
   msUserSelect: 'none',
-}));
-
-const AudioButton = styled(IconButton)(({ theme }) => ({
-  backgroundColor: '#e8e3ff',
-  color: '#7c4dff',
-  '&:hover': {
-    backgroundColor: '#d3c6ff'
-  },
-  '& svg': {
-    fontSize: '1.5rem'
-  }
-}));
-
-const ButtonGroup = styled(Box)(({ theme }) => ({
-  display: 'grid',
-  gridTemplateColumns: 'repeat(4, 1fr)',
-  gap: theme.spacing(2),
-  padding: theme.spacing(2),
-  marginBottom: theme.spacing(2),
-  width: '100%',
-  maxWidth: '680px',
-  [theme.breakpoints.down('sm')]: {
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gap: theme.spacing(1.5)
-  }
-}));
-
-const DifficultyButton = styled(Button)(({ theme }) => ({
-  minWidth: '120px',
-  padding: theme.spacing(1.5, 3),
-  borderRadius: theme.spacing(1),
-  textTransform: 'none',
-  fontSize: '1rem',
-  fontWeight: 500,
-  backgroundColor: '#e8e3ff',
-  color: '#7c4dff',
-  '&:hover': {
-    backgroundColor: '#d3c6ff'
-  },
-  '&.forgot': {
-    backgroundColor: '#5e35b1',
-    color: '#fff',
-    '&:hover': {
-      backgroundColor: '#4527a0'
-    }
-  },
-  '&.hard': {
-    backgroundColor: '#7c4dff',
-    color: '#fff',
-    '&:hover': {
-      backgroundColor: '#6b42e0'
-    }
-  }
 }));
 
 const ReadingBadge = styled(Box)({
@@ -218,64 +112,65 @@ const Example = styled(Typography)({
 
 export default function KanjiPage() {
   const router = useRouter();
-  const [level, setLevel] = useState<number>(5);
-  const [mode, setMode] = useState<StudyMode>('flashcard');
-  const [modeAnchorEl, setModeAnchorEl] = useState<null | HTMLElement>(null);
-  const [showAnswer, setShowAnswer] = useState(false);
+
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const kanjiList = (() => {
-    switch (level) {
-      case 1:
-        return N1Kanji;
-      case 2:
-        return N2Kanji;
-      case 3:
-        return N3Kanji;
-      case 4:
-        return N4Kanji;
-      default:
-        return N5Kanji;
-    }
-  })();
-
-  const [remainingKanji, setRemainingKanji] = useState(N5Kanji);
+  const [showAnswer, setShowAnswer] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  const [feedbackMessage, setFeedbackMessage] = useState<string>('Select meaning below');
+  const [currentAnswers, setCurrentAnswers] = useState<string[]>([]);
+  const [kanjiList, setKanjiList] = useState<KanjiData[]>([]);
 
   useEffect(() => {
-    setRemainingKanji(kanjiList);
-    setCurrentIndex(0);
-    setShowAnswer(false);
-  }, [level, kanjiList]);
+    setKanjiList(N5Kanji);
+  }, []);
 
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setModeAnchorEl(event.currentTarget);
+  useEffect(() => {
+    if (kanjiList.length > 0) {
+      setCurrentIndex(0);
+      setCurrentAnswers(getRandomAnswers(kanjiList[0], kanjiList));
+      setShowAnswer(false);
+    }
+  }, [kanjiList]);
+
+  const getRandomAnswers = (correctKanji: KanjiData, allKanji: KanjiData[], numOptions: number = 4): string[] => {
+    // Get the correct meaning
+    const correctMeaning = correctKanji.meanings[0];
+    
+    // Get random incorrect meanings
+    const otherMeanings = allKanji
+      .filter(k => k !== correctKanji) // Exclude current kanji
+      .map(k => k.meanings[0]) // Get first meaning of each
+      .filter(m => m !== correctMeaning); // Ensure no duplicates with correct answer
+    
+    // Shuffle and take numOptions-1 incorrect answers
+    const wrongAnswers = [...otherMeanings]
+      .sort(() => Math.random() - 0.5)
+      .slice(0, numOptions - 1);
+    
+    // Combine correct and wrong answers and shuffle
+    return [...wrongAnswers, correctMeaning]
+      .sort(() => Math.random() - 0.5);
   };
 
-  const handleMenuClose = () => {
-    setModeAnchorEl(null);
+  const handleAnswerSelect = (selectedMeaning: string) => {
+    if (selectedAnswer) return; // Prevent multiple selections while animating
+
+    const isCorrect = kanjiList[currentIndex].meanings[0] === selectedMeaning;
+    setSelectedAnswer(selectedMeaning);
+    setFeedbackMessage(isCorrect ? 'Correct!' : `Incorrect - ${kanjiList[currentIndex].meanings[0]}`);
+
+    setTimeout(() => {
+      handleNext(); // Move to next kanji whether correct or incorrect
+    }, 1200); // Slightly longer delay for incorrect to read the answer
   };
 
-  const handleModeSelect = (newMode: StudyMode) => {
-    setMode(newMode);
-    handleMenuClose();
-  };
-
-  const handlePlayAudio = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsPlaying(true);
-    const utterance = new SpeechSynthesisUtterance(kanjiList[currentIndex].character);
-    utterance.lang = 'ja-JP';
-    utterance.onend = () => {
-      setIsPlaying(false);
-    };
-    window.speechSynthesis.speak(utterance);
-  };
-
-  const handleDifficulty = (difficulty: 'forgot' | 'hard' | 'good' | 'easy') => {
+  const handleNext = () => {
     if (currentIndex < kanjiList.length - 1) {
       setCurrentIndex(prev => prev + 1);
       setShowAnswer(false);
+      setSelectedAnswer(null);
+      setFeedbackMessage('Select meaning below');
+      setCurrentAnswers(getRandomAnswers(kanjiList[currentIndex + 1], kanjiList));
     } else {
       router.push('/dashboard');
     }
@@ -283,173 +178,129 @@ export default function KanjiPage() {
 
   return (
     <StudyContainer>
-      <Box sx={{ p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 2 }}>
-        <CloseButton onClick={() => router.push('/dashboard')}>
-          <Close />
-        </CloseButton>
-        <Box sx={{ display: 'flex', gap: 1 }}>
-          {[5, 4, 3, 2, 1].map((n) => (
-            <Button
-              key={n}
-              variant={level === n ? 'contained' : 'outlined'}
-              onClick={() => setLevel(n)}
-              sx={{
-                minWidth: 'auto',
-                px: 1,
-                backgroundColor: level === n ? '#7c4dff' : 'transparent',
-                borderColor: '#7c4dff',
-                color: level === n ? 'white' : '#7c4dff',
-                '&:hover': {
-                  backgroundColor: level === n ? '#5e35b1' : 'rgba(124, 77, 255, 0.1)',
-                  borderColor: '#7c4dff'
-                }
-              }}
-            >
-              N{n}
-            </Button>
-          ))}
+      <Box sx={{
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        padding: '12px 32px',
+        backgroundColor: '#f8fafc',
+        zIndex: 10,
+      }}>
+        <Box sx={{ position: 'relative', width: '100%', mb: 2, display: 'flex', alignItems: 'center', gap: 2, px: 2 }}>
+          <CloseButton onClick={() => router.push('/learn')}>
+            <Close />
+          </CloseButton>
+          <Box sx={{
+            flex: 1,
+            height: '24px',
+            backgroundColor: 'rgba(0, 0, 0, 0.08)',
+            borderRadius: '8px',
+            overflow: 'hidden',
+            position: 'relative'
+          }}>
+            <Box sx={{
+              position: 'absolute',
+              left: 0,
+              top: 0,
+              height: '100%',
+              width: `${((currentIndex + 1) / kanjiList.length) * 100}%`,
+              backgroundColor: '#7c4dff',
+              transition: 'width 0.3s ease'
+            }} />
+          </Box>
         </Box>
-        <HeaderControls>
-          <CurrentMode>
-            {mode === 'flashcard' ? 'Flashcards' : mode === 'match' ? 'Matching' : 'Writing'}
-          </CurrentMode>
-          <MenuButton onClick={handleMenuOpen}>
-            <TuneRounded />
-          </MenuButton>
-        </HeaderControls>
       </Box>
-      <Menu
-        anchorEl={modeAnchorEl}
-        open={Boolean(modeAnchorEl)}
-        onClose={handleMenuClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-      >
-        <MenuItem onClick={() => handleModeSelect('flashcard')}>Flashcards</MenuItem>
-        <MenuItem onClick={() => handleModeSelect('match')}>Matching</MenuItem>
-        <MenuItem onClick={() => handleModeSelect('writing')}>Writing</MenuItem>
-      </Menu>
-
-      <ProgressBar value={((currentIndex + 1) / kanjiList.length) * 100} />
-
+      {/* Spacer to prevent content from going under fixed header */}
       {kanjiList.length > 0 ? (
         <>
-          <KanjiCard onClick={() => setShowAnswer(prev => !prev)}>
-            {!showAnswer ? (
-              <>
-                <KanjiCharacter>
-                  {kanjiList[currentIndex].character}
-                </KanjiCharacter>
-
-                <AudioButton onClick={(e) => {
-                  e.stopPropagation(); // Prevent card flip when clicking audio button
-                  const utterance = new SpeechSynthesisUtterance(kanjiList[currentIndex].character);
-                  utterance.lang = 'ja-JP';
-                  window.speechSynthesis.speak(utterance);
-                }}>
-                  {isPlaying ? <VolumeUpOutlined /> : <VolumeUp />}
-                </AudioButton>
-              </>
-            ) : (
+          <KanjiCard>
+            <Box sx={{ 
+              width: '100%',
+              maxWidth: '600px',
+              height: '100%',
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              position: 'relative'
+            }}>
+              <KanjiCharacter>
+                {kanjiList[currentIndex].character}
+              </KanjiCharacter>
+              <Typography 
+                variant="h6"
+                sx={{ 
+                  color: selectedAnswer 
+                    ? kanjiList[currentIndex].meanings[0] === selectedAnswer
+                      ? '#00c853'
+                      : '#d50000'
+                    : '#000000', 
+                  mt: 2, 
+                  mb: 3,
+                  fontWeight: selectedAnswer ? 600 : 400,
+                  fontSize: '1.25rem'
+                }}
+              >
+                {feedbackMessage}
+              </Typography>
               <Box sx={{ 
-                width: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: 3,
-                py: 2
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(2, 1fr)', 
+                gap: 2, 
+                width: '100%', 
+                maxWidth: '600px',
+                px: 2
               }}>
-                <Typography variant="h3" sx={{ 
-                  fontSize: '2rem',
-                  mb: 2,
-                  fontWeight: 500
-                }}>
-                  {kanjiList[currentIndex].meanings.join(', ')}
-                </Typography>
-
-                <Box sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  gap: 2,
-                  width: '100%',
-                  mb: 2
-                }}>
-                  <OnYomiBadge>
-                    <ReadingLabel>ON:</ReadingLabel>
-                    <ReadingText>
-                      {kanjiList[currentIndex].onyomi.join('、')}
-                    </ReadingText>
-                  </OnYomiBadge>
-
-                  <KunYomiBadge>
-                    <ReadingLabel>KUN:</ReadingLabel>
-                    <ReadingText>
-                      {kanjiList[currentIndex].kunyomi.join('、')}
-                    </ReadingText>
-                  </KunYomiBadge>
-                </Box>
+                {currentAnswers.map((meaning, index) => (
+                  <Button
+                    key={index}
+                    onClick={() => handleAnswerSelect(meaning)}
+                    sx={{
+                      backgroundColor: selectedAnswer === meaning
+                        ? kanjiList[currentIndex].meanings[0] === meaning
+                          ? '#00c853' // More vibrant green
+                          : '#d50000' // More vibrant red
+                        : '#fff',
+                      color: selectedAnswer === meaning ? '#ffffff' : '#000000',
+                      opacity: '1 !important',
+                      '&.Mui-disabled': {
+                        opacity: '1 !important',
+                        color: selectedAnswer === meaning ? '#ffffff' : '#000000'
+                      },
+                      border: '2px solid #000',
+                      borderRadius: '12px',
+                      padding: '16px',
+                      textTransform: 'none',
+                      fontSize: '1.5rem',
+                      fontWeight: 500,
+                      '&:hover': {
+                        backgroundColor: selectedAnswer ? undefined : '#e8e3ff',
+                        borderColor: selectedAnswer ? undefined : '#7c4dff'
+                      }
+                    }}
+                    disabled={selectedAnswer !== null}
+                  >
+                    {meaning}
+                  </Button>
+                ))}
               </Box>
-            )}
+              <Typography
+                sx={{
+                  color: '#666666',
+                  fontSize: '0.875rem',
+                  mt: 4,
+                  textAlign: 'center'
+                }}
+              >
+                Accuracy: 85%
+              </Typography>
+            </Box>
           </KanjiCard>
-
-          <ButtonGroup>
-            <DifficultyButton 
-              className="forgot" 
-              onClick={() => handleDifficulty('forgot')}
-              sx={{
-                backgroundColor: '#f44336',
-                color: 'white',
-                '&:hover': {
-                  backgroundColor: '#d32f2f'
-                }
-              }}
-            >
-              Again
-            </DifficultyButton>
-            <DifficultyButton 
-              className="hard" 
-              onClick={() => handleDifficulty('hard')}
-              sx={{
-                backgroundColor: '#7c4dff',
-                color: 'white',
-                '&:hover': {
-                  backgroundColor: '#5e35b1'
-                }
-              }}
-            >
-              Hard
-            </DifficultyButton>
-            <DifficultyButton 
-              onClick={() => handleDifficulty('good')}
-              sx={{
-                backgroundColor: '#4caf50',
-                color: 'white',
-                '&:hover': {
-                  backgroundColor: '#388e3c'
-                }
-              }}
-            >
-              Good
-            </DifficultyButton>
-            <DifficultyButton 
-              onClick={() => handleDifficulty('easy')}
-              sx={{
-                backgroundColor: '#00bfa5',
-                color: 'white',
-                '&:hover': {
-                  backgroundColor: '#00897b'
-                }
-              }}
-            >
-              Easy
-            </DifficultyButton>
-          </ButtonGroup>
         </>
       ) : null}
     </StudyContainer>
