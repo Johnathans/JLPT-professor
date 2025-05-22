@@ -2,6 +2,7 @@
   "name": "jlpt-study",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -54,6 +55,7 @@
     "eslint-config-next": "15.2.4",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.19.4",
     "typescript": "^5"
   }
 }

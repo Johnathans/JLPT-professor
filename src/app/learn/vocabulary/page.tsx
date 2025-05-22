@@ -5,8 +5,8 @@ import { Box, Typography, Button, Stack, IconButton, Menu, MenuItem, Select, Pap
 import { VolumeUp, VolumeUpOutlined, Close, TuneRounded } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/navigation';
-import { n5VocabularyCombined } from '@/data/n5-vocabulary-combined';
-import { Word, Example } from '@/types/vocabulary';
+import { N5Vocabulary, N4Vocabulary, N3Vocabulary, N2Vocabulary, N1Vocabulary } from '@/data/jlpt';
+// import { Word, Example } from '@/types/vocabulary';
 
 interface GameStats {
   currentRound: number;
@@ -27,6 +27,14 @@ interface MatchTileData {
   content: string;
   type: 'vocab' | 'meaning';
   matched: boolean;
+}
+
+interface Word {
+  kanji?: string;
+  kana: string;
+  meanings: string[];
+  jlpt: number;
+  partOfSpeech: string;
 }
 
 const StudyContainer = styled(Box)(({ theme }) => ({
@@ -293,7 +301,7 @@ type Difficulty = 'forgot' | 'hard' | 'good' | 'easy';
 
 export default function VocabularyPage() {
   const router = useRouter();
-  const [currentWord, setCurrentWord] = useState<Word | null>(null);
+  const [currentWord, setCurrentWord] = useState<Word | null>(N5Vocabulary[0]);
   const [isFlipped, setIsFlipped] = useState(false);
   const [progress, setProgress] = useState(0);
   const [studyMode, setStudyMode] = useState<StudyMode>('flashcard');
@@ -323,20 +331,38 @@ export default function VocabularyPage() {
     handleMenuClose();
   };
 
+  const [level, setLevel] = useState<number>(5);
+  const [words, setWords] = useState<Word[]>(N5Vocabulary);
+  const [remainingWords, setRemainingWords] = useState<Word[]>([...N5Vocabulary]);
+
   useEffect(() => {
-    // Initialize with a random word
-    const randomWord = n5VocabularyCombined[Math.floor(Math.random() * n5VocabularyCombined.length)];
-    setCurrentWord(randomWord);
-  }, []);
+    const newWords = (() => {
+      switch (level) {
+        case 1:
+          return N1Vocabulary;
+        case 2:
+          return N2Vocabulary;
+        case 3:
+          return N3Vocabulary;
+        case 4:
+          return N4Vocabulary;
+        default:
+          return N5Vocabulary;
+      }
+    })();
+    setWords(newWords);
+    setRemainingWords([...newWords]);
+    setCurrentWord(newWords[0]);
+  }, [level]);
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
   };
 
   const handleDifficulty = (difficulty: Difficulty) => {
-    // Get next random word
-    const randomWord = n5VocabularyCombined[Math.floor(Math.random() * n5VocabularyCombined.length)];
-    setCurrentWord(randomWord);
+    const shuffled = [...remainingWords].sort(() => Math.random() - 0.5);
+    setRemainingWords(shuffled);
+    setCurrentWord(shuffled[0]);
     setIsFlipped(false);
 
     if (difficulty === 'forgot') {
@@ -348,11 +374,38 @@ export default function VocabularyPage() {
 
   return (
     <StudyContainer>
+      <Box sx={{ p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 2 }}>
+        <IconButton onClick={handleClose}>
+          <Close />
+        </IconButton>
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          {[5, 4, 3, 2, 1].map((n) => (
+            <Button
+              key={n}
+              variant={level === n ? 'contained' : 'outlined'}
+              onClick={() => setLevel(n)}
+              sx={{
+                minWidth: 'auto',
+                px: 1,
+                backgroundColor: level === n ? '#7c4dff' : 'transparent',
+                borderColor: '#7c4dff',
+                color: level === n ? 'white' : '#7c4dff',
+                '&:hover': {
+                  backgroundColor: level === n ? '#5e35b1' : 'rgba(124, 77, 255, 0.1)',
+                  borderColor: '#7c4dff'
+                }
+              }}
+            >
+              N{n}
+            </Button>
+          ))}
+        </Box>
+        <IconButton onClick={handleMenuOpen}>
+          <TuneRounded />
+        </IconButton>
+      </Box>
       <Box sx={{ width: '100%', maxWidth: '680px', mb: 2 }}>
         <Header>
-          <CloseButton onClick={handleClose}>
-            <Close />
-          </CloseButton>
           <HeaderControls>
             <CurrentMode>{modeDisplay[studyMode]}</CurrentMode>
             <MenuButton onClick={handleMenuOpen}>
@@ -424,7 +477,7 @@ export default function VocabularyPage() {
                 fontWeight: 600,
                 flex: 1
               }}>
-                {currentWord?.meaning}
+                {currentWord?.meanings[0]}
               </Typography>
               <Typography
                 sx={{
@@ -478,69 +531,7 @@ export default function VocabularyPage() {
               </Typography>
             </Box>
 
-            <Typography sx={{ 
-              color: '#666', 
-              fontSize: '0.875rem', 
-              mb: 2,
-              fontWeight: 500,
-              alignSelf: 'flex-start'
-            }}>
-              Example Sentences
-            </Typography>
-            <Box sx={{ width: '100%' }}>
-              {currentWord?.examples?.map((example: Example, i: number) => (
-                <Box
-                  key={i}
-                  sx={{
-                    p: 2,
-                    borderBottom: '1px solid #e2e8f0',
-                    '&:last-child': {
-                      borderBottom: 'none'
-                    }
-                  }}
-                >
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-                    <Typography sx={{ 
-                      fontFamily: '"Noto Sans JP", sans-serif',
-                      fontSize: '1.125rem',
-                      fontWeight: 500,
-                      lineHeight: 1.4
-                    }}>
-                      {example.japanese}
-                    </Typography>
-                    <IconButton
-                      size="small"
-                      sx={{ 
-                        color: '#7c4dff',
-                        ml: 'auto'
-                      }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        const utterance = new SpeechSynthesisUtterance(example.japanese);
-                        utterance.lang = 'ja-JP';
-                        window.speechSynthesis.speak(utterance);
-                      }}
-                    >
-                      <VolumeUp />
-                    </IconButton>
-                  </Box>
-                  <Typography sx={{ 
-                    fontFamily: '"Noto Sans JP", sans-serif',
-                    fontSize: '0.875rem',
-                    color: '#666',
-                    mb: 1
-                  }}>
-                    {example.reading}
-                  </Typography>
-                  <Typography sx={{ 
-                    fontSize: '0.875rem',
-                    color: '#666'
-                  }}>
-                    {example.meaning}
-                  </Typography>
-                </Box>
-              ))}
-            </Box>
+            {/* Examples section removed as it's not in the new data structure */}
           </Box>
         )} 
       </FlipCard>

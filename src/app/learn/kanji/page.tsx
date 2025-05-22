@@ -4,10 +4,8 @@ import { useState, useEffect } from 'react';
 import { Box, IconButton, Typography, Button, Menu, MenuItem } from '@mui/material';
 import { VolumeUp, VolumeUpOutlined, Close, TuneRounded } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
-import { useJlptLevel } from '@/contexts/JlptLevelContext';
-import { KANJI_DATA } from '@/app/admin/kanji/data';
-import type { JlptLevel } from '@/contexts/JlptLevelContext';
-import type { KanjiData } from '@/app/admin/kanji/data';
+import { N5Kanji, N4Kanji, N3Kanji, N2Kanji, N1Kanji } from '@/data/jlpt';
+import type { KanjiData } from '@/data/jlpt';
 import { useRouter } from 'next/navigation';
 
 type StudyMode = 'flashcard' | 'match' | 'writing';
@@ -220,29 +218,35 @@ const Example = styled(Typography)({
 
 export default function KanjiPage() {
   const router = useRouter();
-  const { level } = useJlptLevel();
-  const [kanjiList, setKanjiList] = useState<KanjiData[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [showAnswer, setShowAnswer] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [level, setLevel] = useState<number>(5);
   const [mode, setMode] = useState<StudyMode>('flashcard');
   const [modeAnchorEl, setModeAnchorEl] = useState<null | HTMLElement>(null);
+  const [showAnswer, setShowAnswer] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const kanjiList = (() => {
+    switch (level) {
+      case 1:
+        return N1Kanji;
+      case 2:
+        return N2Kanji;
+      case 3:
+        return N3Kanji;
+      case 4:
+        return N4Kanji;
+      default:
+        return N5Kanji;
+    }
+  })();
+
+  const [remainingKanji, setRemainingKanji] = useState(N5Kanji);
 
   useEffect(() => {
-    console.log('KanjiPage: Level changed to:', level);
-    console.log('KANJI_DATA:', KANJI_DATA); // Log the entire KANJI_DATA object
-    // Convert N5 to n5 format for accessing KANJI_DATA
-    const newLevel = level.toLowerCase() as keyof typeof KANJI_DATA;
-    console.log('Converted level:', newLevel); // Log the converted level
-    const newKanjiList = KANJI_DATA[newLevel];
-    console.log('KanjiPage: New kanji list:', newKanjiList); // Log the full kanji list
-    if (!newKanjiList) {
-      console.error('No kanji list found for level:', newLevel);
-    }
-    setKanjiList(newKanjiList || []); // Add fallback to empty array
-    setCurrentIndex(0); // Reset to first kanji when level changes
+    setRemainingKanji(kanjiList);
+    setCurrentIndex(0);
     setShowAnswer(false);
-  }, [level]); // This effect runs both on mount and when level changes
+  }, [level, kanjiList]);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setModeAnchorEl(event.currentTarget);
@@ -260,7 +264,7 @@ export default function KanjiPage() {
   const handlePlayAudio = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsPlaying(true);
-    const utterance = new SpeechSynthesisUtterance(kanjiList[currentIndex].kanji);
+    const utterance = new SpeechSynthesisUtterance(kanjiList[currentIndex].character);
     utterance.lang = 'ja-JP';
     utterance.onend = () => {
       setIsPlaying(false);
@@ -279,22 +283,41 @@ export default function KanjiPage() {
 
   return (
     <StudyContainer>
-      <Header>
+      <Box sx={{ p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 2 }}>
+        <CloseButton onClick={() => router.push('/dashboard')}>
+          <Close />
+        </CloseButton>
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          {[5, 4, 3, 2, 1].map((n) => (
+            <Button
+              key={n}
+              variant={level === n ? 'contained' : 'outlined'}
+              onClick={() => setLevel(n)}
+              sx={{
+                minWidth: 'auto',
+                px: 1,
+                backgroundColor: level === n ? '#7c4dff' : 'transparent',
+                borderColor: '#7c4dff',
+                color: level === n ? 'white' : '#7c4dff',
+                '&:hover': {
+                  backgroundColor: level === n ? '#5e35b1' : 'rgba(124, 77, 255, 0.1)',
+                  borderColor: '#7c4dff'
+                }
+              }}
+            >
+              N{n}
+            </Button>
+          ))}
+        </Box>
         <HeaderControls>
-          <CloseButton onClick={() => router.push('/dashboard')}>
-            <Close />
-          </CloseButton>
           <CurrentMode>
             {mode === 'flashcard' ? 'Flashcards' : mode === 'match' ? 'Matching' : 'Writing'}
           </CurrentMode>
-        </HeaderControls>
-        <HeaderControls>
           <MenuButton onClick={handleMenuOpen}>
             <TuneRounded />
           </MenuButton>
         </HeaderControls>
-      </Header>
-
+      </Box>
       <Menu
         anchorEl={modeAnchorEl}
         open={Boolean(modeAnchorEl)}
@@ -321,12 +344,14 @@ export default function KanjiPage() {
             {!showAnswer ? (
               <>
                 <KanjiCharacter>
-                  {kanjiList[currentIndex].kanji}
+                  {kanjiList[currentIndex].character}
                 </KanjiCharacter>
 
                 <AudioButton onClick={(e) => {
                   e.stopPropagation(); // Prevent card flip when clicking audio button
-                  handlePlayAudio(e);
+                  const utterance = new SpeechSynthesisUtterance(kanjiList[currentIndex].character);
+                  utterance.lang = 'ja-JP';
+                  window.speechSynthesis.speak(utterance);
                 }}>
                   {isPlaying ? <VolumeUpOutlined /> : <VolumeUp />}
                 </AudioButton>
@@ -345,7 +370,7 @@ export default function KanjiPage() {
                   mb: 2,
                   fontWeight: 500
                 }}>
-                  {kanjiList[currentIndex].meanings.slice(0, 3).join(', ')}
+                  {kanjiList[currentIndex].meanings.join(', ')}
                 </Typography>
 
                 <Box sx={{
@@ -358,42 +383,70 @@ export default function KanjiPage() {
                   <OnYomiBadge>
                     <ReadingLabel>ON:</ReadingLabel>
                     <ReadingText>
-                      {kanjiList[currentIndex].onyomi.length > 0 
-                        ? kanjiList[currentIndex].onyomi.slice(0, 3).join('、')
-                        : '—'}
+                      {kanjiList[currentIndex].onyomi.join('、')}
                     </ReadingText>
                   </OnYomiBadge>
 
                   <KunYomiBadge>
                     <ReadingLabel>KUN:</ReadingLabel>
                     <ReadingText>
-                      {kanjiList[currentIndex].kunyomi.length > 0 
-                        ? kanjiList[currentIndex].kunyomi.slice(0, 3).join('、')
-                        : '—'}
+                      {kanjiList[currentIndex].kunyomi.join('、')}
                     </ReadingText>
                   </KunYomiBadge>
                 </Box>
-
-                {kanjiList[currentIndex].info?.examples?.[0] && (
-                  <Example>
-                    {kanjiList[currentIndex].info.examples[0]}
-                  </Example>
-                )}
               </Box>
             )}
           </KanjiCard>
 
           <ButtonGroup>
-            <DifficultyButton className="forgot" onClick={() => handleDifficulty('forgot')}>
+            <DifficultyButton 
+              className="forgot" 
+              onClick={() => handleDifficulty('forgot')}
+              sx={{
+                backgroundColor: '#f44336',
+                color: 'white',
+                '&:hover': {
+                  backgroundColor: '#d32f2f'
+                }
+              }}
+            >
               Again
             </DifficultyButton>
-            <DifficultyButton className="hard" onClick={() => handleDifficulty('hard')}>
+            <DifficultyButton 
+              className="hard" 
+              onClick={() => handleDifficulty('hard')}
+              sx={{
+                backgroundColor: '#7c4dff',
+                color: 'white',
+                '&:hover': {
+                  backgroundColor: '#5e35b1'
+                }
+              }}
+            >
               Hard
             </DifficultyButton>
-            <DifficultyButton onClick={() => handleDifficulty('good')}>
+            <DifficultyButton 
+              onClick={() => handleDifficulty('good')}
+              sx={{
+                backgroundColor: '#4caf50',
+                color: 'white',
+                '&:hover': {
+                  backgroundColor: '#388e3c'
+                }
+              }}
+            >
               Good
             </DifficultyButton>
-            <DifficultyButton onClick={() => handleDifficulty('easy')}>
+            <DifficultyButton 
+              onClick={() => handleDifficulty('easy')}
+              sx={{
+                backgroundColor: '#00bfa5',
+                color: 'white',
+                '&:hover': {
+                  backgroundColor: '#00897b'
+                }
+              }}
+            >
               Easy
             </DifficultyButton>
           </ButtonGroup>
