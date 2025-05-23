@@ -41,11 +41,9 @@ const StudyContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+  gap: theme.spacing(2),
+  position: 'relative',
   width: '100%',
-  minHeight: '100vh',
-  padding: theme.spacing(1),
-  backgroundColor: '#f8fafc',
-  position: 'relative'
 }));
 
 const MainContent = styled(Box)(({ theme }) => ({
@@ -92,11 +90,14 @@ const MenuButton = styled(IconButton)(({ theme }) => ({
 const CloseButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.text.secondary,
   backgroundColor: 'rgba(255, 255, 255, 0.8)',
-  width: '40px',
-  height: '40px',
+  width: '48px',
+  height: '48px',
   borderRadius: '12px',
   '&:hover': {
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
+  },
+  '& .MuiSvgIcon-root': {
+    fontSize: '1.5rem'
   }
 }));
 
@@ -128,21 +129,15 @@ const FlipCard = styled(Box)(({ theme }) => ({
   width: '100%',
   maxWidth: '680px',
   aspectRatio: '16/10',
-  backgroundColor: '#fff',
   borderRadius: theme.spacing(4),
-  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
   padding: theme.spacing(4),
-  marginTop: theme.spacing(2),
+  marginTop: theme.spacing(1),
   marginBottom: theme.spacing(2),
   cursor: 'pointer',
-  transition: 'transform 0.2s ease',
   userSelect: 'none',
   WebkitUserSelect: 'none',
   MozUserSelect: 'none',
   msUserSelect: 'none',
-  '&:hover': {
-    transform: 'translateY(-4px)'
-  },
   [theme.breakpoints.down('sm')]: {
     aspectRatio: '4/3.2',
     padding: theme.spacing(3)
@@ -150,16 +145,20 @@ const FlipCard = styled(Box)(({ theme }) => ({
 }));
 
 const WordText = styled(Typography)(({ theme }) => ({
-  fontSize: '12rem',
+  fontSize: '16rem',
   fontFamily: '"Noto Sans JP", sans-serif',
   fontWeight: 400,
   color: '#1a1a1a',
   lineHeight: 1.2,
+  marginTop: theme.spacing(40),
   marginBottom: theme.spacing(5),
   userSelect: 'none',
   WebkitUserSelect: 'none',
   MozUserSelect: 'none',
   msUserSelect: 'none',
+  [theme.breakpoints.down('sm')]: {
+    marginTop: theme.spacing(20),
+  }
 }));
 
 const AudioButton = styled(IconButton)(({ theme }) => ({
@@ -177,41 +176,44 @@ const ButtonGrid = styled(Box)(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: 'repeat(4, 1fr)',
   gap: theme.spacing(2),
-  padding: theme.spacing(2),
-  marginBottom: theme.spacing(2),
   width: '100%',
-  maxWidth: '680px',
+  maxWidth: '600px',
+  marginTop: theme.spacing(2),
   [theme.breakpoints.down('sm')]: {
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gap: theme.spacing(1.5)
+    gap: theme.spacing(1)
   }
 }));
 
 const DifficultyButton = styled(Button)(({ theme }) => ({
   minWidth: '120px',
-  padding: theme.spacing(1.5, 3),
-  borderRadius: theme.spacing(1),
-  textTransform: 'none',
-  fontSize: '1rem',
+  border: '2px solid #000',
+  borderRadius: '12px',
+  padding: '16px',
+  fontSize: '1.25rem',
   fontWeight: 500,
-  backgroundColor: '#e8e3ff',
-  color: '#7c4dff',
-  width: '100%',
+  textTransform: 'none',
+  backgroundColor: '#fff',
+  color: '#000',
   '&:hover': {
-    backgroundColor: '#d3c6ff'
+    backgroundColor: '#f8fafc',
+    borderColor: '#7c4dff'
   },
   '&.forgot': {
-    backgroundColor: '#5e35b1',
+    backgroundColor: '#dc2626',
     color: '#fff',
+    border: '2px solid #dc2626',
     '&:hover': {
-      backgroundColor: '#4527a0'
+      backgroundColor: '#b91c1c',
+      borderColor: '#b91c1c'
     }
   },
   '&.hard': {
     backgroundColor: '#7c4dff',
     color: '#fff',
+    border: '2px solid #7c4dff',
     '&:hover': {
-      backgroundColor: '#6b42e0'
+      backgroundColor: '#6b42e0',
+      borderColor: '#6b42e0'
     }
   }
 }));
@@ -436,7 +438,17 @@ export default function VocabularyPage() {
         </Header>
         <ProgressBar value={progress} />
       </Box>
-      <FlipCard onClick={() => setIsFlipped(!isFlipped)}>
+      <FlipCard 
+        onClick={() => setIsFlipped(!isFlipped)}
+        sx={{
+          backgroundColor: '#fff',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
+          transition: 'transform 0.2s ease',
+          '&:hover': {
+            transform: 'translateY(-4px)'
+          }
+        }}
+      >
         {!isFlipped ? (
           <>
             <WordText>{currentWord?.kanji || currentWord?.kana}</WordText>
