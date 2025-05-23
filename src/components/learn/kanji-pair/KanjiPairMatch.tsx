@@ -65,7 +65,7 @@ const MatchBox = styled(Paper)<{ selected?: boolean; matched?: boolean }>(({ the
   fontSize: '1.25rem',
   fontWeight: 500,
   backgroundColor: matched ? 'rgba(0, 200, 83, 0.12)' : '#fff',
-  color: matched ? '#00c853' : theme.palette.text.primary,
+  color: theme.palette.text.primary,
   border: selected ? '3px solid #7c4dff' : '2px solid #000',
   transition: 'all 0.2s ease',
   boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
