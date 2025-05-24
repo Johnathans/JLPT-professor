@@ -6,7 +6,11 @@ import styles from '@/app/dashboard/page.module.css';
 import { JLPT_DATA } from '@/data/jlpt';
 import { useJlptLevel } from '@/contexts/JlptLevelContext';
 
-export default function GrammarGrid() {
+interface GrammarGridProps {
+  renderSelectionButtons?: (buttons: React.ReactNode) => void;
+}
+
+export default function GrammarGrid({ renderSelectionButtons }: GrammarGridProps) {
   const { level } = useJlptLevel();
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
@@ -35,18 +39,10 @@ export default function GrammarGrid() {
     );
   };
 
-  return (
-    <>
-      {selectedItems.length > 0 && (
-        <Box sx={{ 
-          mb: 3, 
-          display: 'flex', 
-          gap: 2,
-          alignItems: 'center',
-          bgcolor: '#f8f9fa',
-          p: 2,
-          borderRadius: 2
-        }}>
+  useEffect(() => {
+    if (renderSelectionButtons && selectedItems.length > 0) {
+      renderSelectionButtons(
+        <Box sx={{ display: 'flex', gap: 2 }}>
           <Typography sx={{ fontFamily: 'Poppins', fontWeight: 600 }}>
             {selectedItems.length} items selected
           </Typography>
@@ -81,8 +77,14 @@ export default function GrammarGrid() {
             Mark as Known
           </Button>
         </Box>
-      )}
+      );
+    } else if (renderSelectionButtons) {
+      renderSelectionButtons(null);
+    }
+  }, [selectedItems.length, renderSelectionButtons]);
 
+  return (
+    <>
       <Grid container spacing={2}>
         {currentGrammar.map((item, index) => (
           <Grid item xs={12} sm={6} md={2.4} key={index}>

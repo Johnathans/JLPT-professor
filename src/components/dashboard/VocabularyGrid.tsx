@@ -1,12 +1,24 @@
-import { useState, useEffect } from 'react';
-import { Box, Card, Typography, Button, Checkbox, Grid, Pagination, useMediaQuery, useTheme } from '@mui/material';
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import Grid from '@mui/material/Grid';
+import Pagination from '@mui/material/Pagination';
+import { useMediaQuery, useTheme } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import styles from '@/app/dashboard/page.module.css';
 import { JLPT_DATA } from '@/data/jlpt';
 import { useJlptLevel } from '@/contexts/JlptLevelContext';
 
-export default function VocabularyGrid() {
+export interface VocabularyGridProps {
+  renderSelectionButtons?: (buttons: React.ReactNode) => void;
+}
+
+export default function VocabularyGrid({ renderSelectionButtons }: VocabularyGridProps) {
   const { level } = useJlptLevel();
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
@@ -35,53 +47,63 @@ export default function VocabularyGrid() {
     );
   };
 
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+    setSelectedItems([]);
+  };
+
+  const selectionButtons = selectedItems.length > 0 ? (
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+      <Typography sx={{ 
+        fontFamily: 'Poppins',
+        fontSize: '0.875rem',
+        color: '#666'
+      }}>
+        {selectedItems.length} items selected
+      </Typography>
+      <Button
+        variant="outlined"
+        startIcon={<PlayArrowIcon />}
+        sx={{ 
+          bgcolor: 'white',
+          borderColor: '#7c4dff',
+          color: '#7c4dff',
+          '&:hover': { 
+            bgcolor: 'rgba(124, 77, 255, 0.04)',
+            borderColor: '#6b42e0',
+            color: '#6b42e0'
+          }
+        }}
+      >
+        Study Selected
+      </Button>
+      <Button
+        variant="outlined"
+        startIcon={<CheckCircleIcon />}
+        sx={{
+          bgcolor: 'white',
+          borderColor: '#7c4dff',
+          color: '#7c4dff',
+          '&:hover': {
+            bgcolor: 'rgba(124, 77, 255, 0.04)',
+            borderColor: '#6b42e0',
+            color: '#6b42e0'
+          }
+        }}
+      >
+        Mark as Known
+      </Button>
+    </Box>
+  ) : null;
+
+  useEffect(() => {
+    if (renderSelectionButtons) {
+      renderSelectionButtons(selectionButtons);
+    }
+  }, [renderSelectionButtons, selectionButtons]);
+
   return (
-    <>
-      {selectedItems.length > 0 && (
-        <Box sx={{ 
-          mb: 3, 
-          display: 'flex', 
-          gap: 2,
-          alignItems: 'center',
-          bgcolor: '#f8f9fa',
-          p: 2,
-          borderRadius: 2
-        }}>
-          <Typography sx={{ fontFamily: 'Poppins', fontWeight: 600 }}>
-            {selectedItems.length} items selected
-          </Typography>
-          <Button
-            variant="outlined"
-            startIcon={<PlayArrowIcon />}
-            sx={{ 
-              bgcolor: 'white',
-              borderColor: '#7c4dff',
-              color: '#7c4dff',
-              '&:hover': { 
-                bgcolor: 'rgba(124, 77, 255, 0.04)',
-                borderColor: '#6b42e0',
-                color: '#6b42e0'
-              }
-            }}
-          >
-            Study Selected
-          </Button>
-          <Button
-            variant="outlined"
-            startIcon={<CheckCircleIcon />}
-            sx={{
-              borderColor: '#7c4dff',
-              color: '#7c4dff',
-              '&:hover': {
-                borderColor: '#6b42e0',
-                bgcolor: 'rgba(124, 77, 255, 0.04)'
-              }
-            }}
-          >
-            Mark as Known
-          </Button>
-        </Box>
-      )}
+    <Box>
 
       <Grid container spacing={2}>
         {currentVocabulary.map((item, index) => (
@@ -89,55 +111,40 @@ export default function VocabularyGrid() {
             <Card 
               elevation={0}
               onClick={() => handleSelect(index)}
-              sx={{ 
-                p: 2,
+              sx={{
+                p: 3,
                 cursor: 'pointer',
-                position: 'relative',
-                bgcolor: selectedItems.includes(index) ? '#f8f9fa' : 'white',
-                border: '2px solid #333',
-                '&:hover': { bgcolor: '#f8f9fa' }
+                border: '2px solid',
+                borderColor: selectedItems.includes(startIndex + index) ? '#7c4dff' : '#e0e0e0',
+                '&:hover': {
+                  borderColor: '#7c4dff',
+                  bgcolor: 'rgba(124, 77, 255, 0.04)'
+                }
               }}
             >
-              <Box sx={{ 
-                position: 'absolute', 
-                top: 8, 
-                right: 8,
-                color: selectedItems.includes(index) ? '#7c4dff' : '#e0e0e0'
-              }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                <Typography 
+                  sx={{ fontSize: '2rem', fontWeight: 700 }}
+                >
+                  {item.kanji || item.kana}
+                </Typography>
                 <Checkbox 
-                  checked={selectedItems.includes(index)}
+                  checked={selectedItems.includes(startIndex + index)}
+                  onChange={() => handleSelect(startIndex + index)}
                   sx={{ 
+                    color: '#7c4dff',
                     '&.Mui-checked': {
                       color: '#7c4dff'
                     }
                   }}
                 />
               </Box>
-              <Box sx={{ p: 2 }}>
-                <Typography 
-                  variant="h4" 
-                  sx={{ 
-                    mb: 1, 
-                    fontFamily: '"Noto Sans JP", sans-serif',
-                    fontSize: '2.5rem'
-                  }}
-                >
-                  {item.kanji || item.kana}
-                </Typography>
-                <Typography 
-                  variant="body1" 
-                  color="text.secondary" 
-                  sx={{ 
-                    mb: 0.5,
-                    fontFamily: '"Noto Sans JP", sans-serif'
-                  }}
-                >
-                  {item.kana}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {item.meanings.join(', ')}
-                </Typography>
-              </Box>
+              <Typography sx={{ mt: 1, color: '#666' }}>
+                {item.kana}
+              </Typography>
+              <Typography sx={{ color: '#666' }}>
+                {item.meanings.join(', ')}
+              </Typography>
             </Card>
           </Grid>
         ))}
@@ -148,7 +155,7 @@ export default function VocabularyGrid() {
           <Pagination 
             count={totalPages} 
             page={page} 
-            onChange={(_, value) => setPage(value)}
+            onChange={handlePageChange}
             color="primary"
             sx={{ 
               '& .MuiPaginationItem-root': { fontFamily: 'Poppins' },
@@ -157,6 +164,6 @@ export default function VocabularyGrid() {
           />
         </Box>
       )}
-    </>
+    </Box>
   );
 }

@@ -40,6 +40,7 @@ export interface VocabularyData {
 
 export interface GrammarData {
   pattern: string;
+  kana: string;
   jlpt: number;
 }
 

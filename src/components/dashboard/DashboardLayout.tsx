@@ -11,9 +11,10 @@ const DRAWER_WIDTH = 240;
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
+  onJlptLevelChange?: (level: string) => void;
 }
 
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
+const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onJlptLevelChange }) => {
   const [streakModalOpen, setStreakModalOpen] = useState(false);
   const [jlptLevel, setJlptLevel] = useState('N5');
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -24,6 +25,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const handleJlptChange = (event: React.MouseEvent<HTMLElement>, newLevel: string) => {
     if (newLevel !== null) {
       setJlptLevel(newLevel);
+      onJlptLevelChange?.(newLevel.toLowerCase());
     }
   };
 
