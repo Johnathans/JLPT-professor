@@ -1,6 +1,7 @@
 'use client';
 
-import { Box, Grid, Typography } from '@mui/material';
+import React from 'react';
+import { Box, Grid, ToggleButtonGroup, ToggleButton } from '@mui/material';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import UnitBlock from '@/components/dashboard/UnitBlock';
 
@@ -25,13 +26,21 @@ const units = [
   },
   {
     title: 'Food & Dining',
-    imageUrl: '/images/food.svg',
+    imageUrl: '/images/blocks/4306483_asian_bowl_chopsticks_food_noodle_icon.png',
     wordCount: 30,
     kanjiCount: 8
   }
 ];
 
 export default function DashboardPage() {
+  const [mode, setMode] = React.useState('study');
+
+  const handleModeChange = (event: React.MouseEvent<HTMLElement>, newMode: string) => {
+    if (newMode !== null) {
+      setMode(newMode);
+    }
+  };
+
   const handleStart = (unitTitle: string) => {
     console.log(`Starting unit: ${unitTitle}`);
   };
@@ -43,9 +52,55 @@ export default function DashboardPage() {
   return (
     <DashboardLayout>
       <Box sx={{ p: 3, bgcolor: '#FFFFFF' }}>
-        <Typography variant="h4" sx={{ mb: 4, fontWeight: 700, color: '#000000' }}>
-          Learning Path
-        </Typography>
+        <Box sx={{ mb: 4 }}>
+          <ToggleButtonGroup
+            value={mode}
+            exclusive
+            onChange={handleModeChange}
+            aria-label="study mode"
+            sx={{
+              width: { xs: '100%', sm: 'auto' },
+              bgcolor: '#F5F5F5',
+              p: '4px',
+              borderRadius: '16px',
+              gap: '8px',
+              height: '48px',
+              '& .MuiToggleButton-root': {
+                border: 'none',
+                borderRadius: '12px !important',
+                px: 4,
+                flex: { xs: 1, sm: 'none' },
+                minWidth: { xs: 0, sm: '120px' },
+                fontSize: '1.25rem',
+                fontWeight: 500,
+                color: '#666666',
+                fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
+                textTransform: 'none',
+                letterSpacing: '-0.01em',
+                transition: 'all 0.2s ease',
+                '&.Mui-selected': {
+                  bgcolor: '#FFFFFF',
+                  color: '#000000',
+                  fontWeight: 600,
+                  boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.1)',
+                  '&:hover': {
+                    bgcolor: '#FFFFFF',
+                  }
+                },
+                '&:hover': {
+                  bgcolor: 'rgba(255, 255, 255, 0.5)'
+                }
+              }
+            }}
+          >
+            <ToggleButton value="study" aria-label="study mode">
+              Study
+            </ToggleButton>
+            <ToggleButton value="review" aria-label="review mode">
+              Review
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </Box>
         
         <Grid container spacing={3}>
           {units.map((unit, index) => (

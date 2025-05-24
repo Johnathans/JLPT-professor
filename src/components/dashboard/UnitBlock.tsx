@@ -74,8 +74,8 @@ const UnitBlock: React.FC<UnitBlockProps> = ({
             width: '60%',
             height: 'auto',
             objectFit: 'contain',
-            filter: 'brightness(0) invert(1)',
-            opacity: 0.9
+            filter: imageUrl.endsWith('.svg') ? 'brightness(0) invert(1)' : 'none',
+            opacity: imageUrl.endsWith('.svg') ? 0.9 : 1
           }}
         />
       </Box>
