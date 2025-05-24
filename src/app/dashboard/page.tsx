@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Box, Container, Tab, Tabs } from '@mui/material';
-import DashboardNavbar from '@/components/dashboard/DashboardNavbar';
+import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import LearningPath from '@/components/dashboard/LearningPath';
 import VocabularyGrid from '@/components/dashboard/VocabularyGrid';
 import KanjiGrid from '@/components/dashboard/KanjiGrid';
@@ -34,63 +34,71 @@ function TabPanel(props: TabPanelProps) {
 
 export default function DashboardPage() {
   const [currentTab, setCurrentTab] = useState(0);
+  const [selectionButtons, setSelectionButtons] = useState<React.ReactNode>(null);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setCurrentTab(newValue);
+    setSelectionButtons(null);
+  };
+
+  const handleSelectionButtons = (buttons: React.ReactNode) => {
+    setSelectionButtons(buttons);
   };
 
   return (
-    <div className={styles.dashboardContainer}>
-      <DashboardNavbar />
+    <DashboardLayout>
       <Container maxWidth="xl">
         <Box sx={{ mt: 4 }}>
-            <Box sx={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'space-between'
-            }}>
-              <Tabs 
-                value={currentTab} 
-                onChange={handleTabChange}
-                aria-label="dashboard navigation tabs"
-                sx={{
-                  '& .MuiTab-root': {
-                    fontSize: '1.125rem',
-                    textTransform: 'none',
-                    fontWeight: 700,
-                    color: '#333',
-                    '&.Mui-selected': {
-                      color: '#7c4dff',
-                      fontWeight: 700
-                    }
-                  },
-                  '& .MuiTabs-indicator': {
-                    backgroundColor: '#7c4dff',
-                    height: 3
+          <Box sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'space-between',
+            width: '100%'
+          }}>
+            <Tabs
+              value={currentTab} 
+              onChange={handleTabChange}
+              aria-label="dashboard navigation tabs"
+              sx={{
+                flex: 1,
+                '& .MuiTab-root': {
+                  fontSize: '1.125rem',
+                  textTransform: 'none',
+                  fontWeight: 700,
+                  color: '#333',
+                  '&.Mui-selected': {
+                    color: '#7c4dff',
+                    fontWeight: 700
                   }
-                }}
-              >
-                <Tab label="Learning Path" />
-                <Tab label="Vocabulary" />
-                <Tab label="Kanji" />
-                <Tab label="Grammar" />
-              </Tabs>
-            </Box>
+                },
+                '& .MuiTabs-indicator': {
+                  backgroundColor: '#7c4dff',
+                  height: 3
+                }
+              }}
+            >
+              <Tab label="Learning Path" />
+              <Tab label="Vocabulary" />
+              <Tab label="Kanji" />
+              <Tab label="Grammar" />
+            </Tabs>
+            {selectionButtons}
+          </Box>
 
-            <TabPanel value={currentTab} index={0}>
-              <LearningPath />
-            </TabPanel>
-            <TabPanel value={currentTab} index={1}>
-              <VocabularyGrid />
-            </TabPanel>
-            <TabPanel value={currentTab} index={2}>
-              <KanjiGrid />
-            </TabPanel>
-            <TabPanel value={currentTab} index={3}>
-              <GrammarGrid />
-            </TabPanel>
+          <TabPanel value={currentTab} index={0}>
+            <LearningPath />
+          </TabPanel>
+          <TabPanel value={currentTab} index={1}>
+            <VocabularyGrid renderSelectionButtons={handleSelectionButtons} />
+          </TabPanel>
+          <TabPanel value={currentTab} index={2}>
+            <KanjiGrid renderSelectionButtons={handleSelectionButtons} />
+          </TabPanel>
+          <TabPanel value={currentTab} index={3}>
+            <GrammarGrid renderSelectionButtons={handleSelectionButtons} />
+          </TabPanel>
         </Box>
       </Container>
-    </div>
+    </DashboardLayout>
   );
 }
