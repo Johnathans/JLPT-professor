@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback, memo, ReactElement } from 'react';
+import VirtualizedTable from './VirtualizedTable';
 import StudyModeModal from './StudyModeModal';
 import {
   Box,
@@ -39,6 +40,13 @@ interface ReviewData {
   grammar: ReviewItem[];
 }
 
+interface ReviewData {
+  vocabulary: ReviewItem[];
+  kanji: ReviewItem[];
+  grammar: ReviewItem[];
+  [key: number]: ReviewItem[];
+}
+
 interface ReviewTableProps {
   data: ReviewData;
   filter: string;
@@ -63,431 +71,247 @@ const getStatusColor = (status: string) => {
   }
 };
 
-const ReviewTable: React.FC<ReviewTableProps> = ({ 
+const ReviewTable = memo(({ 
   data, 
   filter, 
   onFilterChange, 
   onSelectionChange,
   onMarkAsKnown,
   onStartReview
-}) => {
+}: ReviewTableProps): ReactElement => {
   const [studyModalOpen, setStudyModalOpen] = useState(false);
   const [currentTab, setCurrentTab] = useState(0);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedItems, setSelectedItems] = useState<{ [key: string]: boolean }>({});
 
-  const handleFilterClick = (event: React.MouseEvent<HTMLElement>) => {
+  // Map currentTab index to data key
+  const tabToKey = ['vocabulary', 'kanji', 'grammar'] as const;
+  const currentData = data[tabToKey[currentTab]] || [];
+
+  // Memoize selected items count
+  const selectedCount = useMemo(() => Object.keys(selectedItems).length, [selectedItems]);
+
+  const handleFilterClick = useCallback((event: React.MouseEvent<HTMLElement>): void => {
     setAnchorEl(event.currentTarget);
-  };
+  }, []);
 
-  const handleFilterClose = () => {
+  const handleFilterClose = useCallback((): void => {
     setAnchorEl(null);
-  };
+  }, []);
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = useCallback((event: React.SyntheticEvent, newValue: number): void => {
     setCurrentTab(newValue);
-  };
+  }, []);
 
-  const getFilteredData = (items: ReviewItem[]) => {
+  const getFilteredData = useCallback((items: ReviewItem[]) => {
     if (filter === 'all') return items;
     return items.filter(item => item.status === filter);
-  };
+  }, [filter]);
 
-  const renderTableContent = (items: ReviewItem[]) => {
-    const filteredItems = getFilteredData(items);
+  const renderTableContent = useCallback((items: ReviewItem[]): ReactElement => {
+    const filteredItems = useMemo(() => getFilteredData(items), [items, getFilteredData]);
+    
+    const handleItemSelect = useCallback((id: string, checked: boolean) => {
+      const newSelected = { ...selectedItems };
+      if (checked) {
+        newSelected[id] = true;
+      } else {
+        delete newSelected[id];
+      }
+      setSelectedItems(newSelected);
+      onSelectionChange?.(Object.keys(newSelected));
+    }, [selectedItems, onSelectionChange]);
+
+    const handleSelectAll = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+      const newSelected = event.target.checked
+        ? filteredItems.reduce((acc, item) => ({ ...acc, [item.id]: true }), {})
+        : {};
+      setSelectedItems(newSelected);
+      onSelectionChange?.(Object.keys(newSelected));
+    }, [filteredItems, onSelectionChange]);
     
     return (
-      <TableContainer 
-        component={Paper} 
-        elevation={0}
-        sx={{ 
-          border: '1px solid',
-          borderColor: '#E8F9FD',
-          borderRadius: 2,
-          height: 'calc(100vh - 300px)',
-          overflow: 'auto'
-        }}
-      >
-        <Table stickyHeader>
-          <TableHead>
-            <TableRow>
-              <TableCell padding="checkbox" sx={{ bgcolor: '#f8f9fa' }}>
-                <Checkbox
-                  indeterminate={Object.keys(selectedItems).length > 0 && 
-                    Object.keys(selectedItems).length < filteredItems.length}
-                  checked={filteredItems.length > 0 && 
-                    Object.keys(selectedItems).length === filteredItems.length}
-                  onChange={(event) => {
-                    const newSelected = event.target.checked
-                      ? filteredItems.reduce((acc, item) => ({ ...acc, [item.id]: true }), {})
-                      : {};
-                    setSelectedItems(newSelected);
-                    onSelectionChange?.(Object.keys(newSelected));
-                  }}
-                  sx={{
-                    color: '#E8F9FD',
-                    '&.Mui-checked': {
-                      color: '#59CE8F',
-                    },
-                    '&.MuiCheckbox-indeterminate': {
-                      color: '#59CE8F',
-                    }
-                  }}
-                />
-              </TableCell>
-              <TableCell sx={{ fontWeight: 600, bgcolor: '#f8f9fa' }}>Character/Pattern</TableCell>
-              <TableCell sx={{ fontWeight: 600, bgcolor: '#f8f9fa' }}>Reading/Meaning</TableCell>
-              <TableCell sx={{ fontWeight: 600, bgcolor: '#f8f9fa' }}>Status</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filteredItems.map((item) => {
-              const statusColor = getStatusColor(item.status);
-              return (
-                <TableRow 
-                  key={item.id}
-                  sx={{ 
-                    '&:hover': { 
-                      bgcolor: 'rgba(0, 0, 0, 0.02)'
-                    },
-                    cursor: 'pointer'
-                  }}
-                  onClick={() => {
-                    const newSelected = { ...selectedItems };
-                    if (newSelected[item.id]) {
-                      delete newSelected[item.id];
-                    } else {
-                      newSelected[item.id] = true;
-                    }
-                    setSelectedItems(newSelected);
-                    onSelectionChange?.(Object.keys(newSelected));
-                  }}
-                >
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={!!selectedItems[item.id]}
-                      sx={{
-                        color: '#E8F9FD',
-                        '&.Mui-checked': {
-                          color: '#59CE8F',
-                        }
-                      }}
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Typography 
-                      sx={{ 
-                        fontSize: currentTab === 1 ? '1.5rem' : '1rem',
-                        fontWeight: 500
-                      }}
-                    >
-                      {item.primary}
-                    </Typography>
-                    {item.secondary && (
-                      <Typography variant="body2" color="textSecondary">
-                        {item.secondary}
-                      </Typography>
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    {item.meanings.join(', ')}
-                  </TableCell>
-                  <TableCell>
-                    <Chip 
-                      label={item.status}
-                      size="small"
-                      sx={{
-                        bgcolor: statusColor.bg,
-                        color: statusColor.text,
-                        fontWeight: 500,
-                        textTransform: 'capitalize'
-                      }}
-                    />
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <>
+        <Paper 
+          elevation={0}
+          sx={{ 
+            border: '1px solid #E8F9FD',
+            borderRadius: 2,
+            height: 'calc(100vh - 300px)',
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden'
+          }}
+        >
+          <Box sx={{ 
+            display: 'flex', 
+            alignItems: 'center',
+            p: 1, 
+            borderBottom: '1px solid #E8F9FD',
+            bgcolor: '#f8f9fa'
+          }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flex: 1 }}>
+              <Checkbox
+                indeterminate={selectedCount > 0 && selectedCount < filteredItems.length}
+                checked={selectedCount > 0 && selectedCount === filteredItems.length}
+                onChange={handleSelectAll}
+                sx={{
+                  color: '#757575',
+                  '&.Mui-checked, &.MuiCheckbox-indeterminate': {
+                    color: '#59CE8F',
+                  },
+                  '&:hover': {
+                    bgcolor: 'rgba(89, 206, 143, 0.08)'
+                  }
+                }}
+              />
+              <Box sx={{ flex: '0 0 200px', fontWeight: 600 }}>Character/Pattern</Box>
+              <Box sx={{ flex: 1, fontWeight: 600 }}>Reading/Meaning</Box>
+              <Box sx={{ flex: '0 0 120px', fontWeight: 600 }}>Status</Box>
+              <IconButton onClick={handleFilterClick}>
+                <FilterList />
+              </IconButton>
+            </Box>
+          </Box>
+          
+          <VirtualizedTable
+            items={filteredItems}
+            selectedItems={selectedItems}
+            onItemSelect={handleItemSelect}
+            getStatusColor={getStatusColor}
+          />
+        </Paper>
+        {selectedCount > 0 && (
+          <Box sx={{ 
+            display: 'flex', 
+            gap: 2, 
+            mt: 3,
+            mb: 2,
+            justifyContent: 'center'
+          }}>
+            <Button
+              variant="contained"
+              onClick={() => onMarkAsKnown?.(Object.keys(selectedItems))}
+              startIcon={<CheckCircleOutline />}
+              size="large"
+              sx={{
+                minWidth: '160px',
+                bgcolor: '#757575',
+                '&:hover': {
+                  bgcolor: '#616161'
+                }
+              }}
+            >
+              Mark as Known
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() => setStudyModalOpen(true)}
+              startIcon={<PlayArrow />}
+              size="large"
+              sx={{
+                minWidth: '160px',
+                bgcolor: '#59CE8F',
+                '&:hover': {
+                  bgcolor: '#4CAF50'
+                }
+              }}
+            >
+              Start Review
+            </Button>
+          </Box>
+        )}
+      </>
     );
-  };
+  }, [filter, selectedItems, selectedCount, onSelectionChange, getFilteredData, onMarkAsKnown, handleFilterClick, setStudyModalOpen]);
 
-  const filterOptions = [
+  const filterOptions = useMemo(() => [
     { value: 'all', label: 'All' },
     { value: 'new', label: 'New' },
     { value: 'learning', label: 'Learning' },
     { value: 'learned', label: 'Learned' },
     { value: 'mastered', label: 'Mastered' }
-  ];
+  ], []);
+
+  const statusFilters = useMemo(() => [
+    { value: 'all', label: 'All' },
+    { value: 'new', label: 'New' },
+    { value: 'learning', label: 'Learning' },
+    { value: 'learned', label: 'Learned' },
+    { value: 'mastered', label: 'Mastered' }
+  ], []);
+
+  const handleFilterChange = useCallback((value: string): void => {
+    onFilterChange(value);
+    handleFilterClose();
+  }, [onFilterChange, handleFilterClose]);
 
   return (
-    <Box>
-      <Box sx={{ 
-        display: 'flex', 
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        mb: 3
-      }}>
-        <Tabs 
-          value={currentTab} 
-          onChange={handleTabChange}
-          variant="fullWidth"
-          sx={{
-            minHeight: 48,
-            flex: 1,
-            mr: 2,
-            '& .MuiTabs-indicator': {
-              backgroundColor: '#59CE8F',
-              height: 3,
-              borderRadius: '3px 3px 0 0'
+    <Box sx={{ width: '100%' }}>
+
+      <Tabs
+        value={currentTab}
+        onChange={handleTabChange}
+        sx={{
+          mb: 2,
+          '& .MuiTabs-indicator': {
+            backgroundColor: '#59CE8F',
+          },
+          '& .MuiTab-root': {
+            color: '#424242',
+            fontSize: '1.2rem',
+            fontWeight: 700,
+            '&.Mui-selected': {
+              color: '#59CE8F',
+              fontWeight: 700,
             },
-            '& .MuiTab-root': {
-              textTransform: 'none',
-              fontWeight: 600,
-              fontSize: '0.95rem',
-              color: '#666666',
-              minHeight: 48,
-              padding: '12px 24px',
-              '&:hover': {
-                color: '#59CE8F',
-                opacity: 1
-              },
-              '&.Mui-selected': {
-                color: '#59CE8F'
-              }
-            }
-          }}
-        >
-          <Tab 
-            label={
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <span>Vocabulary</span>
-                <Chip 
-                  label={data.vocabulary.length} 
-                  size="small"
-                  sx={{ 
-                    height: 20,
-                    fontSize: '0.75rem',
-                    bgcolor: currentTab === 0 ? '#59CE8F' : '#E8F9FD',
-                    color: currentTab === 0 ? 'white' : '#666666',
-                    '& .MuiChip-label': {
-                      px: 1
-                    }
-                  }}
-                />
-              </Box>
-            } 
-          />
-          <Tab 
-            label={
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <span>Kanji</span>
-                <Chip 
-                  label={data.kanji.length} 
-                  size="small"
-                  sx={{ 
-                    height: 20,
-                    fontSize: '0.75rem',
-                    bgcolor: currentTab === 1 ? '#59CE8F' : '#E8F9FD',
-                    color: currentTab === 1 ? 'white' : '#666666',
-                    '& .MuiChip-label': {
-                      px: 1
-                    }
-                  }}
-                />
-              </Box>
-            } 
-          />
-          <Tab 
-            label={
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <span>Grammar</span>
-                <Chip 
-                  label={data.grammar.length} 
-                  size="small"
-                  sx={{ 
-                    height: 20,
-                    fontSize: '0.75rem',
-                    bgcolor: currentTab === 2 ? '#59CE8F' : '#E8F9FD',
-                    color: currentTab === 2 ? 'white' : '#666666',
-                    '& .MuiChip-label': {
-                      px: 1
-                    }
-                  }}
-                />
-              </Box>
-            } 
-          />
-        </Tabs>
-        <Box sx={{ position: 'relative' }}>
-          <IconButton
-            onClick={handleFilterClick}
-            size="small"
-            sx={{
-              ml: 2,
-              border: '1px solid',
-              borderColor: filter === 'all' ? '#E8F9FD' : '#59CE8F',
-              p: 1,
-              color: filter === 'all' ? '#666666' : '#59CE8F',
-              '&:hover': {
-                borderColor: '#59CE8F',
-                bgcolor: 'rgba(89, 206, 143, 0.04)'
-              }
+          },
+        }}
+      >
+        <Tab label="Vocabulary" />
+        <Tab label="Kanji" />
+        <Tab label="Grammar" />
+      </Tabs>
+
+      {currentData.length > 0 ? renderTableContent(currentData) : (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+          <Typography variant="body1" color="text.secondary">
+            No data available for this section
+          </Typography>
+        </Box>
+      )}
+
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleFilterClose}
+      >
+        {filterOptions.map(({ value, label }) => (
+          <MenuItem
+            key={value}
+            onClick={() => {
+              handleFilterChange(value);
+              handleFilterClose();
             }}
           >
-            <FilterList fontSize="small" />
-          </IconButton>
-          {filter !== 'all' && (
-            <Box
-              sx={{
-                width: 8,
-                height: 8,
-                bgcolor: '#59CE8F',
-                borderRadius: '50%',
-                position: 'absolute',
-                top: 0,
-                right: 0,
-                transform: 'translate(25%, -25%)',
-                border: '2px solid white'
-              }}
-            />
-          )}
-        </Box>
-        <Menu
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={handleFilterClose}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          PaperProps={{
-            elevation: 0,
-            sx: {
-              mt: 1,
-              borderRadius: 2,
-              border: '1px solid',
-              borderColor: '#E8F9FD',
-              '& .MuiMenuItem-root': {
-                px: 2,
-                py: 1,
-                borderRadius: 1,
-                mx: 0.5,
-                my: 0.25,
-                '&:hover': {
-                  bgcolor: 'rgba(89, 206, 143, 0.04)'
-                }
-              }
-            },
-          }}
-        >
-          {filterOptions.map((option) => (
-            <MenuItem 
-              key={option.value} 
-              selected={filter === option.value}
-              onClick={() => {
-                handleFilterClose();
-                onFilterChange(option.value);
-              }}
-            >
-              <ListItemIcon sx={{ minWidth: 36 }}>
-                {filter === option.value && <Check sx={{ color: '#59CE8F' }} />}
-              </ListItemIcon>
-              <ListItemText>{option.label}</ListItemText>
-            </MenuItem>
-          ))}
-        </Menu>
-      </Box>
+            <ListItemIcon>
+              {filter === value && <Check sx={{ color: '#59CE8F' }} />}
+            </ListItemIcon>
+            <ListItemText primary={label} />
+          </MenuItem>
+        ))}
+      </Menu>
 
-      <Box sx={{ position: 'relative', height: 'calc(100vh - 300px)' }}>
-        <Box hidden={currentTab !== 0}>
-          {renderTableContent(data.vocabulary)}
-        </Box>
-        <Box hidden={currentTab !== 1}>
-          {renderTableContent(data.kanji)}
-        </Box>
-        <Box hidden={currentTab !== 2}>
-          {renderTableContent(data.grammar)}
-        </Box>
-
-        {/* Action Buttons */}
-        {Object.keys(selectedItems).length > 0 && (
-          <Box
-            sx={{
-              position: 'sticky',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              p: 2,
-              bgcolor: 'rgba(255, 255, 255, 0.9)',
-              backdropFilter: 'blur(8px)',
-              borderTop: '1px solid',
-              borderColor: '#E8F9FD',
-              display: 'flex',
-              gap: 2,
-              justifyContent: 'center',
-              zIndex: 1
-            }}
-          >
-            <Button
-              variant="outlined"
-              size="large"
-              onClick={() => onMarkAsKnown?.(Object.keys(selectedItems))}
-              sx={{
-                flex: 1,
-                maxWidth: 300,
-                textTransform: 'none',
-                borderColor: '#59CE8F',
-                color: '#59CE8F',
-                '&:hover': {
-                  borderColor: '#4AB57E',
-                  bgcolor: 'rgba(89, 206, 143, 0.04)'
-                }
-              }}
-            >
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <CheckCircleOutline />
-                Mark as Known
-              </Box>
-            </Button>
-            <Button
-              variant="contained"
-              size="large"
-              onClick={() => setStudyModalOpen(true)}
-              sx={{
-                flex: 1,
-                maxWidth: 300,
-                textTransform: 'none',
-                bgcolor: '#59CE8F',
-                color: 'white',
-                '&:hover': {
-                  bgcolor: '#4AB57E'
-                }
-              }}
-            >
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <PlayArrow />
-                Start Review
-              </Box>
-            </Button>
-          </Box>
-        )}
-      </Box>
       <StudyModeModal
         open={studyModalOpen}
         onClose={() => setStudyModalOpen(false)}
-        onModeSelect={(mode) => {
+        onModeSelect={(mode: string) => {
           setStudyModalOpen(false);
           onStartReview?.(Object.keys(selectedItems));
         }}
       />
     </Box>
   );
-};
+});
 
 export default ReviewTable;

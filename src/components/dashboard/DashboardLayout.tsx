@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { Box, Drawer, AppBar, Toolbar, IconButton, Badge, Avatar, Tooltip, ToggleButtonGroup, ToggleButton, useMediaQuery, useTheme, Typography, Menu, MenuItem } from '@mui/material';
-import { Book, BarChart2, User, Home, BookOpen, RefreshCw, Settings, Menu as MenuIcon, Award } from 'react-feather';
+import { Book, BarChart2, User, Home, BookOpen, RefreshCw, Settings, Menu as MenuIcon } from 'react-feather';
+import { LocalFireDepartment } from '@mui/icons-material';
 import StreakModal from './StreakModal';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -57,7 +58,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onJlptLevel
           {isMobile && (
             <IconButton
               onClick={() => setMobileOpen(!mobileOpen)}
-              sx={{ mr: 2, color: '#666666' }}
+              sx={{ mr: 2, color: '#000000' }}
             >
               <MenuIcon />
             </IconButton>
@@ -77,7 +78,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onJlptLevel
                 height: '40px',
                 '& .MuiToggleButton-root': {
                   border: '1px solid #E8F9FD',
-                  color: '#666666',
+                  color: '#000000',
                   fontFamily: 'Poppins',
                   fontWeight: 500,
                   px: 2,
@@ -98,11 +99,11 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onJlptLevel
               }}
             >
               <ToggleButton value="study" aria-label="study mode">
-                <BookOpen size={18} />
+                <BookOpen size={18} style={{ color: '#000000' }} />
                 Study
               </ToggleButton>
               <ToggleButton value="review" aria-label="review mode">
-                <RefreshCw size={18} />
+                <RefreshCw size={18} style={{ color: '#000000' }} />
                 Review
               </ToggleButton>
             </ToggleButtonGroup>
@@ -138,23 +139,24 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onJlptLevel
             <IconButton 
               size="large" 
               onClick={() => setStreakModalOpen(true)}
-              sx={{ 
-                color: '#666666',
-                '&:hover': { color: '#FF8C42' }
-              }}
+              sx={{ color: '#000000' }}
             >
               <Badge 
-                badgeContent={7} 
+                badgeContent={5} 
                 color="primary" 
                 sx={{ 
                   '& .MuiBadge-badge': { 
-                    bgcolor: '#FF8C42',
-                    fontWeight: 600,
-                    fontSize: '0.75rem'
+                    bgcolor: '#59CE8F',
+                    color: '#FFFFFF',
                   } 
                 }}
               >
-                <Award size={22} />
+                <LocalFireDepartment 
+                  sx={{ 
+                    fontSize: 28,
+                    color: '#000000'
+                  }} 
+                />
               </Badge>
             </IconButton>
           </Tooltip>
@@ -181,12 +183,13 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onJlptLevel
           </Tooltip>
 
           <Tooltip title="Profile">
-            <IconButton 
-              size="large" 
-              sx={{ 
-                ml: 1,
-                bgcolor: '#E8F9FD',
-                '&:hover': { bgcolor: '#59CE8F' }
+            <IconButton
+              size="large"
+              sx={{
+                bgcolor: '#F5F5F5',
+                '&:hover': {
+                  bgcolor: '#E0E0E0'
+                }
               }}
             >
               <User style={{ color: '#000000' }} />
@@ -254,9 +257,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onJlptLevel
               className="level-text"
               sx={{ 
                 fontSize: '2.5rem',
-                fontWeight: 700,
+                fontWeight: 800,
                 letterSpacing: '-0.02em',
-                color: '#333',
+                color: '#000000',
                 lineHeight: 1,
                 fontFamily: 'Inter, system-ui, -apple-system, sans-serif'
               }}
