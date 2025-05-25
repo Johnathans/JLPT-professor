@@ -23,7 +23,7 @@ import {
   Checkbox,
   IconButton
 } from '@mui/material';
-import { FilterList, Check } from '@mui/icons-material';
+import { FilterList, Check, PlayArrow, CheckCircleOutline } from '@mui/icons-material';
 
 interface ReviewItem {
   id: string;
@@ -450,7 +450,10 @@ const ReviewTable: React.FC<ReviewTableProps> = ({
                 }
               }}
             >
-              Mark as Known
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <CheckCircleOutline />
+                Mark as Known
+              </Box>
             </Button>
             <Button
               variant="contained"
@@ -467,7 +470,10 @@ const ReviewTable: React.FC<ReviewTableProps> = ({
                 }
               }}
             >
-              Start Review
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <PlayArrow />
+                Start Review
+              </Box>
             </Button>
           </Box>
         )}
