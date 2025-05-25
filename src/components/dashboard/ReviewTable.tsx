@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import StudyModeModal from './StudyModeModal';
 import {
   Box,
   Table,
@@ -70,6 +71,7 @@ const ReviewTable: React.FC<ReviewTableProps> = ({
   onMarkAsKnown,
   onStartReview
 }) => {
+  const [studyModalOpen, setStudyModalOpen] = useState(false);
   const [currentTab, setCurrentTab] = useState(0);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedItems, setSelectedItems] = useState<{ [key: string]: boolean }>({});
@@ -453,7 +455,7 @@ const ReviewTable: React.FC<ReviewTableProps> = ({
             <Button
               variant="contained"
               size="large"
-              onClick={() => onStartReview?.(Object.keys(selectedItems))}
+              onClick={() => setStudyModalOpen(true)}
               sx={{
                 flex: 1,
                 maxWidth: 300,
@@ -470,6 +472,14 @@ const ReviewTable: React.FC<ReviewTableProps> = ({
           </Box>
         )}
       </Box>
+      <StudyModeModal
+        open={studyModalOpen}
+        onClose={() => setStudyModalOpen(false)}
+        onModeSelect={(mode) => {
+          setStudyModalOpen(false);
+          onStartReview?.(Object.keys(selectedItems));
+        }}
+      />
     </Box>
   );
 };
