@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Box, Grid, Card, Typography, List, ToggleButtonGroup, ToggleButton } from '@mui/material';
+import { Box, Grid } from '@mui/material';
+import ReviewTable from '@/components/dashboard/ReviewTable';
 import ReviewListItem from '@/components/dashboard/ReviewListItem';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import UnitBlock from '@/components/dashboard/UnitBlock';
@@ -16,25 +17,62 @@ const units = [
     title: 'Basic Greetings',
     imageUrl: '/images/greetings.svg',
     wordCount: 25,
-    kanjiCount: 10
+    kanjiCount: 10,
+    hasStarted: true,
+    words: [
+      { id: '1', kanji: 'おはよう', kana: 'おはよう', meaning: 'Good morning' },
+      { id: '2', kanji: 'こんにちは', kana: 'こんにちは', meaning: 'Hello/Good afternoon' },
+      { id: '3', kanji: 'こんばんは', kana: 'こんばんは', meaning: 'Good evening' },
+      { id: '4', kanji: 'さようなら', kana: 'さようなら', meaning: 'Goodbye' },
+      { id: '5', kanji: 'ありがとう', kana: 'ありがとう', meaning: 'Thank you' },
+      { id: '6', kanji: '初めまして', kana: 'はじめまして', meaning: 'Nice to meet you' },
+      { id: '7', kanji: 'お願いします', kana: 'おねがいします', meaning: 'Please' },
+      { id: '8', kanji: '失礼します', kana: 'しつれいします', meaning: 'Excuse me' }
+    ]
   },
   {
     title: 'Daily Life',
     imageUrl: '/images/daily-life.svg',
     wordCount: 40,
-    kanjiCount: 15
+    kanjiCount: 15,
+    hasStarted: false,
+    words: [
+      { id: '9', kanji: '家', kana: 'いえ', meaning: 'House/Home' },
+      { id: '10', kanji: '学校', kana: 'がっこう', meaning: 'School' },
+      { id: '11', kanji: '仕事', kana: 'しごと', meaning: 'Work/Job' },
+      { id: '12', kanji: '時間', kana: 'じかん', meaning: 'Time' },
+      { id: '13', kanji: '電車', kana: 'でんしゃ', meaning: 'Train' },
+      { id: '14', kanji: '友達', kana: 'ともだち', meaning: 'Friend' }
+    ]
   },
   {
     title: 'Travel & Transport',
     imageUrl: '/images/kim-deokryul-4Jlzdmqg-Pc-unsplash.jpg',
     wordCount: 35,
-    kanjiCount: 12
+    kanjiCount: 12,
+    hasStarted: false,
+    words: [
+      { id: '15', kanji: '駅', kana: 'えき', meaning: 'Station' },
+      { id: '16', kanji: '切符', kana: 'きっぷ', meaning: 'Ticket' },
+      { id: '17', kanji: '地下鉄', kana: 'ちかてつ', meaning: 'Subway' },
+      { id: '18', kanji: 'バス', kana: 'ばす', meaning: 'Bus' },
+      { id: '19', kanji: '空港', kana: 'くうこう', meaning: 'Airport' }
+    ]
   },
   {
     title: 'Food & Dining',
     imageUrl: '/images/blocks/4306483_asian_bowl_chopsticks_food_noodle_icon.png',
     wordCount: 30,
-    kanjiCount: 8
+    kanjiCount: 8,
+    hasStarted: false,
+    words: [
+      { id: '20', kanji: '食べ物', kana: 'たべもの', meaning: 'Food' },
+      { id: '21', kanji: '飲み物', kana: 'のみもの', meaning: 'Drink' },
+      { id: '22', kanji: 'レストラン', kana: 'れすとらん', meaning: 'Restaurant' },
+      { id: '23', kanji: '朝ご飯', kana: 'あさごはん', meaning: 'Breakfast' },
+      { id: '24', kanji: '昼ご飯', kana: 'ひるごはん', meaning: 'Lunch' },
+      { id: '25', kanji: '晩ご飯', kana: 'ばんごはん', meaning: 'Dinner' }
+    ]
   }
 ];
 
@@ -42,7 +80,7 @@ export default function DashboardPage() {
   const [mode, setMode] = React.useState('study');
   const [filter, setFilter] = React.useState('all');
   const [selectedLevel, setSelectedLevel] = React.useState('n5');
-  const [selectedItems, setSelectedItems] = React.useState<{[key: string]: boolean}>({});
+  const [selectedItems, setSelectedItems] = React.useState<string[]>([]);
 
   const { getLevelData, isLoading } = useJlptData('n5');
   const levelData = getLevelData(selectedLevel as 'n5' | 'n4' | 'n3' | 'n2' | 'n1');
@@ -53,14 +91,12 @@ export default function DashboardPage() {
     }
   };
 
-  const handleFilterChange = (event: React.MouseEvent<HTMLElement>, newFilter: string) => {
-    if (newFilter !== null) {
-      setFilter(newFilter);
-    }
+  const handleFilterChange = (newFilter: string) => {
+    setFilter(newFilter);
   };
 
-  const handleStart = (unitTitle: string) => {
-    console.log(`Starting unit: ${unitTitle}`);
+  const handleStart = (unitTitle: string, knownWordIds: string[]) => {
+    console.log(`Starting unit: ${unitTitle} with known words:`, knownWordIds);
   };
 
   const handleReview = (unitTitle: string) => {
@@ -69,16 +105,21 @@ export default function DashboardPage() {
 
   const handleJlptLevelChange = (level: string) => {
     setSelectedLevel(level);
-    setSelectedItems({}); // Reset selections when level changes
+    setSelectedItems([]); // Reset selections when level changes
   };
 
-  const handleItemToggle = React.useCallback((id: string) => {
-    requestAnimationFrame(() => {
-      setSelectedItems(prev => ({
-        ...prev,
-        [id]: !prev[id]
-      }));
-    });
+  const handleSelectionChange = React.useCallback((selectedIds: string[]) => {
+    setSelectedItems(selectedIds);
+  }, []);
+
+  const handleMarkAsKnown = React.useCallback((selectedIds: string[]) => {
+    // TODO: Update the status of these items to 'mastered'
+    console.log('Mark as known:', selectedIds);
+  }, []);
+
+  const handleStartReview = React.useCallback((selectedIds: string[]) => {
+    // TODO: Navigate to review mode with these items
+    console.log('Start review:', selectedIds);
   }, []);
 
   return (
@@ -88,49 +129,7 @@ export default function DashboardPage() {
       initialMode={mode}
     >
       <Box sx={{ p: 3, backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
-        {/* Filter Buttons (Review Mode Only) */}
-        {mode === 'review' && (
-          <Box sx={{ mb: 3, display: 'flex', justifyContent: 'center' }}>
-            <ToggleButtonGroup
-              value={filter}
-              exclusive
-              onChange={handleFilterChange}
-              aria-label="review filter"
-              sx={{
-                backgroundColor: '#F5F5F5',
-                p: '4px',
-                borderRadius: '12px',
-                gap: '8px',
-                '& .MuiToggleButton-root': {
-                  border: 'none',
-                  borderRadius: '8px !important',
-                  px: 3,
-                  py: 1,
-                  fontSize: '0.875rem',
-                  fontWeight: 500,
-                  color: '#666666',
-                  textTransform: 'none',
-                  '&.Mui-selected': {
-                    backgroundColor: '#FFFFFF',
-                    color: '#000000',
-                    boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.1)',
-                    '&:hover': {
-                      backgroundColor: '#FFFFFF',
-                    }
-                  },
-                  '&:hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.5)'
-                  }
-                }
-              }}
-            >
-              <ToggleButton value="new">New</ToggleButton>
-              <ToggleButton value="learning">Learning</ToggleButton>
-              <ToggleButton value="learned">Learned</ToggleButton>
-              <ToggleButton value="mastered">Mastered</ToggleButton>
-            </ToggleButtonGroup>
-          </Box>
-        )}
+
 
         {mode === 'study' ? (
           <Grid container spacing={3}>
@@ -138,69 +137,44 @@ export default function DashboardPage() {
               <Grid item xs={12} sm={6} md={4} key={unit.title}>
                 <UnitBlock
                   {...unit}
-                  onStart={() => handleStart(unit.title)}
-                  onReview={() => handleReview(unit.title)}
+                  onStart={(knownWordIds) => handleStart(unit.title, knownWordIds)}
                 />
               </Grid>
             ))}
           </Grid>
         ) : (
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={4}>
-              <Card sx={{ p: 3, height: '100%', borderRadius: 2, border: '1px solid', borderColor: '#E8F9FD' }}>
-                <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>Vocabulary</Typography>
-                <List sx={{ maxHeight: 400, overflow: 'auto' }}>
-                  {levelData.vocabulary.map((item, index) => (
-                    <ReviewListItem
-                      key={index}
-                      id={`vocab-${index}`}
-                      primary={item.kanji || item.kana}
-                      secondary={item.meanings.join(', ')}
-                      isSelected={selectedItems[`vocab-${index}`] || false}
-                      onToggle={handleItemToggle}
-                      primaryStyle={{ fontWeight: 500 }}
-                    />
-                  ))}
-                </List>
-              </Card>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Card sx={{ p: 3, height: '100%', borderRadius: 2, border: '1px solid', borderColor: '#E8F9FD' }}>
-                <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>Kanji</Typography>
-                <List sx={{ maxHeight: 400, overflow: 'auto' }}>
-                  {levelData.kanji.map((item, index) => (
-                    <ReviewListItem
-                      key={index}
-                      id={`kanji-${index}`}
-                      primary={item.character}
-                      secondary={item.meanings.join(', ')}
-                      isSelected={selectedItems[`kanji-${index}`] || false}
-                      onToggle={handleItemToggle}
-                      primaryStyle={KANJI_STYLE}
-                    />
-                  ))}
-                </List>
-              </Card>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Card sx={{ p: 3, height: '100%', borderRadius: 2, border: '1px solid', borderColor: '#E8F9FD' }}>
-                <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>Grammar</Typography>
-                <List sx={{ maxHeight: 400, overflow: 'auto' }}>
-                  {levelData.grammar.map((item, index) => (
-                    <ReviewListItem
-                      key={index}
-                      id={`grammar-${index}`}
-                      primary={item.pattern}
-                      secondary={item.kana}
-                      isSelected={selectedItems[`grammar-${index}`] || false}
-                      onToggle={handleItemToggle}
-                      primaryStyle={{ fontWeight: 500 }}
-                    />
-                  ))}
-                </List>
-              </Card>
-            </Grid>
-          </Grid>
+          <Box sx={{ mt: 2 }}>
+            <ReviewTable
+              data={{
+                vocabulary: levelData.vocabulary.map((item, index) => ({
+                  id: `vocab-${index}`,
+                  primary: item.kanji || item.kana,
+                  secondary: item.kanji ? item.kana : undefined,
+                  meanings: item.meanings,
+                  status: 'new' // This should come from your data
+                })),
+                kanji: levelData.kanji.map((item, index) => ({
+                  id: `kanji-${index}`,
+                  primary: item.character,
+                  secondary: item.onyomi.concat(item.kunyomi).join(', '),
+                  meanings: item.meanings,
+                  status: 'new' // This should come from your data
+                })),
+                grammar: levelData.grammar.map((item, index) => ({
+                  id: `grammar-${index}`,
+                  primary: item.pattern,
+                  secondary: item.kana,
+                  meanings: [item.kana],
+                  status: 'new' // This should come from your data
+                }))
+              }}
+              filter={filter}
+              onFilterChange={handleFilterChange}
+              onSelectionChange={handleSelectionChange}
+              onMarkAsKnown={handleMarkAsKnown}
+              onStartReview={handleStartReview}
+            />
+          </Box>
         )}
       </Box>
     </DashboardLayout>
