@@ -47,7 +47,7 @@ export default function DashboardPage() {
   const { getLevelData, isLoading } = useJlptData('n5');
   const levelData = getLevelData(selectedLevel as 'n5' | 'n4' | 'n3' | 'n2' | 'n1');
 
-  const handleModeChange = (event: React.MouseEvent<HTMLElement>, newMode: string) => {
+  const handleModeChange = (newMode: string) => {
     if (newMode !== null) {
       setMode(newMode);
     }
@@ -82,57 +82,12 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <DashboardLayout onJlptLevelChange={handleJlptLevelChange}>
+    <DashboardLayout 
+      onJlptLevelChange={handleJlptLevelChange}
+      onModeChange={handleModeChange}
+      initialMode={mode}
+    >
       <Box sx={{ p: 3, backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
-        {/* Mode Toggle */}
-        <Box sx={{ mb: 4, backgroundColor: '#F5F5F5', p: 1, borderRadius: 2 }}>
-          <ToggleButtonGroup
-            value={mode}
-            exclusive
-            onChange={handleModeChange}
-            aria-label="study mode"
-            sx={{
-              display: 'flex',
-              gap: '8px',
-              width: { xs: '100%', sm: 'auto' },
-              height: '48px',
-              '& .MuiToggleButton-root': {
-                border: 'none',
-                borderRadius: '12px !important',
-                px: 4,
-                flex: { xs: 1, sm: 'none' },
-                minWidth: { xs: 0, sm: '120px' },
-                fontSize: '1.25rem',
-                fontWeight: 500,
-                color: '#666666',
-                fontFamily: 'Inter, system-ui, -apple-system, sans-serif',
-                textTransform: 'none',
-                letterSpacing: '-0.01em',
-                transition: 'all 0.2s ease',
-                '&.Mui-selected': {
-                  backgroundColor: '#FFFFFF',
-                  color: '#000000',
-                  fontWeight: 600,
-                  boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.1)',
-                  '&:hover': {
-                    backgroundColor: '#FFFFFF',
-                  }
-                },
-                '&:hover': {
-                  backgroundColor: 'rgba(255, 255, 255, 0.5)'
-                }
-              }
-            }}
-          >
-            <ToggleButton value="study" aria-label="study mode">
-              Study
-            </ToggleButton>
-            <ToggleButton value="review" aria-label="review mode">
-              Review
-            </ToggleButton>
-          </ToggleButtonGroup>
-        </Box>
-
         {/* Filter Buttons (Review Mode Only) */}
         {mode === 'review' && (
           <Box sx={{ mb: 3, display: 'flex', justifyContent: 'center' }}>
@@ -180,7 +135,7 @@ export default function DashboardPage() {
         {mode === 'study' ? (
           <Grid container spacing={3}>
             {units.map((unit, index) => (
-              <Grid item xs={12} sm={6} md={3} key={unit.title}>
+              <Grid item xs={12} sm={6} md={4} key={unit.title}>
                 <UnitBlock
                   {...unit}
                   onStart={() => handleStart(unit.title)}
