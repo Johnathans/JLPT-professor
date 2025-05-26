@@ -79,7 +79,7 @@ const units = [
 
 export default function DashboardPage() {
   const [mode, setMode] = React.useState('study');
-  const [filter, setFilter] = React.useState('all');
+  const [filter, setFilter] = React.useState('vocabulary');
   const [selectedLevel, setSelectedLevel] = React.useState('n5');
   const [selectedItems, setSelectedItems] = React.useState<string[]>([]);
 
@@ -136,27 +136,27 @@ export default function DashboardPage() {
     return {
       vocabulary: levelData.vocabulary?.map((item, index) => ({
         id: `vocab-${index}`,
-        primary: item.kanji || item.kana,
-        secondary: item.kana,
-        meanings: [item.meanings].flat(),
-        status: 'new' as const // This should come from your data
+        word: item.kanji || item.kana,
+        reading: item.kana,
+        meaning: item.meanings.join(', '),
+        status: 'new' as const
       })) || [],
       kanji: levelData.kanji?.map((item, index) => ({
         id: `kanji-${index}`,
-        primary: item.character,
-        secondary: [...item.onyomi, ...item.kunyomi].filter(Boolean).join(', '),
-        meanings: item.meanings,
-        status: 'new' as const // This should come from your data
+        word: item.character,
+        reading: [...item.onyomi, ...item.kunyomi].filter(Boolean).join(', '),
+        meaning: item.meanings.join(', '),
+        status: 'new' as const
       })) || [],
       grammar: levelData.grammar?.map((item, index) => ({
         id: `grammar-${index}`,
-        primary: item.pattern,
-        secondary: item.kana,
-        meanings: [item.kana],
-        status: 'new' as const // This should come from your data
+        word: item.pattern,
+        reading: item.kana,
+        meaning: item.kana, // Use kana as meaning since GrammarData doesn't have a meaning field
+        status: 'new' as const
       })) || []
     };
-  }, [levelData]);
+  }, [levelData, isLoading]);
 
   return (
     <DashboardLayout 
@@ -191,7 +191,7 @@ export default function DashboardPage() {
             {/* Progress Tracking */}
             <Box sx={{ 
               position: 'sticky',
-              top: 80,
+              top: 24,
               height: 'fit-content',
               bgcolor: 'white',
               borderRadius: 2,
