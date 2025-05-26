@@ -21,19 +21,21 @@ const ProgressTracking: React.FC<ProgressTrackingProps> = ({
   const overallProgress = Math.round(((wordsKnown + kanjiKnown) / (totalWords + totalKanji)) * 100);
 
   return (
-    <Box sx={{ width: 280, p: 3 }}>
+    <Box sx={{ width: 300, p: 4, overflow: 'hidden' }}>
       {/* Overall Progress Circle */}
       <Box sx={{ 
         position: 'relative',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        mb: 4 
+        mb: 4,
+        width: '100%',
+        height: 200,
       }}>
         <CircularProgress
           variant="determinate"
           value={100}
-          size={120}
+          size={160}
           thickness={4}
           sx={{ 
             color: 'rgba(45, 222, 152, 0.12)',
@@ -43,7 +45,7 @@ const ProgressTracking: React.FC<ProgressTrackingProps> = ({
         <CircularProgress
           variant="determinate"
           value={overallProgress}
-          size={120}
+          size={160}
           thickness={4}
           sx={{ 
             color: '#2dde98',
@@ -51,10 +53,14 @@ const ProgressTracking: React.FC<ProgressTrackingProps> = ({
           }}
         />
         <Box sx={{ 
-          position: 'relative',
+          position: 'absolute',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center'
+          alignItems: 'center',
+          justifyContent: 'center',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)'
         }}>
           <Typography variant="h4" sx={{ 
             fontWeight: 700,

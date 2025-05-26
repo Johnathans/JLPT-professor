@@ -52,7 +52,7 @@ const UnitBlock: React.FC<UnitBlockProps> = ({
         display: 'flex',
         alignItems: 'flex-start',
         position: 'relative',
-        pl: 4,
+        ml: 4,
         pb: 6,
         mb: 3,
         p: 3,
@@ -62,7 +62,7 @@ const UnitBlock: React.FC<UnitBlockProps> = ({
         '&::before': {
           content: '""',
           position: 'absolute',
-          left: '8px',
+          left: '-16px',
           top: '24px',
           bottom: isLast ? '24px' : 0,
           width: '2px',
@@ -83,7 +83,7 @@ const UnitBlock: React.FC<UnitBlockProps> = ({
       <Box
         sx={{
           position: 'absolute',
-          left: '4px',
+          left: '-20px',
           top: '20px',
           width: '10px',
           height: '10px',
