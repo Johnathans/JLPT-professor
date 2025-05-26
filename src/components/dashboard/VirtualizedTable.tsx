@@ -1,52 +1,55 @@
 'use client';
 
-import React, { memo } from 'react';
-import { TableRow, TableCell, Checkbox, Table, TableBody, Box } from '@mui/material';
+import React, { memo, forwardRef } from 'react';
+import { TableRow, TableCell, Checkbox, Table, TableBody, TableHead, Box } from '@mui/material';
 import { FixedSizeList } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 
 interface VirtualizedTableProps {
   items: Array<{
     id: string;
-    primary: string;
-    secondary?: string;
-    meanings: string[];
+    word: string;
+    reading?: string;
+    meaning: string;
     status: string;
   }>;
-  selectedItems: { [key: string]: boolean };
-  onItemSelect: (id: string, checked: boolean) => void;
-  getStatusColor: (status: string) => { bg: string; text: string };
+  selectedItems: string[];
+  onItemSelect: (id: string) => void;
+  getStatusColor: (status: string) => string;
 }
 
 const ROW_HEIGHT = 56;
 
-const VirtualizedTable = memo(({ 
+const VirtualizedTable = memo(function VirtualizedTable({ 
   items, 
   selectedItems, 
   onItemSelect,
   getStatusColor 
-}: VirtualizedTableProps) => {
-  const Row = memo(({ index, style }: { index: number; style: React.CSSProperties }) => {
+}: VirtualizedTableProps) {
+  const Row = memo(function Row({ index, style }: { index: number; style: React.CSSProperties }) {
     const item = items[index];
     const statusColor = getStatusColor(item.status);
+    
+    const rowStyle = {
+      ...style,
+      display: 'flex',
+      borderBottom: '1px solid #E8F9FD',
+      width: '100%',
+      cursor: 'pointer',
+      backgroundColor: selectedItems.includes(item.id) ? 'rgba(0, 194, 178, 0.08)' : 'transparent'
+    };
+
+
 
     return (
       <TableRow
         hover
         role="checkbox"
-        aria-checked={selectedItems[item.id] || false}
+        aria-checked={selectedItems.includes(item.id)}
         tabIndex={-1}
-        selected={selectedItems[item.id] || false}
-        onClick={() => onItemSelect(item.id, !selectedItems[item.id])}
-        style={{
-          ...style,
-          display: 'flex',
-          alignItems: 'center',
-          borderBottom: '1px solid #E8F9FD',
-          width: '100%',
-          cursor: 'pointer',
-          backgroundColor: selectedItems[item.id] ? 'rgba(89, 206, 143, 0.08)' : 'transparent'
-        }}
+        selected={selectedItems.includes(item.id)}
+        onClick={() => onItemSelect(item.id)}
+        style={rowStyle}
         component="div"
       >
         <TableCell
@@ -59,16 +62,16 @@ const VirtualizedTable = memo(({
           component="div"
         >
           <Checkbox
-            checked={selectedItems[item.id] || false}
+            checked={selectedItems.includes(item.id)}
             onClick={(event) => event.stopPropagation()}
-            onChange={(event) => onItemSelect(item.id, event.target.checked)}
+            onChange={() => onItemSelect(item.id)}
             sx={{
               color: '#E8F9FD',
               '&.Mui-checked': {
-                color: '#59CE8F',
+                color: '#00c2b2',
               },
               '&:hover': {
-                bgcolor: 'rgba(89, 206, 143, 0.08)'
+                bgcolor: 'rgba(0, 194, 178, 0.08)'
               }
             }}
           />
@@ -82,7 +85,7 @@ const VirtualizedTable = memo(({
           }}
           component="div"
         >
-          <Box sx={{ fontSize: '1.15rem', fontWeight: 600 }}>{item.primary}</Box>
+          <Box sx={{ fontSize: '1.15rem', fontWeight: 600 }}>{item.word}</Box>
         </TableCell>
         <TableCell
           sx={{
@@ -94,7 +97,7 @@ const VirtualizedTable = memo(({
           component="div"
         >
           <Box sx={{ fontSize: '1.1rem', fontWeight: 500 }}>
-            {item.meanings.join(', ')}
+            {item.meaning}
           </Box>
         </TableCell>
         <TableCell
@@ -113,8 +116,8 @@ const VirtualizedTable = memo(({
               borderRadius: '4px',
               fontSize: '1rem',
               fontWeight: 500,
-              backgroundColor: statusColor.bg,
-              color: statusColor.text,
+              backgroundColor: 'rgba(89, 206, 143, 0.1)',
+              color: statusColor,
               textTransform: 'capitalize'
             }}
           >
@@ -126,28 +129,57 @@ const VirtualizedTable = memo(({
   });
 
   return (
-    <div style={{ flex: 1, overflow: 'hidden', height: '100%' }}>
-      <AutoSizer>
-        {({ height, width }) => (
-          <Table component="div">
-            <TableBody component="div">
-              <FixedSizeList
-                height={height}
-                width={width}
-                itemCount={items.length}
-                itemSize={ROW_HEIGHT}
-                overscanCount={5}
+    <div style={{ width: '100%', height: '100%' }}>
+      <Box sx={{ height: '100%', bgcolor: 'white', borderRadius: 2, overflow: 'hidden' }}>
+        <Table component="div" sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+          <TableHead component="div" sx={{ bgcolor: '#f8f9fa' }}>
+            <TableRow component="div" sx={{ display: 'flex' }}>
+              <TableCell
+                padding="checkbox"
+                component="div"
+                sx={{
+                  width: 64,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
               >
-                {Row}
-              </FixedSizeList>
-            </TableBody>
-          </Table>
-        )}
-      </AutoSizer>
+                <Checkbox
+                  sx={{
+                    color: '#E8F9FD',
+                    '&.Mui-checked': {
+                      color: '#00c2b2',
+                    }
+                  }}
+                />
+              </TableCell>
+              <TableCell component="div" sx={{ width: '30%', fontWeight: 600 }}>Word</TableCell>
+              <TableCell component="div" sx={{ width: '50%', fontWeight: 600 }}>Meaning</TableCell>
+              <TableCell component="div" sx={{ width: '20%', fontWeight: 600, textAlign: 'center' }}>Status</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody component="div" sx={{ flex: 1, overflow: 'hidden' }}>
+            <AutoSizer>
+              {({ height, width }) => (
+                <FixedSizeList
+                  height={height}
+                  width={width}
+                  itemCount={items.length}
+                  itemSize={ROW_HEIGHT}
+                  overscanCount={5}
+                  style={{ overflowX: 'hidden' }}
+                >
+                  {Row}
+                </FixedSizeList>
+              )}
+            </AutoSizer>
+          </TableBody>
+        </Table>
+      </Box>
     </div>
   );
 });
 
 VirtualizedTable.displayName = 'VirtualizedTable';
 
-export default VirtualizedTable;
+export default memo(VirtualizedTable);

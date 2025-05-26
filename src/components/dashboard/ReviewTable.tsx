@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState, useMemo, useCallback, memo, ReactElement } from 'react';
-import VirtualizedTable from './VirtualizedTable';
+
 import StudyModeModal from './StudyModeModal';
+import VirtualizedTable from './VirtualizedTable';
 import {
   Box,
   Table,
@@ -14,266 +15,159 @@ import {
   Paper,
   Tabs,
   Tab,
-  Chip,
   Typography,
   Button,
-  Menu,
-  MenuItem,
-  ListItemIcon,
-  ListItemText,
+  SelectChangeEvent,
   Checkbox,
-  IconButton
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@mui/material';
-import { FilterList, Check, PlayArrow, CheckCircleOutline } from '@mui/icons-material';
+
 
 interface ReviewItem {
   id: string;
-  primary: string;
-  secondary?: string;
-  meanings: string[];
-  status: 'new' | 'learning' | 'learned' | 'mastered';
+  word: string;
+  reading?: string;
+  meaning: string;
+  status: string;
 }
 
 interface ReviewData {
   vocabulary: ReviewItem[];
   kanji: ReviewItem[];
   grammar: ReviewItem[];
-}
-
-interface ReviewData {
-  vocabulary: ReviewItem[];
-  kanji: ReviewItem[];
-  grammar: ReviewItem[];
-  [key: number]: ReviewItem[];
 }
 
 interface ReviewTableProps {
   data: ReviewData;
   filter: string;
   onFilterChange: (filter: string) => void;
-  onSelectionChange?: (selectedIds: string[]) => void;
-  onMarkAsKnown?: (selectedIds: string[]) => void;
-  onStartReview?: (selectedIds: string[]) => void;
+  onSelectionChange: (selectedItems: string[]) => void;
+  onMarkAsKnown: (selectedItems: string[]) => void;
+  onStartReview: (selectedItems: string[]) => void;
 }
 
-const getStatusColor = (status: string) => {
+const getStatusColor = (status: string): string => {
   switch (status) {
-    case 'new':
-      return { bg: '#E8F9FD', text: '#333333' };
+    case 'known':
+      return '#4CAF50';
     case 'learning':
-      return { bg: '#FFF4E5', text: '#B76E00' };
-    case 'learned':
-      return { bg: '#E6F4EA', text: '#1E8E3E' };
-    case 'mastered':
-      return { bg: '#E8F0FE', text: '#1A73E8' };
+      return '#FFC107';
+    case 'new':
+      return '#59CE8F';
     default:
-      return { bg: '#E8F9FD', text: '#333333' };
+      return '#757575';
   }
 };
 
-const ReviewTable = memo(({ 
+const ReviewTable = memo(function ReviewTable({
   data, 
   filter, 
-  onFilterChange, 
+  onFilterChange,
   onSelectionChange,
   onMarkAsKnown,
   onStartReview
-}: ReviewTableProps): ReactElement => {
-  const [studyModalOpen, setStudyModalOpen] = useState(false);
-  const [currentTab, setCurrentTab] = useState(0);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedItems, setSelectedItems] = useState<{ [key: string]: boolean }>({});
+}: ReviewTableProps) {
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const [studyModalOpen, setStudyModalOpen] = React.useState(false);
 
-  // Map currentTab index to data key
-  const tabToKey = ['vocabulary', 'kanji', 'grammar'] as const;
-  const currentData = data[tabToKey[currentTab]] || [];
+  // Move filteredData into useMemo to prevent unnecessary recalculations
+  const filteredData = useMemo(() => data[filter as keyof ReviewData] || [], [data, filter]);
 
-  // Memoize selected items count
-  const selectedCount = useMemo(() => Object.keys(selectedItems).length, [selectedItems]);
+  const handleSelectAll = useCallback(() => {
+    const allIds = filteredData.map(item => item.id);
+    onSelectionChange(allIds);
+    setSelectedItems(allIds);
+  }, [filteredData, onSelectionChange]);
 
-  const handleFilterClick = useCallback((event: React.MouseEvent<HTMLElement>): void => {
-    setAnchorEl(event.currentTarget);
-  }, []);
+  const handleItemSelect = useCallback((id: string) => {
+    setSelectedItems(prev => {
+      const newSelected = prev.includes(id)
+        ? prev.filter(item => item !== id)
+        : [...prev, id];
+      onSelectionChange(newSelected);
+      return newSelected;
+    });
+  }, [onSelectionChange]);
 
-  const handleFilterClose = useCallback((): void => {
-    setAnchorEl(null);
-  }, []);
-
-  const handleTabChange = useCallback((event: React.SyntheticEvent, newValue: number): void => {
-    setCurrentTab(newValue);
-  }, []);
-
-  const getFilteredData = useCallback((items: ReviewItem[]) => {
-    if (filter === 'all') return items;
-    return items.filter(item => item.status === filter);
-  }, [filter]);
-
-  const renderTableContent = useCallback((items: ReviewItem[]): ReactElement => {
-    const filteredItems = useMemo(() => getFilteredData(items), [items, getFilteredData]);
-    
-    const handleItemSelect = useCallback((id: string, checked: boolean) => {
-      const newSelected = { ...selectedItems };
-      if (checked) {
-        newSelected[id] = true;
-      } else {
-        delete newSelected[id];
-      }
-      setSelectedItems(newSelected);
-      onSelectionChange?.(Object.keys(newSelected));
-    }, [selectedItems, onSelectionChange]);
-
-    const handleSelectAll = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-      const newSelected = event.target.checked
-        ? filteredItems.reduce((acc, item) => ({ ...acc, [item.id]: true }), {})
-        : {};
-      setSelectedItems(newSelected);
-      onSelectionChange?.(Object.keys(newSelected));
-    }, [filteredItems, onSelectionChange]);
-    
+  const renderTableContent = (items: ReviewItem[]): ReactElement => {
     return (
-      <>
-        <Paper 
-          elevation={0}
-          sx={{ 
-            border: '1px solid #E8F9FD',
-            borderRadius: 2,
-            height: 'calc(100vh - 300px)',
-            display: 'flex',
-            flexDirection: 'column',
-            overflow: 'hidden'
-          }}
-        >
-          <Box sx={{ 
-            display: 'flex', 
-            alignItems: 'center',
-            p: 1, 
-            borderBottom: '1px solid #E8F9FD',
-            bgcolor: '#f8f9fa'
-          }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flex: 1 }}>
-              <Checkbox
-                indeterminate={selectedCount > 0 && selectedCount < filteredItems.length}
-                checked={selectedCount > 0 && selectedCount === filteredItems.length}
-                onChange={handleSelectAll}
-                sx={{
-                  color: '#757575',
-                  '&.Mui-checked, &.MuiCheckbox-indeterminate': {
-                    color: '#59CE8F',
-                  },
-                  '&:hover': {
-                    bgcolor: 'rgba(89, 206, 143, 0.08)'
-                  }
-                }}
-              />
-              <Box sx={{ width: '30%', fontWeight: 600, pl: 3 }}>Character/Pattern</Box>
-              <Box sx={{ width: '50%', fontWeight: 600, pl: 1 }}>Meaning</Box>
-              <Box sx={{ width: '20%', fontWeight: 600, textAlign: 'center' }}>Status</Box>
-              <IconButton onClick={handleFilterClick}>
-                <FilterList />
-              </IconButton>
-            </Box>
-          </Box>
-          
-          <VirtualizedTable
-            items={filteredItems}
-            selectedItems={selectedItems}
-            onItemSelect={handleItemSelect}
-            getStatusColor={getStatusColor}
-          />
-        </Paper>
-        {selectedCount > 0 && (
-          <Box sx={{ 
-            display: 'flex', 
-            gap: 2, 
-            mt: 3,
-            mb: 2,
-            justifyContent: 'center'
-          }}>
-            <Button
-              variant="contained"
-              onClick={() => onMarkAsKnown?.(Object.keys(selectedItems))}
-              startIcon={<CheckCircleOutline />}
-              size="large"
-              sx={{
-                minWidth: '160px',
-                bgcolor: '#757575',
-                '&:hover': {
-                  bgcolor: '#616161'
-                }
-              }}
-            >
-              Mark as Known
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => setStudyModalOpen(true)}
-              startIcon={<PlayArrow />}
-              size="large"
-              sx={{
-                minWidth: '160px',
-                bgcolor: '#59CE8F',
-                '&:hover': {
-                  bgcolor: '#4CAF50'
-                }
-              }}
-            >
-              Start Review
-            </Button>
-          </Box>
-        )}
-      </>
+      <Box sx={{ height: 'calc(100vh - 200px)', width: '100%', display: 'flex' }}>
+        <VirtualizedTable
+          items={items}
+          selectedItems={selectedItems}
+          onItemSelect={handleItemSelect}
+          getStatusColor={getStatusColor}
+        />
+      </Box>
     );
-  }, [filter, selectedItems, selectedCount, onSelectionChange, getFilteredData, onMarkAsKnown, handleFilterClick, setStudyModalOpen]);
-
-  const filterOptions = useMemo(() => [
-    { value: 'all', label: 'All' },
-    { value: 'new', label: 'New' },
-    { value: 'learning', label: 'Learning' },
-    { value: 'learned', label: 'Learned' },
-    { value: 'mastered', label: 'Mastered' }
-  ], []);
-
-  const statusFilters = useMemo(() => [
-    { value: 'all', label: 'All' },
-    { value: 'new', label: 'New' },
-    { value: 'learning', label: 'Learning' },
-    { value: 'learned', label: 'Learned' },
-    { value: 'mastered', label: 'Mastered' }
-  ], []);
-
-  const handleFilterChange = useCallback((value: string): void => {
-    onFilterChange(value);
-    handleFilterClose();
-  }, [onFilterChange, handleFilterClose]);
+  };
 
   return (
     <Box sx={{ width: '100%' }}>
+      <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
+        <FormControl sx={{ minWidth: 200 }}>
+          <InputLabel id="filter-label">Filter</InputLabel>
+          <Select
+            labelId="filter-label"
+            value={filter}
+            label="Filter"
+            onChange={(e) => onFilterChange(e.target.value)}
+          >
+            <MenuItem value="vocabulary">Vocabulary ({data.vocabulary.length})</MenuItem>
+            <MenuItem value="kanji">Kanji ({data.kanji.length})</MenuItem>
+            <MenuItem value="grammar">Grammar ({data.grammar.length})</MenuItem>
+          </Select>
+        </FormControl>
+
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          <Button
+            variant="outlined"
+            onClick={handleSelectAll}
+            disabled={!filteredData.length}
+          >
+            Select All
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => onMarkAsKnown(selectedItems)}
+            disabled={!selectedItems.length}
+          >
+            Mark as Known
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => onStartReview(selectedItems)}
+            disabled={!selectedItems.length}
+          >
+            Start Review
+          </Button>
+        </Box>
+      </Box>
 
       <Tabs
-        value={currentTab}
-        onChange={handleTabChange}
+        value={filter}
+        onChange={(_, newValue) => onFilterChange(newValue)}
         sx={{
-          mb: 2,
-          '& .MuiTabs-indicator': {
-            backgroundColor: '#59CE8F',
-          },
+          mb: 3,
           '& .MuiTab-root': {
-            color: '#424242',
             fontSize: '1.2rem',
             fontWeight: 700,
             '&.Mui-selected': {
-              color: '#59CE8F',
+              color: '#00c2b2',
               fontWeight: 700,
             },
           },
         }}
       >
-        <Tab label="Vocabulary" />
-        <Tab label="Kanji" />
-        <Tab label="Grammar" />
+        <Tab label="Vocabulary" value="vocabulary" />
+        <Tab label="Kanji" value="kanji" />
+        <Tab label="Grammar" value="grammar" />
       </Tabs>
 
-      {currentData.length > 0 ? renderTableContent(currentData) : (
+      {filteredData.length > 0 ? renderTableContent(filteredData) : (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
           <Typography variant="body1" color="text.secondary">
             No data available for this section
@@ -281,37 +175,17 @@ const ReviewTable = memo(({
         </Box>
       )}
 
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleFilterClose}
-      >
-        {filterOptions.map(({ value, label }) => (
-          <MenuItem
-            key={value}
-            onClick={() => {
-              handleFilterChange(value);
-              handleFilterClose();
-            }}
-          >
-            <ListItemIcon>
-              {filter === value && <Check sx={{ color: '#59CE8F' }} />}
-            </ListItemIcon>
-            <ListItemText primary={label} />
-          </MenuItem>
-        ))}
-      </Menu>
-
       <StudyModeModal
         open={studyModalOpen}
         onClose={() => setStudyModalOpen(false)}
         onModeSelect={(mode: string) => {
           setStudyModalOpen(false);
-          onStartReview?.(Object.keys(selectedItems));
+          onStartReview(selectedItems);
         }}
       />
     </Box>
   );
 });
 
+ReviewTable.displayName = 'ReviewTable';
 export default ReviewTable;
