@@ -21,7 +21,7 @@ const ProgressTracking: React.FC<ProgressTrackingProps> = ({
   const overallProgress = Math.round(((wordsKnown + kanjiKnown) / (totalWords + totalKanji)) * 100);
 
   return (
-    <Box sx={{ width: 300, p: 4, overflow: 'hidden' }}>
+    <Box sx={{ width: 320, p: 4, overflow: 'hidden' }}>
       {/* Overall Progress Circle */}
       <Box sx={{ 
         position: 'relative',
@@ -30,12 +30,12 @@ const ProgressTracking: React.FC<ProgressTrackingProps> = ({
         justifyContent: 'center',
         mb: 4,
         width: '100%',
-        height: 200,
+        height: 220,
       }}>
         <CircularProgress
           variant="determinate"
           value={100}
-          size={160}
+          size={180}
           thickness={4}
           sx={{ 
             color: 'rgba(45, 222, 152, 0.12)',
@@ -45,7 +45,7 @@ const ProgressTracking: React.FC<ProgressTrackingProps> = ({
         <CircularProgress
           variant="determinate"
           value={overallProgress}
-          size={160}
+          size={180}
           thickness={4}
           sx={{ 
             color: '#2dde98',
@@ -62,21 +62,33 @@ const ProgressTracking: React.FC<ProgressTrackingProps> = ({
           left: '50%',
           transform: 'translate(-50%, -50%)'
         }}>
-          <Typography variant="h4" sx={{ 
-            fontWeight: 700,
+          <Typography variant="h2" sx={{ 
+            fontWeight: 800,
             color: '#1a1a1a',
-            fontSize: '2.5rem',
+            letterSpacing: '0.05em',
+            fontSize: '3.5rem',
             lineHeight: 1
           }}>
-            {overallProgress}%
+            N5
           </Typography>
-          <Typography sx={{ 
-            color: '#666',
-            fontSize: '0.875rem',
-            mt: 0.5
+          <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1,
+            mt: 1
           }}>
-            Complete
-          </Typography>
+            <Typography variant="body2" sx={{ 
+              color: 'text.secondary'
+            }}>
+              Complete
+            </Typography>
+            <Typography variant="body2" sx={{ 
+              color: '#2dde98',
+              fontWeight: 600
+            }}>
+              ({overallProgress}%)
+            </Typography>
+          </Box>
         </Box>
       </Box>
 
