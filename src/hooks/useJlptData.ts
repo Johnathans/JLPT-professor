@@ -58,9 +58,10 @@ export function useJlptData(initialLevel: 'n5' | 'n4' | 'n3' | 'n2' | 'n1') {
     });
   }, []); // Only run on mount
 
-  const getLevelData = React.useCallback((level: 'n5' | 'n4' | 'n3' | 'n2' | 'n1'): LevelData => {
-    return state.data[level]!;
-  }, [state.data]);
+  const getLevelData = React.useCallback((level: 'n5' | 'n4' | 'n3' | 'n2' | 'n1'): LevelData | null => {
+    if (state.isLoading) return null;
+    return state.data[level] || null;
+  }, [state.data, state.isLoading]);
 
   return {
     isLoading: state.isLoading,

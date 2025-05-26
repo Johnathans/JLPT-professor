@@ -6,7 +6,7 @@ const LayoutRoot = styled('div')({});
 
 const MainContent = styled('div')(({ theme }) => ({
   minHeight: '100vh',
-  backgroundColor: '#f8fafc',
+  backgroundColor: '#ffffff',
   padding: theme.spacing(4, 3),
   [theme.breakpoints.down('sm')]: {
     padding: theme.spacing(3, 2),

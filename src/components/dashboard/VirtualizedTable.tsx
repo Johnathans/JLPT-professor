@@ -52,10 +52,9 @@ const VirtualizedTable = memo(({
         <TableCell
           padding="checkbox"
           sx={{
-            width: 50,
-            border: 'none',
-            p: 0,
-            pl: 1
+            width: 64,
+            padding: '12px 0',
+            pl: 2
           }}
           component="div"
         >
@@ -76,9 +75,10 @@ const VirtualizedTable = memo(({
         </TableCell>
         <TableCell
           sx={{
-            flex: '0 0 200px',
+            width: '30%',
             border: 'none',
-            p: 1
+            p: 1,
+            pl: 3
           }}
           component="div"
         >
@@ -86,9 +86,10 @@ const VirtualizedTable = memo(({
         </TableCell>
         <TableCell
           sx={{
-            flex: 1,
+            width: '50%',
             border: 'none',
-            p: 1
+            p: 1,
+            pl: 1
           }}
           component="div"
         >
@@ -98,9 +99,10 @@ const VirtualizedTable = memo(({
         </TableCell>
         <TableCell
           sx={{
-            flex: '0 0 120px',
+            width: '20%',
+            padding: '12px 0',
             border: 'none',
-            p: 1
+            textAlign: 'center'
           }}
           component="div"
         >

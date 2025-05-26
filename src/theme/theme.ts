@@ -31,7 +31,7 @@ const theme = createTheme({
       main: '#00bfa5', // Using success palette for our accent color
     },
     background: {
-      default: '#f8f9fa',
+      default: '#ffffff',
       paper: '#ffffff',
     },
     text: {

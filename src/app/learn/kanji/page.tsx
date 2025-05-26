@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Box, IconButton, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Close } from '@mui/icons-material';
@@ -119,6 +119,11 @@ export default function KanjiPage() {
   const [feedbackMessage, setFeedbackMessage] = useState<string>('Select meaning below');
   const [currentAnswers, setCurrentAnswers] = useState<string[]>([]);
   const [kanjiList, setKanjiList] = useState<KanjiData[]>([]);
+  const correctSound = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    correctSound.current = new Audio('/audio/ui/correct-6033.mp3');
+  }, []);
 
   useEffect(() => {
     setKanjiList(N5Kanji);
@@ -153,15 +158,14 @@ export default function KanjiPage() {
   };
 
   const handleAnswerSelect = (selectedMeaning: string) => {
-    if (selectedAnswer) return; // Prevent multiple selections while animating
-
-    const isCorrect = kanjiList[currentIndex].meanings[0] === selectedMeaning;
     setSelectedAnswer(selectedMeaning);
-    setFeedbackMessage(isCorrect ? 'Correct!' : `Incorrect - ${kanjiList[currentIndex].meanings[0]}`);
-
-    setTimeout(() => {
-      handleNext(); // Move to next kanji whether correct or incorrect
-    }, 1200); // Slightly longer delay for incorrect to read the answer
+    const isCorrect = kanjiList[currentIndex].meanings[0] === selectedMeaning;
+    setFeedbackMessage(isCorrect ? 'Correct!' : 'Incorrect');
+    if (isCorrect && correctSound.current) {
+      correctSound.current.currentTime = 0;
+      correctSound.current.play();
+    }
+    setTimeout(handleNext, 1500);
   };
 
   const handleNext = () => {
@@ -209,7 +213,7 @@ export default function KanjiPage() {
               top: 0,
               height: '100%',
               width: `${((currentIndex + 1) / kanjiList.length) * 100}%`,
-              backgroundColor: '#7c4dff',
+              backgroundColor: '#89ce00',
               transition: 'width 0.3s ease'
             }} />
           </Box>

@@ -22,7 +22,7 @@ export default function VocabularyGrid({ renderSelectionButtons }: VocabularyGri
   const { level } = useJlptLevel();
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
-  const itemsPerPage = isDesktop ? 12 : 6;
+  const itemsPerPage = isDesktop ? 9 : 6;
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -107,7 +107,7 @@ export default function VocabularyGrid({ renderSelectionButtons }: VocabularyGri
 
       <Grid container spacing={2}>
         {currentVocabulary.map((item, index) => (
-          <Grid item xs={12} sm={6} md={2.4} key={index}>
+          <Grid item xs={12} sm={6} md={4} key={index}>
             <Card 
               elevation={0}
               onClick={() => handleSelect(index)}

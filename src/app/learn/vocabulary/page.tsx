@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Box, IconButton, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Close } from '@mui/icons-material';
@@ -78,6 +78,11 @@ export default function VocabularyPage() {
   const [feedbackMessage, setFeedbackMessage] = useState<string>('Select meaning below');
   const [currentAnswers, setCurrentAnswers] = useState<string[]>([]);
   const [vocabList, setVocabList] = useState<VocabularyData[]>([]);
+  const correctSound = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    correctSound.current = new Audio('/audio/ui/correct-6033.mp3');
+  }, []);
 
   useEffect(() => {
     setVocabList(N5Vocabulary);
@@ -115,6 +120,10 @@ export default function VocabularyPage() {
     setSelectedAnswer(selectedMeaning);
     const isCorrect = vocabList[currentIndex].meanings[0] === selectedMeaning;
     setFeedbackMessage(isCorrect ? 'Correct!' : 'Incorrect');
+    if (isCorrect && correctSound.current) {
+      correctSound.current.currentTime = 0;
+      correctSound.current.play();
+    }
     setTimeout(handleNext, 1500);
   };
 

@@ -28,10 +28,10 @@ const CircleContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  backgroundColor: theme.palette.grey[50],
+  backgroundColor: '#f8f9fa',
   borderRadius: 16,
   padding: theme.spacing(3),
-  marginBottom: theme.spacing(3),
+  marginBottom: theme.spacing(2),
 }));
 
 interface CircleProps {
@@ -45,14 +45,14 @@ const Circle = styled(Box, {
   width: 40,
   height: 40,
   borderRadius: '50%',
-  backgroundColor: active ? theme.palette.primary.light : theme.palette.grey[100],
+  backgroundColor: active ? '#e8f5e9' : '#f5f5f5',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  color: active ? theme.palette.primary.main : theme.palette.text.secondary,
+  color: active ? '#2e7d32' : '#757575',
   fontWeight: 600,
   ...(isToday && {
-    border: `2px dashed ${theme.palette.warning.main}`,
+    border: '2px dashed #59CE8F',
   }),
 }));
 
@@ -97,13 +97,10 @@ const StreakModal: React.FC<StreakModalProps> = ({
         },
       }}
     >
-      <DialogTitle sx={{ p: 3, pb: 2 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <FlameIcon sx={{ color: '#ff9100', fontSize: 24 }} />
-          <Typography variant="h6" component="span" sx={{ fontWeight: 600 }}>
-            Your streak
-          </Typography>
-        </Box>
+      <DialogTitle sx={{ p: 3, pb: 2, textAlign: 'center' }}>
+        <Typography variant="h6" component="span" sx={{ fontWeight: 800 }}>
+          Your Streak
+        </Typography>
         <IconButton
           onClick={onClose}
           sx={{
@@ -118,20 +115,6 @@ const StreakModal: React.FC<StreakModalProps> = ({
       </DialogTitle>
 
       <DialogContent sx={{ p: 3 }}>
-        {timeRemaining && (
-          <Typography
-            variant="h6"
-            sx={{
-              textAlign: 'center',
-              mb: 3,
-              color: 'text.primary',
-              fontWeight: 500,
-            }}
-          >
-            {timeRemaining} remaining to start your streak!
-          </Typography>
-        )}
-
         <CircleContainer>
           {weekDays.map((day, index) => (
             <Circle
@@ -144,52 +127,25 @@ const StreakModal: React.FC<StreakModalProps> = ({
           ))}
         </CircleContainer>
 
-        <Box sx={{ mb: 4 }}>
-          <Box sx={{ mb: 2 }}>
-            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
-              Current
-            </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1 }}>
-              <Typography variant="h5" sx={{ fontWeight: 600 }}>
-                {currentStreak} day{currentStreak !== 1 ? 's' : ''}
-              </Typography>
-              <Box sx={{ 
-                bgcolor: '#e8f5e9', 
-                p: 0.5, 
-                borderRadius: '50%',
-                display: 'flex'
-              }}>
-                <Box component="span" role="img" aria-label="checkmark">
-                  ✓
-                </Box>
-              </Box>
-            </Box>
-            <StyledLinearProgress
-              variant="determinate"
-              value={(currentStreak / 7) * 100}
-            />
-          </Box>
-
-          <Box>
-            <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
-              Longest
-            </Typography>
-            <Typography variant="h5" sx={{ fontWeight: 600, mb: 1 }}>
-              {longestStreak} day{longestStreak !== 1 ? 's' : ''}
-            </Typography>
-            <StyledLinearProgress
-              variant="determinate"
-              value={(longestStreak / 7) * 100}
-            />
-          </Box>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, mb: 3 }}>
+          <FlameIcon sx={{ color: '#59CE8F', fontSize: 48 }} />
+          <Typography variant="h6" sx={{ fontWeight: 600, color: '#2e7d32' }}>
+            {currentStreak} day streak
+          </Typography>
         </Box>
 
         <Typography
           variant="body1"
-          sx={{ color: 'text.secondary', textAlign: 'center' }}
+          sx={{ 
+            color: '#666',
+            textAlign: 'center',
+            backgroundColor: '#f8f9fa',
+            p: 2,
+            borderRadius: 2,
+            fontSize: '0.95rem'
+          }}
         >
-          Each day watch a video, practice a conversation, learn or review words to
-          keep your streak growing.
+          Complete at least one review session each day to maintain your streak. Practice consistently to master Japanese faster!
         </Typography>
       </DialogContent>
     </Dialog>

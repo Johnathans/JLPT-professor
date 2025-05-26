@@ -165,9 +165,9 @@ const ReviewTable = memo(({
                   }
                 }}
               />
-              <Box sx={{ flex: '0 0 200px', fontWeight: 600 }}>Character/Pattern</Box>
-              <Box sx={{ flex: 1, fontWeight: 600 }}>Reading/Meaning</Box>
-              <Box sx={{ flex: '0 0 120px', fontWeight: 600 }}>Status</Box>
+              <Box sx={{ width: '30%', fontWeight: 600, pl: 3 }}>Character/Pattern</Box>
+              <Box sx={{ width: '50%', fontWeight: 600, pl: 1 }}>Meaning</Box>
+              <Box sx={{ width: '20%', fontWeight: 600, textAlign: 'center' }}>Status</Box>
               <IconButton onClick={handleFilterClick}>
                 <FilterList />
               </IconButton>

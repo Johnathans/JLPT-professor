@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useJlptLevel } from '@/contexts/JlptLevelContext';
-import { AppBar, Toolbar, Box, IconButton, Avatar, LinearProgress, Menu, MenuItem, Typography } from '@mui/material';
+import { AppBar, Toolbar, Box, IconButton, Avatar, LinearProgress, Menu, MenuItem, Typography, ListItemIcon, ListItemText, Divider } from '@mui/material';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 export default function DashboardNavbar() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -44,6 +48,30 @@ export default function DashboardNavbar() {
         </Link>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Link href="/learn" style={{ textDecoration: 'none' }}>
+              <Typography sx={{ 
+                fontFamily: 'Poppins', 
+                fontWeight: 600, 
+                fontSize: '0.875rem',
+                color: '#333',
+                '&:hover': { color: '#7c4dff' }
+              }}>
+                Study
+              </Typography>
+            </Link>
+            <Link href="/review" style={{ textDecoration: 'none' }}>
+              <Typography sx={{ 
+                fontFamily: 'Poppins', 
+                fontWeight: 600, 
+                fontSize: '0.875rem',
+                color: '#333',
+                '&:hover': { color: '#7c4dff' }
+              }}>
+                Review
+              </Typography>
+            </Link>
+          </Box>
           <Box sx={{ 
             display: 'flex', 
             alignItems: 'center', 
@@ -206,13 +234,67 @@ export default function DashboardNavbar() {
             PaperProps={{
               sx: {
                 mt: 1,
+                minWidth: 200,
                 boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                 borderRadius: 1
               }
             }}
           >
-            <MenuItem onClick={handleProfileClose} sx={{ fontFamily: 'Poppins' }}>Settings</MenuItem>
-            <MenuItem onClick={handleProfileClose} sx={{ fontFamily: 'Poppins' }}>Logout</MenuItem>
+            <MenuItem onClick={handleProfileClose} sx={{ py: 1.5, px: 2 }}>
+              <ListItemIcon>
+                <PersonOutlineIcon sx={{ fontSize: 20 }} />
+              </ListItemIcon>
+              <ListItemText 
+                primary="My Profile" 
+                primaryTypographyProps={{ 
+                  sx: { fontFamily: 'Poppins', fontWeight: 500 } 
+                }} 
+              />
+            </MenuItem>
+            <MenuItem onClick={handleProfileClose} sx={{ py: 1.5, px: 2 }}>
+              <ListItemIcon>
+                <SettingsOutlinedIcon sx={{ fontSize: 20 }} />
+              </ListItemIcon>
+              <ListItemText 
+                primary="Settings" 
+                primaryTypographyProps={{ 
+                  sx: { fontFamily: 'Poppins', fontWeight: 500 } 
+                }} 
+              />
+            </MenuItem>
+            <MenuItem onClick={handleProfileClose} sx={{ py: 1.5, px: 2 }}>
+              <ListItemIcon>
+                <CreditCardOutlinedIcon sx={{ fontSize: 20 }} />
+              </ListItemIcon>
+              <ListItemText 
+                primary="Subscription" 
+                primaryTypographyProps={{ 
+                  sx: { fontFamily: 'Poppins', fontWeight: 500 } 
+                }} 
+              />
+            </MenuItem>
+            <Divider sx={{ my: 1 }} />
+            <MenuItem 
+              onClick={handleProfileClose} 
+              sx={{ 
+                py: 1.5, 
+                px: 2,
+                color: '#d32f2f',
+                '& .MuiListItemIcon-root': {
+                  color: '#d32f2f'
+                }
+              }}
+            >
+              <ListItemIcon>
+                <LogoutOutlinedIcon sx={{ fontSize: 20 }} />
+              </ListItemIcon>
+              <ListItemText 
+                primary="Log Out" 
+                primaryTypographyProps={{ 
+                  sx: { fontFamily: 'Poppins', fontWeight: 500 } 
+                }} 
+              />
+            </MenuItem>
           </Menu>
         </Box>
       </Toolbar>

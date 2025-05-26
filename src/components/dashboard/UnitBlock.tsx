@@ -1,121 +1,205 @@
 'use client';
 
-import React from 'react';
-import { Box, Card, Typography, Button, Stack } from '@mui/material';
-import { PlayArrow, Refresh } from '@mui/icons-material';
+import React, { useState } from 'react';
+import { Box, Card, Typography, Button, Avatar } from '@mui/material';
+import { MenuBook, School, Assignment, Language } from '@mui/icons-material';
+import UnitPreviewModal from './UnitPreviewModal';
+import BackgroundPattern from './BackgroundPattern';
+
+interface Word {
+  id: string;
+  kanji?: string;
+  kana: string;
+  meaning: string;
+}
 
 interface UnitBlockProps {
+  isLast?: boolean;
   title: string;
   imageUrl: string;
   wordCount: number;
   kanjiCount: number;
   color?: string;
-  onStart?: () => void;
-  onReview?: () => void;
+  hasStarted?: boolean;
+  words: Word[];
+  onStart: (knownWordIds: string[]) => void;
+  index?: number;
 }
+
+const icons = {
+  vocabulary: <MenuBook />,
+  grammar: <School />,
+  kanji: <Assignment />,
+  reading: <Language />
+};
 
 const UnitBlock: React.FC<UnitBlockProps> = ({
   title,
   imageUrl,
   wordCount,
   kanjiCount,
-  color = '#7c4dff',
+  hasStarted = false,
+  words,
   onStart,
-  onReview
+  index = 1,
+  isLast = false
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
   return (
-    <Card
+    <Box
       sx={{
-        p: 3,
-        height: '100%',
         display: 'flex',
-        flexDirection: 'column',
-        borderRadius: 2,
-        bgcolor: 'white',
-        border: '1px solid',
-        borderColor: '#E8F9FD',
-        color: '#000000',
-        transition: 'all 0.2s',
-        '&:hover': {
-          borderColor: '#59CE8F',
-          boxShadow: '0 4px 20px rgba(89, 206, 143, 0.15)'
+        alignItems: 'flex-start',
+        position: 'relative',
+        pl: 4,
+        pb: 6,
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          left: '8px',
+          top: '24px',
+          bottom: isLast ? '24px' : 0,
+          width: '2px',
+          backgroundColor: hasStarted ? '#2dde98' : '#e0e0e0',
+          zIndex: 0
+        },
+        '& .MuiAvatar-root': {
+          marginRight: 3,
+          marginTop: 2,
+          width: 60,
+          height: 60,
+          borderRadius: 2,
+          backgroundColor: '#f5f5f5'
         }
       }}
     >
-      <Box sx={{ mb: 2 }}>
-        <Typography variant="h5" sx={{ fontWeight: 600, mb: 1, color: '#000000' }}>
-          {title}
-        </Typography>
-        
-        <Stack direction="row" spacing={2} sx={{ mb: 2 }}>
-          <Typography variant="body2" sx={{ color: '#666666' }}>
-            {wordCount} Words
-          </Typography>
-          <Typography variant="body2" sx={{ color: '#666666' }}>
-            {kanjiCount} Kanji
-          </Typography>
-        </Stack>
-      </Box>
+      {/* Timeline Node */}
+      <Box
+        sx={{
+          position: 'absolute',
+          left: '4px',
+          top: '20px',
+          width: '10px',
+          height: '10px',
+          borderRadius: '50%',
+          backgroundColor: hasStarted ? '#2dde98' : 'white',
+          border: '2px solid',
+          borderColor: hasStarted ? '#2dde98' : '#e0e0e0',
+          zIndex: 1
+        }}
+      />
 
-      <Box 
-        sx={{ 
+      {/* Unit Image */}
+      <Avatar
+        src={imageUrl}
+        variant="square"
+        alt={title}
+      />
+
+      {/* Content */}
+      <Box
+        sx={{
           flex: 1,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          mb: 3
+          '&:hover': {
+            '& .unit-title': {
+              color: '#2dde98'
+            }
+          }
         }}
       >
-        <Box
-          component="img"
-          src={imageUrl}
-          alt={title}
+        {/* Unit Number */}
+        <Typography
           sx={{
-            width: '60%',
-            height: 'auto',
-            objectFit: 'contain',
-            filter: imageUrl.endsWith('.svg') ? 'brightness(0) invert(1)' : 'none',
-            opacity: imageUrl.endsWith('.svg') ? 0.9 : 1
+            color: '#666',
+            fontSize: '0.875rem',
+            mb: 1,
+            fontWeight: 500
           }}
-        />
+        >
+          Unit {String(index).padStart(2, '0')}
+        </Typography>
+
+        {/* Title */}
+        <Typography
+          className="unit-title"
+          variant="h6"
+          sx={{
+            fontWeight: 800,
+            color: '#1a1a1a',
+            mb: 1,
+            fontSize: '1.25rem',
+            letterSpacing: '-0.01em',
+            transition: 'color 0.2s'
+          }}
+        >
+          {title}
+        </Typography>
+
+        {/* Description */}
+        <Typography
+          sx={{
+            color: '#666',
+            fontSize: '0.875rem',
+            mb: 3,
+            lineHeight: 1.4
+          }}
+        >
+          {wordCount} words with example sentences and audio
+        </Typography>
+
+        {/* Icon and Button */}
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 3,
+            mt: 2
+          }}
+        >
+          <Box
+            sx={{
+              '& .MuiSvgIcon-root': {
+                fontSize: 24,
+                color: hasStarted ? '#2dde98' : '#666'
+              }
+            }}
+          >
+            {icons.vocabulary}
+          </Box>
+
+          <Button
+            onClick={() => setIsModalOpen(true)}
+            variant="outlined"
+            sx={{
+              color: hasStarted ? '#2dde98' : '#666',
+              borderColor: hasStarted ? '#2dde98' : '#e0e0e0',
+              textTransform: 'none',
+              borderRadius: '8px',
+              px: 3,
+              py: 1,
+              minWidth: '120px',
+              '&:hover': {
+                borderColor: '#2dde98',
+                color: '#2dde98',
+                backgroundColor: 'rgba(45, 222, 152, 0.04)'
+              }
+            }}
+          >
+            {hasStarted ? 'Continue' : 'Start Unit'}
+          </Button>
+        </Box>
       </Box>
 
-      <Stack direction="row" spacing={1}>
-        <Button
-          fullWidth
-          variant="contained"
-          startIcon={<PlayArrow />}
-          onClick={onStart}
-          sx={{
-            bgcolor: '#59CE8F',
-            color: 'white',
-            boxShadow: 'none',
-            '&:hover': {
-              bgcolor: '#4AB57E',
-              boxShadow: 'none'
-            }
-          }}
-        >
-          Start
-        </Button>
-        <Button
-          fullWidth
-          variant="outlined"
-          startIcon={<Refresh />}
-          onClick={onReview}
-          sx={{
-            borderColor: '#E8F9FD',
-            color: '#000000',
-            '&:hover': {
-              borderColor: '#59CE8F',
-              bgcolor: 'transparent'
-            }
-          }}
-        >
-          Review
-        </Button>
-      </Stack>
-    </Card>
+      <UnitPreviewModal
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title={title}
+        words={words}
+        onStart={onStart}
+        hasStarted={hasStarted}
+      />
+    </Box>
   );
 };
 

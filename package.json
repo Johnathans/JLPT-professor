@@ -22,6 +22,7 @@
     "@supabase/auth-ui-shared": "^0.1.8",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.49.4",
+    "@types/react-window": "^1.8.8",
     "@types/uuid": "^10.0.0",
     "@types/wanakana": "^4.0.6",
     "bootstrap": "^5.3.3",
@@ -43,6 +44,8 @@
     "react-dom": "^19.0.0",
     "react-feather": "^2.0.10",
     "react-icons": "^5.5.0",
+    "react-virtualized-auto-sizer": "^1.0.26",
+    "react-window": "^1.8.11",
     "recharts": "^2.15.3",
     "uuid": "^11.1.0",
     "wanakana": "^5.3.1"
