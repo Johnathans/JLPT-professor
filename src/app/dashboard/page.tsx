@@ -6,6 +6,7 @@ import ReviewTable from '@/components/dashboard/ReviewTable';
 import ReviewListItem from '@/components/dashboard/ReviewListItem';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import UnitBlock from '@/components/dashboard/UnitBlock';
+import ProgressTracking from '@/components/dashboard/ProgressTracking';
 import { useJlptData } from '@/hooks/useJlptData';
 
 const VOCAB_STYLE = { fontWeight: 500 };
@@ -163,24 +164,18 @@ export default function DashboardPage() {
       onModeChange={handleModeChange}
       initialMode={mode}
     >
-      <Box sx={{ p: 3, backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
+      <Box sx={{ p: 3, backgroundColor: '#f8f9fa', minHeight: '100vh' }}>
         {mode === 'study' ? (
-          <Box sx={{ maxWidth: 800, mx: 'auto', px: 2 }}>
-            {/* Overall Progress */}
-            <Box sx={{ mb: 4, p: 3, bgcolor: 'white', borderRadius: 2, boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
-              <Typography variant="h6" sx={{ mb: 2, fontWeight: 800, letterSpacing: '-0.01em' }}>Chapter Progress</Typography>
-              <Box sx={{ height: 4, bgcolor: '#e0e0e0', borderRadius: 2, overflow: 'hidden' }}>
-                <Box sx={{ 
-                  width: `${(units.filter(u => u.hasStarted).length / units.length) * 100}%`,
-                  height: '100%',
-                  bgcolor: '#2dde98',
-                  transition: 'width 0.3s ease'
-                }} />
-              </Box>
-            </Box>
-            
-            {/* Units Timeline */}
-            <Box sx={{ position: 'relative' }}>
+          <Box sx={{ 
+            display: 'flex',
+            gap: 4,
+            maxWidth: 1000,
+            mx: 'auto',
+            px: 2
+          }}>
+            <Box sx={{ width: '65%' }}>
+              {/* Units Timeline */}
+              <Box sx={{ position: 'relative' }}>
               {units.map((unit, index) => (
                 <UnitBlock
                   key={unit.title}
@@ -190,6 +185,25 @@ export default function DashboardPage() {
                   isLast={index === units.length - 1}
                 />
               ))}
+              </Box>
+            </Box>
+
+            {/* Progress Tracking */}
+            <Box sx={{ 
+              position: 'sticky',
+              top: 80,
+              height: 'fit-content',
+              bgcolor: 'white',
+              borderRadius: 2,
+              boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
+            }}>
+              <ProgressTracking
+                wordsKnown={42}
+                totalWords={100}
+                kanjiKnown={15}
+                totalKanji={50}
+                dailyProgress={[60, 80, 40, 90, 70, 30, 50]}
+              />
             </Box>
           </Box>
         ) : (

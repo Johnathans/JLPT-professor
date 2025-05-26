@@ -11,6 +11,7 @@ interface DashboardLayoutProps {
   children: React.ReactNode;
   onModeChange?: (mode: string) => void;
   initialMode?: string;
+  onJlptLevelChange?: (level: string) => void;
 }
 
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onModeChange, initialMode = 'study' }) => {

@@ -54,6 +54,11 @@ const UnitBlock: React.FC<UnitBlockProps> = ({
         position: 'relative',
         pl: 4,
         pb: 6,
+        mb: 3,
+        p: 3,
+        backgroundColor: '#FFFFFF',
+        borderRadius: 2,
+        boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
         '&::before': {
           content: '""',
           position: 'absolute',
