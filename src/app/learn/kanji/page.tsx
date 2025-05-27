@@ -197,12 +197,12 @@ export default function KanjiPage() {
         <Box sx={{ 
           position: 'relative', 
           width: '100%',
-          maxWidth: '800px',
+          maxWidth: '900px',
           mx: 'auto',
           display: 'flex', 
           alignItems: 'center', 
-          gap: 3,
-          px: 2
+          gap: 4,
+          px: 3
         }}>
           <CloseButton onClick={() => router.push('/learn')}>
             <Close />

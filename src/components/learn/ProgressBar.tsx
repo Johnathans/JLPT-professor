@@ -18,7 +18,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
     <Box
       sx={{
         flex: 1,
-        height: '8px',
+        height: '10px',
         backgroundColor: 'rgba(0, 0, 0, 0.08)',
         borderRadius: '4px',
         overflow: 'hidden',
