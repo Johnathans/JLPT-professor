@@ -1319,7 +1319,7 @@
 }
 
 .moduleCard.completed {
-  border: 2px solid #00bfa5;
+  border: 2px solid #27cc56;
 }
 
 .moduleCard.in_progress {
@@ -1354,7 +1354,7 @@
 
 .completed .moduleStatus {
   background-color: #e0f2f1;
-  color: #00bfa5;
+  color: #27cc56;
 }
 
 .moduleTag {
@@ -1482,7 +1482,7 @@
 }
 
 .activityIcon {
-  color: #00bfa5;
+  color: #27cc56;
   font-weight: bold;
   font-size: 1rem;
 }

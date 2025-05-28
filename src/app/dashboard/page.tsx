@@ -7,6 +7,7 @@ import ReviewListItem from '@/components/dashboard/ReviewListItem';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import UnitBlock from '@/components/dashboard/UnitBlock';
 import ProgressTracking from '@/components/dashboard/ProgressTracking';
+import ContentContainer from '@/components/shared/ContentContainer';
 import { useJlptData } from '@/hooks/useJlptData';
 
 const VOCAB_STYLE = { fontWeight: 500 };
@@ -207,22 +208,24 @@ export default function DashboardPage() {
             </Box>
           </Box>
         ) : (
-          <Box sx={{ mt: 2 }}>
-            {isLoading ? (
-              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
-                <CircularProgress />
-              </Box>
-            ) : reviewData ? (
-              <ReviewTable
-                data={reviewData}
-                filter={filter}
-                onFilterChange={handleFilterChange}
-                onSelectionChange={handleSelectionChange}
-                onMarkAsKnown={handleMarkAsKnown}
-                onStartReview={handleStartReview}
-              />
-            ) : null}
-          </Box>
+          <ContentContainer maxWidth="lg">
+            <Box sx={{ mt: 2 }}>
+              {isLoading ? (
+                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+                  <CircularProgress />
+                </Box>
+              ) : reviewData ? (
+                <ReviewTable
+                  data={reviewData}
+                  filter={filter}
+                  onFilterChange={handleFilterChange}
+                  onSelectionChange={handleSelectionChange}
+                  onMarkAsKnown={handleMarkAsKnown}
+                  onStartReview={handleStartReview}
+                />
+              ) : null}
+            </Box>
+          </ContentContainer>
         )}
       </Box>
     </DashboardLayout>

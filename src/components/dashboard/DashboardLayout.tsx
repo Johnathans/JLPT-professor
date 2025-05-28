@@ -99,7 +99,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onModeChang
                   size="large" 
                   sx={{ 
                     color: '#666666',
-                    '&:hover': { color: '#59CE8F' }
+                    '&:hover': { color: '#27cc56' }
                   }}
                 >
                   <Badge 
@@ -107,7 +107,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onModeChang
                     color="primary" 
                     sx={{ 
                       '& .MuiBadge-badge': { 
-                        bgcolor: '#59CE8F',
+                        bgcolor: '#27cc56',
                         fontWeight: 600,
                         fontSize: '0.75rem'
                       } 
@@ -129,7 +129,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onModeChang
                     color="primary" 
                     sx={{ 
                       '& .MuiBadge-badge': { 
-                        bgcolor: '#59CE8F',
+                        bgcolor: '#27cc56',
                         color: '#FFFFFF',
                       } 
                     }}

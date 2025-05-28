@@ -66,7 +66,7 @@ const UnitBlock: React.FC<UnitBlockProps> = ({
           top: '24px',
           bottom: isLast ? '24px' : 0,
           width: '2px',
-          backgroundColor: hasStarted ? '#2dde98' : '#e0e0e0',
+          backgroundColor: hasStarted ? '#27cc56' : '#e0e0e0',
           zIndex: 0
         },
         '& .MuiAvatar-root': {
@@ -88,9 +88,9 @@ const UnitBlock: React.FC<UnitBlockProps> = ({
           width: '10px',
           height: '10px',
           borderRadius: '50%',
-          backgroundColor: hasStarted ? '#2dde98' : 'white',
+          backgroundColor: hasStarted ? '#27cc56' : 'white',
           border: '2px solid',
-          borderColor: hasStarted ? '#2dde98' : '#e0e0e0',
+          borderColor: hasStarted ? '#27cc56' : '#e0e0e0',
           zIndex: 1
         }}
       />
@@ -166,7 +166,7 @@ const UnitBlock: React.FC<UnitBlockProps> = ({
             sx={{
               '& .MuiSvgIcon-root': {
                 fontSize: 24,
-                color: hasStarted ? '#2dde98' : '#666'
+                color: hasStarted ? '#27cc56' : '#666'
               }
             }}
           >
@@ -177,17 +177,17 @@ const UnitBlock: React.FC<UnitBlockProps> = ({
             onClick={() => setIsModalOpen(true)}
             variant="outlined"
             sx={{
-              color: hasStarted ? '#2dde98' : '#666',
-              borderColor: hasStarted ? '#2dde98' : '#e0e0e0',
+              color: hasStarted ? '#27cc56' : '#666',
+              borderColor: hasStarted ? '#27cc56' : '#e0e0e0',
               textTransform: 'none',
               borderRadius: '8px',
               px: 3,
               py: 1,
               minWidth: '120px',
               '&:hover': {
-                borderColor: '#2dde98',
-                color: '#2dde98',
-                backgroundColor: 'rgba(45, 222, 152, 0.04)'
+                borderColor: '#27cc56',
+                color: '#27cc56',
+                backgroundColor: 'rgba(39, 204, 86, 0.04)'
               }
             }}
           >

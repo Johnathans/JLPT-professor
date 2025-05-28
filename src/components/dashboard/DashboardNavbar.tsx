@@ -154,7 +154,7 @@ export default function DashboardNavbar() {
                 borderRadius: 3,
                 backgroundColor: '#f0f0f0',
                 '& .MuiLinearProgress-bar': {
-                  backgroundColor: '#00c853',
+                  backgroundColor: '#27cc56',
                   borderRadius: 3
                 }
               }}

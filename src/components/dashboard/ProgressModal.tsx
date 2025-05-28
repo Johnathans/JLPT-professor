@@ -115,7 +115,7 @@ const ProgressModal: React.FC<ProgressModalProps> = ({
             size={160}
             thickness={4}
             sx={{ 
-              color: '#59CE8F', 
+              color: '#27cc56', 
               position: 'absolute',
               top: '50%',
               left: '50%',
@@ -166,7 +166,7 @@ const ProgressModal: React.FC<ProgressModalProps> = ({
                       boxShadow: 'none',
                       borderRadius: 2,
                       '&:hover': {
-                        borderColor: '#59CE8F',
+                        borderColor: '#27cc56',
                         backgroundColor: 'rgba(89, 206, 143, 0.05)'
                       }
                     }}>
@@ -176,7 +176,7 @@ const ProgressModal: React.FC<ProgressModalProps> = ({
                         alignItems: 'center',
                         gap: 1
                       }}>
-                        <Icon size={24} color="#59CE8F" />
+                        <Icon size={24} color="#27cc56" />
                         <Typography sx={{ 
                           fontWeight: 600,
                           color: '#000000',

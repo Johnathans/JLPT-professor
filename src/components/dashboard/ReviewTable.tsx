@@ -3,18 +3,9 @@
 import React, { useState, useMemo, useCallback, memo, ReactElement } from 'react';
 
 import StudyModeModal from './StudyModeModal';
-import VirtualizedTable from './VirtualizedTable';
+import VirtualizedGrid from './VirtualizedGrid';
 import {
   Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  Tabs,
-  Tab,
   Typography,
   Button,
   SelectChangeEvent,
@@ -24,7 +15,8 @@ import {
   Select,
   MenuItem,
 } from '@mui/material';
-
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 interface ReviewItem {
   id: string;
@@ -56,7 +48,7 @@ const getStatusColor = (status: string): string => {
     case 'learning':
       return '#FFC107';
     case 'new':
-      return '#59CE8F';
+      return '#27cc56';
     default:
       return '#757575';
   }
@@ -92,29 +84,115 @@ const ReviewTable = memo(function ReviewTable({
     });
   }, [onSelectionChange]);
 
+  const onItemClick = useCallback((id: string) => {
+    handleItemSelect(id);
+  }, [handleItemSelect]);
+
   const renderTableContent = (items: ReviewItem[]): ReactElement => {
+    const gridItems = items.map(item => ({
+      id: item.id,
+      character: item.word,
+      reading: item.reading,
+      meaning: item.meaning,
+      type: (item.reading ? 'vocabulary' : 'kanji') as 'vocabulary' | 'kanji'
+    }));
     return (
-      <Box sx={{ height: 'calc(100vh - 200px)', width: '100%', display: 'flex' }}>
-        <VirtualizedTable
-          items={items}
-          selectedItems={selectedItems}
-          onItemSelect={handleItemSelect}
-          getStatusColor={getStatusColor}
+      <Box sx={{ height: 'calc(100vh - 250px)', width: '100%', mx: 1 }}>
+        <VirtualizedGrid
+          items={gridItems}
+          onItemClick={onItemClick}
         />
       </Box>
     );
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
-        <FormControl sx={{ minWidth: 200 }}>
+    <Box>
+      <Typography variant="h1" sx={{ color: '#000', fontSize: '2.5rem', fontWeight: 800, mb: 4, letterSpacing: '-0.02em' }}>
+        Review
+      </Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center', mb: 3, ml: 1, gap: 2 }}>
+        <FormControl sx={{ 
+          minWidth: 240,
+          '& .MuiOutlinedInput-root.MuiInputBase-root': {
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'transparent'
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'transparent'
+            },
+            height: '48px',
+            fontSize: '1rem',
+            backgroundColor: '#fff',
+            borderRadius: '4px',
+            borderBottom: '4px solid #e0e0e0',
+            transition: 'all 0.2s ease',
+            '& fieldset': {
+              border: 'none'
+            },
+            '&:hover': {
+              borderBottom: '4px solid #bdbdbd',
+              backgroundColor: 'rgba(0, 0, 0, 0.02)'
+            },
+            '&.Mui-focused': {
+              borderBottom: '4px solid #27cc56',
+              backgroundColor: '#fff'
+            }
+          },
+          '& .MuiInputLabel-root': {
+            fontSize: '1rem',
+            color: '#666666',
+            '&.Mui-focused': {
+              color: '#27cc56'
+            }
+          },
+          '& .MuiSelect-select': {
+            py: 1.5,
+            px: 2
+          },
+          '& .MuiMenuItem-root': {
+            fontSize: '1rem',
+            py: 1.5,
+            '&:hover': {
+              backgroundColor: 'rgba(0, 0, 0, 0.02)'
+            },
+            '&.Mui-selected': {
+              backgroundColor: 'rgba(39, 204, 86, 0.08)',
+              '&:hover': {
+                backgroundColor: 'rgba(39, 204, 86, 0.12)'
+              }
+            }
+          }
+        }}>
           <InputLabel id="filter-label">Filter</InputLabel>
           <Select
             labelId="filter-label"
             value={filter}
             label="Filter"
             onChange={(e) => onFilterChange(e.target.value)}
+            MenuProps={{
+              sx: {
+                '& .MuiPaper-root': {
+                  borderRadius: '4px',
+                  mt: 1,
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+                },
+                '& .MuiMenuItem-root': {
+                  fontSize: '1rem',
+                  py: 1.5,
+                  px: 2,
+                  '&:hover': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.02)'
+                  },
+                  '&.Mui-selected': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                    '&:hover': {
+                      backgroundColor: 'rgba(0, 0, 0, 0.06)'
+                    }
+                  }
+                }
+              }
+            }}
           >
             <MenuItem value="vocabulary">Vocabulary ({data.vocabulary.length})</MenuItem>
             <MenuItem value="kanji">Kanji ({data.kanji.length})</MenuItem>
@@ -122,50 +200,81 @@ const ReviewTable = memo(function ReviewTable({
           </Select>
         </FormControl>
 
-        <Box sx={{ display: 'flex', gap: 1 }}>
+        <Box sx={{ display: 'flex', gap: 1, mr: -1 }}>
           <Button
-            variant="outlined"
+            variant="text"
             onClick={handleSelectAll}
             disabled={!filteredData.length}
+            sx={{ 
+              color: '#666666',
+              bgcolor: '#fff',
+              border: 'none',
+              borderBottom: '4px solid #e0e0e0',
+              borderRadius: '4px',
+              fontSize: '1rem',
+              py: 1.5,
+              px: 3,
+              transition: 'all 0.2s ease',
+              '&:hover': { 
+                bgcolor: 'rgba(0, 0, 0, 0.02)',
+                borderBottom: '4px solid #bdbdbd',
+                transform: 'translateY(-1px)'
+              },
+              '&:active': {
+                transform: 'translateY(0)'
+              },
+              '&.Mui-focused': {
+                bgcolor: '#fff',
+                borderBottom: '4px solid #27cc56'
+              }
+            }}
           >
             Select All
           </Button>
           <Button
-            variant="contained"
+            variant="text"
             onClick={() => onMarkAsKnown(selectedItems)}
             disabled={!selectedItems.length}
+            sx={{ 
+              bgcolor: '#fff',
+              borderBottom: '4px solid #e0e0e0',
+              borderRadius: '4px',
+              color: '#666666',
+              fontSize: '1rem',
+              py: 1.5,
+              px: 3,
+              '&:hover': { 
+                bgcolor: 'rgba(0, 0, 0, 0.04)',
+                borderBottom: '4px solid #bdbdbd'
+              }
+            }}
           >
+            <CheckCircleOutlineIcon sx={{ mr: 1 }} />
             Mark as Known
           </Button>
           <Button
             variant="contained"
             onClick={() => onStartReview(selectedItems)}
             disabled={!selectedItems.length}
+            sx={{ 
+              bgcolor: '#27cc56',
+              borderBottom: '4px solid #1fb848',
+              borderRadius: '4px',
+              color: '#fff',
+              fontSize: '1rem',
+              py: 1.5,
+              px: 3,
+              '&:hover': { 
+                bgcolor: '#1fb848',
+                borderBottom: '4px solid #1a9f3d'
+              }
+            }}
           >
+            <PlayArrowIcon sx={{ mr: 1 }} />
             Start Review
           </Button>
         </Box>
       </Box>
-
-      <Tabs
-        value={filter}
-        onChange={(_, newValue) => onFilterChange(newValue)}
-        sx={{
-          mb: 3,
-          '& .MuiTab-root': {
-            fontSize: '1.2rem',
-            fontWeight: 700,
-            '&.Mui-selected': {
-              color: '#00c2b2',
-              fontWeight: 700,
-            },
-          },
-        }}
-      >
-        <Tab label="Vocabulary" value="vocabulary" />
-        <Tab label="Kanji" value="kanji" />
-        <Tab label="Grammar" value="grammar" />
-      </Tabs>
 
       {filteredData.length > 0 ? renderTableContent(filteredData) : (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>

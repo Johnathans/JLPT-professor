@@ -12,5 +12,5 @@ export const COLORS = {
   PRIMARY_DARK: '#5e35b1',
   SECONDARY: '#ff9100',
   SECONDARY_LIGHT: '#ffd180',
-  ACCENT: '#00bfa5'
+  ACCENT: '#27cc56'
 }

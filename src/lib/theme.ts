@@ -12,7 +12,7 @@ export const theme = createTheme({
       light: '#ffd180',
     },
     success: {
-      main: '#00bfa5', // accent color
+      main: '#27cc56', // accent color
     },
     background: {
       default: '#ffffff',

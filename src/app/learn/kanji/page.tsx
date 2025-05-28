@@ -246,10 +246,10 @@ export default function KanjiPage() {
                           ? '#27cc56'
                           : '#ff5e5e'
                         : '#fff',
-                      boxShadow: selectedAnswer === meaning ? 'none' : '0 2px 0 rgba(0, 0, 0, 0.1)'
+                      boxShadow: selectedAnswer === meaning ? 'none' : '0 4px 0 rgba(0, 0, 0, 0.12)'
                     },
                     border: '1px solid rgba(0, 0, 0, 0.15)',
-                    borderBottom: '2px solid rgba(0, 0, 0, 0.2)',
+                    borderBottom: '4px solid rgba(0, 0, 0, 0.25)',
                     borderRadius: '16px',
                     padding: '14px',
                     paddingBottom: '16px',
@@ -268,9 +268,9 @@ export default function KanjiPage() {
                       boxShadow: '0 4px 6px rgba(0, 0, 0, 0.08)'
                     },
                     '&:active': {
-                      transform: 'translateY(1px)',
-                      boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
-                      borderBottomColor: 'rgba(0, 0, 0, 0.2)'
+                      transform: 'translateY(2px)',
+                      boxShadow: '0 2px 2px rgba(0, 0, 0, 0.05)',
+                      borderBottomColor: 'rgba(0, 0, 0, 0.25)'
                     }
                   }}
                 >

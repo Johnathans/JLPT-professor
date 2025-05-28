@@ -79,9 +79,11 @@ export default function VocabularyPage() {
   const [currentAnswers, setCurrentAnswers] = useState<string[]>([]);
   const [vocabList, setVocabList] = useState<VocabularyData[]>([]);
   const correctSound = useRef<HTMLAudioElement | null>(null);
+  const incorrectSound = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    correctSound.current = new Audio('/audio/ui/correct-6033.mp3');
+    correctSound.current = new Audio('/audio/ui/ui_correct_button2-103167 (1).mp3');
+    incorrectSound.current = new Audio('/audio/ui/button_10-190436.mp3');
   }, []);
 
   useEffect(() => {
@@ -120,9 +122,16 @@ export default function VocabularyPage() {
     setSelectedAnswer(selectedMeaning);
     const isCorrect = vocabList[currentIndex].meanings[0] === selectedMeaning;
     setFeedbackMessage(isCorrect ? 'Correct!' : 'Incorrect');
-    if (isCorrect && correctSound.current) {
-      correctSound.current.currentTime = 0;
-      correctSound.current.play();
+    if (isCorrect) {
+      if (correctSound.current) {
+        correctSound.current.currentTime = 0;
+        correctSound.current.play();
+      }
+    } else {
+      if (incorrectSound.current) {
+        incorrectSound.current.currentTime = 0;
+        incorrectSound.current.play();
+      }
     }
     setTimeout(handleNext, 1500);
   };
@@ -245,7 +254,7 @@ export default function VocabularyPage() {
                     sx={{
                       backgroundColor: selectedAnswer === meaning
                         ? vocabList[currentIndex].meanings[0] === meaning
-                          ? '#00c853'
+                          ? '#27cc56'
                           : '#d50000'
                         : '#fff',
                       color: selectedAnswer === meaning ? '#ffffff' : '#000000',

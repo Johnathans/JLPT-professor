@@ -52,7 +52,7 @@ const Circle = styled(Box, {
   color: active ? '#2e7d32' : '#757575',
   fontWeight: 600,
   ...(isToday && {
-    border: '2px dashed #59CE8F',
+    border: '2px dashed #27cc56',
   }),
 }));
 
@@ -61,7 +61,7 @@ const StyledLinearProgress = styled(LinearProgress)(({ theme }) => ({
   borderRadius: 4,
   backgroundColor: theme.palette.grey[100],
   '& .MuiLinearProgress-bar': {
-    backgroundColor: '#4caf50',
+    backgroundColor: '#27cc56',
   },
 }));
 
@@ -128,7 +128,7 @@ const StreakModal: React.FC<StreakModalProps> = ({
         </CircleContainer>
 
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, mb: 3 }}>
-          <FlameIcon sx={{ color: '#59CE8F', fontSize: 48 }} />
+          <FlameIcon sx={{ color: '#27cc56', fontSize: 48 }} />
           <Typography variant="h6" sx={{ fontWeight: 600, color: '#2e7d32' }}>
             {currentStreak} day streak
           </Typography>

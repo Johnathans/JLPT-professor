@@ -28,7 +28,7 @@ const theme = createTheme({
       light: '#ffd180',
     },
     success: {
-      main: '#00bfa5', // Using success palette for our accent color
+      main: '#27cc56', // Using success palette for our accent color
     },
     background: {
       default: '#ffffff',

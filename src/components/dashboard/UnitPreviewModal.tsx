@@ -134,7 +134,7 @@ const UnitPreviewModal: React.FC<UnitPreviewModalProps> = ({
                   sx={{
                     color: '#E8F9FD',
                     '&.Mui-checked': {
-                      color: '#59CE8F'
+                      color: '#27cc56'
                     }
                   }}
                 />
@@ -171,7 +171,7 @@ const UnitPreviewModal: React.FC<UnitPreviewModalProps> = ({
             variant="contained"
             onClick={handleStart}
             sx={{
-              bgcolor: hasStarted ? '#3b82f6' : '#59CE8F',
+              bgcolor: hasStarted ? '#3b82f6' : '#27cc56',
               color: 'white',
               px: 4,
               '&:hover': {

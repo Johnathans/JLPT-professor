@@ -38,7 +38,7 @@ const ProgressTracking: React.FC<ProgressTrackingProps> = ({
           size={180}
           thickness={4}
           sx={{ 
-            color: 'rgba(45, 222, 152, 0.12)',
+            color: 'rgba(39, 204, 86, 0.12)',
             position: 'absolute'
           }}
         />
@@ -48,7 +48,7 @@ const ProgressTracking: React.FC<ProgressTrackingProps> = ({
           size={180}
           thickness={4}
           sx={{ 
-            color: '#2dde98',
+            color: '#27cc56',
             position: 'absolute'
           }}
         />
@@ -83,7 +83,7 @@ const ProgressTracking: React.FC<ProgressTrackingProps> = ({
               Complete
             </Typography>
             <Typography variant="body2" sx={{ 
-              color: '#2dde98',
+              color: '#27cc56',
               fontWeight: 600
             }}>
               ({overallProgress}%)
@@ -122,7 +122,7 @@ const ProgressTracking: React.FC<ProgressTrackingProps> = ({
                 sx={{
                   width: '100%',
                   height: `${progress}%`,
-                  bgcolor: '#2dde98',
+                  bgcolor: '#27cc56',
                   borderRadius: '4px 4px 0 0',
                   transition: 'height 0.3s ease'
                 }}
